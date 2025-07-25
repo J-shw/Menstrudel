@@ -1,49 +1,66 @@
 import 'package:flutter/material.dart';
 
-class DaysCounterCircle extends StatelessWidget {
-  // We make these final because StatelessWidget properties don't change
-  final int days;
+// You'll likely want to put this in your components folder, e.g.,
+// lib/components/basic_progress_circle.dart
+class BasicProgressCircle extends StatelessWidget {
+  final int currentValue;
+  final int maxValue;
   final double circleSize;
-  final Color borderColor;
+  final double strokeWidth;
+  final Color progressColor;
+  final Color trackColor;
 
-  // Constructor to pass in the values
-  const DaysCounterCircle({
+  const BasicProgressCircle({
     super.key,
-    required this.days,
+    required this.currentValue,
+    required this.maxValue,
     this.circleSize = 200.0,
-    this.borderColor = Colors.red,
+    this.strokeWidth = 15.0,
+    this.progressColor = Colors.red,
+    this.trackColor = Colors.grey,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    double progressValue = (1.0 - (currentValue / maxValue)).clamp(0.0, 1.0);
+
+    return SizedBox(
       width: circleSize,
       height: circleSize,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        border: Border.all(
-          color: borderColor,
-          width: 15.0,
-        ),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      child: Stack(
+        alignment: Alignment.center,
         children: [
-          Text(
-            '$days',
-            style: const TextStyle(
-              fontSize: 60,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
+          SizedBox(
+            width: circleSize,
+            height: circleSize,
+            child: CircularProgressIndicator(
+              year2023: false,
+              value: progressValue,
+              strokeWidth: strokeWidth,
+              valueColor: AlwaysStoppedAnimation<Color>(progressColor),
+              backgroundColor: trackColor,
             ),
           ),
-          const Text(
-            'Days',
-            style: TextStyle(
-              fontSize: 30,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-            ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                '$currentValue',
+                style: const TextStyle(
+                  fontSize: 60,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+              const Text(
+                'Days',
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+            ],
           ),
         ],
       ),
