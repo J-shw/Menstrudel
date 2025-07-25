@@ -45,8 +45,8 @@ class MainApp extends StatelessWidget {
 				maxValue: 30,  // Out of 30 days total
 				circleSize: 220,
 				strokeWidth: 20,
-				// progressColor: Color.fromARGB(255, 255, 118, 118),
-				// trackColor: Color.fromARGB(20, 255, 118, 118),
+				progressColor: Color.fromARGB(255, 255, 118, 118),
+				trackColor: Color.fromARGB(20, 255, 118, 118),
 			),
 			),
 		),
