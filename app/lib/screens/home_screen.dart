@@ -20,6 +20,10 @@ class HomeScreen extends StatelessWidget {
           trackColor: const Color.fromARGB(20, 255, 118, 118),
         ),
       ),
+      bottomNavigationBar: BottomAppBar(
+        shape: const CircularNotchedRectangle(),
+        child: Container(height: 50.0),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context).push(
