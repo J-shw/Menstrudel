@@ -31,7 +31,6 @@ Widget build(BuildContext context) {
 	final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
 	return AlertDialog(
-		title: const Text('Log period'),
 		content: SingleChildScrollView(
 			child: Column(
 				mainAxisSize: MainAxisSize.min,
@@ -39,7 +38,7 @@ Widget build(BuildContext context) {
 					ListTile(
 						leading: Icon(Icons.calendar_today, color: colorScheme.onSurfaceVariant),
 						title: Text(
-							'Select Date:',
+							'Date',
 							style: TextStyle(color: colorScheme.onSurface),
 						),
 						subtitle: Text(
@@ -71,7 +70,7 @@ Widget build(BuildContext context) {
 							}
 						},
 					),
-					const SizedBox(height: 15),
+					const SizedBox(height: 5),
 					Text('Flow'),
 					Slider(
 						year2023: false,
@@ -86,7 +85,7 @@ Widget build(BuildContext context) {
 						},
 					),
 
-					const SizedBox(height: 15),
+					const SizedBox(height: 25),
 
 					DropdownButtonFormField<String>(
 						decoration: InputDecoration(
