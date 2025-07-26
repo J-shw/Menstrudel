@@ -83,6 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
 							);
 
 							await PeriodDatabase.instance.create(newEntry);
+							_refreshPeriodLogs();
 
 							ScaffoldMessenger.of(context).showSnackBar(
 								SnackBar(
