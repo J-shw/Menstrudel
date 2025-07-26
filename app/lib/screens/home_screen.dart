@@ -34,9 +34,13 @@ class _HomeScreenState extends State<HomeScreen> {
 		setState(() {
 			_periodEntries = data;
 			_isLoading = false;
-			// This is where PeriodPredictor is used:
 			_predictionResult = PeriodPredictor.estimateNextPeriod(_periodEntries, DateTime.now()); 
 		});
+	}
+
+	Future<void> _deletePeriodEntry(int id) async {
+		await PeriodDatabase.instance.delete(id);
+		_refreshPeriodLogs();
 	}
 
 	@override
@@ -91,6 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
 					PeriodListView(
 						periodEntries: _periodEntries,
 						isLoading: _isLoading,
+						onDelete: _deletePeriodEntry
 					),
 				],
 			),
