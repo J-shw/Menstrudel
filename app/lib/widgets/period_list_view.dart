@@ -35,6 +35,18 @@ class PeriodListView extends StatelessWidget {
 					itemBuilder: (context, index) {
 						final entry = periodEntries[index];
 						final String displayedSymptom = entry.symptom?.isNotEmpty == true ? entry.symptom! : 'No specific symptom';
+
+						final int numberOfDrops = entry.flow + 1; 
+
+						final List<Widget> flowIcons = List.generate(
+							numberOfDrops,
+							(index) => Icon(
+								Icons.water_drop,
+								size: 16,
+								color: Theme.of(context).colorScheme.primary,
+							),
+						);
+
 						return Dismissible(
 							key: ValueKey(entry.id),
 							direction: DismissDirection.endToStart,
@@ -74,8 +86,31 @@ class PeriodListView extends StatelessWidget {
 								margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
 								child: ListTile(
 									title: Text(DateFormat('dd/MM/yyyy').format(entry.date), style: TextStyle(fontWeight: FontWeight.bold)),
-									subtitle: Text(
-										'Symptons: $displayedSymptom | Flow: ${flowLabels[entry.flow]}',
+									subtitle: Column(
+									crossAxisAlignment: CrossAxisAlignment.start,
+									children: [
+										Text(
+											'Symptom: $displayedSymptom',
+											style: TextStyle(
+											fontSize: 14,
+											color: Theme.of(context).colorScheme.onSurfaceVariant,
+											),
+										),
+										const SizedBox(height: 4),
+
+										Row(
+											children: [
+											Text(
+												'Flow: ',
+												style: TextStyle(
+												fontSize: 14,
+												color: Theme.of(context).colorScheme.onSurfaceVariant,
+												),
+											),
+											...flowIcons,
+											],
+										),
+										],
 									),
 								),
 							),
