@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:menstrudel/models/period_logs.dart';
 
-final List<String> flowLabels = ["Low", "Medium", "High"];
-
 class PeriodListView extends StatelessWidget {
 	final List<PeriodEntry> periodEntries;
 	final bool isLoading;
