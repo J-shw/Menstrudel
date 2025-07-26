@@ -72,6 +72,7 @@ Widget build(BuildContext context) {
 						},
 					),
 					const SizedBox(height: 15),
+					Text('Flow'),
 					Slider(
 						year2023: false,
 						value: _currentDiscreteSliderValue,
