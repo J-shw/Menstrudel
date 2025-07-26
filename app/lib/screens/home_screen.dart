@@ -5,6 +5,8 @@ import 'package:menstrudel/widgets/log_period.dart';
 import 'package:menstrudel/models/period_logs.dart';
 import 'package:menstrudel/database/period_database.dart'; 
 import 'package:menstrudel/widgets/period_list_view.dart';
+import 'package:menstrudel/models/period_prediction_result.dart';
+import 'package:menstrudel/utils/period_predictor.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -16,6 +18,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
 	List<PeriodEntry> _periodEntries = [];
 	bool _isLoading = false;
+	PeriodPredictionResult? _predictionResult;
 
 	@override
 	void initState() {
@@ -31,10 +34,33 @@ class _HomeScreenState extends State<HomeScreen> {
 		setState(() {
 			_periodEntries = data;
 			_isLoading = false;
+			// This is where PeriodPredictor is used:
+			_predictionResult = PeriodPredictor.estimateNextPeriod(_periodEntries, DateTime.now()); 
 		});
 	}
+
 	@override
 	Widget build(BuildContext context) {
+		int daysUntilDueForCircle = _predictionResult?.daysUntilDue ?? 0; 
+		int circleMaxValue = _predictionResult?.averageCycleLength ?? 28;
+
+		int circleCurrentValue = daysUntilDueForCircle.clamp(0, circleMaxValue); 
+
+		String predictionText = '';
+		if (_isLoading) {
+			predictionText = 'Calculating prediction...';
+		} else if (_predictionResult == null) {
+			predictionText = 'Log at least two periods to estimate next cycle.';
+		} else {
+			String datePart = DateFormat('dd/MM/yyyy').format(_predictionResult!.estimatedDate);
+		if (_predictionResult!.daysUntilDue > 0) {
+			predictionText = 'Next Period Est: $datePart (${_predictionResult!.daysUntilDue} days)';
+		} else if (_predictionResult!.daysUntilDue == 0) {
+			predictionText = 'Period due TODAY: $datePart';
+		} else { // _predictionResult.daysUntilDue is negative, meaning overdue
+			predictionText = 'Period overdue by ${-_predictionResult!.daysUntilDue} days: $datePart';
+		}
+		}
 		return Scaffold(
 			body: Column(
 				mainAxisSize: MainAxisSize.max,
@@ -43,14 +69,25 @@ class _HomeScreenState extends State<HomeScreen> {
 				children: [
 					const SizedBox(height: 100),
 					BasicProgressCircle(
-						currentValue: 7,
-						maxValue: 30,
+						currentValue: circleCurrentValue,
+						maxValue: circleMaxValue,
 						circleSize: 220,
 						strokeWidth: 20,
 						progressColor: const Color.fromARGB(255, 255, 118, 118),
 						trackColor: const Color.fromARGB(20, 255, 118, 118),
 					),
+					const SizedBox(height: 15),
+					Text(
+						predictionText,
+						textAlign: TextAlign.center,
+						style: const TextStyle(
+							fontSize: 12,
+							fontWeight: FontWeight.bold,
+							color: Colors.blueGrey,
+						),
+					),
 					const SizedBox(height: 20),
+
 					PeriodListView(
 						periodEntries: _periodEntries,
 						isLoading: _isLoading,
