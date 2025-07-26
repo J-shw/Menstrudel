@@ -19,24 +19,20 @@ Future<Database> get database async {
 		final path = join(dbPath, filePath);
 
 		return await openDatabase(
-		path,
-		version: 1,
-		onCreate: _createDB,
+			path,
+			version: 1,
+			onCreate: _createDB,
 		);
 	}
 
 	Future _createDB(Database db, int version) async {
-		const idType = 'INTEGER PRIMARY KEY AUTOINCREMENT';
-		const textType = 'TEXT NOT NULL';
-		const nullableTextType = 'TEXT';
-
 		await db.execute('''
-		CREATE TABLE period_logs (
-			id $idType,
-			date $textType,
-			symptom $nullableTextType,
-			flow $textType
-		)
+			CREATE TABLE period_logs (
+					id 'INTEGER PRIMARY KEY AUTOINCREMENT',
+					date 'TEXT NOT NULL',
+					symptom 'TEXT',
+					flow 'INTEGER NOT NULL'
+			)
 		''');
 	}
 
@@ -73,19 +69,19 @@ Future<Database> get database async {
 	Future<int> update(PeriodEntry entry) async {
 		final db = await instance.database;
 		return db.update(
-		'period_logs',
-		entry.toMap(),
-		where: 'id = ?',
-		whereArgs: [entry.id],
+			'period_logs',
+			entry.toMap(),
+			where: 'id = ?',
+			whereArgs: [entry.id],
 		);
 	}
 
 	Future<int> delete(int id) async {
 		final db = await instance.database;
 		return await db.delete(
-		'period_logs',
-		where: 'id = ?',
-		whereArgs: [id],
+			'period_logs',
+			where: 'id = ?',
+			whereArgs: [id],
 		);
 	}
 
