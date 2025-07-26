@@ -66,7 +66,6 @@ class PeriodListView extends StatelessWidget {
 								);
 							},
 							onDismissed: (direction) {
-								print(entry.id);
 								if (entry.id != null) {
 									onDelete(entry.id!);
 								}
