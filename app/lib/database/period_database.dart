@@ -3,15 +3,15 @@ import 'package:path/path.dart';
 import 'package:menstrudel/models/period_logs.dart';
 
 class PeriodDatabase {
-static final PeriodDatabase instance = PeriodDatabase._init();
-static Database? _database;
+	static final PeriodDatabase instance = PeriodDatabase._init();
+	static Database? _database;
 
-PeriodDatabase._init();
+	PeriodDatabase._init();
 
-Future<Database> get database async {
-	if (_database != null) return _database!;
-		_database = await _initDB('periods.db');
-		return _database!;
+	Future<Database> get database async {
+		if (_database != null) return _database!;
+			_database = await _initDB('periods.db');
+			return _database!;
 	}
 
 	Future<Database> _initDB(String filePath) async {
@@ -28,10 +28,10 @@ Future<Database> get database async {
 	Future _createDB(Database db, int version) async {
 		await db.execute('''
 			CREATE TABLE period_logs (
-					id 'INTEGER PRIMARY KEY AUTOINCREMENT',
-					date 'TEXT NOT NULL',
-					symptom 'TEXT',
-					flow 'INTEGER NOT NULL'
+					id INTEGER PRIMARY KEY AUTOINCREMENT,
+					date TEXT NOT NULL,
+					symptom TEXT,
+					flow INTEGER NOT NULL
 			)
 		''');
 	}
@@ -42,7 +42,7 @@ Future<Database> get database async {
 		return entry.copyWith(id: id);
 	}
 
-	Future<PeriodEntry> readSymptom(int id) async {
+	Future<PeriodEntry> readPeriod(int id) async {
 		final db = await instance.database;
 		final maps = await db.query(
 			'period_logs',
