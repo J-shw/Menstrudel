@@ -44,18 +44,18 @@ Widget build(BuildContext context) {
 					final DateTime? date = result['date'];
 					final String? symptom = result['symptom'];
 					
-					if (date != null && symptom != null) {
+					if (date != null) {
 						// For demonstration, print the results and show a SnackBar
 						print('Symptom Logged: $symptom on ${DateFormat('dd/MM/yyyy').format(date)}');
 						ScaffoldMessenger.of(context).showSnackBar(
 							SnackBar(
-							content: Text('Symptom "$symptom" added for ${DateFormat('dd/MM/yyyy').format(date)}'),
+							content: Text('Symptom "$symptom" added for ${DateFormat('dd/MM/yyyy').format(date)} - Flow ${result['flow']}'),
 							duration: const Duration(seconds: 3),
 							),
 						);
 					}
 				} else {
-					print('Dialog was cancelled or no symptom selected.');
+					print('Dialog was cancelled.');
 				}
 			},
 			tooltip: 'Log symptoms',

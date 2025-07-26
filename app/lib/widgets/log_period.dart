@@ -123,20 +123,12 @@ Widget build(BuildContext context) {
 			),
 			ElevatedButton(
 			onPressed: () {
-				if (_selectedSymptom != null) {
 				Navigator.of(context).pop({
 					'date': _selectedDate,
+					'flow': _currentDiscreteSliderValue,
 					'symptom': _selectedSymptom,
 				});
-				} else {
-				ScaffoldMessenger.of(context).showSnackBar(
-					SnackBar(
-					content: Text('Please select a symptom', style: TextStyle(color: colorScheme.onError)),
-					backgroundColor: colorScheme.error,
-					behavior: SnackBarBehavior.floating,
-					),
-				);
-				}
+				
 			},
 			child: const Text('Add'),
 			),
