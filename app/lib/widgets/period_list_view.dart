@@ -18,7 +18,7 @@ class PeriodListView extends StatelessWidget {
 	Widget build(BuildContext context) {
 		if (isLoading) {
 			return const Center(child: CircularProgressIndicator());
-			} else if (periodEntries.isEmpty) {
+		} else if (periodEntries.isEmpty) {
 			return const Center(
 				child: Text(
 				'No periods logged yet.\nTap the + button to add one.',
@@ -26,7 +26,7 @@ class PeriodListView extends StatelessWidget {
 				style: TextStyle(fontSize: 16, color: Colors.grey),
 				),
 			);
-			} else {
+		} else {
 			return Expanded(
 				child: ListView.builder(
 					itemCount: periodEntries.length,
@@ -59,18 +59,18 @@ class PeriodListView extends StatelessWidget {
 									context: context,
 									builder: (BuildContext context) {
 										return AlertDialog(
-										title: const Text("Confirm Delete"),
-										content: const Text("Are you sure you want to delete this entry?"),
-										actions: <Widget>[
-											TextButton(
-											onPressed: () => Navigator.of(context).pop(false), // Don't dismiss
-											child: const Text("Cancel"),
-											),
-											ElevatedButton(
-											onPressed: () => Navigator.of(context).pop(true), // Confirm dismissal
-											child: const Text("Delete"),
-											),
-										],
+											title: const Text("Confirm Delete"),
+											content: const Text("Are you sure you want to delete this entry?"),
+											actions: <Widget>[
+												TextButton(
+													onPressed: () => Navigator.of(context).pop(false), // Don't dismiss
+													child: const Text("Cancel"),
+												),
+												ElevatedButton(
+													onPressed: () => Navigator.of(context).pop(true), // Confirm dismissal
+													child: const Text("Delete"),
+												),
+											],
 										);
 									},
 								);
@@ -90,8 +90,8 @@ class PeriodListView extends StatelessWidget {
 										Text(
 											'Symptom: $displayedSymptom',
 											style: TextStyle(
-											fontSize: 14,
-											color: Theme.of(context).colorScheme.onSurfaceVariant,
+												fontSize: 14,
+												color: Theme.of(context).colorScheme.onSurfaceVariant,
 											),
 										),
 										const SizedBox(height: 4),
@@ -101,8 +101,8 @@ class PeriodListView extends StatelessWidget {
 											Text(
 												'Flow: ',
 												style: TextStyle(
-												fontSize: 14,
-												color: Theme.of(context).colorScheme.onSurfaceVariant,
+													fontSize: 14,
+													color: Theme.of(context).colorScheme.onSurfaceVariant,
 												),
 											),
 											...flowIcons,
