@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:menstrudel/widgets/basic_progress_circle.dart';
+import 'package:menstrudel/screens/home_screen.dart';
+
 
 void main() {
   runApp(const MainApp());
@@ -37,26 +38,8 @@ class MainApp extends StatelessWidget {
 				),
 			),
 			themeMode: ThemeMode.system, 
-			home: Scaffold(
-				// backgroundColor: Colors.white,
-				body: Center(
-					child: BasicProgressCircle(
-						currentValue: 7, // Example: 7 days left
-						maxValue: 30,  // Out of 30 days total
-						circleSize: 220,
-						strokeWidth: 20,
-						progressColor: Color.fromARGB(255, 255, 118, 118),
-						trackColor: Color.fromARGB(20, 255, 118, 118),
-					),
-				),
-				floatingActionButton: FloatingActionButton(
-					onPressed:
-						() => true,
-					tooltip: 'Log symptoms',
-					child: const Icon(Icons.add),
-				),
-				floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-			),
+
+			home: const HomeScreen(),
 		);
 	}
 }
