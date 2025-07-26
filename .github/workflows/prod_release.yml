@@ -25,25 +25,30 @@ jobs:
           channel: 'stable'
 
       - name: Run Flutter doctor (for diagnostics - optional)
+        working-directory: app
         run: flutter doctor -v
 
       - name: Install Flutter dependencies
+        working-directory: app
         run: flutter pub get
 
       - name: Grant execute permission to gradlew
+        working-directory: app
         run: chmod +x android/gradlew
         
       - name: Build Android App Bundle (AAB - Recommended for Google Play Store)
+        working-directory: app
         run: flutter build appbundle --release
 
       - name: Build Android APK (Release - for direct distribution)
+        working-directory: app
         run: flutter build apk --release
 
       - name: Upload Release App Bundle as an artifact
         uses: actions/upload-artifact@v4
         with:
           name: menstrudel-release-aab
-          path: build/app/outputs/bundle/release/app-release.aab
+          path: app/build/app/outputs/bundle/release/app-release.aab
 
       - name: Upload Release APK as an artifact
         uses: actions/upload-artifact@v4
