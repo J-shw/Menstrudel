@@ -2,7 +2,7 @@ class PeriodEntry {
 	int? id;
 	DateTime date;
 	String? symptom;
-	String flow;
+	int flow;
 
 	PeriodEntry({
 		this.id,
@@ -25,7 +25,7 @@ class PeriodEntry {
 			id: map['id'] as int?,
 			date: DateTime.parse(map['date'] as String),
 			symptom: map['symptom'] as String?,
-			flow: map['flow'] as String,
+			flow: map['flow'] as int,
 		);
 	}
 
@@ -33,13 +33,13 @@ class PeriodEntry {
 		int? id,
 		DateTime? date,
 		String? symptom,
-		String? flow,
+		int? flow,
 	}) {
 		return PeriodEntry(
-		id: id ?? this.id,
-		date: date ?? this.date,
-		symptom: symptom ?? this.symptom,
-		flow: flow ?? this.flow,
+			id: id ?? this.id,
+			date: date ?? this.date,
+			symptom: symptom ?? this.symptom,
+			flow: flow ?? this.flow,
 		);
 	}
 

@@ -125,7 +125,7 @@ Widget build(BuildContext context) {
 			onPressed: () {
 				Navigator.of(context).pop({
 					'date': _selectedDate,
-					'flow': _currentDiscreteSliderValue,
+					'flow': _currentDiscreteSliderValue.toInt(),
 					'symptom': _selectedSymptom,
 				});
 				
