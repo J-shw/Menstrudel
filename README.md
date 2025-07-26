@@ -1,6 +1,6 @@
 # <img src="icon/Menstrudle_cropped.png" alt="Menstrudel App Icon" width="100"> Menstrudel 
 
-Free, offline, open source period tracking app.
+Free, offline, and open source period tracking app.
 
 ## About Menstrudel
 
