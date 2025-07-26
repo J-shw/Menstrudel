@@ -21,7 +21,7 @@ jobs:
       - name: Set up Flutter SDK
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.22.0' 
+          flutter-version: '3.8.1' 
           channel: 'stable'
 
       - name: Run Flutter doctor (for diagnostics - optional)
