@@ -126,13 +126,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
 							await PeriodDatabase.instance.create(newEntry);
 							_refreshPeriodLogs();
-
-							ScaffoldMessenger.of(context).showSnackBar(
-								SnackBar(
-									content: Text('Logged: ${symptom ?? "N/A"} (Flow: $flow) on ${DateFormat('dd/MM/yyyy').format(date)}'),
-									duration: const Duration(seconds: 3),
-								),
-							);
 						}
 					}
 				},
