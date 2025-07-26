@@ -15,25 +15,23 @@ class MainApp extends StatelessWidget {
 		return MaterialApp(
 			theme: ThemeData(
 				useMaterial3: true,
-				// Define your light color scheme
 				colorScheme: ColorScheme.fromSeed(
-					seedColor: Colors.blue, // A vibrant red for light mode progress
+					seedColor: Colors.blue,
 					brightness: Brightness.light,
 				),
 				appBarTheme: const AppBarTheme(
-					backgroundColor: Colors.red, // Example app bar color for light theme
-					foregroundColor: Colors.white, // Text color for app bar
+					backgroundColor: Colors.red,
+					foregroundColor: Colors.white,
 				),
 			),
 			darkTheme: ThemeData(
 				useMaterial3: true,
-				// Define your dark color scheme
 				colorScheme: ColorScheme.fromSeed(
-					seedColor: Colors.blue, // Using the same seed color helps maintain consistency
+					seedColor: Colors.blue,
 					brightness: Brightness.dark,
 				),
 				appBarTheme: AppBarTheme(
-					backgroundColor: Colors.red[900], // Darker red for dark mode app bar
+					backgroundColor: Colors.red[900],
 					foregroundColor: Colors.white,
 				),
 			),
