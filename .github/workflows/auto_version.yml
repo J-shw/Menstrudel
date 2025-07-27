@@ -24,7 +24,7 @@ jobs:
         id: get_version
         run: |
 
-            VERSION_LINE=$(grep "version:" pubspec.yaml)
+            VERSION_LINE=$(grep "version:" app/pubspec.yaml)
             echo "Current version line: $VERSION_LINE"
 
             BASE_VERSION=$(echo "$VERSION_LINE" | sed -E 's/version: ([0-9]+\.[0-9]+\.[0-9]+)\+([0-9]+)/\1/')
@@ -42,7 +42,7 @@ jobs:
       - name: Update pubspec.yaml
         run: |
 
-            sed -i -E "s/version: [0-9]+\.[0-9]+\.[0-9]+\+[0-9]+/version: ${{ steps.get_version.outputs.base_version }}+${{ steps.get_version.outputs.new_build_number }}/" pubspec.yaml
+            sed -i -E "s/version: [0-9]+\.[0-9]+\.[0-9]+\+[0-9]+/version: ${{ steps.get_version.outputs.base_version }}+${{ steps.get_version.outputs.new_build_number }}/" app/pubspec.yaml
             echo "Updated pubspec.yaml:"
             cat pubspec.yaml
 
