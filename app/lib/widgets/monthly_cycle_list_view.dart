@@ -18,9 +18,9 @@ class MonthlyCycleListView extends StatelessWidget {
 		final double screenWidth = MediaQuery.of(context).size.width;
 		const double axisLabelWidth = 40.0;
 		const double barHeight = 30.0;
-		const double maxBarWidthPercentage = 0.65;
+		const double maxBarWidthPercentage = 0.95;
 
-		const double minDataValue = 20; 
+		const double minDataValue = 15; 
 		const double maxDataValue = 45; 
 
 		final double maxBarPixelWidth = screenWidth * maxBarWidthPercentage;
