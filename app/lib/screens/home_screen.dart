@@ -6,8 +6,9 @@ import 'package:menstrudel/models/period_logs.dart';
 import 'package:menstrudel/database/period_database.dart'; 
 import 'package:menstrudel/widgets/period_list_view.dart';
 import 'package:menstrudel/models/period_prediction_result.dart';
+import 'package:menstrudel/models/cycle_stats.dart';
 import 'package:menstrudel/utils/period_predictor.dart';
-import 'package:menstrudel/screens/analytics_screen.dart'; 
+import 'package:menstrudel/screens/analytics_screen.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -20,6 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
 	List<PeriodEntry> _periodEntries = [];
 	bool _isLoading = false;
 	PeriodPredictionResult? _predictionResult;
+	CycleStats? _cycleStats;
 
 	@override
 	void initState() {
@@ -35,7 +37,8 @@ class _HomeScreenState extends State<HomeScreen> {
 		setState(() {
 			_periodEntries = data;
 			_isLoading = false;
-			_predictionResult = PeriodPredictor.estimateNextPeriod(_periodEntries, DateTime.now()); 
+			_predictionResult = PeriodPredictor.estimateNextPeriod(_periodEntries, DateTime.now());
+			_cycleStats = PeriodPredictor.getCycleStats(data);
 		});
 	}
 
