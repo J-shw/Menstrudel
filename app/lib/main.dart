@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:menstrudel/screens/home_screen.dart';
 
 void main() {
   runApp(const MainApp());
@@ -7,14 +8,34 @@ void main() {
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
-    );
-  }
+	@override
+	Widget build(BuildContext context) {
+		return MaterialApp(
+			theme: ThemeData(
+				useMaterial3: true,
+				colorScheme: ColorScheme.fromSeed(
+					seedColor: Colors.blue,
+					brightness: Brightness.light,
+				),
+				appBarTheme: const AppBarTheme(
+					backgroundColor: Colors.red,
+					foregroundColor: Colors.white,
+				),
+			),
+			darkTheme: ThemeData(
+				useMaterial3: true,
+				colorScheme: ColorScheme.fromSeed(
+					seedColor: Colors.blue,
+					brightness: Brightness.dark,
+				),
+				appBarTheme: AppBarTheme(
+					backgroundColor: Colors.red[900],
+					foregroundColor: Colors.white,
+				),
+			),
+			themeMode: ThemeMode.system, 
+
+			home: const HomeScreen(),
+		);
+	}
 }
