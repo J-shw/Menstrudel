@@ -136,13 +136,13 @@ class _HomeScreenState extends State<HomeScreen> {
 							Row(
 								mainAxisAlignment: MainAxisAlignment.spaceAround,
 								children: [
-									IconButton(
-										icon: const Icon(Icons.settings, size: 30.0),
-										tooltip: 'Settings',
-										onPressed: () {
+									// IconButton(
+									// 	icon: const Icon(Icons.settings, size: 30.0),
+									// 	tooltip: 'Settings',
+									// 	onPressed: () {
 											
-										},
-									),	
+									// 	},
+									// ),	
 								],
 							),
 						],
