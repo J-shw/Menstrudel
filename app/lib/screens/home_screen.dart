@@ -110,27 +110,36 @@ class _HomeScreenState extends State<HomeScreen> {
 					child: Row(
 						mainAxisAlignment: MainAxisAlignment.spaceAround,
 						children: [
-							IconButton(
-								icon: const Icon(Icons.bar_chart, size: 30.0),
-								tooltip: 'Logs',
-								onPressed: () {
-									Navigator.of(context).push(
-										MaterialPageRoute(
-											builder: (context) => AnalyticsScreen(
-												cycleStats: _cycleStats,
+							Row(
+								mainAxisAlignment: MainAxisAlignment.spaceAround,
+								children: [
+									IconButton(
+										icon: const Icon(Icons.bar_chart, size: 30.0),
+										tooltip: 'Logs',
+										onPressed: () {
+											Navigator.of(context).push(
+												MaterialPageRoute(
+													builder: (context) => AnalyticsScreen(
+														cycleStats: _cycleStats,
+													),
 												),
-										),
-									);
-								},
+											);
+										},
+									),	
+								],
 							),
 							const SizedBox(width: 48.0),
-							const SizedBox(width: 48.0),
-							IconButton(
-								icon: const Icon(Icons.settings, size: 30.0),
-								tooltip: 'Settings',
-								onPressed: () {
-									
-								},
+							Row(
+								mainAxisAlignment: MainAxisAlignment.spaceAround,
+								children: [
+									IconButton(
+										icon: const Icon(Icons.settings, size: 30.0),
+										tooltip: 'Settings',
+										onPressed: () {
+											
+										},
+									),	
+								],
 							),
 						],
 					)
