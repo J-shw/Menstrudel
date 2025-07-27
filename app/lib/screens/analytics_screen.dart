@@ -113,7 +113,7 @@ class AnalyticsScreen extends StatelessWidget {
                   ),
                   buildStatCard(
                     icon: Icons.history,
-                    title: 'Cycles Analyzed',
+                    title: 'Cycles Analysed',
                     value: '${cycleStats!.numberOfCycles}',
                     colors: colorScheme,
                   ),
