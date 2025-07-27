@@ -1,6 +1,7 @@
 import 'package:menstrudel/models/period_logs.dart';
 import 'package:menstrudel/models/period_prediction_result.dart';
 import 'package:menstrudel/models/cycle_stats.dart';
+import 'package:menstrudel/models/monthly_cycle_data.dart';
 import 'dart:math';
 
 
@@ -75,33 +76,58 @@ class PeriodPredictor {
 			return null;
 		}
 	}
-  static CycleStats? getCycleStats(List<PeriodEntry> entries) {
-    if (entries.length < 2) {
-    	return null;
-    }
 
-    final List<PeriodEntry> sortedEntries = List.from(entries);
-    sortedEntries.sort((a, b) => a.date.compareTo(b.date));
+	static CycleStats? getCycleStats(List<PeriodEntry> entries) {
+		if (entries.length < 2) {
+			return null;
+		}
 
-    List<int> validCycleLengths = _getValidCycleLengths(entries);
+		final List<PeriodEntry> sortedEntries = List.from(entries);
+		sortedEntries.sort((a, b) => a.date.compareTo(b.date));
 
-    if (validCycleLengths.isEmpty) {
-      	return null;
-    }
+		List<int> validCycleLengths = _getValidCycleLengths(entries);
 
-    int totalCycleDays = validCycleLengths.reduce((a, b) => a + b);
-    int averageCycleLength = (totalCycleDays / validCycleLengths.length).round();
-    
-    if (averageCycleLength == 0) averageCycleLength = _defaultCycleLength; 
+		if (validCycleLengths.isEmpty) {
+			return null;
+		}
 
-    int shortestCycle = validCycleLengths.reduce(min);
-    int longestCycle = validCycleLengths.reduce(max);
+		int totalCycleDays = validCycleLengths.reduce((a, b) => a + b);
+		int averageCycleLength = (totalCycleDays / validCycleLengths.length).round();
+		
+		if (averageCycleLength == 0) averageCycleLength = _defaultCycleLength; 
 
-    return CycleStats(
-      averageCycleLength: averageCycleLength,
-      shortestCycleLength: shortestCycle,
-      longestCycleLength: longestCycle,
-      numberOfCycles: validCycleLengths.length,
-    );
-  }
+		int shortestCycle = validCycleLengths.reduce(min);
+		int longestCycle = validCycleLengths.reduce(max);
+
+		return CycleStats(
+		averageCycleLength: averageCycleLength,
+		shortestCycleLength: shortestCycle,
+		longestCycleLength: longestCycle,
+		numberOfCycles: validCycleLengths.length,
+		);
+	}
+	static List<MonthlyCycleData> getMonthlyCycleData(List<PeriodEntry> entries) {
+		List<MonthlyCycleData> monthlyData = [];
+
+		if (entries.length < 2) {
+			return monthlyData; 
+		}
+
+		final List<PeriodEntry> sortedEntries = List.from(entries);
+		sortedEntries.sort((a, b) => a.date.compareTo(b.date));
+
+		for (int i = 0; i < sortedEntries.length - 1; i++) {
+		int days = sortedEntries[i + 1].date.difference(sortedEntries[i].date).inDays;
+
+		if (days >= _minValidCycleLength && days <= _maxValidCycleLength) {
+			final DateTime cycleEndDate = sortedEntries[i + 1].date;
+			monthlyData.add(MonthlyCycleData(
+				year: cycleEndDate.year,
+				month: cycleEndDate.month,
+				cycleLength: days,
+			));
+		}
+		}
+		return monthlyData;
+  	}
 }
