@@ -9,6 +9,7 @@ import 'package:menstrudel/models/period_prediction_result.dart';
 import 'package:menstrudel/models/cycle_stats.dart';
 import 'package:menstrudel/utils/period_predictor.dart';
 import 'package:menstrudel/screens/analytics_screen.dart';
+import 'package:menstrudel/models/monthly_cycle_data.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -19,6 +20,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 	List<PeriodEntry> _periodEntries = [];
+	List<MonthlyCycleData> _monthlyCycleData = [];
 	bool _isLoading = false;
 	PeriodPredictionResult? _predictionResult;
 	CycleStats? _cycleStats;
@@ -39,6 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
 			_isLoading = false;
 			_predictionResult = PeriodPredictor.estimateNextPeriod(_periodEntries, DateTime.now());
 			_cycleStats = PeriodPredictor.getCycleStats(data);
+			_monthlyCycleData = PeriodPredictor.getMonthlyCycleData(data);
 		});
 	}
 
@@ -121,6 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
 												MaterialPageRoute(
 													builder: (context) => AnalyticsScreen(
 														cycleStats: _cycleStats,
+														monthlyCycleData: _monthlyCycleData,
 													),
 												),
 											);
