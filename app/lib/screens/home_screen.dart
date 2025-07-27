@@ -115,7 +115,11 @@ class _HomeScreenState extends State<HomeScreen> {
 								tooltip: 'Logs',
 								onPressed: () {
 									Navigator.of(context).push(
-										MaterialPageRoute(builder: (context) => const AnalyticsScreen()),
+										MaterialPageRoute(
+											builder: (context) => AnalyticsScreen(
+												cycleStats: _cycleStats,
+												),
+										),
 									);
 								},
 							),
