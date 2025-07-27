@@ -109,7 +109,6 @@ class PeriodListView extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const SizedBox(height: 4),
-
                           Row(
                             children: [
                             Text(
