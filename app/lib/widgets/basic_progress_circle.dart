@@ -96,7 +96,7 @@ Widget build(BuildContext context) {
 			Text(
 				'${widget.currentValue}',
 				style: TextStyle(
-				fontSize: 60,
+				fontSize: 70,
 				fontWeight: FontWeight.bold,
 				color: colorScheme.primary,
 				),
@@ -104,9 +104,9 @@ Widget build(BuildContext context) {
 			Text(
 				'Days',
 				style: TextStyle(
-				fontSize: 30,
-				fontWeight: FontWeight.bold,
-				color: colorScheme.primary,
+				fontSize: 20,
+				fontWeight: FontWeight.normal,
+				color: colorScheme.secondary,
 				),
 			),
 			],
