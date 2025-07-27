@@ -24,10 +24,7 @@ class AnalyticsScreen extends StatelessWidget {
 			required String value,
 			required ColorScheme colors,
 			}) {
-			return Card(
-				shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25.0)),
-				elevation: 2.0,
-				margin: const EdgeInsets.all(4.0),
+			return SizedBox(
 				child: Padding(
 					padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
 					child: Column(
@@ -100,11 +97,14 @@ class AnalyticsScreen extends StatelessWidget {
 				: Center( 
 					child: Column(
 						children: [
-								Expanded(
+								SizedBox(
+									height: 300,
 									child: GridView.count(
 										crossAxisCount: 2,
 										crossAxisSpacing: 10.0,
 										mainAxisSpacing: 10.0,
+										physics: const NeverScrollableScrollPhysics(),
+										childAspectRatio: 2.5,
 										children: <Widget>[
 											buildStatCard(
 												icon: Icons.calendar_month,
@@ -134,8 +134,8 @@ class AnalyticsScreen extends StatelessWidget {
 									),
 								),
 	
-							SizedBox( 
-								height: 400,
+							Expanded( 
+		
 								child: MonthlyCycleListView(
 									monthlyCycleData: monthlyCycleData, // Pass the data to your chart component
 								),
