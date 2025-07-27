@@ -102,7 +102,29 @@ class _HomeScreenState extends State<HomeScreen> {
 
 			bottomNavigationBar: BottomAppBar(
 				shape: const CircularNotchedRectangle(),
-				child: Container(height: 50.0),
+				child: SizedBox(
+					child: Row(
+						mainAxisAlignment: MainAxisAlignment.spaceAround,
+						children: [
+							IconButton(
+								icon: const Icon(Icons.bar_chart, size: 30.0),
+								tooltip: 'Logs',
+								onPressed: () {
+
+								},
+							),
+							const SizedBox(width: 48.0),
+							const SizedBox(width: 48.0),
+							IconButton(
+								icon: const Icon(Icons.settings, size: 30.0),
+								tooltip: 'Settings',
+								onPressed: () {
+
+								},
+							),
+						],
+					)
+				),
 			),
 			floatingActionButton: FloatingActionButton(
 				onPressed: () async {
