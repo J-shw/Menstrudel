@@ -7,6 +7,7 @@ import 'package:menstrudel/database/period_database.dart';
 import 'package:menstrudel/widgets/period_list_view.dart';
 import 'package:menstrudel/models/period_prediction_result.dart';
 import 'package:menstrudel/utils/period_predictor.dart';
+import 'package:menstrudel/screens/analytics_screen.dart'; 
 
 
 class HomeScreen extends StatefulWidget {
@@ -110,7 +111,9 @@ class _HomeScreenState extends State<HomeScreen> {
 								icon: const Icon(Icons.bar_chart, size: 30.0),
 								tooltip: 'Logs',
 								onPressed: () {
-
+									Navigator.of(context).push(
+										MaterialPageRoute(builder: (context) => const AnalyticsScreen()),
+									);
 								},
 							),
 							const SizedBox(width: 48.0),
@@ -119,7 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
 								icon: const Icon(Icons.settings, size: 30.0),
 								tooltip: 'Settings',
 								onPressed: () {
-
+									
 								},
 							),
 						],
