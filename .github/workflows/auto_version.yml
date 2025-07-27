@@ -44,7 +44,7 @@ jobs:
 
             sed -i -E "s/version: [0-9]+\.[0-9]+\.[0-9]+\+[0-9]+/version: ${{ steps.get_version.outputs.base_version }}+${{ steps.get_version.outputs.new_build_number }}/" app/pubspec.yaml
             echo "Updated pubspec.yaml:"
-            cat pubspec.yaml
+            cat app/pubspec.yaml
 
       - name: Commit and Push new version
         run: |
