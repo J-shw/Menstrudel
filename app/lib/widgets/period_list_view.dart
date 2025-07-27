@@ -49,11 +49,16 @@ class PeriodListView extends StatelessWidget {
 							key: ValueKey(entry.id),
 							direction: DismissDirection.endToStart,
 							background: Container(
-								color: Colors.red,
-								alignment: Alignment.centerRight,
-								padding: const EdgeInsets.symmetric(horizontal: 20),
-								child: const Icon(Icons.delete, color: Colors.white),
-							),
+                margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                  child: ClipRRect( 
+                    borderRadius: BorderRadius.circular(10),
+                      child: Container(
+                        color: Colors.red,
+                        alignment: Alignment.centerRight,
+                        child: const Icon(Icons.delete, color: Colors.white),
+                      ),
+                  ),
+              ),
 							confirmDismiss: (direction) async {
 								return await showDialog(
 									context: context,
@@ -81,7 +86,7 @@ class PeriodListView extends StatelessWidget {
 								}
 							},
 							child: Card(
-								margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+								margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4), 
 								child: ListTile(
 									title: Text(DateFormat('dd/MM/yyyy').format(entry.date), style: TextStyle(fontWeight: FontWeight.bold)),
 									subtitle: Column(
