@@ -11,12 +11,12 @@ class PeriodPredictor {
   	static const int _maxValidCycleLength = 45;
   	static const int _minValidCycleLength = 20;
 
-	static List<int> _getValidCycleLengths(List<PeriodEntry> entries) {
+	static List<int> _getValidCycleLengths(List<PeriodLogEntry> entries) {
 		if (entries.length < 2) {
 			return [];
 		}
 
-		final List<PeriodEntry> sortedEntries = List.from(entries);
+		final List<PeriodLogEntry> sortedEntries = List.from(entries);
 		sortedEntries.sort((a, b) => a.date.compareTo(b.date));
 
 		List<int> cycleLengths = [];
@@ -30,9 +30,9 @@ class PeriodPredictor {
 		return cycleLengths;
 	}
 
-  	static PeriodPredictionResult? estimateNextPeriod(List<PeriodEntry> entries, DateTime now) {
+  	static PeriodPredictionResult? estimateNextPeriod(List<PeriodLogEntry> entries, DateTime now) {
 		
-		final List<PeriodEntry> sortedEntries = List.from(entries);
+		final List<PeriodLogEntry> sortedEntries = List.from(entries);
 		sortedEntries.sort((a, b) => a.date.compareTo(b.date));
 
 		if (sortedEntries.length < 2) {
@@ -77,12 +77,12 @@ class PeriodPredictor {
 		}
 	}
 
-	static CycleStats? getCycleStats(List<PeriodEntry> entries) {
+	static CycleStats? getCycleStats(List<PeriodLogEntry> entries) {
 		if (entries.length < 2) {
 			return null;
 		}
 
-		final List<PeriodEntry> sortedEntries = List.from(entries);
+		final List<PeriodLogEntry> sortedEntries = List.from(entries);
 		sortedEntries.sort((a, b) => a.date.compareTo(b.date));
 
 		List<int> validCycleLengths = _getValidCycleLengths(entries);
@@ -106,14 +106,14 @@ class PeriodPredictor {
 		numberOfCycles: validCycleLengths.length,
 		);
 	}
-	static List<MonthlyCycleData> getMonthlyCycleData(List<PeriodEntry> entries) {
+	static List<MonthlyCycleData> getMonthlyCycleData(List<PeriodLogEntry> entries) {
 		List<MonthlyCycleData> monthlyData = [];
 
 		if (entries.length < 2) {
 			return monthlyData; 
 		}
 
-		final List<PeriodEntry> sortedEntries = List.from(entries);
+		final List<PeriodLogEntry> sortedEntries = List.from(entries);
 		sortedEntries.sort((a, b) => a.date.compareTo(b.date));
 
 		for (int i = 0; i < sortedEntries.length - 1; i++) {
