@@ -29,7 +29,7 @@ class PeriodLogEntry {
 			date: DateTime.parse(map['date'] as String),
 			symptom: map['symptom'] as String?,
 			flow: map['flow'] as int,
-			periodId: map['period_id'] as int,
+			periodId: map['period_id'] as int?,
 		);
 	}
 
