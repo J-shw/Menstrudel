@@ -21,9 +21,9 @@ class PeriodListView extends StatelessWidget {
     } else if (periodEntries.isEmpty) {
       return const Center(
         child: Text(
-        'No periods logged yet.\nTap the + button to add one.',
-        textAlign: TextAlign.center,
-        style: TextStyle(fontSize: 16, color: Colors.grey),
+          'No periods logged yet.\nTap the + button to add one.',
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 16, color: Colors.grey),
         ),
       );
     } else {
@@ -37,12 +37,12 @@ class PeriodListView extends StatelessWidget {
             final int numberOfDrops = entry.flow + 1; 
 
             final List<Widget> flowIcons = List.generate(
-              numberOfDrops,
-              (index) => Icon(
-                Icons.water_drop,
-                size: 16,
-                color: Theme.of(context).colorScheme.primary,
-              ),
+				numberOfDrops,
+				(index) => Icon(
+					Icons.water_drop,
+					size: 16,
+					color: Theme.of(context).colorScheme.primary,
+				),
             );
 
             return Column(
@@ -55,6 +55,7 @@ class PeriodListView extends StatelessWidget {
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
+                      color: Colors.grey,
                     ),
                   ),
                 ),
