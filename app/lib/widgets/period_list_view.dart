@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:menstrudel/models/period_logs.dart';
 
 class PeriodListView extends StatelessWidget {
-	final List<PeriodEntry> periodEntries;
+	final List<PeriodLogEntry> periodEntries;
 	final bool isLoading;
 	final Function(int) onDelete;
 
