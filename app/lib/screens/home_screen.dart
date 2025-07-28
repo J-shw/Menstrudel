@@ -19,7 +19,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-	List<PeriodEntry> _periodEntries = [];
+	List<PeriodLogEntry> _periodLogEntries = [];
 	List<MonthlyCycleData> _monthlyCycleData = [];
 	bool _isLoading = false;
 	PeriodPredictionResult? _predictionResult;
@@ -35,18 +35,18 @@ class _HomeScreenState extends State<HomeScreen> {
 		setState(() {
 			_isLoading = true;
 		});
-		final data = await PeriodDatabase.instance.readAllPeriods();
+		final data = await PeriodDatabase.instance.readAllPeriodLogs();
 		setState(() {
-			_periodEntries = data;
+			_periodLogEntries = data;
 			_isLoading = false;
-			_predictionResult = PeriodPredictor.estimateNextPeriod(_periodEntries, DateTime.now());
+			_predictionResult = PeriodPredictor.estimateNextPeriod(_periodLogEntries, DateTime.now());
 			_cycleStats = PeriodPredictor.getCycleStats(data);
 			_monthlyCycleData = PeriodPredictor.getMonthlyCycleData(data);
 		});
 	}
 
 	Future<void> _deletePeriodEntry(int id) async {
-		await PeriodDatabase.instance.delete(id);
+		await PeriodDatabase.instance.deletePeriodLog(id);
 		_refreshPeriodLogs();
 	}
 
@@ -100,7 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
 					const SizedBox(height: 20),
 
 					PeriodListView(
-						periodEntries: _periodEntries,
+						periodEntries: _periodLogEntries,
 						isLoading: _isLoading,
 						onDelete: _deletePeriodEntry
 					),
@@ -163,13 +163,13 @@ class _HomeScreenState extends State<HomeScreen> {
 						final int flow = result['flow'];
 						
 						if (date != null) {
-							final newEntry = PeriodEntry(
+							final newEntry = PeriodLogEntry(
 								date: date,
 								symptom: symptom,
 								flow: flow,
 							);
 
-							await PeriodDatabase.instance.create(newEntry);
+							await PeriodDatabase.instance.createPeriodLog(newEntry);
 							_refreshPeriodLogs();
 						}
 					}
