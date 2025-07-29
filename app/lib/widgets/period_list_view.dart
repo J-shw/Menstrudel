@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:menstrudel/models/period_logs.dart';
+import 'package:menstrudel/models/period.dart';
 
 class PeriodListView extends StatelessWidget {
-	final List<PeriodLogEntry> periodEntries;
+	final List<PeriodLogEntry> periodLogEnties;
+	final List<PeriodEntry> periodEntries;
 	final bool isLoading;
 	final Function(int) onDelete;
 
 	const PeriodListView({
 		super.key,
 		required this.periodEntries,
+		required this.periodLogEnties,
 		required this.isLoading,
 		required this.onDelete,
 	});
@@ -29,9 +32,9 @@ class PeriodListView extends StatelessWidget {
 		} else {
 			return Expanded(
 				child: ListView.builder(
-				itemCount: periodEntries.length,
+				itemCount: periodLogEnties.length,
 				itemBuilder: (context, index) {
-					final entry = periodEntries[index];
+					final entry = periodLogEnties[index];
 					final String displayedSymptom = entry.symptom?.isNotEmpty == true ? entry.symptom! : 'No specific symptom';
 
 					final int numberOfDrops = entry.flow + 1; 
