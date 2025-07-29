@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/models/cycle_stats.dart';
 import 'package:menstrudel/models/monthly_cycle_data.dart';
+import 'package:menstrudel/models/period_stats.dart';
 import 'package:menstrudel/widgets/monthly_cycle_list_view.dart';
 import 'package:intl/intl.dart';
 
 class AnalyticsScreen extends StatelessWidget {
 	final CycleStats? cycleStats;
 	final List<MonthlyCycleData>? monthlyCycleData;
+	final PeriodStats? periodStats;
 
   	const AnalyticsScreen({
 		super.key, 
 		this.cycleStats,
 		this.monthlyCycleData,
+		this.periodStats
 	});
 
 	@override
@@ -142,26 +145,26 @@ class AnalyticsScreen extends StatelessWidget {
 									children: <Widget>[
 										buildStatCard(
 											icon: Icons.calendar_month,
-											title: 'Average Cycle Length',
-											value: '${cycleStats!.averageCycleLength} days',
+											title: 'Average Period Length',
+											value: '${periodStats!.averageLength} days',
 											colors: colorScheme,
 										),
 										buildStatCard(
 											icon: Icons.compress,
-											title: 'Shortest Cycle',
-											value: '${cycleStats!.shortestCycleLength ?? "N/A"} days',
+											title: 'Shortest Period',
+											value: '${periodStats!.shortestLength ?? "N/A"} days',
 											colors: colorScheme,
 										),
 										buildStatCard(
 											icon: Icons.expand,
-											title: 'Longest Cycle',
-											value: '${cycleStats!.longestCycleLength ?? "N/A"} days',
+											title: 'Longest Period',
+											value: '${periodStats!.longestLength ?? "N/A"} days',
 											colors: colorScheme,
 										),
 										buildStatCard(
 											icon: Icons.history,
-											title: 'Cycles Analysed',
-											value: '${cycleStats!.numberOfCycles}',
+											title: 'Total Periods',
+											value: '${periodStats!.numberofPeriods}',
 											colors: colorScheme,
 										),
 									],
