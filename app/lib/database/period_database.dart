@@ -31,7 +31,8 @@ class PeriodDatabase {
             CREATE TABLE periods (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 start_date INTEGER NOT NULL,
-                end_date INTEGER NOT NULL
+                end_date INTEGER NOT NULL,
+                total_days INTEGER NOT NULL
         )
         ''');
 		await db.execute('''
@@ -56,8 +57,8 @@ class PeriodDatabase {
 
 	Future<List<PeriodEntry>> readAllPeriods() async {
 		final db = await instance.database;
-		const orderBy = 'date DESC';
-		final result = await db.query('period_logs', orderBy: orderBy);
+		const orderBy = 'start_date DESC';
+		final result = await db.query('periods', orderBy: orderBy);
 
 		return result.map((json) => PeriodEntry.fromMap(json)).toList();
 	}
@@ -161,6 +162,7 @@ class PeriodDatabase {
 
         DateTime? currentPeriodStartDate;
         DateTime? currentPeriodEndDate;
+        int currentPeriodTotalDays = 0;
         List<int> currentPeriodEntryIds = [];
 
         for (int i = 0; i < allEntries.length; i++) {
@@ -175,9 +177,11 @@ class PeriodDatabase {
                     currentPeriodEndDate = entry.date;
                     currentPeriodEntryIds.add(entry.id!);
                 } else {
+                    currentPeriodTotalDays = currentPeriodEndDate.difference(currentPeriodStartDate).inDays + 1;
                     final newPeriod = PeriodEntry(
                         startDate: currentPeriodStartDate,
                         endDate: currentPeriodEndDate,
+                        totalDays: currentPeriodTotalDays,
                     );
                     final createdPeriod = await createPeriod(newPeriod);
                     final assignedPeriodId = createdPeriod.id;
@@ -201,23 +205,29 @@ class PeriodDatabase {
         }
 
         if (currentPeriodStartDate != null) {
-            final newPeriod = PeriodEntry(
-                startDate: currentPeriodStartDate,
-                endDate: currentPeriodEndDate!,
-            );
-            final createdPeriod = await createPeriod(newPeriod);
-            final assignedPeriodId = createdPeriod.id;
+          if (currentPeriodEndDate != null) {
+            currentPeriodTotalDays = currentPeriodEndDate.difference(currentPeriodStartDate).inDays + 1;
+          }else{
+            currentPeriodTotalDays = 1;
+          }
+          final newPeriod = PeriodEntry(
+            startDate: currentPeriodStartDate,
+            endDate: currentPeriodEndDate!,
+            totalDays: currentPeriodTotalDays,
+          );
+          final createdPeriod = await createPeriod(newPeriod);
+          final assignedPeriodId = createdPeriod.id;
 
-            await db.transaction((txn) async {
-                for (int entryId in currentPeriodEntryIds) {
-                    await txn.update(
-                        'period_logs',
-                        {'period_id': assignedPeriodId},
-                        where: 'id = ?',
-                        whereArgs: [entryId],
-                    );
-                }
-            });
+          await db.transaction((txn) async {
+            for (int entryId in currentPeriodEntryIds) {
+              await txn.update(
+                  'period_logs',
+                  {'period_id': assignedPeriodId},
+                  where: 'id = ?',
+                  whereArgs: [entryId],
+              );
+            }
+          });
         }
     }
 }
