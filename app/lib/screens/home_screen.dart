@@ -3,10 +3,12 @@ import 'package:intl/intl.dart';
 import 'package:menstrudel/widgets/basic_progress_circle.dart';
 import 'package:menstrudel/widgets/log_period.dart';
 import 'package:menstrudel/models/period_logs.dart';
+import 'package:menstrudel/models/period.dart';
 import 'package:menstrudel/database/period_database.dart'; 
 import 'package:menstrudel/widgets/period_list_view.dart';
 import 'package:menstrudel/models/period_prediction_result.dart';
 import 'package:menstrudel/models/cycle_stats.dart';
+import 'package:menstrudel/models/period_stats.dart';
 import 'package:menstrudel/utils/period_predictor.dart';
 import 'package:menstrudel/screens/analytics_screen.dart';
 import 'package:menstrudel/models/monthly_cycle_data.dart';
@@ -19,11 +21,13 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-	List<PeriodEntry> _periodEntries = [];
+	List<PeriodLogEntry> _periodLogEntries = [];
+  List<PeriodEntry> _periodEntries = [];
 	List<MonthlyCycleData> _monthlyCycleData = [];
 	bool _isLoading = false;
 	PeriodPredictionResult? _predictionResult;
 	CycleStats? _cycleStats;
+  PeriodStats? _periodStats;
 
 	@override
 	void initState() {
@@ -35,18 +39,21 @@ class _HomeScreenState extends State<HomeScreen> {
 		setState(() {
 			_isLoading = true;
 		});
-		final data = await PeriodDatabase.instance.readAllPeriods();
+		final periodLogData = await PeriodDatabase.instance.readAllPeriodLogs();
+    final periodData = await PeriodDatabase.instance.readAllPeriods();
 		setState(() {
-			_periodEntries = data;
 			_isLoading = false;
-			_predictionResult = PeriodPredictor.estimateNextPeriod(_periodEntries, DateTime.now());
-			_cycleStats = PeriodPredictor.getCycleStats(data);
-			_monthlyCycleData = PeriodPredictor.getMonthlyCycleData(data);
+      _periodLogEntries = periodLogData;
+      _periodEntries = periodData;
+			_predictionResult = PeriodPredictor.estimateNextPeriod(periodLogData, DateTime.now());
+			_cycleStats = PeriodPredictor.getCycleStats(periodLogData);
+			_monthlyCycleData = PeriodPredictor.getMonthlyCycleData(periodLogData);
+      _periodStats = PeriodPredictor.getPeriodData(periodData);
 		});
 	}
 
 	Future<void> _deletePeriodEntry(int id) async {
-		await PeriodDatabase.instance.delete(id);
+		await PeriodDatabase.instance.deletePeriodLog(id);
 		_refreshPeriodLogs();
 	}
 
@@ -98,9 +105,9 @@ class _HomeScreenState extends State<HomeScreen> {
 						),
 					),
 					const SizedBox(height: 20),
-
 					PeriodListView(
-						periodEntries: _periodEntries,
+						periodLogEnties: _periodLogEntries,
+            periodEntries: _periodEntries,
 						isLoading: _isLoading,
 						onDelete: _deletePeriodEntry
 					),
@@ -125,6 +132,7 @@ class _HomeScreenState extends State<HomeScreen> {
 													builder: (context) => AnalyticsScreen(
 														cycleStats: _cycleStats,
 														monthlyCycleData: _monthlyCycleData,
+                            periodStats: _periodStats,
 													),
 												),
 											);
@@ -163,13 +171,13 @@ class _HomeScreenState extends State<HomeScreen> {
 						final int flow = result['flow'];
 						
 						if (date != null) {
-							final newEntry = PeriodEntry(
+							final newEntry = PeriodLogEntry(
 								date: date,
 								symptom: symptom,
 								flow: flow,
 							);
 
-							await PeriodDatabase.instance.create(newEntry);
+							await PeriodDatabase.instance.createPeriodLog(newEntry);
 							_refreshPeriodLogs();
 						}
 					}
