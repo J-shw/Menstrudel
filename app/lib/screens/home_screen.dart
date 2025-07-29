@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:menstrudel/widgets/basic_progress_circle.dart';
 import 'package:menstrudel/widgets/log_period.dart';
 import 'package:menstrudel/models/period_logs.dart';
+import 'package:menstrudel/models/period.dart';
 import 'package:menstrudel/database/period_database.dart'; 
 import 'package:menstrudel/widgets/period_list_view.dart';
 import 'package:menstrudel/models/period_prediction_result.dart';
@@ -21,6 +22,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 	List<PeriodLogEntry> _periodLogEntries = [];
+  List<PeriodEntry> _periodEntries = [];
 	List<MonthlyCycleData> _monthlyCycleData = [];
 	bool _isLoading = false;
 	PeriodPredictionResult? _predictionResult;
@@ -42,6 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
 		setState(() {
 			_isLoading = false;
       _periodLogEntries = periodLogData;
+      _periodEntries = periodData;
 			_predictionResult = PeriodPredictor.estimateNextPeriod(periodLogData, DateTime.now());
 			_cycleStats = PeriodPredictor.getCycleStats(periodLogData);
 			_monthlyCycleData = PeriodPredictor.getMonthlyCycleData(periodLogData);
@@ -103,7 +106,8 @@ class _HomeScreenState extends State<HomeScreen> {
 					),
 					const SizedBox(height: 20),
 					PeriodListView(
-						periodEntries: _periodLogEntries,
+						periodLogEnties: _periodLogEntries,
+            periodEntries: _periodEntries,
 						isLoading: _isLoading,
 						onDelete: _deletePeriodEntry
 					),
