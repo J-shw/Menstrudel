@@ -7,6 +7,7 @@ import 'package:menstrudel/database/period_database.dart';
 import 'package:menstrudel/widgets/period_list_view.dart';
 import 'package:menstrudel/models/period_prediction_result.dart';
 import 'package:menstrudel/models/cycle_stats.dart';
+import 'package:menstrudel/models/period_stats.dart';
 import 'package:menstrudel/utils/period_predictor.dart';
 import 'package:menstrudel/screens/analytics_screen.dart';
 import 'package:menstrudel/models/monthly_cycle_data.dart';
@@ -24,6 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
 	bool _isLoading = false;
 	PeriodPredictionResult? _predictionResult;
 	CycleStats? _cycleStats;
+  PeriodStats? _periodStats;
 
 	@override
 	void initState() {
@@ -35,13 +37,15 @@ class _HomeScreenState extends State<HomeScreen> {
 		setState(() {
 			_isLoading = true;
 		});
-		final data = await PeriodDatabase.instance.readAllPeriodLogs();
+		final periodLogData = await PeriodDatabase.instance.readAllPeriodLogs();
+    final periodData = await PeriodDatabase.instance.readAllPeriods();
 		setState(() {
-			_periodLogEntries = data;
 			_isLoading = false;
-			_predictionResult = PeriodPredictor.estimateNextPeriod(_periodLogEntries, DateTime.now());
-			_cycleStats = PeriodPredictor.getCycleStats(data);
-			_monthlyCycleData = PeriodPredictor.getMonthlyCycleData(data);
+      _periodLogEntries = periodLogData;
+			_predictionResult = PeriodPredictor.estimateNextPeriod(periodLogData, DateTime.now());
+			_cycleStats = PeriodPredictor.getCycleStats(periodLogData);
+			_monthlyCycleData = PeriodPredictor.getMonthlyCycleData(periodLogData);
+      _periodStats = PeriodPredictor.getPeriodData(periodData);
 		});
 	}
 
@@ -98,7 +102,6 @@ class _HomeScreenState extends State<HomeScreen> {
 						),
 					),
 					const SizedBox(height: 20),
-
 					PeriodListView(
 						periodEntries: _periodLogEntries,
 						isLoading: _isLoading,
@@ -125,6 +128,7 @@ class _HomeScreenState extends State<HomeScreen> {
 													builder: (context) => AnalyticsScreen(
 														cycleStats: _cycleStats,
 														monthlyCycleData: _monthlyCycleData,
+                            periodStats: _periodStats,
 													),
 												),
 											);
