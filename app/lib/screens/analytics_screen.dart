@@ -198,7 +198,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
 						],
 					),
 				),
-        bottomNavigationBar: MainBottomNavigationBar(),
+        bottomNavigationBar: MainBottomNavigationBar(isAnalyticsScreenActive: true,),
 			);
 	}
 }
