@@ -7,11 +7,9 @@ import 'package:menstrudel/models/period.dart';
 import 'package:menstrudel/database/period_database.dart'; 
 import 'package:menstrudel/widgets/period_list_view.dart';
 import 'package:menstrudel/models/period_prediction_result.dart';
-import 'package:menstrudel/models/cycle_stats.dart';
-import 'package:menstrudel/models/period_stats.dart';
 import 'package:menstrudel/utils/period_predictor.dart';
 import 'package:menstrudel/screens/analytics_screen.dart';
-import 'package:menstrudel/models/monthly_cycle_data.dart';
+import 'package:menstrudel/widgets/navigation_bar.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -23,11 +21,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
 	List<PeriodLogEntry> _periodLogEntries = [];
   List<PeriodEntry> _periodEntries = [];
-	List<MonthlyCycleData> _monthlyCycleData = [];
 	bool _isLoading = false;
 	PeriodPredictionResult? _predictionResult;
-	CycleStats? _cycleStats;
-  PeriodStats? _periodStats;
 
 	@override
 	void initState() {
@@ -46,9 +41,6 @@ class _HomeScreenState extends State<HomeScreen> {
       _periodLogEntries = periodLogData;
       _periodEntries = periodData;
 			_predictionResult = PeriodPredictor.estimateNextPeriod(periodLogData, DateTime.now());
-			_cycleStats = PeriodPredictor.getCycleStats(periodLogData);
-			_monthlyCycleData = PeriodPredictor.getMonthlyCycleData(periodLogData);
-      _periodStats = PeriodPredictor.getPeriodData(periodData);
 		});
 	}
 
@@ -113,50 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
 					),
 				],
 			),
-
-			bottomNavigationBar: BottomAppBar(
-				shape: const CircularNotchedRectangle(),
-				child: SizedBox(
-					child: Row(
-						mainAxisAlignment: MainAxisAlignment.spaceAround,
-						children: [
-							Row(
-								mainAxisAlignment: MainAxisAlignment.spaceAround,
-								children: [
-									IconButton(
-										icon: const Icon(Icons.bar_chart, size: 30.0),
-										tooltip: 'Logs',
-										onPressed: () {
-											Navigator.of(context).push(
-												MaterialPageRoute(
-													builder: (context) => AnalyticsScreen(
-														cycleStats: _cycleStats,
-														monthlyCycleData: _monthlyCycleData,
-                            periodStats: _periodStats,
-													),
-												),
-											);
-										},
-									),	
-								],
-							),
-							const SizedBox(width: 48.0),
-							Row(
-								mainAxisAlignment: MainAxisAlignment.spaceAround,
-								children: [
-									// IconButton(
-									// 	icon: const Icon(Icons.settings, size: 30.0),
-									// 	tooltip: 'Settings',
-									// 	onPressed: () {
-											
-									// 	},
-									// ),	
-								],
-							),
-						],
-					)
-				),
-			),
+			bottomNavigationBar: MainBottomNavigationBar(isHomeScreenActive: true,),
 			floatingActionButton: FloatingActionButton(
 				onPressed: () async {
 					final Map<String, dynamic>? result = await showDialog<Map<String, dynamic>>(
@@ -185,7 +134,7 @@ class _HomeScreenState extends State<HomeScreen> {
 				tooltip: 'Log period',
 				child: const Icon(Icons.add),
 			),
-			floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+			floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
 		);
 	}
 }
