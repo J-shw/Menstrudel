@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/widgets/navigation_bar.dart';
+import 'package:menstrudel/widgets/app_bar.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({
@@ -9,8 +10,8 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Settings'),
+      appBar: TopAppBar(
+        titleText: "Settings"
       ),
       body: Center(
         child: Text(
