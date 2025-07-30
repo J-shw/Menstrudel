@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/screens/analytics_screen.dart';
 import 'package:menstrudel/screens/home_screen.dart';
+import 'package:menstrudel/screens/settings_screen.dart';
 
 
 class MainBottomNavigationBar extends StatelessWidget {
   final bool isAnalyticsScreenActive;
   final bool isHomeScreenActive;
+  final bool isSettingScreenActive;
   
   const MainBottomNavigationBar({
     super.key,
     this.isAnalyticsScreenActive = false,
     this.isHomeScreenActive = false,
+    this.isSettingScreenActive = false,
   });
 
   @override
@@ -50,8 +53,14 @@ class MainBottomNavigationBar extends StatelessWidget {
             IconButton(
               icon: const Icon(Icons.settings, size: 30.0),
               tooltip: 'Settings',
-              onPressed: () {
-                
+              onPressed: isSettingScreenActive
+              ? null
+              : () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const SettingsScreen(),
+                  ),
+                );
               },
             ),	
           ],
