@@ -40,7 +40,7 @@ class MainBottomNavigationBar extends StatelessWidget {
               onPressed: isHomeScreenActive
               ? null
               : () {
-                Navigator.of(context).push(
+                Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
                     builder: (context) => const HomeScreen(),
                   ),
