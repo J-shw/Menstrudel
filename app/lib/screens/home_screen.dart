@@ -105,7 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
 					),
 				],
 			),
-			bottomNavigationBar: MainBottomNavigationBar(),
+			bottomNavigationBar: MainBottomNavigationBar(isHomeScreenActive: true,),
 			floatingActionButton: FloatingActionButton(
 				onPressed: () async {
 					final Map<String, dynamic>? result = await showDialog<Map<String, dynamic>>(
@@ -134,7 +134,7 @@ class _HomeScreenState extends State<HomeScreen> {
 				tooltip: 'Log period',
 				child: const Icon(Icons.add),
 			),
-			floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+			floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
 		);
 	}
 }
