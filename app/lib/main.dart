@@ -18,7 +18,7 @@ class MainApp extends StatelessWidget {
 					brightness: Brightness.light,
 				),
 				appBarTheme: const AppBarTheme(
-					backgroundColor: Colors.red,
+					backgroundColor: Color.fromARGB(255, 236, 102, 102),
 					foregroundColor: Colors.white,
 				),
 			),

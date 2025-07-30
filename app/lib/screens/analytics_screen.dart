@@ -6,6 +6,7 @@ import 'package:menstrudel/widgets/monthly_cycle_list_view.dart';
 import 'package:menstrudel/utils/period_predictor.dart';
 import 'package:menstrudel/database/period_database.dart';
 import 'package:menstrudel/widgets/navigation_bar.dart';
+import 'package:menstrudel/widgets/app_bar.dart';
 import 'package:intl/intl.dart';
 
 class AnalyticsScreen extends StatefulWidget {
@@ -85,6 +86,9 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
 		}
 		
     return Scaffold(
+      appBar: TopAppBar(
+        titleText: "Analytics"
+      ),
 			body: _cycleStats == null
 				? Center(
 					child: Padding(
@@ -113,7 +117,6 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
 				: Center( 
 					child: Column(
 						children: [
-							SizedBox(height: 50,),
 							SizedBox(
 								height: 200,
 								child: GridView.count(
