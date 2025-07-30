@@ -3,20 +3,39 @@ import 'package:menstrudel/models/cycle_stats.dart';
 import 'package:menstrudel/models/monthly_cycle_data.dart';
 import 'package:menstrudel/models/period_stats.dart';
 import 'package:menstrudel/widgets/monthly_cycle_list_view.dart';
+import 'package:menstrudel/utils/period_predictor.dart';
+import 'package:menstrudel/database/period_database.dart';
+import 'package:menstrudel/widgets/navigation_bar.dart';
 import 'package:intl/intl.dart';
 
-class AnalyticsScreen extends StatelessWidget {
-	final CycleStats? cycleStats;
-	final List<MonthlyCycleData>? monthlyCycleData;
-	final PeriodStats? periodStats;
+class AnalyticsScreen extends StatefulWidget {
+  const AnalyticsScreen({super.key});
 
-  	const AnalyticsScreen({
-		super.key, 
-		this.cycleStats,
-		this.monthlyCycleData,
-		this.periodStats
-	});
+  @override
+  State<AnalyticsScreen> createState() => _AnalyticsScreenState();
+}
 
+class _AnalyticsScreenState extends State<AnalyticsScreen> {
+	List<MonthlyCycleData> _monthlyCycleData = [];
+	CycleStats? _cycleStats;
+  PeriodStats? _periodStats;
+
+  @override
+	void initState() {
+		super.initState();
+		_refreshPeriodLogs();
+	}
+
+	Future<void> _refreshPeriodLogs() async {
+		final periodLogData = await PeriodDatabase.instance.readAllPeriodLogs();
+    final periodData = await PeriodDatabase.instance.readAllPeriods();
+		setState(() {
+			_cycleStats = PeriodPredictor.getCycleStats(periodLogData);
+			_monthlyCycleData = PeriodPredictor.getMonthlyCycleData(periodLogData);
+      _periodStats = PeriodPredictor.getPeriodData(periodData);
+		});
+	}
+  
 	@override
 	Widget build(BuildContext context) {
 		final ColorScheme colorScheme = Theme.of(context).colorScheme;
@@ -66,7 +85,7 @@ class AnalyticsScreen extends StatelessWidget {
 		}
 		
     return Scaffold(
-			body: cycleStats == null
+			body: _cycleStats == null
 				? Center(
 					child: Padding(
 						padding: const EdgeInsets.all(24.0),
@@ -108,25 +127,25 @@ class AnalyticsScreen extends StatelessWidget {
 										buildStatCard(
 											icon: Icons.calendar_month,
 											title: 'Average Cycle Length',
-											value: '${cycleStats!.averageCycleLength} days',
+											value: '${_cycleStats!.averageCycleLength} days',
 											colors: colorScheme,
 										),
 										buildStatCard(
 											icon: Icons.compress,
 											title: 'Shortest Cycle',
-											value: '${cycleStats!.shortestCycleLength ?? "N/A"} days',
+											value: '${_cycleStats!.shortestCycleLength ?? "N/A"} days',
 											colors: colorScheme,
 										),
 										buildStatCard(
 											icon: Icons.expand,
 											title: 'Longest Cycle',
-											value: '${cycleStats!.longestCycleLength ?? "N/A"} days',
+											value: '${_cycleStats!.longestCycleLength ?? "N/A"} days',
 											colors: colorScheme,
 										),
 										buildStatCard(
 											icon: Icons.history,
 											title: 'Cycles Analysed',
-											value: '${cycleStats!.numberOfCycles}',
+											value: '${_cycleStats!.numberOfCycles}',
 											colors: colorScheme,
 										),
 									],
@@ -146,25 +165,25 @@ class AnalyticsScreen extends StatelessWidget {
 										buildStatCard(
 											icon: Icons.calendar_month,
 											title: 'Average Period Length',
-											value: '${periodStats!.averageLength} days',
+											value: '${_periodStats!.averageLength} days',
 											colors: colorScheme,
 										),
 										buildStatCard(
 											icon: Icons.compress,
 											title: 'Shortest Period',
-											value: '${periodStats!.shortestLength ?? "N/A"} days',
+											value: '${_periodStats!.shortestLength ?? "N/A"} days',
 											colors: colorScheme,
 										),
 										buildStatCard(
 											icon: Icons.expand,
 											title: 'Longest Period',
-											value: '${periodStats!.longestLength ?? "N/A"} days',
+											value: '${_periodStats!.longestLength ?? "N/A"} days',
 											colors: colorScheme,
 										),
 										buildStatCard(
 											icon: Icons.history,
 											title: 'Total Periods',
-											value: '${periodStats!.numberofPeriods}',
+											value: '${_periodStats!.numberofPeriods}',
 											colors: colorScheme,
 										),
 									],
@@ -173,12 +192,13 @@ class AnalyticsScreen extends StatelessWidget {
 							
 							Expanded( 
 								child: MonthlyCycleListView(
-									monthlyCycleData: monthlyCycleData, // Pass the data to your chart component
+									monthlyCycleData: _monthlyCycleData, // Pass the data to your chart component
 								),
 							),
 						],
 					),
 				),
+        bottomNavigationBar: MainBottomNavigationBar(),
 			);
 	}
 }
