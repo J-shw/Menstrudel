@@ -100,8 +100,8 @@ class NotificationHelper {
 
     await flutterLocalNotificationsPlugin.zonedSchedule(
       periodNotificationId,
-      "Period Alert",
-      "Your period is due today",
+      "Period Reminder",
+      "Your period is due tomorrow",
       tzScheduledTime.subtract(const Duration(days: 1)),
       platformDetails,
       androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
