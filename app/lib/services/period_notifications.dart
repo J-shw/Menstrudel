@@ -16,6 +16,8 @@ void onDidReceiveBackgroundNotificationResponse(NotificationResponse notificatio
 }
 
 class NotificationHelper {
+  static const int periodNotificationId = 1;
+
   static Future<void> initialiseNotifications() async {
     tz_data.initializeTimeZones();
     tz.setLocalLocation(tz.getLocation('Europe/London'));
@@ -75,17 +77,14 @@ class NotificationHelper {
     );
   }
 
-  static Future<void> scheduleNotification({
-    required int id,
-    required String title,
-    required String body,
+  static Future<void> schedulePeriodNotification({ // Schedules a notification a day before
     required DateTime scheduledTime,
     String? payload,
   }) async {
     const AndroidNotificationDetails androidDetails = AndroidNotificationDetails(
       'scheduled_channel_id',
-      'Scheduled Reminders',
-      channelDescription: 'For future reminders that pop up at a specific time',
+      'Period Alerts',
+      channelDescription: 'Prediction alerts for periods',
       importance: Importance.max,
       priority: Priority.high,
       playSound: true,
@@ -100,10 +99,10 @@ class NotificationHelper {
     final tz.TZDateTime tzScheduledTime = tz.TZDateTime.from(scheduledTime, tz.local);
 
     await flutterLocalNotificationsPlugin.zonedSchedule(
-      id,
-      title,
-      body,
-      tzScheduledTime,
+      periodNotificationId,
+      "Period Alert",
+      "Your period is due today",
+      tzScheduledTime.subtract(const Duration(days: 1)),
       platformDetails,
       androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
       payload: payload,
