@@ -22,7 +22,7 @@ final List<String> _symptomOptions = [
 	'Acne',
 ];
 
-final List<String> flowLabels = ["Low", "Medium", "High"];
+final List<String> flowLabels = ["Light", "Moderate", "Heavy"];
 
 double _currentDiscreteSliderValue = 1;
 
