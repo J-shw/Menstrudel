@@ -10,6 +10,7 @@ import 'package:menstrudel/models/period_prediction_result.dart';
 import 'package:menstrudel/utils/period_predictor.dart';
 import 'package:menstrudel/screens/analytics_screen.dart';
 import 'package:menstrudel/widgets/navigation_bar.dart';
+import 'package:menstrudel/services/period_notifications.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -41,6 +42,11 @@ class _HomeScreenState extends State<HomeScreen> {
       _periodLogEntries = periodLogData;
       _periodEntries = periodData;
 			_predictionResult = PeriodPredictor.estimateNextPeriod(periodLogData, DateTime.now());
+      if (_predictionResult != null) {
+        NotificationHelper.schedulePeriodNotification(
+          scheduledTime: _predictionResult!.estimatedDate,
+        );
+      }
 		});
 	}
 

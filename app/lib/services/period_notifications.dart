@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:timezone/timezone.dart' as tz;
+import 'package:timezone/data/latest.dart' as tz_data;
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
@@ -14,16 +16,21 @@ void onDidReceiveBackgroundNotificationResponse(NotificationResponse notificatio
 }
 
 class NotificationHelper {
+  static const int periodNotificationId = 1;
+
   static Future<void> initialiseNotifications() async {
+    tz_data.initializeTimeZones();
+    tz.setLocalLocation(tz.getLocation('Europe/London'));
+
     const AndroidInitializationSettings initializationSettingsAndroid =
         AndroidInitializationSettings('@mipmap/ic_notification');
 
     const DarwinInitializationSettings initializationSettingsIOS =
-      DarwinInitializationSettings(
-        requestAlertPermission: true,
-        requestBadgePermission: true,
-        requestSoundPermission: true,
-      );
+        DarwinInitializationSettings(
+      requestAlertPermission: true,
+      requestBadgePermission: true,
+      requestSoundPermission: true,
+    );
 
     const InitializationSettings initializationSettings = InitializationSettings(
       android: initializationSettingsAndroid,
@@ -68,5 +75,45 @@ class NotificationHelper {
       platformDetails,
       payload: 'test_payload',
     );
+  }
+
+  static Future<void> schedulePeriodNotification({ // Schedules a notification a day before
+    required DateTime scheduledTime,
+    String? payload,
+  }) async {
+    const AndroidNotificationDetails androidDetails = AndroidNotificationDetails(
+      'scheduled_channel_id',
+      'Period Alerts',
+      channelDescription: 'Prediction alerts for periods',
+      importance: Importance.max,
+      priority: Priority.high,
+      playSound: true,
+      enableVibration: true,
+    );
+    const DarwinNotificationDetails iOSDetails = DarwinNotificationDetails();
+    const NotificationDetails platformDetails = NotificationDetails(
+      android: androidDetails,
+      iOS: iOSDetails,
+    );
+
+    final tz.TZDateTime tzScheduledTime = tz.TZDateTime.from(scheduledTime, tz.local);
+
+    await flutterLocalNotificationsPlugin.zonedSchedule(
+      periodNotificationId,
+      "Period Reminder",
+      "Your period is due tomorrow",
+      tzScheduledTime.subtract(const Duration(days: 1)),
+      platformDetails,
+      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+      payload: payload,
+    );
+  }
+
+  static Future<void> cancelNotification(int id) async {
+    await flutterLocalNotificationsPlugin.cancel(id);
+  }
+
+  static Future<void> cancelAllNotifications() async {
+    await flutterLocalNotificationsPlugin.cancelAll();
   }
 }
