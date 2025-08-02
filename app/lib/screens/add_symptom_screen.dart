@@ -5,13 +5,11 @@ class AddSymptomScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Get the current theme's color scheme for adaptive colors
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('Add Symptoms'),
-        // The back button is automatically added by Scaffold when pushed
       ),
       body: Center(
         child: Column(
@@ -21,14 +19,13 @@ class AddSymptomScreen extends StatelessWidget {
               'This is where you will add your symptoms!',
               style: TextStyle(
                 fontSize: 18,
-                color: colorScheme.onSurface, // Adapts to light/dark mode
+                color: colorScheme.onSurface,
               ),
             ),
             const SizedBox(height: 20),
-            // You'll add your symptom input fields, date pickers, etc., here later
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).pop(); // Go back to the previous screen
+                Navigator.of(context).pop();
               },
               child: const Text('Go Back'),
             ),

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/screens/home_screen.dart';
+import 'package:menstrudel/services/period_notifications.dart';
 
-void main() {
+void main() async { 
+  WidgetsFlutterBinding.ensureInitialized();
+  await NotificationHelper.initialiseNotifications(); 
   runApp(const MainApp());
 }
 
@@ -18,7 +21,7 @@ class MainApp extends StatelessWidget {
 					brightness: Brightness.light,
 				),
 				appBarTheme: const AppBarTheme(
-					backgroundColor: Colors.red,
+					backgroundColor: Color.fromARGB(255, 236, 102, 102),
 					foregroundColor: Colors.white,
 				),
 			),

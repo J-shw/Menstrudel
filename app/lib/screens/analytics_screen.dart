@@ -1,19 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/models/cycle_stats.dart';
 import 'package:menstrudel/models/monthly_cycle_data.dart';
+import 'package:menstrudel/models/period_stats.dart';
 import 'package:menstrudel/widgets/monthly_cycle_list_view.dart';
+import 'package:menstrudel/utils/period_predictor.dart';
+import 'package:menstrudel/database/period_database.dart';
+import 'package:menstrudel/widgets/navigation_bar.dart';
+import 'package:menstrudel/widgets/app_bar.dart';
 import 'package:intl/intl.dart';
 
-class AnalyticsScreen extends StatelessWidget {
-	final CycleStats? cycleStats;
-	final List<MonthlyCycleData>? monthlyCycleData;
+class AnalyticsScreen extends StatefulWidget {
+  const AnalyticsScreen({super.key});
 
-  	const AnalyticsScreen({
-		super.key, 
-		this.cycleStats,
-		this.monthlyCycleData,
-	});
+  @override
+  State<AnalyticsScreen> createState() => _AnalyticsScreenState();
+}
 
+class _AnalyticsScreenState extends State<AnalyticsScreen> {
+	List<MonthlyCycleData> _monthlyCycleData = [];
+	CycleStats? _cycleStats;
+  PeriodStats? _periodStats;
+
+  @override
+	void initState() {
+		super.initState();
+		_refreshPeriodLogs();
+	}
+
+	Future<void> _refreshPeriodLogs() async {
+		final periodLogData = await PeriodDatabase.instance.readAllPeriodLogs();
+    final periodData = await PeriodDatabase.instance.readAllPeriods();
+		setState(() {
+			_cycleStats = PeriodPredictor.getCycleStats(periodLogData);
+			_monthlyCycleData = PeriodPredictor.getMonthlyCycleData(periodLogData);
+      _periodStats = PeriodPredictor.getPeriodData(periodData);
+		});
+	}
+  
 	@override
 	Widget build(BuildContext context) {
 		final ColorScheme colorScheme = Theme.of(context).colorScheme;
@@ -24,52 +47,49 @@ class AnalyticsScreen extends StatelessWidget {
 			required String value,
 			required ColorScheme colors,
 			}) {
-			return SizedBox(
-				child: Padding(
-					padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
-					child: Column(
-						mainAxisSize: MainAxisSize.min,
-						mainAxisAlignment: MainAxisAlignment.center,
-						crossAxisAlignment: CrossAxisAlignment.start,
-						children: [
-							Text(
-								title,
-								textAlign: TextAlign.left,
-								style: TextStyle(
+			return Column(
+					mainAxisSize: MainAxisSize.min,
+					mainAxisAlignment: MainAxisAlignment.center,
+					children: [
+						Text(
+							title,
+							style: TextStyle(
 								fontSize: 14,
 								fontWeight: FontWeight.normal,
 								color: colors.onSurfaceVariant, 
-								),
-								overflow: TextOverflow.ellipsis,
 							),
-							const SizedBox(height: 4),
-							Row(
-								mainAxisSize: MainAxisSize.min,
-								children: [
-									Icon(
-										icon,
-										size: 18.0,
-										color: colors.primary,
-									),
-									const SizedBox(width: 6),
-									Text(
-										value,
-										textAlign: TextAlign.left,
-										style: TextStyle(
+							overflow: TextOverflow.ellipsis,
+						),
+						const SizedBox(height: 5),
+						Row(
+							mainAxisSize: MainAxisSize.min,
+							children: [
+								Icon(
+									icon,
+									size: 18.0,
+									color: colors.primary,
+								),
+								const SizedBox(width: 5),
+								Text(
+									value,
+									style: TextStyle(
 										fontSize: 16,
 										fontWeight: FontWeight.bold,
 										color: colors.onSurface,
-										),
 									),
-								],
-							),
-						],
-					),
-				),
+								),
+							],
+						),
+					],
+				
 			);
 		}
-		return Scaffold(
-			body: cycleStats == null
+		
+    return Scaffold(
+      appBar: TopAppBar(
+        titleText: "Analytics"
+      ),
+			body: _cycleStats == null
 				? Center(
 					child: Padding(
 						padding: const EdgeInsets.all(24.0),
@@ -97,52 +117,91 @@ class AnalyticsScreen extends StatelessWidget {
 				: Center( 
 					child: Column(
 						children: [
-								SizedBox(
-									height: 300,
-									child: GridView.count(
-										crossAxisCount: 2,
-										crossAxisSpacing: 10.0,
-										mainAxisSpacing: 10.0,
-										physics: const NeverScrollableScrollPhysics(),
-										childAspectRatio: 2.5,
-										children: <Widget>[
-											buildStatCard(
-												icon: Icons.calendar_month,
-												title: 'Average Cycle Length',
-												value: '${cycleStats!.averageCycleLength} days',
-												colors: colorScheme,
-											),
-											buildStatCard(
-												icon: Icons.compress,
-												title: 'Shortest Cycle',
-												value: '${cycleStats!.shortestCycleLength ?? "N/A"} days',
-												colors: colorScheme,
-											),
-											buildStatCard(
-												icon: Icons.expand,
-												title: 'Longest Cycle',
-												value: '${cycleStats!.longestCycleLength ?? "N/A"} days',
-												colors: colorScheme,
-											),
-											buildStatCard(
-												icon: Icons.history,
-												title: 'Cycles Analysed',
-												value: '${cycleStats!.numberOfCycles}',
-												colors: colorScheme,
-											),
-										],
-									),
+							SizedBox(
+								height: 200,
+								child: GridView.count(
+									padding: EdgeInsets.zero,
+									crossAxisCount: 2,
+									crossAxisSpacing: 10.0,
+									mainAxisSpacing: 10.0,
+									physics: const NeverScrollableScrollPhysics(),
+									childAspectRatio: 2.5,
+									children: <Widget>[
+										buildStatCard(
+											icon: Icons.calendar_month,
+											title: 'Average Cycle Length',
+											value: '${_cycleStats!.averageCycleLength} days',
+											colors: colorScheme,
+										),
+										buildStatCard(
+											icon: Icons.compress,
+											title: 'Shortest Cycle',
+											value: '${_cycleStats!.shortestCycleLength ?? "N/A"} days',
+											colors: colorScheme,
+										),
+										buildStatCard(
+											icon: Icons.expand,
+											title: 'Longest Cycle',
+											value: '${_cycleStats!.longestCycleLength ?? "N/A"} days',
+											colors: colorScheme,
+										),
+										buildStatCard(
+											icon: Icons.history,
+											title: 'Cycles Analysed',
+											value: '${_cycleStats!.numberOfCycles}',
+											colors: colorScheme,
+										),
+									],
 								),
-	
+							),
+
+							SizedBox(
+								height: 200,
+								child: GridView.count(
+									padding: EdgeInsets.zero,
+									crossAxisCount: 2,
+									crossAxisSpacing: 10.0,
+									mainAxisSpacing: 10.0,
+									physics: const NeverScrollableScrollPhysics(),
+									childAspectRatio: 2.5,
+									children: <Widget>[
+										buildStatCard(
+											icon: Icons.calendar_month,
+											title: 'Average Period Length',
+											value: '${_periodStats!.averageLength} days',
+											colors: colorScheme,
+										),
+										buildStatCard(
+											icon: Icons.compress,
+											title: 'Shortest Period',
+											value: '${_periodStats!.shortestLength ?? "N/A"} days',
+											colors: colorScheme,
+										),
+										buildStatCard(
+											icon: Icons.expand,
+											title: 'Longest Period',
+											value: '${_periodStats!.longestLength ?? "N/A"} days',
+											colors: colorScheme,
+										),
+										buildStatCard(
+											icon: Icons.history,
+											title: 'Total Periods',
+											value: '${_periodStats!.numberofPeriods}',
+											colors: colorScheme,
+										),
+									],
+								),
+							),
+							
 							Expanded( 
-		
 								child: MonthlyCycleListView(
-									monthlyCycleData: monthlyCycleData, // Pass the data to your chart component
+									monthlyCycleData: _monthlyCycleData, // Pass the data to your chart component
 								),
 							),
 						],
 					),
 				),
+        bottomNavigationBar: MainBottomNavigationBar(isAnalyticsScreenActive: true,),
 			);
 	}
 }

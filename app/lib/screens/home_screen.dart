@@ -3,13 +3,14 @@ import 'package:intl/intl.dart';
 import 'package:menstrudel/widgets/basic_progress_circle.dart';
 import 'package:menstrudel/widgets/log_period.dart';
 import 'package:menstrudel/models/period_logs.dart';
+import 'package:menstrudel/models/period.dart';
 import 'package:menstrudel/database/period_database.dart'; 
 import 'package:menstrudel/widgets/period_list_view.dart';
 import 'package:menstrudel/models/period_prediction_result.dart';
-import 'package:menstrudel/models/cycle_stats.dart';
 import 'package:menstrudel/utils/period_predictor.dart';
 import 'package:menstrudel/screens/analytics_screen.dart';
-import 'package:menstrudel/models/monthly_cycle_data.dart';
+import 'package:menstrudel/widgets/navigation_bar.dart';
+import 'package:menstrudel/services/period_notifications.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -19,11 +20,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-	List<PeriodEntry> _periodEntries = [];
-	List<MonthlyCycleData> _monthlyCycleData = [];
+	List<PeriodLogEntry> _periodLogEntries = [];
+  List<PeriodEntry> _periodEntries = [];
 	bool _isLoading = false;
 	PeriodPredictionResult? _predictionResult;
-	CycleStats? _cycleStats;
 
 	@override
 	void initState() {
@@ -35,18 +35,23 @@ class _HomeScreenState extends State<HomeScreen> {
 		setState(() {
 			_isLoading = true;
 		});
-		final data = await PeriodDatabase.instance.readAllPeriods();
+		final periodLogData = await PeriodDatabase.instance.readAllPeriodLogs();
+    final periodData = await PeriodDatabase.instance.readAllPeriods();
 		setState(() {
-			_periodEntries = data;
 			_isLoading = false;
-			_predictionResult = PeriodPredictor.estimateNextPeriod(_periodEntries, DateTime.now());
-			_cycleStats = PeriodPredictor.getCycleStats(data);
-			_monthlyCycleData = PeriodPredictor.getMonthlyCycleData(data);
+      _periodLogEntries = periodLogData;
+      _periodEntries = periodData;
+			_predictionResult = PeriodPredictor.estimateNextPeriod(periodLogData, DateTime.now());
+      if (_predictionResult != null) {
+        NotificationHelper.schedulePeriodNotification(
+          scheduledTime: _predictionResult!.estimatedDate,
+        );
+      }
 		});
 	}
 
 	Future<void> _deletePeriodEntry(int id) async {
-		await PeriodDatabase.instance.delete(id);
+		await PeriodDatabase.instance.deletePeriodLog(id);
 		_refreshPeriodLogs();
 	}
 
@@ -98,57 +103,15 @@ class _HomeScreenState extends State<HomeScreen> {
 						),
 					),
 					const SizedBox(height: 20),
-
 					PeriodListView(
-						periodEntries: _periodEntries,
+						periodLogEnties: _periodLogEntries,
+            periodEntries: _periodEntries,
 						isLoading: _isLoading,
 						onDelete: _deletePeriodEntry
 					),
 				],
 			),
-
-			bottomNavigationBar: BottomAppBar(
-				shape: const CircularNotchedRectangle(),
-				child: SizedBox(
-					child: Row(
-						mainAxisAlignment: MainAxisAlignment.spaceAround,
-						children: [
-							Row(
-								mainAxisAlignment: MainAxisAlignment.spaceAround,
-								children: [
-									IconButton(
-										icon: const Icon(Icons.bar_chart, size: 30.0),
-										tooltip: 'Logs',
-										onPressed: () {
-											Navigator.of(context).push(
-												MaterialPageRoute(
-													builder: (context) => AnalyticsScreen(
-														cycleStats: _cycleStats,
-														monthlyCycleData: _monthlyCycleData,
-													),
-												),
-											);
-										},
-									),	
-								],
-							),
-							const SizedBox(width: 48.0),
-							Row(
-								mainAxisAlignment: MainAxisAlignment.spaceAround,
-								children: [
-									// IconButton(
-									// 	icon: const Icon(Icons.settings, size: 30.0),
-									// 	tooltip: 'Settings',
-									// 	onPressed: () {
-											
-									// 	},
-									// ),	
-								],
-							),
-						],
-					)
-				),
-			),
+			bottomNavigationBar: MainBottomNavigationBar(isHomeScreenActive: true,),
 			floatingActionButton: FloatingActionButton(
 				onPressed: () async {
 					final Map<String, dynamic>? result = await showDialog<Map<String, dynamic>>(
@@ -163,13 +126,13 @@ class _HomeScreenState extends State<HomeScreen> {
 						final int flow = result['flow'];
 						
 						if (date != null) {
-							final newEntry = PeriodEntry(
+							final newEntry = PeriodLogEntry(
 								date: date,
 								symptom: symptom,
 								flow: flow,
 							);
 
-							await PeriodDatabase.instance.create(newEntry);
+							await PeriodDatabase.instance.createPeriodLog(newEntry);
 							_refreshPeriodLogs();
 						}
 					}
@@ -177,7 +140,7 @@ class _HomeScreenState extends State<HomeScreen> {
 				tooltip: 'Log period',
 				child: const Icon(Icons.add),
 			),
-			floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+			floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
 		);
 	}
 }
