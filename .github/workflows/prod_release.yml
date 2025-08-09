@@ -24,6 +24,15 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
+
+      - name: Deeply Inspect Keystore Secret
+        run: |
+          SECRET_VALUE="${{ secrets.SIGNING_KEY_STORE_BASE64 }}"
+          echo "--- GitHub Actions Secret Analysis ---"
+          echo "Total length of secret received by Actions: ${#SECRET_VALUE}"
+          echo "First 20 characters: ${SECRET_VALUE:0:20}..."
+          echo "Last 20 characters: ...${SECRET_VALUE: -20}"
+          echo "--------------------------------------"
       
       - name: Decode Keystore
         uses: timheuer/base64-to-file@v1
