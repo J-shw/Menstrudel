@@ -50,10 +50,7 @@ jobs:
           fi
 
       - name: 2. Decode Keystore
-        uses: timheuer/base64-to-file@v1
-        with:
-          fileName: app/android/upload-keystore.jks
-          encodedString: ${{ secrets.SIGNING_KEY_STORE_BASE64 }}
+        run: echo "${{ secrets.SIGNING_KEY_STORE_BASE64 }}" | base64 --decode > app/android/upload-keystore.jks
 
       - name: 3. Verify Keystore File Creation
         run: |
