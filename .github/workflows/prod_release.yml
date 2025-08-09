@@ -26,18 +26,15 @@ jobs:
           channel: 'stable'
 
       - name: Decode Keystore
-        id: decode_keystore
-        uses: timheuer/base64-to-file@v1
-        with:
-          fileName: upload-keystore.jks
-          encodedString: ${{ secrets.SIGNING_KEY_STORE_BASE64 }}
+        run: echo "${{ secrets.SIGNING_KEY_STORE_BASE64 }}" | base64 --decode > app/android/app/upload-keystore.jks
 
       - name: Create key.properties
         run: |
-          echo "storeFile=${{ steps.decode_keystore.outputs.filePath }}" > app/android/key.properties
-          echo "storePassword=${{ secrets.KEY_STORE_PASSWORD }}" >> app/android/key.properties
-          echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> app/android/key.properties
-          echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> app/android/key.properties
+          echo "storeFile=upload-keystore.jks" > app/android/app/key.properties
+          echo "storePassword=${{ secrets.KEY_STORE_PASSWORD }}" >> app/android/app/key.properties
+          echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> app/android/app/key.properties
+          echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> app/android/app/key.properties
+
 
       - name: Install Flutter dependencies
         working-directory: ./app
