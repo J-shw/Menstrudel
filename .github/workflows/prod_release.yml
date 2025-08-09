@@ -32,11 +32,14 @@ jobs:
           encodedString: ${{ secrets.SIGNING_KEY_STORE_BASE64 }}
 
       - name: 1. Check if Keystore Secret is Empty
-        if: ${{ secrets.SIGNING_KEY_STORE_BASE64 == '' }}
         run: |
-          echo "Error: The SIGNING_KEY_STORE_BASE64 secret is empty."
-          echo "Go to your repository Settings > Secrets and variables > Actions and paste the Base64 keystore value."
-          exit 1
+          if [ -z "${{ secrets.SIGNING_KEY_STORE_BASE64 }}" ]; then
+            echo "Error: The SIGNING_KEY_STORE_BASE64 secret is empty."
+            echo "Go to your repository Settings > Secrets and variables > Actions and paste the Base64 keystore value."
+            exit 1
+          else
+            echo "Keystore secret is present."
+          fi
 
       - name: 2. Decode Keystore
         uses: timheuer/base64-to-file@v1
