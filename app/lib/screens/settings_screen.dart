@@ -1,24 +1,80 @@
 import 'package:flutter/material.dart';
+import 'package:menstrudel/services/settings_service.dart';
 import 'package:menstrudel/widgets/navigation_bar.dart';
 import 'package:menstrudel/widgets/app_bar.dart';
 
-class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({
-    super.key
-  });
+class SettingsScreen extends StatefulWidget {
+  const SettingsScreen({super.key});
+
+  @override
+  State<SettingsScreen> createState() => _SettingsScreenState();
+}
+
+class _SettingsScreenState extends State<SettingsScreen> {
+  final SettingsService _settingsService = SettingsService();
+
+  bool _isLoading = true;
+  bool _notificationsEnabled = true;
+  int _notificationDays = 1;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSettings();
+  }
+
+  Future<void> _loadSettings() async {
+    _notificationsEnabled = await _settingsService.areNotificationsEnabled();
+    _notificationDays = await _settingsService.getNotificationDays();
+    setState(() {
+      _isLoading = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: TopAppBar(
-        titleText: "Settings"
+        titleText: "Settings",
       ),
-      body: Center(
-        child: Text(
-          "Settings Screen"
-        ),
+      body: _isLoading
+          ? const Center(child: CircularProgressIndicator())
+          : ListView(
+        children: [
+          SwitchListTile(
+            title: const Text('Enable Notifications'),
+            value: _notificationsEnabled,
+            onChanged: (bool value) {
+              setState(() {
+                _notificationsEnabled = value;
+              });
+              _settingsService.setNotificationsEnabled(value);
+            },
+          ),
+          if (_notificationsEnabled)
+            ListTile(
+              title: const Text('Remind Me Before'),
+              trailing: DropdownButton<int>(
+                value: _notificationDays,
+                items: [1, 2, 3].map((int days) {
+                  return DropdownMenuItem<int>(
+                    value: days,
+                    child: Text('$days Day${days > 1 ? 's' : ''}'),
+                  );
+                }).toList(),
+                onChanged: (int? newDays) {
+                  if (newDays != null) {
+                    setState(() {
+                      _notificationDays = newDays;
+                    });
+                    _settingsService.setNotificationDays(newDays);
+                  }
+                },
+              ),
+            ),
+        ],
       ),
-      bottomNavigationBar: MainBottomNavigationBar(isSettingScreenActive: true,),
+      bottomNavigationBar: MainBottomNavigationBar(isSettingScreenActive: true),
     );
   }
 }
