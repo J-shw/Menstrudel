@@ -94,11 +94,11 @@ class PeriodDatabase {
 
 	Future<int> deletePeriod(int id) async {
 		final db = await instance.database;
-		return await db.delete(
-			'periods',
-			where: 'id = ?',
-			whereArgs: [id],
-		);
+    return await db.delete(
+      'periods',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
 	}
 
   // Period logs
@@ -134,11 +134,17 @@ class PeriodDatabase {
 
 	Future<int> deletePeriodLog(int id) async {
 		final db = await instance.database;
-		return await db.delete(
+		final int result = await db.delete(
 			'period_logs',
 			where: 'id = ?',
 			whereArgs: [id],
 		);
+
+    if (result > 0) {
+      await _recalculateAndAssignPeriods(db);
+    }
+
+    return result;
 	}
 
   // Other
@@ -149,89 +155,59 @@ class PeriodDatabase {
 		db.close();
 	}
 
-    // Helper functions
+  // Helper functions
 
-  Future<void> _recalculateAndAssignPeriods(Database db) async {
-    await db.delete('periods');
+Future<void> _recalculateAndAssignPeriods(Database db) async {
+  await db.delete('periods');
 
-    final List<Map<String, dynamic>> allEntryMaps = await db.query(
-      'period_logs',
-      orderBy: 'date ASC',
-    );
-    final List<PeriodLogEntry> allEntries = allEntryMaps.map((json) => PeriodLogEntry.fromMap(json)).toList();
+  final allEntryMaps = await db.query('period_logs', orderBy: 'date ASC');
+  final allEntries = allEntryMaps.map((e) => PeriodLogEntry.fromMap(e)).toList();
 
-    if (allEntries.isEmpty) {
-      return;
-    }
+  if (allEntries.isEmpty) {
+    return; 
+  }
 
-    DateTime? currentPeriodStartDate;
-    DateTime? currentPeriodEndDate;
-    int currentPeriodTotalDays = 0;
-    List<int> currentPeriodEntryIds = [];
+  List<PeriodLogEntry> currentPeriodLogs = [];
 
-    for (int i = 0; i < allEntries.length; i++) {
-      final entry = allEntries[i];
-
-      if (currentPeriodStartDate == null) {
-          currentPeriodStartDate = entry.date;
-          currentPeriodEndDate = entry.date;
-          currentPeriodEntryIds.add(entry.id!);
-      } else {
-        if (entry.date.difference(currentPeriodEndDate!).inDays <= 1) {
-          currentPeriodEndDate = entry.date;
-          currentPeriodEntryIds.add(entry.id!);
-        } else {
-          currentPeriodTotalDays = currentPeriodEndDate.difference(currentPeriodStartDate).inDays + 1;
-          final newPeriod = PeriodEntry(
-            startDate: currentPeriodStartDate,
-            endDate: currentPeriodEndDate,
-            totalDays: currentPeriodTotalDays,
-          );
-          final createdPeriod = await createPeriod(newPeriod);
-          final assignedPeriodId = createdPeriod.id;
-
-          await db.transaction((txn) async {
-            for (int entryId in currentPeriodEntryIds) {
-              await txn.update(
-                'period_logs',
-                {'period_id': assignedPeriodId},
-                where: 'id = ?',
-                whereArgs: [entryId],
-              );
-            }
-          });
-
-          currentPeriodStartDate = entry.date;
-          currentPeriodEndDate = entry.date;
-          currentPeriodEntryIds = [entry.id!];
-        }
+  for (final entry in allEntries) {
+    if (currentPeriodLogs.isEmpty || entry.date.difference(currentPeriodLogs.last.date).inDays > 1) {
+      if (currentPeriodLogs.isNotEmpty) {
+        await _createPeriodFromLogs(db, currentPeriodLogs);
       }
+      currentPeriodLogs = [entry];
+    } else {
+      currentPeriodLogs.add(entry);
     }
+  }
+  if (currentPeriodLogs.isNotEmpty) {
+    await _createPeriodFromLogs(db, currentPeriodLogs);
+  }
+}
 
-    if (currentPeriodStartDate != null) {
-      if (currentPeriodEndDate != null) {
-        currentPeriodTotalDays = currentPeriodEndDate.difference(currentPeriodStartDate).inDays + 1;
-      }else{
-        currentPeriodTotalDays = 1;
-      }
-      final newPeriod = PeriodEntry(
-        startDate: currentPeriodStartDate,
-        endDate: currentPeriodEndDate!,
-        totalDays: currentPeriodTotalDays,
+Future<void> _createPeriodFromLogs(Database db, List<PeriodLogEntry> logs) async {
+  final startDate = logs.first.date;
+  final endDate = logs.last.date;
+  final totalDays = endDate.difference(startDate).inDays + 1;
+
+  final newPeriodMap = {
+    'start_date': startDate.millisecondsSinceEpoch,
+    'end_date': endDate.millisecondsSinceEpoch,
+    'total_days': totalDays,
+  };
+
+  final periodId = await db.insert('periods', newPeriodMap);
+
+  final logIds = logs.map((log) => log.id!).toList();
+
+  await db.transaction((txn) async {
+    for (final logId in logIds) {
+      await txn.update(
+        'period_logs',
+        {'period_id': periodId},
+        where: 'id = ?',
+        whereArgs: [logId],
       );
-      final createdPeriod = await createPeriod(newPeriod);
-      final assignedPeriodId = createdPeriod.id;
-
-      await db.transaction((txn) async {
-        for (int entryId in currentPeriodEntryIds) {
-          await txn.update(
-            'period_logs',
-            {'period_id': assignedPeriodId},
-            where: 'id = ?',
-            whereArgs: [entryId],
-          );
-        }
-      });
     }
+  });
   }
 }
