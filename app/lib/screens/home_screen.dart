@@ -8,7 +8,6 @@ import 'package:menstrudel/database/period_database.dart';
 import 'package:menstrudel/widgets/period_list_view.dart';
 import 'package:menstrudel/models/period_prediction_result.dart';
 import 'package:menstrudel/utils/period_predictor.dart';
-import 'package:menstrudel/screens/analytics_screen.dart';
 import 'package:menstrudel/widgets/navigation_bar.dart';
 import 'package:menstrudel/services/period_notifications.dart';
 
@@ -36,17 +35,18 @@ class _HomeScreenState extends State<HomeScreen> {
 			_isLoading = true;
 		});
 		final periodLogData = await PeriodDatabase.instance.readAllPeriodLogs();
-    final periodData = await PeriodDatabase.instance.readAllPeriods();
+		final periodData = await PeriodDatabase.instance.readAllPeriods();
 		setState(() {
 			_isLoading = false;
-      _periodLogEntries = periodLogData;
-      _periodEntries = periodData;
+			_periodLogEntries = periodLogData;
+			_periodEntries = periodData;
 			_predictionResult = PeriodPredictor.estimateNextPeriod(periodLogData, DateTime.now());
-      if (_predictionResult != null) {
-        NotificationHelper.schedulePeriodNotification(
-          scheduledTime: _predictionResult!.estimatedDate,
-        );
-      }
+			if (_predictionResult != null) {
+				final notificationHelper = NotificationHelper();
+				notificationHelper.schedulePeriodNotification(
+					scheduledTime: _predictionResult!.estimatedDate,
+				);
+			}
 		});
 	}
 

@@ -1,13 +1,15 @@
-name: Build Android APK/AAB
+name: Build and Release Android App
 
 on:
-  release: 
+  release:
     types: [published]
   workflow_dispatch:
 
 jobs:
   build_android:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -21,37 +23,52 @@ jobs:
       - name: Set up Flutter SDK
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.32.8' 
           channel: 'stable'
 
-      - name: Run Flutter doctor (for diagnostics - optional)
-        working-directory: app
-        run: flutter doctor -v
-
       - name: Install Flutter dependencies
-        working-directory: app
+        working-directory: ./app
         run: flutter pub get
 
-      - name: Grant execute permission to gradlew
-        working-directory: app
-        run: chmod +x android/gradlew
-        
-      - name: Build Android App Bundle (AAB - Recommended for Google Play Store)
-        working-directory: app
+      - name: Build Android App Bundle (AAB)
+        working-directory: ./app
         run: flutter build appbundle --release
 
-      - name: Build Android APK (Release - for direct distribution)
-        working-directory: app
+      - name: Build Android APK
+        working-directory: ./app
         run: flutter build apk --release
 
-      - name: Upload Release App Bundle as an artifact
+      - name: Upload App Bundle as an artifact
         uses: actions/upload-artifact@v4
         with:
           name: menstrudel-release-aab
-          path: app/build/app/outputs/bundle/release/app-release.aab
+          path: ./app/build/app/outputs/bundle/release/app-release.aab
 
-      - name: Upload Release APK as an artifact
+      - name: Upload APK as an artifact
         uses: actions/upload-artifact@v4
         with:
           name: menstrudel-release-apk
-          path: app/build/app/outputs/flutter-apk/app-release.apk
+          path: ./app/build/app/outputs/flutter-apk/app-release.apk
+
+      - name: Get version from Git tag
+        id: get_version
+        run: echo "VERSION=${{ github.ref_name }}" >> $GITHUB_ENV
+
+      - name: Upload App Bundle to Release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ./app/build/app/outputs/bundle/release/app-release.aab
+          asset_name: menstrudel-${{ env.VERSION }}.aab
+          asset_content_type: application/octet-stream
+
+      - name: Upload APK to Release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ./app/build/app/outputs/flutter-apk/app-release.apk
+          asset_name: menstrudel-${{ env.VERSION }}.apk
+          asset_content_type: application/vnd.android.package-archive
