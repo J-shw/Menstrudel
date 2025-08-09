@@ -42,7 +42,8 @@ class _HomeScreenState extends State<HomeScreen> {
 			_periodEntries = periodData;
 			_predictionResult = PeriodPredictor.estimateNextPeriod(periodLogData, DateTime.now());
 			if (_predictionResult != null) {
-				NotificationHelper.schedulePeriodNotification(
+				final notificationHelper = NotificationHelper();
+				notificationHelper.schedulePeriodNotification(
 					scheduledTime: _predictionResult!.estimatedDate,
 				);
 			}
