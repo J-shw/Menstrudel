@@ -8,7 +8,6 @@ import 'package:menstrudel/database/period_database.dart';
 import 'package:menstrudel/widgets/period_list_view.dart';
 import 'package:menstrudel/models/period_prediction_result.dart';
 import 'package:menstrudel/utils/period_predictor.dart';
-import 'package:menstrudel/screens/analytics_screen.dart';
 import 'package:menstrudel/widgets/navigation_bar.dart';
 import 'package:menstrudel/services/period_notifications.dart';
 
