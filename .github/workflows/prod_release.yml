@@ -52,7 +52,6 @@ jobs:
             echo "Keystore file was created successfully."
           else
             echo "Error: Keystore file was NOT found at app/android/upload-keystore.jks."
-            echo "This proves the 'Decode Keystore' step failed, likely due to an invalid Base64 secret."
             exit 1
           fi
 
