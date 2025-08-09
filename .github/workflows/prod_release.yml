@@ -34,10 +34,10 @@ jobs:
 
       - name: Create key.properties
         run: |
-          echo "storeFile=${{ steps.decode_keystore.outputs.filePath }}" > android/key.properties
-          echo "storePassword=${{ secrets.KEY_STORE_PASSWORD }}" >> android/key.properties
-          echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> android/key.properties
-          echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> android/key.properties
+          echo "storeFile=${{ steps.decode_keystore.outputs.filePath }}" > app/android/key.properties
+          echo "storePassword=${{ secrets.KEY_STORE_PASSWORD }}" >> app/android/key.properties
+          echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> app/android/key.properties
+          echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> app/android/key.properties
 
       - name: Install Flutter dependencies
         working-directory: ./app
