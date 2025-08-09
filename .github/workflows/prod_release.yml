@@ -19,6 +19,13 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
+  
+      - name: Print build.gradle.kts for verification
+        run: |
+          echo "--- Contents of app/android/app/build.gradle.kts ---"
+          cat app/android/app/build.gradle.kts
+          echo "----------------------------------------------------"
+
 
       - name: Set up Flutter SDK
         uses: subosito/flutter-action@v2
