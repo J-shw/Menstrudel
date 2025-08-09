@@ -19,13 +19,6 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
-  
-      - name: Print build.gradle.kts for verification
-        run: |
-          echo "--- Contents of app/android/app/build.gradle.kts ---"
-          cat app/android/app/build.gradle.kts
-          echo "----------------------------------------------------"
-
 
       - name: Set up Flutter SDK
         uses: subosito/flutter-action@v2
@@ -33,14 +26,15 @@ jobs:
           channel: 'stable'
 
       - name: Decode Keystore
-        run: echo "${{ secrets.SIGNING_KEY_STORE_BASE64 }}" | base64 --decode > app/android/upload-keystore.jks
+        run: echo "${{ secrets.SIGNING_KEY_STORE_BASE64 }}" | base64 --decode > app/android/app/upload-keystore.jks
 
       - name: Create key.properties
         run: |
-          echo "storeFile=upload-keystore.jks" > app/android/key.properties
-          echo "storePassword=${{ secrets.KEY_STORE_PASSWORD }}" >> app/android/key.properties
-          echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> app/android/key.properties
-          echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> app/android/key.properties
+          echo "storeFile=upload-keystore.jks" > app/android/app/key.properties
+          echo "storePassword=${{ secrets.KEY_STORE_PASSWORD }}" >> app/android/app/key.properties
+          echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> app/android/app/key.properties
+          echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> app/android/app/key.properties
+
 
       - name: Install Flutter dependencies
         working-directory: ./app
