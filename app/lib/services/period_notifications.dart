@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:menstrudel/services/settings_service.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz_data;
 
@@ -17,6 +18,7 @@ void onDidReceiveBackgroundNotificationResponse(NotificationResponse notificatio
 
 class NotificationHelper {
   static const int periodNotificationId = 1;
+  final SettingsService _settingsService = SettingsService();
 
   static Future<void> initialiseNotifications() async {
     tz_data.initializeTimeZones();
@@ -52,37 +54,41 @@ class NotificationHelper {
         ?.requestPermissions(alert: true, badge: true, sound: true);
   }
 
-  static Future<void> schedulePeriodNotification({ // Schedules a notification a day before
+  Future<void> schedulePeriodNotification({ // Schedules a notification
     required DateTime scheduledTime,
     String? payload,
   }) async {
-    const AndroidNotificationDetails androidDetails = AndroidNotificationDetails(
-      'scheduled_channel_id',
-      'Period Alerts',
-      channelDescription: 'Prediction alerts for periods',
-      importance: Importance.max,
-      priority: Priority.high,
-      playSound: true,
-      enableVibration: true,
-    );
-    const DarwinNotificationDetails iOSDetails = DarwinNotificationDetails();
-    const NotificationDetails platformDetails = NotificationDetails(
-      android: androidDetails,
-      iOS: iOSDetails,
-    );
-
-    final tz.TZDateTime tzScheduledTime = tz.TZDateTime.from(scheduledTime, tz.local).subtract(const Duration(days: 1));
-
-    if (tzScheduledTime.isAfter(tz.TZDateTime.now(tz.local))) {
-      await flutterLocalNotificationsPlugin.zonedSchedule(
-        periodNotificationId,
-        "Period Reminder",
-        "Your period is due tomorrow",
-        tzScheduledTime,
-        platformDetails,
-        androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-        payload: payload,
+    final bool areEnabled = await _settingsService.areNotificationsEnabled();
+    final int daysBefore = await _settingsService.getNotificationDays();
+    if (!areEnabled) {
+      const AndroidNotificationDetails androidDetails = AndroidNotificationDetails(
+        'scheduled_channel_id',
+        'Period Alerts',
+        channelDescription: 'Prediction alerts for periods',
+        importance: Importance.max,
+        priority: Priority.high,
+        playSound: true,
+        enableVibration: true,
       );
+      const DarwinNotificationDetails iOSDetails = DarwinNotificationDetails();
+      const NotificationDetails platformDetails = NotificationDetails(
+        android: androidDetails,
+        iOS: iOSDetails,
+      );
+
+      final tz.TZDateTime tzScheduledTime = tz.TZDateTime.from(scheduledTime, tz.local).subtract(Duration(days: daysBefore));
+
+      if (tzScheduledTime.isAfter(tz.TZDateTime.now(tz.local))) {
+        await flutterLocalNotificationsPlugin.zonedSchedule(
+          periodNotificationId,
+          "Period Reminder",
+          "Your period is due tomorrow",
+          tzScheduledTime,
+          platformDetails,
+          androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+          payload: payload,
+        );
+      }
     }
   }
 
