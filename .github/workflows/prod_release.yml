@@ -33,7 +33,8 @@ jobs:
 
       - name: Create key.properties
         run: |
-          echo "storeFile=${{ steps.decode_keystore.outputs.filePath }}" > ./app/android/key.properties
+          # Use a simple relative path because both files are now in the same directory.
+          echo "storeFile=upload-keystore.jks" > ./app/android/key.properties
           echo "storePassword=${{ secrets.KEY_STORE_PASSWORD }}" >> ./app/android/key.properties
           echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> ./app/android/key.properties
           echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> ./app/android/key.properties
