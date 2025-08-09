@@ -35,17 +35,17 @@ class _HomeScreenState extends State<HomeScreen> {
 			_isLoading = true;
 		});
 		final periodLogData = await PeriodDatabase.instance.readAllPeriodLogs();
-    final periodData = await PeriodDatabase.instance.readAllPeriods();
+		final periodData = await PeriodDatabase.instance.readAllPeriods();
 		setState(() {
 			_isLoading = false;
-      _periodLogEntries = periodLogData;
-      _periodEntries = periodData;
+			_periodLogEntries = periodLogData;
+			_periodEntries = periodData;
 			_predictionResult = PeriodPredictor.estimateNextPeriod(periodLogData, DateTime.now());
-      if (_predictionResult != null) {
-        NotificationHelper.schedulePeriodNotification(
-          scheduledTime: _predictionResult!.estimatedDate,
-        );
-      }
+			if (_predictionResult != null) {
+				NotificationHelper.schedulePeriodNotification(
+					scheduledTime: _predictionResult!.estimatedDate,
+				);
+			}
 		});
 	}
 

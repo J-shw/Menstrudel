@@ -16,40 +16,44 @@ class PeriodDatabase {
     }
 
     Future<Database> _initDB(String filePath) async {
-        final dbPath = await getDatabasesPath();
-        final path = join(dbPath, filePath);
+      final dbPath = await getDatabasesPath();
+      final path = join(dbPath, filePath);
 
-        return await openDatabase(
-            path,
-            version: 1,
-            onCreate: _createDB,
-        );
+      return await openDatabase(
+        path,
+        version: 1,
+        onCreate: _createDB,
+      );
     }
 
-    Future _createDB(Database db, int version) async {
-        await db.execute('''
-            CREATE TABLE periods (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                start_date INTEGER NOT NULL,
-                end_date INTEGER NOT NULL,
-                total_days INTEGER NOT NULL
+  Future _createDB(Database db, int version) async {
+    await db.execute(
+      '''
+        CREATE TABLE periods (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            start_date INTEGER NOT NULL,
+            end_date INTEGER NOT NULL,
+            total_days INTEGER NOT NULL
         )
-        ''');
-		await db.execute('''
-			CREATE TABLE period_logs (
-					id INTEGER PRIMARY KEY AUTOINCREMENT,
-					date TEXT NOT NULL,
-					symptom TEXT,
-					flow INTEGER NOT NULL,
+      '''
+    );
+    await db.execute(
+      '''
+      CREATE TABLE period_logs (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          date TEXT NOT NULL,
+          symptom TEXT,
+          flow INTEGER NOT NULL,
                     period_id INTEGER,
-					FOREIGN KEY (period_id) REFERENCES periods(id) ON DELETE SET NULL
-			)
-		''');
+          FOREIGN KEY (period_id) REFERENCES periods(id) ON DELETE SET NULL
+      )
+      '''
+    );
 	}
 
-    // Periods
+  // Periods
 
-    Future<PeriodEntry> createPeriod(PeriodEntry entry) async {
+  Future<PeriodEntry> createPeriod(PeriodEntry entry) async {
 		final db = await instance.database;
 		final id = await db.insert('periods', entry.toMap());
 		return entry.copyWith(id: id);
@@ -63,50 +67,50 @@ class PeriodDatabase {
 		return result.map((json) => PeriodEntry.fromMap(json)).toList();
 	}
 
-    Future<PeriodEntry?> readLastPeriod() async {
-        final db = await instance.database;
-        final maps = await db.query(
-            'periods',
-            orderBy: 'start_date DESC',
-            limit: 1,
-        );
+  Future<PeriodEntry?> readLastPeriod() async {
+    final db = await instance.database;
+    final maps = await db.query(
+      'periods',
+      orderBy: 'start_date DESC',
+      limit: 1,
+    );
 
-        if (maps.isNotEmpty) {
-            return PeriodEntry.fromMap(maps.first);
-        } else {
-            return null;
-        }
+    if (maps.isNotEmpty) {
+      return PeriodEntry.fromMap(maps.first);
+    } else {
+      return null;
     }
+  }
 
-    Future<int> updatePeriod(PeriodEntry period) async {
-        final db = await instance.database;
-        return db.update(
-            'periods',
-            period.toMap(),
-            where: 'id = ?',
-            whereArgs: [period.id],
-        );
-    }
+  Future<int> updatePeriod(PeriodEntry period) async {
+    final db = await instance.database;
+    return db.update(
+      'periods',
+      period.toMap(),
+      where: 'id = ?',
+      whereArgs: [period.id],
+    );
+  }
 
 	Future<int> deletePeriod(int id) async {
 		final db = await instance.database;
-		return await db.delete(
-			'periods',
-			where: 'id = ?',
-			whereArgs: [id],
-		);
+    return await db.delete(
+      'periods',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
 	}
 
-    // Period logs
+  // Period logs
 
-    Future<PeriodLogEntry> createPeriodLog(PeriodLogEntry entry) async {
-		final db = await instance.database;
-        
-        final id = await db.insert('period_logs', entry.toMap());
+  Future<PeriodLogEntry> createPeriodLog(PeriodLogEntry entry) async {
+    final db = await instance.database;
+      
+    final id = await db.insert('period_logs', entry.toMap());
 
-        await _recalculateAndAssignPeriods(db);
+    await _recalculateAndAssignPeriods(db);
 
-        return await readPeriodLog(id);
+    return await readPeriodLog(id);
 	}
 
 	Future<List<PeriodLogEntry>> readAllPeriodLogs() async {
@@ -117,117 +121,93 @@ class PeriodDatabase {
 		return result.map((json) => PeriodLogEntry.fromMap(json)).toList();
 	}
 
-    Future<PeriodLogEntry> readPeriodLog(id) async {
+  Future<PeriodLogEntry> readPeriodLog(id) async {
 		final db = await instance.database;
 
 		final result = await db.query(
-            'period_logs', 
-            where: 'id = $id', 
-            );
+      'period_logs', 
+      where: 'id = $id', 
+    );
 
 		return result.map((json) => PeriodLogEntry.fromMap(json)).first;
 	}
 
 	Future<int> deletePeriodLog(int id) async {
 		final db = await instance.database;
-		return await db.delete(
+		final int result = await db.delete(
 			'period_logs',
 			where: 'id = ?',
 			whereArgs: [id],
 		);
+
+    if (result > 0) {
+      await _recalculateAndAssignPeriods(db);
+    }
+
+    return result;
 	}
 
-    // Other
+  // Other
 
-    Future close() async {
+  Future close() async {
 		final db = await instance.database;
 		_database = null;
 		db.close();
 	}
 
-    // Helper functions
+  // Helper functions
 
-    Future<void> _recalculateAndAssignPeriods(Database db) async {
-        await db.delete('periods');
+Future<void> _recalculateAndAssignPeriods(Database db) async {
+  await db.delete('periods');
 
-        final List<Map<String, dynamic>> allEntryMaps = await db.query(
-            'period_logs',
-            orderBy: 'date ASC',
-        );
-        final List<PeriodLogEntry> allEntries = allEntryMaps.map((json) => PeriodLogEntry.fromMap(json)).toList();
+  final allEntryMaps = await db.query('period_logs', orderBy: 'date ASC');
+  final allEntries = allEntryMaps.map((e) => PeriodLogEntry.fromMap(e)).toList();
 
-        if (allEntries.isEmpty) {
-            return;
-        }
+  if (allEntries.isEmpty) {
+    return; 
+  }
 
-        DateTime? currentPeriodStartDate;
-        DateTime? currentPeriodEndDate;
-        int currentPeriodTotalDays = 0;
-        List<int> currentPeriodEntryIds = [];
+  List<PeriodLogEntry> currentPeriodLogs = [];
 
-        for (int i = 0; i < allEntries.length; i++) {
-            final entry = allEntries[i];
-
-            if (currentPeriodStartDate == null) {
-                currentPeriodStartDate = entry.date;
-                currentPeriodEndDate = entry.date;
-                currentPeriodEntryIds.add(entry.id!);
-            } else {
-                if (entry.date.difference(currentPeriodEndDate!).inDays <= 1) {
-                    currentPeriodEndDate = entry.date;
-                    currentPeriodEntryIds.add(entry.id!);
-                } else {
-                    currentPeriodTotalDays = currentPeriodEndDate.difference(currentPeriodStartDate).inDays + 1;
-                    final newPeriod = PeriodEntry(
-                        startDate: currentPeriodStartDate,
-                        endDate: currentPeriodEndDate,
-                        totalDays: currentPeriodTotalDays,
-                    );
-                    final createdPeriod = await createPeriod(newPeriod);
-                    final assignedPeriodId = createdPeriod.id;
-
-                    await db.transaction((txn) async {
-                        for (int entryId in currentPeriodEntryIds) {
-                            await txn.update(
-                                'period_logs',
-                                {'period_id': assignedPeriodId},
-                                where: 'id = ?',
-                                whereArgs: [entryId],
-                            );
-                        }
-                    });
-
-                    currentPeriodStartDate = entry.date;
-                    currentPeriodEndDate = entry.date;
-                    currentPeriodEntryIds = [entry.id!];
-                }
-            }
-        }
-
-        if (currentPeriodStartDate != null) {
-          if (currentPeriodEndDate != null) {
-            currentPeriodTotalDays = currentPeriodEndDate.difference(currentPeriodStartDate).inDays + 1;
-          }else{
-            currentPeriodTotalDays = 1;
-          }
-          final newPeriod = PeriodEntry(
-            startDate: currentPeriodStartDate,
-            endDate: currentPeriodEndDate!,
-            totalDays: currentPeriodTotalDays,
-          );
-          final createdPeriod = await createPeriod(newPeriod);
-          final assignedPeriodId = createdPeriod.id;
-
-          await db.transaction((txn) async {
-            for (int entryId in currentPeriodEntryIds) {
-              await txn.update(
-                  'period_logs',
-                  {'period_id': assignedPeriodId},
-                  where: 'id = ?',
-                  whereArgs: [entryId],
-              );
-            }
-          });
-        }
+  for (final entry in allEntries) {
+    if (currentPeriodLogs.isEmpty || entry.date.difference(currentPeriodLogs.last.date).inDays > 1) {
+      if (currentPeriodLogs.isNotEmpty) {
+        await _createPeriodFromLogs(db, currentPeriodLogs);
+      }
+      currentPeriodLogs = [entry];
+    } else {
+      currentPeriodLogs.add(entry);
     }
+  }
+  if (currentPeriodLogs.isNotEmpty) {
+    await _createPeriodFromLogs(db, currentPeriodLogs);
+  }
+}
+
+Future<void> _createPeriodFromLogs(Database db, List<PeriodLogEntry> logs) async {
+  final startDate = logs.first.date;
+  final endDate = logs.last.date;
+  final totalDays = endDate.difference(startDate).inDays + 1;
+
+  final newPeriodMap = {
+    'start_date': startDate.millisecondsSinceEpoch,
+    'end_date': endDate.millisecondsSinceEpoch,
+    'total_days': totalDays,
+  };
+
+  final periodId = await db.insert('periods', newPeriodMap);
+
+  final logIds = logs.map((log) => log.id!).toList();
+
+  await db.transaction((txn) async {
+    for (final logId in logIds) {
+      await txn.update(
+        'period_logs',
+        {'period_id': periodId},
+        where: 'id = ?',
+        whereArgs: [logId],
+      );
+    }
+  });
+  }
 }
