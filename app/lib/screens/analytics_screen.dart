@@ -202,7 +202,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
 					child: Column(
 						children: [
 							SizedBox(
-                height: 200,
+                height: 100,
                 child: PageView.builder(
                   controller: _pageController,
                   onPageChanged: (index) {
