@@ -117,57 +117,60 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
 	@override
 	Widget build(BuildContext context) {
 		final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    List<Widget> statCards = [];
 
-    final List<Widget> statCards = [
-      _buildStatCard(
-        icon: Icons.calendar_month,
-        title: 'Average Cycle Length',
-        value: '${_cycleStats!.averageCycleLength} days',
-        colors: colorScheme,
-      ),
-      _buildStatCard(
-        icon: Icons.calendar_month,
-        title: 'Average Period Length',
-        value: '${_periodStats!.averageLength} days',
-        colors: colorScheme,
-      ),
-      _buildStatCard(
-        icon: Icons.compress,
-        title: 'Shortest Cycle',
-        value: '${_cycleStats!.shortestCycleLength ?? "N/A"} days',
-        colors: colorScheme,
-      ),
-      _buildStatCard(
-        icon: Icons.expand,
-        title: 'Longest Cycle',
-        value: '${_cycleStats!.longestCycleLength ?? "N/A"} days',
-        colors: colorScheme,
-      ),
-      _buildStatCard(
-        icon: Icons.compress,
-        title: 'Shortest Period',
-        value: '${_periodStats!.shortestLength ?? "N/A"} days',
-        colors: colorScheme,
-      ),
-      _buildStatCard(
-        icon: Icons.expand,
-        title: 'Longest Period',
-        value: '${_periodStats!.longestLength ?? "N/A"} days',
-        colors: colorScheme,
-      ),
-      _buildStatCard(
-        icon: Icons.history,
-        title: 'Cycles Analysed',
-        value: '${_cycleStats!.numberOfCycles}',
-        colors: colorScheme,
-      ),
-      _buildStatCard(
-        icon: Icons.history,
-        title: 'Total Periods',
-        value: '${_periodStats!.numberofPeriods}',
-        colors: colorScheme,
-      ),
-    ];
+    if (_cycleStats != null) {
+      statCards = [
+        _buildStatCard(
+          icon: Icons.calendar_month,
+          title: 'Average Cycle Length',
+          value: '${_cycleStats!.averageCycleLength} days',
+          colors: colorScheme,
+        ),
+        _buildStatCard(
+          icon: Icons.calendar_month,
+          title: 'Average Period Length',
+          value: '${_periodStats!.averageLength} days',
+          colors: colorScheme,
+        ),
+        _buildStatCard(
+          icon: Icons.compress,
+          title: 'Shortest Cycle',
+          value: '${_cycleStats!.shortestCycleLength ?? "N/A"} days',
+          colors: colorScheme,
+        ),
+        _buildStatCard(
+          icon: Icons.expand,
+          title: 'Longest Cycle',
+          value: '${_cycleStats!.longestCycleLength ?? "N/A"} days',
+          colors: colorScheme,
+        ),
+        _buildStatCard(
+          icon: Icons.compress,
+          title: 'Shortest Period',
+          value: '${_periodStats!.shortestLength ?? "N/A"} days',
+          colors: colorScheme,
+        ),
+        _buildStatCard(
+          icon: Icons.expand,
+          title: 'Longest Period',
+          value: '${_periodStats!.longestLength ?? "N/A"} days',
+          colors: colorScheme,
+        ),
+        _buildStatCard(
+          icon: Icons.history,
+          title: 'Cycles Analysed',
+          value: '${_cycleStats!.numberOfCycles}',
+          colors: colorScheme,
+        ),
+        _buildStatCard(
+          icon: Icons.history,
+          title: 'Total Periods',
+          value: '${_periodStats!.numberofPeriods}',
+          colors: colorScheme,
+        ),
+      ];
+    }
 		
     return Scaffold(
       appBar: TopAppBar(
@@ -241,11 +244,10 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                 ),
               ),
 							
-							Expanded( 
-								child: MonthlyCycleListView(
-									monthlyCycleData: _monthlyCycleData, // Pass the data to your chart component
-								),
-							),
+							MonthlyCycleListView(
+                monthlyCycleData: _monthlyCycleData, // Pass the data to your chart component
+              ),
+							
 						],
 					),
 				),
