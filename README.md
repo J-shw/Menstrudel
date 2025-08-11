@@ -25,6 +25,6 @@ Menstrudel is a simple, private, and intuitive mobile application built with Flu
 
 # App Screenshots
 
-| Your daily logs | Cycle insights | Quick symptom entry |
-|--------------|--------------|--------------|
-| ![Log View](screenshots/android/Screenshot_20250727-170121.png) | ![Analytics View](screenshots/android/Screenshot_20250727-170125.png) | ![Symptom Entry Dialog](screenshots/android/Screenshot_20250727-170128.png) |
+| Your daily logs | Cycle insights | Quick symptom entry | Settings |
+|--------------|--------------|--------------|--------------|
+| ![Log View](screenshots/v1.2.2/android/home.png) | ![Analytics View](screenshots/v1.2.2/android/analytics.png) | ![Symptom Entry Dialog](screenshots/v1.2.2/android/log.png) | ![Symptom Entry Dialog](screenshots/v1.2.2/android/settings.png) |
