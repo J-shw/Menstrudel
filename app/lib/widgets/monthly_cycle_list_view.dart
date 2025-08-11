@@ -52,7 +52,7 @@ class MonthlyCycleListView extends StatelessWidget {
 				Padding(
 					padding: const EdgeInsets.only(bottom: 5.0),
 					child: Text(
-						'Monthly Cycle Lengths (Days)',
+						'Cycle Lengths (Days)',
 						style: TextStyle(
 							fontSize: 18,
 							fontWeight: FontWeight.bold,
@@ -71,7 +71,7 @@ class MonthlyCycleListView extends StatelessWidget {
 						
 						final double barWidth = getScaledBarWidth(data.cycleLength);
 
-						return Container( 
+						return Container(
 							padding: const EdgeInsets.symmetric(vertical: 8.0), 
 							height: barHeight + 15, 
 							child: Row(
