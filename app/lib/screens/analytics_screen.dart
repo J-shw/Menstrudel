@@ -21,11 +21,29 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
 	CycleStats? _cycleStats;
   PeriodStats? _periodStats;
 
+  final PageController _pageController = PageController();
+  int _currentPage = 0;
+
   @override
 	void initState() {
 		super.initState();
 		_refreshPeriodLogs();
+
+    _pageController.addListener(() {
+      int next = _pageController.page!.round();
+      if (_currentPage != next) {
+        setState(() {
+          _currentPage = next;
+        });
+      }
+    });
 	}
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
 
 	Future<void> _refreshPeriodLogs() async {
 		final periodLogData = await PeriodDatabase.instance.readAllPeriodLogs();
@@ -36,6 +54,18 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
       _periodStats = PeriodPredictor.getPeriodData(periodData);
 		});
 	}
+
+  Widget _buildIndicator(int index) {
+    return Container(
+      width: 8.0,
+      height: 8.0,
+      margin: const EdgeInsets.symmetric(horizontal: 4.0),
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: _currentPage == index ? Theme.of(context).colorScheme.primary : Colors.grey,
+      ),
+    );
+  }
   
 	@override
 	Widget build(BuildContext context) {
@@ -171,6 +201,12 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
 							SizedBox(
                 height: 200,
                 child: PageView.builder(
+                  controller: _pageController,
+                  onPageChanged: (index) {
+                    setState(() {
+                      _currentPage = index;
+                    });
+                  },
                   itemCount: (statCards.length / 2).ceil(),
                   itemBuilder: (BuildContext context, int index) {
                     final int firstCardIndex = index * 2;
@@ -189,6 +225,16 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                       ),
                     );
                   },
+                ),
+              ),
+
+              const SizedBox(height: 10),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: List.generate(
+                  (statCards.length / 2).ceil(),
+                  (index) => _buildIndicator(index),
                 ),
               ),
 							
