@@ -68,49 +68,52 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
   }
 
   Widget _buildStatCard({
-			required IconData icon,
-			required String title,
-			required String value,
-			required ColorScheme colors,
-			}) {
-			return Column(
-					mainAxisSize: MainAxisSize.min,
-					mainAxisAlignment: MainAxisAlignment.center,
-					children: [
-						Text(
-							title,
-							style: TextStyle(
-								fontSize: 14,
-								fontWeight: FontWeight.normal,
-								color: colors.onSurfaceVariant, 
-							),
-							overflow: TextOverflow.ellipsis,
-						),
-						const SizedBox(height: 5),
-						Row(
-							mainAxisSize: MainAxisSize.min,
-							children: [
-								Icon(
-									icon,
-									size: 18.0,
-									color: colors.primary,
-								),
-								const SizedBox(width: 5),
-								Text(
-									value,
-									style: TextStyle(
-										fontSize: 16,
-										fontWeight: FontWeight.bold,
-										color: colors.onSurface,
-									),
-								),
-							],
-						),
-					],
-				
-			);
-		}
-  
+    required IconData icon,
+    required String title,
+    required String value,
+    required ColorScheme colors,
+  }) {
+    return Container(
+      padding: const EdgeInsets.all(10.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            title,
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.normal,
+              color: colors.onSurfaceVariant,
+            ),
+            textAlign: TextAlign.center,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 2,
+          ),
+          const SizedBox(height: 8),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                icon,
+                size: 24.0,
+                color: colors.primary,
+              ),
+              const SizedBox(width: 8),
+              Text(
+                value,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: colors.primary,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
 	@override
 	Widget build(BuildContext context) {
 		final ColorScheme colorScheme = Theme.of(context).colorScheme;
