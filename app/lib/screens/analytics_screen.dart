@@ -244,6 +244,8 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                 ),
               ),
 							
+              const SizedBox(height: 10),
+              
 							MonthlyCycleListView(
                 monthlyCycleData: _monthlyCycleData, // Pass the data to your chart component
               ),
