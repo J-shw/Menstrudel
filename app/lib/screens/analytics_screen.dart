@@ -84,6 +84,57 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
 				
 			);
 		}
+
+    final List<Widget> statCards = [
+      buildStatCard(
+        icon: Icons.calendar_month,
+        title: 'Average Cycle Length',
+        value: '${_cycleStats!.averageCycleLength} days',
+        colors: colorScheme,
+      ),
+      buildStatCard(
+        icon: Icons.calendar_month,
+        title: 'Average Period Length',
+        value: '${_periodStats!.averageLength} days',
+        colors: colorScheme,
+      ),
+      buildStatCard(
+        icon: Icons.compress,
+        title: 'Shortest Cycle',
+        value: '${_cycleStats!.shortestCycleLength ?? "N/A"} days',
+        colors: colorScheme,
+      ),
+      buildStatCard(
+        icon: Icons.expand,
+        title: 'Longest Cycle',
+        value: '${_cycleStats!.longestCycleLength ?? "N/A"} days',
+        colors: colorScheme,
+      ),
+      buildStatCard(
+        icon: Icons.compress,
+        title: 'Shortest Period',
+        value: '${_periodStats!.shortestLength ?? "N/A"} days',
+        colors: colorScheme,
+      ),
+      buildStatCard(
+        icon: Icons.expand,
+        title: 'Longest Period',
+        value: '${_periodStats!.longestLength ?? "N/A"} days',
+        colors: colorScheme,
+      ),
+      buildStatCard(
+        icon: Icons.history,
+        title: 'Cycles Analysed',
+        value: '${_cycleStats!.numberOfCycles}',
+        colors: colorScheme,
+      ),
+      buildStatCard(
+        icon: Icons.history,
+        title: 'Total Periods',
+        value: '${_periodStats!.numberofPeriods}',
+        colors: colorScheme,
+      ),
+    ];
 		
     return Scaffold(
       appBar: TopAppBar(
@@ -118,80 +169,28 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
 					child: Column(
 						children: [
 							SizedBox(
-								height: 200,
-								child: GridView.count(
-									padding: EdgeInsets.zero,
-									crossAxisCount: 2,
-									crossAxisSpacing: 10.0,
-									mainAxisSpacing: 10.0,
-									physics: const NeverScrollableScrollPhysics(),
-									childAspectRatio: 2.5,
-									children: <Widget>[
-										buildStatCard(
-											icon: Icons.calendar_month,
-											title: 'Average Cycle Length',
-											value: '${_cycleStats!.averageCycleLength} days',
-											colors: colorScheme,
-										),
-										buildStatCard(
-											icon: Icons.compress,
-											title: 'Shortest Cycle',
-											value: '${_cycleStats!.shortestCycleLength ?? "N/A"} days',
-											colors: colorScheme,
-										),
-										buildStatCard(
-											icon: Icons.expand,
-											title: 'Longest Cycle',
-											value: '${_cycleStats!.longestCycleLength ?? "N/A"} days',
-											colors: colorScheme,
-										),
-										buildStatCard(
-											icon: Icons.history,
-											title: 'Cycles Analysed',
-											value: '${_cycleStats!.numberOfCycles}',
-											colors: colorScheme,
-										),
-									],
-								),
-							),
+                height: 200,
+                child: PageView.builder(
+                  itemCount: (statCards.length / 2).ceil(),
+                  itemBuilder: (BuildContext context, int index) {
+                    final int firstCardIndex = index * 2;
+                    final int secondCardIndex = firstCardIndex + 1;
 
-							SizedBox(
-								height: 200,
-								child: GridView.count(
-									padding: EdgeInsets.zero,
-									crossAxisCount: 2,
-									crossAxisSpacing: 10.0,
-									mainAxisSpacing: 10.0,
-									physics: const NeverScrollableScrollPhysics(),
-									childAspectRatio: 2.5,
-									children: <Widget>[
-										buildStatCard(
-											icon: Icons.calendar_month,
-											title: 'Average Period Length',
-											value: '${_periodStats!.averageLength} days',
-											colors: colorScheme,
-										),
-										buildStatCard(
-											icon: Icons.compress,
-											title: 'Shortest Period',
-											value: '${_periodStats!.shortestLength ?? "N/A"} days',
-											colors: colorScheme,
-										),
-										buildStatCard(
-											icon: Icons.expand,
-											title: 'Longest Period',
-											value: '${_periodStats!.longestLength ?? "N/A"} days',
-											colors: colorScheme,
-										),
-										buildStatCard(
-											icon: Icons.history,
-											title: 'Total Periods',
-											value: '${_periodStats!.numberofPeriods}',
-											colors: colorScheme,
-										),
-									],
-								),
-							),
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      child: Row(
+                        children: <Widget>[
+                          Expanded(child: statCards[firstCardIndex]),
+                          if (secondCardIndex < statCards.length) ...[
+                            const SizedBox(width: 10),
+                            Expanded(child: statCards[secondCardIndex]),
+                          ],
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ),
 							
 							Expanded( 
 								child: MonthlyCycleListView(
