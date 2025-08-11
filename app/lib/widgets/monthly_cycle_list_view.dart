@@ -66,7 +66,7 @@ class MonthlyCycleListView extends StatelessWidget {
 					shrinkWrap: true,
 					itemCount: monthlyCycleData!.length,
 					itemBuilder: (context, index) {
-						final data = monthlyCycleData![index];
+						final data = monthlyCycleData![monthlyCycleData!.length - 1 - index];
 						final String monthName = DateFormat.MMM().format(DateTime(data.year, data.month));
 						
 						final double barWidth = getScaledBarWidth(data.cycleLength);
