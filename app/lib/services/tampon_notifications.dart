@@ -40,8 +40,8 @@ Future<void> tamponNotificationScheduler({required TimeOfDay reminderTime}) asyn
 
   await flutterLocalNotificationsPlugin.zonedSchedule(
     tamponNotificationId,
-    'Time to Change',
-    'This is your reminder to change your tampon.',
+    'Tampon Reminder',
+    'Remember to change your tampon',
     scheduledDate,
     platformDetails,
     androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
