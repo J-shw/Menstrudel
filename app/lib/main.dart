@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:menstrudel/screens/home_screen.dart';
-import 'package:menstrudel/services/period_notifications.dart';
+import 'package:menstrudel/services/notifications/period_notifications.dart';
 
 void main() async { 
   WidgetsFlutterBinding.ensureInitialized();
