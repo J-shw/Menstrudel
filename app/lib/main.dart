@@ -13,7 +13,8 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final seedColor = const Color.fromARGB(255, 130, 172, 250);
+    final lightSeedColor = const Color(0xFF3B82F6);
+	final darkSeedColor = const Color(0xFF60A5FA);
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -22,14 +23,14 @@ class MainApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
-          seedColor: seedColor,
+          seedColor: lightSeedColor,
         ),
       ),
 
       darkTheme: ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
-          seedColor: seedColor,
+          seedColor: darkSeedColor,
           brightness: Brightness.dark,
         ),
       ),
