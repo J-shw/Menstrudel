@@ -115,7 +115,7 @@ class _SymptomEntryDialogState extends State<SymptomEntryDialog> {
             Navigator.of(context).pop({
               'date': _selectedDate,
               'flow': _flowSelection.first,
-              'symptom': _selectedSymptom,
+              'symptom': _selectedSymptoms.toList(),
             });
           },
           child: const Text('Log'),
