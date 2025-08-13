@@ -122,9 +122,9 @@ class _HomeScreenState extends State<HomeScreen> {
             onPressed: () {
               print('Test button for ongoing period was pressed!');
             },
-            tooltip: 'Test',
+            tooltip: 'Tampon reminder',
             heroTag: null,
-            child: const Icon(Icons.science_outlined),
+            child: const Icon(Icons.add_alarm),
           ),
         ),
 
