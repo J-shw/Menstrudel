@@ -10,7 +10,7 @@ import 'package:menstrudel/models/period_prediction_result.dart';
 import 'package:menstrudel/utils/period_predictor.dart';
 import 'package:menstrudel/widgets/navigation_bar.dart';
 import 'package:menstrudel/services/period_notifications.dart';
-import 'package:menstrudel/widgets/tampon_reminder_dialog.dart';
+import 'package:menstrudel/widgets/dialogs/tampon_reminder_dialog.dart';
 import 'package:menstrudel/services/tampon_notifications.dart';
 
 
