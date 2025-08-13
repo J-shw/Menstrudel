@@ -18,4 +18,4 @@ Notification permissions are required to alert you of tampon reminders and that 
 
 #### Open Source
 
-This application is open source, and its source code is publicly available on [GitHub](https://github.com/J-shw/Menstrudel). You can review the code to understand how it works and verify that no personal data is collected.
+This application is open source, and its source code is publicly available on [GitHub](https://github.com/J-shw/Menstrudel). You can review the code to understand how it works and verify that no personal data is collected outside of the application.
