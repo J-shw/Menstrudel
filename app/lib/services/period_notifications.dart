@@ -76,7 +76,9 @@ class NotificationHelper {
         iOS: iOSDetails,
       );
 
-      final tz.TZDateTime tzScheduledTime = tz.TZDateTime.from(scheduledTime, tz.local).subtract(Duration(days: daysBefore));
+      final notificationTimeAt9AM = DateTime(scheduledTime.year, scheduledTime.month, scheduledTime.day, 9);
+      final tz.TZDateTime tzScheduledTime = tz.TZDateTime.from(notificationTimeAt9AM, tz.local).subtract(Duration(days: daysBefore));
+
 
       if (tzScheduledTime.isAfter(tz.TZDateTime.now(tz.local))) {
         await flutterLocalNotificationsPlugin.zonedSchedule(
