@@ -5,160 +5,182 @@ import 'package:menstrudel/models/period.dart';
 import 'package:collection/collection.dart';
 
 class PeriodListView extends StatelessWidget {
-	final List<PeriodLogEntry> periodLogEnties;
-	final List<PeriodEntry> periodEntries;
-	final bool isLoading;
-	final Function(int) onDelete;
+  final List<PeriodLogEntry> periodLogEnties;
+  final List<PeriodEntry> periodEntries;
+  final bool isLoading;
+  final Function(int) onDelete;
 
-	const PeriodListView({
-		super.key,
-		required this.periodEntries,
-		required this.periodLogEnties,
-		required this.isLoading,
-		required this.onDelete,
-	});
+  const PeriodListView({
+    super.key,
+    required this.periodEntries,
+    required this.periodLogEnties,
+    required this.isLoading,
+    required this.onDelete,
+  });
 
-	@override
-	Widget build(BuildContext context) {
-		if (isLoading) {
-			return const Center(child: CircularProgressIndicator());
-		} else if (periodEntries.isEmpty) {
-			return const Center(
-				child: Text(
-					'No periods logged yet.\nTap the + button to add one.',
-					textAlign: TextAlign.center,
-					style: TextStyle(fontSize: 16, color: Colors.grey),
-				),
-			);
-		} else {
-			final Map<int, List<PeriodLogEntry>> groupedLogs = groupBy(periodLogEnties, (log) => log.periodId ?? -1);
-			return Expanded(
-        child: ListView.builder(
-          itemCount: periodEntries.length,
-          itemBuilder: (context, periodIndex) {
-            final period = periodEntries[periodIndex];
-            final logsForPeriod = groupedLogs[period.id] ?? [];
+  @override
+  Widget build(BuildContext context) {
+    if (isLoading) {
+      return const Expanded(child: Center(child: CircularProgressIndicator()));
+    }
 
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 16.0, top: 16.0, bottom: 8.0),
-                  child: Text(
-                    '${DateFormat('dd/MM/yy').format(period.startDate)} - ${DateUtils.isSameDay(period.endDate, DateTime.now()) ? 'Ongoing' : DateFormat('dd/MM/yy').format(period.endDate)}',
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.blueGrey,
-                    ),
-                  ),
+    if (periodEntries.isEmpty) {
+      return const Expanded(
+        child: Center(
+          child: Text(
+            'No periods logged yet.\nTap the + button to add one.',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 16, color: Colors.grey),
+          ),
+        ),
+      );
+    }
+
+    final items = _buildTimelineItems();
+
+    return Expanded(
+      child: ListView.builder(
+        itemCount: items.length,
+        itemBuilder: (context, index) {
+          final item = items[index];
+          if (item is PeriodEntry) {
+            return _buildPeriodHeader(item, context);
+          } else if (item is PeriodLogEntry) {
+            return _buildPeriodLog(item, context);
+          }
+          return const SizedBox.shrink();
+        },
+      ),
+    );
+  }
+
+  List<Object> _buildTimelineItems() {
+    final groupedLogs = groupBy(periodLogEnties, (log) => log.periodId ?? -1);
+    final List<Object> items = [];
+    for (final period in periodEntries) {
+      items.add(period);
+      final logsForPeriod = groupedLogs[period.id] ?? [];
+      items.addAll(logsForPeriod);
+    }
+    return items;
+  }
+
+  Widget _buildPeriodHeader(PeriodEntry period, BuildContext context) {
+    final duration = period.endDate.difference(period.startDate).inDays + 1;
+    final isOngoing = DateUtils.isSameDay(period.endDate, DateTime.now());
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16.0, 24.0, 16.0, 8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            DateFormat('MMMM yyyy').format(period.startDate),
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+              color: Colors.black87,
+            ),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            '${DateFormat('d MMM').format(period.startDate)} - ${isOngoing ? 'Ongoing' : DateFormat('d MMM').format(period.endDate)} ($duration days)',
+            style: const TextStyle(fontSize: 14, color: Colors.grey),
+          ),
+          const Divider(height: 16),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPeriodLog(PeriodLogEntry entry, BuildContext context) {
+    return Dismissible(
+      key: ValueKey(entry.id),
+      direction: DismissDirection.endToStart,
+      background: Container(
+        color: Colors.redAccent,
+        alignment: Alignment.centerRight,
+        padding: const EdgeInsets.only(right: 20.0),
+        child: const Icon(Icons.delete, color: Colors.white),
+      ),
+      confirmDismiss: (direction) async {
+        return await showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text("Confirm Delete"),
+              content: const Text("Are you sure you want to delete this entry?"),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(false),
+                  child: const Text("Cancel"),
                 ),
-                if (logsForPeriod.isEmpty)
-                  Padding(
-                    padding: const EdgeInsets.only(left: 16.0, bottom: 8.0),
-                    child: Text(
-                      'No logs for this period.',
-                      style: TextStyle(fontSize: 14, color: Colors.grey),
-                    ),
-                  ),
-                ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: logsForPeriod.length,
-                  itemBuilder: (context, logIndex) {
-                    final entry = logsForPeriod[logIndex];
-                    final String displayedSymptom =
-                        entry.symptom?.isNotEmpty == true
-                            ? entry.symptom!
-                            : 'No specific symptom';
-
-                    final int numberOfDrops = entry.flow + 1;
-
-                    final List<Widget> flowIcons = List.generate(
-                      numberOfDrops,
-                      (index) => Icon(
-                        Icons.water_drop,
-                        size: 16,
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
-                    );
-
-                    return Dismissible(
-                      key: ValueKey(entry.id),
-                      direction: DismissDirection.endToStart,
-                      background: Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Container(
-                            color: Colors.red,
-                            alignment: Alignment.centerRight,
-                            child: const Icon(Icons.delete, color: Colors.white),
-                          ),
-                        ),
-                      ),
-                      confirmDismiss: (direction) async {
-                        return await showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              title: const Text("Confirm Delete"),
-                              content: const Text("Are you sure you want to delete this entry?"),
-                              actions: <Widget>[
-                                TextButton(
-                                  onPressed: () => Navigator.of(context).pop(false),
-                                  child: const Text("Cancel"),
-                                ),
-                                ElevatedButton(
-                                  onPressed: () => Navigator.of(context).pop(true),
-                                  child: const Text("Delete"),
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      },
-                      onDismissed: (direction) {
-                        if (entry.id != null) {
-                          onDelete(entry.id!);
-                        }
-                      },
-                      child: Card(
-                        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-                        child: ListTile(
-                          title: Text(
-                                DateFormat('dd/MM/yyyy').format(entry.date),
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                          subtitle: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-							  Text(
-									'Symptom: $displayedSymptom',
-									style: TextStyle(fontWeight: FontWeight.bold),
-								),
-                              const SizedBox(height: 4),
-                              Row(
-                                children: [
-                                  ...flowIcons,
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    );
-                  },
+                ElevatedButton(
+                  onPressed: () => Navigator.of(context).pop(true),
+                  child: const Text("Delete"),
                 ),
-                const Divider(),
               ],
             );
           },
+        );
+                      
+      },
+      onDismissed: (_) {
+        if (entry.id != null) onDelete(entry.id!);
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              width: 40,
+              child: Column(
+                children: [
+                  Text(
+                    DateFormat('d').format(entry.date),
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
+                  ),
+                  Text(
+                    DateFormat('EEE').format(entry.date).toUpperCase(),
+                    style: const TextStyle(fontSize: 12, color: Colors.grey),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: List.generate(
+                      entry.flow + 1,
+                      (index) => Icon(
+                        Icons.water_drop,
+                        size: 18,
+                        color: Theme.of(context).colorScheme.primary.withOpacity(0.7),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  if (entry.symptom != null && entry.symptom!.isNotEmpty)
+                    Chip(
+                      label: Text(entry.symptom!),
+                      padding: EdgeInsets.zero,
+                      visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
+                      backgroundColor: Colors.grey.shade200,
+                      labelStyle: const TextStyle(fontSize: 12),
+                    ),
+                ],
+              ),
+            ),
+          ],
         ),
-      );
-		}
-	}
+      ),
+    );
+  }
 }
