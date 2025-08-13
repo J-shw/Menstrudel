@@ -170,6 +170,8 @@ class PeriodListView extends StatelessWidget {
                   if (entry.symptom != null && entry.symptom!.isNotEmpty)
                     Chip(
                       label: Text(entry.symptom!),
+                      shape: const StadiumBorder(),
+                      side: BorderSide.none,
                       padding: EdgeInsets.zero,
                       visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
                       backgroundColor: Colors.grey.shade200,
