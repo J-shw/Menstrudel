@@ -11,34 +11,31 @@ void main() async {
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
 
-	@override
-	Widget build(BuildContext context) {
-		return MaterialApp(
-			theme: ThemeData(
-				useMaterial3: true,
-				colorScheme: ColorScheme.fromSeed(
-					seedColor: Colors.blue,
-					brightness: Brightness.light,
-				),
-				appBarTheme: const AppBarTheme(
-					backgroundColor: Color.fromARGB(255, 236, 102, 102),
-					foregroundColor: Colors.white,
-				),
-			),
-			darkTheme: ThemeData(
-				useMaterial3: true,
-				colorScheme: ColorScheme.fromSeed(
-					seedColor: Colors.blue,
-					brightness: Brightness.dark,
-				),
-				appBarTheme: AppBarTheme(
-					backgroundColor: Colors.red[900],
-					foregroundColor: Colors.white,
-				),
-			),
-			themeMode: ThemeMode.system, 
+  @override
+  Widget build(BuildContext context) {
+    final seedColor = const Color.fromARGB(255, 130, 172, 250);
 
-			home: const HomeScreen(),
-		);
-	}
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Menstrudel',
+
+      theme: ThemeData(
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: seedColor,
+        ),
+      ),
+
+      darkTheme: ThemeData(
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: seedColor,
+          brightness: Brightness.dark,
+        ),
+      ),
+
+      themeMode: ThemeMode.system,
+      home: const HomeScreen(),
+    );
+  }
 }
