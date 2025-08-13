@@ -45,7 +45,7 @@ class PeriodListView extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: 16.0, top: 16.0, bottom: 8.0),
                   child: Text(
-                    '${DateFormat('dd/MM/yy').format(period.startDate)} - ${period.endDate != null ? DateFormat('dd/MM/yy').format(period.endDate!) : 'Ongoing'}', // This won't work yet but might be better
+                    '${DateFormat('dd/MM/yy').format(period.startDate)} - ${DateUtils.isSameDay(period.endDate, DateTime.now()) ? 'Ongoing' : DateFormat('dd/MM/yy').format(period.endDate)}',
                     style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
