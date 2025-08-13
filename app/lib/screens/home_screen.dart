@@ -146,38 +146,38 @@ class _HomeScreenState extends State<HomeScreen> {
             child: const Icon(Icons.add_alarm),
           ),
         ),
+        Visibility(
+          visible: !isPeriodOngoing,
+          child:FloatingActionButton(
+            onPressed: () async {
+              final Map<String, dynamic>? result =
+                  await showDialog<Map<String, dynamic>>(
+                context: context,
+                builder: (BuildContext dialogContext) {
+                  return const SymptomEntryDialog();
+                },
+              );
+              if (result != null) {
+                final DateTime? date = result['date'];
+                final String? symptom = result['symptom'];
+                final int flow = result['flow'];
 
-        const SizedBox(height: 16),
+                if (date != null) {
+                  final newEntry = PeriodLogEntry(
+                    date: date,
+                    symptom: symptom,
+                    flow: flow,
+                  );
 
-        FloatingActionButton(
-          onPressed: () async {
-            final Map<String, dynamic>? result =
-                await showDialog<Map<String, dynamic>>(
-              context: context,
-              builder: (BuildContext dialogContext) {
-                return const SymptomEntryDialog();
-              },
-            );
-            if (result != null) {
-              final DateTime? date = result['date'];
-              final String? symptom = result['symptom'];
-              final int flow = result['flow'];
-
-              if (date != null) {
-                final newEntry = PeriodLogEntry(
-                  date: date,
-                  symptom: symptom,
-                  flow: flow,
-                );
-
-                await PeriodDatabase.instance.createPeriodLog(newEntry);
-                _refreshPeriodLogs();
+                  await PeriodDatabase.instance.createPeriodLog(newEntry);
+                  _refreshPeriodLogs();
+                }
               }
-            }
-          },
-          tooltip: 'Log period',
-          heroTag: null,
-          child: const Icon(Icons.add),
+            },
+            tooltip: 'Log period',
+            heroTag: null,
+            child: const Icon(Icons.add),
+          ),
         ),
       ],
     ),
