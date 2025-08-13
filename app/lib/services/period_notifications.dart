@@ -60,6 +60,8 @@ class NotificationHelper {
   }) async {
     final bool areEnabled = await _settingsService.areNotificationsEnabled();
     final int daysBefore = await _settingsService.getNotificationDays();
+    final TimeOfDay notificationTime = await _settingsService.getNotificationTime();
+
     if (areEnabled) {
       const AndroidNotificationDetails androidDetails = AndroidNotificationDetails(
         'scheduled_channel_id',
@@ -76,9 +78,15 @@ class NotificationHelper {
         iOS: iOSDetails,
       );
 
-      final notificationTimeAt9AM = DateTime(scheduledTime.year, scheduledTime.month, scheduledTime.day, 9);
-      final tz.TZDateTime tzScheduledTime = tz.TZDateTime.from(notificationTimeAt9AM, tz.local).subtract(Duration(days: daysBefore));
+      final DateTime notificationDateTime = DateTime(
+        scheduledTime.year,
+        scheduledTime.month,
+        scheduledTime.day,
+        notificationTime.hour,
+        notificationTime.minute,
+      );
 
+      final tz.TZDateTime tzScheduledTime = tz.TZDateTime.from(notificationDateTime, tz.local).subtract(Duration(days: daysBefore));
 
       if (tzScheduledTime.isAfter(tz.TZDateTime.now(tz.local))) {
         await flutterLocalNotificationsPlugin.zonedSchedule(
