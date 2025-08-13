@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/services/settings_service.dart';
-import 'package:menstrudel/widgets/navigation_bar.dart';
-import 'package:menstrudel/widgets/app_bar.dart';
+import 'package:menstrudel/widgets/main/navigation_bar.dart';
+import 'package:menstrudel/widgets/main/app_bar.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});

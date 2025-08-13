@@ -8,7 +8,7 @@ import 'package:menstrudel/database/period_database.dart';
 import 'package:menstrudel/widgets/period_list_view.dart';
 import 'package:menstrudel/models/period_prediction_result.dart';
 import 'package:menstrudel/utils/period_predictor.dart';
-import 'package:menstrudel/widgets/navigation_bar.dart';
+import 'package:menstrudel/widgets/main/navigation_bar.dart';
 import 'package:menstrudel/services/notifications/period_notifications.dart';
 import 'package:menstrudel/widgets/dialogs/tampon_reminder_dialog.dart';
 import 'package:menstrudel/services/notifications/tampon_notifications.dart';

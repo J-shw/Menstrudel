@@ -5,8 +5,8 @@ import 'package:menstrudel/models/periods/period_stats.dart';
 import 'package:menstrudel/widgets/monthly_cycle_list_view.dart';
 import 'package:menstrudel/utils/period_predictor.dart';
 import 'package:menstrudel/database/period_database.dart';
-import 'package:menstrudel/widgets/navigation_bar.dart';
-import 'package:menstrudel/widgets/app_bar.dart';
+import 'package:menstrudel/widgets/main/navigation_bar.dart';
+import 'package:menstrudel/widgets/main/app_bar.dart';
 import 'package:intl/intl.dart';
 
 class AnalyticsScreen extends StatefulWidget {
