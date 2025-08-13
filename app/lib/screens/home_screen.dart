@@ -59,8 +59,9 @@ class _HomeScreenState extends State<HomeScreen> {
 	Widget build(BuildContext context) {
 		int daysUntilDueForCircle = _predictionResult?.daysUntilDue ?? 0; 
 		int circleMaxValue = _predictionResult?.averageCycleLength ?? 28;
-
 		int circleCurrentValue = daysUntilDueForCircle.clamp(0, circleMaxValue); 
+
+    final bool isPeriodOngoing = _periodEntries.isNotEmpty && DateUtils.isSameDay(_periodEntries.first.endDate, DateTime.now());
 
 		String predictionText = '';
 		if (_isLoading) {
