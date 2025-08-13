@@ -1,7 +1,7 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
-import 'package:menstrudel/models/period_logs.dart';
-import 'package:menstrudel/models/period.dart';
+import 'package:menstrudel/models/period_logs/period_logs.dart';
+import 'package:menstrudel/models/periods/period.dart';
 
 class PeriodDatabase {
     static final PeriodDatabase instance = PeriodDatabase._init();
@@ -42,7 +42,7 @@ class PeriodDatabase {
       CREATE TABLE period_logs (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
           date TEXT NOT NULL,
-          symptom TEXT,
+          symptoms  TEXT,
           flow INTEGER NOT NULL,
                     period_id INTEGER,
           FOREIGN KEY (period_id) REFERENCES periods(id) ON DELETE SET NULL

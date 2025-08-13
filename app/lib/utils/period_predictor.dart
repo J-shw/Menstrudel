@@ -1,9 +1,9 @@
-import 'package:menstrudel/models/period_logs.dart';
-import 'package:menstrudel/models/period.dart';
+import 'package:menstrudel/models/period_logs/period_logs.dart';
+import 'package:menstrudel/models/periods/period.dart';
 import 'package:menstrudel/models/period_prediction_result.dart';
-import 'package:menstrudel/models/cycle_stats.dart';
-import 'package:menstrudel/models/period_stats.dart';
-import 'package:menstrudel/models/monthly_cycle_data.dart';
+import 'package:menstrudel/models/cycles/cycle_stats.dart';
+import 'package:menstrudel/models/periods/period_stats.dart';
+import 'package:menstrudel/models/cycles/monthly_cycle_data.dart';
 import 'dart:math';
 
 

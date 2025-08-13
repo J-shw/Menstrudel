@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:menstrudel/widgets/basic_progress_circle.dart';
-import 'package:menstrudel/widgets/log_period.dart';
-import 'package:menstrudel/models/period_logs.dart';
-import 'package:menstrudel/models/period.dart';
+import 'package:menstrudel/widgets/dialogs/log_period_dialog.dart';
+import 'package:menstrudel/models/period_logs/period_logs.dart';
+import 'package:menstrudel/models/periods/period.dart';
 import 'package:menstrudel/database/period_database.dart'; 
 import 'package:menstrudel/widgets/period_list_view.dart';
 import 'package:menstrudel/models/period_prediction_result.dart';
 import 'package:menstrudel/utils/period_predictor.dart';
-import 'package:menstrudel/widgets/navigation_bar.dart';
-import 'package:menstrudel/services/period_notifications.dart';
+import 'package:menstrudel/widgets/main/navigation_bar.dart';
+import 'package:menstrudel/services/notifications/period_notifications.dart';
+import 'package:menstrudel/widgets/dialogs/tampon_reminder_dialog.dart';
+import 'package:menstrudel/services/notifications/tampon_notifications.dart';
 
 
 class HomeScreen extends StatefulWidget {
 	const HomeScreen({super.key});
-	  @override
-  	State<HomeScreen> createState() => _HomeScreenState();
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
@@ -59,8 +61,9 @@ class _HomeScreenState extends State<HomeScreen> {
 	Widget build(BuildContext context) {
 		int daysUntilDueForCircle = _predictionResult?.daysUntilDue ?? 0; 
 		int circleMaxValue = _predictionResult?.averageCycleLength ?? 28;
-
 		int circleCurrentValue = daysUntilDueForCircle.clamp(0, circleMaxValue); 
+
+    final bool isPeriodOngoing = _periodEntries.isNotEmpty && DateUtils.isSameDay(_periodEntries.first.endDate, DateTime.now());
 
 		String predictionText = '';
 		if (_isLoading) {
@@ -112,34 +115,72 @@ class _HomeScreenState extends State<HomeScreen> {
 				],
 			),
 			bottomNavigationBar: MainBottomNavigationBar(isHomeScreenActive: true,),
-			floatingActionButton: FloatingActionButton(
-				onPressed: () async {
-					final Map<String, dynamic>? result = await showDialog<Map<String, dynamic>>(
-						context: context,
-						builder: (BuildContext dialogContext) {
-							return const SymptomEntryDialog();
-						},
-					);
-					if (result != null) {
-						final DateTime? date = result['date'];
-						final String? symptom = result['symptom'];
-						final int flow = result['flow'];
-						
-						if (date != null) {
-							final newEntry = PeriodLogEntry(
-								date: date,
-								symptom: symptom,
-								flow: flow,
-							);
+			floatingActionButton: Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        Visibility(
+          visible: isPeriodOngoing,
+          child: FloatingActionButton(
+            onPressed: () async {
+              final TimeOfDay? reminderTime = await showDialog<TimeOfDay>(
+                context: context,
+                builder: (BuildContext context) {
+                  return const TimeSelectionDialog();
+                },
+              );
 
-							await PeriodDatabase.instance.createPeriodLog(newEntry);
-							_refreshPeriodLogs();
-						}
-					}
-				},
-				tooltip: 'Log period',
-				child: const Icon(Icons.add),
-			),
+              if (reminderTime != null) {
+                await tamponNotificationScheduler(reminderTime: reminderTime);
+
+                ScaffoldMessenger.of(context)
+                  ..hideCurrentSnackBar()
+                  ..showSnackBar(
+                    SnackBar(
+                      content: Text('Reminder set for ${reminderTime.format(context)}'),
+                    ),
+                  );
+              }
+            },
+            tooltip: 'Tampon reminder',
+            heroTag: null,
+            child: const Icon(Icons.add_alarm),
+          ),
+        ),
+        Visibility(
+          visible: !isPeriodOngoing,
+          child:FloatingActionButton(
+            onPressed: () async {
+              final Map<String, dynamic>? result =
+                  await showDialog<Map<String, dynamic>>(
+                context: context,
+                builder: (BuildContext dialogContext) {
+                  return const SymptomEntryDialog();
+                },
+              );
+              if (result != null) {
+                final DateTime? date = result['date'];
+                final List<String>? symptoms = result['symptoms'];
+                final int flow = result['flow'];
+
+                if (date != null) {
+                  final newEntry = PeriodLogEntry(
+                    date: date,
+                    symptoms: symptoms,
+                    flow: flow,
+                  );
+
+                  await PeriodDatabase.instance.createPeriodLog(newEntry);
+                  _refreshPeriodLogs();
+                }
+              }
+            },
+            tooltip: 'Log period',
+            heroTag: null,
+            child: const Icon(Icons.add),
+          ),
+        ),
+      ],
+    ),
 			floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
 		);
 	}

@@ -1,14 +1,16 @@
+import 'dart:convert';
+
 class PeriodLogEntry {
 	int? id;
 	DateTime date;
-	String? symptom;
+	List<String>? symptoms;
 	int flow;
 	int? periodId;
 
 	PeriodLogEntry({
 		this.id,
 		required this.date,
-		this.symptom,
+		this.symptoms,
 		required this.flow,
 		this.periodId,
 	});
@@ -17,17 +19,23 @@ class PeriodLogEntry {
 		return {
 			'id': id,
 			'date': date.toIso8601String(),
-			'symptom': symptom,
+			'symptoms': symptoms != null ? jsonEncode(symptoms) : null,
 			'flow': flow,
 			'period_id': periodId,
 		};
 	}
 
 	factory PeriodLogEntry.fromMap(Map<String, dynamic> map) {
+    List<String>? symptomsFromMap;
+    if (map['symptoms'] != null) {
+      final decoded = jsonDecode(map['symptoms'] as String);
+      symptomsFromMap = List<String>.from(decoded);
+    }
+
 		return PeriodLogEntry(
 			id: map['id'] as int?,
 			date: DateTime.parse(map['date'] as String),
-			symptom: map['symptom'] as String?,
+			symptoms: symptomsFromMap,
 			flow: map['flow'] as int,
 			periodId: map['period_id'] as int?,
 		);
@@ -36,14 +44,14 @@ class PeriodLogEntry {
 	PeriodLogEntry copyWith({
 		int? id,
 		DateTime? date,
-		String? symptom,
+		List<String>? symptoms,
 		int? flow,
 		int? periodId,
 	}) {
 		return PeriodLogEntry(
 			id: id ?? this.id,
 			date: date ?? this.date,
-			symptom: symptom ?? this.symptom,
+			symptoms: symptoms ?? this.symptoms,
 			flow: flow ?? this.flow,
 			periodId: periodId ?? this.periodId,
 		);

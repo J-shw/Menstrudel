@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:menstrudel/models/monthly_cycle_data.dart';
+import 'package:menstrudel/models/cycles/monthly_cycle_data.dart';
 import 'dart:math' as math;
 
 class MonthlyCycleListView extends StatelessWidget {
@@ -52,7 +52,7 @@ class MonthlyCycleListView extends StatelessWidget {
 				Padding(
 					padding: const EdgeInsets.only(bottom: 5.0),
 					child: Text(
-						'Monthly Cycle Lengths (Days)',
+						'Cycle Lengths (Days)',
 						style: TextStyle(
 							fontSize: 18,
 							fontWeight: FontWeight.bold,
@@ -66,12 +66,12 @@ class MonthlyCycleListView extends StatelessWidget {
 					shrinkWrap: true,
 					itemCount: monthlyCycleData!.length,
 					itemBuilder: (context, index) {
-						final data = monthlyCycleData![index];
+						final data = monthlyCycleData![monthlyCycleData!.length - 1 - index];
 						final String monthName = DateFormat.MMM().format(DateTime(data.year, data.month));
 						
 						final double barWidth = getScaledBarWidth(data.cycleLength);
 
-						return Container( 
+						return Container(
 							padding: const EdgeInsets.symmetric(vertical: 8.0), 
 							height: barHeight + 15, 
 							child: Row(
