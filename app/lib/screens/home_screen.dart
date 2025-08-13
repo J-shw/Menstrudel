@@ -11,6 +11,7 @@ import 'package:menstrudel/utils/period_predictor.dart';
 import 'package:menstrudel/widgets/navigation_bar.dart';
 import 'package:menstrudel/services/period_notifications.dart';
 import 'package:menstrudel/widgets/tampon_reminder_dialog.dart';
+import 'package:menstrudel/services/tampon_notifications.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -129,7 +130,8 @@ class _HomeScreenState extends State<HomeScreen> {
               );
 
               if (reminderTime != null) {
-                print('Reminder time received: ${reminderTime.format(context)}');
+                await tamponNotificationScheduler(reminderTime: reminderTime);
+
                 ScaffoldMessenger.of(context)
                   ..hideCurrentSnackBar()
                   ..showSnackBar(
