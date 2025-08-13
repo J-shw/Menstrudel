@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:menstrudel/models/monthly_cycle_data.dart';
+import 'package:menstrudel/models/cycles/monthly_cycle_data.dart';
 import 'dart:math' as math;
 
 class MonthlyCycleListView extends StatelessWidget {

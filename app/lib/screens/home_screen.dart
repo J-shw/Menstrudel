@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:menstrudel/widgets/basic_progress_circle.dart';
-import 'package:menstrudel/widgets/log_period.dart';
-import 'package:menstrudel/models/period_logs.dart';
-import 'package:menstrudel/models/period.dart';
+import 'package:menstrudel/widgets/dialogs/log_period_dialog.dart';
+import 'package:menstrudel/models/period_logs/period_logs.dart';
+import 'package:menstrudel/models/periods/period.dart';
 import 'package:menstrudel/database/period_database.dart'; 
 import 'package:menstrudel/widgets/period_list_view.dart';
 import 'package:menstrudel/models/period_prediction_result.dart';
 import 'package:menstrudel/utils/period_predictor.dart';
-import 'package:menstrudel/widgets/navigation_bar.dart';
-import 'package:menstrudel/services/period_notifications.dart';
-import 'package:menstrudel/widgets/tampon_reminder_dialog.dart';
-import 'package:menstrudel/services/tampon_notifications.dart';
+import 'package:menstrudel/widgets/main/navigation_bar.dart';
+import 'package:menstrudel/services/notifications/period_notifications.dart';
+import 'package:menstrudel/widgets/dialogs/tampon_reminder_dialog.dart';
+import 'package:menstrudel/services/notifications/tampon_notifications.dart';
 
 
 class HomeScreen extends StatefulWidget {

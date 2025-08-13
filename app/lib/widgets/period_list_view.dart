@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:menstrudel/models/period_logs.dart';
-import 'package:menstrudel/models/period.dart';
+import 'package:menstrudel/models/period_logs/period_logs.dart';
+import 'package:menstrudel/models/periods/period.dart';
 import 'package:collection/collection.dart';
 
 class PeriodListView extends StatelessWidget {
