@@ -30,14 +30,8 @@ Menstrudel is a simple, private, and intuitive mobile application built with Flu
 
 # App Screenshots
 
-| Your daily logs | Cycle insights | Quick symptom entry | Settings | Tampon reminder |
-|--------------|--------------|--------------|--------------|--------------|
-| ![Log View](screenshots/v2.0.0/android/home.png) | ![Analytics View](screenshots/v2.0.0/android/analytics.png) | ![Symptom Entry Dialog](screenshots/v2.0.0/android/log.png) | ![Symptom Entry Dialog](screenshots/v2.0.0/android/settings.png) | ![Symptom Entry Dialog](screenshots/v2.0.0/android/reminder.png) |
-
-
-
-### App Screenshots
-
-| Daily Logs | Cycle Insights | Symptom Entry | Settings | Tampon Reminder |
-| :---: | :---: | :---: | :---: | :---: |
-| ![Log View](screenshots/v2.0.0/android/home.png) | ![Analytics View](screenshots/v2.0.0/android/analytics.png) | ![Symptom Entry Dialog](screenshots/v2.0.0/android/log.png) | ![Settings Dialog](screenshots/v2.0.0/android/settings.png) | ![Tampon Reminder Dialog](screenshots/v2.0.0/android/reminder.png) |
+| Your daily logs |  Quick symptom entry | Tampon reminder |
+| :---: | :---: | :---: |
+| ![Log View](screenshots/v2.0.0/android/home.png) | ![Symptom Entry Dialog](screenshots/v2.0.0/android/log.png) | ![Symptom Entry Dialog](screenshots/v2.0.0/android/reminder.png) |
+| Cycle insights | Settings | :---: |
+![Analytics View](screenshots/v2.0.0/android/analytics.png) | ![Symptom Entry Dialog](screenshots/v2.0.0/android/settings.png) | :---: |
