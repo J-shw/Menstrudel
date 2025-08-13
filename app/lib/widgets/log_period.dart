@@ -10,7 +10,7 @@ class SymptomEntryDialog extends StatefulWidget {
 
 class _SymptomEntryDialogState extends State<SymptomEntryDialog> {
   DateTime _selectedDate = DateTime.now();
-  String? _selectedSymptom;
+  final Set<String> _selectedSymptoms = {};
   Set<int> _flowSelection = {1};
 
   final List<String> _symptomOptions = [
@@ -88,13 +88,13 @@ class _SymptomEntryDialogState extends State<SymptomEntryDialog> {
                 children: _symptomOptions.map((symptom) {
                   return FilterChip(
                     label: Text(symptom),
-                    selected: _selectedSymptom == symptom,
+                    selected: _selectedSymptoms.contains(symptom),
                     onSelected: (bool selected) {
                       setState(() {
                         if (selected) {
-                          _selectedSymptom = symptom;
+                          _selectedSymptoms.add(symptom);
                         } else {
-                          _selectedSymptom = null;
+                          _selectedSymptoms.remove(symptom);
                         }
                       });
                     },
@@ -115,7 +115,7 @@ class _SymptomEntryDialogState extends State<SymptomEntryDialog> {
             Navigator.of(context).pop({
               'date': _selectedDate,
               'flow': _flowSelection.first,
-              'symptom': _selectedSymptom,
+              'symptoms': _selectedSymptoms.toList(),
             });
           },
           child: const Text('Log'),

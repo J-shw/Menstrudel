@@ -166,19 +166,24 @@ class PeriodListView extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 6),
-                  if (entry.symptom != null && entry.symptom!.isNotEmpty)
-                    Chip(
-                      label: Text(entry.symptom!),
-                      shape: const StadiumBorder(),
-                      side: BorderSide.none,
-                      padding: EdgeInsets.zero,
-                      visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
-                      backgroundColor: colorScheme.secondaryContainer,
-                      labelStyle: TextStyle(
-                        fontSize: 12,
-                        color: colorScheme.onSecondaryContainer
+                  if (entry.symptoms != null && entry.symptoms!.isNotEmpty)
+                    Wrap(
+                      spacing: 6.0,
+                      runSpacing: 4.0,
+                      children: entry.symptoms!.map((symptom) {
+                      return Chip(
+                        label: Text(symptom),
+                        side: BorderSide.none,
+                        padding: EdgeInsets.zero,
+                        visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
+                        backgroundColor: colorScheme.secondaryContainer,
+                        labelStyle: TextStyle(
+                          fontSize: 12,
+                          color: colorScheme.onSecondaryContainer,
                         ),
-                    ),
+                      );
+                    }).toList(),
+                  ),
                 ],
               ),
             ),

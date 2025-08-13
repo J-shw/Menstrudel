@@ -42,7 +42,7 @@ class PeriodDatabase {
       CREATE TABLE period_logs (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
           date TEXT NOT NULL,
-          symptom TEXT,
+          symptoms  TEXT,
           flow INTEGER NOT NULL,
                     period_id INTEGER,
           FOREIGN KEY (period_id) REFERENCES periods(id) ON DELETE SET NULL
