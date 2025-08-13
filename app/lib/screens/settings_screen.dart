@@ -90,7 +90,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             ListTile(
               title: const Text('Notification Time'),
-              trailing: Text(_notificationTime.format(context)),
+              trailing: Text(
+                _notificationTime.format(context),
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
               onTap: _selectTime,
             ),
           ],
