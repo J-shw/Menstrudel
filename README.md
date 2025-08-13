@@ -30,7 +30,7 @@ Menstrudel is a simple, private, and intuitive mobile application built with Flu
 
 ### Privacy Policy
 
-You can view our privacy policy [here](https://github.com/J-shw/Menstrudel/tree/feature/privacy-policy/docs).
+You can view our privacy policy [here](https://github.com/J-shw/Menstrudel/blob/dev/docs/PRIVACY.md)
 
 # App Screenshots
 
