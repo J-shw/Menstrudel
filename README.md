@@ -28,6 +28,10 @@ Menstrudel is a simple, private, and intuitive mobile application built with Flu
 * **Completely Offline:** No internet connection. No sign ups. No adverts.
 * **Free & Open Source:** Menstrudel is free to use, and its codebase is open for transparency, auditing, and community contributions.
 
+### Privacy Policy
+
+You can view our privacy policy [here](https://github.com/J-shw/Menstrudel/tree/feature/privacy-policy/docs).
+
 # App Screenshots
 
 | Your daily logs |  Quick symptom entry | Tampon reminder |
