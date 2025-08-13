@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:menstrudel/widgets/basic_progress_circle.dart';
 import 'package:menstrudel/widgets/dialogs/log_period_dialog.dart';
 import 'package:menstrudel/models/period_logs.dart';
-import 'package:menstrudel/models/period.dart';
+import 'package:menstrudel/models/periods/period.dart';
 import 'package:menstrudel/database/period_database.dart'; 
 import 'package:menstrudel/widgets/period_list_view.dart';
 import 'package:menstrudel/models/period_prediction_result.dart';
