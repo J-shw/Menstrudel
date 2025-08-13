@@ -27,6 +27,7 @@ class _SymptomEntryDialogState extends State<SymptomEntryDialog> {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: const Text('Log Your Day'),
+      insetPadding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 24.0),
       contentPadding: const EdgeInsets.fromLTRB(24.0, 20.0, 24.0, 0),
       content: SizedBox(
         width: double.maxFinite,
@@ -47,28 +48,36 @@ class _SymptomEntryDialogState extends State<SymptomEntryDialog> {
                 ),
                 onPressed: _pickDate,
               ),
+
               const SizedBox(height: 24),
 
               Text('Flow', style: Theme.of(context).textTheme.bodySmall),
               const SizedBox(height: 8),
-              SegmentedButton<int>(
-                segments: const [
-                  ButtonSegment(value: 0, label: Text('Light')),
-                  ButtonSegment(value: 1, label: Text('Moderate')),
-                  ButtonSegment(value: 2, label: Text('Heavy')),
-                ],
-                selected: _flowSelection,
-                onSelectionChanged: (Set<int> newSelection) {
-                  setState(() {
-                    if (newSelection.isNotEmpty) {
-                      _flowSelection = newSelection;
-                    }
-                  });
-                },
-                style: const ButtonStyle(
-                  visualDensity: VisualDensity(horizontal: 0, vertical: -1),
-                ),
+              Row(
+                children: [
+                  Expanded(
+                    child: SegmentedButton<int>(
+                      segments: const [
+                        ButtonSegment(value: 0, label: Text('Light')),
+                        ButtonSegment(value: 1, label: Text('Moderate')),
+                        ButtonSegment(value: 2, label: Text('Heavy')),
+                      ],
+                      selected: _flowSelection,
+                      onSelectionChanged: (Set<int> newSelection) {
+                        setState(() {
+                          if (newSelection.isNotEmpty) {
+                            _flowSelection = newSelection;
+                          }
+                        });
+                      },
+                      style: const ButtonStyle(
+                        visualDensity: VisualDensity(horizontal: 0, vertical: -1),
+                      ),
+                    ),
+                  )
+                ]
               ),
+
               const SizedBox(height: 24),
 
               Text('Symptoms (Optional)', style: Theme.of(context).textTheme.bodySmall),
