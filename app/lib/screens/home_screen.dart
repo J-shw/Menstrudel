@@ -159,13 +159,13 @@ class _HomeScreenState extends State<HomeScreen> {
               );
               if (result != null) {
                 final DateTime? date = result['date'];
-                final String? symptom = result['symptom'];
+                final List<String>? symptoms = result['symptoms'];
                 final int flow = result['flow'];
 
                 if (date != null) {
                   final newEntry = PeriodLogEntry(
                     date: date,
-                    symptom: symptom,
+                    symptoms: symptoms,
                     flow: flow,
                   );
 
