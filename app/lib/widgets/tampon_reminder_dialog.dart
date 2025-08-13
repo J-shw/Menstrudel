@@ -12,51 +12,45 @@ class _TimeSelectionDialogState extends State<TimeSelectionDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return Hero(
-      tag: 'reminder-dialog-hero',
-      createRectTween: (begin, end) {
-        return MaterialRectArcTween(begin: begin, end: end);
-      },
-      child: AlertDialog(
-        title: const Text('Tampon Reminder'),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            const SizedBox(height: 16),
-            InkWell(
-              onTap: () async {
-                final TimeOfDay? picked = await showTimePicker(
-                  context: context,
-                  initialTime: _selectedTime,
-                );
-                if (picked != null && picked != _selectedTime) {
-                  setState(() {
-                    _selectedTime = picked;
-                  });
-                }
-              },
-              child: Text(
-                _selectedTime.format(context),
-                style: const TextStyle(fontSize: 48, fontWeight: FontWeight.bold),
-              ),
+    return AlertDialog(
+      title: const Text('Tampon Reminder'),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          const SizedBox(height: 16),
+          InkWell(
+            onTap: () async {
+              final TimeOfDay? picked = await showTimePicker(
+                context: context,
+                initialTime: _selectedTime,
+              );
+              if (picked != null && picked != _selectedTime) {
+                setState(() {
+                  _selectedTime = picked;
+                });
+              }
+            },
+            child: Text(
+              _selectedTime.format(context),
+              style: const TextStyle(fontSize: 48, fontWeight: FontWeight.bold),
             ),
-          ],
-        ),
-        actions: <Widget>[
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context); 
-            },
-            child: const Text('Cancel'),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context, _selectedTime);
-            },
-            child: const Text('Set'),
           ),
         ],
-      )
+      ),
+      actions: <Widget>[
+        TextButton(
+          onPressed: () {
+            Navigator.pop(context); 
+          },
+          child: const Text('Cancel'),
+        ),
+        TextButton(
+          onPressed: () {
+            Navigator.pop(context, _selectedTime);
+          },
+          child: const Text('Set'),
+        ),
+      ],
     );
   }
 }

@@ -140,7 +140,7 @@ class _HomeScreenState extends State<HomeScreen> {
               }
             },
             tooltip: 'Tampon reminder',
-            heroTag: 'reminder-dialog-hero',
+            heroTag: null,
             child: const Icon(Icons.add_alarm),
           ),
         ),
