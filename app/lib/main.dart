@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:dynamic_color/dynamic_color.dart';
 import 'package:menstrudel/screens/home_screen.dart';
 import 'package:menstrudel/services/period_notifications.dart';
 
@@ -13,30 +14,39 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final lightSeedColor = const Color(0xFF3B82F6);
-	final darkSeedColor = const Color(0xFF60A5FA);
+	final seedColor = const Color(0xFF60A5FA);
 
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Menstrudel',
+    return DynamicColorBuilder(
+      builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
+        ColorScheme lightColorScheme;
+        ColorScheme darkColorScheme;
 
-      theme: ThemeData(
-        useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: lightSeedColor,
-        ),
-      ),
+        if (lightDynamic != null && darkDynamic != null) {
+          lightColorScheme = lightDynamic.harmonized();
+          darkColorScheme = darkDynamic.harmonized();
+        } else {
+          lightColorScheme = ColorScheme.fromSeed(seedColor: seedColor);
+          darkColorScheme = ColorScheme.fromSeed(
+            seedColor: seedColor,
+            brightness: Brightness.dark,
+          );
+        }
 
-      darkTheme: ThemeData(
-        useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: darkSeedColor,
-          brightness: Brightness.dark,
-        ),
-      ),
-
-      themeMode: ThemeMode.system,
-      home: const HomeScreen(),
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Menstrudel',
+          theme: ThemeData(
+            useMaterial3: true,
+            colorScheme: lightColorScheme,
+          ),
+          darkTheme: ThemeData(
+            useMaterial3: true,
+            colorScheme: darkColorScheme,
+          ),
+          themeMode: ThemeMode.system,
+          home: const HomeScreen(),
+        );
+      },
     );
   }
 }
