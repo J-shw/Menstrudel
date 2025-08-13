@@ -69,6 +69,9 @@ class PeriodListView extends StatelessWidget {
     final duration = period.endDate.difference(period.startDate).inDays + 1;
     final isOngoing = DateUtils.isSameDay(period.endDate, DateTime.now());
 
+    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
+
     return Padding(
       padding: const EdgeInsets.fromLTRB(16.0, 24.0, 16.0, 8.0),
       child: Column(
@@ -76,16 +79,12 @@ class PeriodListView extends StatelessWidget {
         children: [
           Text(
             DateFormat('MMMM yyyy').format(period.startDate),
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 18,
-              color: Colors.black87,
-            ),
+            style: textTheme.titleLarge
           ),
           const SizedBox(height: 4),
           Text(
             '${DateFormat('d MMM').format(period.startDate)} - ${isOngoing ? 'Ongoing' : DateFormat('d MMM').format(period.endDate)} ($duration days)',
-            style: const TextStyle(fontSize: 14, color: Colors.grey),
+            style: textTheme.bodyMedium?.copyWith(color: colorScheme.onSurfaceVariant),
           ),
           const Divider(height: 16),
         ],
@@ -94,6 +93,9 @@ class PeriodListView extends StatelessWidget {
   }
 
   Widget _buildPeriodLog(PeriodLogEntry entry, BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
+
     return Dismissible(
       key: ValueKey(entry.id),
       direction: DismissDirection.endToStart,
@@ -139,14 +141,11 @@ class PeriodListView extends StatelessWidget {
                 children: [
                   Text(
                     DateFormat('d').format(entry.date),
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                    ),
+                    style: textTheme.titleMedium,
                   ),
                   Text(
                     DateFormat('EEE').format(entry.date).toUpperCase(),
-                    style: const TextStyle(fontSize: 12, color: Colors.grey),
+                    style: textTheme.bodySmall?.copyWith(color: colorScheme.onSurfaceVariant),
                   ),
                 ],
               ),
@@ -162,7 +161,7 @@ class PeriodListView extends StatelessWidget {
                       (index) => Icon(
                         Icons.water_drop,
                         size: 18,
-                        color: Theme.of(context).colorScheme.primary.withOpacity(0.7),
+                        color: colorScheme.primary.withOpacity(0.8)
                       ),
                     ),
                   ),
@@ -174,8 +173,11 @@ class PeriodListView extends StatelessWidget {
                       side: BorderSide.none,
                       padding: EdgeInsets.zero,
                       visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
-                      backgroundColor: Colors.grey.shade200,
-                      labelStyle: const TextStyle(fontSize: 12),
+                      backgroundColor: colorScheme.secondaryContainer,
+                      labelStyle: TextStyle(
+                        fontSize: 12,
+                        color: colorScheme.onSecondaryContainer
+                        ),
                     ),
                 ],
               ),
