@@ -60,7 +60,7 @@ class NotificationHelper {
   }) async {
     final bool areEnabled = await _settingsService.areNotificationsEnabled();
     final int daysBefore = await _settingsService.getNotificationDays();
-    if (!areEnabled) {
+    if (areEnabled) {
       const AndroidNotificationDetails androidDetails = AndroidNotificationDetails(
         'scheduled_channel_id',
         'Period Alerts',
