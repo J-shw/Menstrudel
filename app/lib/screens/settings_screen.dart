@@ -16,6 +16,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   bool _isLoading = true;
   bool _notificationsEnabled = true;
   int _notificationDays = 1;
+  TimeOfDay _notificationTime = const TimeOfDay(hour: 9, minute: 0);
 
   @override
   void initState() {
@@ -26,9 +27,24 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Future<void> _loadSettings() async {
     _notificationsEnabled = await _settingsService.areNotificationsEnabled();
     _notificationDays = await _settingsService.getNotificationDays();
+    _notificationTime = await _settingsService.getNotificationTime();
     setState(() {
       _isLoading = false;
     });
+  }
+
+  Future<void> _selectTime() async {
+    final TimeOfDay? pickedTime = await showTimePicker(
+      context: context,
+      initialTime: _notificationTime,
+    );
+
+    if (pickedTime != null && pickedTime != _notificationTime) {
+      setState(() {
+        _notificationTime = pickedTime;
+      });
+      await _settingsService.setNotificationTime(pickedTime);
+    }
   }
 
   @override
@@ -51,7 +67,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               _settingsService.setNotificationsEnabled(value);
             },
           ),
-          if (_notificationsEnabled)
+          if (_notificationsEnabled) ...[
             ListTile(
               title: const Text('Remind Me Before'),
               trailing: DropdownButton<int>(
@@ -72,6 +88,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 },
               ),
             ),
+            ListTile(
+              title: const Text('Notification Time'),
+              trailing: Text(_notificationTime.format(context)),
+              onTap: _selectTime,
+            ),
+          ],
         ],
       ),
       bottomNavigationBar: MainBottomNavigationBar(isSettingScreenActive: true),
