@@ -113,34 +113,55 @@ class _HomeScreenState extends State<HomeScreen> {
 				],
 			),
 			bottomNavigationBar: MainBottomNavigationBar(isHomeScreenActive: true,),
-			floatingActionButton: FloatingActionButton(
-				onPressed: () async {
-					final Map<String, dynamic>? result = await showDialog<Map<String, dynamic>>(
-						context: context,
-						builder: (BuildContext dialogContext) {
-							return const SymptomEntryDialog();
-						},
-					);
-					if (result != null) {
-						final DateTime? date = result['date'];
-						final String? symptom = result['symptom'];
-						final int flow = result['flow'];
-						
-						if (date != null) {
-							final newEntry = PeriodLogEntry(
-								date: date,
-								symptom: symptom,
-								flow: flow,
-							);
+			floatingActionButton: Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        Visibility(
+          visible: isPeriodOngoing,
+          child: FloatingActionButton(
+            onPressed: () {
+              print('Test button for ongoing period was pressed!');
+            },
+            tooltip: 'Test',
+            heroTag: null,
+            child: const Icon(Icons.science_outlined),
+          ),
+        ),
 
-							await PeriodDatabase.instance.createPeriodLog(newEntry);
-							_refreshPeriodLogs();
-						}
-					}
-				},
-				tooltip: 'Log period',
-				child: const Icon(Icons.add),
-			),
+        const SizedBox(height: 16),
+
+        FloatingActionButton(
+          onPressed: () async {
+            final Map<String, dynamic>? result =
+                await showDialog<Map<String, dynamic>>(
+              context: context,
+              builder: (BuildContext dialogContext) {
+                return const SymptomEntryDialog();
+              },
+            );
+            if (result != null) {
+              final DateTime? date = result['date'];
+              final String? symptom = result['symptom'];
+              final int flow = result['flow'];
+
+              if (date != null) {
+                final newEntry = PeriodLogEntry(
+                  date: date,
+                  symptom: symptom,
+                  flow: flow,
+                );
+
+                await PeriodDatabase.instance.createPeriodLog(newEntry);
+                _refreshPeriodLogs();
+              }
+            }
+          },
+          tooltip: 'Log period',
+          heroTag: null,
+          child: const Icon(Icons.add),
+        ),
+      ],
+    ),
 			floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
 		);
 	}
