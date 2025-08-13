@@ -8,7 +8,15 @@ class TimeSelectionDialog extends StatefulWidget {
 }
 
 class _TimeSelectionDialogState extends State<TimeSelectionDialog> {
-  TimeOfDay _selectedTime = TimeOfDay.now();
+  late TimeOfDay _selectedTime;
+
+  @override
+  void initState() {
+    super.initState();
+    final DateTime now = DateTime.now();
+    final DateTime futureDateTime = now.add(const Duration(hours: 6));
+    _selectedTime = TimeOfDay.fromDateTime(futureDateTime);
+  }
 
   @override
   Widget build(BuildContext context) {
