@@ -190,7 +190,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
 								),
 								const SizedBox(height: 20),
 								Text(
-									'Not enough data for insights yet.\nLog at least two periods to see your cycle stats.',
+									'Not enough data for insights yet.\nLog at least two periods.',
 									textAlign: TextAlign.center,
 									style: TextStyle(
 										fontSize: 18,
