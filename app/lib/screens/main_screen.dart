@@ -5,6 +5,12 @@ import 'package:menstrudel/screens/settings_screen.dart';
 import 'package:menstrudel/widgets/main/main_navigation_bar.dart';
 import 'package:menstrudel/widgets/main/app_bar.dart';
 
+enum FabState {
+  logPeriod,
+  setReminder,
+  cancelReminder,
+}
+
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
 
@@ -17,7 +23,7 @@ class _MainScreenState extends State<MainScreen> {
 
   final GlobalKey<HomeScreenState> _homeScreenKey = GlobalKey<HomeScreenState>();
   
-  bool _isPeriodOngoing = false;
+  FabState _fabState = FabState.logPeriod;
 
   late final List<Widget> _pages;
   static const List<PreferredSizeWidget?> _appBars = <PreferredSizeWidget?>[
@@ -33,16 +39,16 @@ class _MainScreenState extends State<MainScreen> {
       const AnalyticsScreen(),
       HomeScreen(
         key: _homeScreenKey,
-        onPeriodStatusChange: _onPeriodStatusChange,
+        onFabStateChange: _onFabStateChange,
       ),
       const SettingsScreen(),
     ];
   }
 
-  void _onPeriodStatusChange(bool isOngoing) {
-    if (_isPeriodOngoing != isOngoing) {
+  void _onFabStateChange(FabState newState) {
+    if (_fabState != newState) {
       setState(() {
-        _isPeriodOngoing = isOngoing;
+        _fabState = newState;
       });
     }
   }
@@ -51,6 +57,32 @@ class _MainScreenState extends State<MainScreen> {
     setState(() {
       _selectedIndex = index;
     });
+  }
+
+  Widget _buildFab() {
+    switch (_fabState) {
+      case FabState.setReminder:
+        return FloatingActionButton(
+          key: const ValueKey('set_reminder_fab'),
+          tooltip: 'Tampon reminder',
+          onPressed: () => _homeScreenKey.currentState?.handleTamponReminder(context),
+          child: const Icon(Icons.add_alarm),
+        );
+      case FabState.cancelReminder:
+        return FloatingActionButton(
+          key: const ValueKey('cancel_reminder_fab'),
+          tooltip: 'Cancel reminder',
+          onPressed: () => _homeScreenKey.currentState?.handleCancelReminder(),
+          child: const Icon(Icons.alarm_off),
+        );
+      case FabState.logPeriod:
+        return FloatingActionButton(
+          key: const ValueKey('log_fab'),
+          tooltip: 'Log period',
+          onPressed: () => _homeScreenKey.currentState?.handleLogPeriod(context),
+          child: const Icon(Icons.add),
+        );
+    }
   }
 
   @override
@@ -69,19 +101,7 @@ class _MainScreenState extends State<MainScreen> {
         transitionBuilder: (Widget child, Animation<double> animation) {
           return ScaleTransition(child: child, scale: animation);
         },
-        child: _isPeriodOngoing
-          ? FloatingActionButton(
-              key: const ValueKey('tampon_fab'),
-              tooltip: 'Tampon reminder',
-              onPressed: () => _homeScreenKey.currentState?.handleTamponReminder(context),
-              child: const Icon(Icons.add_alarm),
-            )
-          : FloatingActionButton(
-              key: const ValueKey('log_fab'),
-              tooltip: 'Log period',
-              onPressed: () => _homeScreenKey.currentState?.handleLogPeriod(context),
-              child: const Icon(Icons.add),
-            ),
+        child: _buildFab(),
       )
     : null,
     );
