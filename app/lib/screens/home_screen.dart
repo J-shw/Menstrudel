@@ -8,10 +8,10 @@ import 'package:menstrudel/database/period_database.dart';
 import 'package:menstrudel/widgets/period_list_view.dart';
 import 'package:menstrudel/models/period_prediction_result.dart';
 import 'package:menstrudel/utils/period_predictor.dart';
-import 'package:menstrudel/services/notifications/period_notifications.dart';
+import 'package:menstrudel/services/notification_service.dart';
 import 'package:menstrudel/widgets/dialogs/tampon_reminder_dialog.dart';
-import 'package:menstrudel/services/notifications/tampon_notifications.dart';
 import 'package:menstrudel/screens/main_screen.dart';
+import 'package:menstrudel/services/settings_service.dart';
 
 class HomeScreen extends StatefulWidget {
    final Function(FabState) onFabStateChange;
@@ -77,7 +77,7 @@ class HomeScreenState extends State<HomeScreen> {
       builder: (BuildContext context) => const TimeSelectionDialog(),
     );
     if (reminderTime == null) return;
-    await TamponNotificationScheduler.schedule(reminderTime: reminderTime);
+    await NotificationService.scheduleTamponReminder(reminderTime: reminderTime);
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
       ..showSnackBar(SnackBar(content: Text('Reminder set for ${reminderTime.format(context)}')));
@@ -86,7 +86,7 @@ class HomeScreenState extends State<HomeScreen> {
 
   Future<void> handleCancelReminder() async {
     try {
-      await TamponNotificationScheduler.cancel();
+      await NotificationService.cancelTamponReminder();
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Tampon reminder cancelled.')),
@@ -110,18 +110,33 @@ class HomeScreenState extends State<HomeScreen> {
 	}
 
 	Future<void> _refreshPeriodLogs() async {
-		setState(() {
-			_isLoading = true;
-		});
+    setState(() {
+      _isLoading = true;
+    });
 
-		final periodLogData = await PeriodDatabase.instance.readAllPeriodLogs();
-		final periodData = await PeriodDatabase.instance.readAllPeriods();
+    final periodLogData = await PeriodDatabase.instance.readAllPeriodLogs();
+    final periodData = await PeriodDatabase.instance.readAllPeriods();
+    final isReminderSet = await NotificationService.isTamponReminderScheduled();
+    final predictionResult = PeriodPredictor.estimateNextPeriod(periodLogData, DateTime.now());
 
-    final isReminderSet = await TamponNotificationScheduler.isScheduled();
+    if (predictionResult != null) {
+      final settingsService = SettingsService();
+      final notificationsEnabled = await settingsService.areNotificationsEnabled();
+      final notificationDays = await settingsService.getNotificationDays();
+      final notificationTime = await settingsService.getNotificationTime();
+      
+      await NotificationService.schedulePeriodNotification(
+        scheduledTime: predictionResult.estimatedDate,
+        areEnabled: notificationsEnabled,
+        daysBefore: notificationDays,
+        notificationTime: notificationTime,
+      );
+    }
+    
+    if (!mounted) return;
+
     final isPeriodOngoing = periodData.isNotEmpty && DateUtils.isSameDay(periodData.first.endDate, DateTime.now());
-
     FabState currentState;
-
     if (!isPeriodOngoing) {
       currentState = FabState.logPeriod;
     } else {
@@ -129,19 +144,13 @@ class HomeScreenState extends State<HomeScreen> {
     }
     widget.onFabStateChange(currentState);
 
-		setState(() {
-			_isLoading = false;
-			_periodLogEntries = periodLogData;
-			_periodEntries = periodData;
-			_predictionResult = PeriodPredictor.estimateNextPeriod(periodLogData, DateTime.now());
-			if (_predictionResult != null) {
-				final notificationHelper = NotificationHelper();
-				notificationHelper.schedulePeriodNotification(
-					scheduledTime: _predictionResult!.estimatedDate,
-				);
-			}
-		});
-	}
+    setState(() {
+      _isLoading = false;
+      _periodLogEntries = periodLogData;
+      _periodEntries = periodData;
+      _predictionResult = predictionResult;
+    });
+  }
 
 	Future<void> _deletePeriodEntry(int id) async {
 		await PeriodDatabase.instance.deletePeriodLog(id);

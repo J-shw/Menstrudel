@@ -1,14 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:timezone/data/latest.dart' as tz_data;
+import 'package:timezone/timezone.dart' as tz;
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:menstrudel/screens/main_screen.dart';
-import 'package:menstrudel/services/notifications/period_notifications.dart';
-import 'package:menstrudel/services/notifications/tampon_notifications.dart';
+import 'package:menstrudel/services/notification_service.dart';
+import 'package:flutter_timezone/flutter_timezone.dart';
 
 void main() async { 
   WidgetsFlutterBinding.ensureInitialized();
 
-  await NotificationHelper.initialiseNotifications();
-  await TamponNotificationScheduler.initialize();
+  tz_data.initializeTimeZones();
+  try {
+    final String localTimezone = await FlutterTimezone.getLocalTimezone();
+    tz.setLocalLocation(tz.getLocation(localTimezone));
+  } catch (e) {
+    tz.setLocalLocation(tz.getLocation('Etc/UTC'));
+  }
+  
+  await NotificationService.initialize();
   runApp(const MainApp());
 }
 
