@@ -3,7 +3,7 @@ import 'package:menstrudel/services/settings_service.dart';
 import 'package:menstrudel/widgets/main/navigation_bar.dart';
 import 'package:menstrudel/widgets/main/app_bar.dart';
 import 'package:menstrudel/widgets/dialogs/delete_confirmation_dialog.dart';
-import 'package:menstrudel/database/period_database.dart'; 
+import 'package:menstrudel/database/period_database.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -79,10 +79,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
       const SnackBar(content: Text('All logs have been cleared.')),
     );
 
-    Navigator.of(context).pushAndRemoveUntil(
-      MaterialPageRoute(builder: (context) => const MainBottomNavigationBar()),
-      (Route<dynamic> route) => false,
-    );
+    setState(() {
+      _isLoading = false;
+    });
   }
 
   @override
