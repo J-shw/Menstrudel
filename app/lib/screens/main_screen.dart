@@ -56,38 +56,34 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _appBars[_selectedIndex],
+    appBar: _appBars[_selectedIndex],
+    body: _pages[_selectedIndex],
+    bottomNavigationBar: MainNavigationBar(
+      selectedIndex: _selectedIndex,
+      onScreenSelected: _onItemTapped,
+    ),
 
-      body: _pages[_selectedIndex],
-
-      bottomNavigationBar: MainNavigationBar(
-        selectedIndex: _selectedIndex,
-        onScreenSelected: _onItemTapped,
-      ),
-
-      floatingActionButton: _selectedIndex == 1
-        ? Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Visibility(
-                visible: _isPeriodOngoing,
-                child: FloatingActionButton(
-                  tooltip: 'Tampon reminder',
-                  onPressed: () => _homeScreenKey.currentState?.handleTamponReminder(context),
-                  child: const Icon(Icons.add_alarm),
-                ),
-              ),
-              Visibility(
-                visible: !_isPeriodOngoing,
-                child: FloatingActionButton(
-                  tooltip: 'Log period',
-                  onPressed: () => _homeScreenKey.currentState?.handleLogPeriod(context),
-                  child: const Icon(Icons.add),
-                ),
-              ),
-            ],
-          )
-        : null,
+    floatingActionButton: _selectedIndex == 1 
+      ? AnimatedSwitcher(
+        duration: const Duration(milliseconds: 200),
+        transitionBuilder: (Widget child, Animation<double> animation) {
+          return ScaleTransition(child: child, scale: animation);
+        },
+        child: _isPeriodOngoing
+          ? FloatingActionButton(
+              key: const ValueKey('tampon_fab'),
+              tooltip: 'Tampon reminder',
+              onPressed: () => _homeScreenKey.currentState?.handleTamponReminder(context),
+              child: const Icon(Icons.add_alarm),
+            )
+          : FloatingActionButton(
+              key: const ValueKey('log_fab'),
+              tooltip: 'Log period',
+              onPressed: () => _homeScreenKey.currentState?.handleLogPeriod(context),
+              child: const Icon(Icons.add),
+            ),
+      )
+    : null,
     );
   }
 }
