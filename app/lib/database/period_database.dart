@@ -2,6 +2,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:menstrudel/models/period_logs/period_logs.dart';
 import 'package:menstrudel/models/periods/period.dart';
+import 'package:menstrudel/models/flows/flow_data.dart';
 
 class PeriodDatabase {
     static final PeriodDatabase instance = PeriodDatabase._init();
@@ -165,57 +166,90 @@ class PeriodDatabase {
 
   // Helper functions
 
-Future<void> _recalculateAndAssignPeriods(Database db) async {
-  await db.delete('periods');
+  Future<void> _recalculateAndAssignPeriods(Database db) async {
+    await db.delete('periods');
 
-  final allEntryMaps = await db.query('period_logs', orderBy: 'date ASC');
-  final allEntries = allEntryMaps.map((e) => PeriodLogEntry.fromMap(e)).toList();
+    final allEntryMaps = await db.query('period_logs', orderBy: 'date ASC');
+    final allEntries = allEntryMaps.map((e) => PeriodLogEntry.fromMap(e)).toList();
 
-  if (allEntries.isEmpty) {
-    return; 
-  }
+    if (allEntries.isEmpty) {
+      return; 
+    }
 
-  List<PeriodLogEntry> currentPeriodLogs = [];
+    List<PeriodLogEntry> currentPeriodLogs = [];
 
-  for (final entry in allEntries) {
-    if (currentPeriodLogs.isEmpty || entry.date.difference(currentPeriodLogs.last.date).inDays > 1) {
-      if (currentPeriodLogs.isNotEmpty) {
-        await _createPeriodFromLogs(db, currentPeriodLogs);
+    for (final entry in allEntries) {
+      if (currentPeriodLogs.isEmpty || entry.date.difference(currentPeriodLogs.last.date).inDays > 1) {
+        if (currentPeriodLogs.isNotEmpty) {
+          await _createPeriodFromLogs(db, currentPeriodLogs);
+        }
+        currentPeriodLogs = [entry];
+      } else {
+        currentPeriodLogs.add(entry);
       }
-      currentPeriodLogs = [entry];
-    } else {
-      currentPeriodLogs.add(entry);
+    }
+    if (currentPeriodLogs.isNotEmpty) {
+      await _createPeriodFromLogs(db, currentPeriodLogs);
     }
   }
-  if (currentPeriodLogs.isNotEmpty) {
-    await _createPeriodFromLogs(db, currentPeriodLogs);
+
+  Future<void> _createPeriodFromLogs(Database db, List<PeriodLogEntry> logs) async {
+    final startDate = logs.first.date;
+    final endDate = logs.last.date;
+    final totalDays = endDate.difference(startDate).inDays + 1;
+
+    final newPeriodMap = {
+      'start_date': startDate.millisecondsSinceEpoch,
+      'end_date': endDate.millisecondsSinceEpoch,
+      'total_days': totalDays,
+    };
+
+    final periodId = await db.insert('periods', newPeriodMap);
+
+    final logIds = logs.map((log) => log.id!).toList();
+
+    await db.transaction((txn) async {
+      for (final logId in logIds) {
+        await txn.update(
+          'period_logs',
+          {'period_id': periodId},
+          where: 'id = ?',
+          whereArgs: [logId],
+        );
+      }
+    });
   }
-}
 
-Future<void> _createPeriodFromLogs(Database db, List<PeriodLogEntry> logs) async {
-  final startDate = logs.first.date;
-  final endDate = logs.last.date;
-  final totalDays = endDate.difference(startDate).inDays + 1;
+  Future<List<DailyFlowData>> getFlowDataForPeriod(int periodId) async {
+    final db = await instance.database;
 
-  final newPeriodMap = {
-    'start_date': startDate.millisecondsSinceEpoch,
-    'end_date': endDate.millisecondsSinceEpoch,
-    'total_days': totalDays,
-  };
+    final result = await db.query(
+      'period_logs',
+      where: 'period_id = ?',
+      whereArgs: [periodId],
+      orderBy: 'date ASC',
+    );
 
-  final periodId = await db.insert('periods', newPeriodMap);
+    if (result.isEmpty) {
+      return [];
+    }
 
-  final logIds = logs.map((log) => log.id!).toList();
+    List<DailyFlowData> flowDataList = [];
+    for (int i = 0; i < result.length; i++) {
+      final logMap = result[i];
+      
+      final int dayNumber = i + 1; 
+      
+      final int flowInt = logMap['flow'] as int;
 
-  await db.transaction((txn) async {
-    for (final logId in logIds) {
-      await txn.update(
-        'period_logs',
-        {'period_id': periodId},
-        where: 'id = ?',
-        whereArgs: [logId],
+      flowDataList.add(
+        DailyFlowData(
+          day: dayNumber,
+          flow: flowLevelFromInt(flowInt),
+        ),
       );
     }
-  });
+
+    return flowDataList;
   }
 }
