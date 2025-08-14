@@ -114,9 +114,6 @@ class _HomeScreenState extends State<HomeScreen> {
 					),
 				],
 			),
-			bottomNavigationBar: const MainBottomNavigationBar(
-        activeScreen: AppScreen.home,
-      ),
 			floatingActionButton: Column(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
