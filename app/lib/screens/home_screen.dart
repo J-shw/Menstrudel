@@ -11,14 +11,14 @@ import 'package:menstrudel/utils/period_predictor.dart';
 import 'package:menstrudel/services/notifications/period_notifications.dart';
 import 'package:menstrudel/widgets/dialogs/tampon_reminder_dialog.dart';
 import 'package:menstrudel/services/notifications/tampon_notifications.dart';
-
+import 'package:menstrudel/screens/main_screen.dart';
 
 class HomeScreen extends StatefulWidget {
-  final Function(bool) onPeriodStatusChange;
+   final Function(FabState) onFabStateChange;
 
 	const HomeScreen({
     super.key,
-    required this.onPeriodStatusChange,
+    required this.onFabStateChange,
   });
 
   @override
@@ -77,11 +77,29 @@ class HomeScreenState extends State<HomeScreen> {
       builder: (BuildContext context) => const TimeSelectionDialog(),
     );
     if (reminderTime == null) return;
-
-    await tamponNotificationScheduler(reminderTime: reminderTime);
+    await TamponNotificationScheduler.schedule(reminderTime: reminderTime);
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
       ..showSnackBar(SnackBar(content: Text('Reminder set for ${reminderTime.format(context)}')));
+  }
+
+  Future<void> handleCancelReminder() async {
+    try {
+      await TamponNotificationScheduler.cancel();
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Tampon reminder cancelled.')),
+        );
+      }
+    } catch (e) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Could not cancel reminder: $e'), backgroundColor: Colors.red),
+        );
+      }
+    } finally {
+      _refreshPeriodLogs();
+    }
   }
 
 	@override
@@ -94,10 +112,22 @@ class HomeScreenState extends State<HomeScreen> {
 		setState(() {
 			_isLoading = true;
 		});
+
 		final periodLogData = await PeriodDatabase.instance.readAllPeriodLogs();
 		final periodData = await PeriodDatabase.instance.readAllPeriods();
+
+    final isReminderSet = await TamponNotificationScheduler.isScheduled();
     final isPeriodOngoing = periodData.isNotEmpty && DateUtils.isSameDay(periodData.first.endDate, DateTime.now());
-    widget.onPeriodStatusChange(isPeriodOngoing);
+
+    FabState currentState;
+
+    if (!isPeriodOngoing) {
+      currentState = FabState.logPeriod;
+    } else {
+      currentState = isReminderSet ? FabState.cancelReminder : FabState.setReminder;
+    }
+    widget.onFabStateChange(currentState);
+
 		setState(() {
 			_isLoading = false;
 			_periodLogEntries = periodLogData;
