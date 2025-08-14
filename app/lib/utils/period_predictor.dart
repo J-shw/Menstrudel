@@ -49,8 +49,6 @@ class PeriodPredictor {
 			averageCycleLength = (totalCycleDays / validCycleLengths.length).round();
 			if (averageCycleLength == 0){
 				averageCycleLength = _defaultCycleLength; 
-			} else {
-				averageCycleLength = _defaultCycleLength;
 			}
 
 			DateTime lastPeriodDate = sortedEntries.last.date;
