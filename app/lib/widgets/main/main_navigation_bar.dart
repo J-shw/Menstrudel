@@ -20,7 +20,7 @@ class MainNavigationBar extends StatelessWidget {
         children: [
           _NavBarItem(
             icon: Icons.bar_chart,
-            label: 'Analytics',
+            label: 'Insights',
             isActive: selectedIndex == 0,
             onPressed: () => onScreenSelected(0),
           ),
