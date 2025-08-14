@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:menstrudel/screens/main_screen.dart';
 import 'package:menstrudel/services/notifications/period_notifications.dart';
+import 'package:menstrudel/services/notifications/tampon_notifications.dart';
 
 void main() async { 
   WidgetsFlutterBinding.ensureInitialized();
-  await NotificationHelper.initialiseNotifications(); 
+
+  await NotificationHelper.initialiseNotifications();
+  await TamponNotificationScheduler.initialize();
   runApp(const MainApp());
 }
 
