@@ -174,7 +174,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
 		
     return Scaffold(
       appBar: TopAppBar(
-        titleText: "Analytics"
+        titleText: "Insights"
       ),
 			body: _cycleStats == null
 				? Center(
@@ -190,7 +190,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
 								),
 								const SizedBox(height: 20),
 								Text(
-									'Not enough data for analytics yet.\nLog at least two periods to see your cycle stats.',
+									'Not enough data for insights yet.\nLog at least two periods.',
 									textAlign: TextAlign.center,
 									style: TextStyle(
 										fontSize: 18,
@@ -247,7 +247,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
               const SizedBox(height: 10),
               
 							MonthlyCycleListView(
-                monthlyCycleData: _monthlyCycleData, // Pass the data to your chart component
+                monthlyCycleData: _monthlyCycleData,
               ),
 							
 						],
