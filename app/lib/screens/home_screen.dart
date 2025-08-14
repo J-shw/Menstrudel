@@ -81,6 +81,7 @@ class HomeScreenState extends State<HomeScreen> {
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
       ..showSnackBar(SnackBar(content: Text('Reminder set for ${reminderTime.format(context)}')));
+      _refreshPeriodLogs();
   }
 
   Future<void> handleCancelReminder() async {
