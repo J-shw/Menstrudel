@@ -32,24 +32,26 @@ class PeriodPredictor {
 		return cycleLengths;
 	}
 
-  	static PeriodPredictionResult? estimateNextPeriod(List<PeriodLogEntry> entries, DateTime now) {
-		
-		final List<PeriodLogEntry> sortedEntries = List.from(entries);
-		sortedEntries.sort((a, b) => a.date.compareTo(b.date));
+  static PeriodPredictionResult? estimateNextPeriod(List<PeriodLogEntry> entries, DateTime now) {
 
-		if (sortedEntries.length < 2) {
-			return null;
-		}
+    if (entries.length < 2) {
+      return null;
+    };
 
-		List<int> validCycleLengths = _getValidCycleLengths(entries);
+    final sortedEntries = List<PeriodLogEntry>.from(entries)
+    ..sort((a, b) => a.date.compareTo(b.date));
 
-		int averageCycleLength;
-		if (validCycleLengths.isNotEmpty) {
-			int totalCycleDays = validCycleLengths.reduce((a, b) => a + b);
-			averageCycleLength = (totalCycleDays / validCycleLengths.length).round();
-			if (averageCycleLength == 0){
-				averageCycleLength = _defaultCycleLength; 
-			}
+
+		final List<int> cycleLengths = _getValidCycleLengths(sortedEntries);
+
+
+		if (cycleLengths.isNotEmpty) {
+			final int totalCycleDays = cycleLengths.reduce((a, b) => a + b);
+			final int averageCycleLength = (totalCycleDays / cycleLengths.length).round();
+
+      if (averageCycleLength <= 0) {
+        return null;
+      }
 
 			DateTime lastPeriodDate = sortedEntries.last.date;
 
