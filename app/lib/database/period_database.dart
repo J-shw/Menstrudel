@@ -51,6 +51,14 @@ class PeriodDatabase {
     );
 	}
 
+  Future<void> deleteAllEntries() async {
+    final db = await instance.database;
+    await db.transaction((txn) async {
+      await txn.delete('period_logs');
+      await txn.delete('periods');
+    });
+  }
+
   // Periods
 
   Future<PeriodEntry> createPeriod(PeriodEntry entry) async {

@@ -28,10 +28,14 @@ Menstrudel is a simple, private, and intuitive mobile application built with Flu
 * **Completely Offline:** No internet connection. No sign ups. No adverts.
 * **Free & Open Source:** Menstrudel is free to use, and its codebase is open for transparency, auditing, and community contributions.
 
+### Privacy Policy
+
+You can view our privacy policy [here](/docs/PRIVACY.md).
+
 # App Screenshots
 
 | Your daily logs |  Quick symptom entry | Tampon reminder |
 | :---: | :---: | :---: |
-| ![Log View](screenshots/v2.0.0/android/home.png) | ![Symptom Entry Dialog](screenshots/v2.0.0/android/log.png) | ![Symptom Entry Dialog](screenshots/v2.0.0/android/reminder.png) |
+| ![Log View](docs/screenshots/v2.1.0/android/home.png) | ![Symptom Entry Dialog](docs/screenshots/v2.1.0/android/log.png) | ![Symptom Entry Dialog](docs/screenshots/v2.1.0/android/reminder.png) |
 | Cycle insights | Settings |  |
-![Analytics View](screenshots/v2.0.0/android/analytics.png) | ![Symptom Entry Dialog](screenshots/v2.0.0/android/settings.png) |  |
+![Insights View](docs/screenshots/v2.1.0/android/insights.png) | ![Symptom Entry Dialog](docs/screenshots/v2.1.0/android/settings.png) |  |

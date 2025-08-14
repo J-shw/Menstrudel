@@ -6,6 +6,11 @@ class SettingsService {
   static const String _notificationDaysKey = 'notification_days';
   static const _notificationTimeKey = 'notification_time';
 
+  Future<void> deleteAllSettings() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
+  }
+
   Future<void> setNotificationsEnabled(bool isEnabled) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(_notificationsEnabledKey, isEnabled);

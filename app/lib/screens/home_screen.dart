@@ -8,23 +8,100 @@ import 'package:menstrudel/database/period_database.dart';
 import 'package:menstrudel/widgets/period_list_view.dart';
 import 'package:menstrudel/models/period_prediction_result.dart';
 import 'package:menstrudel/utils/period_predictor.dart';
-import 'package:menstrudel/widgets/main/navigation_bar.dart';
-import 'package:menstrudel/services/notifications/period_notifications.dart';
+import 'package:menstrudel/services/notification_service.dart';
 import 'package:menstrudel/widgets/dialogs/tampon_reminder_dialog.dart';
-import 'package:menstrudel/services/notifications/tampon_notifications.dart';
-
+import 'package:menstrudel/screens/main_screen.dart';
+import 'package:menstrudel/services/settings_service.dart';
 
 class HomeScreen extends StatefulWidget {
-	const HomeScreen({super.key});
+   final Function(FabState) onFabStateChange;
+
+	const HomeScreen({
+    super.key,
+    required this.onFabStateChange,
+  });
+
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<HomeScreen> createState() => HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class HomeScreenState extends State<HomeScreen> {
 	List<PeriodLogEntry> _periodLogEntries = [];
   List<PeriodEntry> _periodEntries = [];
 	bool _isLoading = false;
 	PeriodPredictionResult? _predictionResult;
+
+  Future<void> handleLogPeriod(BuildContext context) async {
+    final result = await showDialog<Map<String, dynamic>>(
+      context: context,
+      builder: (BuildContext dialogContext) => const SymptomEntryDialog(),
+    );
+
+    if (result == null) return;
+    if (!context.mounted) return;
+
+    try {
+      final DateTime? date = result['date'];
+      final List<String>? symptoms = result['symptoms'];
+      final int? flow = result['flow'];
+
+      if (date == null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Error: Date was not provided.')),
+        );
+        return;
+      }
+
+      final newEntry = PeriodLogEntry(
+        date: date,
+        symptoms: symptoms ?? [],
+        flow: flow ?? 0,
+      );
+
+      await PeriodDatabase.instance.createPeriodLog(newEntry);
+      _refreshPeriodLogs();
+
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: const Text('Failed to save period log. Please try again.'),
+          backgroundColor: Theme.of(context).colorScheme.error,
+        ),
+      );
+    }
+  }
+  
+  Future<void> handleTamponReminder(BuildContext context) async {
+    final reminderTime = await showDialog<TimeOfDay>(
+      context: context,
+      builder: (BuildContext context) => const TimeSelectionDialog(),
+    );
+    if (reminderTime == null) return;
+    await NotificationService.scheduleTamponReminder(reminderTime: reminderTime);
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(SnackBar(content: Text('Reminder set for ${reminderTime.format(context)}')));
+      _refreshPeriodLogs();
+  }
+
+  Future<void> handleCancelReminder() async {
+    try {
+      await NotificationService.cancelTamponReminder();
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Tampon reminder cancelled.')),
+        );
+      }
+    } catch (e) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Could not cancel reminder: $e'), backgroundColor: Colors.red),
+        );
+      }
+    } finally {
+      _refreshPeriodLogs();
+    }
+  }
 
 	@override
 	void initState() {
@@ -33,24 +110,47 @@ class _HomeScreenState extends State<HomeScreen> {
 	}
 
 	Future<void> _refreshPeriodLogs() async {
-		setState(() {
-			_isLoading = true;
-		});
-		final periodLogData = await PeriodDatabase.instance.readAllPeriodLogs();
-		final periodData = await PeriodDatabase.instance.readAllPeriods();
-		setState(() {
-			_isLoading = false;
-			_periodLogEntries = periodLogData;
-			_periodEntries = periodData;
-			_predictionResult = PeriodPredictor.estimateNextPeriod(periodLogData, DateTime.now());
-			if (_predictionResult != null) {
-				final notificationHelper = NotificationHelper();
-				notificationHelper.schedulePeriodNotification(
-					scheduledTime: _predictionResult!.estimatedDate,
-				);
-			}
-		});
-	}
+    setState(() {
+      _isLoading = true;
+    });
+
+    final periodLogData = await PeriodDatabase.instance.readAllPeriodLogs();
+    final periodData = await PeriodDatabase.instance.readAllPeriods();
+    final isReminderSet = await NotificationService.isTamponReminderScheduled();
+    final predictionResult = PeriodPredictor.estimateNextPeriod(periodLogData, DateTime.now());
+
+    if (predictionResult != null) {
+      final settingsService = SettingsService();
+      final notificationsEnabled = await settingsService.areNotificationsEnabled();
+      final notificationDays = await settingsService.getNotificationDays();
+      final notificationTime = await settingsService.getNotificationTime();
+      
+      await NotificationService.schedulePeriodNotification(
+        scheduledTime: predictionResult.estimatedDate,
+        areEnabled: notificationsEnabled,
+        daysBefore: notificationDays,
+        notificationTime: notificationTime,
+      );
+    }
+    
+    if (!mounted) return;
+
+    final isPeriodOngoing = periodData.isNotEmpty && DateUtils.isSameDay(periodData.first.endDate, DateTime.now());
+    FabState currentState;
+    if (!isPeriodOngoing) {
+      currentState = FabState.logPeriod;
+    } else {
+      currentState = isReminderSet ? FabState.cancelReminder : FabState.setReminder;
+    }
+    widget.onFabStateChange(currentState);
+
+    setState(() {
+      _isLoading = false;
+      _periodLogEntries = periodLogData;
+      _periodEntries = periodData;
+      _predictionResult = predictionResult;
+    });
+  }
 
 	Future<void> _deletePeriodEntry(int id) async {
 		await PeriodDatabase.instance.deletePeriodLog(id);
@@ -62,8 +162,6 @@ class _HomeScreenState extends State<HomeScreen> {
 		int daysUntilDueForCircle = _predictionResult?.daysUntilDue ?? 0; 
 		int circleMaxValue = _predictionResult?.averageCycleLength ?? 28;
 		int circleCurrentValue = daysUntilDueForCircle.clamp(0, circleMaxValue); 
-
-    final bool isPeriodOngoing = _periodEntries.isNotEmpty && DateUtils.isSameDay(_periodEntries.first.endDate, DateTime.now());
 
 		String predictionText = '';
 		if (_isLoading) {
@@ -80,108 +178,38 @@ class _HomeScreenState extends State<HomeScreen> {
 			predictionText = 'Period overdue by ${-_predictionResult!.daysUntilDue} days: $datePart';
 		}
 		}
-		return Scaffold(
-			body: Column(
-				mainAxisSize: MainAxisSize.max,
-				mainAxisAlignment: MainAxisAlignment.start,
-				crossAxisAlignment: CrossAxisAlignment.stretch,
-				children: [
-					const SizedBox(height: 100),
-					BasicProgressCircle(
-						currentValue: circleCurrentValue,
-						maxValue: circleMaxValue,
-						circleSize: 220,
-						strokeWidth: 20,
-						progressColor: const Color.fromARGB(255, 255, 118, 118),
-						trackColor: const Color.fromARGB(20, 255, 118, 118),
-					),
-					const SizedBox(height: 15),
-					Text(
-						predictionText,
-						textAlign: TextAlign.center,
-						style: const TextStyle(
-							fontSize: 12,
-							fontWeight: FontWeight.bold,
-							color: Colors.blueGrey,
-						),
-					),
-					const SizedBox(height: 20),
-					PeriodListView(
-						periodLogEnties: _periodLogEntries,
-            periodEntries: _periodEntries,
-						isLoading: _isLoading,
-						onDelete: _deletePeriodEntry
-					),
-				],
-			),
-			bottomNavigationBar: MainBottomNavigationBar(isHomeScreenActive: true,),
-			floatingActionButton: Column(
-      mainAxisAlignment: MainAxisAlignment.end,
+		return Column(
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Visibility(
-          visible: isPeriodOngoing,
-          child: FloatingActionButton(
-            onPressed: () async {
-              final TimeOfDay? reminderTime = await showDialog<TimeOfDay>(
-                context: context,
-                builder: (BuildContext context) {
-                  return const TimeSelectionDialog();
-                },
-              );
-
-              if (reminderTime != null) {
-                await tamponNotificationScheduler(reminderTime: reminderTime);
-
-                ScaffoldMessenger.of(context)
-                  ..hideCurrentSnackBar()
-                  ..showSnackBar(
-                    SnackBar(
-                      content: Text('Reminder set for ${reminderTime.format(context)}'),
-                    ),
-                  );
-              }
-            },
-            tooltip: 'Tampon reminder',
-            heroTag: null,
-            child: const Icon(Icons.add_alarm),
+        const SizedBox(height: 100),
+        BasicProgressCircle(
+          currentValue: circleCurrentValue,
+          maxValue: circleMaxValue,
+          circleSize: 220,
+          strokeWidth: 20,
+          progressColor: const Color.fromARGB(255, 255, 118, 118),
+          trackColor: const Color.fromARGB(20, 255, 118, 118),
+        ),
+        const SizedBox(height: 15),
+        Text(
+          predictionText,
+          textAlign: TextAlign.center,
+          style: const TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.bold,
+            color: Colors.blueGrey,
           ),
         ),
-        Visibility(
-          visible: !isPeriodOngoing,
-          child:FloatingActionButton(
-            onPressed: () async {
-              final Map<String, dynamic>? result =
-                  await showDialog<Map<String, dynamic>>(
-                context: context,
-                builder: (BuildContext dialogContext) {
-                  return const SymptomEntryDialog();
-                },
-              );
-              if (result != null) {
-                final DateTime? date = result['date'];
-                final List<String>? symptoms = result['symptoms'];
-                final int flow = result['flow'];
-
-                if (date != null) {
-                  final newEntry = PeriodLogEntry(
-                    date: date,
-                    symptoms: symptoms,
-                    flow: flow,
-                  );
-
-                  await PeriodDatabase.instance.createPeriodLog(newEntry);
-                  _refreshPeriodLogs();
-                }
-              }
-            },
-            tooltip: 'Log period',
-            heroTag: null,
-            child: const Icon(Icons.add),
-          ),
+        const SizedBox(height: 20),
+        PeriodListView(
+          periodLogEnties: _periodLogEntries,
+          periodEntries: _periodEntries,
+          isLoading: _isLoading,
+          onDelete: _deletePeriodEntry
         ),
       ],
-    ),
-			floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-		);
+    );
 	}
 }
