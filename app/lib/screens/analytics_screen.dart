@@ -6,6 +6,8 @@ import 'package:menstrudel/utils/period_predictor.dart';
 import 'package:menstrudel/database/period_database.dart';
 import 'package:menstrudel/widgets/analytics/no_data_view.dart';
 import 'package:menstrudel/widgets/analytics/insights_data_view.dart';
+import 'package:menstrudel/models/flows/flow_data.dart';
+
 
 class AnalyticsScreen extends StatefulWidget {
   const AnalyticsScreen({super.key});
@@ -16,6 +18,7 @@ class AnalyticsScreen extends StatefulWidget {
 
 class _AnalyticsScreenState extends State<AnalyticsScreen> {
 	List<MonthlyCycleData> _monthlyCycleData = [];
+  List<DailyFlowData> _cycleFlowData = []; 
 	CycleStats? _cycleStats;
   PeriodStats? _periodStats;
 
@@ -46,10 +49,18 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
 	Future<void> _refreshPeriodLogs() async {
 		final periodLogData = await PeriodDatabase.instance.readAllPeriodLogs();
     final periodData = await PeriodDatabase.instance.readAllPeriods();
+    List<DailyFlowData> flowDataForLastPeriod = [];
+    if (periodData.isNotEmpty) {
+      final lastPeriod = periodData.first;
+      if (lastPeriod.id != null) {
+        flowDataForLastPeriod = await PeriodDatabase.instance.getFlowDataForPeriod(lastPeriod.id!);
+      }
+    }
 		setState(() {
 			_cycleStats = PeriodPredictor.getCycleStats(periodLogData);
 			_monthlyCycleData = PeriodPredictor.getMonthlyCycleData(periodLogData);
       _periodStats = PeriodPredictor.getPeriodData(periodData);
+      _cycleFlowData = flowDataForLastPeriod;
 		});
 	}
 
@@ -64,6 +75,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
       cycleStats: _cycleStats!,
       periodStats: _periodStats!,
       monthlyCycleData: _monthlyCycleData,
+      cycleFlowData: _cycleFlowData,
     );
 	}
 }
