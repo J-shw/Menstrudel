@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/widgets/analytics/monthly_cycle_list_view.dart';
+import 'package:menstrudel/widgets/analytics/cycle_flow_pill_view.dart';
 import 'package:menstrudel/widgets/analytics/stat_card.dart';
 import 'package:menstrudel/models/cycles/cycle_stats.dart';
 import 'package:menstrudel/models/cycles/monthly_cycle_data.dart';
 import 'package:menstrudel/models/periods/period_stats.dart';
+import 'package:menstrudel/models/flows/flow_data.dart';
 
 enum CycleView { 
   list, 
@@ -13,6 +15,7 @@ enum CycleView {
 class InsightsDataView extends StatefulWidget {
   final CycleStats cycleStats;
   final PeriodStats periodStats;
+  final List<DailyFlowData> cycleFlowData;
   final List<MonthlyCycleData> monthlyCycleData;
 
   const InsightsDataView({
@@ -20,6 +23,7 @@ class InsightsDataView extends StatefulWidget {
     required this.cycleStats,
     required this.periodStats,
     required this.monthlyCycleData,
+    required this.cycleFlowData,
   });
 
   @override
@@ -163,7 +167,9 @@ class _InsightsDataViewState extends State<InsightsDataView> {
             monthlyCycleData: widget.monthlyCycleData,
           )
         else
-         Text('Other View')
+         CycleFlowPillView(
+            cycleFlowData: widget.cycleFlowData,
+          ),
       ],
     );
   }
