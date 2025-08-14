@@ -253,7 +253,9 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
 						],
 					),
 				),
-        bottomNavigationBar: MainBottomNavigationBar(isAnalyticsScreenActive: true,),
+        bottomNavigationBar: const MainBottomNavigationBar(
+          activeScreen: AppScreen.analytics,
+        ),
 			);
 	}
 }

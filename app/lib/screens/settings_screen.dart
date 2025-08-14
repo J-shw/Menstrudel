@@ -153,7 +153,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
         ],
       ),
-      bottomNavigationBar: MainBottomNavigationBar(isSettingScreenActive: true),
+      bottomNavigationBar: const MainBottomNavigationBar(
+        activeScreen: AppScreen.settings,
+      ),
     );
   }
 }
