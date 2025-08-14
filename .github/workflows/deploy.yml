@@ -21,7 +21,6 @@ jobs:
         uses: actions/setup-ruby@v1
         with:
           ruby-version: '3'
-          bundler-cache: true 
 
       - name: Build the Jekyll site
         run: bundle exec jekyll build --source ./docs --destination ./_site
