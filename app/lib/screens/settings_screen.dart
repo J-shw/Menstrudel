@@ -86,76 +86,71 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: TopAppBar(
-        titleText: "Settings",
-      ),
-      body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
-          : ListView(
-        children: [
-          SwitchListTile(
-            title: const Text('Enable Notifications'),
-            value: _notificationsEnabled,
-            onChanged: (bool value) {
-              setState(() {
-                _notificationsEnabled = value;
-              });
-              _settingsService.setNotificationsEnabled(value);
-            },
-          ),
-          if (_notificationsEnabled) ...[
-            ListTile(
-              title: const Text('Remind Me Before'),
-              trailing: DropdownButton<int>(
-                value: _notificationDays,
-                items: [1, 2, 3].map((int days) {
-                  return DropdownMenuItem<int>(
-                    value: days,
-                    child: Text('$days Day${days > 1 ? 's' : ''}'),
-                  );
-                }).toList(),
-                onChanged: (int? newDays) {
-                  if (newDays != null) {
-                    setState(() {
-                      _notificationDays = newDays;
-                    });
-                    _settingsService.setNotificationDays(newDays);
-                  }
-                },
-              ),
-            ),
-            ListTile(
-              title: const Text('Notification Time'),
-              trailing: Text(
-                _notificationTime.format(context),
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              onTap: _selectTime,
-            ),
-          ],
-          const Divider(),
+
+    if (_isLoading) {
+      return const Center(child: CircularProgressIndicator());
+    }
+
+    return ListView(
+      children: [
+        SwitchListTile(
+          title: const Text('Enable Notifications'),
+          value: _notificationsEnabled,
+          onChanged: (bool value) {
+            setState(() {
+              _notificationsEnabled = value;
+            });
+            _settingsService.setNotificationsEnabled(value);
+          },
+        ),
+        if (_notificationsEnabled) ...[
           ListTile(
-            leading: Icon(
-              Icons.playlist_remove,
-              color: Theme.of(context).colorScheme.error,
+            title: const Text('Remind Me Before'),
+            trailing: DropdownButton<int>(
+              value: _notificationDays,
+              items: [1, 2, 3].map((int days) {
+                return DropdownMenuItem<int>(
+                  value: days,
+                  child: Text('$days Day${days > 1 ? 's' : ''}'),
+                );
+              }).toList(),
+              onChanged: (int? newDays) {
+                if (newDays != null) {
+                  setState(() {
+                    _notificationDays = newDays;
+                  });
+                  _settingsService.setNotificationDays(newDays);
+                }
+              },
             ),
-            title: Text(
-              'Clear Logs',
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.error,
+          ),
+          ListTile(
+            title: const Text('Notification Time'),
+            trailing: Text(
+              _notificationTime.format(context),
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
               ),
             ),
-            onTap: _showClearLogsDialog,
+            onTap: _selectTime,
           ),
         ],
-      ),
-      bottomNavigationBar: const MainBottomNavigationBar(
-        activeScreen: AppScreen.settings,
-      ),
+        const Divider(),
+        ListTile(
+          leading: Icon(
+            Icons.playlist_remove,
+            color: Theme.of(context).colorScheme.error,
+          ),
+          title: Text(
+            'Clear Logs',
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.error,
+            ),
+          ),
+          onTap: _showClearLogsDialog,
+        ),
+      ],
     );
   }
 }
