@@ -72,7 +72,6 @@ class _MainScreenState extends State<MainScreen> {
         return FloatingActionButton(
           key: const ValueKey('cancel_reminder_fab'),
           tooltip: 'Cancel reminder',
-          backgroundColor: Colors.grey[700],
           onPressed: () => _homeScreenKey.currentState?.handleCancelReminder(),
           child: const Icon(Icons.alarm_off),
         );
