@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dynamic_color/dynamic_color.dart';
-import 'package:menstrudel/screens/home_screen.dart';
+import 'package:menstrudel/screens/main_screen.dart';
 import 'package:menstrudel/services/notifications/period_notifications.dart';
 
 void main() async { 
@@ -44,7 +44,7 @@ class MainApp extends StatelessWidget {
             colorScheme: darkColorScheme,
           ),
           themeMode: ThemeMode.system,
-          home: const HomeScreen(),
+          home: const MainScreen(),
         );
       },
     );
