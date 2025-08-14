@@ -4,14 +4,18 @@ import 'package:timezone/timezone.dart' as tz;
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:menstrudel/screens/main_screen.dart';
 import 'package:menstrudel/services/notification_service.dart';
-import 'package:flutter_native_timezone/flutter_native_timezone.dart';
+import 'package:flutter_timezone/flutter_timezone.dart';
 
 void main() async { 
   WidgetsFlutterBinding.ensureInitialized();
 
   tz_data.initializeTimeZones();
-  final String localTimezone = await FlutterNativeTimezone.getLocalTimezone();
-  tz.setLocalLocation(tz.getLocation(localTimezone));
+  try {
+    final String localTimezone = await FlutterTimezone.getLocalTimezone();
+    tz.setLocalLocation(tz.getLocation(localTimezone));
+  } catch (e) {
+    tz.setLocalLocation(tz.getLocation('Etc/UTC'));
+  }
   
   await NotificationService.initialize();
   runApp(const MainApp());
