@@ -5,7 +5,10 @@ import 'package:menstrudel/models/cycles/cycle_stats.dart';
 import 'package:menstrudel/models/cycles/monthly_cycle_data.dart';
 import 'package:menstrudel/models/periods/period_stats.dart';
 
-enum CycleView { list, flow }
+enum CycleView { 
+  list, 
+  flow 
+}
 
 class InsightsDataView extends StatefulWidget {
   final CycleStats cycleStats;
