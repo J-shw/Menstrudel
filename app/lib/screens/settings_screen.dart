@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:menstrudel/services/settings_service.dart';
 import 'package:menstrudel/widgets/main/navigation_bar.dart';
 import 'package:menstrudel/widgets/main/app_bar.dart';
+import 'package:menstrudel/widgets/dialogs/delete_confirmation_dialog.dart';
+import 'package:menstrudel/database/period_database.dart'; 
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -45,6 +47,42 @@ class _SettingsScreenState extends State<SettingsScreen> {
       });
       await _settingsService.setNotificationTime(pickedTime);
     }
+  }
+
+  Future<void> _showClearLogsDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return ConfirmationDialog(
+          title: 'Clear All Logs?',
+          content: const Text(
+            'This will permanently delete all your period logs. Your app settings will not be affected.',
+          ),
+          confirmButtonText: 'Clear',
+          onConfirm: _clearLogs,
+        );
+      },
+    );
+  }
+
+  Future<void> _clearLogs() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    await PeriodDatabase.instance.deleteAllEntries();
+
+    if (!mounted) return;
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('All logs have been cleared.')),
+    );
+
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(builder: (context) => const MainBottomNavigationBar()),
+      (Route<dynamic> route) => false,
+    );
   }
 
   @override
@@ -100,6 +138,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
               onTap: _selectTime,
             ),
           ],
+          const Divider(),
+          ListTile(
+            leading: Icon(
+              Icons.playlist_remove,
+              color: Theme.of(context).colorScheme.error,
+            ),
+            title: Text(
+              'Clear Logs',
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.error,
+              ),
+            ),
+            onTap: _showClearLogsDialog,
+          ),
         ],
       ),
       bottomNavigationBar: MainBottomNavigationBar(isSettingScreenActive: true),
