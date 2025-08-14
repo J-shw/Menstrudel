@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:menstrudel/screens/analytics_screen.dart';
-import 'package:menstrudel/screens/home_screen.dart';
-import 'package:menstrudel/screens/settings_screen.dart';
 
-enum AppScreen { home, analytics, settings }
-
-class MainBottomNavigationBar extends StatelessWidget {
-  final AppScreen activeScreen;
+class MainNavigationBar extends StatelessWidget {
+  final int selectedIndex;
+  final Function(int) onScreenSelected;
   
-  const MainBottomNavigationBar({
+  const MainNavigationBar({
     super.key,
-    required this.activeScreen,
+    required this.selectedIndex,
+    required this.onScreenSelected,
   });
 
   @override
@@ -23,33 +20,21 @@ class MainBottomNavigationBar extends StatelessWidget {
         children: [
           _NavBarItem(
             icon: Icons.bar_chart,
-            label: 'Insights',
-            isActive: activeScreen == AppScreen.analytics,
-            onPressed: () {
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => const AnalyticsScreen()),
-              );
-            },
+            label: 'Analytics',
+            isActive: selectedIndex == 0,
+            onPressed: () => onScreenSelected(0),
           ),
           _NavBarItem(
             icon: Icons.home,
             label: 'Home',
-            isActive: activeScreen == AppScreen.home,
-            onPressed: () {
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => const HomeScreen()),
-              );
-            },
+            isActive: selectedIndex == 1,
+            onPressed: () => onScreenSelected(1),
           ),
           _NavBarItem(
             icon: Icons.settings,
             label: 'Settings',
-            isActive: activeScreen == AppScreen.settings,
-            onPressed: () {
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => const SettingsScreen()),
-              );
-            },
+            isActive: selectedIndex == 2,
+            onPressed: () => onScreenSelected(2),
           ), 
         ],
       )
@@ -73,7 +58,6 @@ class _NavBarItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final color = isActive ? Theme.of(context).primaryColor : Colors.grey;
-
     return InkWell(
       onTap: isActive ? null : onPressed,
       borderRadius: BorderRadius.circular(20),
