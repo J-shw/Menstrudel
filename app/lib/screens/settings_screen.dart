@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/services/settings_service.dart';
-import 'package:menstrudel/widgets/main/navigation_bar.dart';
-import 'package:menstrudel/widgets/main/app_bar.dart';
 import 'package:menstrudel/widgets/dialogs/delete_confirmation_dialog.dart';
 import 'package:menstrudel/database/period_database.dart';
 
