@@ -38,4 +38,4 @@ You can view our privacy policy [here](/docs/PRIVACY.md).
 | :---: | :---: | :---: |
 | ![Log View](screenshots/v2.0.0/android/home.png) | ![Symptom Entry Dialog](screenshots/v2.0.0/android/log.png) | ![Symptom Entry Dialog](screenshots/v2.0.0/android/reminder.png) |
 | Cycle insights | Settings |  |
-![Analytics View](screenshots/v2.0.0/android/analytics.png) | ![Symptom Entry Dialog](screenshots/v2.0.0/android/settings.png) |  |
+![Insights View](screenshots/v2.0.0/android/insights.png) | ![Symptom Entry Dialog](screenshots/v2.0.0/android/settings.png) |  |
