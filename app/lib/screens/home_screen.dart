@@ -8,23 +8,81 @@ import 'package:menstrudel/database/period_database.dart';
 import 'package:menstrudel/widgets/period_list_view.dart';
 import 'package:menstrudel/models/period_prediction_result.dart';
 import 'package:menstrudel/utils/period_predictor.dart';
-import 'package:menstrudel/widgets/main/navigation_bar.dart';
 import 'package:menstrudel/services/notifications/period_notifications.dart';
 import 'package:menstrudel/widgets/dialogs/tampon_reminder_dialog.dart';
 import 'package:menstrudel/services/notifications/tampon_notifications.dart';
 
 
 class HomeScreen extends StatefulWidget {
-	const HomeScreen({super.key});
+  final Function(bool) onPeriodStatusChange;
+
+	const HomeScreen({
+    super.key,
+    required this.onPeriodStatusChange,
+  });
+
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<HomeScreen> createState() => HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class HomeScreenState extends State<HomeScreen> {
 	List<PeriodLogEntry> _periodLogEntries = [];
   List<PeriodEntry> _periodEntries = [];
 	bool _isLoading = false;
 	PeriodPredictionResult? _predictionResult;
+
+  Future<void> handleLogPeriod(BuildContext context) async {
+    final result = await showDialog<Map<String, dynamic>>(
+      context: context,
+      builder: (BuildContext dialogContext) => const SymptomEntryDialog(),
+    );
+
+    if (result == null) return;
+    if (!context.mounted) return;
+
+    try {
+      final DateTime? date = result['date'];
+      final List<String>? symptoms = result['symptoms'];
+      final int? flow = result['flow'];
+
+      if (date == null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Error: Date was not provided.')),
+        );
+        return;
+      }
+
+      final newEntry = PeriodLogEntry(
+        date: date,
+        symptoms: symptoms ?? [],
+        flow: flow ?? 0,
+      );
+
+      await PeriodDatabase.instance.createPeriodLog(newEntry);
+      _refreshPeriodLogs();
+
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: const Text('Failed to save period log. Please try again.'),
+          backgroundColor: Theme.of(context).colorScheme.error,
+        ),
+      );
+    }
+  }
+  
+  Future<void> handleTamponReminder(BuildContext context) async {
+    final reminderTime = await showDialog<TimeOfDay>(
+      context: context,
+      builder: (BuildContext context) => const TimeSelectionDialog(),
+    );
+    if (reminderTime == null) return;
+
+    await tamponNotificationScheduler(reminderTime: reminderTime);
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(SnackBar(content: Text('Reminder set for ${reminderTime.format(context)}')));
+  }
 
 	@override
 	void initState() {
@@ -38,6 +96,8 @@ class _HomeScreenState extends State<HomeScreen> {
 		});
 		final periodLogData = await PeriodDatabase.instance.readAllPeriodLogs();
 		final periodData = await PeriodDatabase.instance.readAllPeriods();
+    final isPeriodOngoing = periodData.isNotEmpty && DateUtils.isSameDay(periodData.first.endDate, DateTime.now());
+    widget.onPeriodStatusChange(isPeriodOngoing);
 		setState(() {
 			_isLoading = false;
 			_periodLogEntries = periodLogData;
@@ -63,8 +123,6 @@ class _HomeScreenState extends State<HomeScreen> {
 		int circleMaxValue = _predictionResult?.averageCycleLength ?? 28;
 		int circleCurrentValue = daysUntilDueForCircle.clamp(0, circleMaxValue); 
 
-    final bool isPeriodOngoing = _periodEntries.isNotEmpty && DateUtils.isSameDay(_periodEntries.first.endDate, DateTime.now());
-
 		String predictionText = '';
 		if (_isLoading) {
 			predictionText = 'Calculating prediction...';
@@ -80,108 +138,38 @@ class _HomeScreenState extends State<HomeScreen> {
 			predictionText = 'Period overdue by ${-_predictionResult!.daysUntilDue} days: $datePart';
 		}
 		}
-		return Scaffold(
-			body: Column(
-				mainAxisSize: MainAxisSize.max,
-				mainAxisAlignment: MainAxisAlignment.start,
-				crossAxisAlignment: CrossAxisAlignment.stretch,
-				children: [
-					const SizedBox(height: 100),
-					BasicProgressCircle(
-						currentValue: circleCurrentValue,
-						maxValue: circleMaxValue,
-						circleSize: 220,
-						strokeWidth: 20,
-						progressColor: const Color.fromARGB(255, 255, 118, 118),
-						trackColor: const Color.fromARGB(20, 255, 118, 118),
-					),
-					const SizedBox(height: 15),
-					Text(
-						predictionText,
-						textAlign: TextAlign.center,
-						style: const TextStyle(
-							fontSize: 12,
-							fontWeight: FontWeight.bold,
-							color: Colors.blueGrey,
-						),
-					),
-					const SizedBox(height: 20),
-					PeriodListView(
-						periodLogEnties: _periodLogEntries,
-            periodEntries: _periodEntries,
-						isLoading: _isLoading,
-						onDelete: _deletePeriodEntry
-					),
-				],
-			),
-			bottomNavigationBar: MainBottomNavigationBar(isHomeScreenActive: true,),
-			floatingActionButton: Column(
-      mainAxisAlignment: MainAxisAlignment.end,
+		return Column(
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Visibility(
-          visible: isPeriodOngoing,
-          child: FloatingActionButton(
-            onPressed: () async {
-              final TimeOfDay? reminderTime = await showDialog<TimeOfDay>(
-                context: context,
-                builder: (BuildContext context) {
-                  return const TimeSelectionDialog();
-                },
-              );
-
-              if (reminderTime != null) {
-                await tamponNotificationScheduler(reminderTime: reminderTime);
-
-                ScaffoldMessenger.of(context)
-                  ..hideCurrentSnackBar()
-                  ..showSnackBar(
-                    SnackBar(
-                      content: Text('Reminder set for ${reminderTime.format(context)}'),
-                    ),
-                  );
-              }
-            },
-            tooltip: 'Tampon reminder',
-            heroTag: null,
-            child: const Icon(Icons.add_alarm),
+        const SizedBox(height: 100),
+        BasicProgressCircle(
+          currentValue: circleCurrentValue,
+          maxValue: circleMaxValue,
+          circleSize: 220,
+          strokeWidth: 20,
+          progressColor: const Color.fromARGB(255, 255, 118, 118),
+          trackColor: const Color.fromARGB(20, 255, 118, 118),
+        ),
+        const SizedBox(height: 15),
+        Text(
+          predictionText,
+          textAlign: TextAlign.center,
+          style: const TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.bold,
+            color: Colors.blueGrey,
           ),
         ),
-        Visibility(
-          visible: !isPeriodOngoing,
-          child:FloatingActionButton(
-            onPressed: () async {
-              final Map<String, dynamic>? result =
-                  await showDialog<Map<String, dynamic>>(
-                context: context,
-                builder: (BuildContext dialogContext) {
-                  return const SymptomEntryDialog();
-                },
-              );
-              if (result != null) {
-                final DateTime? date = result['date'];
-                final List<String>? symptoms = result['symptoms'];
-                final int flow = result['flow'];
-
-                if (date != null) {
-                  final newEntry = PeriodLogEntry(
-                    date: date,
-                    symptoms: symptoms,
-                    flow: flow,
-                  );
-
-                  await PeriodDatabase.instance.createPeriodLog(newEntry);
-                  _refreshPeriodLogs();
-                }
-              }
-            },
-            tooltip: 'Log period',
-            heroTag: null,
-            child: const Icon(Icons.add),
-          ),
+        const SizedBox(height: 20),
+        PeriodListView(
+          periodLogEnties: _periodLogEntries,
+          periodEntries: _periodEntries,
+          isLoading: _isLoading,
+          onDelete: _deletePeriodEntry
         ),
       ],
-    ),
-			floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-		);
+    );
 	}
 }
