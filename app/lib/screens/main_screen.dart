@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:menstrudel/screens/analytics_screen.dart';
-import 'package:menstrudel/screens/home_screen.dart';
+import 'package:menstrudel/screens/logs_screen.dart';
 import 'package:menstrudel/screens/settings_screen.dart';
+import 'package:menstrudel/screens/insights_screen.dart';
 import 'package:menstrudel/widgets/main/main_navigation_bar.dart';
 import 'package:menstrudel/widgets/main/app_bar.dart';
 
@@ -21,13 +21,13 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 1;
 
-  final GlobalKey<HomeScreenState> _homeScreenKey = GlobalKey<HomeScreenState>();
+  final GlobalKey<LogsScreenState> _logsScreenKey = GlobalKey<LogsScreenState>();
   
   FabState _fabState = FabState.logPeriod;
 
   late final List<Widget> _pages;
   static const List<PreferredSizeWidget?> _appBars = <PreferredSizeWidget?>[
-    TopAppBar(titleText: "Insights"),
+    TopAppBar(titleText: "Your Insights"),
     null,
     TopAppBar(titleText: "Settings"),
   ];
@@ -36,9 +36,9 @@ class _MainScreenState extends State<MainScreen> {
   void initState() {
     super.initState();
     _pages = <Widget>[
-      const AnalyticsScreen(),
-      HomeScreen(
-        key: _homeScreenKey,
+      const InsightsScreen(),
+      LogsScreen(
+        key: _logsScreenKey,
         onFabStateChange: _onFabStateChange,
       ),
       const SettingsScreen(),
@@ -65,21 +65,21 @@ class _MainScreenState extends State<MainScreen> {
         return FloatingActionButton(
           key: const ValueKey('set_reminder_fab'),
           tooltip: 'Tampon reminder',
-          onPressed: () => _homeScreenKey.currentState?.handleTamponReminder(context),
+          onPressed: () => _logsScreenKey.currentState?.handleTamponReminder(context),
           child: const Icon(Icons.add_alarm),
         );
       case FabState.cancelReminder:
         return FloatingActionButton(
           key: const ValueKey('cancel_reminder_fab'),
           tooltip: 'Cancel reminder',
-          onPressed: () => _homeScreenKey.currentState?.handleCancelReminder(),
+          onPressed: () => _logsScreenKey.currentState?.handleCancelReminder(),
           child: const Icon(Icons.alarm_off),
         );
       case FabState.logPeriod:
         return FloatingActionButton(
           key: const ValueKey('log_fab'),
           tooltip: 'Log period',
-          onPressed: () => _homeScreenKey.currentState?.handleLogPeriod(context),
+          onPressed: () => _logsScreenKey.currentState?.handleLogPeriod(context),
           child: const Icon(Icons.add),
         );
     }
