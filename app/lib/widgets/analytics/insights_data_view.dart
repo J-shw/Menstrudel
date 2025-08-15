@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:menstrudel/widgets/analytics/monthly_cycle_pill_view.dart';
+import 'package:menstrudel/widgets/analytics/monthly_cycle_bar_chart_view.dart';
 import 'package:menstrudel/widgets/analytics/monthly_flow_table_view.dart';
 import 'package:menstrudel/widgets/analytics/stat_card.dart';
 import 'package:menstrudel/models/cycles/cycle_stats.dart';
@@ -163,7 +163,7 @@ class _InsightsDataViewState extends State<InsightsDataView> {
         const SizedBox(height: 10),
 
         if (_currentView == CycleView.list)
-          MonthlyCycleListView(
+          CycleLengthBarChart(
             monthlyCycleData: widget.monthlyCycleData,
           )
         else
