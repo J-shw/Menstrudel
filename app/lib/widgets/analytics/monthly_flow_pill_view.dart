@@ -75,15 +75,18 @@ class CycleFlowPillView extends StatelessWidget {
                       final dayNumber = entry.key + 1;
                       final flowInt = entry.value;
                       final flowLevel = flowLevelFromInt(flowInt);
+                      final segmentColor = _getColorForFlow(flowLevel, colorScheme);
+                      final brightness = ThemeData.estimateBrightnessForColor(segmentColor);
+                      final textColor = brightness == Brightness.dark ? Colors.white : Colors.black;
 
                       return Expanded(
                         child: Container(
-                          color: _getColorForFlow(flowLevel, colorScheme),
+                          color: segmentColor,
                           child: Center(
                             child: Text(
                               '$dayNumber',
                               style: TextStyle(
-                                color: Colors.white,
+                                color: textColor,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 14,
                               ),

@@ -13,14 +13,25 @@ class MonthlyCycleListView extends StatelessWidget {
   });
 
   Color _getColorForCycle(int cycleLength, ColorScheme colorScheme) {
-    if (cycleLength < 24) {
-      return colorScheme.tertiaryContainer;
+    const Color lightColor = Color.fromARGB(255, 255, 153, 153);
+    const Color mediumColor = Color.fromARGB(255, 255, 102, 102);
+    const Color darkColor = Color.fromARGB(255, 204, 0, 0);
+
+    final Color themeColor = colorScheme.primaryContainer;
+
+    Color blend(Color yourColor) {
+      return Color.lerp(themeColor, yourColor, 0.7)!;
+    }
+
+
+    if (cycleLength <= 24) {
+      return blend(lightColor);
     }
     else if (cycleLength <= 35) {
-      return colorScheme.primary;
+      return blend(mediumColor);
     }
     else {
-      return colorScheme.secondary;
+      return blend(darkColor);
     }
   }
 
@@ -48,9 +59,8 @@ class MonthlyCycleListView extends StatelessWidget {
         final double barWidthFactor = ((data.cycleLength.clamp(15, 40) - 15) / (40 - 15)) * 0.8 + 0.2;
 
         final barColor = _getColorForCycle(data.cycleLength, colorScheme);
-        final textColor = Theme.of(context).brightness == Brightness.dark
-            ? Colors.black
-            : Colors.white;
+        final brightness = ThemeData.estimateBrightnessForColor(barColor);
+        final textColor = brightness == Brightness.dark ? Colors.white : Colors.black;
 
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8.0),
