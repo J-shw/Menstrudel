@@ -27,7 +27,7 @@ class _MainScreenState extends State<MainScreen> {
 
   late final List<Widget> _pages;
   static const List<PreferredSizeWidget?> _appBars = <PreferredSizeWidget?>[
-    TopAppBar(titleText: "Insights"),
+    TopAppBar(titleText: "Your Insights"),
     null,
     TopAppBar(titleText: "Settings"),
   ];
