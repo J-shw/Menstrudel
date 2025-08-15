@@ -105,7 +105,7 @@ class _ChartBar extends StatelessWidget {
               child: FractionallySizedBox(
                 heightFactor: barHeightFactor,
                 child: Container(
-                  constraints: const BoxConstraints(minWidth: 20),
+                  constraints: const BoxConstraints(minWidth: 40),
                   decoration: BoxDecoration(
                     color: barColor,
                     borderRadius: const BorderRadius.only(
