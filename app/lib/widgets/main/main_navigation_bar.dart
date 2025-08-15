@@ -25,8 +25,8 @@ class MainNavigationBar extends StatelessWidget {
             onPressed: () => onScreenSelected(0),
           ),
           _NavBarItem(
-            icon: Icons.home,
-            label: 'Home',
+            icon: Icons.book,
+            label: 'Logs',
             isActive: selectedIndex == 1,
             onPressed: () => onScreenSelected(1),
           ),
