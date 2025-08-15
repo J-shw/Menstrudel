@@ -171,7 +171,7 @@ class LogsScreenState extends State<LogsScreen> {
 		} else {
 			String datePart = DateFormat('dd/MM/yyyy').format(_predictionResult!.estimatedDate);
 		if (_predictionResult!.daysUntilDue > 0) {
-			predictionText = 'Next Period Est: $datePart (${_predictionResult!.daysUntilDue} days)';
+			predictionText = 'Next Period Est: $datePart';
 		} else if (_predictionResult!.daysUntilDue == 0) {
 			predictionText = 'Period due TODAY: $datePart';
 		} else { // _predictionResult.daysUntilDue is negative, meaning overdue
