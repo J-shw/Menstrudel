@@ -47,21 +47,53 @@ class CycleLengthVarianceWidget extends StatelessWidget {
                 BarChartData(
                   alignment: BarChartAlignment.spaceAround,
                   borderData: FlBorderData(show: false),
-                  gridData: FlGridData(show: true, drawVerticalLine: false, horizontalInterval: 10, getDrawingHorizontalLine: (value) => FlLine(color: colorScheme.onSurface.withValues(alpha: 0.1), strokeWidth: 1)),
+                  gridData: FlGridData(
+                    show: true,
+                    drawVerticalLine: false,
+                    horizontalInterval: 10,
+                    getDrawingHorizontalLine: (value) => FlLine(color: colorScheme.onSurface.withValues(alpha: 0.1), strokeWidth: 1),
+                  ),
+                  barTouchData: BarTouchData(
+                    touchTooltipData: BarTouchTooltipData(
+                      getTooltipColor: (_) => colorScheme.secondary,
+                      tooltipBorder: BorderSide(color: colorScheme.onSecondary.withValues(alpha: 0.2)),
+                      getTooltipItem: (group, groupIndex, rod, rodIndex) {
+                        final period = reversedPeriods[groupIndex];
+                        final String month = period.monthLabel;
+                        
+                        if (rod.toY == 0) {
+                          return null;
+                        }
+                        final String text = rodIndex == 0
+                            ? 'Period: ${rod.toY.toInt()} days'
+                            : 'Cycle: ${rod.toY.toInt()} days';
+
+                        return BarTooltipItem(
+                          '$month\n$text',
+                          TextStyle(
+                            color: colorScheme.onSecondary,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+
                   barGroups: List.generate(reversedPeriods.length, (index) {
                     final period = reversedPeriods[index];
                     final double cycleLength = index < cycleLengths.length ? cycleLengths[index] : 0;
                     return BarChartGroupData(
                       x: index,
                       barRods: [
-                        BarChartRodData(toY: period.totalDays.toDouble(), color: colorScheme.primary.withValues(alpha: 0.6), width: 12),
-                        BarChartRodData(toY: cycleLength, color: colorScheme.tertiary, width: 12),
+                        BarChartRodData(toY: period.totalDays.toDouble(), color: colorScheme.primary.withValues(alpha: 0.8), width: 12, borderRadius: BorderRadius.circular(2)),
+                        BarChartRodData(toY: cycleLength, color: colorScheme.tertiary, width: 12, borderRadius: BorderRadius.circular(2)),
                       ],
                     );
                   }),
                   titlesData: FlTitlesData(
                      topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
                      rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                     
                      leftTitles: AxisTitles(sideTitles: SideTitles(showTitles: true, reservedSize: 28, interval: 10)),
                      bottomTitles: AxisTitles(
                        sideTitles: SideTitles(
