@@ -37,7 +37,7 @@ class CycleLengthBarChart extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.end,
-              children: data.map((cycleData) {
+              children: data.reversed.map((cycleData) {
                 return _ChartBar(
                   cycleData: cycleData,
                   minAxisValue: minAxisValue,
