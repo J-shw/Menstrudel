@@ -37,5 +37,5 @@ You can view our privacy policy [here](/docs/PRIVACY.md).
 | Your daily logs |  Quick symptom entry | Tampon reminder |
 | :---: | :---: | :---: |
 | ![Log View](docs/screenshots/v2.2.0/android/logs.png) | ![Symptom Entry Dialog](docs/screenshots/v2.2.0/android/log.png) | ![Symptom Entry Dialog](docs/screenshots/v2.2.0/android/reminder.png) |
-| Cycle insights | Settings |  |
+| Quick insights | Settings |  |
 ![Insights View](docs/screenshots/v2.2.0/android/insights.png) | ![Symptom Entry Dialog](docs/screenshots/v2.2.0/android/settings.png) |  |
