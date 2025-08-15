@@ -1,0 +1,31 @@
+name: Convert PNG to WebP in Docs for Website
+
+on:
+  push:
+    paths:
+      - 'docs/screenshots/**.png'
+
+jobs:
+  convert:
+    name: Convert Images
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Install webp
+        run: sudo apt-get update && sudo apt-get install -y webp
+
+      - name: Convert new PNGs to WebP
+        run: |
+          find docs/website/images -type f -name "*.png" -exec sh -c 'cwebp -q 80 -nooverwrite "$0" -o "${0%.png}.webp"' {} \;
+
+      - name: Commit files
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "CI: Add converted WebP images for docs"
+          file_pattern: "docs/screenshots/**/*.webp"
+          commit_user_name: GitHub Actions
+          commit_user_email: actions@github.com
+          commit_author: GitHub Actions <actions@github.com>
