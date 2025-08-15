@@ -41,6 +41,6 @@ You can view our privacy policy [here](/docs/PRIVACY.md).
 
 | Your daily logs |  Quick symptom entry | Tampon reminder |
 | :---: | :---: | :---: |
-| ![Log View](docs/screenshots/v2.2.0/android/logs.png) | ![Symptom Entry Dialog](docs/screenshots/v2.2.0/android/log.png) | ![Symptom Entry Dialog](docs/screenshots/v2.2.0/android/reminder.png) |
+| ![Log View](docs/screenshots/v2.2.0/android/logs_screen.webp) | ![Symptom Entry Dialog](docs/screenshots/v2.2.0/android/log_day.webp) | ![Symptom Entry Dialog](docs/screenshots/v2.2.0/android/tampon_reminder.webp) |
 | Quick insights | Settings |  |
-![Insights View](docs/screenshots/v2.2.0/android/insights.png) | ![Symptom Entry Dialog](docs/screenshots/v2.2.0/android/settings.png) |  |
+![Insights View](docs/screenshots/v2.2.0/android/insights_screen.webp) | ![Symptom Entry Dialog](docs/screenshots/v2.2.0/android/settings_screen.webp) |  |
