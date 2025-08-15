@@ -19,7 +19,7 @@ jobs:
 
       - name: Convert new PNGs to WebP
         run: |
-          find docs/website/images -type f -name "*.png" | while read -r png_file; do
+          find docs/screenshots -type f -name "*.png" | while read -r png_file; do
             webp_file="${png_file%.png}.webp"
             if [ ! -f "$webp_file" ]; then
               echo "Converting: $png_file"
