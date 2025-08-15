@@ -18,7 +18,7 @@ class AnalyticsScreen extends StatefulWidget {
 
 class _AnalyticsScreenState extends State<AnalyticsScreen> {
 	List<MonthlyCycleData> _monthlyCycleData = [];
-  List<DailyFlowData> _cycleFlowData = []; 
+  List<MonthlyFlowData> _cycleFlowData = []; 
 	CycleStats? _cycleStats;
   PeriodStats? _periodStats;
 
@@ -49,18 +49,18 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
 	Future<void> _refreshPeriodLogs() async {
 		final periodLogData = await PeriodDatabase.instance.readAllPeriodLogs();
     final periodData = await PeriodDatabase.instance.readAllPeriods();
-    List<DailyFlowData> flowDataForLastPeriod = [];
+    List<MonthlyFlowData> flowData = [];
     if (periodData.isNotEmpty) {
       final lastPeriod = periodData.first;
       if (lastPeriod.id != null) {
-        flowDataForLastPeriod = await PeriodDatabase.instance.getFlowDataForPeriod(lastPeriod.id!);
+        flowData = await PeriodDatabase.instance.getMonthlyFlows();
       }
     }
 		setState(() {
 			_cycleStats = PeriodPredictor.getCycleStats(periodLogData);
 			_monthlyCycleData = PeriodPredictor.getMonthlyCycleData(periodLogData);
       _periodStats = PeriodPredictor.getPeriodData(periodData);
-      _cycleFlowData = flowDataForLastPeriod;
+      _cycleFlowData = flowData;
 		});
 	}
 
@@ -75,7 +75,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
       cycleStats: _cycleStats!,
       periodStats: _periodStats!,
       monthlyCycleData: _monthlyCycleData,
-      cycleFlowData: _cycleFlowData,
+      monthlyFlowData: _cycleFlowData,
     );
 	}
 }
