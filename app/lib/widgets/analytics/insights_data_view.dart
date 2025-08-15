@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:menstrudel/widgets/analytics/monthly_cycle_list_view.dart';
-import 'package:menstrudel/widgets/analytics/cycle_flow_pill_view.dart';
+import 'package:menstrudel/widgets/analytics/monthly_cycle_pill_view.dart';
+import 'package:menstrudel/widgets/analytics/monthly_flow_pill_view.dart';
 import 'package:menstrudel/widgets/analytics/stat_card.dart';
 import 'package:menstrudel/models/cycles/cycle_stats.dart';
 import 'package:menstrudel/models/cycles/monthly_cycle_data.dart';
