@@ -4,6 +4,9 @@ on:
   push:
     paths:
       - 'docs/screenshots/**.png'
+      
+permissions:
+  contents: write
 
 jobs:
   convert:
