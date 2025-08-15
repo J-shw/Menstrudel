@@ -19,7 +19,7 @@ jobs:
 
       - name: Convert new PNGs to WebP
         run: |
-          find docs/website/images -type f -name "*.png" -exec sh -c 'cwebp -q 80 -nooverwrite "$0" -o "${0%.png}.webp"' {} \;
+          find docs/screenshots -type f -name "*.png" -exec sh -c 'cwebp -q 80 -nooverwrite "$0" -o "${0%.png}.webp"' {} \;
 
       - name: Commit files
         uses: stefanzweifel/git-auto-commit-action@v5
