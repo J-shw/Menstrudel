@@ -32,6 +32,11 @@ Menstrudel is a simple, private, and intuitive mobile application built with Flu
 
 You can view our privacy policy [here](/docs/PRIVACY.md).
 
+### Socials
+
+- [ItsAllWidgets](https://itsallwidgets.com/menstrudel)
+- [Website](https://menstrudel.app/)
+
 # App Screenshots
 
 | Your daily logs |  Quick symptom entry | Tampon reminder |
