@@ -48,7 +48,7 @@ class _InsightsDataViewState extends State<InsightsDataView> {
       margin: const EdgeInsets.symmetric(horizontal: 4.0),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: _currentPage == index ? Theme.of(context).primaryColor : Colors.grey.withOpacity(0.5),
+        color: _currentPage == index ? Theme.of(context).primaryColor : Colors.grey.withValues(alpha: 0.5),
       ),
     );
   }
