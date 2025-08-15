@@ -43,6 +43,6 @@ You can view our full privacy policy [here](PRIVACY.md).
 
 | Your Daily Logs | Quick Symptom Entry | Tampon Reminder |
 | :---: | :---: | :---: |
-| ![Screenshot of Menstrudel's daily period log view on Android](screenshots/v2.2.0/android/logs.png) | ![Screenshot showing the quick symptom entry for a period log in Menstrudel](screenshots/v2.2.0/android/log.png) | ![Screenshot of the tampon change reminder setup in Menstrudel](screenshots/v2.2.0/android/reminder.png) |
+| ![Screenshot of Menstrudel's daily period log view on Android](screenshots/v2.2.0/android/logs_screen.png) | ![Screenshot showing the quick symptom entry for a period log in Menstrudel](screenshots/v2.2.0/android/log_day.webp) | ![Screenshot of the tampon change reminder setup in Menstrudel](screenshots/v2.2.0/android/reminder.png) |
 | Quick Insights | App Settings | |
 | ![Screenshot of the cycle insights and predictions screen in Menstrudel](screenshots/v2.2.0/android/insights.png) | ![Screenshot of the Menstrudel settings page showing notification options](screenshots/v2.2.0/android/settings.webp) | |
