@@ -240,7 +240,7 @@ class PeriodDatabase {
       final flowInts = logsResult.map((log) => log['flow'] as int).toList();
 
       if (flowInts.isNotEmpty) {
-        final monthKey = DateFormat('MMMM').format(period.startDate);
+        final monthKey = DateFormat('MMM').format(period.startDate);
         
         allMonthlyFlows.add(
           MonthlyFlowData(
