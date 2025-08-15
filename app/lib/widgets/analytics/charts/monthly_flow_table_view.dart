@@ -33,7 +33,7 @@ class CycleFlowTableView extends StatelessWidget {
               child: Center(
                 child: Text(
                   data.monthLabel,
-                  style: textTheme.titleSmall,
+                  style: textTheme.bodySmall,
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
