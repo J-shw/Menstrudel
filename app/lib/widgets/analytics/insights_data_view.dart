@@ -162,14 +162,20 @@ class _InsightsDataViewState extends State<InsightsDataView> {
         ),
         const SizedBox(height: 10),
 
-        if (_currentView == CycleView.list)
-          CycleLengthBarChart(
-            monthlyCycleData: widget.monthlyCycleData,
-          )
-        else
-         CycleFlowTableView(
-            monthlyFlowData: widget.monthlyFlowData,
+        Expanded(
+          child: AnimatedSwitcher(
+            duration: const Duration(milliseconds: 100),
+            child: _currentView == CycleView.list
+                ? CycleLengthBarChart(
+                    key: const ValueKey('cycle_chart'),
+                    monthlyCycleData: widget.monthlyCycleData,
+                  )
+                : CycleFlowTableView(
+                    key: const ValueKey('flow_table'),
+                    monthlyFlowData: widget.monthlyFlowData,
+                  ),
           ),
+        ),
       ],
     );
   }
