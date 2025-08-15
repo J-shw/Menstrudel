@@ -13,19 +13,19 @@ import 'package:menstrudel/widgets/dialogs/tampon_reminder_dialog.dart';
 import 'package:menstrudel/screens/main_screen.dart';
 import 'package:menstrudel/services/settings_service.dart';
 
-class HomeScreen extends StatefulWidget {
+class LogsScreen extends StatefulWidget {
    final Function(FabState) onFabStateChange;
 
-	const HomeScreen({
+	const LogsScreen({
     super.key,
     required this.onFabStateChange,
   });
 
   @override
-  State<HomeScreen> createState() => HomeScreenState();
+  State<LogsScreen> createState() => LogsScreenState();
 }
 
-class HomeScreenState extends State<HomeScreen> {
+class LogsScreenState extends State<LogsScreen> {
 	List<PeriodLogEntry> _periodLogEntries = [];
   List<PeriodEntry> _periodEntries = [];
 	bool _isLoading = false;
