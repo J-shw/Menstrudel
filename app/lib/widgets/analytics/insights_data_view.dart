@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/widgets/analytics/monthly_cycle_pill_view.dart';
-import 'package:menstrudel/widgets/analytics/monthly_flow_pill_view.dart';
+import 'package:menstrudel/widgets/analytics/monthly_flow_table_view.dart';
 import 'package:menstrudel/widgets/analytics/stat_card.dart';
 import 'package:menstrudel/models/cycles/cycle_stats.dart';
 import 'package:menstrudel/models/cycles/monthly_cycle_data.dart';
@@ -167,7 +167,7 @@ class _InsightsDataViewState extends State<InsightsDataView> {
             monthlyCycleData: widget.monthlyCycleData,
           )
         else
-         CycleFlowPillView(
+         CycleFlowTableView(
             monthlyFlowData: widget.monthlyFlowData,
           ),
       ],
