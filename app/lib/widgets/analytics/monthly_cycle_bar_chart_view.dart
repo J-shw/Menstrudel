@@ -3,11 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:menstrudel/models/cycles/monthly_cycle_data.dart';
 
-const double _kChartHeight = 200.0;
-const double _kYAxisWidth = 30.0;
-const int _kMinYAxisValue = 15;
-const int _kMaxYAxisValue = 45; 
-
 class CycleLengthBarChart extends StatelessWidget {
   final List<MonthlyCycleData>? monthlyCycleData;
 
@@ -25,40 +20,32 @@ class CycleLengthBarChart extends StatelessWidget {
       );
     }
 
-    return SizedBox(
-      height: _kChartHeight,
+    final allLengths = data.map((d) => d.cycleLength);
+    final minDataValue = allLengths.reduce(min);
+    final maxDataValue = allLengths.reduce(max);
+    int minAxisValue = (minDataValue / 5).floor() * 5;
+    int maxAxisValue = (maxDataValue / 5).ceil() * 5;
+    if (minAxisValue == maxAxisValue) {
+      minAxisValue = max(0, minAxisValue - 5);
+      maxAxisValue = maxAxisValue + 5;
+    }
+
+    return Expanded(
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          _buildYAxisLabels(context),
-          const VerticalDivider(width: 1),
-
           Expanded(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: data.map((cycleData) {
-                return _ChartBar(cycleData: cycleData);
+                return _ChartBar(
+                  cycleData: cycleData,
+                  minAxisValue: minAxisValue,
+                  maxAxisValue: maxAxisValue,);
               }).toList(),
             ),
           ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildYAxisLabels(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
-    return SizedBox(
-      width: _kYAxisWidth,
-      height: _kChartHeight,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text('${_kMaxYAxisValue}d', style: textTheme.bodySmall),
-          Text('${(_kMinYAxisValue + _kMaxYAxisValue) ~/ 2}d', style: textTheme.bodySmall),
-          Text('${_kMinYAxisValue}d', style: textTheme.bodySmall),
         ],
       ),
     );
@@ -67,12 +54,18 @@ class CycleLengthBarChart extends StatelessWidget {
 
 class _ChartBar extends StatelessWidget {
   final MonthlyCycleData cycleData;
+  final int minAxisValue;
+  final int maxAxisValue;
 
-  const _ChartBar({required this.cycleData});
+  const _ChartBar({
+    required this.cycleData,
+    required this.minAxisValue,
+    required this.maxAxisValue,
+  });
 
   Color _getColorForCycle(int cycleLength, ColorScheme colorScheme) {
     const Color shortColor = Color(0xFFFF9999);
-    const Color normalColor = Color(0xFF4CAF50);
+    const Color normalColor = Color.fromARGB(255, 255, 102, 102);
     const Color longColor = Color(0xFFCC0000);
 
     final Color baseColor;
@@ -93,8 +86,8 @@ class _ChartBar extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
 
     final barHeightFactor =
-        (cycleData.cycleLength.clamp(_kMinYAxisValue, _kMaxYAxisValue) - _kMinYAxisValue) /
-            (_kMaxYAxisValue - _kMinYAxisValue);
+        (cycleData.cycleLength.clamp(minAxisValue, maxAxisValue) - minAxisValue) /
+            (maxAxisValue - minAxisValue);
 
     final barColor = _getColorForCycle(cycleData.cycleLength, colorScheme);
     final monthLabel = DateFormat('MMM').format(DateTime(cycleData.year, cycleData.month));
