@@ -44,39 +44,41 @@ class CycleFlowTableView extends StatelessWidget {
     );
 
     return Column(
-      mainAxisSize: MainAxisSize.min,
       children: [
-        ...List.generate(maxCycleLength, (rowIndex) {
-          final dayNumber = maxCycleLength - rowIndex;
-          final dataIndex = dayNumber - 1;
+        Expanded(
+          child: Column(
+            children: List.generate(maxCycleLength, (rowIndex) {
+              final dayNumber = maxCycleLength - rowIndex;
+              final dataIndex = dayNumber - 1;
 
-          return SizedBox(
-            height: _kRowHeight,
-            child: Row(
-              children: [
-                SizedBox(
-                  width: _kDayNumberColumnWidth,
-                  child: Center(
-                    child: Text('$dayNumber', style: textTheme.bodySmall),
-                  ),
-                ),
-                ...monthlyFlowData.map((monthData) {
-                  return Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(2.0),
-                      child: (dayNumber <= monthData.flows.length)
-                          ? _DaySegment(
-                              flow: flowLevelFromInt(monthData.flows[dataIndex]),
-                              colorScheme: colorScheme,
-                            )
-                          : const SizedBox.shrink(),
+              return Expanded(
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: _kDayNumberColumnWidth,
+                      child: Center(
+                        child: Text('$dayNumber', style: textTheme.bodySmall),
+                      ),
                     ),
-                  );
-                }),
-              ],
-            ),
-          );
-        }),
+                    ...monthlyFlowData.map((monthData) {
+                      return Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.all(2.0),
+                          child: (dayNumber <= monthData.flows.length)
+                              ? _DaySegment(
+                                  flow: flowLevelFromInt(monthData.flows[dataIndex]),
+                                  colorScheme: colorScheme,
+                                )
+                              : const SizedBox.shrink(),
+                        ),
+                      );
+                    }),
+                  ],
+                ),
+              );
+            }),
+          ),
+        ),
         headerRow,
       ],
     );
