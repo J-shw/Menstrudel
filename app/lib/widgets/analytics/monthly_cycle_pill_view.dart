@@ -12,6 +12,18 @@ class MonthlyCycleListView extends StatelessWidget {
     this.barHeight = 35.0,
   });
 
+  Color _getColorForCycle(int cycleLength, ColorScheme colorScheme) {
+    if (cycleLength < 24) {
+      return colorScheme.tertiaryContainer;
+    }
+    else if (cycleLength <= 35) {
+      return colorScheme.primary;
+    }
+    else {
+      return colorScheme.secondary;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
@@ -35,6 +47,11 @@ class MonthlyCycleListView extends StatelessWidget {
         
         final double barWidthFactor = ((data.cycleLength.clamp(15, 40) - 15) / (40 - 15)) * 0.8 + 0.2;
 
+        final barColor = _getColorForCycle(data.cycleLength, colorScheme);
+        final textColor = Theme.of(context).brightness == Brightness.dark
+            ? Colors.black
+            : Colors.white;
+
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8.0),
 
@@ -57,14 +74,14 @@ class MonthlyCycleListView extends StatelessWidget {
                 child: Container(
                   height: barHeight,
                   decoration: BoxDecoration(
-                    color: colorScheme.primary,
+                    color: barColor,
                     borderRadius: BorderRadius.circular(barHeight / 2),
                   ),
                   child: Center(
                     child: Text(
                       '${data.cycleLength} days',
                       style: TextStyle(
-                        color: colorScheme.onPrimary,
+                        color: textColor,
                         fontWeight: FontWeight.bold,
                         fontSize: 14,
                       ),
