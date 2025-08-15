@@ -9,7 +9,7 @@ class MonthlyCycleListView extends StatelessWidget {
   const MonthlyCycleListView({
     super.key,
     this.monthlyCycleData,
-    this.barHeight = 35.0,
+    this.barHeight = 30.0,
   });
 
   Color _getColorForCycle(int cycleLength, ColorScheme colorScheme) {
@@ -69,7 +69,7 @@ class MonthlyCycleListView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
+                padding: const EdgeInsets.only(bottom: 2.0),
                 child: Text(
                   monthName,
                   style: const TextStyle(
