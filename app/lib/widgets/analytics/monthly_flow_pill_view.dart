@@ -9,7 +9,7 @@ class CycleFlowPillView extends StatelessWidget {
   const CycleFlowPillView({
     super.key,
     required this.monthlyFlowData,
-    this.height = 35.0,
+    this.height = 30.0,
   });
 
   Color _getColorForFlow(FlowLevel flow, ColorScheme colorScheme) {
@@ -56,7 +56,7 @@ class CycleFlowPillView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
+                padding: const EdgeInsets.only(bottom: 2.0),
                 child: Text(
                   monthData.monthLabel,
                   style: const TextStyle(
@@ -68,20 +68,37 @@ class CycleFlowPillView extends StatelessWidget {
               
               SizedBox(
                 height: height,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(height / 2),
-                  child: Row(
-                    children: monthData.flows.asMap().entries.map((entry) {
-                      final dayNumber = entry.key + 1;
-                      final flowInt = entry.value;
-                      final flowLevel = flowLevelFromInt(flowInt);
-                      final segmentColor = _getColorForFlow(flowLevel, colorScheme);
-                      final brightness = ThemeData.estimateBrightnessForColor(segmentColor);
-                      final textColor = brightness == Brightness.dark ? Colors.white : Colors.black;
+                child: Row(
+                  children: monthData.flows.asMap().entries.map((entry) {
+                    final dayNumber = entry.key + 1;
+                    final flowInt = entry.value;
+                    final flowLevel = flowLevelFromInt(flowInt);
+                    final segmentColor = _getColorForFlow(flowLevel, colorScheme);
+                    final brightness = ThemeData.estimateBrightnessForColor(segmentColor);
+                    final textColor = brightness == Brightness.dark ? Colors.white : Colors.black;
+                    
+                    BorderRadiusGeometry? borderRadius;
+                    if (entry.key == 0) {
+                      borderRadius = BorderRadius.only(
+                        topLeft: Radius.circular(height / 2),
+                        bottomLeft: Radius.circular(height / 2),
+                      );
+                    } 
+                    else if (entry.key == monthData.flows.length - 1) {
+                      borderRadius = BorderRadius.only(
+                        topRight: Radius.circular(height / 2),
+                        bottomRight: Radius.circular(height / 2),
+                      );
+                    }
 
-                      return Expanded(
+                    return Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 0.5),
                         child: Container(
-                          color: segmentColor,
+                          decoration: BoxDecoration(
+                            color: segmentColor,
+                            borderRadius: borderRadius,
+                          ),
                           child: Center(
                             child: Text(
                               '$dayNumber',
@@ -93,9 +110,9 @@ class CycleFlowPillView extends StatelessWidget {
                             ),
                           ),
                         ),
-                      );
-                    }).toList(),
-                  ),
+                      ),
+                    );
+                  }).toList(),
                 ),
               ),
             ],
