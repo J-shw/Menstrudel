@@ -4,13 +4,13 @@ enum FlowLevel {
   heavy 
 }
 
-class DailyFlowData {
-  final int day;
-  final FlowLevel flow;
+class MonthlyFlowData {
+  final String monthLabel;
+  final List<int> flows;
 
-  DailyFlowData({
-    required this.day,
-    required this.flow,
+  MonthlyFlowData({
+    required this.monthLabel,
+    required this.flows,
   });
 }
 
