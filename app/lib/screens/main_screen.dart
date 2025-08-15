@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:menstrudel/screens/analytics_screen.dart';
 import 'package:menstrudel/screens/logs_screen.dart';
 import 'package:menstrudel/screens/settings_screen.dart';
+import 'package:menstrudel/screens/insights_screen.dart';
 import 'package:menstrudel/widgets/main/main_navigation_bar.dart';
 import 'package:menstrudel/widgets/main/app_bar.dart';
 
@@ -27,7 +27,7 @@ class _MainScreenState extends State<MainScreen> {
 
   late final List<Widget> _pages;
   static const List<PreferredSizeWidget?> _appBars = <PreferredSizeWidget?>[
-    TopAppBar(titleText: "Insights"),
+    TopAppBar(titleText: "Your Insights"),
     null,
     TopAppBar(titleText: "Settings"),
   ];
@@ -36,7 +36,7 @@ class _MainScreenState extends State<MainScreen> {
   void initState() {
     super.initState();
     _pages = <Widget>[
-      const AnalyticsScreen(),
+      const InsightsScreen(),
       LogsScreen(
         key: _logsScreenKey,
         onFabStateChange: _onFabStateChange,
