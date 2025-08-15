@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:menstrudel/widgets/monthly_cycle_list_view.dart';
+import 'package:menstrudel/widgets/analytics/monthly_cycle_list_view.dart';
+import 'package:menstrudel/widgets/analytics/cycle_flow_pill_view.dart';
 import 'package:menstrudel/widgets/analytics/stat_card.dart';
 import 'package:menstrudel/models/cycles/cycle_stats.dart';
 import 'package:menstrudel/models/cycles/monthly_cycle_data.dart';
 import 'package:menstrudel/models/periods/period_stats.dart';
+import 'package:menstrudel/models/flows/flow_data.dart';
 
+enum CycleView { 
+  list, 
+  flow 
+}
 
 class InsightsDataView extends StatefulWidget {
   final CycleStats cycleStats;
   final PeriodStats periodStats;
+  final List<MonthlyFlowData> monthlyFlowData;
   final List<MonthlyCycleData> monthlyCycleData;
 
   const InsightsDataView({
@@ -16,6 +23,7 @@ class InsightsDataView extends StatefulWidget {
     required this.cycleStats,
     required this.periodStats,
     required this.monthlyCycleData,
+    required this.monthlyFlowData,
   });
 
   @override
@@ -25,6 +33,7 @@ class InsightsDataView extends StatefulWidget {
 class _InsightsDataViewState extends State<InsightsDataView> {
   final _pageController = PageController();
   int _currentPage = 0;
+  CycleView _currentView = CycleView.list;
 
   @override
   void dispose() {
@@ -46,6 +55,7 @@ class _InsightsDataViewState extends State<InsightsDataView> {
 
   @override
   Widget build(BuildContext context) {
+
     List<Widget> statCards = [
       StatCard(
         icon: Icons.calendar_month,
@@ -128,11 +138,38 @@ class _InsightsDataViewState extends State<InsightsDataView> {
 
         const SizedBox(height: 10),
 
-        Expanded(
-          child: MonthlyCycleListView(
-            monthlyCycleData: widget.monthlyCycleData,
-          ),
+        ToggleButtons(
+          isSelected: [
+            _currentView == CycleView.list,
+            _currentView == CycleView.flow,
+          ],
+          onPressed: (int index) {
+            setState(() {
+              _currentView = CycleView.values[index];
+            });
+          },
+          borderRadius: BorderRadius.circular(8.0),
+          children: const [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.0),
+              child: Text('Cycle Length'),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.0),
+              child: Text('Flow Rate'),
+            ),
+          ],
         ),
+        const SizedBox(height: 10),
+
+        if (_currentView == CycleView.list)
+          MonthlyCycleListView(
+            monthlyCycleData: widget.monthlyCycleData,
+          )
+        else
+         CycleFlowPillView(
+            monthlyFlowData: widget.monthlyFlowData,
+          ),
       ],
     );
   }
