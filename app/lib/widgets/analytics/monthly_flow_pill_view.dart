@@ -20,7 +20,7 @@ class CycleFlowPillView extends StatelessWidget {
     final Color themeColor = colorScheme.primaryContainer;
 
     Color blend(Color yourColor) {
-      return Color.lerp(themeColor, yourColor, 0.3)!;
+      return Color.lerp(themeColor, yourColor, 0.7)!;
     }
 
     switch (flow) {
