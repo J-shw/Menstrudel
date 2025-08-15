@@ -30,8 +30,7 @@ class CycleLengthBarChart extends StatelessWidget {
       maxAxisValue = maxAxisValue + 5;
     }
 
-    return Expanded(
-      child: Row(
+    return Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Expanded(
@@ -47,8 +46,7 @@ class CycleLengthBarChart extends StatelessWidget {
             ),
           ),
         ],
-      ),
-    );
+      );
   }
 }
 
