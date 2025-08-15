@@ -1,5 +1,6 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+import 'package:intl/intl.dart';
 import 'package:menstrudel/models/period_logs/period_logs.dart';
 import 'package:menstrudel/models/periods/period.dart';
 import 'package:menstrudel/models/flows/flow_data.dart';
@@ -220,36 +221,36 @@ class PeriodDatabase {
     });
   }
 
-  Future<List<DailyFlowData>> getFlowDataForPeriod(int periodId) async {
+  Future<List<MonthlyFlowData>> getMonthlyFlows() async {
     final db = await instance.database;
+    final List<MonthlyFlowData> allMonthlyFlows = [];
 
-    final result = await db.query(
-      'period_logs',
-      where: 'period_id = ?',
-      whereArgs: [periodId],
-      orderBy: 'date ASC',
-    );
+    final allPeriods = await readAllPeriods();
 
-    if (result.isEmpty) {
-      return [];
-    }
+    for (final period in allPeriods) {
+      if (period.id == null) continue;
 
-    List<DailyFlowData> flowDataList = [];
-    for (int i = 0; i < result.length; i++) {
-      final logMap = result[i];
-      
-      final int dayNumber = i + 1; 
-      
-      final int flowInt = logMap['flow'] as int;
-
-      flowDataList.add(
-        DailyFlowData(
-          day: dayNumber,
-          flow: flowLevelFromInt(flowInt),
-        ),
+      final logsResult = await db.query(
+        'period_logs',
+        where: 'period_id = ?',
+        whereArgs: [period.id],
+        orderBy: 'date ASC',
       );
-    }
 
-    return flowDataList;
+      final flowInts = logsResult.map((log) => log['flow'] as int).toList();
+
+      if (flowInts.isNotEmpty) {
+        final monthKey = DateFormat('MMMM').format(period.startDate);
+        
+        allMonthlyFlows.add(
+          MonthlyFlowData(
+            monthLabel: monthKey,
+            flows: flowInts,
+          ),
+        );
+      }
+    }
+    
+    return allMonthlyFlows;
   }
 }
