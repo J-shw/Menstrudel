@@ -26,26 +26,6 @@ class CycleFlowTableView extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        SizedBox(
-          height: _kRowHeight,
-          child: Row(
-            children: [
-              SizedBox(width: _kDayNumberColumnWidth),
-              ...monthlyFlowData.map(
-                (data) => Expanded(
-                  child: Center(
-                    child: Text(
-                      data.monthLabel,
-                      style: textTheme.titleSmall,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-
         ...List.generate(maxCycleLength, (dayIndex) {
           final dayNumber = dayIndex + 1;
           return SizedBox(
@@ -75,6 +55,25 @@ class CycleFlowTableView extends StatelessWidget {
             ),
           );
         }),
+        SizedBox(
+          height: _kRowHeight,
+          child: Row(
+            children: [
+              SizedBox(width: _kDayNumberColumnWidth),
+              ...monthlyFlowData.map(
+                (data) => Expanded(
+                  child: Center(
+                    child: Text(
+                      data.monthLabel,
+                      style: textTheme.titleSmall,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ],
     );
   }
