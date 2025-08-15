@@ -15,7 +15,7 @@ enum CycleView {
 class InsightsDataView extends StatefulWidget {
   final CycleStats cycleStats;
   final PeriodStats periodStats;
-  final List<DailyFlowData> cycleFlowData;
+  final List<MonthlyFlowData> monthlyFlowData;
   final List<MonthlyCycleData> monthlyCycleData;
 
   const InsightsDataView({
@@ -23,7 +23,7 @@ class InsightsDataView extends StatefulWidget {
     required this.cycleStats,
     required this.periodStats,
     required this.monthlyCycleData,
-    required this.cycleFlowData,
+    required this.monthlyFlowData,
   });
 
   @override
@@ -168,7 +168,7 @@ class _InsightsDataViewState extends State<InsightsDataView> {
           )
         else
          CycleFlowPillView(
-            cycleFlowData: widget.cycleFlowData,
+            monthlyFlowData: widget.monthlyFlowData,
           ),
       ],
     );
