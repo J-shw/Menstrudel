@@ -1,8 +1,14 @@
+import 'package:intl/intl.dart';
+
 class PeriodEntry {
 	final int? id;
 	final DateTime startDate;
 	final DateTime endDate;
 	final int totalDays;
+
+  String get monthLabel {
+    return DateFormat('MMM').format(startDate);
+  }
 
 	PeriodEntry({
 		this.id, 
