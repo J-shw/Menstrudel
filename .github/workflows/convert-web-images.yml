@@ -19,8 +19,15 @@ jobs:
 
       - name: Convert new PNGs to WebP
         run: |
-          find docs/screenshots -type f -name "*.png" -exec sh -c 'cwebp -q 80 -nooverwrite "$0" -o "${0%.png}.webp"' {} \;
-
+          find docs/website/images -type f -name "*.png" | while read -r png_file; do
+            webp_file="${png_file%.png}.webp"
+            if [ ! -f "$webp_file" ]; then
+              echo "Converting: $png_file"
+              cwebp -q 80 "$png_file" -o "$webp_file"
+            else
+              echo "Skipping (already exists): $webp_file"
+            fi
+          done
       - name: Commit files
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
