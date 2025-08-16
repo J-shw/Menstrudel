@@ -1,0 +1,105 @@
+import 'package:sqflite/sqflite.dart';
+import 'package:path/path.dart';
+
+class AppDatabase {
+    static final AppDatabase instance = AppDatabase._init();
+    static Database? _database;
+
+    AppDatabase._init();
+
+    Future<Database> get database async {
+        if (_database != null) return _database!;
+        _database = await _initDB('app_database.db');
+        return _database!;
+    }
+
+    Future<Database> _initDB(String filePath) async {
+      final dbPath = await getDatabasesPath();
+      final path = join(dbPath, filePath);
+
+      return await openDatabase(
+        path,
+        version: 2,
+        onCreate: _createDB,
+        onUpgrade: _upgradeDB,
+      );
+    }
+
+  Future _createDB(Database db, int version) async {
+    await db.execute(
+      '''
+        CREATE TABLE periods (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            start_date INTEGER NOT NULL,
+            end_date INTEGER NOT NULL,
+            total_days INTEGER NOT NULL
+        )
+      '''
+    );
+    await db.execute(
+      '''
+      CREATE TABLE period_logs (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          date TEXT NOT NULL,
+          symptoms  TEXT,
+          flow INTEGER NOT NULL,
+          period_id INTEGER,
+          FOREIGN KEY (period_id) REFERENCES periods(id) ON DELETE SET NULL
+      )
+      '''
+    );
+    
+    await _createPillTables(db);
+  }
+
+  Future _upgradeDB(Database db, int oldVersion, int newVersion) async {
+    if (oldVersion < 2) {
+      await _createPillTables(db);
+    }
+  }
+
+  Future<void> _createPillTables(Database db) async {
+    await db.execute(
+      '''
+      CREATE TABLE PillRegimen (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL,
+        active_pills INTEGER NOT NULL,
+        placebo_pills INTEGER NOT NULL,
+        start_date TEXT NOT NULL,
+        is_active INTEGER NOT NULL
+      )
+      '''
+    );
+    await db.execute(
+      '''
+      CREATE TABLE PillIntake (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        regimen_id INTEGER NOT NULL,
+        taken_at TEXT NOT NULL,
+        scheduled_date TEXT NOT NULL,
+        status TEXT NOT NULL,
+        pill_number_in_cycle INTEGER NOT NULL,
+        FOREIGN KEY (regimen_id) REFERENCES PillRegimen (id) ON DELETE CASCADE
+      )
+      '''
+    );
+    await db.execute(
+      '''
+      CREATE TABLE PillReminder (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        regimen_id INTEGER NOT NULL,
+        reminder_time TEXT NOT NULL,
+        is_enabled INTEGER NOT NULL,
+        FOREIGN KEY (regimen_id) REFERENCES PillRegimen (id) ON DELETE CASCADE
+      )
+      '''
+    );
+  }
+
+  Future close() async {
+    final db = await instance.database;
+    _database = null;
+    db.close();
+  }
+}
