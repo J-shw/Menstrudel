@@ -31,6 +31,12 @@ class MainNavigationBar extends StatelessWidget {
             onPressed: () => onScreenSelected(1),
           ),
           _NavBarItem(
+            icon: Icons.medication_rounded,
+            label: 'Pill',
+            isActive: selectedIndex == 2,
+            onPressed: () => onScreenSelected(2),
+          ), 
+          _NavBarItem(
             icon: Icons.settings,
             label: 'Settings',
             isActive: selectedIndex == 2,
