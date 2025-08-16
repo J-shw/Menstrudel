@@ -7,6 +7,7 @@
 
 ## Get The App
 
+* **[Join our Playstore beta](https://groups.google.com/g/menstrudel-app-testers)**
 * **[Contribute on GitHub](https://github.com/J-shw/Menstrudel)**
 
 ---
