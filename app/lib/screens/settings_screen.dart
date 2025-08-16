@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/services/settings_service.dart';
 import 'package:menstrudel/widgets/dialogs/delete_confirmation_dialog.dart';
-import 'package:menstrudel/database/period_database.dart';
+import 'package:menstrudel/database/repositories/periods_repository.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -11,6 +11,7 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+  final periodsRepo = PeriodsRepository();
   final SettingsService _settingsService = SettingsService();
 
   bool _isLoading = true;
@@ -69,7 +70,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       _isLoading = true;
     });
 
-    await PeriodDatabase.instance.deleteAllEntries();
+    await periodsRepo.deleteAllEntries();
 
     if (!mounted) return;
 
