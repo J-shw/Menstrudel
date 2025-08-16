@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:menstrudel/database/period_database.dart';
+import 'package:menstrudel/database/repositories/periods_repository.dart';
 import 'package:menstrudel/models/period_logs/period_logs.dart';
 import 'package:menstrudel/models/periods/period.dart';
 import 'package:menstrudel/models/flows/flow_data.dart';
@@ -21,6 +21,7 @@ class InsightsScreen extends StatefulWidget {
 
 class _InsightsScreenState extends State<InsightsScreen> {
   late Future<List<dynamic>> _insightsDataFuture;
+  final periodsRepo = PeriodsRepository();
 
   @override
   void initState() {
@@ -29,13 +30,12 @@ class _InsightsScreenState extends State<InsightsScreen> {
   }
 
   void _loadInsightsData() {
-    final db = PeriodDatabase.instance;
     _insightsDataFuture = Future.wait([
-      db.readAllPeriods(),
-      db.readAllPeriodLogs(),
-      db.getMonthlyFlows()
+      periodsRepo.readAllPeriods(),
+      periodsRepo.readAllPeriodLogs(),
+      periodsRepo.getMonthlyFlows()
     ]);
-  }
+}
 
   @override
   Widget build(BuildContext context) {
