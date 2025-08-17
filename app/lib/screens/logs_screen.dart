@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:menstrudel/database/repositories/periods_repository.dart';
 import 'package:menstrudel/widgets/basic_progress_circle.dart';
 import 'package:menstrudel/widgets/dialogs/log_period_dialog.dart';
 import 'package:menstrudel/models/period_logs/period_logs.dart';
 import 'package:menstrudel/models/periods/period.dart';
-import 'package:menstrudel/database/period_database.dart'; 
 import 'package:menstrudel/widgets/period_list_view.dart';
 import 'package:menstrudel/models/period_prediction_result.dart';
 import 'package:menstrudel/utils/period_predictor.dart';
@@ -26,6 +26,8 @@ class LogsScreen extends StatefulWidget {
 }
 
 class LogsScreenState extends State<LogsScreen> {
+  final periodsRepo = PeriodsRepository();
+
 	List<PeriodLogEntry> _periodLogEntries = [];
   List<PeriodEntry> _periodEntries = [];
 	bool _isLoading = false;
@@ -58,7 +60,7 @@ class LogsScreenState extends State<LogsScreen> {
         flow: flow ?? 0,
       );
 
-      await PeriodDatabase.instance.createPeriodLog(newEntry);
+      await periodsRepo.createPeriodLog(newEntry);
       _refreshPeriodLogs();
 
     } catch (e) {
@@ -114,8 +116,8 @@ class LogsScreenState extends State<LogsScreen> {
       _isLoading = true;
     });
 
-    final periodLogData = await PeriodDatabase.instance.readAllPeriodLogs();
-    final periodData = await PeriodDatabase.instance.readAllPeriods();
+    final periodLogData = await periodsRepo.readAllPeriodLogs();
+    final periodData = await periodsRepo.readAllPeriods();
     final isReminderSet = await NotificationService.isTamponReminderScheduled();
     final predictionResult = PeriodPredictor.estimateNextPeriod(periodLogData, DateTime.now());
 
@@ -153,7 +155,7 @@ class LogsScreenState extends State<LogsScreen> {
   }
 
 	Future<void> _deletePeriodEntry(int id) async {
-		await PeriodDatabase.instance.deletePeriodLog(id);
+		await periodsRepo.deletePeriodLog(id);
 		_refreshPeriodLogs();
 	}
 

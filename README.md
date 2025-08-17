@@ -2,40 +2,44 @@
 
 Free, offline, and open source period tracking app.
 
+[Join our Playstore beta](https://groups.google.com/g/menstrudel-app-testers)
+
 ## About Menstrudel
 
 Menstrudel is a simple, private, and intuitive mobile application built with Flutter to help you track your menstrual cycle. Log your period start dates, record symptoms and flow intensity, and get predictions for your next cycle. Designed with privacy in mind, all your personal health data is stored securely offline on your device.
 
-## Features
+## Key Features for Your Menstrual Health
 
 * **Effortless Period Logging:**
-    * Quickly log the start date of your period using a date picker.
-    * Select associated symptoms from a dropdown (supports single selection for now).
-    * Record flow intensity (Low, Medium, High) using a slider.
-* **Cycle Prediction:**
-    * Leverages your logged data to estimate your next period start date.
-    * Calculates average cycle length by filtering out unrealistic gaps (e.g., due to missed loggings) for more reliable predictions.
-    * Clearly displays the number of days until your next period, or indicates if your period is due today or overdue.
-* **Period Notifications:**
-    * Get a reminder a few days before your period starts.
-    * Customise the days in advance to be alerted that your period is due.
-    * Choose the time of day to send the notification.
-* **Tampon Reminders:**
-    * Get a reminder when it's time to change your tampon.
-    * Defaulting to 6 hours from the current time, you choose when the alert should be sent.
-* **Private Local Data Storage:** All your sensitive health data is stored securely offline on your device using SQLite, ensuring your privacy.
-* **Adaptive Theme:** Supports both Light and Dark modes, adapting seamlessly to your device's system settings.
-* **Completely Offline:** No internet connection. No sign ups. No adverts.
-* **Free & Open Source:** Menstrudel is free to use, and its codebase is open for transparency, auditing, and community contributions.
-
+    * Quickly log your period start date.
+    * Record symptoms and flow intensity.
+* **Reliable Cycle Prediction:**
+    * Estimates your next period start date based on your history.
+    * Calculates your average cycle length for reliable predictions.
+    * Clearly displays a countdown to your next period.
+* **Intuiative Pill Regimen:**
+    * Easily configure your specific pill pack, whether it’s 21-day, 28-day, or custom.
+    * Log your daily intake with a single tap.
+* **Customisable Notifications:**
+    * **Period Reminders:** Get an alert a few days before your period is due.
+    * **Tampon Reminders:** Set a reminder to change your tampon for your safety.
+    * **Pill Reminders:** Get an alert when its time to take your pill.
+* **Secure Local Storage:** Your sensitive health data is stored offline on your device using SQLite.
+* **Adaptive Theme:** Supports both Light and Dark modes.
 ### Privacy Policy
 
 You can view our privacy policy [here](/docs/PRIVACY.md).
+
+### Socials
+
+- [Website](https://menstrudel.app/)
+- [ItsAllWidgets](https://itsallwidgets.com/menstrudel)
+- [AlternativeTo](https://alternativeto.net/software/menstrudel/about/)
 
 # App Screenshots
 
 | Your daily logs |  Quick symptom entry | Tampon reminder |
 | :---: | :---: | :---: |
-| ![Log View](docs/screenshots/v2.2.0/android/logs.png) | ![Symptom Entry Dialog](docs/screenshots/v2.2.0/android/log.png) | ![Symptom Entry Dialog](docs/screenshots/v2.2.0/android/reminder.png) |
-| Quick insights | Settings |  |
-![Insights View](docs/screenshots/v2.2.0/android/insights.png) | ![Symptom Entry Dialog](docs/screenshots/v2.2.0/android/settings.png) |  |
+| ![Log View](docs/screenshots/v2.2.0/android/logs_screen.webp) | ![Symptom Entry Dialog](docs/screenshots/v2.2.0/android/log_day.webp) | ![Symptom Entry Dialog](docs/screenshots/v2.2.0/android/tampon_reminder.webp) |
+| Pill Reminder | Quick insights | Settings |
+| ![Screenshot of the pill reminder screen in Menstrudel](screenshots/v2.3.0/android/pill_screen.webp)  | ![Insights View](docs/screenshots/v2.2.0/android/insights_screen.webp) | ![Symptom Entry Dialog](docs/screenshots/v2.2.0/android/settings_screen.webp) |  |

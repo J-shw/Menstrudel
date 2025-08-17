@@ -7,6 +7,7 @@
 
 ## Get The App
 
+* **[Join our Playstore beta](https://groups.google.com/g/menstrudel-app-testers)**
 * **[Contribute on GitHub](https://github.com/J-shw/Menstrudel)**
 
 ---
@@ -31,9 +32,13 @@ Log your period start dates, record symptoms, and get predictions for your next 
     * Estimates your next period start date based on your history.
     * Calculates your average cycle length for reliable predictions.
     * Clearly displays a countdown to your next period.
+* **Intuiative Pill Regimen:**
+    * Easily configure your specific pill pack, whether it’s 21-day, 28-day, or custom.
+    * Log your daily intake with a single tap.
 * **Customisable Notifications:**
     * **Period Reminders:** Get an alert a few days before your period is due.
     * **Tampon Reminders:** Set a reminder to change your tampon for your safety.
+    * **Pill Reminders:** Get an alert when its time to take your pill.
 * **Secure Local Storage:** Your sensitive health data is stored offline on your device using SQLite.
 * **Adaptive Theme:** Supports both Light and Dark modes.
 
@@ -43,6 +48,6 @@ You can view our full privacy policy [here](PRIVACY.md).
 
 | Your Daily Logs | Quick Symptom Entry | Tampon Reminder |
 | :---: | :---: | :---: |
-| ![Screenshot of Menstrudel's daily period log view on Android](screenshots/v2.2.0/android/logs.png) | ![Screenshot showing the quick symptom entry for a period log in Menstrudel](screenshots/v2.2.0/android/log.png) | ![Screenshot of the tampon change reminder setup in Menstrudel](screenshots/v2.2.0/android/reminder.png) |
-| Quick Insights | App Settings | |
-| ![Screenshot of the cycle insights and predictions screen in Menstrudel](screenshots/v2.2.0/android/insights.png) | ![Screenshot of the Menstrudel settings page showing notification options](screenshots/v2.2.0/android/settings.png) | |
+| ![Screenshot of Menstrudel's daily period log view on Android](screenshots/v2.3.0/android/logs_screen.webp) | ![Screenshot showing the quick symptom entry for a period log in Menstrudel](screenshots/v2.3.0/android/log_day.webp) | ![Screenshot of the tampon change reminder setup in Menstrudel](screenshots/v2.3.0/android/tampon_reminder.webp) |
+| Pill Reminder | Quick Insights | App Settings |
+ ![Screenshot of the pill reminder screen in Menstrudel](screenshots/v2.3.0/android/pill_screen.webp)  | ![Screenshot of the cycle insights and predictions screen in Menstrudel](screenshots/v2.3.0/android/insights_screen.webp) | ![Screenshot of the Menstrudel settings page showing notification options](screenshots/v2.3.0/android/settings_screen.webp) |

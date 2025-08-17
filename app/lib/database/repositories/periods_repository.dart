@@ -1,60 +1,16 @@
 import 'package:sqflite/sqflite.dart';
-import 'package:path/path.dart';
 import 'package:intl/intl.dart';
+
+import 'package:menstrudel/database/app_database.dart';
 import 'package:menstrudel/models/period_logs/period_logs.dart';
 import 'package:menstrudel/models/periods/period.dart';
 import 'package:menstrudel/models/flows/flow_data.dart';
 
-class PeriodDatabase {
-    static final PeriodDatabase instance = PeriodDatabase._init();
-    static Database? _database;
-
-    PeriodDatabase._init();
-
-    Future<Database> get database async {
-        if (_database != null) return _database!;
-            _database = await _initDB('periods.db');
-            return _database!;
-    }
-
-    Future<Database> _initDB(String filePath) async {
-      final dbPath = await getDatabasesPath();
-      final path = join(dbPath, filePath);
-
-      return await openDatabase(
-        path,
-        version: 1,
-        onCreate: _createDB,
-      );
-    }
-
-  Future _createDB(Database db, int version) async {
-    await db.execute(
-      '''
-        CREATE TABLE periods (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            start_date INTEGER NOT NULL,
-            end_date INTEGER NOT NULL,
-            total_days INTEGER NOT NULL
-        )
-      '''
-    );
-    await db.execute(
-      '''
-      CREATE TABLE period_logs (
-          id INTEGER PRIMARY KEY AUTOINCREMENT,
-          date TEXT NOT NULL,
-          symptoms  TEXT,
-          flow INTEGER NOT NULL,
-                    period_id INTEGER,
-          FOREIGN KEY (period_id) REFERENCES periods(id) ON DELETE SET NULL
-      )
-      '''
-    );
-	}
+class PeriodsRepository {
+  final dbProvider = AppDatabase.instance;
 
   Future<void> deleteAllEntries() async {
-    final db = await instance.database;
+    final db = await dbProvider.database;
     await db.transaction((txn) async {
       await txn.delete('period_logs');
       await txn.delete('periods');
@@ -64,21 +20,21 @@ class PeriodDatabase {
   // Periods
 
   Future<PeriodEntry> createPeriod(PeriodEntry entry) async {
-		final db = await instance.database;
-		final id = await db.insert('periods', entry.toMap());
-		return entry.copyWith(id: id);
-	}
+    final db = await dbProvider.database;
+    final id = await db.insert('periods', entry.toMap());
+    return entry.copyWith(id: id);
+  }
 
-	Future<List<PeriodEntry>> readAllPeriods() async {
-		final db = await instance.database;
-		const orderBy = 'start_date DESC';
-		final result = await db.query('periods', orderBy: orderBy);
+  Future<List<PeriodEntry>> readAllPeriods() async {
+    final db = await dbProvider.database;
+    const orderBy = 'start_date DESC';
+    final result = await db.query('periods', orderBy: orderBy);
 
-		return result.map((json) => PeriodEntry.fromMap(json)).toList();
-	}
+    return result.map((json) => PeriodEntry.fromMap(json)).toList();
+  }
 
   Future<PeriodEntry?> readLastPeriod() async {
-    final db = await instance.database;
+    final db = await dbProvider.database;
     final maps = await db.query(
       'periods',
       orderBy: 'start_date DESC',
@@ -93,7 +49,7 @@ class PeriodDatabase {
   }
 
   Future<int> updatePeriod(PeriodEntry period) async {
-    final db = await instance.database;
+    final db = await dbProvider.database;
     return db.update(
       'periods',
       period.toMap(),
@@ -102,70 +58,62 @@ class PeriodDatabase {
     );
   }
 
-	Future<int> deletePeriod(int id) async {
-		final db = await instance.database;
+  Future<int> deletePeriod(int id) async {
+    final db = await dbProvider.database;
     return await db.delete(
       'periods',
       where: 'id = ?',
       whereArgs: [id],
     );
-	}
+  }
 
   // Period logs
 
   Future<PeriodLogEntry> createPeriodLog(PeriodLogEntry entry) async {
-    final db = await instance.database;
+    final db = await dbProvider.database;
       
     final id = await db.insert('period_logs', entry.toMap());
 
     await _recalculateAndAssignPeriods(db);
 
     return await readPeriodLog(id);
-	}
+  }
 
-	Future<List<PeriodLogEntry>> readAllPeriodLogs() async {
-		final db = await instance.database;
-		const orderBy = 'date DESC';
-		final result = await db.query('period_logs', orderBy: orderBy);
+  Future<List<PeriodLogEntry>> readAllPeriodLogs() async {
+    final db = await dbProvider.database;
+    const orderBy = 'date DESC';
+    final result = await db.query('period_logs', orderBy: orderBy);
 
-		return result.map((json) => PeriodLogEntry.fromMap(json)).toList();
-	}
+    return result.map((json) => PeriodLogEntry.fromMap(json)).toList();
+  }
 
   Future<PeriodLogEntry> readPeriodLog(id) async {
-		final db = await instance.database;
+    final db = await dbProvider.database;
 
-		final result = await db.query(
+    final result = await db.query(
       'period_logs', 
       where: 'id = $id', 
     );
 
-		return result.map((json) => PeriodLogEntry.fromMap(json)).first;
-	}
+    return result.map((json) => PeriodLogEntry.fromMap(json)).first;
+  }
 
-	Future<int> deletePeriodLog(int id) async {
-		final db = await instance.database;
-		final int result = await db.delete(
-			'period_logs',
-			where: 'id = ?',
-			whereArgs: [id],
-		);
+  Future<int> deletePeriodLog(int id) async {
+    final db = await dbProvider.database;
+    final int result = await db.delete(
+      'period_logs',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
 
     if (result > 0) {
       await _recalculateAndAssignPeriods(db);
     }
 
     return result;
-	}
+  }
 
   // Other
-
-  Future close() async {
-		final db = await instance.database;
-		_database = null;
-		db.close();
-	}
-
-  // Helper functions
 
   Future<void> _recalculateAndAssignPeriods(Database db) async {
     await db.delete('periods');
@@ -222,7 +170,7 @@ class PeriodDatabase {
   }
 
   Future<List<MonthlyFlowData>> getMonthlyFlows() async {
-    final db = await instance.database;
+    final db = await dbProvider.database;
     final List<MonthlyFlowData> allMonthlyFlows = [];
 
     final allPeriods = await readAllPeriods();
