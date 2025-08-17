@@ -101,8 +101,8 @@ class NotificationService {
 
     await _plugin.zonedSchedule(
       _pillReminderId,
-      'Time for your pill!',
-      "Don't forget to log your pill for today.",
+      'Pill Reminder',
+      "Don't forget to take your pill for today.",
       scheduledDate,
       details,
       androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
