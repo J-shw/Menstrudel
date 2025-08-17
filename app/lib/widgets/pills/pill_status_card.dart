@@ -16,43 +16,67 @@ class PillStatusCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          children: [
-            Text(
-              'Pill $currentPillNumberInCycle of $totalPills',
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              isTodayPillTaken ? 'Taken for today' : 'Ready to take',
-              style: TextStyle(
-                fontSize: 16,
-                color: isTodayPillTaken ? Colors.green : Colors.orange.shade700,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            const SizedBox(height: 20),
-            SizedBox(
-              width: double.infinity,
-              child: FilledButton.icon(
-                onPressed: isTodayPillTaken ? null : onTakePill,
-                icon: Icon(isTodayPillTaken ? Icons.check_circle : Icons.medical_services_rounded),
-                label: Text(
-                  isTodayPillTaken ? 'All Set!' : 'Mark as Taken',
-                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                ),
-                style: FilledButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                  disabledBackgroundColor: Colors.green.withOpacity(0.7),
+    final double progressValue = totalPills > 0 ? currentPillNumberInCycle / totalPills : 0.0;
+    final Color primaryColor = Theme.of(context).colorScheme.primary;
+
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Column(
+        children: [
+          Stack(
+            alignment: Alignment.center,
+            children: [
+              SizedBox(
+                height: 200,
+                width: 200,
+                child: CircularProgressIndicator(
+                  year2023: false,
+                  value: progressValue,
+                  strokeWidth: 15,
+                  backgroundColor: primaryColor.withValues(alpha: 0.1),
+                  valueColor: AlwaysStoppedAnimation<Color>(primaryColor),
                 ),
               ),
+              Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      '$currentPillNumberInCycle',
+                      style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                            fontWeight: FontWeight.bold,
+                            color: primaryColor,
+                          ),
+                    ),
+                    Text(
+                      'of $totalPills pills',
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color: Colors.grey.shade600,
+                          ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 20),
+          SizedBox(
+            width: double.infinity,
+            child: FilledButton.icon(
+              onPressed: isTodayPillTaken ? null : onTakePill,
+              icon: Icon(isTodayPillTaken ? Icons.check_circle : Icons.medical_services_rounded),
+              label: Text(
+                isTodayPillTaken ? 'All Set!' : 'Mark as Taken',
+                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              style: FilledButton.styleFrom(
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                disabledBackgroundColor: Colors.green.withValues(alpha: 0.7),
+              ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
