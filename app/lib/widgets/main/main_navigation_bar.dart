@@ -40,7 +40,7 @@ class MainNavigationBar extends StatelessWidget {
             icon: Icons.settings,
             label: 'Settings',
             isActive: selectedIndex == 2,
-            onPressed: () => onScreenSelected(2),
+            onPressed: () => onScreenSelected(3),
           ), 
         ],
       )
