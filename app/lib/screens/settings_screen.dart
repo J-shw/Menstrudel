@@ -218,10 +218,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ],
         const Divider(),
         const ListTile(
-          title: Text('Period Tracking', style: TextStyle(fontWeight: FontWeight.bold)),
+          title: Text('Period Predictions & Reminders', style: TextStyle(fontWeight: FontWeight.bold)),
         ),
         SwitchListTile(
-          title: const Text('Enable Notifications'),
+          title: const Text('Upcoming Period Reminders'),
           value: _notificationsEnabled,
           onChanged: (bool value) {
             setState(() {
@@ -270,7 +270,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             color: Theme.of(context).colorScheme.error,
           ),
           title: Text(
-            'Clear Logs',
+            'Clear All Period Data',
             style: TextStyle(
               color: Theme.of(context).colorScheme.error,
             ),
