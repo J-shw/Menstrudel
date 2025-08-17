@@ -39,7 +39,7 @@ class MainNavigationBar extends StatelessWidget {
           _NavBarItem(
             icon: Icons.settings,
             label: 'Settings',
-            isActive: selectedIndex == 2,
+            isActive: selectedIndex == 3,
             onPressed: () => onScreenSelected(3),
           ), 
         ],
