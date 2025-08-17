@@ -157,6 +157,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
           ),
         const Divider(),
+        const ListTile(
+          title: Text('Period Tracking', style: TextStyle(fontWeight: FontWeight.bold)),
+        ),
         SwitchListTile(
           title: const Text('Enable Notifications'),
           value: _notificationsEnabled,
