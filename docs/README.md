@@ -7,10 +7,8 @@
 
 ## Get The App
 
-<p>
-  <a href="https://groups.google.com/g/menstrudel-app-testers" class="btn btn-primary">Join the Playstore Beta</a>
-  <a href="https://github.com/J-shw/Menstrudel" class="btn">View on GitHub</a>
-</p>
+* **[Join our Playstore beta](https://groups.google.com/g/menstrudel-app-testers)**
+* **[Contribute on GitHub](https://github.com/J-shw/Menstrudel)**
 
 ---
 
