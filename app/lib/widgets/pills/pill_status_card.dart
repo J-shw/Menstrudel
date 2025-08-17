@@ -44,15 +44,15 @@ class PillStatusCard extends StatelessWidget {
                     Text(
                       '$currentPillNumberInCycle',
                       style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                            fontWeight: FontWeight.bold,
-                            color: primaryColor,
-                          ),
+                        fontWeight: FontWeight.bold,
+                        color: primaryColor,
+                      ),
                     ),
                     Text(
                       'of $totalPills pills',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: Colors.grey.shade600,
-                          ),
+                        color: Colors.grey.shade600,
+                      ),
                     ),
                   ],
                 ),
