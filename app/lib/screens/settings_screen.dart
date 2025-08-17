@@ -6,6 +6,7 @@ import 'package:menstrudel/database/repositories/pills_repository.dart';
 import 'package:menstrudel/models/pills/pill_reminder.dart';
 import 'package:menstrudel/models/pills/pill_regimen.dart';
 import 'package:menstrudel/widgets/settings/regimen_setup_dialog.dart';
+import 'package:menstrudel/services/notification_service.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -71,6 +72,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
       isEnabled: _pillNotificationsEnabled,
     );
     await pillsRepo.savePillReminder(reminder);
+
+    await NotificationService.schedulePillReminder(
+      reminderTime: _pillNotificationTime,
+      isEnabled: _pillNotificationsEnabled,
+    );
+
     _loadSettings();
   }
   
@@ -96,6 +103,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
     if (result != null && mounted) {
       await pillsRepo.createPillRegimen(result);
+
+      await NotificationService.cancelPillReminder();
+
+      await pillsRepo.createPillRegimen(result);
+      
       _loadSettings();
     }
   }
@@ -114,6 +126,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
           confirmButtonText: 'Delete',
           onConfirm: () async {
             await pillsRepo.deletePillRegimen(_activeRegimen!.id!);
+
+            await NotificationService.cancelPillReminder();
+
             _loadSettings();
           },
         );
