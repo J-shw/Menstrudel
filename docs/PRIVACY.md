@@ -1,3 +1,9 @@
+---
+layout: default
+title: Privacy Policy
+permalink: /privacy/
+---
+
 ### Privacy Policy for Menstrudel
 
 **Last Updated:** 13/08/2025
