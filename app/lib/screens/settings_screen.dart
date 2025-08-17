@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:menstrudel/services/settings_service.dart';
 import 'package:menstrudel/widgets/dialogs/delete_confirmation_dialog.dart';
 import 'package:menstrudel/database/repositories/periods_repository.dart';
+import 'package:menstrudel/database/repositories/pills_repository.dart';
+import 'package:menstrudel/models/pills/pill_regimen.dart';
+import 'package:menstrudel/widgets/settings/regimen_setup_dialog.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -12,6 +15,8 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   final periodsRepo = PeriodsRepository();
+  final pillsRepo = PillsRepository();
+  PillRegimen? _activeRegimen;
   final SettingsService _settingsService = SettingsService();
 
   bool _isLoading = true;
@@ -26,12 +31,51 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   Future<void> _loadSettings() async {
+    setState(() { _isLoading = true; });
+    
     _notificationsEnabled = await _settingsService.areNotificationsEnabled();
     _notificationDays = await _settingsService.getNotificationDays();
     _notificationTime = await _settingsService.getNotificationTime();
+    _activeRegimen = await pillsRepo.readActivePillRegimen();
+    
     setState(() {
       _isLoading = false;
     });
+  }
+
+  Future<void> _showRegimenSetupDialog() async {
+    final result = await showDialog<PillRegimen>(
+      context: context,
+      builder: (BuildContext context) {
+        return const RegimenSetupDialog();
+      },
+    );
+
+    if (result != null && mounted) {
+      await pillsRepo.createPillRegimen(result);
+      _loadSettings();
+    }
+  }
+
+  Future<void> _showDeleteRegimenDialog() async {
+    if (_activeRegimen == null) return;
+
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return ConfirmationDialog(
+          title: 'Delete Regimen?',
+          content: const Text(
+            'This will delete your current pill pack settings and all associated pill logs. This cannot be undone.',
+          ),
+          confirmButtonText: 'Delete',
+          onConfirm: () async {
+            await pillsRepo.deletePillRegimen(_activeRegimen!.id!);
+            _loadSettings();
+          },
+        );
+      },
+    );
   }
 
   Future<void> _selectTime() async {
@@ -92,6 +136,27 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
     return ListView(
       children: [
+        const ListTile(
+          title: Text('Birth Control', style: TextStyle(fontWeight: FontWeight.bold)),
+        ),
+        if (_activeRegimen == null)
+          ListTile(
+            title: const Text('Set Up Pill Regimen'),
+            subtitle: const Text('Track your daily pill intake.'),
+            trailing: const Icon(Icons.add),
+            onTap: _showRegimenSetupDialog,
+          )
+        else
+          ListTile(
+            title: Text(_activeRegimen!.name),
+            subtitle: Text(
+                '${_activeRegimen!.activePills}/${_activeRegimen!.placeboPills} Pack. Started on ${MaterialLocalizations.of(context).formatShortDate(_activeRegimen!.startDate)}'),
+            trailing: IconButton(
+              icon: Icon(Icons.delete_outline, color: Theme.of(context).colorScheme.error),
+              onPressed: _showDeleteRegimenDialog,
+            ),
+          ),
+        const Divider(),
         SwitchListTile(
           title: const Text('Enable Notifications'),
           value: _notificationsEnabled,
