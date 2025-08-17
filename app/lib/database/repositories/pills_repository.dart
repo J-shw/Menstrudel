@@ -73,6 +73,7 @@ class PillsRepository {
 
   Future<void> savePillReminder(PillReminder reminder) async {
     final db = await dbProvider.database;
+    
     final existing = await db.query(
       'PillReminder',
       where: 'regimen_id = ?',
@@ -81,9 +82,12 @@ class PillsRepository {
     );
 
     if (existing.isNotEmpty) {
+      final values = reminder.toMap();
+      values.remove('id');
+
       await db.update(
         'PillReminder',
-        reminder.toMap(),
+        values,
         where: 'regimen_id = ?',
         whereArgs: [reminder.regimenId],
       );
