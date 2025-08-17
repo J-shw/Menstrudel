@@ -33,8 +33,8 @@ Log your period start dates, record symptoms, and get predictions for your next 
     * Calculates your average cycle length for reliable predictions.
     * Clearly displays a countdown to your next period.
 * **Intuiative Pill Regimen:**
-    * Create your personal pill pack.
-    * 
+    * Easily configure your specific pill pack, whether it’s 21-day, 28-day, or custom.
+    * Log your daily intake with a single tap.
 * **Customisable Notifications:**
     * **Period Reminders:** Get an alert a few days before your period is due.
     * **Tampon Reminders:** Set a reminder to change your tampon for your safety.
