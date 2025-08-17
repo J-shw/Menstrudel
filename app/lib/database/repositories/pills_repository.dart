@@ -70,4 +70,25 @@ class PillsRepository {
       whereArgs: [id],
     );
   }
+
+  Future<void> savePillReminder(PillReminder reminder) async {
+    final db = await dbProvider.database;
+    final existing = await db.query(
+      'PillReminder',
+      where: 'regimen_id = ?',
+      whereArgs: [reminder.regimenId],
+      limit: 1,
+    );
+
+    if (existing.isNotEmpty) {
+      await db.update(
+        'PillReminder',
+        reminder.toMap(),
+        where: 'regimen_id = ?',
+        whereArgs: [reminder.regimenId],
+      );
+    } else {
+      await db.insert('PillReminder', reminder.toMap());
+    }
+  }
 }
