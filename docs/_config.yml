@@ -5,3 +5,8 @@ logo: /icon/Menstrudel_cropped.png
 plugins:
   - jekyll-seo-tag
   - jekyll-sitemap 
+
+social:
+  name: Menstrudel
+  links:
+    - https://github.com/J-shw/Menstrudel
