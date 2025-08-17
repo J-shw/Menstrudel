@@ -42,4 +42,4 @@ You can view our privacy policy [here](/docs/PRIVACY.md).
 | :---: | :---: | :---: |
 | ![Log View](docs/screenshots/v2.2.0/android/logs_screen.webp) | ![Symptom Entry Dialog](docs/screenshots/v2.2.0/android/log_day.webp) | ![Symptom Entry Dialog](docs/screenshots/v2.2.0/android/tampon_reminder.webp) |
 | Pill Reminder | Quick insights | Settings |
-| ![Screenshot of the pill reminder screen in Menstrudel](screenshots/v2.3.0/android/pill_screen.webp)  | ![Insights View](docs/screenshots/v2.2.0/android/insights_screen.webp) | ![Symptom Entry Dialog](docs/screenshots/v2.2.0/android/settings_screen.webp) |  |
+| ![Screenshot of the pill reminder screen in Menstrudel](docs/screenshots/v2.3.0/android/pill_screen.webp)  | ![Insights View](docs/screenshots/v2.2.0/android/insights_screen.webp) | ![Symptom Entry Dialog](docs/screenshots/v2.2.0/android/settings_screen.webp) |  |
