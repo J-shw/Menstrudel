@@ -3,6 +3,7 @@ import 'package:menstrudel/services/settings_service.dart';
 import 'package:menstrudel/widgets/dialogs/delete_confirmation_dialog.dart';
 import 'package:menstrudel/database/repositories/periods_repository.dart';
 import 'package:menstrudel/database/repositories/pills_repository.dart';
+import 'package:menstrudel/models/pills/pill_reminder.dart';
 import 'package:menstrudel/models/pills/pill_regimen.dart';
 import 'package:menstrudel/widgets/settings/regimen_setup_dialog.dart';
 
@@ -16,13 +17,19 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   final periodsRepo = PeriodsRepository();
   final pillsRepo = PillsRepository();
-  PillRegimen? _activeRegimen;
+
   final SettingsService _settingsService = SettingsService();
 
   bool _isLoading = true;
   bool _notificationsEnabled = true;
   int _notificationDays = 1;
   TimeOfDay _notificationTime = const TimeOfDay(hour: 9, minute: 0);
+
+  PillRegimen? _activeRegimen;
+  PillReminder? _pillReminder;
+  bool _pillNotificationsEnabled = false;
+  TimeOfDay _pillNotificationTime = const TimeOfDay(hour: 21, minute: 0);
+
 
   @override
   void initState() {
@@ -37,10 +44,46 @@ class _SettingsScreenState extends State<SettingsScreen> {
     _notificationDays = await _settingsService.getNotificationDays();
     _notificationTime = await _settingsService.getNotificationTime();
     _activeRegimen = await pillsRepo.readActivePillRegimen();
+
+    if (_activeRegimen != null) {
+      _pillReminder = await pillsRepo.readReminderForRegimen(_activeRegimen!.id!);
+      if (_pillReminder != null) {
+        _pillNotificationsEnabled = _pillReminder!.isEnabled;
+        final timeParts = _pillReminder!.reminderTime.split(':');
+        _pillNotificationTime = TimeOfDay(hour: int.parse(timeParts[0]), minute: int.parse(timeParts[1]));
+      } else {
+        _pillNotificationsEnabled = false;
+        _pillNotificationTime = const TimeOfDay(hour: 21, minute: 0);
+      }
+    }
     
     setState(() {
       _isLoading = false;
     });
+  }
+
+  Future<void> _savePillReminderSettings() async {
+    if (_activeRegimen == null) return;
+    
+    final reminder = PillReminder(
+      regimenId: _activeRegimen!.id!,
+      reminderTime: '${_pillNotificationTime.hour}:${_pillNotificationTime.minute}',
+      isEnabled: _pillNotificationsEnabled,
+    );
+    await pillsRepo.savePillReminder(reminder);
+    _loadSettings();
+  }
+  
+  Future<void> _selectPillReminderTime() async {
+    final TimeOfDay? pickedTime = await showTimePicker(
+      context: context,
+      initialTime: _pillNotificationTime,
+    );
+
+    if (pickedTime != null && pickedTime != _pillNotificationTime) {
+      setState(() { _pillNotificationTime = pickedTime; });
+      await _savePillReminderSettings();
+    }
   }
 
   Future<void> _showRegimenSetupDialog() async {
@@ -146,16 +189,33 @@ class _SettingsScreenState extends State<SettingsScreen> {
             trailing: const Icon(Icons.add),
             onTap: _showRegimenSetupDialog,
           )
-        else
+        else ...[
           ListTile(
             title: Text(_activeRegimen!.name),
-            subtitle: Text(
-                '${_activeRegimen!.activePills}/${_activeRegimen!.placeboPills} Pack. Started on ${MaterialLocalizations.of(context).formatShortDate(_activeRegimen!.startDate)}'),
+            subtitle: Text('${_activeRegimen!.activePills}/${_activeRegimen!.placeboPills} Pack'),
             trailing: IconButton(
               icon: Icon(Icons.delete_outline, color: Theme.of(context).colorScheme.error),
               onPressed: _showDeleteRegimenDialog,
             ),
           ),
+          SwitchListTile(
+            title: const Text('Daily Pill Reminder'),
+            value: _pillNotificationsEnabled,
+            onChanged: (bool value) {
+              setState(() { _pillNotificationsEnabled = value; });
+              _savePillReminderSettings();
+            },
+          ),
+          if (_pillNotificationsEnabled)
+            ListTile(
+              title: const Text('Reminder Time'),
+              trailing: Text(
+                _pillNotificationTime.format(context),
+                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              onTap: _selectPillReminderTime,
+            ),
+        ],
         const Divider(),
         const ListTile(
           title: Text('Period Tracking', style: TextStyle(fontWeight: FontWeight.bold)),
