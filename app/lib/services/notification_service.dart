@@ -17,6 +17,7 @@ class NotificationService {
 
   static const int _periodNotificationId = 1;
   static const int _tamponReminderId = 2;
+  static const int _pillReminderId = 3;
 
   static Future<void> initialize() async {
     const androidSettings = AndroidInitializationSettings('@mipmap/ic_launcher');
@@ -37,6 +38,8 @@ class NotificationService {
         .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
         ?.requestNotificationsPermission();
   }
+
+  // Perdiods
 
   static Future<void> schedulePeriodNotification({
     required DateTime scheduledTime,
@@ -74,6 +77,54 @@ class NotificationService {
       androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
     );
   }
+  
+  // Pills
+
+  static Future<void> schedulePillReminder({
+    required TimeOfDay reminderTime,
+    required bool isEnabled,
+  }) async {
+    await _plugin.cancel(_pillReminderId);
+
+    if (!isEnabled) return;
+
+    final tz.TZDateTime scheduledDate = _nextInstanceOfTime(reminderTime);
+
+    const details = NotificationDetails(
+      android: AndroidNotificationDetails(
+        'pill_reminder_channel', 'Pill Reminders',
+        channelDescription: 'Daily reminders to take your birth control pill',
+        importance: Importance.max, priority: Priority.high,
+      ),
+      iOS: DarwinNotificationDetails(),
+    );
+
+    await _plugin.zonedSchedule(
+      _pillReminderId,
+      'Time for your pill!',
+      "Don't forget to log your pill for today.",
+      scheduledDate,
+      details,
+      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+      matchDateTimeComponents: DateTimeComponents.time,
+    );
+  }
+
+  static Future<void> cancelPillReminder() async {
+    await _plugin.cancel(_pillReminderId);
+  }
+
+  static tz.TZDateTime _nextInstanceOfTime(TimeOfDay time) {
+    final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
+    tz.TZDateTime scheduledDate = tz.TZDateTime(tz.local, now.year, now.month, now.day, time.hour, time.minute);
+    
+    if (scheduledDate.isBefore(now)) {
+      scheduledDate = scheduledDate.add(const Duration(days: 1));
+    }
+    return scheduledDate;
+  }
+
+  // Other
 
   static Future<void> scheduleTamponReminder({required TimeOfDay reminderTime}) async {
     final now = tz.TZDateTime.now(tz.local);
@@ -108,6 +159,8 @@ class NotificationService {
     final pendingRequests = await _plugin.pendingNotificationRequests();
     return pendingRequests.any((request) => request.id == _tamponReminderId);
   }
+
+  // General
 
   static Future<void> cancelAllNotifications() async {
     await _plugin.cancelAll();
