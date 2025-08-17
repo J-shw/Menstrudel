@@ -83,11 +83,11 @@ Widget build(BuildContext context) {
 			width: widget.circleSize,
 			height: widget.circleSize,
 			child: CircularProgressIndicator(
-			year2023: false,
-			value: _animation.value,
-			strokeWidth: widget.strokeWidth,
-			valueColor: AlwaysStoppedAnimation<Color>(widget.progressColor),
-			backgroundColor: widget.trackColor,
+        year2023: false,
+        value: _animation.value,
+        strokeWidth: widget.strokeWidth,
+        valueColor: AlwaysStoppedAnimation<Color>(widget.progressColor),
+        backgroundColor: widget.trackColor,
 			),
 		),
 		Column(
