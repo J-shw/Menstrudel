@@ -5,13 +5,15 @@ import 'package:menstrudel/widgets/basic_progress_circle.dart';
 import 'package:menstrudel/widgets/dialogs/log_period_dialog.dart';
 import 'package:menstrudel/models/period_logs/period_logs.dart';
 import 'package:menstrudel/models/periods/period.dart';
-import 'package:menstrudel/widgets/period_list_view.dart';
+
 import 'package:menstrudel/models/period_prediction_result.dart';
 import 'package:menstrudel/utils/period_predictor.dart';
 import 'package:menstrudel/services/notification_service.dart';
 import 'package:menstrudel/widgets/dialogs/tampon_reminder_dialog.dart';
 import 'package:menstrudel/screens/main_screen.dart';
 import 'package:menstrudel/services/settings_service.dart';
+import 'package:menstrudel/widgets/logs/dynamic_history_view.dart';
+
 
 class LogsScreen extends StatefulWidget {
    final Function(FabState) onFabStateChange;
@@ -27,11 +29,13 @@ class LogsScreen extends StatefulWidget {
 
 class LogsScreenState extends State<LogsScreen> {
   final periodsRepo = PeriodsRepository();
+  final SettingsService _settingsService = SettingsService();
 
 	List<PeriodLogEntry> _periodLogEntries = [];
   List<PeriodEntry> _periodEntries = [];
 	bool _isLoading = false;
 	PeriodPredictionResult? _predictionResult;
+  PeriodHistoryView _selectedView = PeriodHistoryView.journal;
 
   Future<void> handleLogPeriod(BuildContext context) async {
     final result = await showDialog<Map<String, dynamic>>(
@@ -120,6 +124,7 @@ class LogsScreenState extends State<LogsScreen> {
     final periodData = await periodsRepo.readAllPeriods();
     final isReminderSet = await NotificationService.isTamponReminderScheduled();
     final predictionResult = PeriodPredictor.estimateNextPeriod(periodLogData, DateTime.now());
+    final selectedView = await _settingsService.getHistoryView();
 
     if (predictionResult != null) {
       final settingsService = SettingsService();
@@ -151,6 +156,7 @@ class LogsScreenState extends State<LogsScreen> {
       _periodLogEntries = periodLogData;
       _periodEntries = periodData;
       _predictionResult = predictionResult;
+      _selectedView = selectedView;
     });
   }
 
@@ -205,11 +211,12 @@ class LogsScreenState extends State<LogsScreen> {
           ),
         ),
         const SizedBox(height: 20),
-        PeriodListView(
-          periodLogEnties: _periodLogEntries,
+        DynamicHistoryView(
+          selectedView: _selectedView,
+          periodLogEntries: _periodLogEntries,
           periodEntries: _periodEntries,
           isLoading: _isLoading,
-          onDelete: _deletePeriodEntry
+          onDelete: _deletePeriodEntry,
         ),
       ],
     );
