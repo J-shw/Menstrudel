@@ -30,6 +30,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   PillReminder? _pillReminder;
   bool _pillNotificationsEnabled = false;
   TimeOfDay _pillNotificationTime = const TimeOfDay(hour: 21, minute: 0);
+  PeriodHistoryView _selectedView = PeriodHistoryView.journal;
 
 
   @override
@@ -44,6 +45,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     _notificationsEnabled = await _settingsService.areNotificationsEnabled();
     _notificationDays = await _settingsService.getNotificationDays();
     _notificationTime = await _settingsService.getNotificationTime();
+    _selectedView = await _settingsService.getHistoryView();
     _activeRegimen = await pillsRepo.readActivePillRegimen();
 
     if (_activeRegimen != null) {
@@ -63,7 +65,34 @@ class _SettingsScreenState extends State<SettingsScreen> {
     });
   }
 
-  Future<void> _savePillReminderSettings() async {
+  Future<void> showViewPicker() async {
+    final PeriodHistoryView? result = await showDialog<PeriodHistoryView>(
+      context: context,
+      builder: (BuildContext context) {
+        return SimpleDialog(
+          title: const Text('Select History View'),
+          children: PeriodHistoryView.values.map((view) {
+            final viewName = '${view.name[0].toUpperCase()}${view.name.substring(1)}';
+            return RadioListTile<PeriodHistoryView>(
+              title: Text('$viewName View'),
+              value: view,
+              groupValue: _selectedView,
+              onChanged: (PeriodHistoryView? value) {
+                Navigator.of(context).pop(value);
+              },
+            );
+          }).toList(),
+        );
+      },
+    );
+
+    if (result != null && result != _selectedView) {
+      setState(() => _selectedView = result);
+      await _settingsService.setHistoryView(result);
+    }
+  }
+
+  Future<void> savePillReminderSettings() async {
     if (_activeRegimen == null) return;
     
     final reminder = PillReminder(
@@ -81,7 +110,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     _loadSettings();
   }
   
-  Future<void> _selectPillReminderTime() async {
+  Future<void> selectPillReminderTime() async {
     final TimeOfDay? pickedTime = await showTimePicker(
       context: context,
       initialTime: _pillNotificationTime,
@@ -89,11 +118,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
     if (pickedTime != null && pickedTime != _pillNotificationTime) {
       setState(() { _pillNotificationTime = pickedTime; });
-      await _savePillReminderSettings();
+      await savePillReminderSettings();
     }
   }
 
-  Future<void> _showRegimenSetupDialog() async {
+  Future<void> showRegimenSetupDialog() async {
     final result = await showDialog<PillRegimen>(
       context: context,
       builder: (BuildContext context) {
@@ -112,7 +141,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     }
   }
 
-  Future<void> _showDeleteRegimenDialog() async {
+  Future<void> showDeleteRegimenDialog() async {
     if (_activeRegimen == null) return;
 
     return showDialog<void>(
@@ -136,7 +165,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  Future<void> _selectTime() async {
+  Future<void> selectTime() async {
     final TimeOfDay? pickedTime = await showTimePicker(
       context: context,
       initialTime: _notificationTime,
@@ -150,24 +179,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     }
   }
 
-  Future<void> _showClearLogsDialog() async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return ConfirmationDialog(
-          title: 'Clear All Logs?',
-          content: const Text(
-            'This will permanently delete all your period logs. Your app settings will not be affected.',
-          ),
-          confirmButtonText: 'Clear',
-          onConfirm: _clearLogs,
-        );
-      },
-    );
-  }
-
-  Future<void> _clearLogs() async {
+  Future<void> clearLogs() async {
     setState(() {
       _isLoading = true;
     });
@@ -185,6 +197,23 @@ class _SettingsScreenState extends State<SettingsScreen> {
     });
   }
 
+  Future<void> showClearLogsDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return ConfirmationDialog(
+          title: 'Clear All Logs?',
+          content: const Text(
+            'This will permanently delete all your period logs. Your app settings will not be affected.',
+          ),
+          confirmButtonText: 'Clear',
+          onConfirm: clearLogs,
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -192,8 +221,21 @@ class _SettingsScreenState extends State<SettingsScreen> {
       return const Center(child: CircularProgressIndicator());
     }
 
+    final selectedViewName = '${_selectedView.name[0].toUpperCase()}${_selectedView.name.substring(1)}';
+
     return ListView(
       children: [
+        const ListTile(
+          title: Text('Appearance', style: TextStyle(fontWeight: FontWeight.bold)),
+        ),
+        ListTile(
+          title: const Text('History View Style'),
+          subtitle: Text('$selectedViewName View'),
+          onTap: showViewPicker,
+        ),
+
+        const Divider(),
+
         const ListTile(
           title: Text('Birth Control', style: TextStyle(fontWeight: FontWeight.bold)),
         ),
@@ -202,7 +244,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             title: const Text('Set Up Pill Regimen'),
             subtitle: const Text('Track your daily pill intake.'),
             trailing: const Icon(Icons.add),
-            onTap: _showRegimenSetupDialog,
+            onTap: showRegimenSetupDialog,
           )
         else ...[
           ListTile(
@@ -210,7 +252,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             subtitle: Text('${_activeRegimen!.activePills}/${_activeRegimen!.placeboPills} Pack'),
             trailing: IconButton(
               icon: Icon(Icons.delete_outline, color: Theme.of(context).colorScheme.error),
-              onPressed: _showDeleteRegimenDialog,
+              onPressed: showDeleteRegimenDialog,
             ),
           ),
           SwitchListTile(
@@ -218,7 +260,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             value: _pillNotificationsEnabled,
             onChanged: (bool value) {
               setState(() { _pillNotificationsEnabled = value; });
-              _savePillReminderSettings();
+              savePillReminderSettings();
             },
           ),
           if (_pillNotificationsEnabled)
@@ -228,7 +270,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 _pillNotificationTime.format(context),
                 style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
-              onTap: _selectPillReminderTime,
+              onTap: selectPillReminderTime,
             ),
         ],
         const Divider(),
@@ -275,7 +317,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            onTap: _selectTime,
+            onTap: selectTime,
           ),
         ],
         const Divider(),
@@ -290,7 +332,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               color: Theme.of(context).colorScheme.error,
             ),
           ),
-          onTap: _showClearLogsDialog,
+          onTap: showClearLogsDialog,
         ),
       ],
     );
