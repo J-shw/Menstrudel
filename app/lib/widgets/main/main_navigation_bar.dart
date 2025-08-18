@@ -19,25 +19,29 @@ class MainNavigationBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           _NavBarItem(
-            icon: Icons.bar_chart,
+            iconActive: Icons.bar_chart_rounded,
+            iconInactive: Icons.bar_chart_sharp,
             label: 'Insights',
             isActive: selectedIndex == 0,
             onPressed: () => onScreenSelected(0),
           ),
           _NavBarItem(
-            icon: Icons.book,
+            iconActive: Icons.book,
+            iconInactive: Icons.book_outlined,
             label: 'Logs',
             isActive: selectedIndex == 1,
             onPressed: () => onScreenSelected(1),
           ),
           _NavBarItem(
-            icon: Icons.medication_rounded,
+            iconActive: Icons.medication_rounded,
+            iconInactive: Icons.medication_outlined,
             label: 'Pill',
             isActive: selectedIndex == 2,
             onPressed: () => onScreenSelected(2),
           ), 
           _NavBarItem(
-            icon: Icons.settings,
+            iconActive: Icons.settings,
+            iconInactive: Icons.settings_outlined,
             label: 'Settings',
             isActive: selectedIndex == 3,
             onPressed: () => onScreenSelected(3),
@@ -49,13 +53,15 @@ class MainNavigationBar extends StatelessWidget {
 }
 
 class _NavBarItem extends StatelessWidget {
-  final IconData icon;
+  final IconData iconActive;
+  final IconData iconInactive;
   final String label;
   final bool isActive;
   final VoidCallback onPressed;
 
   const _NavBarItem({
-    required this.icon,
+    required this.iconActive,
+    required this.iconInactive,
     required this.label,
     required this.isActive,
     required this.onPressed,
@@ -72,7 +78,10 @@ class _NavBarItem extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(icon, color: color, size: 26),
+            if (isActive)
+              Icon(iconActive, color: color, size: 26)
+            else
+              Icon(iconInactive, color: color, size: 26),
             const SizedBox(height: 2),
             Text(
               label,
