@@ -1,10 +1,13 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 
+enum PeriodHistoryView { list, rhythm, journal }
+
 class SettingsService {
   static const String _notificationsEnabledKey = 'notifications_enabled';
   static const String _notificationDaysKey = 'notification_days';
   static const _notificationTimeKey = 'notification_time';
+  static const _historyViewKey = 'history_view';
 
   Future<void> deleteAllSettings() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -49,6 +52,20 @@ class SettingsService {
     return TimeOfDay(
       hour: int.parse(parts[0]),
       minute: int.parse(parts[1]),
+    );
+  }
+
+  Future<void> setHistoryView(PeriodHistoryView view) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_historyViewKey, view.name);
+  }
+
+  Future<PeriodHistoryView> getHistoryView() async {
+    final prefs = await SharedPreferences.getInstance();
+    final viewName = prefs.getString(_historyViewKey);
+    return PeriodHistoryView.values.firstWhere(
+      (e) => e.name == viewName,
+      orElse: () => PeriodHistoryView.journal,
     );
   }
 }
