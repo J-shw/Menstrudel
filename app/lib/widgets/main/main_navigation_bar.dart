@@ -69,31 +69,48 @@ class _NavBarItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = isActive ? Theme.of(context).primaryColor : Colors.grey;
-    return InkWell(
-      onTap: isActive ? null : onPressed,
-      borderRadius: BorderRadius.circular(20),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 12.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            if (isActive)
-              Icon(iconActive, color: color, size: 26)
-            else
-              Icon(iconInactive, color: color, size: 26),
-            const SizedBox(height: 2),
-            Text(
-              label,
-              style: TextStyle(
-                color: color,
-                fontSize: 12,
-                fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
+  final theme = Theme.of(context);
+  final color = isActive ? theme.primaryColor : Colors.grey;
+  final pillColor = theme.colorScheme.primary;
+  
+  final activeIconColor = theme.colorScheme.onPrimary; 
+  final inactiveColor = Colors.grey;
+
+  const pillPadding = EdgeInsets.symmetric(horizontal: 16, vertical: 4);
+
+  return InkWell(
+    onTap: isActive ? null : onPressed,
+    borderRadius: BorderRadius.circular(20),
+    child: Padding(
+      padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 12.0),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (isActive)
+            Container(
+              padding: pillPadding,
+              decoration: BoxDecoration(
+                color: pillColor,
+                borderRadius: BorderRadius.circular(50),
               ),
+              child: Icon(iconActive, color: activeIconColor, size: 26),
+            )
+          else
+            Container(
+              padding: pillPadding,
+              child: Icon(iconInactive, color: inactiveColor, size: 26),
             ),
-          ],
-        ),
+          Text(
+            label,
+            style: TextStyle(
+              color: color,
+              fontSize: 12,
+              fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
+            ),
+          ),
+        ],
       ),
-    );
-  }
+    ),
+  );
+}
 }
