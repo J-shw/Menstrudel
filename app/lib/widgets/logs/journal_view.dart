@@ -278,15 +278,13 @@ class _DetailsPanel extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 8),
                     Text("Flow", style: textTheme.bodySmall),
                     Row(
-                      children: List.generate(5, (index) => Icon(
+                      children: List.generate(3, (index) => Icon(
                         index < log!.flow + 1 ? Icons.water_drop : Icons.water_drop_outlined,
                         color: colorScheme.primary,
                       )),
                     ),
-                    const SizedBox(height: 8),
                     if (log!.symptoms != null && log!.symptoms!.isNotEmpty)
                       Expanded(
                         child: SingleChildScrollView(
