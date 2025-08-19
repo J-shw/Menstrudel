@@ -225,7 +225,7 @@ class _DayCell extends StatelessWidget {
           color: isPeriodDay ? colorScheme.primary.withValues(alpha: flowOpacity) : Colors.transparent,
           border: isSelected 
               ? Border.all(color: colorScheme.primary, width: 2.5)
-              : Border.all(color: Theme.of(context).dividerColor),
+              : null,
         ),
         child: Center(
           child: Text(
