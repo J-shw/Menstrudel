@@ -177,19 +177,19 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
 
                   if (isPredictedDay) {
                     return Container(
-                    margin: const EdgeInsets.all(4.0),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: colorScheme.error,
-                    ),
-                    alignment: Alignment.center,
-                    child: Text(
-                      '${day.day}',
-                      style: TextStyle(
-                        color: colorScheme.onError,
+                      margin: const EdgeInsets.all(4.0),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: colorScheme.error.withValues(alpha: 0.7),
                       ),
-                    ),
-                  );
+                      alignment: Alignment.center,
+                      child: Text(
+                        '${day.day}',
+                        style: TextStyle(
+                          color: colorScheme.onError,
+                        ),
+                      ),
+                    );
                   }
 
                   return null;
