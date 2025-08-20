@@ -182,7 +182,7 @@ class _WeekRow extends StatelessWidget {
               return _DayCell(
                 date: day,
                 log: log,
-                isSelected: selectedLog?.id == log?.id,
+                isSelected: selectedLog != null && log != null && selectedLog!.id == log!.id,
                 onTap: () {
                   if (log != null) onDaySelected(log);
                 },
