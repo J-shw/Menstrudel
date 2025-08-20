@@ -1,7 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 
-enum PeriodHistoryView { list, rhythm, journal }
+enum PeriodHistoryView { list, journal }
 
 class SettingsService {
   static const String _notificationsEnabledKey = 'notifications_enabled';
