@@ -102,7 +102,7 @@ class _MainScreenState extends State<MainScreen> {
       ? AnimatedSwitcher(
         duration: const Duration(milliseconds: 200),
         transitionBuilder: (Widget child, Animation<double> animation) {
-          return ScaleTransition(child: child, scale: animation);
+          return ScaleTransition(scale: animation, child: child,);
         },
         child: _buildFab(),
       )
