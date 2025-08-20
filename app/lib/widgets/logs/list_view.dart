@@ -5,7 +5,7 @@ import 'package:menstrudel/models/periods/period.dart';
 import 'package:collection/collection.dart';
 
 class PeriodListView extends StatelessWidget {
-  final List<PeriodLogEntry> periodLogEnties;
+  final List<PeriodLogEntry> periodLogEntries;
   final List<PeriodEntry> periodEntries;
   final bool isLoading;
   final Function(int) onDelete;
@@ -13,7 +13,7 @@ class PeriodListView extends StatelessWidget {
   const PeriodListView({
     super.key,
     required this.periodEntries,
-    required this.periodLogEnties,
+    required this.periodLogEntries,
     required this.isLoading,
     required this.onDelete,
   });
@@ -55,7 +55,7 @@ class PeriodListView extends StatelessWidget {
   }
 
   List<Object> _buildTimelineItems() {
-    final groupedLogs = groupBy(periodLogEnties, (log) => log.periodId ?? -1);
+    final groupedLogs = groupBy(periodLogEntries, (log) => log.periodId ?? -1);
     final List<Object> items = [];
     for (final period in periodEntries) {
       items.add(period);
@@ -161,7 +161,7 @@ class PeriodListView extends StatelessWidget {
                       (index) => Icon(
                         Icons.water_drop,
                         size: 18,
-                        color: colorScheme.primary.withOpacity(0.8)
+                        color: colorScheme.primary.withValues(alpha: 0.8)
                       ),
                     ),
                   ),
