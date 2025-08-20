@@ -212,6 +212,7 @@ class LogsScreenState extends State<LogsScreen> {
         ),
         const SizedBox(height: 20),
         DynamicHistoryView(
+          predictionResult: _predictionResult,
           selectedView: _selectedView,
           periodLogEntries: _periodLogEntries,
           periodEntries: _periodEntries,

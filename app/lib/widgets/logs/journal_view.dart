@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:menstrudel/models/period_logs/period_logs.dart';
+import 'package:menstrudel/models/period_prediction_result.dart';
 import 'package:collection/collection.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class PeriodJournalView extends StatefulWidget {
   final List<PeriodLogEntry> periodLogEntries;
+  final PeriodPredictionResult? predictionResult;
   final bool isLoading;
   final Function(int) onDelete;
 
   const PeriodJournalView({
     super.key,
     required this.periodLogEntries,
+    required this.predictionResult,
     required this.isLoading,
     required this.onDelete,
   });
@@ -148,9 +151,10 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
                 prioritizedBuilder: (context, day, focusedDay) {
                   final log = _logMap[DateUtils.dateOnly(day)];
                   final isSelected = isSameDay(_selectedDay, day);
+                  final isPredictedDay = isSameDay(day, widget.predictionResult?.estimatedDate);
 
                   if (log != null) {
-                    final flowOpacity = 0.3 + (log.flow * 0.3);
+                    final flowOpacity = 0.3 + (log.flow * 0.33);
                     return Container(
                       margin: const EdgeInsets.all(4.0),
                       decoration: BoxDecoration(
@@ -164,13 +168,30 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
                       child: Text(
                         '${day.day}',
                         style: TextStyle(
-                          fontWeight:
-                              isSelected ? FontWeight.bold : FontWeight.normal,
+                          fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
                           color: colorScheme.onPrimary.withValues(alpha: 0.9),
                         ),
                       ),
                     );
                   }
+
+                  if (isPredictedDay) {
+                    return Container(
+                    margin: const EdgeInsets.all(4.0),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: colorScheme.error,
+                    ),
+                    alignment: Alignment.center,
+                    child: Text(
+                      '${day.day}',
+                      style: TextStyle(
+                        color: colorScheme.onError,
+                      ),
+                    ),
+                  );
+                  }
+
                   return null;
                 },
               ),
