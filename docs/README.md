@@ -48,6 +48,6 @@ You can view our full privacy policy [here](PRIVACY.md).
 
 | Your Daily Logs | Quick Symptom Entry | Tampon Reminder |
 | :---: | :---: | :---: |
-| ![Screenshot of Menstrudel's daily period log view on Android](screenshots/v2.3.0/android/logs_screen.webp) | ![Screenshot showing the quick symptom entry for a period log in Menstrudel](screenshots/v2.3.0/android/log_day.webp) | ![Screenshot of the tampon change reminder setup in Menstrudel](screenshots/v2.3.0/android/tampon_reminder.webp) |
+| ![Screenshot of Menstrudel's daily period log view on Android](screenshots/v2.4.0/android/logs_screen.webp) | ![Screenshot showing the quick symptom entry for a period log in Menstrudel](screenshots/v2.4.0/android/log_day.webp) | ![Screenshot of the tampon change reminder setup in Menstrudel](screenshots/v2.4.0/android/tampon_reminder.webp) |
 | Pill Reminder | Quick Insights | App Settings |
- ![Screenshot of the pill reminder screen in Menstrudel](screenshots/v2.3.0/android/pill_screen.webp)  | ![Screenshot of the cycle insights and predictions screen in Menstrudel](screenshots/v2.3.0/android/insights_screen.webp) | ![Screenshot of the Menstrudel settings page showing notification options](screenshots/v2.3.0/android/settings_screen.webp) |
+ ![Screenshot of the pill reminder screen in Menstrudel](screenshots/v2.4.0/android/pill_screen.webp)  | ![Screenshot of the cycle insights and predictions screen in Menstrudel](screenshots/v2.4.0/android/insights_screen.webp) | ![Screenshot of the Menstrudel settings page showing notification options](screenshots/v2.4.0/android/settings_screen.webp) |
