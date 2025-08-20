@@ -123,8 +123,19 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
                 formatButtonVisible: false,
                 titleCentered: true,
               ),
-              calendarStyle: const CalendarStyle(
+              calendarStyle: CalendarStyle(
                 outsideDaysVisible: false,
+                todayDecoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: colorScheme.primary,
+                    width: 2.0,
+                  ),
+                ),
+                todayTextStyle: TextStyle(
+                  color: colorScheme.primary,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               eventLoader: (day) {
                 final log = _logMap[DateUtils.dateOnly(day)];
