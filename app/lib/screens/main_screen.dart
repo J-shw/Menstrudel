@@ -95,7 +95,7 @@ class _MainScreenState extends State<MainScreen> {
     body: _pages[_selectedIndex],
     bottomNavigationBar: MainNavigationBar(
       selectedIndex: _selectedIndex,
-      onScreenSelected: _onItemTapped,
+      onDestinationSelected: _onItemTapped,
     ),
 
     floatingActionButton: _selectedIndex == 1 
