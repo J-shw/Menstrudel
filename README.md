@@ -28,7 +28,7 @@ Menstrudel is a simple, private, and intuitive mobile application built with Flu
 * **Adaptive Theme:** Supports both Light and Dark modes.
 ### Privacy Policy
 
-You can view our privacy policy [here](/docs/PRIVACY.md).
+You can view our privacy policy [here](https://menstrudel.app/privacy/).
 
 ### Socials
 
