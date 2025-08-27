@@ -22,20 +22,11 @@
         .privacy-list { list-style: none; padding: 0; max-width: 600px; margin: 1rem auto; text-align: left; }
         .privacy-list li { margin-bottom: 0.5rem; }
         .screenshots { text-align: center; }
-        .screenshots img { max-width: 250px; margin: 0.5rem; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .screenshots img { max-width: 250px; margin: 0.5rem; border-radius: 45px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
     </style>
 </head>
 <body>
-    <div class="hero">
-        <div class="container">
-            <h1>Private, Offline Period Tracker App</h1>
-            <p>Menstrudel is a free, open-source, and completely offline period tracking app that puts your privacy first.</p>
-            <div class="cta-buttons">
-                <a href="https://groups.google.com/g/menstrudel-app-testers" class="cta-button primary">Join the Beta</a>
-                <a href="https://github.com/J-shw/Menstrudel" class="cta-button secondary">View on GitHub</a>
-            </div>
-        </div>
-    </div>
+    {% include hero.html %}
 
     <div class="container">
         <section>
@@ -73,9 +64,11 @@
         <section class="screenshots" style="border-bottom: none;">
             <h2>Take a Look</h2>
             <img src="assets/images/logs_screen.webp" alt="Daily logs screen">
-            <img src="assets-images/insights_screen.webp" alt="Insights and predictions screen">
+            <img src="assets/images/log_day.webp" alt="Log your day">
+            <img src="assets/images/insights_screen.webp" alt="Insights and predictions screen">
             <img src="assets/images/pill_screen.webp" alt="Pill reminder screen">
             <img src="assets/images/settings_screen.webp" alt="Settings page">
+            <img src="assets/images/tampon_reminder.webp" alt="Tampon reminder screen">
         </section>
     </div>
 </body>
