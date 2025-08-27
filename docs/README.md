@@ -1,53 +1,71 @@
-# Menstrudel: A Private, Offline Period Tracker App
+---
+# index.md
+layout: default
+---
 
-**A free, open-source, and completely offline period tracking app that puts your privacy first.**
+<style>
+  .hero { text-align: center; padding: 4rem 1rem; }
+  .hero h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+  .hero p { font-size: 1.2rem; color: #555; max-width: 600px; margin: 0 auto 2rem auto; }
+  .cta-buttons { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+  .cta-button { padding: 0.8rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: bold; }
+  .primary { background-color: #e91e63; color: white; }
+  .secondary { background-color: #333; color: white; }
+  .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin: 3rem 0; }
+  .feature { text-align: center; }
+  .feature h3 { margin-top: 0.5rem; }
+  .screenshots { text-align: center; }
+  .screenshots img { max-width: 250px; margin: 0.5rem; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+</style>
 
+<div class="hero">
+  <h1>Private, Offline Period Tracker App</h1>
+  <p>Menstrudel is a free, open-source, and completely offline period tracking app that puts your privacy first.</p>
+  <div class="cta-buttons">
+    <a href="{{ site.google_group_url }}" class="cta-button primary">Join the Beta</a>
+    <a href="https://github.com/J-shw/Menstrudel" class="cta-button secondary">View on GitHub</a>
+  </div>
+</div>
 
 ---
 
-## Get The App
+## Why Menstrudel? Because Privacy Matters.
 
-* **[Join our Playstore beta](https://groups.google.com/g/menstrudel-app-testers)**
-* **[Contribute on GitHub](https://github.com/J-shw/Menstrudel)**
+In an era where personal health data is a commodity, Menstrudel offers a secure sanctuary. All your cycle information, symptoms, and logs are stored **only on your device**. We can't see your data, and we don't want to.
+
+* **Absolutely Private:** Your data never leaves your phone.
+* **Completely Offline:** Works anywhere, anytime, without an internet connection.
+* **100% Free & Open Source:** Transparent, community-driven, and free forever.
 
 ---
 
-## About This Privacy-First Period Tracker
+## Simple, Powerful Features
 
-Menstrudel is a simple, private, and intuitive mobile application built with Flutter to help you track your menstrual cycle. In an era where data privacy is critical, especially for health data, Menstrudel offers a secure alternative. **All your personal health data is stored securely offline on your device.** No cloud, no sign-ups, no-nonsense.
+<div class="features">
+  <div class="feature">
+    <h3>Effortless Logging</h3>
+    <p>Quickly log your period, symptoms, and flow intensity with just a few taps.</p>
+  </div>
+  <div class="feature">
+    <h3>Reliable Predictions</h3>
+    <p>Get accurate estimates for your next cycle based on your personal history.</p>
+  </div>
+  <div class="feature">
+    <h3>Intuitive Pill Regimen</h3>
+    <p>Easily track your 21-day, 28-day, or custom pill pack with a single daily tap.</p>
+  </div>
+   <div class="feature">
+    <h3>Smart Reminders</h3>
+    <p>Set customisable alerts for your period, pill intake, or tampon changes.</p>
+  </div>
+</div>
 
-Log your period start dates, record symptoms, and get predictions for your next cycle, all without an internet connection.
+---
 
-### Why Choose Menstrudel?
-* **Absolutely Private:** All data stays on your device. We can't see it, and we don't want to.
-* **Completely Offline:** Works anywhere, anytime, without needing an internet connection.
-* **100% Free & Open Source:** No ads, no subscriptions. The code is transparent and open for community review.
-
-## Key Features for Your Menstrual Health
-
-* **Effortless Period Logging:**
-    * Quickly log your period start date.
-    * Record symptoms and flow intensity.
-* **Reliable Cycle Prediction:**
-    * Estimates your next period start date based on your history.
-    * Calculates your average cycle length for reliable predictions.
-    * Clearly displays a countdown to your next period.
-* **Intuiative Pill Regimen:**
-    * Easily configure your specific pill pack, whether it’s 21-day, 28-day, or custom.
-    * Log your daily intake with a single tap.
-* **Customisable Notifications:**
-    * **Period Reminders:** Get an alert a few days before your period is due.
-    * **Tampon Reminders:** Set a reminder to change your tampon for your safety.
-    * **Pill Reminders:** Get an alert when its time to take your pill.
-* **Secure Local Storage:** Your sensitive health data is stored offline on your device using SQLite.
-* **Adaptive Theme:** Supports both Light and Dark modes.
-
-You can view our full privacy policy [here](PRIVACY.md).
-
-## App Screenshots
-
-| Your Daily Logs | Quick Symptom Entry | Tampon Reminder |
-| :---: | :---: | :---: |
-| ![Screenshot of Menstrudel's daily period log view on Android](screenshots/v2.4.0/android/logs_screen.webp) | ![Screenshot showing the quick symptom entry for a period log in Menstrudel](screenshots/v2.4.0/android/log_day.webp) | ![Screenshot of the tampon change reminder setup in Menstrudel](screenshots/v2.4.0/android/tampon_reminder.webp) |
-| Pill Reminder | Quick Insights | App Settings |
- ![Screenshot of the pill reminder screen in Menstrudel](screenshots/v2.4.0/android/pill_screen.webp)  | ![Screenshot of the cycle insights and predictions screen in Menstrudel](screenshots/v2.4.0/android/insights_screen.webp) | ![Screenshot of the Menstrudel settings page showing notification options](screenshots/v2.4.0/android/settings_screen.webp) |
+<div class="screenshots">
+  <h2>Take a Look</h2>
+  <img src="assets/images/logs_screen.webp" alt="Daily logs screen">
+  <img src="assets/images/insights_screen.webp" alt="Insights and predictions screen">
+  <img src="assets/images/pill_screen.webp" alt="Pill reminder screen">
+  <img src="assets/images/settings_screen.webp" alt="Settings page">
+</div>
