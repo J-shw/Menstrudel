@@ -38,9 +38,10 @@ class LogsScreenState extends State<LogsScreen> {
   PeriodHistoryView _selectedView = PeriodHistoryView.journal;
 
   Future<void> handleLogPeriod(BuildContext context) async {
-    final result = await showDialog<Map<String, dynamic>>(
+    final result = await showModalBottomSheet<Map<String, dynamic>>(
       context: context,
-      builder: (BuildContext dialogContext) => const SymptomEntryDialog(),
+      isScrollControlled: true,
+      builder: (BuildContext context) => const SymptomEntrySheet(),
     );
 
     if (result == null) return;
