@@ -30,7 +30,7 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
         top: 20,
         left: 16,
         right: 16,
-        bottom: MediaQuery.of(context).viewInsets.bottom + 16,
+        bottom: MediaQuery.of(context).viewInsets.bottom + 32,
       ),
       child: SingleChildScrollView(
         child: Column(
@@ -109,28 +109,36 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
               }).toList(),
             ),
             const SizedBox(height: 24),
-
             // --- Action Buttons ---
             Row(
-              mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                TextButton(
-                  onPressed: () => Navigator.of(context).pop(),
-                  child: const Text('Cancel'),
+                Expanded(
+                  child: FilledButton.tonal(
+                    style: FilledButton.styleFrom(
+                      minimumSize: const Size.fromHeight(50),
+                    ),
+                    onPressed: () => Navigator.of(context).pop(),
+                    child: const Text('Cancel'),
+                  ),
                 ),
-                const SizedBox(width: 8),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).pop({
-                      'date': _selectedDate,
-                      'flow': _flowSelection.first,
-                      'symptoms': _selectedSymptoms.toList(),
-                    });
-                  },
-                  child: const Text('Log'),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: FilledButton(
+                    style: FilledButton.styleFrom(
+                      minimumSize: const Size.fromHeight(50),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pop({
+                        'date': _selectedDate,
+                        'flow': _flowSelection.first,
+                        'symptoms': _selectedSymptoms.toList(),
+                      });
+                    },
+                    child: const Text('Log'),
+                  ),
                 ),
               ],
-            ),
+            )
           ],
         ),
       ),
