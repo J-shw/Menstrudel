@@ -37,6 +37,19 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // --- Drag Handle ---
+            Center(
+              child: Container(
+                width: 40,
+                height: 4,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).dividerColor,
+                  borderRadius: BorderRadius.circular(2),
+                ),
+              ),
+            ),
+            const SizedBox(height: 12),
+            // --- Title ---
             Center(
               child: Text(
                 'Log Your Day',
@@ -48,13 +61,12 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
             // --- Date Picker ---
             Text('Date', style: Theme.of(context).textTheme.bodySmall),
             const SizedBox(height: 8),
-            OutlinedButton.icon(
+            FilledButton.tonalIcon(
               icon: const Icon(Icons.calendar_today, size: 18),
               label: Text(DateFormat('EEEE, d MMMM yyyy').format(_selectedDate)),
-              style: OutlinedButton.styleFrom(
-                minimumSize: const Size.fromHeight(48),
+              style: FilledButton.styleFrom(
+                minimumSize: const Size.fromHeight(50), // Consistent height
                 alignment: Alignment.centerLeft,
-                foregroundColor: Theme.of(context).colorScheme.onSurface,
               ),
               onPressed: _pickDate,
             ),
@@ -79,9 +91,6 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
                     }
                   });
                 },
-                style: const ButtonStyle(
-                  visualDensity: VisualDensity(horizontal: 0, vertical: -1),
-                ),
               ),
             ),
             const SizedBox(height: 24),
