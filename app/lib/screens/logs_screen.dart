@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:menstrudel/database/repositories/periods_repository.dart';
 import 'package:menstrudel/widgets/basic_progress_circle.dart';
-import 'package:menstrudel/widgets/dialogs/log_period_dialog.dart';
+import 'package:menstrudel/widgets/sheets/symptom_entry_sheet.dart';
 import 'package:menstrudel/models/period_logs/period_logs.dart';
 import 'package:menstrudel/models/periods/period.dart';
 
@@ -38,9 +38,10 @@ class LogsScreenState extends State<LogsScreen> {
   PeriodHistoryView _selectedView = PeriodHistoryView.journal;
 
   Future<void> handleLogPeriod(BuildContext context) async {
-    final result = await showDialog<Map<String, dynamic>>(
+    final result = await showModalBottomSheet<Map<String, dynamic>>(
       context: context,
-      builder: (BuildContext dialogContext) => const SymptomEntryDialog(),
+      isScrollControlled: true,
+      builder: (BuildContext context) => const SymptomEntrySheet(),
     );
 
     if (result == null) return;
