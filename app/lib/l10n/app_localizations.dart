@@ -100,6 +100,30 @@ abstract class AppLocalizations {
   /// **'Menstrudel'**
   String get appTitle;
 
+  /// No description provided for @delete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get delete;
+
+  /// No description provided for @clear.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear'**
+  String get clear;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @ok.
+  ///
+  /// In en, this message translates to:
+  /// **'OK'**
+  String get ok;
+
   /// No description provided for @mainScreen_insightsPageTitle.
   ///
   /// In en, this message translates to:
@@ -207,6 +231,126 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Pill for today marked as taken!'**
   String get pillScreen_pillForTodayMarkedAsTaken;
+
+  /// No description provided for @settingsScreen_selectHistoryView.
+  ///
+  /// In en, this message translates to:
+  /// **'Select History View'**
+  String get settingsScreen_selectHistoryView;
+
+  /// No description provided for @settingsScreen_deleteRegimen_question.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Regimen?'**
+  String get settingsScreen_deleteRegimen_question;
+
+  /// No description provided for @settingsScreen_deleteRegimenDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'This will delete your current pill pack settings and all associated pill logs. This cannot be undone.'**
+  String get settingsScreen_deleteRegimenDescription;
+
+  /// No description provided for @settingsScreen_allLogsHaveBeenCleared.
+  ///
+  /// In en, this message translates to:
+  /// **'All logs have been cleared.'**
+  String get settingsScreen_allLogsHaveBeenCleared;
+
+  /// No description provided for @settingsScreen_clearAllLogs_question.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear All Logs?'**
+  String get settingsScreen_clearAllLogs_question;
+
+  /// No description provided for @settingsScreen_deleteAllLogsDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'This will permanently delete all your period logs. Your app settings will not be affected.'**
+  String get settingsScreen_deleteAllLogsDescription;
+
+  /// No description provided for @settingsScreen_appearance.
+  ///
+  /// In en, this message translates to:
+  /// **'Appearance'**
+  String get settingsScreen_appearance;
+
+  /// No description provided for @settingsScreen_historyViewStyle.
+  ///
+  /// In en, this message translates to:
+  /// **'History View Style'**
+  String get settingsScreen_historyViewStyle;
+
+  /// No description provided for @settingsScreen_view.
+  ///
+  /// In en, this message translates to:
+  /// **'View'**
+  String get settingsScreen_view;
+
+  /// No description provided for @settingsScreen_birthControl.
+  ///
+  /// In en, this message translates to:
+  /// **'Birth Control'**
+  String get settingsScreen_birthControl;
+
+  /// No description provided for @settingsScreen_setUpPillRegimen.
+  ///
+  /// In en, this message translates to:
+  /// **'Set Up Pill Regimen'**
+  String get settingsScreen_setUpPillRegimen;
+
+  /// No description provided for @settingsScreen_trackYourDailyPillIntake.
+  ///
+  /// In en, this message translates to:
+  /// **'Track Your Daily Pill Intake'**
+  String get settingsScreen_trackYourDailyPillIntake;
+
+  /// No description provided for @settingsScreen_dailyPillReminder.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily Pill Reminder'**
+  String get settingsScreen_dailyPillReminder;
+
+  /// No description provided for @settingsScreen_reminderTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Reminder Time'**
+  String get settingsScreen_reminderTime;
+
+  /// No description provided for @settingsScreen_periodPredictionAndReminders.
+  ///
+  /// In en, this message translates to:
+  /// **'Period Prediction & Reminders'**
+  String get settingsScreen_periodPredictionAndReminders;
+
+  /// No description provided for @settingsScreen_upcomingPeriodReminder.
+  ///
+  /// In en, this message translates to:
+  /// **'Upcoming Period Reminder'**
+  String get settingsScreen_upcomingPeriodReminder;
+
+  /// No description provided for @settingsScreen_remindMeBefore.
+  ///
+  /// In en, this message translates to:
+  /// **'Remind Me Before'**
+  String get settingsScreen_remindMeBefore;
+
+  /// No description provided for @settingsScreen_notificationTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Notification Time'**
+  String get settingsScreen_notificationTime;
+
+  /// No description provided for @settingsScreen_clearAllLogs.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear All Logs'**
+  String get settingsScreen_clearAllLogs;
+
+  /// No description provided for @settingsScreen_day.
+  ///
+  /// In en, this message translates to:
+  /// **'Day'**
+  String get settingsScreen_day;
 
   /// No description provided for @navBar_insights.
   ///

@@ -2,6 +2,11 @@
     "@@locale": "en",
     "appTitle": "Menstrudel",
 
+    "delete": "Delete",
+    "clear": "Clear",
+    "cancel": "Cancel",
+    "ok": "OK",
+
     "mainScreen_insightsPageTitle": "Your Insights",
     "mainScreen_pillsPageTitle": "Pills",
     "mainScreen_settingsPageTitle": "Settings",
@@ -24,6 +29,29 @@
     "logScreen_couldNotCancelReminder": "Could not cancel reminder",
 
     "pillScreen_pillForTodayMarkedAsTaken": "Pill for today marked as taken!",
+
+    "settingsScreen_selectHistoryView": "Select History View",
+    "settingsScreen_deleteRegimen_question": "Delete Regimen?",
+    "settingsScreen_deleteRegimenDescription": "This will delete your current pill pack settings and all associated pill logs. This cannot be undone.",
+    "settingsScreen_allLogsHaveBeenCleared": "All logs have been cleared.",
+    "settingsScreen_clearAllLogs_question": "Clear All Logs?",
+    "settingsScreen_deleteAllLogsDescription": "This will permanently delete all your period logs. Your app settings will not be affected.",
+    "settingsScreen_appearance": "Appearance",
+    "settingsScreen_historyViewStyle": "History View Style",
+    "settingsScreen_view": "View",
+    "settingsScreen_birthControl": "Birth Control",
+    "settingsScreen_setUpPillRegimen": "Set Up Pill Regimen",
+    "settingsScreen_trackYourDailyPillIntake": "Track Your Daily Pill Intake",
+    "settingsScreen_dailyPillReminder": "Daily Pill Reminder",
+    "settingsScreen_reminderTime": "Reminder Time",
+    "settingsScreen_periodPredictionAndReminders": "Period Prediction & Reminders",
+    "settingsScreen_upcomingPeriodReminder": "Upcoming Period Reminder",
+    "settingsScreen_remindMeBefore": "Remind Me Before",
+    "settingsScreen_notificationTime": "Notification Time",
+    "settingsScreen_clearAllLogs": "Clear All Logs",
+    "settingsScreen_day": "Day",
+    
+    
     
     "navBar_insights": "Insights",
     "navBar_logs": "Logs",

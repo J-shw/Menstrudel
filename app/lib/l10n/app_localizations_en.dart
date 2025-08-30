@@ -12,6 +12,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appTitle => 'Menstrudel';
 
   @override
+  String get delete => 'Delete';
+
+  @override
+  String get clear => 'Clear';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get ok => 'OK';
+
+  @override
   String get mainScreen_insightsPageTitle => 'Your Insights';
 
   @override
@@ -66,6 +78,72 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get pillScreen_pillForTodayMarkedAsTaken =>
       'Pill for today marked as taken!';
+
+  @override
+  String get settingsScreen_selectHistoryView => 'Select History View';
+
+  @override
+  String get settingsScreen_deleteRegimen_question => 'Delete Regimen?';
+
+  @override
+  String get settingsScreen_deleteRegimenDescription =>
+      'This will delete your current pill pack settings and all associated pill logs. This cannot be undone.';
+
+  @override
+  String get settingsScreen_allLogsHaveBeenCleared =>
+      'All logs have been cleared.';
+
+  @override
+  String get settingsScreen_clearAllLogs_question => 'Clear All Logs?';
+
+  @override
+  String get settingsScreen_deleteAllLogsDescription =>
+      'This will permanently delete all your period logs. Your app settings will not be affected.';
+
+  @override
+  String get settingsScreen_appearance => 'Appearance';
+
+  @override
+  String get settingsScreen_historyViewStyle => 'History View Style';
+
+  @override
+  String get settingsScreen_view => 'View';
+
+  @override
+  String get settingsScreen_birthControl => 'Birth Control';
+
+  @override
+  String get settingsScreen_setUpPillRegimen => 'Set Up Pill Regimen';
+
+  @override
+  String get settingsScreen_trackYourDailyPillIntake =>
+      'Track Your Daily Pill Intake';
+
+  @override
+  String get settingsScreen_dailyPillReminder => 'Daily Pill Reminder';
+
+  @override
+  String get settingsScreen_reminderTime => 'Reminder Time';
+
+  @override
+  String get settingsScreen_periodPredictionAndReminders =>
+      'Period Prediction & Reminders';
+
+  @override
+  String get settingsScreen_upcomingPeriodReminder =>
+      'Upcoming Period Reminder';
+
+  @override
+  String get settingsScreen_remindMeBefore => 'Remind Me Before';
+
+  @override
+  String get settingsScreen_notificationTime => 'Notification Time';
+
+  @override
+  String get settingsScreen_clearAllLogs => 'Clear All Logs';
+
+  @override
+  String get settingsScreen_day => 'Day';
 
   @override
   String get navBar_insights => 'Insights';
