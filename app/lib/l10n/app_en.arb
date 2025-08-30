@@ -77,7 +77,11 @@
     "cycleLengthVarianceWidget_cycle": "Cycle",
 
     "flowIntensityWidget_flowIntensityBreakdown": "Flow Intensity Breakdown",
-    "flowIntensityWidget_noFlowDataLoggedYet": "No flow data logged yet."
+    "flowIntensityWidget_noFlowDataLoggedYet": "No flow data logged yet.",
+
+    "monthlyFlowChartWidget_noDataToDisplay": "No data to display.",
+    "monthlyFlowChartWidget_cycleFlowPatterns": "Cycle Flow Patterns",
+    "monthlyFlowChartWidget_cycleFlowPatternsDescription": "Each line represents one complete cycle"
 
     
     

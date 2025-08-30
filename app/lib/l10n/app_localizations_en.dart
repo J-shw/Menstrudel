@@ -208,4 +208,14 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get flowIntensityWidget_noFlowDataLoggedYet =>
       'No flow data logged yet.';
+
+  @override
+  String get monthlyFlowChartWidget_noDataToDisplay => 'No data to display.';
+
+  @override
+  String get monthlyFlowChartWidget_cycleFlowPatterns => 'Cycle Flow Patterns';
+
+  @override
+  String get monthlyFlowChartWidget_cycleFlowPatternsDescription =>
+      'Each line represents one complete cycle';
 }

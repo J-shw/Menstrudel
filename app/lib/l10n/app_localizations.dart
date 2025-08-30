@@ -471,6 +471,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No flow data logged yet.'**
   String get flowIntensityWidget_noFlowDataLoggedYet;
+
+  /// No description provided for @monthlyFlowChartWidget_noDataToDisplay.
+  ///
+  /// In en, this message translates to:
+  /// **'No data to display.'**
+  String get monthlyFlowChartWidget_noDataToDisplay;
+
+  /// No description provided for @monthlyFlowChartWidget_cycleFlowPatterns.
+  ///
+  /// In en, this message translates to:
+  /// **'Cycle Flow Patterns'**
+  String get monthlyFlowChartWidget_cycleFlowPatterns;
+
+  /// No description provided for @monthlyFlowChartWidget_cycleFlowPatternsDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Each line represents one complete cycle'**
+  String get monthlyFlowChartWidget_cycleFlowPatternsDescription;
 }
 
 class _AppLocalizationsDelegate
