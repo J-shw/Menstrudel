@@ -55,7 +55,15 @@
     "logScreen_logAtLeastTwoPeriods": "Log at least two periods to estimate next cycle.",
     "logScreen_nextPeriodEstimate": "Next period Est",
     "logScreen_periodDueToday": "Period due today",
-    "logScreen_periodOverdueBy": "Period overdue by",
+    "logScreen_periodOverdueBy": "{count, plural, =1{Period overdue by 1 day} other{Period overdue by {count} days}}",
+    "@logScreen_periodOverdueBy": {
+        "description": "A label showing the total number of days period is overdue.",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
     "logScreen_tamponReminderSetFor": "Tampon reminder set for",
     "logScreen_tamponReminderCancelled": "Tampon reminder cancelled.",
     "logScreen_couldNotCancelReminder": "Could not cancel reminder",

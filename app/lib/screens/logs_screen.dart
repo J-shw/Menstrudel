@@ -157,7 +157,7 @@ class LogsScreenState extends State<LogsScreen> {
 		} else if (_predictionResult!.daysUntilDue == 0) {
 			predictionText = '${l10n.logScreen_periodDueToday} $datePart';
 		} else { // _predictionResult.daysUntilDue is negative, meaning overdue
-			predictionText = '${l10n.logScreen_periodOverdueBy} ${-_predictionResult!.daysUntilDue} ${l10n.days.toLowerCase()}: $datePart';
+			predictionText = '${l10n.logScreen_periodOverdueBy(-_predictionResult!.daysUntilDue)}: $datePart';
 		}
 		}
 		return Column(

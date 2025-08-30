@@ -346,11 +346,11 @@ abstract class AppLocalizations {
   /// **'Period due today'**
   String get logScreen_periodDueToday;
 
-  /// No description provided for @logScreen_periodOverdueBy.
+  /// A label showing the total number of days period is overdue.
   ///
   /// In en, this message translates to:
-  /// **'Period overdue by'**
-  String get logScreen_periodOverdueBy;
+  /// **'{count, plural, =1{Period overdue by 1 day} other{Period overdue by {count} days}}'**
+  String logScreen_periodOverdueBy(int count);
 
   /// No description provided for @logScreen_tamponReminderSetFor.
   ///

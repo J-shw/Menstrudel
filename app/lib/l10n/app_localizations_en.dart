@@ -136,7 +136,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get logScreen_periodDueToday => 'Period due today';
 
   @override
-  String get logScreen_periodOverdueBy => 'Period overdue by';
+  String logScreen_periodOverdueBy(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Period overdue by $count days',
+      one: 'Period overdue by 1 day',
+    );
+    return '$_temp0';
+  }
 
   @override
   String get logScreen_tamponReminderSetFor => 'Tampon reminder set for';
