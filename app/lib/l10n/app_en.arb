@@ -12,6 +12,14 @@
 
     "insightsScreen_errorPrefix": "Error:",
     "insightsScreen_noDataAvailable": "No data available.",
+
+    "logsScreen_calculatingPrediction": "Calculating prediction...",
+    "logScreen_logAtLeastTwoPeriods": "Log at least two periods to estimate next cycle.",
+    "logScreen_nextPeriodEstimate": "Next period Est",
+    "logScreen_periodDueToday": "Period due today",
+    "logScreen_periodOverdueBy": "Period overdue by",
+    "logScreen_days": "days",
+    "logsScreen_noDataAvailable": "No data available",
     
     "navBar_insights": "Insights",
     "navBar_logs": "Logs",
