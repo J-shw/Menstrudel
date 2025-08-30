@@ -186,6 +186,7 @@ class LogsScreenState extends State<LogsScreen> {
           periodEntries: _periodEntries,
           isLoading: _isLoading,
           onDelete: _deletePeriodEntry,
+          onLogRequested: handleLogPeriod,
         ),
       ],
     );
