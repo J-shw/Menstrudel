@@ -226,4 +226,7 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get symptomFrequencyWidget_mostCommonSymptoms =>
       'Most Common Symptoms';
+
+  @override
+  String get yearHeatMapWidget_yearlyOverview => 'Yearly Overview';
 }

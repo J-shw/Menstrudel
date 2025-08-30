@@ -501,6 +501,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Most Common Symptoms'**
   String get symptomFrequencyWidget_mostCommonSymptoms;
+
+  /// No description provided for @yearHeatMapWidget_yearlyOverview.
+  ///
+  /// In en, this message translates to:
+  /// **'Yearly Overview'**
+  String get yearHeatMapWidget_yearlyOverview;
 }
 
 class _AppLocalizationsDelegate

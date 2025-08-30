@@ -84,6 +84,8 @@
     "monthlyFlowChartWidget_cycleFlowPatternsDescription": "Each line represents one complete cycle",
 
     "symptomFrequencyWidget_noSymptomsLoggedYet": "No symptoms logged yet.",
-    "symptomFrequencyWidget_mostCommonSymptoms": "Most Common Symptoms"
+    "symptomFrequencyWidget_mostCommonSymptoms": "Most Common Symptoms",
+
+    "yearHeatMapWidget_yearlyOverview": "Yearly Overview"
     
 }
