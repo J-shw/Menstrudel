@@ -257,4 +257,7 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get emptyPillStateWidget_noPillRegimenFoundDescription =>
       'Set up your pill pack in settings to start tracking.';
+
+  @override
+  String get pillPackVisualiser_yourPack => 'Your Pack';
 }

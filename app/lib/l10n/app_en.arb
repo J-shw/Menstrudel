@@ -98,6 +98,8 @@
     "listViewWidget_confirmDeleteDescription": "Are you sure you want to delete this entry?",
 
     "emptyPillStateWidget_noPillRegimenFound": "No pill regimen found.",
-    "emptyPillStateWidget_noPillRegimenFoundDescription": "Set up your pill pack in settings to start tracking."
+    "emptyPillStateWidget_noPillRegimenFoundDescription": "Set up your pill pack in settings to start tracking.",
+
+    "pillPackVisualiser_yourPack": "Your Pack"
     
 }

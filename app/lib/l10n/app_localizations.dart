@@ -555,6 +555,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Set up your pill pack in settings to start tracking.'**
   String get emptyPillStateWidget_noPillRegimenFoundDescription;
+
+  /// No description provided for @pillPackVisualiser_yourPack.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Pack'**
+  String get pillPackVisualiser_yourPack;
 }
 
 class _AppLocalizationsDelegate
