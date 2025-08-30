@@ -19,7 +19,9 @@
     "logScreen_periodDueToday": "Period due today",
     "logScreen_periodOverdueBy": "Period overdue by",
     "logScreen_days": "days",
-    "logsScreen_noDataAvailable": "No data available",
+    "logScreen_tamponReminderSetFor": "Tampon reminder set for",
+    "logScreen_tamponReminderCancelled": "Tampon reminder cancelled.",
+    "logScreen_couldNotCancelReminder": "Could not cancel reminder",
     
     "navBar_insights": "Insights",
     "navBar_logs": "Logs",
