@@ -18,10 +18,31 @@ class AppLocalizationsEn extends AppLocalizations {
   String get clear => 'Clear';
 
   @override
+  String get ok => 'OK';
+
+  @override
+  String get confirm => 'Confirm';
+
+  @override
+  String get yes => 'Yes';
+
+  @override
+  String get no => 'No';
+
+  @override
   String get cancel => 'Cancel';
 
   @override
-  String get ok => 'OK';
+  String get navBar_insights => 'Insights';
+
+  @override
+  String get navBar_logs => 'Logs';
+
+  @override
+  String get navBar_pill => 'Pill';
+
+  @override
+  String get navBar_settings => 'Settings';
 
   @override
   String get mainScreen_insightsPageTitle => 'Your Insights';
@@ -144,16 +165,4 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get settingsScreen_day => 'Day';
-
-  @override
-  String get navBar_insights => 'Insights';
-
-  @override
-  String get navBar_logs => 'Logs';
-
-  @override
-  String get navBar_pill => 'Pill';
-
-  @override
-  String get navBar_settings => 'Settings';
 }

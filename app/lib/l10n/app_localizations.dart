@@ -112,17 +112,59 @@ abstract class AppLocalizations {
   /// **'Clear'**
   String get clear;
 
+  /// No description provided for @ok.
+  ///
+  /// In en, this message translates to:
+  /// **'OK'**
+  String get ok;
+
+  /// No description provided for @confirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm'**
+  String get confirm;
+
+  /// No description provided for @yes.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes'**
+  String get yes;
+
+  /// No description provided for @no.
+  ///
+  /// In en, this message translates to:
+  /// **'No'**
+  String get no;
+
   /// No description provided for @cancel.
   ///
   /// In en, this message translates to:
   /// **'Cancel'**
   String get cancel;
 
-  /// No description provided for @ok.
+  /// No description provided for @navBar_insights.
   ///
   /// In en, this message translates to:
-  /// **'OK'**
-  String get ok;
+  /// **'Insights'**
+  String get navBar_insights;
+
+  /// No description provided for @navBar_logs.
+  ///
+  /// In en, this message translates to:
+  /// **'Logs'**
+  String get navBar_logs;
+
+  /// No description provided for @navBar_pill.
+  ///
+  /// In en, this message translates to:
+  /// **'Pill'**
+  String get navBar_pill;
+
+  /// No description provided for @navBar_settings.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get navBar_settings;
 
   /// No description provided for @mainScreen_insightsPageTitle.
   ///
@@ -351,30 +393,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Day'**
   String get settingsScreen_day;
-
-  /// No description provided for @navBar_insights.
-  ///
-  /// In en, this message translates to:
-  /// **'Insights'**
-  String get navBar_insights;
-
-  /// No description provided for @navBar_logs.
-  ///
-  /// In en, this message translates to:
-  /// **'Logs'**
-  String get navBar_logs;
-
-  /// No description provided for @navBar_pill.
-  ///
-  /// In en, this message translates to:
-  /// **'Pill'**
-  String get navBar_pill;
-
-  /// No description provided for @navBar_settings.
-  ///
-  /// In en, this message translates to:
-  /// **'Settings'**
-  String get navBar_settings;
 }
 
 class _AppLocalizationsDelegate

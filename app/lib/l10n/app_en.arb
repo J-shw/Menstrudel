@@ -4,8 +4,17 @@
 
     "delete": "Delete",
     "clear": "Clear",
-    "cancel": "Cancel",
     "ok": "OK",
+    "confirm": "Confirm",
+    "yes": "Yes",
+    "no": "No",
+    "cancel": "Cancel",
+
+
+    "navBar_insights": "Insights",
+    "navBar_logs": "Logs",
+    "navBar_pill": "Pill",
+    "navBar_settings": "Settings",
 
     "mainScreen_insightsPageTitle": "Your Insights",
     "mainScreen_pillsPageTitle": "Pills",
@@ -49,12 +58,5 @@
     "settingsScreen_remindMeBefore": "Remind Me Before",
     "settingsScreen_notificationTime": "Notification Time",
     "settingsScreen_clearAllLogs": "Clear All Logs",
-    "settingsScreen_day": "Day",
-    
-    
-    
-    "navBar_insights": "Insights",
-    "navBar_logs": "Logs",
-    "navBar_pill": "Pill",
-    "navBar_settings": "Settings"
+    "settingsScreen_day": "Day"
 }
