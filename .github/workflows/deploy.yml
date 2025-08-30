@@ -20,13 +20,13 @@ jobs:
       - name: Setup Ruby and install dependencies
         uses: actions/setup-ruby@v1
         with:
-          ruby-version: '3'
+          ruby-version: '3.3'
           
       - name: Install dependencies
         run: bundle install
 
       - name: Build the Jekyll site
-        run: bundle exec jekyll build --source ./docs --destination ./_site
+        run: bundle exec jekyll build --source ./website --destination ./_site
 
       - name: Upload the built site as an artifact
         uses: actions/upload-pages-artifact@v3

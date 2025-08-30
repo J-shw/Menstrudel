@@ -5,6 +5,7 @@ import 'package:menstrudel/database/app_database.dart';
 import 'package:menstrudel/models/period_logs/period_logs.dart';
 import 'package:menstrudel/models/periods/period.dart';
 import 'package:menstrudel/models/flows/flow_data.dart';
+import 'package:menstrudel/utils/exceptions.dart';
 
 class PeriodsRepository {
   final dbProvider = AppDatabase.instance;
@@ -71,6 +72,17 @@ class PeriodsRepository {
 
   Future<PeriodLogEntry> createPeriodLog(PeriodLogEntry entry) async {
     final db = await dbProvider.database;
+
+    final existingLogs = await db.query(
+      'period_logs',
+      where: 'date(date) = date(?)',
+      whereArgs: [entry.date.toIso8601String()],
+      limit: 1, 
+    );
+
+    if (existingLogs.isNotEmpty) {
+      throw DuplicateLogException('A log already exists for this date.');
+    }
       
     final id = await db.insert('period_logs', entry.toMap());
 

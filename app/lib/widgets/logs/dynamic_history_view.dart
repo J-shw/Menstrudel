@@ -14,6 +14,7 @@ class DynamicHistoryView extends StatelessWidget {
   final List<PeriodEntry> periodEntries;
   final bool isLoading;
   final Function(int) onDelete;
+  final Function(DateTime) onLogRequested;
 
   const DynamicHistoryView({
     super.key,
@@ -23,6 +24,7 @@ class DynamicHistoryView extends StatelessWidget {
     required this.periodEntries,
     required this.isLoading,
     required this.onDelete,
+    required this.onLogRequested,
   });
 
   @override
@@ -41,6 +43,7 @@ class DynamicHistoryView extends StatelessWidget {
           predictionResult: predictionResult, 
           isLoading: isLoading,
           onDelete: onDelete,
+          onLogRequested: onLogRequested,
         );
     }
   }

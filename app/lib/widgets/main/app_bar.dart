@@ -11,12 +11,18 @@ class TopAppBar extends StatelessWidget implements PreferredSizeWidget{
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text(titleText),
+      title: Text(
+              titleText,
+              style: TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
 
       shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.vertical(
-        bottom: Radius.circular(35),
-      ),
+        borderRadius: BorderRadius.vertical(
+          bottom: Radius.circular(35),
+        ),
       ),
     );
   }

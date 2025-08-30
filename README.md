@@ -28,7 +28,7 @@ Menstrudel is a simple, private, and intuitive mobile application built with Flu
 * **Adaptive Theme:** Supports both Light and Dark modes.
 ### Privacy Policy
 
-You can view our privacy policy [here](/docs/PRIVACY.md).
+You can view our privacy policy [here](https://menstrudel.app/privacy/).
 
 ### Socials
 
@@ -40,6 +40,6 @@ You can view our privacy policy [here](/docs/PRIVACY.md).
 
 | Your daily logs |  Quick symptom entry | Tampon reminder |
 | :---: | :---: | :---: |
-| ![Log View](docs/screenshots/v2.4.0/android/logs_screen.webp) | ![Symptom Entry Dialog](docs/screenshots/v2.4.0/android/log_day.webp) | ![Symptom Entry Dialog](docs/screenshots/v2.4.0/android/tampon_reminder.webp) |
+| ![Log View](docs/screenshots/v2.5.0/android/logs_screen.webp) | ![Symptom Entry Dialog](docs/screenshots/v2.5.0/android/log_day.webp) | ![Symptom Entry Dialog](docs/screenshots/v2.5.0/android/tampon_reminder.webp) |
 | Pill Reminder | Quick insights | Settings |
-| ![Screenshot of the pill reminder screen in Menstrudel](docs/screenshots/v2.4.0/android/pill_screen.webp)  | ![Insights View](docs/screenshots/v2.4.0/android/insights_screen.webp) | ![Symptom Entry Dialog](docs/screenshots/v2.4.0/android/settings_screen.webp) |  |
+| ![Screenshot of the pill reminder screen in Menstrudel](docs/screenshots/v2.5.0/android/pill_screen.webp)  | ![Insights View](docs/screenshots/v2.5.0/android/insights_screen.webp) | ![Symptom Entry Dialog](docs/screenshots/v2.5.0/android/settings_screen.webp) |  |

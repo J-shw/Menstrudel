@@ -82,7 +82,7 @@ class _MainScreenState extends State<MainScreen> {
         return FloatingActionButton(
           key: const ValueKey('log_fab'),
           tooltip: 'Log period',
-          onPressed: () => _logsScreenKey.currentState?.handleLogPeriod(context),
+          onPressed: () => _logsScreenKey.currentState?.handleLogPeriod(DateTime.now()),
           child: const Icon(Icons.add),
         );
     }
@@ -95,7 +95,7 @@ class _MainScreenState extends State<MainScreen> {
     body: _pages[_selectedIndex],
     bottomNavigationBar: MainNavigationBar(
       selectedIndex: _selectedIndex,
-      onScreenSelected: _onItemTapped,
+      onDestinationSelected: _onItemTapped,
     ),
 
     floatingActionButton: _selectedIndex == 1 
