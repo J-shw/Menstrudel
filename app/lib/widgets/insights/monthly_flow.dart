@@ -103,7 +103,7 @@ class FlowPatternsWidget extends StatelessWidget {
                     leftTitles: AxisTitles(
                       sideTitles: SideTitles(
                         showTitles: true,
-                        reservedSize: 50,
+                        reservedSize: 70,
                         interval: 1,
                         getTitlesWidget: (value, meta) => _getFlowLabel(context, value, textTheme.bodySmall),
                       ),
