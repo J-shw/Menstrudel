@@ -5,6 +5,7 @@ import 'package:dynamic_color/dynamic_color.dart';
 import 'package:menstrudel/screens/main_screen.dart';
 import 'package:menstrudel/services/notification_service.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async { 
   WidgetsFlutterBinding.ensureInitialized();
@@ -46,6 +47,16 @@ class MainApp extends StatelessWidget {
 
         return MaterialApp(
           debugShowCheckedModeBanner: false,
+
+          localizationsDelegates: const [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            Locale('en'),
+          ],
+          
           title: 'Menstrudel',
           theme: ThemeData(
             useMaterial3: true,
