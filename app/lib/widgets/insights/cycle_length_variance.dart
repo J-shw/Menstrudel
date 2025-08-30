@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:menstrudel/models/periods/period.dart';
+import 'package:menstrudel/l10n/app_localizations.dart';
 
 class CycleLengthVarianceWidget extends StatelessWidget {
   final List<PeriodEntry> periods;
@@ -11,9 +12,10 @@ class CycleLengthVarianceWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
+    final l10n = AppLocalizations.of(context)!;
 
     if (periods.length < 2) {
-      return const Card(child: Padding(padding: EdgeInsets.all(24.0), child: Center(child: Text("Need at least two cycles to show variance."))));
+      return Card(child: Padding(padding: EdgeInsets.all(24.0), child: Center(child: Text(l10n.cycleLengthVarianceWidget_LogAtLeastTwoPeriods))));
     }
 
     final List<double> cycleLengths = [];
@@ -37,9 +39,9 @@ class CycleLengthVarianceWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Cycle & Period Variance', style: textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
+            Text(l10n.cycleLengthVarianceWidget_cycleAndPeriodVeriance, style: textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
             const SizedBox(height: 4),
-            Text('Average Cycle: ${avgCycle.toStringAsFixed(0)} days  •  Average Period: ${avgDuration.toStringAsFixed(1)} days', style: textTheme.bodyMedium?.copyWith(color: colorScheme.onSurfaceVariant)),
+            Text('${l10n.cycleLengthVarianceWidget_averageCycle}: ${avgCycle.toStringAsFixed(0)} ${l10n.days.toLowerCase()}  •  ${l10n.cycleLengthVarianceWidget_averagePeriod}: ${avgDuration.toStringAsFixed(1)} ${l10n.days.toLowerCase()}', style: textTheme.bodyMedium?.copyWith(color: colorScheme.onSurfaceVariant)),
             const SizedBox(height: 24),
             AspectRatio(
               aspectRatio: 1.7,
@@ -65,8 +67,8 @@ class CycleLengthVarianceWidget extends StatelessWidget {
                           return null;
                         }
                         final String text = rodIndex == 0
-                            ? 'Period: ${rod.toY.toInt()} days'
-                            : 'Cycle: ${rod.toY.toInt()} days';
+                            ? '${l10n.cycleLengthVarianceWidget_period}: ${rod.toY.toInt()} ${l10n.days.toLowerCase()}'
+                            : '${l10n.cycleLengthVarianceWidget_cycle}: ${rod.toY.toInt()} ${l10n.days.toLowerCase()}';
 
                         return BarTooltipItem(
                           '$month\n$text',

@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:menstrudel/models/period_logs/period_logs.dart';
 import 'package:menstrudel/models/period_prediction_result.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:menstrudel/l10n/app_localizations.dart';
 
 class PeriodJournalView extends StatefulWidget {
   final List<PeriodLogEntry> periodLogEntries;
@@ -57,14 +58,15 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
     }
   }
 
-  String _getFlowLabel(int flow) {
+   String _getFlowLabel(BuildContext context, int flow) {
+    final l10n = AppLocalizations.of(context)!;
     switch (flow) {
-      case 0:
-        return 'Light';
       case 1:
-        return 'Medium';
+        return l10n.flowIntensity_light;
       case 2:
-        return 'Heavy';
+        return l10n.flowIntensity_moderate;
+      case 3:
+        return l10n.flowIntensity_heavy;
       default:
         return '';
     }
@@ -73,6 +75,7 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
   void _showDetailsBottomSheet(PeriodLogEntry log) {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
+    final l10n = AppLocalizations.of(context)!;
 
     showModalBottomSheet(
       context: context,
@@ -121,7 +124,7 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
                       color: colorScheme.onSurfaceVariant, size: 20),
                   const SizedBox(width: 12),
                   Text('Flow: ', style: textTheme.bodyLarge),
-                  Text(_getFlowLabel(log.flow),
+                  Text(_getFlowLabel(context, log.flow),
                       style: textTheme.bodyLarge
                           ?.copyWith(fontWeight: FontWeight.bold)),
                   const Spacer(),
@@ -144,7 +147,7 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
                     Icon(Icons.bubble_chart_outlined,
                         color: colorScheme.onSurfaceVariant, size: 20),
                     const SizedBox(width: 12),
-                    Text('Symptoms:', style: textTheme.bodyLarge),
+                    Text('${l10n.journalViewWidget_symptoms}:', style: textTheme.bodyLarge),
                   ],
                 ),
                 const SizedBox(height: 8),
@@ -173,11 +176,13 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     if (widget.isLoading) {
       return const Expanded(child: Center(child: CircularProgressIndicator()));
     }
     if (widget.periodLogEntries.isEmpty) {
-      return const Expanded(child: Center(child: Text('Log your first period.')));
+      return Expanded(child: Center(child: Text(l10n.journalViewWidget_logYourFirstPeriod)));
     }
 
     final colorScheme = Theme.of(context).colorScheme;

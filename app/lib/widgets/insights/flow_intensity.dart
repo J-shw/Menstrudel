@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/models/period_logs/period_logs.dart';
+import 'package:menstrudel/l10n/app_localizations.dart';
 
 class FlowBreakdownWidget extends StatelessWidget {
   final List<PeriodLogEntry> logs;
@@ -8,11 +9,12 @@ class FlowBreakdownWidget extends StatelessWidget {
   Widget _buildBar(BuildContext context, {required String label, required int count, required int total, required Color color}) {
     final textTheme = Theme.of(context).textTheme;
     final percentage = total > 0 ? (count / total) : 0.0;
+    final l10n = AppLocalizations.of(context)!;
     
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('$label ($count days)', style: textTheme.bodyMedium),
+        Text('$label ($count ${l10n.days.toLowerCase()})', style: textTheme.bodyMedium),
         const SizedBox(height: 4),
         LinearProgressIndicator(
           value: percentage,
@@ -29,9 +31,10 @@ class FlowBreakdownWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
+    final l10n = AppLocalizations.of(context)!;
 
     if (logs.isEmpty) {
-        return const Card(child: Padding(padding: EdgeInsets.all(24.0), child: Center(child: Text("No flow data logged yet."))));
+        return Card(child: Padding(padding: EdgeInsets.all(24.0), child: Center(child: Text(l10n.flowIntensityWidget_noFlowDataLoggedYet))));
     }
     
     // --- Data Processing ---
@@ -51,13 +54,13 @@ class FlowBreakdownWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Flow Intensity Breakdown', style: textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
+            Text(l10n.flowIntensityWidget_flowIntensityBreakdown, style: textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
             const SizedBox(height: 24),
-            _buildBar(context, label: 'Light', count: lightDays, total: totalDays, color: Colors.pink.shade200),
+            _buildBar(context, label: l10n.flowIntensity_light, count: lightDays, total: totalDays, color: Colors.pink.shade200),
             const SizedBox(height: 16),
-            _buildBar(context, label: 'Medium', count: mediumDays, total: totalDays, color: Colors.pink.shade400),
+            _buildBar(context, label: l10n.flowIntensity_moderate, count: mediumDays, total: totalDays, color: Colors.pink.shade400),
             const SizedBox(height: 16),
-            _buildBar(context, label: 'Heavy', count: heavyDays, total: totalDays, color: Colors.red.shade700),
+            _buildBar(context, label: l10n.flowIntensity_heavy, count: heavyDays, total: totalDays, color: Colors.red.shade700),
           ],
         ),
       ),

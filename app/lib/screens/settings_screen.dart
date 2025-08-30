@@ -7,6 +7,7 @@ import 'package:menstrudel/models/pills/pill_reminder.dart';
 import 'package:menstrudel/models/pills/pill_regimen.dart';
 import 'package:menstrudel/widgets/settings/regimen_setup_dialog.dart';
 import 'package:menstrudel/services/notification_service.dart';
+import 'package:menstrudel/l10n/app_localizations.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -66,11 +67,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   Future<void> showViewPicker() async {
+    final l10n = AppLocalizations.of(context)!;
     final PeriodHistoryView? result = await showDialog<PeriodHistoryView>(
       context: context,
       builder: (BuildContext context) {
         return SimpleDialog(
-          title: const Text('Select History View'),
+          title: Text(l10n.settingsScreen_selectHistoryView),
           children: PeriodHistoryView.values.map((view) {
             final viewName = '${view.name[0].toUpperCase()}${view.name.substring(1)}';
             return RadioListTile<PeriodHistoryView>(
@@ -142,17 +144,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   Future<void> showDeleteRegimenDialog() async {
+    final l10n = AppLocalizations.of(context)!;
     if (_activeRegimen == null) return;
 
     return showDialog<void>(
       context: context,
       builder: (BuildContext context) {
         return ConfirmationDialog(
-          title: 'Delete Regimen?',
-          content: const Text(
-            'This will delete your current pill pack settings and all associated pill logs. This cannot be undone.',
+          title: l10n.settingsScreen_deleteRegimen_question,
+          content: Text(
+            l10n.settingsScreen_deleteRegimenDescription,
           ),
-          confirmButtonText: 'Delete',
+          confirmButtonText: l10n.delete,
           onConfirm: () async {
             await pillsRepo.deletePillRegimen(_activeRegimen!.id!);
 
@@ -180,6 +183,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   Future<void> clearLogs() async {
+    final l10n = AppLocalizations.of(context)!;
     setState(() {
       _isLoading = true;
     });
@@ -189,7 +193,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     if (!mounted) return;
 
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('All logs have been cleared.')),
+      SnackBar(content: Text(l10n.settingsScreen_allLogsHaveBeenCleared)),
     );
 
     setState(() {
@@ -198,16 +202,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   Future<void> showClearLogsDialog() async {
+    final l10n = AppLocalizations.of(context)!;
     return showDialog<void>(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
         return ConfirmationDialog(
-          title: 'Clear All Logs?',
-          content: const Text(
-            'This will permanently delete all your period logs. Your app settings will not be affected.',
+          title: l10n.settingsScreen_clearAllLogs_question,
+          content: Text(
+            l10n.settingsScreen_deleteAllLogsDescription,
           ),
-          confirmButtonText: 'Clear',
+          confirmButtonText: l10n.clear,
           onConfirm: clearLogs,
         );
       },
@@ -216,6 +221,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
 
     if (_isLoading) {
       return const Center(child: CircularProgressIndicator());
@@ -225,24 +231,24 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
     return ListView(
       children: [
-        const ListTile(
-          title: Text('Appearance', style: TextStyle(fontWeight: FontWeight.bold)),
+        ListTile(
+          title: Text(l10n.settingsScreen_appearance, style: TextStyle(fontWeight: FontWeight.bold)),
         ),
         ListTile(
-          title: const Text('History View Style'),
-          subtitle: Text('$selectedViewName View'),
+          title: Text(l10n.settingsScreen_historyViewStyle),
+          subtitle: Text('$selectedViewName ${l10n.settingsScreen_view}'),
           onTap: showViewPicker,
         ),
 
         const Divider(),
 
-        const ListTile(
-          title: Text('Birth Control', style: TextStyle(fontWeight: FontWeight.bold)),
+        ListTile(
+          title: Text(l10n.settingsScreen_birthControl, style: TextStyle(fontWeight: FontWeight.bold)),
         ),
         if (_activeRegimen == null)
           ListTile(
-            title: const Text('Set Up Pill Regimen'),
-            subtitle: const Text('Track your daily pill intake.'),
+            title: Text(l10n.settingsScreen_setUpPillRegimen),
+            subtitle: Text(l10n.settingsScreen_trackYourDailyPillIntake),
             trailing: const Icon(Icons.add),
             onTap: showRegimenSetupDialog,
           )
@@ -256,7 +262,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
           ),
           SwitchListTile(
-            title: const Text('Daily Pill Reminder'),
+            title: Text(l10n.settingsScreen_dailyPillReminder),
             value: _pillNotificationsEnabled,
             onChanged: (bool value) {
               setState(() { _pillNotificationsEnabled = value; });
@@ -265,7 +271,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
           if (_pillNotificationsEnabled)
             ListTile(
-              title: const Text('Reminder Time'),
+              title: Text(l10n.settingsScreen_reminderTime),
               trailing: Text(
                 _pillNotificationTime.format(context),
                 style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
@@ -274,11 +280,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
         ],
         const Divider(),
-        const ListTile(
-          title: Text('Period Predictions & Reminders', style: TextStyle(fontWeight: FontWeight.bold)),
+        ListTile(
+          title: Text(l10n.settingsScreen_periodPredictionAndReminders, style: TextStyle(fontWeight: FontWeight.bold)),
         ),
         SwitchListTile(
-          title: const Text('Upcoming Period Reminders'),
+          title: Text(l10n.settingsScreen_upcomingPeriodReminder),
           value: _notificationsEnabled,
           onChanged: (bool value) {
             setState(() {
@@ -289,13 +295,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ),
         if (_notificationsEnabled) ...[
           ListTile(
-            title: const Text('Remind Me Before'),
+            title: Text(l10n.settingsScreen_remindMeBefore),
             trailing: DropdownButton<int>(
               value: _notificationDays,
               items: [1, 2, 3].map((int days) {
                 return DropdownMenuItem<int>(
                   value: days,
-                  child: Text('$days Day${days > 1 ? 's' : ''}'),
+                  child: Text('$days ${l10n.day}${days > 1 ? 's' : ''}'),
                 );
               }).toList(),
               onChanged: (int? newDays) {
@@ -309,7 +315,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
           ),
           ListTile(
-            title: const Text('Notification Time'),
+            title: Text(l10n.settingsScreen_notificationTime),
             trailing: Text(
               _notificationTime.format(context),
               style: const TextStyle(
@@ -327,7 +333,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             color: Theme.of(context).colorScheme.error,
           ),
           title: Text(
-            'Clear All Period Data',
+            l10n.settingsScreen_clearAllLogs,
             style: TextStyle(
               color: Theme.of(context).colorScheme.error,
             ),

@@ -10,6 +10,8 @@ import 'package:menstrudel/widgets/insights/flow_intensity.dart';
 import 'package:menstrudel/widgets/insights/year_heat_map.dart';
 import 'package:menstrudel/widgets/insights/monthly_flow.dart';
 
+import 'package:menstrudel/l10n/app_localizations.dart';
+
 
 
 class InsightsScreen extends StatefulWidget {
@@ -39,6 +41,8 @@ class _InsightsScreenState extends State<InsightsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return FutureBuilder<List<dynamic>>(
       future: _insightsDataFuture,
       builder: (context, snapshot) {
@@ -47,7 +51,7 @@ class _InsightsScreenState extends State<InsightsScreen> {
         }
 
         if (snapshot.hasError) {
-          return Center(child: Text('Error: ${snapshot.error}'));
+          return Center(child: Text('${l10n.insightsScreen_errorPrefix} ${snapshot.error}'));
         }
 
         if (snapshot.hasData) {
@@ -70,7 +74,7 @@ class _InsightsScreenState extends State<InsightsScreen> {
             ],
           );
         }
-        return const Center(child: Text('No data available.'));
+        return Center(child: Text(l10n.insightsScreen_noDataAvailable));
       },
       
     );

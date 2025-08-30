@@ -1,6 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:menstrudel/models/flows/flow_data.dart';
+import 'package:menstrudel/l10n/app_localizations.dart';
 
 class FlowPatternsWidget extends StatelessWidget {
   final List<MonthlyFlowData> monthlyFlowData;
@@ -12,14 +13,15 @@ class FlowPatternsWidget extends StatelessWidget {
 
   double _numericFromFlow(FlowLevel flow) => flow.index.toDouble() + 1;
 
-  Widget _getFlowLabel(double value, TextStyle? style) {
+  Widget _getFlowLabel(BuildContext context, double value, TextStyle? style) {
+    final l10n = AppLocalizations.of(context)!;
     switch (value.round()) {
       case 1:
-        return Text('Light', style: style);
+        return Text(l10n.flowIntensity_light, style: style);
       case 2:
-        return Text('Medium', style: style);
+        return Text(l10n.flowIntensity_moderate, style: style);
       case 3:
-        return Text('Heavy', style: style);
+        return Text(l10n.flowIntensity_heavy, style: style);
       default:
         return const SizedBox.shrink();
     }
@@ -29,12 +31,13 @@ class FlowPatternsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
+    final l10n = AppLocalizations.of(context)!;
 
     if (monthlyFlowData.isEmpty) {
-      return const Card(
+      return Card(
         child: Padding(
           padding: EdgeInsets.all(24.0),
-          child: Center(child: Text("No data to display.")),
+          child: Center(child: Text(l10n.monthlyFlowChartWidget_noDataToDisplay)),
         ),
       );
     }
@@ -75,12 +78,12 @@ class FlowPatternsWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Cycle Flow Patterns',
+              l10n.monthlyFlowChartWidget_cycleFlowPatterns,
               style: textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 4),
             Text(
-              'Each line represents one complete cycle',
+              l10n.monthlyFlowChartWidget_cycleFlowPatternsDescription,
               style: textTheme.bodyMedium?.copyWith(color: colorScheme.onSurfaceVariant),
             ),
             const SizedBox(height: 24),
@@ -100,9 +103,9 @@ class FlowPatternsWidget extends StatelessWidget {
                     leftTitles: AxisTitles(
                       sideTitles: SideTitles(
                         showTitles: true,
-                        reservedSize: 50,
+                        reservedSize: 70,
                         interval: 1,
-                        getTitlesWidget: (value, meta) => _getFlowLabel(value, textTheme.bodySmall),
+                        getTitlesWidget: (value, meta) => _getFlowLabel(context, value, textTheme.bodySmall),
                       ),
                     ),
                     bottomTitles: AxisTitles(
