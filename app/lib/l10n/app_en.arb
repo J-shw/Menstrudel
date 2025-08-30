@@ -138,7 +138,7 @@
     "symptomEntrySheet_logYourDay": "Log Your Day",
     "symptomEntrySheet_symptomsOptional": "Symptoms (Optional)",
 
-    "periodPredictionCircle_days": "{count, plural, =1{of 1 Day} other{of {count} Days}}",
+    "periodPredictionCircle_days": "{count, plural, =1{Day} other{Days}}",
     "@periodPredictionCircle_days": {
         "description": "A label showing the total number of days until period is due.",
         "placeholders": {

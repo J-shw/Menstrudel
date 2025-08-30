@@ -703,7 +703,7 @@ abstract class AppLocalizations {
   /// A label showing the total number of days until period is due.
   ///
   /// In en, this message translates to:
-  /// **'{count, plural, =1{of 1 Day} other{of {count} Days}}'**
+  /// **'{count, plural, =1{Day} other{Days}}'**
   String periodPredictionCircle_days(int count);
 }
 
