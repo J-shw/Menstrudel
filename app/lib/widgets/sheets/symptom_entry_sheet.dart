@@ -2,14 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class SymptomEntrySheet extends StatefulWidget {
-  const SymptomEntrySheet({super.key});
+  const SymptomEntrySheet({
+    super.key, 
+    required this.selectedDate
+  });
+
+  final DateTime selectedDate;
 
   @override
   State<SymptomEntrySheet> createState() => _SymptomEntrySheetState();
 }
 
 class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
-  DateTime _selectedDate = DateTime.now();
+  late DateTime _selectedDate; 
   final Set<String> _selectedSymptoms = {};
   Set<int> _flowSelection = {1};
 
@@ -22,6 +27,13 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
     'Bloating',
     'Acne',
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedDate = widget.selectedDate; 
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +69,6 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
               ),
             ),
             const SizedBox(height: 24),
-
             // --- Date Picker ---
             Text('Date', style: Theme.of(context).textTheme.bodySmall),
             const SizedBox(height: 8),
@@ -70,6 +81,7 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
               ),
               onPressed: _pickDate,
             ),
+            // ... (The rest of your UI is fine)
             const SizedBox(height: 24),
 
             // --- Flow Selection ---
@@ -96,7 +108,8 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
             const SizedBox(height: 24),
 
             // --- Symptoms ---
-            Text('Symptoms (Optional)', style: Theme.of(context).textTheme.bodySmall),
+            Text('Symptoms (Optional)',
+                style: Theme.of(context).textTheme.bodySmall),
             const SizedBox(height: 8),
             Wrap(
               spacing: 8.0,
