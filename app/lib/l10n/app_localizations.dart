@@ -130,6 +130,12 @@ abstract class AppLocalizations {
   /// **'Clear'**
   String get clear;
 
+  /// No description provided for @save.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get save;
+
   /// No description provided for @ok.
   ///
   /// In en, this message translates to:
@@ -579,6 +585,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Mark As Taken'**
   String get pillStatus_markAsTaken;
+
+  /// No description provided for @regimenSetupWidget_setUpPillRegimen.
+  ///
+  /// In en, this message translates to:
+  /// **'Set Up Pill Regimen'**
+  String get regimenSetupWidget_setUpPillRegimen;
+
+  /// No description provided for @regimenSetupWidget_packName.
+  ///
+  /// In en, this message translates to:
+  /// **'Pack Name'**
+  String get regimenSetupWidget_packName;
+
+  /// No description provided for @regimenSetupWidget_pleaseEnterAName.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a name'**
+  String get regimenSetupWidget_pleaseEnterAName;
+
+  /// No description provided for @regimenSetupWidget_activePills.
+  ///
+  /// In en, this message translates to:
+  /// **'Active Pills'**
+  String get regimenSetupWidget_activePills;
+
+  /// No description provided for @regimenSetupWidget_enterANumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a number'**
+  String get regimenSetupWidget_enterANumber;
+
+  /// No description provided for @regimenSetupWidget_placeboPills.
+  ///
+  /// In en, this message translates to:
+  /// **'Placebo Pills'**
+  String get regimenSetupWidget_placeboPills;
+
+  /// No description provided for @regimenSetupWidget_firstDayOfThisPack.
+  ///
+  /// In en, this message translates to:
+  /// **'First Day of This Pack'**
+  String get regimenSetupWidget_firstDayOfThisPack;
 }
 
 class _AppLocalizationsDelegate

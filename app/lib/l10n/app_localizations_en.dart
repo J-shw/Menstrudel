@@ -27,6 +27,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get clear => 'Clear';
 
   @override
+  String get save => 'Save';
+
+  @override
   String get ok => 'OK';
 
   @override
@@ -277,4 +280,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get pillStatus_markAsTaken => 'Mark As Taken';
+
+  @override
+  String get regimenSetupWidget_setUpPillRegimen => 'Set Up Pill Regimen';
+
+  @override
+  String get regimenSetupWidget_packName => 'Pack Name';
+
+  @override
+  String get regimenSetupWidget_pleaseEnterAName => 'Please enter a name';
+
+  @override
+  String get regimenSetupWidget_activePills => 'Active Pills';
+
+  @override
+  String get regimenSetupWidget_enterANumber => 'Enter a number';
+
+  @override
+  String get regimenSetupWidget_placeboPills => 'Placebo Pills';
+
+  @override
+  String get regimenSetupWidget_firstDayOfThisPack => 'First Day of This Pack';
 }

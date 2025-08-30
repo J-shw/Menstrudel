@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/models/pills/pill_regimen.dart';
+import 'package:menstrudel/l10n/app_localizations.dart';
 
 class RegimenSetupDialog extends StatefulWidget {
   const RegimenSetupDialog({super.key});
@@ -52,8 +53,9 @@ class _RegimenSetupDialogState extends State<RegimenSetupDialog> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return AlertDialog(
-      title: const Text('Set Up Pill Regimen'),
+      title: Text(l10n.regimenSetupWidget_setUpPillRegimen),
       content: SizedBox(
         width: double.maxFinite,
         child: Form(
@@ -63,8 +65,8 @@ class _RegimenSetupDialogState extends State<RegimenSetupDialog> {
             children: [
               TextFormField(
                 controller: _nameController,
-                decoration: const InputDecoration(labelText: 'Pack Name (e.g., Yasmin)'),
-                validator: (value) => value!.isEmpty ? 'Please enter a name' : null,
+                decoration: const InputDecoration(labelText: l10n.regimenSetupWidget_packName),
+                validator: (value) => value!.isEmpty ? l10n.regimenSetupWidget_pleaseEnterAName : null,
               ),
               const SizedBox(height: 16),
               Row(
@@ -72,20 +74,20 @@ class _RegimenSetupDialogState extends State<RegimenSetupDialog> {
                   Expanded(
                     child: TextFormField(
                       controller: _activeController,
-                      decoration: const InputDecoration(labelText: 'Active Pills'),
+                      decoration: InputDecoration(labelText: l10n.regimenSetupWidget_activePills),
                       keyboardType: TextInputType.number,
                       validator: (value) =>
-                          value!.isEmpty || int.tryParse(value) == null ? 'Enter a number' : null,
+                          value!.isEmpty || int.tryParse(value) == null ? l10n.regimenSetupWidget_enterANumber : null,
                     ),
                   ),
                   const SizedBox(width: 16),
                   Expanded(
                     child: TextFormField(
                       controller: _placeboController,
-                      decoration: const InputDecoration(labelText: 'Placebo Pills'),
+                      decoration: InputDecoration(labelText: l10n.regimenSetupWidget_placeboPills),
                       keyboardType: TextInputType.number,
                       validator: (value) =>
-                          value!.isEmpty || int.tryParse(value) == null ? 'Enter a number' : null,
+                          value!.isEmpty || int.tryParse(value) == null ? l10n.regimenSetupWidget_enterANumber : null,
                     ),
                   ),
                 ],
@@ -93,7 +95,7 @@ class _RegimenSetupDialogState extends State<RegimenSetupDialog> {
               const SizedBox(height: 24),
               ListTile(
                 contentPadding: EdgeInsets.zero,
-                title: const Text('First Day of This Pack'),
+                title: const Text(l10n.regimenSetupWidget_firstDayOfThisPack),
                 subtitle: Text(MaterialLocalizations.of(context).formatFullDate(_startDate)),
                 trailing: const Icon(Icons.calendar_today),
                 onTap: _selectStartDate,
@@ -104,12 +106,12 @@ class _RegimenSetupDialogState extends State<RegimenSetupDialog> {
       ),
       actions: [
         TextButton(
-          child: const Text('Cancel'),
+          child: Text(l10n.cancel),
           onPressed: () => Navigator.of(context).pop(),
         ),
         FilledButton(
-          child: const Text('Save'),
           onPressed: _submitForm,
+          child: Text(l10n.save),
         ),
       ],
     );

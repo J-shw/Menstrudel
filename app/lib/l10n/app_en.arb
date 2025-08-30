@@ -9,6 +9,7 @@
 
     "delete": "Delete",
     "clear": "Clear",
+    "save": "Save",
 
     "ok": "OK",
     "confirm": "Confirm",
@@ -112,6 +113,14 @@
         }
     },
     "pillStatus_allSet": "All Set!",
-    "pillStatus_markAsTaken": "Mark As Taken"
+    "pillStatus_markAsTaken": "Mark As Taken",
+
+    "regimenSetupWidget_setUpPillRegimen": "Set Up Pill Regimen",
+    "regimenSetupWidget_packName": "Pack Name",
+    "regimenSetupWidget_pleaseEnterAName": "Please enter a name",
+    "regimenSetupWidget_activePills": "Active Pills",
+    "regimenSetupWidget_enterANumber": "Enter a number",
+    "regimenSetupWidget_placeboPills": "Placebo Pills",
+    "regimenSetupWidget_firstDayOfThisPack": "First Day of This Pack"
     
 }
