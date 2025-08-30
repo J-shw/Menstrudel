@@ -37,8 +37,8 @@ class LogsScreenState extends State<LogsScreen> {
 	PeriodPredictionResult? _predictionResult;
   PeriodHistoryView _selectedView = PeriodHistoryView.journal;
 
-  Future<void> handleLogPeriod() async {
-    final bool wasLogSuccessful = await PeriodLoggerService.showAndLogPeriod(context);
+  Future<void> handleLogPeriod(DateTime selectedDate) async {
+    final bool wasLogSuccessful = await PeriodLoggerService.showAndLogPeriod(context, selectedDate);
 
     if (wasLogSuccessful && mounted) {
       _refreshPeriodLogs();

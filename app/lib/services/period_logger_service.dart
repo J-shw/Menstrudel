@@ -4,11 +4,11 @@ import 'package:menstrudel/models/period_logs/period_logs.dart';
 import 'package:menstrudel/database/repositories/periods_repository.dart';
 
 class PeriodLoggerService {
-  static Future<bool> showAndLogPeriod(BuildContext context) async {
+  static Future<bool> showAndLogPeriod(BuildContext context, DateTime selectedDate) async {
     final result = await showModalBottomSheet<Map<String, dynamic>>(
       context: context,
       isScrollControlled: true,
-      builder: (ctx) => const SymptomEntrySheet(),
+      builder: (ctx) => SymptomEntrySheet(selectedDate: selectedDate),
     );
     final periodsRepo = PeriodsRepository();
 
