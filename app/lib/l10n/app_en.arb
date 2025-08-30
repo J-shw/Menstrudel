@@ -2,8 +2,12 @@
     "@@locale": "en",
     "appTitle": "Menstrudel",
 
+    "day": "Day",
+    "days": "Days",
+
     "delete": "Delete",
     "clear": "Clear",
+
     "ok": "OK",
     "confirm": "Confirm",
     "set": "Set",
@@ -33,7 +37,6 @@
     "logScreen_nextPeriodEstimate": "Next period Est",
     "logScreen_periodDueToday": "Period due today",
     "logScreen_periodOverdueBy": "Period overdue by",
-    "logScreen_days": "days",
     "logScreen_tamponReminderSetFor": "Tampon reminder set for",
     "logScreen_tamponReminderCancelled": "Tampon reminder cancelled.",
     "logScreen_couldNotCancelReminder": "Could not cancel reminder",
@@ -59,7 +62,11 @@
     "settingsScreen_remindMeBefore": "Remind Me Before",
     "settingsScreen_notificationTime": "Notification Time",
     "settingsScreen_clearAllLogs": "Clear All Logs",
-    "settingsScreen_day": "Day",
 
-    "tamponReminderDialog_tamponReminderTitle": "Tampon Reminder"
+    "tamponReminderDialog_tamponReminderTitle": "Tampon Reminder",
+
+    "cycleLengthVarianceWidget_LogAtLeastTwoPeriods": "Need at least two cycles to show variance.",
+    "cycleLengthVarianceWidget_cycleAndPeriodVeriance": "Cycle & Period Variance",
+    "cycleLengthVarianceWidget_averageCycle": "Average Cycle"
+    
 }
