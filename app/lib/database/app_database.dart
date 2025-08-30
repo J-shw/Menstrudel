@@ -8,9 +8,9 @@ class AppDatabase {
     AppDatabase._init();
 
     Future<Database> get database async {
-        if (_database != null) return _database!;
-        _database = await _initDB('app_database.db');
-        return _database!;
+      if (_database != null) return _database!;
+      _database = await _initDB('app_database.db');
+      return _database!;
     }
 
     Future<Database> _initDB(String filePath) async {
