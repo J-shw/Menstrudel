@@ -65,7 +65,7 @@ class _RegimenSetupDialogState extends State<RegimenSetupDialog> {
             children: [
               TextFormField(
                 controller: _nameController,
-                decoration: const InputDecoration(labelText: l10n.regimenSetupWidget_packName),
+                decoration: InputDecoration(labelText: l10n.regimenSetupWidget_packName),
                 validator: (value) => value!.isEmpty ? l10n.regimenSetupWidget_pleaseEnterAName : null,
               ),
               const SizedBox(height: 16),
@@ -95,7 +95,7 @@ class _RegimenSetupDialogState extends State<RegimenSetupDialog> {
               const SizedBox(height: 24),
               ListTile(
                 contentPadding: EdgeInsets.zero,
-                title: const Text(l10n.regimenSetupWidget_firstDayOfThisPack),
+                title: Text(l10n.regimenSetupWidget_firstDayOfThisPack),
                 subtitle: Text(MaterialLocalizations.of(context).formatFullDate(_startDate)),
                 trailing: const Icon(Icons.calendar_today),
                 onTap: _selectStartDate,
