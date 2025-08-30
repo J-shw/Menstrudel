@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:menstrudel/database/repositories/periods_repository.dart';
 import 'package:menstrudel/widgets/basic_progress_circle.dart';
-import 'package:menstrudel/widgets/sheets/symptom_entry_sheet.dart';
 import 'package:menstrudel/models/period_logs/period_logs.dart';
 import 'package:menstrudel/models/periods/period.dart';
 
@@ -12,6 +11,7 @@ import 'package:menstrudel/services/notification_service.dart';
 import 'package:menstrudel/widgets/dialogs/tampon_reminder_dialog.dart';
 import 'package:menstrudel/screens/main_screen.dart';
 import 'package:menstrudel/services/settings_service.dart';
+import 'package:menstrudel/services/period_logger_service.dart';
 import 'package:menstrudel/widgets/logs/dynamic_history_view.dart';
 
 
@@ -37,44 +37,11 @@ class LogsScreenState extends State<LogsScreen> {
 	PeriodPredictionResult? _predictionResult;
   PeriodHistoryView _selectedView = PeriodHistoryView.journal;
 
-  Future<void> handleLogPeriod(BuildContext context) async {
-    final result = await showModalBottomSheet<Map<String, dynamic>>(
-      context: context,
-      isScrollControlled: true,
-      builder: (BuildContext context) => const SymptomEntrySheet(),
-    );
+  Future<void> handleLogPeriod() async {
+    final bool wasLogSuccessful = await PeriodLoggerService.showAndLogPeriod(context);
 
-    if (result == null) return;
-    if (!context.mounted) return;
-
-    try {
-      final DateTime? date = result['date'];
-      final List<String>? symptoms = result['symptoms'];
-      final int? flow = result['flow'];
-
-      if (date == null) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Error: Date was not provided.')),
-        );
-        return;
-      }
-
-      final newEntry = PeriodLogEntry(
-        date: date,
-        symptoms: symptoms ?? [],
-        flow: flow ?? 0,
-      );
-
-      await periodsRepo.createPeriodLog(newEntry);
+    if (wasLogSuccessful && mounted) {
       _refreshPeriodLogs();
-
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: const Text('Failed to save period log. Please try again.'),
-          backgroundColor: Theme.of(context).colorScheme.error,
-        ),
-      );
     }
   }
   
