@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/widgets/sheets/symptom_entry_sheet.dart';
 import 'package:menstrudel/models/period_logs/period_logs.dart';
+import 'package:menstrudel/database/repositories/periods_repository.dart';
 
 class PeriodLoggerService {
   static Future<bool> showAndLogPeriod(BuildContext context) async {
@@ -9,6 +10,7 @@ class PeriodLoggerService {
       isScrollControlled: true,
       builder: (ctx) => const SymptomEntrySheet(),
     );
+    final periodsRepo = PeriodsRepository();
 
     if (result == null || !context.mounted) {
       return false; 
@@ -28,6 +30,8 @@ class PeriodLoggerService {
         symptoms: result['symptoms'] ?? [],
         flow: result['flow'] ?? 0,
       );
+
+      await periodsRepo.createPeriodLog(newEntry); 
 
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Log saved!')),
