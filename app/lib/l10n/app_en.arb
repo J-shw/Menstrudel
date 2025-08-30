@@ -95,6 +95,9 @@
 
     "listViewWidget_noPeriodsLogged": "No periods logged yet.\nTap the + button to add one.",
     "listViewWidget_confirmDelete": "Confirm Delete",
-    "listViewWidget_confirmDeleteDescription": "Are you sure you want to delete this entry?"
+    "listViewWidget_confirmDeleteDescription": "Are you sure you want to delete this entry?",
+
+    "emptyPillStateWidget_noPillRegimenFound": "No pill regimen found.",
+    "emptyPillStateWidget_noPillRegimenFoundDescription": "Set up your pill pack in settings to start tracking."
     
 }

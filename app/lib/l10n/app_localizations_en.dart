@@ -249,4 +249,12 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get listViewWidget_confirmDeleteDescription =>
       'Are you sure you want to delete this entry?';
+
+  @override
+  String get emptyPillStateWidget_noPillRegimenFound =>
+      'No pill regimen found.';
+
+  @override
+  String get emptyPillStateWidget_noPillRegimenFoundDescription =>
+      'Set up your pill pack in settings to start tracking.';
 }

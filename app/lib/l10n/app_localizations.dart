@@ -543,6 +543,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Are you sure you want to delete this entry?'**
   String get listViewWidget_confirmDeleteDescription;
+
+  /// No description provided for @emptyPillStateWidget_noPillRegimenFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No pill regimen found.'**
+  String get emptyPillStateWidget_noPillRegimenFound;
+
+  /// No description provided for @emptyPillStateWidget_noPillRegimenFoundDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Set up your pill pack in settings to start tracking.'**
+  String get emptyPillStateWidget_noPillRegimenFoundDescription;
 }
 
 class _AppLocalizationsDelegate
