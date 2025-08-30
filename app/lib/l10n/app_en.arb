@@ -1,0 +1,20 @@
+{
+    "@@locale": "en",
+    "appTitle": "Menstrudel",
+
+    "mainScreen_insightsPageTitle": "Your Insights",
+    "mainScreen_pillsPageTitle": "Pills",
+    "mainScreen_settingsPageTitle": "Settings",
+
+    "mainScreen_tooltipSetReminder": "Tampon reminder",
+    "mainScreen_tooltipCancelReminder": "Cancel reminder",
+    "mainScreen_tooltipLogPeriod": "Log period",
+
+    "insightsScreen_errorPrefix": "Error:",
+    "insightsScreen_noDataAvailable": "No data available.",
+    
+    "navBar_insights": "Insights",
+    "navBar_logs": "Logs",
+    "navBar_pill": "Pill",
+    "navBar_settings": "Settings"
+}
