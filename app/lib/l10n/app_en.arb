@@ -100,6 +100,18 @@
     "emptyPillStateWidget_noPillRegimenFound": "No pill regimen found.",
     "emptyPillStateWidget_noPillRegimenFoundDescription": "Set up your pill pack in settings to start tracking.",
 
-    "pillPackVisualiser_yourPack": "Your Pack"
+    "pillPackVisualiser_yourPack": "Your Pack",
+
+    "pillStatus_pillsOfTotal": "{count, plural, =1{of 1 pill} other{of {count} pills}}",
+    "@pillStatus_pillsOfTotal": {
+        "description": "A label showing the total number of pills.",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "pillStatus_allSet": "All Set!",
+    "pillStatus_markAsTaken": "Mark As Taken"
     
 }

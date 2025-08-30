@@ -260,4 +260,21 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get pillPackVisualiser_yourPack => 'Your Pack';
+
+  @override
+  String pillStatus_pillsOfTotal(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'of $count pills',
+      one: 'of 1 pill',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get pillStatus_allSet => 'All Set!';
+
+  @override
+  String get pillStatus_markAsTaken => 'Mark As Taken';
 }

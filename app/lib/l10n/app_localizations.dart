@@ -561,6 +561,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Your Pack'**
   String get pillPackVisualiser_yourPack;
+
+  /// A label showing the total number of pills.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{of 1 pill} other{of {count} pills}}'**
+  String pillStatus_pillsOfTotal(int count);
+
+  /// No description provided for @pillStatus_allSet.
+  ///
+  /// In en, this message translates to:
+  /// **'All Set!'**
+  String get pillStatus_allSet;
+
+  /// No description provided for @pillStatus_markAsTaken.
+  ///
+  /// In en, this message translates to:
+  /// **'Mark As Taken'**
+  String get pillStatus_markAsTaken;
 }
 
 class _AppLocalizationsDelegate
