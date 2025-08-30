@@ -184,6 +184,24 @@ abstract class AppLocalizations {
   /// **'Settings'**
   String get navBar_settings;
 
+  /// No description provided for @flowIntensity_light.
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get flowIntensity_light;
+
+  /// No description provided for @flowIntensity_moderate.
+  ///
+  /// In en, this message translates to:
+  /// **'Moderate'**
+  String get flowIntensity_moderate;
+
+  /// No description provided for @flowIntensity_heavy.
+  ///
+  /// In en, this message translates to:
+  /// **'Heavy'**
+  String get flowIntensity_heavy;
+
   /// No description provided for @mainScreen_insightsPageTitle.
   ///
   /// In en, this message translates to:
@@ -441,6 +459,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Cycle'**
   String get cycleLengthVarianceWidget_cycle;
+
+  /// No description provided for @flowIntensityWidget_flowIntensityBreakdown.
+  ///
+  /// In en, this message translates to:
+  /// **'Flow Intensity Breakdown'**
+  String get flowIntensityWidget_flowIntensityBreakdown;
+
+  /// No description provided for @flowIntensityWidget_noFlowDataLoggedYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No flow data logged yet.'**
+  String get flowIntensityWidget_noFlowDataLoggedYet;
 }
 
 class _AppLocalizationsDelegate

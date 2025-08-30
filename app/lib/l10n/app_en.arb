@@ -21,6 +21,10 @@
     "navBar_pill": "Pill",
     "navBar_settings": "Settings",
 
+    "flowIntensity_light": "Light",
+    "flowIntensity_moderate": "Moderate",
+    "flowIntensity_heavy": "Heavy",
+
     "mainScreen_insightsPageTitle": "Your Insights",
     "mainScreen_pillsPageTitle": "Pills",
     "mainScreen_settingsPageTitle": "Settings",
@@ -70,7 +74,11 @@
     "cycleLengthVarianceWidget_averageCycle": "Average Cycle",
     "cycleLengthVarianceWidget_averagePeriod": "Average Period",
     "cycleLengthVarianceWidget_period": "Period",
-    "cycleLengthVarianceWidget_cycle": "Cycle"
+    "cycleLengthVarianceWidget_cycle": "Cycle",
+
+    "flowIntensityWidget_flowIntensityBreakdown": "Flow Intensity Breakdown",
+    "flowIntensityWidget_noFlowDataLoggedYet": "No flow data logged yet."
+
     
     
 }

@@ -54,6 +54,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get navBar_settings => 'Settings';
 
   @override
+  String get flowIntensity_light => 'Light';
+
+  @override
+  String get flowIntensity_moderate => 'Moderate';
+
+  @override
+  String get flowIntensity_heavy => 'Heavy';
+
+  @override
   String get mainScreen_insightsPageTitle => 'Your Insights';
 
   @override
@@ -191,4 +200,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get cycleLengthVarianceWidget_cycle => 'Cycle';
+
+  @override
+  String get flowIntensityWidget_flowIntensityBreakdown =>
+      'Flow Intensity Breakdown';
+
+  @override
+  String get flowIntensityWidget_noFlowDataLoggedYet =>
+      'No flow data logged yet.';
 }
