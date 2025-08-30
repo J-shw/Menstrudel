@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:menstrudel/models/period_logs/period_logs.dart';
 import 'package:menstrudel/models/period_prediction_result.dart';
-import 'package:collection/collection.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class PeriodJournalView extends StatefulWidget {
@@ -10,6 +9,7 @@ class PeriodJournalView extends StatefulWidget {
   final bool isLoading;
   final Function(int) onDelete;
   final PeriodPredictionResult? predictionResult;
+  final Function(DateTime) onLogRequested;
 
   const PeriodJournalView({
     super.key,
@@ -17,6 +17,7 @@ class PeriodJournalView extends StatefulWidget {
     required this.isLoading,
     required this.onDelete,
     this.predictionResult,
+    required this.onLogRequested,
   });
 
   @override
@@ -230,6 +231,7 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
                 if (logForSelectedDay != null) {
                   _showDetailsBottomSheet(logForSelectedDay);
                 } else {
+                  widget.onLogRequested(selectedDay);
                 }
               },
               onPageChanged: (focusedDay) {
