@@ -301,7 +301,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               items: [1, 2, 3].map((int days) {
                 return DropdownMenuItem<int>(
                   value: days,
-                  child: Text('$days ${l10n.settingsScreen_day}${days > 1 ? 's' : ''}'),
+                  child: Text('$days ${l10n.day}${days > 1 ? 's' : ''}'),
                 );
               }).toList(),
               onChanged: (int? newDays) {
