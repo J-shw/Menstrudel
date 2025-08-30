@@ -2,6 +2,8 @@
     "@@locale": "en",
     "appTitle": "Menstrudel",
 
+    "ongoing": "Ongoing",
+
     "day": "Day",
     "days": "Days",
 
@@ -89,6 +91,10 @@
     "yearHeatMapWidget_yearlyOverview": "Yearly Overview",
 
     "journalViewWidget_symptoms": "Symptoms",
-    "journalViewWidget_logYourFirstPeriod": "Log your first period."
+    "journalViewWidget_logYourFirstPeriod": "Log your first period.",
+
+    "listViewWidget_noPeriodsLogged": "No periods logged yet.\nTap the + button to add one.",
+    "listViewWidget_confirmDelete": "Confirm Delete",
+    "listViewWidget_confirmDeleteDescription": "Are you sure you want to delete this entry?"
     
 }

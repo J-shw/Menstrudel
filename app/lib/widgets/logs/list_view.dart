@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:menstrudel/models/period_logs/period_logs.dart';
 import 'package:menstrudel/models/periods/period.dart';
 import 'package:collection/collection.dart';
+import 'package:menstrudel/l10n/app_localizations.dart';
 
 class PeriodListView extends StatelessWidget {
   final List<PeriodLogEntry> periodLogEntries;
@@ -20,15 +21,17 @@ class PeriodListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     if (isLoading) {
       return const Expanded(child: Center(child: CircularProgressIndicator()));
     }
 
     if (periodEntries.isEmpty) {
-      return const Expanded(
+      return Expanded(
         child: Center(
           child: Text(
-            'No periods logged yet.\nTap the + button to add one.',
+            l10n.listViewWidget_noPeriodsLogged,
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 16, color: Colors.grey),
           ),
@@ -72,6 +75,8 @@ class PeriodListView extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
 
+    final l10n = AppLocalizations.of(context)!;
+
     return Padding(
       padding: const EdgeInsets.fromLTRB(16.0, 24.0, 16.0, 8.0),
       child: Column(
@@ -83,7 +88,7 @@ class PeriodListView extends StatelessWidget {
           ),
           const SizedBox(height: 4),
           Text(
-            '${DateFormat('d MMM').format(period.startDate)} - ${isOngoing ? 'Ongoing' : DateFormat('d MMM').format(period.endDate)} ($duration days)',
+            '${DateFormat('d MMM').format(period.startDate)} - ${isOngoing ? l10n.ongoing : DateFormat('d MMM').format(period.endDate)} ($duration ${l10n.days.toLowerCase()})',
             style: textTheme.bodyMedium?.copyWith(color: colorScheme.onSurfaceVariant),
           ),
           const Divider(height: 16),
@@ -95,6 +100,8 @@ class PeriodListView extends StatelessWidget {
   Widget _buildPeriodLog(PeriodLogEntry entry, BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
+
+    final l10n = AppLocalizations.of(context)!;
 
     return Dismissible(
       key: ValueKey(entry.id),
@@ -110,16 +117,16 @@ class PeriodListView extends StatelessWidget {
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: const Text("Confirm Delete"),
-              content: const Text("Are you sure you want to delete this entry?"),
+              title: Text(l10n.listViewWidget_confirmDelete),
+              content: Text(l10n.listViewWidget_confirmDeleteDescription),
               actions: <Widget>[
                 TextButton(
                   onPressed: () => Navigator.of(context).pop(false),
-                  child: const Text("Cancel"),
+                  child: Text(l10n.cancel),
                 ),
                 ElevatedButton(
                   onPressed: () => Navigator.of(context).pop(true),
-                  child: const Text("Delete"),
+                  child: Text(l10n.delete),
                 ),
               ],
             );

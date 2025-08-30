@@ -12,6 +12,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appTitle => 'Menstrudel';
 
   @override
+  String get ongoing => 'Ongoing';
+
+  @override
   String get day => 'Day';
 
   @override
@@ -235,4 +238,15 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get journalViewWidget_logYourFirstPeriod => 'Log your first period.';
+
+  @override
+  String get listViewWidget_noPeriodsLogged =>
+      'No periods logged yet.\nTap the + button to add one.';
+
+  @override
+  String get listViewWidget_confirmDelete => 'Confirm Delete';
+
+  @override
+  String get listViewWidget_confirmDeleteDescription =>
+      'Are you sure you want to delete this entry?';
 }

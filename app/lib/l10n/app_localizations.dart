@@ -100,6 +100,12 @@ abstract class AppLocalizations {
   /// **'Menstrudel'**
   String get appTitle;
 
+  /// No description provided for @ongoing.
+  ///
+  /// In en, this message translates to:
+  /// **'Ongoing'**
+  String get ongoing;
+
   /// No description provided for @day.
   ///
   /// In en, this message translates to:
@@ -519,6 +525,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Log your first period.'**
   String get journalViewWidget_logYourFirstPeriod;
+
+  /// No description provided for @listViewWidget_noPeriodsLogged.
+  ///
+  /// In en, this message translates to:
+  /// **'No periods logged yet.\nTap the + button to add one.'**
+  String get listViewWidget_noPeriodsLogged;
+
+  /// No description provided for @listViewWidget_confirmDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Delete'**
+  String get listViewWidget_confirmDelete;
+
+  /// No description provided for @listViewWidget_confirmDeleteDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete this entry?'**
+  String get listViewWidget_confirmDeleteDescription;
 }
 
 class _AppLocalizationsDelegate
