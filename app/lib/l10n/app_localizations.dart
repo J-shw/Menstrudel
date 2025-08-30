@@ -124,6 +124,12 @@ abstract class AppLocalizations {
   /// **'Confirm'**
   String get confirm;
 
+  /// No description provided for @set.
+  ///
+  /// In en, this message translates to:
+  /// **'Set'**
+  String get set;
+
   /// No description provided for @yes.
   ///
   /// In en, this message translates to:
@@ -393,6 +399,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Day'**
   String get settingsScreen_day;
+
+  /// No description provided for @tamponReminderDialog_tamponReminderTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Tampon Reminder'**
+  String get tamponReminderDialog_tamponReminderTitle;
 }
 
 class _AppLocalizationsDelegate

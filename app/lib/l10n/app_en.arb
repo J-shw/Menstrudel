@@ -6,6 +6,7 @@
     "clear": "Clear",
     "ok": "OK",
     "confirm": "Confirm",
+    "set": "Set",
     "yes": "Yes",
     "no": "No",
     "cancel": "Cancel",
@@ -58,5 +59,7 @@
     "settingsScreen_remindMeBefore": "Remind Me Before",
     "settingsScreen_notificationTime": "Notification Time",
     "settingsScreen_clearAllLogs": "Clear All Logs",
-    "settingsScreen_day": "Day"
+    "settingsScreen_day": "Day",
+
+    "tamponReminderDialog_tamponReminderTitle": "Tampon Reminder"
 }

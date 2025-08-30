@@ -24,6 +24,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get confirm => 'Confirm';
 
   @override
+  String get set => 'Set';
+
+  @override
   String get yes => 'Yes';
 
   @override
@@ -165,4 +168,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get settingsScreen_day => 'Day';
+
+  @override
+  String get tamponReminderDialog_tamponReminderTitle => 'Tampon Reminder';
 }
