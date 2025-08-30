@@ -337,4 +337,15 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get symptomEntrySheet_symptomsOptional => 'Symptoms (Optional)';
+
+  @override
+  String periodPredictionCircle_days(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'of $count Days',
+      one: 'of 1 Day',
+    );
+    return '$_temp0';
+  }
 }
