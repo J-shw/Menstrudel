@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
 import 'package:menstrudel/models/period_logs/period_logs.dart';
+import 'package:menstrudel/l10n/app_localizations.dart';
 
 class SymptomFrequencyWidget extends StatelessWidget {
   final List<PeriodLogEntry> logs;
@@ -10,6 +11,7 @@ class SymptomFrequencyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
+    final l10n = AppLocalizations.of(context)!;
 
     final Map<String, int> symptomCounts = {};
     for (final log in logs) {
@@ -24,7 +26,7 @@ class SymptomFrequencyWidget extends StatelessWidget {
     final sortedSymptoms = symptomCounts.entries.sortedBy<num>((e) => e.value).reversed.toList();
     
     if (sortedSymptoms.isEmpty) {
-        return const Card(child: Padding(padding: EdgeInsets.all(24.0), child: Center(child: Text("No symptoms logged yet."))));
+        return Card(child: Padding(padding: EdgeInsets.all(24.0), child: Center(child: Text(l10n.symptomFrequencyWidget_noSymptomsLoggedYet))));
     }
 
     return Card(
@@ -35,7 +37,7 @@ class SymptomFrequencyWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Most Common Symptoms', style: textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
+            Text(l10n.symptomFrequencyWidget_mostCommonSymptoms, style: textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
             const SizedBox(height: 16),
             ...List.generate(sortedSymptoms.length.clamp(0, 5), (index) {
                 final entry = sortedSymptoms[index];

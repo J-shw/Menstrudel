@@ -218,4 +218,12 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get monthlyFlowChartWidget_cycleFlowPatternsDescription =>
       'Each line represents one complete cycle';
+
+  @override
+  String get symptomFrequencyWidget_noSymptomsLoggedYet =>
+      'No symptoms logged yet.';
+
+  @override
+  String get symptomFrequencyWidget_mostCommonSymptoms =>
+      'Most Common Symptoms';
 }

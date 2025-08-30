@@ -489,6 +489,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Each line represents one complete cycle'**
   String get monthlyFlowChartWidget_cycleFlowPatternsDescription;
+
+  /// No description provided for @symptomFrequencyWidget_noSymptomsLoggedYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No symptoms logged yet.'**
+  String get symptomFrequencyWidget_noSymptomsLoggedYet;
+
+  /// No description provided for @symptomFrequencyWidget_mostCommonSymptoms.
+  ///
+  /// In en, this message translates to:
+  /// **'Most Common Symptoms'**
+  String get symptomFrequencyWidget_mostCommonSymptoms;
 }
 
 class _AppLocalizationsDelegate
