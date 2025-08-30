@@ -12,6 +12,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appTitle => 'Menstrudel';
 
   @override
+  String get day => 'Day';
+
+  @override
+  String get days => 'Days';
+
+  @override
   String get delete => 'Delete';
 
   @override
@@ -86,9 +92,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get logScreen_periodOverdueBy => 'Period overdue by';
-
-  @override
-  String get logScreen_days => 'days';
 
   @override
   String get logScreen_tamponReminderSetFor => 'Tampon reminder set for';
@@ -167,8 +170,25 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsScreen_clearAllLogs => 'Clear All Logs';
 
   @override
-  String get settingsScreen_day => 'Day';
+  String get tamponReminderDialog_tamponReminderTitle => 'Tampon Reminder';
 
   @override
-  String get tamponReminderDialog_tamponReminderTitle => 'Tampon Reminder';
+  String get cycleLengthVarianceWidget_LogAtLeastTwoPeriods =>
+      'Need at least two cycles to show variance.';
+
+  @override
+  String get cycleLengthVarianceWidget_cycleAndPeriodVeriance =>
+      'Cycle & Period Variance';
+
+  @override
+  String get cycleLengthVarianceWidget_averageCycle => 'Average Cycle';
+
+  @override
+  String get cycleLengthVarianceWidget_averagePeriod => 'Average Period';
+
+  @override
+  String get cycleLengthVarianceWidget_period => 'Period';
+
+  @override
+  String get cycleLengthVarianceWidget_cycle => 'Cycle';
 }

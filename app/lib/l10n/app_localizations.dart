@@ -100,6 +100,18 @@ abstract class AppLocalizations {
   /// **'Menstrudel'**
   String get appTitle;
 
+  /// No description provided for @day.
+  ///
+  /// In en, this message translates to:
+  /// **'Day'**
+  String get day;
+
+  /// No description provided for @days.
+  ///
+  /// In en, this message translates to:
+  /// **'Days'**
+  String get days;
+
   /// No description provided for @delete.
   ///
   /// In en, this message translates to:
@@ -250,12 +262,6 @@ abstract class AppLocalizations {
   /// **'Period overdue by'**
   String get logScreen_periodOverdueBy;
 
-  /// No description provided for @logScreen_days.
-  ///
-  /// In en, this message translates to:
-  /// **'days'**
-  String get logScreen_days;
-
   /// No description provided for @logScreen_tamponReminderSetFor.
   ///
   /// In en, this message translates to:
@@ -394,17 +400,47 @@ abstract class AppLocalizations {
   /// **'Clear All Logs'**
   String get settingsScreen_clearAllLogs;
 
-  /// No description provided for @settingsScreen_day.
-  ///
-  /// In en, this message translates to:
-  /// **'Day'**
-  String get settingsScreen_day;
-
   /// No description provided for @tamponReminderDialog_tamponReminderTitle.
   ///
   /// In en, this message translates to:
   /// **'Tampon Reminder'**
   String get tamponReminderDialog_tamponReminderTitle;
+
+  /// No description provided for @cycleLengthVarianceWidget_LogAtLeastTwoPeriods.
+  ///
+  /// In en, this message translates to:
+  /// **'Need at least two cycles to show variance.'**
+  String get cycleLengthVarianceWidget_LogAtLeastTwoPeriods;
+
+  /// No description provided for @cycleLengthVarianceWidget_cycleAndPeriodVeriance.
+  ///
+  /// In en, this message translates to:
+  /// **'Cycle & Period Variance'**
+  String get cycleLengthVarianceWidget_cycleAndPeriodVeriance;
+
+  /// No description provided for @cycleLengthVarianceWidget_averageCycle.
+  ///
+  /// In en, this message translates to:
+  /// **'Average Cycle'**
+  String get cycleLengthVarianceWidget_averageCycle;
+
+  /// No description provided for @cycleLengthVarianceWidget_averagePeriod.
+  ///
+  /// In en, this message translates to:
+  /// **'Average Period'**
+  String get cycleLengthVarianceWidget_averagePeriod;
+
+  /// No description provided for @cycleLengthVarianceWidget_period.
+  ///
+  /// In en, this message translates to:
+  /// **'Period'**
+  String get cycleLengthVarianceWidget_period;
+
+  /// No description provided for @cycleLengthVarianceWidget_cycle.
+  ///
+  /// In en, this message translates to:
+  /// **'Cycle'**
+  String get cycleLengthVarianceWidget_cycle;
 }
 
 class _AppLocalizationsDelegate
