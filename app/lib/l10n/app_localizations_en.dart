@@ -229,4 +229,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get yearHeatMapWidget_yearlyOverview => 'Yearly Overview';
+
+  @override
+  String get journalViewWidget_symptoms => 'Symptoms';
+
+  @override
+  String get journalViewWidget_logYourFirstPeriod => 'Log your first period.';
 }

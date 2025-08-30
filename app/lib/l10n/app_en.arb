@@ -86,6 +86,9 @@
     "symptomFrequencyWidget_noSymptomsLoggedYet": "No symptoms logged yet.",
     "symptomFrequencyWidget_mostCommonSymptoms": "Most Common Symptoms",
 
-    "yearHeatMapWidget_yearlyOverview": "Yearly Overview"
+    "yearHeatMapWidget_yearlyOverview": "Yearly Overview",
+
+    "journalViewWidget_symptoms": "Symptoms",
+    "journalViewWidget_logYourFirstPeriod": "Log your first period."
     
 }

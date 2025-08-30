@@ -507,6 +507,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Yearly Overview'**
   String get yearHeatMapWidget_yearlyOverview;
+
+  /// No description provided for @journalViewWidget_symptoms.
+  ///
+  /// In en, this message translates to:
+  /// **'Symptoms'**
+  String get journalViewWidget_symptoms;
+
+  /// No description provided for @journalViewWidget_logYourFirstPeriod.
+  ///
+  /// In en, this message translates to:
+  /// **'Log your first period.'**
+  String get journalViewWidget_logYourFirstPeriod;
 }
 
 class _AppLocalizationsDelegate
