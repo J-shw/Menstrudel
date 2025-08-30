@@ -22,6 +22,8 @@
     "logScreen_tamponReminderSetFor": "Tampon reminder set for",
     "logScreen_tamponReminderCancelled": "Tampon reminder cancelled.",
     "logScreen_couldNotCancelReminder": "Could not cancel reminder",
+
+    "pillScreen_pillForTodayMarkedAsTaken": "Pill for today marked as taken!",
     
     "navBar_insights": "Insights",
     "navBar_logs": "Logs",

@@ -64,6 +64,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get logScreen_couldNotCancelReminder => 'Could not cancel reminder';
 
   @override
+  String get pillScreen_pillForTodayMarkedAsTaken =>
+      'Pill for today marked as taken!';
+
+  @override
   String get navBar_insights => 'Insights';
 
   @override

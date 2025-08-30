@@ -202,6 +202,12 @@ abstract class AppLocalizations {
   /// **'Could not cancel reminder'**
   String get logScreen_couldNotCancelReminder;
 
+  /// No description provided for @pillScreen_pillForTodayMarkedAsTaken.
+  ///
+  /// In en, this message translates to:
+  /// **'Pill for today marked as taken!'**
+  String get pillScreen_pillForTodayMarkedAsTaken;
+
   /// No description provided for @navBar_insights.
   ///
   /// In en, this message translates to:
