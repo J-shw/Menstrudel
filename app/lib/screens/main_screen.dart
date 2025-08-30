@@ -61,21 +61,21 @@ class _MainScreenState extends State<MainScreen> {
       case FabState.setReminder:
         return FloatingActionButton(
           key: const ValueKey('set_reminder_fab'),
-          tooltip: l10n.tooltipSetReminder,
+          tooltip: l10n.mainScreen_tooltipSetReminder,
           onPressed: () => _logsScreenKey.currentState?.handleTamponReminder(context),
           child: const Icon(Icons.add_alarm),
         );
       case FabState.cancelReminder:
         return FloatingActionButton(
           key: const ValueKey('cancel_reminder_fab'),
-          tooltip: l10n.tooltipCancelReminder,
+          tooltip: l10n.mainScreen_tooltipCancelReminder,
           onPressed: () => _logsScreenKey.currentState?.handleCancelReminder(),
           child: const Icon(Icons.alarm_off),
         );
       case FabState.logPeriod:
         return FloatingActionButton(
           key: const ValueKey('log_fab'),
-          tooltip: l10n.tooltipLogPeriod,
+          tooltip: l10n.mainScreen_tooltipLogPeriod,
           onPressed: () => _logsScreenKey.currentState?.handleLogPeriod(DateTime.now()),
           child: const Icon(Icons.add),
         );
@@ -88,10 +88,10 @@ class _MainScreenState extends State<MainScreen> {
     final l10n = AppLocalizations.of(context)!;
 
     final List<PreferredSizeWidget?> appBars = [
-      TopAppBar(titleText: l10n.insightsPageTitle),
+      TopAppBar(titleText: l10n.mainScreen_insightsPageTitle),
       null,
-      TopAppBar(titleText: l10n.pillsPageTitle),
-      TopAppBar(titleText: l10n.settingsPageTitle),
+      TopAppBar(titleText: l10n.mainScreen_pillsPageTitle),
+      TopAppBar(titleText: l10n.mainScreen_settingsPageTitle),
     ];
 
     return Scaffold(
