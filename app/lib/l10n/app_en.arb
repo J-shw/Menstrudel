@@ -4,6 +4,9 @@
 
     "ongoing": "Ongoing",
 
+    "date": "Date",
+    "time": "Time",
+
     "day": "Day",
     "days": "Days",
 
@@ -18,6 +21,7 @@
     "no": "No",
     "cancel": "Cancel",
 
+    "flow": "Flow",
 
     "navBar_insights": "Insights",
     "navBar_logs": "Logs",
@@ -27,6 +31,14 @@
     "flowIntensity_light": "Light",
     "flowIntensity_moderate": "Moderate",
     "flowIntensity_heavy": "Heavy",
+
+    "symptom_headache": "Headache",
+    "symptom_fatigue": "Fatigue",
+    "symptom_cramps": "Cramps",
+    "symptom_nausea": "Nausea",
+    "symptom_moodSwings": "Mood Swings",
+    "symptom_bloating": "Bloating",
+    "symptom_acne": "Acne",
 
     "mainScreen_insightsPageTitle": "Your Insights",
     "mainScreen_pillsPageTitle": "Pills",
@@ -121,6 +133,9 @@
     "regimenSetupWidget_activePills": "Active Pills",
     "regimenSetupWidget_enterANumber": "Enter a number",
     "regimenSetupWidget_placeboPills": "Placebo Pills",
-    "regimenSetupWidget_firstDayOfThisPack": "First Day of This Pack"
+    "regimenSetupWidget_firstDayOfThisPack": "First Day of This Pack",
+
+    "symptomEntrySheet_logYourDay": "Log Your Day",
+    "symptomEntrySheet_symptomsOptional": "Symptoms (Optional)"
     
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:menstrudel/l10n/app_localizations.dart';
 
 class SymptomEntrySheet extends StatefulWidget {
   const SymptomEntrySheet({
@@ -18,16 +19,6 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
   final Set<String> _selectedSymptoms = {};
   Set<int> _flowSelection = {1};
 
-  final List<String> _symptomOptions = [
-    'Headache',
-    'Fatigue',
-    'Cramps',
-    'Nausea',
-    'Mood Swings',
-    'Bloating',
-    'Acne',
-  ];
-
   @override
   void initState() {
     super.initState();
@@ -37,6 +28,18 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
+    final List<String> symptomOptions = [
+      l10n.symptom_headache,
+      l10n.symptom_fatigue,
+      l10n.symptom_cramps,
+      l10n.symptom_nausea,
+      l10n.symptom_moodSwings,
+      l10n.symptom_bloating,
+      l10n.symptom_acne,
+    ];
+
     return Padding(
       padding: EdgeInsets.only(
         top: 20,
@@ -64,13 +67,13 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
             // --- Title ---
             Center(
               child: Text(
-                'Log Your Day',
+                l10n.symptomEntrySheet_logYourDay,
                 style: Theme.of(context).textTheme.titleLarge,
               ),
             ),
             const SizedBox(height: 24),
             // --- Date Picker ---
-            Text('Date', style: Theme.of(context).textTheme.bodySmall),
+            Text(l10n.date, style: Theme.of(context).textTheme.bodySmall),
             const SizedBox(height: 8),
             FilledButton.tonalIcon(
               icon: const Icon(Icons.calendar_today, size: 18),
@@ -85,15 +88,15 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
             const SizedBox(height: 24),
 
             // --- Flow Selection ---
-            Text('Flow', style: Theme.of(context).textTheme.bodySmall),
+            Text(l10n.flow, style: Theme.of(context).textTheme.bodySmall),
             const SizedBox(height: 8),
             SizedBox(
               width: double.infinity,
               child: SegmentedButton<int>(
-                segments: const [
-                  ButtonSegment(value: 0, label: Text('Light')),
-                  ButtonSegment(value: 1, label: Text('Moderate')),
-                  ButtonSegment(value: 2, label: Text('Heavy')),
+                segments: [
+                  ButtonSegment(value: 0, label: Text(l10n.flowIntensity_light)),
+                  ButtonSegment(value: 1, label: Text(l10n.flowIntensity_moderate)),
+                  ButtonSegment(value: 2, label: Text(l10n.flowIntensity_heavy)),
                 ],
                 selected: _flowSelection,
                 onSelectionChanged: (Set<int> newSelection) {
@@ -108,13 +111,13 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
             const SizedBox(height: 24),
 
             // --- Symptoms ---
-            Text('Symptoms (Optional)',
+            Text(l10n.symptomEntrySheet_symptomsOptional,
                 style: Theme.of(context).textTheme.bodySmall),
             const SizedBox(height: 8),
             Wrap(
               spacing: 8.0,
               runSpacing: 4.0,
-              children: _symptomOptions.map((symptom) {
+              children: symptomOptions.map((symptom) {
                 return FilterChip(
                   label: Text(symptom),
                   selected: _selectedSymptoms.contains(symptom),
@@ -140,7 +143,7 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
                       minimumSize: const Size.fromHeight(50),
                     ),
                     onPressed: () => Navigator.of(context).pop(),
-                    child: const Text('Cancel'),
+                    child: Text(l10n.cancel),
                   ),
                 ),
                 const SizedBox(width: 16),

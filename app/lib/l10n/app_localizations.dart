@@ -106,6 +106,18 @@ abstract class AppLocalizations {
   /// **'Ongoing'**
   String get ongoing;
 
+  /// No description provided for @date.
+  ///
+  /// In en, this message translates to:
+  /// **'Date'**
+  String get date;
+
+  /// No description provided for @time.
+  ///
+  /// In en, this message translates to:
+  /// **'Time'**
+  String get time;
+
   /// No description provided for @day.
   ///
   /// In en, this message translates to:
@@ -172,6 +184,12 @@ abstract class AppLocalizations {
   /// **'Cancel'**
   String get cancel;
 
+  /// No description provided for @flow.
+  ///
+  /// In en, this message translates to:
+  /// **'Flow'**
+  String get flow;
+
   /// No description provided for @navBar_insights.
   ///
   /// In en, this message translates to:
@@ -213,6 +231,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Heavy'**
   String get flowIntensity_heavy;
+
+  /// No description provided for @symptom_headache.
+  ///
+  /// In en, this message translates to:
+  /// **'Headache'**
+  String get symptom_headache;
+
+  /// No description provided for @symptom_fatigue.
+  ///
+  /// In en, this message translates to:
+  /// **'Fatigue'**
+  String get symptom_fatigue;
+
+  /// No description provided for @symptom_cramps.
+  ///
+  /// In en, this message translates to:
+  /// **'Cramps'**
+  String get symptom_cramps;
+
+  /// No description provided for @symptom_nausea.
+  ///
+  /// In en, this message translates to:
+  /// **'Nausea'**
+  String get symptom_nausea;
+
+  /// No description provided for @symptom_moodSwings.
+  ///
+  /// In en, this message translates to:
+  /// **'Mood Swings'**
+  String get symptom_moodSwings;
+
+  /// No description provided for @symptom_bloating.
+  ///
+  /// In en, this message translates to:
+  /// **'Bloating'**
+  String get symptom_bloating;
+
+  /// No description provided for @symptom_acne.
+  ///
+  /// In en, this message translates to:
+  /// **'Acne'**
+  String get symptom_acne;
 
   /// No description provided for @mainScreen_insightsPageTitle.
   ///
@@ -627,6 +687,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'First Day of This Pack'**
   String get regimenSetupWidget_firstDayOfThisPack;
+
+  /// No description provided for @symptomEntrySheet_logYourDay.
+  ///
+  /// In en, this message translates to:
+  /// **'Log Your Day'**
+  String get symptomEntrySheet_logYourDay;
+
+  /// No description provided for @symptomEntrySheet_symptomsOptional.
+  ///
+  /// In en, this message translates to:
+  /// **'Symptoms (Optional)'**
+  String get symptomEntrySheet_symptomsOptional;
 }
 
 class _AppLocalizationsDelegate

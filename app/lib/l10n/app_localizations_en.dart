@@ -15,6 +15,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get ongoing => 'Ongoing';
 
   @override
+  String get date => 'Date';
+
+  @override
+  String get time => 'Time';
+
+  @override
   String get day => 'Day';
 
   @override
@@ -48,6 +54,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get cancel => 'Cancel';
 
   @override
+  String get flow => 'Flow';
+
+  @override
   String get navBar_insights => 'Insights';
 
   @override
@@ -67,6 +76,27 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get flowIntensity_heavy => 'Heavy';
+
+  @override
+  String get symptom_headache => 'Headache';
+
+  @override
+  String get symptom_fatigue => 'Fatigue';
+
+  @override
+  String get symptom_cramps => 'Cramps';
+
+  @override
+  String get symptom_nausea => 'Nausea';
+
+  @override
+  String get symptom_moodSwings => 'Mood Swings';
+
+  @override
+  String get symptom_bloating => 'Bloating';
+
+  @override
+  String get symptom_acne => 'Acne';
 
   @override
   String get mainScreen_insightsPageTitle => 'Your Insights';
@@ -301,4 +331,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get regimenSetupWidget_firstDayOfThisPack => 'First Day of This Pack';
+
+  @override
+  String get symptomEntrySheet_logYourDay => 'Log Your Day';
+
+  @override
+  String get symptomEntrySheet_symptomsOptional => 'Symptoms (Optional)';
 }
