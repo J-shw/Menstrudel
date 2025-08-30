@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:menstrudel/l10n/app_localizations.dart';
 
 class TimeSelectionDialog extends StatefulWidget {
   const TimeSelectionDialog({super.key});
@@ -20,8 +21,10 @@ class _TimeSelectionDialogState extends State<TimeSelectionDialog> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return AlertDialog(
-      title: const Text('Tampon Reminder'),
+      title: Text(l10n.tamponReminderDialog_tamponReminderTitle),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
@@ -50,13 +53,13 @@ class _TimeSelectionDialogState extends State<TimeSelectionDialog> {
           onPressed: () {
             Navigator.pop(context); 
           },
-          child: const Text('Cancel'),
+          child: Text(l10n.cancel),
         ),
         TextButton(
           onPressed: () {
             Navigator.pop(context, _selectedTime);
           },
-          child: const Text('Set'),
+          child: Text(l10n.set),
         ),
       ],
     );
