@@ -1,3 +1,4 @@
+[![Crowdin](https://badges.crowdin.net/menstrudel/localized.svg)](https://crowdin.com/project/menstrudel)
 # <img src="icon/Menstrudle_cropped.png" alt="Menstrudel App Icon" width="100"> Menstrudel 
 
 Free, offline, and open source period tracking app.
