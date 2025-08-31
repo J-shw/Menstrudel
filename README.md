@@ -2,7 +2,9 @@
 
 Free, offline, and open source period tracking app.
 
-[Join our Playstore beta](https://groups.google.com/g/menstrudel-app-testers)
+🤖 [Join our Playstore beta](https://groups.google.com/g/menstrudel-app-testers)
+
+🌐 [Help translate](https://crowdin.com/project/menstrudel)
 
 ## About Menstrudel
 
