@@ -20,7 +20,7 @@ class FlowBreakdownWidget extends StatelessWidget {
           value: percentage,
           minHeight: 8,
           borderRadius: BorderRadius.circular(4),
-          backgroundColor: Theme.of(context).colorScheme.surfaceVariant,
+          backgroundColor: Theme.of(context).colorScheme.surfaceContainerHighest,
           color: color,
         ),
       ],
@@ -48,7 +48,7 @@ class FlowBreakdownWidget extends StatelessWidget {
 
     return Card(
       elevation: 0,
-      color: colorScheme.surfaceVariant.withValues(alpha: 0.3),
+      color: colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
       child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
