@@ -9,7 +9,7 @@ import 'package:menstrudel/utils/exceptions.dart';
 
 class PeriodsRepository {
   final dbProvider = AppDatabase.instance;
-  static const String _whereId = _whereId;
+  static const String _whereId = 'id = ?';
 
   Future<void> deleteAllEntries() async {
     final db = await dbProvider.database;
