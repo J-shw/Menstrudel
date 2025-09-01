@@ -1,0 +1,35 @@
+name: Build
+on:
+  push:
+    branches:
+      - dev
+  pull_request:
+    types: [opened, synchronize, reopened]
+jobs:
+  sonarqube:
+    name: SonarQube
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      # The analysis requires to retrieve dependencies and build successfully
+
+      # Set up the Flutter SDK on the runner
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable' # Or 'beta', 'dev', 'master'
+
+      # Get project dependencies
+      - name: Install dependencies
+        run: flutter pub get
+
+      # Build the Android app to ensure it compiles successfully
+      - name: Build Android App
+        run: flutter build apk
+
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
