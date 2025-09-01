@@ -40,9 +40,14 @@ class FlowBreakdownWidget extends StatelessWidget {
     // --- Data Processing ---
     int lightDays = 0, mediumDays = 0, heavyDays = 0;
     for (final log in logs) {
-        if (log.flow <= 1) lightDays++;
-        else if (log.flow == 2) mediumDays++;
-        else heavyDays++;
+        if (log.flow <= 1) {
+          lightDays++;
+        } else if (log.flow == 2) {
+          mediumDays++;
+        }
+        else {
+          heavyDays++;
+        }
     }
     final totalDays = logs.length;
 
