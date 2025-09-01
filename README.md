@@ -1,4 +1,4 @@
-[![Crowdin](https://badges.crowdin.net/menstrudel/localized.svg)](https://crowdin.com/project/menstrudel)
+[![Crowdin](https://badges.crowdin.net/menstrudel/localized.svg)](https://crowdin.com/project/menstrudel) [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=J-shw_Menstrudel&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=J-shw_Menstrudel) [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=J-shw_Menstrudel&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=J-shw_Menstrudel) [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=J-shw_Menstrudel&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=J-shw_Menstrudel)
 # <img src="icon/Menstrudle_cropped.png" alt="Menstrudel App Icon" width="100"> Menstrudel 
 
 Free, offline, and open source period tracking app.
