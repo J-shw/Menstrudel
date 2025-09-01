@@ -20,6 +20,16 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: 'stable' # Or 'beta', 'dev', 'master'
+      
+      - name: Decode Keystore
+        run: echo "${{ secrets.SIGNING_KEY_STORE_BASE64 }}" | base64 --decode > app/android/app/upload-keystore.jks
+
+      - name: Create key.properties
+        run: |
+          echo "storeFile=upload-keystore.jks" > app/android/app/key.properties
+          echo "storePassword=${{ secrets.KEY_STORE_PASSWORD }}" >> app/android/app/key.properties
+          echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> app/android/app/key.properties
+          echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> app/android/app/key.properties
 
       # Get project dependencies
       - name: Install dependencies
