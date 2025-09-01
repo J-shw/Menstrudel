@@ -27,7 +27,7 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-	final seedColor = const Color(0xFF60A5FA);
+	const seedColor = Color(0xFF60A5FA);
 
     return DynamicColorBuilder(
       builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
