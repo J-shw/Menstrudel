@@ -24,10 +24,12 @@ jobs:
       # Get project dependencies
       - name: Install dependencies
         run: flutter pub get
+        working-directory: app
 
       # Build the Android app to ensure it compiles successfully
       - name: Build Android App
         run: flutter build apk
+        working-directory: app
 
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v5
