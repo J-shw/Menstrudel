@@ -15,7 +15,6 @@ jobs:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
       # The analysis requires to retrieve dependencies and build successfully
 
-      # Set up the Flutter SDK on the runner
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
