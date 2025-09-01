@@ -6,6 +6,8 @@ import 'package:menstrudel/models/pills/pill_reminder.dart';
 class PillsRepository {
   final dbProvider = AppDatabase.instance;
 
+  static const String _whereRegimenId = 'regimen_id = ?';
+
   Future<PillIntake> createPillIntake(PillIntake intake) async {
     final db = await dbProvider.database;
     final id = await db.insert('PillIntake', intake.toMap());
@@ -31,7 +33,7 @@ class PillsRepository {
     final db = await dbProvider.database;
     final result = await db.query(
       'PillIntake',
-      where: 'regimen_id = ?',
+      where: _whereRegimenId,
       whereArgs: [regimenId],
     );
     return result.map((json) => PillIntake.fromMap(json)).toList();
@@ -41,7 +43,7 @@ class PillsRepository {
     final db = await dbProvider.database;
     final maps = await db.query(
       'PillReminder',
-      where: 'regimen_id = ?',
+      where: _whereRegimenId,
       whereArgs: [regimenId],
       limit: 1,
     );
@@ -76,7 +78,7 @@ class PillsRepository {
     
     final existing = await db.query(
       'PillReminder',
-      where: 'regimen_id = ?',
+      where: _whereRegimenId,
       whereArgs: [reminder.regimenId],
       limit: 1,
     );
@@ -88,7 +90,7 @@ class PillsRepository {
       await db.update(
         'PillReminder',
         values,
-        where: 'regimen_id = ?',
+        where: _whereRegimenId,
         whereArgs: [reminder.regimenId],
       );
     } else {

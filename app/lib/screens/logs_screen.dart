@@ -35,7 +35,7 @@ class LogsScreenState extends State<LogsScreen> {
 
 	List<PeriodLogEntry> _periodLogEntries = [];
   List<PeriodEntry> _periodEntries = [];
-	bool _isLoading = false;
+	bool _isLoading = true;
 	PeriodPredictionResult? _predictionResult;
   PeriodHistoryView _selectedView = PeriodHistoryView.journal;
 
@@ -88,10 +88,6 @@ class LogsScreenState extends State<LogsScreen> {
 	}
 
 	Future<void> _refreshPeriodLogs() async {
-    setState(() {
-      _isLoading = true;
-    });
-
     final periodLogData = await periodsRepo.readAllPeriodLogs();
     final periodData = await periodsRepo.readAllPeriods();
     final isReminderSet = await NotificationService.isTamponReminderScheduled();

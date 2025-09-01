@@ -20,7 +20,7 @@ class FlowBreakdownWidget extends StatelessWidget {
           value: percentage,
           minHeight: 8,
           borderRadius: BorderRadius.circular(4),
-          backgroundColor: Theme.of(context).colorScheme.surfaceVariant,
+          backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
           color: color,
         ),
       ],
@@ -40,15 +40,20 @@ class FlowBreakdownWidget extends StatelessWidget {
     // --- Data Processing ---
     int lightDays = 0, mediumDays = 0, heavyDays = 0;
     for (final log in logs) {
-        if (log.flow <= 1) lightDays++;
-        else if (log.flow == 2) mediumDays++;
-        else heavyDays++;
+        if (log.flow <= 1) {
+          lightDays++;
+        } else if (log.flow == 2) {
+          mediumDays++;
+        }
+        else {
+          heavyDays++;
+        }
     }
     final totalDays = logs.length;
 
     return Card(
       elevation: 0,
-      color: colorScheme.surfaceVariant.withValues(alpha: 0.3),
+      color: colorScheme.surfaceContainerHighest,
       child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
