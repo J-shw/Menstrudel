@@ -36,7 +36,7 @@ class PeriodPredictor {
 
     if (entries.length < 2) {
       return null;
-    };
+    }
 
     final sortedEntries = List<PeriodLogEntry>.from(entries)
     ..sort((a, b) => a.date.compareTo(b.date));
