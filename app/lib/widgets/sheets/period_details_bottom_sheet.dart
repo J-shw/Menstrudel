@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/models/period_logs/period_logs.dart';
+import 'package:menstrudel/models/period_logs/symptom_enum.dart';
 
 class PeriodDetailsBottomSheet extends StatefulWidget {
   final PeriodLogEntry log;
@@ -24,11 +25,8 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
   bool _isEditing = false;
 
   late int _editedFlow;
-  late List<String> _editedSymptoms;
-
-  final List<String> _allSymptoms = [
-    'Headache', 'Fatigue', 'Cramps', 'Nausea', 'Mood Swings', 'Bloating', 'Acne'
-  ];
+  late List<Symptom> _editedSymptoms;
+  final List<Symptom> _allSymptoms = Symptom.values;
 
   @override
   void initState() {
@@ -38,15 +36,24 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
 
   void _resetEditableState() {
     _editedFlow = widget.log.flow;
-    _editedSymptoms = List<String>.from(widget.log.symptoms ?? []);
+    _editedSymptoms = widget.log.symptoms?.map((symptomString) {
+    try {
+        return Symptom.values.firstWhere((e) => e.name == symptomString);
+      } catch (e) {
+        return null;
+      }
+    }).whereType<Symptom>().toList() ?? [];
   }
 
   void _handleSave() {
+    final symptomsToSave = _editedSymptoms.map((s) => s.name).toList();
     final updatedLog = widget.log.copyWith(
       flow: _editedFlow,
-      symptoms: _editedSymptoms,
+      symptoms: symptomsToSave,
     );
+
     widget.onSave(updatedLog);
+    
     setState(() {
       _isEditing = false;
     });
@@ -211,36 +218,56 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
     final l10n = AppLocalizations.of(context)!;
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
-    
-    final symptomsToShow = _isEditing ? _allSymptoms : (_editedSymptoms);
 
-    if (symptomsToShow.isEmpty && !_isEditing) {
-      return const SizedBox.shrink(); 
-    }
+    final header = Row(
+      children: [
+        Icon(Icons.bubble_chart_outlined, color: colorScheme.onSurfaceVariant, size: 20),
+        const SizedBox(width: 12),
+        Text('${l10n.periodDetailsSheet_symptoms}:', style: textTheme.bodyLarge),
+      ],
+    );
 
-    return Expanded(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Icon(Icons.bubble_chart_outlined, color: colorScheme.onSurfaceVariant, size: 20),
-              const SizedBox(width: 12),
-              Text('${l10n.periodDetailsSheet_symptoms}:', style: textTheme.bodyLarge),
-            ],
-          ),
-          const SizedBox(height: 8),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Wrap(
-                spacing: 8.0,
-                runSpacing: 4.0,
-                children: symptomsToShow.map((symptom) {
-                  if (!_isEditing) {
-                    return Chip(label: Text(symptom));
-                  } else {
+    if (!_isEditing) {
+      if (_editedSymptoms.isEmpty) {
+        return const SizedBox.shrink();
+      }
+
+      return Expanded(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            header,
+            const SizedBox(height: 8),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Wrap(
+                  spacing: 8.0,
+                  runSpacing: 4.0,
+                  children: _editedSymptoms.map((symptom) {
+                    return Chip(label: Text(symptom.getDisplayName(l10n)));
+                  }).toList(),
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+    } else {
+      // --- EDIT MODE ---
+      return Expanded(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            header,
+            const SizedBox(height: 8),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Wrap(
+                  spacing: 8.0,
+                  runSpacing: 4.0,
+                  children: _allSymptoms.map((symptom) {
                     return FilterChip(
-                      label: Text(symptom),
+                      label: Text(symptom.getDisplayName(l10n)),
                       selected: _editedSymptoms.contains(symptom),
                       onSelected: (isSelected) {
                         setState(() {
@@ -252,13 +279,13 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
                         });
                       },
                     );
-                  }
-                }).toList(),
+                  }).toList(),
+                ),
               ),
             ),
-          ),
-        ],
-      ),
-    );
+          ],
+        ),
+      );
+    }
   }
 }
