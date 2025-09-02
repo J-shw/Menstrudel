@@ -9,6 +9,7 @@ class PeriodJournalView extends StatefulWidget {
   final List<PeriodLogEntry> periodLogEntries;
   final bool isLoading;
   final Function(int) onDelete;
+  final Function(PeriodLogEntry) onSave;
   final PeriodPredictionResult? predictionResult;
   final Function(DateTime) onLogRequested;
 
@@ -17,6 +18,7 @@ class PeriodJournalView extends StatefulWidget {
     required this.periodLogEntries,
     required this.isLoading,
     required this.onDelete,
+    required this.onSave,
     this.predictionResult,
     required this.onLogRequested,
   });
@@ -69,6 +71,7 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
         return PeriodDetailsBottomSheet(
           log: log,
           onDelete: () => _handleDelete(log),
+          onSave: widget.onSave,
         );
       },
     ).then((_) {
