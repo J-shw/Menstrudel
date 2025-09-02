@@ -1,5 +1,6 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+import 'dart:convert';
 
 class AppDatabase {
     static final AppDatabase instance = AppDatabase._init();
@@ -19,7 +20,7 @@ class AppDatabase {
 
       return await openDatabase(
         path,
-        version: 2,
+        version: 3,
         onCreate: _createDB,
         onUpgrade: _upgradeDB,
       );
@@ -55,6 +56,9 @@ class AppDatabase {
   Future _upgradeDB(Database db, int oldVersion, int newVersion) async {
     if (oldVersion < 2) {
       await _createPillTables(db);
+    }
+    if (oldVersion < 3) {
+      await _migrateSymptoms(db);
     }
   }
 
@@ -95,6 +99,45 @@ class AppDatabase {
       )
       '''
     );
+  }
+
+  Future<void> _migrateSymptoms(Database db) async {
+    const symptomMigrationMap = {
+      'Headache': 'headache',
+      'Fatigue': 'fatigue',
+      'Cramps': 'cramps',
+      'Nausea': 'nausea',
+      'Mood Swings': 'moodSwings',
+      'Bloating': 'bloating',
+      'Acne': 'acne',
+    };
+
+    final allLogs = await db.query('period_logs');
+
+    for (final row in allLogs) {
+      final int id = row['id'] as int;
+      final String? oldSymptomsJson = row['symptoms'] as String?;
+
+      if (oldSymptomsJson == null || oldSymptomsJson.isEmpty) {
+        continue;
+      }
+
+      final List<dynamic> oldSymptomList = jsonDecode(oldSymptomsJson);
+
+      final newSymptomList = oldSymptomList
+          .map((oldSymptom) => symptomMigrationMap[oldSymptom])
+          .where((newSymptom) => newSymptom != null)
+          .toList();
+
+      final String newSymptomsJson = jsonEncode(newSymptomList);
+
+      await db.update(
+        'period_logs',
+        {'symptoms': newSymptomsJson},
+        where: 'id = ?',
+        whereArgs: [id],
+      );
+    }
   }
 
   Future close() async {
