@@ -135,6 +135,12 @@ class LogsScreenState extends State<LogsScreen> {
     });
   }
 
+  void _handleSaveLog(PeriodLogEntry updatedLog) {
+    periodsRepo.updatePeriodLog(updatedLog);
+    Navigator.of(context).pop();
+    _refreshPeriodLogs();
+  }
+
 	Future<void> _deletePeriodEntry(int id) async {
 		await periodsRepo.deletePeriodLog(id);
 		_refreshPeriodLogs();
@@ -195,6 +201,7 @@ class LogsScreenState extends State<LogsScreen> {
           periodEntries: _periodEntries,
           isLoading: _isLoading,
           onDelete: _deletePeriodEntry,
+          onSave: _handleSaveLog,
           onLogRequested: handleLogPeriod,
         ),
       ],
