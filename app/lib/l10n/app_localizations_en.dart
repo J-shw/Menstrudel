@@ -275,9 +275,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get yearHeatMapWidget_yearlyOverview => 'Yearly Overview';
 
   @override
-  String get journalViewWidget_symptoms => 'Symptoms';
-
-  @override
   String get journalViewWidget_logYourFirstPeriod => 'Log your first period.';
 
   @override
@@ -345,6 +342,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get symptomEntrySheet_symptomsOptional => 'Symptoms (Optional)';
+
+  @override
+  String get periodDetailsSheet_symptoms => 'Symptoms';
+
+  @override
+  String get periodDetailsSheet_flow => 'Flow';
 
   @override
   String periodPredictionCircle_days(int count) {
