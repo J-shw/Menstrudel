@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
+import 'package:menstrudel/models/period_logs/symptom_enum.dart';
 
 class SymptomEntrySheet extends StatefulWidget {
   const SymptomEntrySheet({
-    super.key, 
+    super.key,
     required this.selectedDate
   });
 
@@ -15,30 +16,19 @@ class SymptomEntrySheet extends StatefulWidget {
 }
 
 class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
-  late DateTime _selectedDate; 
-  final Set<String> _selectedSymptoms = {};
+  late DateTime _selectedDate;
+  final Set<Symptom> _selectedSymptoms = {};
   Set<int> _flowSelection = {1};
 
   @override
   void initState() {
     super.initState();
-    _selectedDate = widget.selectedDate; 
+    _selectedDate = widget.selectedDate;
   }
-
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-
-    final List<String> symptomOptions = [
-      l10n.symptom_headache,
-      l10n.symptom_fatigue,
-      l10n.symptom_cramps,
-      l10n.symptom_nausea,
-      l10n.symptom_moodSwings,
-      l10n.symptom_bloating,
-      l10n.symptom_acne,
-    ];
 
     return Padding(
       padding: EdgeInsets.only(
@@ -71,22 +61,20 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
                 style: Theme.of(context).textTheme.titleLarge,
               ),
             ),
-            const SizedBox(height: 24),
             // --- Date Picker ---
+            const SizedBox(height: 24),
             Text(l10n.date, style: Theme.of(context).textTheme.bodySmall),
             const SizedBox(height: 8),
             FilledButton.tonalIcon(
               icon: const Icon(Icons.calendar_today, size: 18),
               label: Text(DateFormat('EEEE, d MMMM yyyy').format(_selectedDate)),
               style: FilledButton.styleFrom(
-                minimumSize: const Size.fromHeight(50), // Consistent height
+                minimumSize: const Size.fromHeight(50),
                 alignment: Alignment.centerLeft,
               ),
               onPressed: _pickDate,
             ),
-            // ... (The rest of your UI is fine)
             const SizedBox(height: 24),
-
             // --- Flow Selection ---
             Text(l10n.flow, style: Theme.of(context).textTheme.bodySmall),
             const SizedBox(height: 8),
@@ -109,7 +97,6 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
               ),
             ),
             const SizedBox(height: 24),
-
             // --- Symptoms ---
             Text(l10n.symptomEntrySheet_symptomsOptional,
                 style: Theme.of(context).textTheme.bodySmall),
@@ -117,9 +104,9 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
             Wrap(
               spacing: 8.0,
               runSpacing: 4.0,
-              children: symptomOptions.map((symptom) {
+              children: Symptom.values.map((symptom) {
                 return FilterChip(
-                  label: Text(symptom),
+                  label: Text(symptom.getDisplayName(l10n)),
                   selected: _selectedSymptoms.contains(symptom),
                   onSelected: (bool selected) {
                     setState(() {
@@ -153,13 +140,15 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
                       minimumSize: const Size.fromHeight(50),
                     ),
                     onPressed: () {
+                      final symptomsToSave = _selectedSymptoms.map((s) => s.name).toList();
+
                       Navigator.of(context).pop({
                         'date': _selectedDate,
                         'flow': _flowSelection.first,
-                        'symptoms': _selectedSymptoms.toList(),
+                        'symptoms': symptomsToSave,
                       });
                     },
-                    child: const Text('Log'),
+                    child: Text(l10n.save),
                   ),
                 ),
               ],
