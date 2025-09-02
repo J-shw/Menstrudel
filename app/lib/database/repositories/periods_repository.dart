@@ -92,6 +92,7 @@ class PeriodsRepository {
     return await readPeriodLog(id);
   }
 
+
   Future<List<PeriodLogEntry>> readAllPeriodLogs() async {
     final db = await dbProvider.database;
     const orderBy = 'date DESC';
@@ -110,6 +111,22 @@ class PeriodsRepository {
     );
 
     return result.map((json) => PeriodLogEntry.fromMap(json)).first;
+  }
+
+  Future<int> updatePeriodLog(PeriodLogEntry entry) async {
+    final db = await dbProvider.database;
+    final int result = await db.update(
+      'period_logs',
+      entry.toMap(),
+      where: _whereId,
+      whereArgs: [entry.id],
+    );
+
+    if (result > 0) {
+      await _recalculateAndAssignPeriods(db);
+    }
+
+    return result;
   }
 
   Future<int> deletePeriodLog(int id) async {
