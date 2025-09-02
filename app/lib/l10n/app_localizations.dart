@@ -580,12 +580,6 @@ abstract class AppLocalizations {
   /// **'Yearly Overview'**
   String get yearHeatMapWidget_yearlyOverview;
 
-  /// No description provided for @journalViewWidget_symptoms.
-  ///
-  /// In en, this message translates to:
-  /// **'Symptoms'**
-  String get journalViewWidget_symptoms;
-
   /// No description provided for @journalViewWidget_logYourFirstPeriod.
   ///
   /// In en, this message translates to:
@@ -699,6 +693,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Symptoms (Optional)'**
   String get symptomEntrySheet_symptomsOptional;
+
+  /// No description provided for @periodDetailsSheet_symptons.
+  ///
+  /// In en, this message translates to:
+  /// **'Symptoms'**
+  String get periodDetailsSheet_symptons;
+
+  /// No description provided for @periodDetailsSheet_flow.
+  ///
+  /// In en, this message translates to:
+  /// **'Flow'**
+  String get periodDetailsSheet_flow;
 
   /// A label showing the total number of days until period is due.
   ///

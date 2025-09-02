@@ -111,7 +111,6 @@
 
     "yearHeatMapWidget_yearlyOverview": "Yearly Overview",
 
-    "journalViewWidget_symptoms": "Symptoms",
     "journalViewWidget_logYourFirstPeriod": "Log your first period.",
 
     "listViewWidget_noPeriodsLogged": "No periods logged yet.\nTap the + button to add one.",
@@ -145,6 +144,9 @@
 
     "symptomEntrySheet_logYourDay": "Log Your Day",
     "symptomEntrySheet_symptomsOptional": "Symptoms (Optional)",
+
+    "periodDetailsSheet_symptons": "Symptoms",
+    "periodDetailsSheet_flow": "Flow",
 
     "periodPredictionCircle_days": "{count, plural, =1{Day} other{Days}}",
     "@periodPredictionCircle_days": {
