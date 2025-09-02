@@ -99,7 +99,7 @@ class PeriodDetailsBottomSheet extends StatelessWidget {
               children: [
                 Icon(Icons.bubble_chart_outlined, color: colorScheme.onSurfaceVariant, size: 20),
                 const SizedBox(width: 12),
-                Text('${l10n.periodDetailsSheet_symptons}:', style: textTheme.bodyLarge),
+                Text('${l10n.periodDetailsSheet_symptoms}:', style: textTheme.bodyLarge),
               ],
             ),
             const SizedBox(height: 8),

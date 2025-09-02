@@ -694,11 +694,11 @@ abstract class AppLocalizations {
   /// **'Symptoms (Optional)'**
   String get symptomEntrySheet_symptomsOptional;
 
-  /// No description provided for @periodDetailsSheet_symptons.
+  /// No description provided for @periodDetailsSheet_symptoms.
   ///
   /// In en, this message translates to:
   /// **'Symptoms'**
-  String get periodDetailsSheet_symptons;
+  String get periodDetailsSheet_symptoms;
 
   /// No description provided for @periodDetailsSheet_flow.
   ///

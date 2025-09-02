@@ -145,7 +145,7 @@
     "symptomEntrySheet_logYourDay": "Log Your Day",
     "symptomEntrySheet_symptomsOptional": "Symptoms (Optional)",
 
-    "periodDetailsSheet_symptons": "Symptoms",
+    "periodDetailsSheet_symptoms": "Symptoms",
     "periodDetailsSheet_flow": "Flow",
 
     "periodPredictionCircle_days": "{count, plural, =1{Day} other{Days}}",

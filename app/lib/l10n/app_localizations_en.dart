@@ -344,7 +344,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get symptomEntrySheet_symptomsOptional => 'Symptoms (Optional)';
 
   @override
-  String get periodDetailsSheet_symptons => 'Symptoms';
+  String get periodDetailsSheet_symptoms => 'Symptoms';
 
   @override
   String get periodDetailsSheet_flow => 'Flow';
