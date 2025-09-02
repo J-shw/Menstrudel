@@ -274,6 +274,42 @@ abstract class AppLocalizations {
   /// **'Acne'**
   String get symptom_acne;
 
+  /// Title for the upcoming period notification.
+  ///
+  /// In en, this message translates to:
+  /// **'Period Approaching'**
+  String get notification_periodTitle;
+
+  /// Body for the upcoming period notification.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{Your next period is estimated to start in 1 day.} other{Your next period is estimated to start in {count} days.}}'**
+  String notification_periodBody(int count);
+
+  /// Title for the daily pill reminder notification.
+  ///
+  /// In en, this message translates to:
+  /// **'Pill Reminder'**
+  String get notification_pillTitle;
+
+  /// Body for the daily pill reminder notification.
+  ///
+  /// In en, this message translates to:
+  /// **'Don\'t forget to take your pill for today.'**
+  String get notification_pillBody;
+
+  /// Title for the tampon reminder notification.
+  ///
+  /// In en, this message translates to:
+  /// **'Tampon Reminder'**
+  String get notification_tamponReminderTitle;
+
+  /// Body for the tampon reminder notification.
+  ///
+  /// In en, this message translates to:
+  /// **'Remember to change your tampon.'**
+  String get notification_tamponReminderBody;
+
   /// No description provided for @mainScreen_insightsPageTitle.
   ///
   /// In en, this message translates to:

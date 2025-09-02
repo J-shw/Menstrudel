@@ -99,6 +99,34 @@ class AppLocalizationsEn extends AppLocalizations {
   String get symptom_acne => 'Acne';
 
   @override
+  String get notification_periodTitle => 'Period Approaching';
+
+  @override
+  String notification_periodBody(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Your next period is estimated to start in $count days.',
+      one: 'Your next period is estimated to start in 1 day.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get notification_pillTitle => 'Pill Reminder';
+
+  @override
+  String get notification_pillBody =>
+      'Don\'t forget to take your pill for today.';
+
+  @override
+  String get notification_tamponReminderTitle => 'Tampon Reminder';
+
+  @override
+  String get notification_tamponReminderBody =>
+      'Remember to change your tampon.';
+
+  @override
   String get mainScreen_insightsPageTitle => 'Your Insights';
 
   @override
