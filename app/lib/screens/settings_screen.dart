@@ -102,11 +102,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
       reminderTime: '${_pillNotificationTime.hour}:${_pillNotificationTime.minute}',
       isEnabled: _pillNotificationsEnabled,
     );
+    final l10n = AppLocalizations.of(context)!;
+
     await pillsRepo.savePillReminder(reminder);
 
     await NotificationService.schedulePillReminder(
       reminderTime: _pillNotificationTime,
       isEnabled: _pillNotificationsEnabled,
+      title: l10n.notification_pillTitle,
+      body: l10n.notification_pillBody,
     );
 
     _loadSettings();

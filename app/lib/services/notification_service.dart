@@ -46,6 +46,8 @@ class NotificationService {
     required bool areEnabled,
     required int daysBefore,
     required TimeOfDay notificationTime,
+    required String title,
+    required String body, 
   }) async {
     if (!areEnabled) return;
 
@@ -70,8 +72,8 @@ class NotificationService {
 
     await _plugin.zonedSchedule(
       _periodNotificationId,
-      'Period Approaching',
-      "Your next period is estimated to start in $daysBefore day${daysBefore > 1 ? 's' : ''}.",
+      title,
+      body,
       tzScheduledTime,
       details,
       androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
@@ -83,6 +85,8 @@ class NotificationService {
   static Future<void> schedulePillReminder({
     required TimeOfDay reminderTime,
     required bool isEnabled,
+    required String title,
+    required String body, 
   }) async {
     await _plugin.cancel(_pillReminderId);
 
@@ -101,8 +105,8 @@ class NotificationService {
 
     await _plugin.zonedSchedule(
       _pillReminderId,
-      'Pill Reminder',
-      "Don't forget to take your pill for today.",
+      title,
+      body,
       scheduledDate,
       details,
       androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
@@ -126,7 +130,11 @@ class NotificationService {
 
   // Other
 
-  static Future<void> scheduleTamponReminder({required TimeOfDay reminderTime}) async {
+  static Future<void> scheduleTamponReminder({
+    required TimeOfDay reminderTime,
+    required String title,
+    required String body,
+  }) async {
     final now = tz.TZDateTime.now(tz.local);
     tz.TZDateTime scheduledDate = tz.TZDateTime(
         tz.local, now.year, now.month, now.day, reminderTime.hour, reminderTime.minute);
@@ -145,7 +153,8 @@ class NotificationService {
 
     await _plugin.zonedSchedule(
         _tamponReminderId,
-        'Tampon Reminder', 'Remember to change your tampon',
+        title,
+        body,
         scheduledDate,
         details,
         androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle);

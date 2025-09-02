@@ -40,6 +40,36 @@
     "symptom_bloating": "Bloating",
     "symptom_acne": "Acne",
 
+    "notification_periodTitle": "Period Approaching",
+    "@notification_periodTitle": {
+        "description": "Title for the upcoming period notification."
+    },
+    "notification_periodBody": "{count, plural, =1{Your next period is estimated to start in 1 day.} other{Your next period is estimated to start in {count} days.}}",
+    "@notification_periodBody": {
+        "description": "Body for the upcoming period notification.",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "notification_pillTitle": "Pill Reminder",
+    "@notification_pillTitle": {
+        "description": "Title for the daily pill reminder notification."
+    },
+    "notification_pillBody": "Don't forget to take your pill for today.",
+    "@notification_pillBody": {
+        "description": "Body for the daily pill reminder notification."
+    },
+    "notification_tamponReminderTitle": "Tampon Reminder",
+    "@notification_tamponReminderTitle": {
+        "description": "Title for the tampon reminder notification."
+    },
+    "notification_tamponReminderBody": "Remember to change your tampon.",
+    "@notification_tamponReminderBody": {
+        "description": "Body for the tampon reminder notification."
+    },
+
     "mainScreen_insightsPageTitle": "Your Insights",
     "mainScreen_pillsPageTitle": "Pills",
     "mainScreen_settingsPageTitle": "Settings",
