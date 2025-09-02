@@ -54,7 +54,11 @@ class LogsScreenState extends State<LogsScreen> {
       builder: (BuildContext context) => const TimeSelectionDialog(),
     );
     if (reminderTime == null) return;
-    await NotificationService.scheduleTamponReminder(reminderTime: reminderTime);
+    await NotificationService.scheduleTamponReminder(
+      reminderTime: reminderTime,
+      title: l10n.notification_tamponReminderTitle,
+      body: l10n.notification_tamponReminderBody,
+      );
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
       ..showSnackBar(SnackBar(content: Text('${l10n.logScreen_tamponReminderSetFor} ${reminderTime.format(context)}')));
@@ -99,12 +103,15 @@ class LogsScreenState extends State<LogsScreen> {
       final notificationsEnabled = await settingsService.areNotificationsEnabled();
       final notificationDays = await settingsService.getNotificationDays();
       final notificationTime = await settingsService.getNotificationTime();
+      final l10n = AppLocalizations.of(context)!;
       
       await NotificationService.schedulePeriodNotification(
         scheduledTime: predictionResult.estimatedDate,
         areEnabled: notificationsEnabled,
         daysBefore: notificationDays,
         notificationTime: notificationTime,
+        title: l10n.notification_periodTitle,
+        body: l10n.notification_periodBody(notificationDays),
       );
     }
     
