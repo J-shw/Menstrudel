@@ -88,7 +88,7 @@ class PeriodListView extends StatelessWidget {
           ),
           const SizedBox(height: 4),
           Text(
-            '${DateFormat('d MMM').format(period.startDate)} - ${isOngoing ? l10n.ongoing : DateFormat('d MMM').format(period.endDate)} ($duration ${l10n.days.toLowerCase()})',
+            '${DateFormat('d MMM').format(period.startDate)} - ${isOngoing ? l10n.ongoing : DateFormat('d MMM').format(period.endDate)} (${l10n.dayCount(duration)})',
             style: textTheme.bodyMedium?.copyWith(color: colorScheme.onSurfaceVariant),
           ),
           const Divider(height: 16),
