@@ -115,7 +115,7 @@ class FlowPatternsWidget extends StatelessWidget {
                           if (value > maxDay || value == 0) return const SizedBox.shrink();
                           return Padding(
                             padding: const EdgeInsets.only(top: 8.0),
-                            child: Text('Day ${value.toInt()}', style: textTheme.bodySmall),
+                            child: Text('${l10n.day} ${value.toInt()}', style: textTheme.bodySmall),
                           );
                         },
                       ),
