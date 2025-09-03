@@ -4,6 +4,8 @@ import 'package:menstrudel/models/period_logs/period_logs.dart';
 import 'package:menstrudel/models/periods/period.dart';
 import 'package:collection/collection.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
+import 'package:menstrudel/models/period_logs/flow_enum.dart';
+import 'package:menstrudel/models/period_logs/symptom_enum.dart';
 
 class PeriodListView extends StatelessWidget {
   final List<PeriodLogEntry> periodLogEntries;
@@ -100,8 +102,14 @@ class PeriodListView extends StatelessWidget {
   Widget _buildPeriodLog(PeriodLogEntry entry, BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
-
     final l10n = AppLocalizations.of(context)!;
+
+    final flow = FlowRate.values[entry.flow];
+    final symptomMap = {for (var s in Symptom.values) s.name: s};
+    final symptoms = entry.symptoms
+            ?.map((s) => symptomMap[s])
+            .whereType<Symptom>()
+            .toList() ?? [];
 
     return Dismissible(
       key: ValueKey(entry.id),
@@ -164,22 +172,22 @@ class PeriodListView extends StatelessWidget {
                 children: [
                   Row(
                     children: List.generate(
-                      entry.flow + 1,
+                      flow.intValue + 1,
                       (index) => Icon(
                         Icons.water_drop,
                         size: 18,
-                        color: colorScheme.primary.withValues(alpha: 0.8)
+                        color: colorScheme.primary.withValues(alpha: 0.8),
                       ),
                     ),
                   ),
                   const SizedBox(height: 6),
-                  if (entry.symptoms != null && entry.symptoms!.isNotEmpty)
+                  if (symptoms.isNotEmpty)
                     Wrap(
                       spacing: 6.0,
                       runSpacing: 4.0,
-                      children: entry.symptoms!.map((symptom) {
+                      children: symptoms.map((symptom) {
                       return Chip(
-                        label: Text(symptom),
+                        label: Text(symptom.getDisplayName(l10n)),
                         side: BorderSide.none,
                         padding: EdgeInsets.zero,
                         visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
