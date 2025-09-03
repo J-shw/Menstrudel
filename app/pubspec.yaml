@@ -2,7 +2,7 @@ name: menstrudel
 description: "Your private, offline, menstrual cycle tracker."
 publish_to: 'none'
 
-version: 2.5.0+9
+version: 2.6.0+10
 
 environment:
   sdk: ^3.8.1
