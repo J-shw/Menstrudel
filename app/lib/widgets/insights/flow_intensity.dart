@@ -15,7 +15,7 @@ class FlowBreakdownWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('$label ($count ${l10n.days.toLowerCase()})', style: textTheme.bodyMedium),
+        Text('$label (${l10n.dayCount(count)})', style: textTheme.bodyMedium),
         const SizedBox(height: 4),
         LinearProgressIndicator(
           value: percentage,

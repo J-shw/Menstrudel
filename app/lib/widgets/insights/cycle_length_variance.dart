@@ -41,7 +41,7 @@ class CycleLengthVarianceWidget extends StatelessWidget {
           children: [
             Text(l10n.cycleLengthVarianceWidget_cycleAndPeriodVeriance, style: textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
             const SizedBox(height: 4),
-            Text('${l10n.cycleLengthVarianceWidget_averageCycle}: ${avgCycle.toStringAsFixed(0)} ${l10n.days.toLowerCase()}  •  ${l10n.cycleLengthVarianceWidget_averagePeriod}: ${avgDuration.toStringAsFixed(1)} ${l10n.days.toLowerCase()}', style: textTheme.bodyMedium?.copyWith(color: colorScheme.onSurfaceVariant)),
+            Text('${l10n.cycleLengthVarianceWidget_averageCycle}: ${l10n.dayCount(avgCycle.toInt().round())}  •  ${l10n.cycleLengthVarianceWidget_averagePeriod}: ${l10n.dayCount(avgDuration.toInt().round())}', style: textTheme.bodyMedium?.copyWith(color: colorScheme.onSurfaceVariant)),
             const SizedBox(height: 24),
             AspectRatio(
               aspectRatio: 1.7,
@@ -67,8 +67,8 @@ class CycleLengthVarianceWidget extends StatelessWidget {
                           return null;
                         }
                         final String text = rodIndex == 0
-                            ? '${l10n.cycleLengthVarianceWidget_period}: ${rod.toY.toInt()} ${l10n.days.toLowerCase()}'
-                            : '${l10n.cycleLengthVarianceWidget_cycle}: ${rod.toY.toInt()} ${l10n.days.toLowerCase()}';
+                            ? '${l10n.cycleLengthVarianceWidget_period}: ${l10n.dayCount(rod.toY.toInt())}'
+                            : '${l10n.cycleLengthVarianceWidget_cycle}: ${l10n.dayCount(rod.toY.toInt())}';
 
                         return BarTooltipItem(
                           '$month\n$text',

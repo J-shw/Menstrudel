@@ -60,7 +60,7 @@ class SymptomFrequencyWidget extends StatelessWidget {
                       ),
                       const SizedBox(width: 12),
                       Text(
-                        '${entry.value} ${l10n.days.toLowerCase()}',
+                        l10n.dayCount(entry.value),
                         style: textTheme.bodyMedium?.copyWith(color: colorScheme.onSurfaceVariant),
                       ),
                     ],

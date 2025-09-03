@@ -10,6 +10,17 @@
     "day": "Day",
     "days": "Days",
 
+    "dayCount": "{count, plural, one{{count} Day} other{{count} Days}}",
+    "@dayCount": {
+        "description": "A message that displays a count of days, handling singular and plural forms.",
+        "placeholders": {
+            "count": {
+                "type": "int",
+                "example": "5"
+            }
+        }
+    },
+
     "delete": "Delete",
     "clear": "Clear",
     "save": "Save",
