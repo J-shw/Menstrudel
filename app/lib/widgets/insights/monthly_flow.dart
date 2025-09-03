@@ -1,6 +1,8 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:menstrudel/models/flows/flow_data.dart';
+import 'package:menstrudel/l10n/app_localizations.dart';
+import 'package:menstrudel/models/period_logs/flow_enum.dart';
 
 class FlowPatternsWidget extends StatelessWidget {
   final List<MonthlyFlowData> monthlyFlowData;
@@ -10,31 +12,30 @@ class FlowPatternsWidget extends StatelessWidget {
     required this.monthlyFlowData,
   });
 
-  double _numericFromFlow(FlowLevel flow) => flow.index.toDouble() + 1;
+  double _numericFromFlow(FlowRate flow) => flow.index.toDouble() + 1;
 
-  Widget _getFlowLabel(double value, TextStyle? style) {
-    switch (value.round()) {
-      case 1:
-        return Text('Light', style: style);
-      case 2:
-        return Text('Medium', style: style);
-      case 3:
-        return Text('Heavy', style: style);
-      default:
-        return const SizedBox.shrink();
+  Widget _getFlowLabel(BuildContext context, double value, TextStyle? style) {
+    final l10n = AppLocalizations.of(context)!;
+    final index = value.round() - 1;
+
+    if (index >= 0 && index < FlowRate.values.length) {
+      final flow = FlowRate.values[index];
+      return Text(flow.getDisplayName(l10n), style: style);
     }
+    return const SizedBox.shrink();
   }
 
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
+    final l10n = AppLocalizations.of(context)!;
 
     if (monthlyFlowData.isEmpty) {
-      return const Card(
+      return Card(
         child: Padding(
           padding: EdgeInsets.all(24.0),
-          child: Center(child: Text("No data to display.")),
+          child: Center(child: Text(l10n.monthlyFlowChartWidget_noDataToDisplay)),
         ),
       );
     }
@@ -46,7 +47,7 @@ class FlowPatternsWidget extends StatelessWidget {
       final List<FlSpot> spotsForThisCycle = [];
       for (int i = 0; i < monthData.flows.length; i++) {
         final day = i + 1;
-        final flow = flowLevelFromInt(monthData.flows[i]);
+        final flow = FlowRate.values[monthData.flows[i]];
         spotsForThisCycle.add(FlSpot(day.toDouble(), _numericFromFlow(flow)));
       }
 
@@ -68,19 +69,19 @@ class FlowPatternsWidget extends StatelessWidget {
 
     return Card(
       elevation: 0,
-      color: colorScheme.surfaceVariant.withValues(alpha: 0.3),
+      color: colorScheme.surfaceContainerHighest,
       child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Cycle Flow Patterns',
+              l10n.monthlyFlowChartWidget_cycleFlowPatterns,
               style: textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 4),
             Text(
-              'Each line represents one complete cycle',
+              l10n.monthlyFlowChartWidget_cycleFlowPatternsDescription,
               style: textTheme.bodyMedium?.copyWith(color: colorScheme.onSurfaceVariant),
             ),
             const SizedBox(height: 24),
@@ -100,9 +101,9 @@ class FlowPatternsWidget extends StatelessWidget {
                     leftTitles: AxisTitles(
                       sideTitles: SideTitles(
                         showTitles: true,
-                        reservedSize: 50,
+                        reservedSize: 70,
                         interval: 1,
-                        getTitlesWidget: (value, meta) => _getFlowLabel(value, textTheme.bodySmall),
+                        getTitlesWidget: (value, meta) => _getFlowLabel(context, value, textTheme.bodySmall),
                       ),
                     ),
                     bottomTitles: AxisTitles(
@@ -114,7 +115,7 @@ class FlowPatternsWidget extends StatelessWidget {
                           if (value > maxDay || value == 0) return const SizedBox.shrink();
                           return Padding(
                             padding: const EdgeInsets.only(top: 8.0),
-                            child: Text('Day ${value.toInt()}', style: textTheme.bodySmall),
+                            child: Text('${l10n.day} ${value.toInt()}', style: textTheme.bodySmall),
                           );
                         },
                       ),

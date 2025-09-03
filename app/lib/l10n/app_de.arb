@@ -1,0 +1,169 @@
+{
+    "@@locale": "de",
+    "appTitle": "Menstrudel",
+    "ongoing": "Ongoing",
+    "date": "Date",
+    "time": "Time",
+    "day": "Day",
+    "days": "Days",
+    "dayCount": "{count, plural, one{{count} Day} other{{count} Days}}",
+    "@dayCount": {
+        "description": "A message that displays a count of days, handling singular and plural forms.",
+        "placeholders": {
+            "count": {
+                "type": "int",
+                "example": "5"
+            }
+        }
+    },
+    "delete": "Delete",
+    "clear": "Clear",
+    "save": "Save",
+    "ok": "OK",
+    "confirm": "Confirm",
+    "set": "Set",
+    "yes": "Yes",
+    "no": "No",
+    "cancel": "Cancel",
+    "flow": "Flow",
+    "navBar_insights": "Insights",
+    "navBar_logs": "Logs",
+    "navBar_pill": "Pill",
+    "navBar_settings": "Settings",
+    "flowIntensity_light": "Light",
+    "flowIntensity_moderate": "Moderate",
+    "flowIntensity_heavy": "Heavy",
+    "symptom_headache": "Headache",
+    "symptom_fatigue": "Fatigue",
+    "symptom_cramps": "Cramps",
+    "symptom_nausea": "Nausea",
+    "symptom_moodSwings": "Mood Swings",
+    "symptom_bloating": "Bloating",
+    "symptom_acne": "Acne",
+    "notification_periodTitle": "Period Approaching",
+    "@notification_periodTitle": {
+        "description": "Title for the upcoming period notification."
+    },
+    "notification_periodBody": "{count, plural, =1{Your next period is estimated to start in 1 day.} other{Your next period is estimated to start in {count} days.}}",
+    "@notification_periodBody": {
+        "description": "Body for the upcoming period notification.",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "notification_pillTitle": "Pill Reminder",
+    "@notification_pillTitle": {
+        "description": "Title for the daily pill reminder notification."
+    },
+    "notification_pillBody": "Don't forget to take your pill for today.",
+    "@notification_pillBody": {
+        "description": "Body for the daily pill reminder notification."
+    },
+    "notification_tamponReminderTitle": "Tampon Reminder",
+    "@notification_tamponReminderTitle": {
+        "description": "Title for the tampon reminder notification."
+    },
+    "notification_tamponReminderBody": "Remember to change your tampon.",
+    "@notification_tamponReminderBody": {
+        "description": "Body for the tampon reminder notification."
+    },
+    "mainScreen_insightsPageTitle": "Your Insights",
+    "mainScreen_pillsPageTitle": "Pills",
+    "mainScreen_settingsPageTitle": "Settings",
+    "mainScreen_tooltipSetReminder": "Tampon reminder",
+    "mainScreen_tooltipCancelReminder": "Cancel reminder",
+    "mainScreen_tooltipLogPeriod": "Log period",
+    "insightsScreen_errorPrefix": "Error:",
+    "insightsScreen_noDataAvailable": "No data available.",
+    "logsScreen_calculatingPrediction": "Calculating prediction...",
+    "logScreen_logAtLeastTwoPeriods": "Log at least two periods to estimate next cycle.",
+    "logScreen_nextPeriodEstimate": "Next period Est",
+    "logScreen_periodDueToday": "Period due today",
+    "logScreen_periodOverdueBy": "{count, plural, =1{Period overdue by 1 day} other{Period overdue by {count} days}}",
+    "@logScreen_periodOverdueBy": {
+        "description": "A label showing the total number of days period is overdue.",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "logScreen_tamponReminderSetFor": "Tampon reminder set for",
+    "logScreen_tamponReminderCancelled": "Tampon reminder cancelled.",
+    "logScreen_couldNotCancelReminder": "Could not cancel reminder",
+    "pillScreen_pillForTodayMarkedAsTaken": "Pill for today marked as taken!",
+    "settingsScreen_selectHistoryView": "Select History View",
+    "settingsScreen_deleteRegimen_question": "Delete Regimen?",
+    "settingsScreen_deleteRegimenDescription": "This will delete your current pill pack settings and all associated pill logs. This cannot be undone.",
+    "settingsScreen_allLogsHaveBeenCleared": "All logs have been cleared.",
+    "settingsScreen_clearAllLogs_question": "Clear All Logs?",
+    "settingsScreen_deleteAllLogsDescription": "This will permanently delete all your period logs. Your app settings will not be affected.",
+    "settingsScreen_appearance": "Appearance",
+    "settingsScreen_historyViewStyle": "History View Style",
+    "settingsScreen_view": "View",
+    "settingsScreen_birthControl": "Birth Control",
+    "settingsScreen_setUpPillRegimen": "Set Up Pill Regimen",
+    "settingsScreen_trackYourDailyPillIntake": "Track Your Daily Pill Intake",
+    "settingsScreen_dailyPillReminder": "Daily Pill Reminder",
+    "settingsScreen_reminderTime": "Reminder Time",
+    "settingsScreen_periodPredictionAndReminders": "Period Prediction & Reminders",
+    "settingsScreen_upcomingPeriodReminder": "Upcoming Period Reminder",
+    "settingsScreen_remindMeBefore": "Remind Me Before",
+    "settingsScreen_notificationTime": "Notification Time",
+    "settingsScreen_clearAllLogs": "Clear All Logs",
+    "tamponReminderDialog_tamponReminderTitle": "Tampon Reminder",
+    "cycleLengthVarianceWidget_LogAtLeastTwoPeriods": "Need at least two cycles to show variance.",
+    "cycleLengthVarianceWidget_cycleAndPeriodVeriance": "Cycle & Period Variance",
+    "cycleLengthVarianceWidget_averageCycle": "Average Cycle",
+    "cycleLengthVarianceWidget_averagePeriod": "Average Period",
+    "cycleLengthVarianceWidget_period": "Period",
+    "cycleLengthVarianceWidget_cycle": "Cycle",
+    "flowIntensityWidget_flowIntensityBreakdown": "Flow Intensity Breakdown",
+    "flowIntensityWidget_noFlowDataLoggedYet": "No flow data logged yet.",
+    "monthlyFlowChartWidget_noDataToDisplay": "No data to display.",
+    "monthlyFlowChartWidget_cycleFlowPatterns": "Cycle Flow Patterns",
+    "monthlyFlowChartWidget_cycleFlowPatternsDescription": "Each line represents one complete cycle",
+    "symptomFrequencyWidget_noSymptomsLoggedYet": "No symptoms logged yet.",
+    "symptomFrequencyWidget_mostCommonSymptoms": "Most Common Symptoms",
+    "yearHeatMapWidget_yearlyOverview": "Yearly Overview",
+    "journalViewWidget_logYourFirstPeriod": "Log your first period.",
+    "listViewWidget_noPeriodsLogged": "No periods logged yet.\nTap the + button to add one.",
+    "listViewWidget_confirmDelete": "Confirm Delete",
+    "listViewWidget_confirmDeleteDescription": "Are you sure you want to delete this entry?",
+    "emptyPillStateWidget_noPillRegimenFound": "No pill regimen found.",
+    "emptyPillStateWidget_noPillRegimenFoundDescription": "Set up your pill pack in settings to start tracking.",
+    "pillPackVisualiser_yourPack": "Your Pack",
+    "pillStatus_pillsOfTotal": "{count, plural, =1{of 1 pill} other{of {count} pills}}",
+    "@pillStatus_pillsOfTotal": {
+        "description": "A label showing the total number of pills.",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "pillStatus_allSet": "All Set!",
+    "pillStatus_markAsTaken": "Mark As Taken",
+    "regimenSetupWidget_setUpPillRegimen": "Set Up Pill Regimen",
+    "regimenSetupWidget_packName": "Pack Name",
+    "regimenSetupWidget_pleaseEnterAName": "Please enter a name",
+    "regimenSetupWidget_activePills": "Active Pills",
+    "regimenSetupWidget_enterANumber": "Enter a number",
+    "regimenSetupWidget_placeboPills": "Placebo Pills",
+    "regimenSetupWidget_firstDayOfThisPack": "First Day of This Pack",
+    "symptomEntrySheet_logYourDay": "Log Your Day",
+    "symptomEntrySheet_symptomsOptional": "Symptoms (Optional)",
+    "periodDetailsSheet_symptoms": "Symptoms",
+    "periodDetailsSheet_flow": "Flow",
+    "periodPredictionCircle_days": "{count, plural, =1{Day} other{Days}}",
+    "@periodPredictionCircle_days": {
+        "description": "A label showing the total number of days until period is due.",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    }
+}

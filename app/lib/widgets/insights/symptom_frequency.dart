@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
 import 'package:menstrudel/models/period_logs/period_logs.dart';
+import 'package:menstrudel/l10n/app_localizations.dart';
+import 'package:menstrudel/models/period_logs/symptom_enum.dart';
 
 class SymptomFrequencyWidget extends StatelessWidget {
   final List<PeriodLogEntry> logs;
@@ -10,13 +12,18 @@ class SymptomFrequencyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
+    final l10n = AppLocalizations.of(context)!;
 
-    final Map<String, int> symptomCounts = {};
+    final Map<Symptom, int> symptomCounts = {};
+    final symptomMap = {for (var s in Symptom.values) s.name: s};
+
     for (final log in logs) {
-      if (log.symptoms != null && log.symptoms!.isNotEmpty) {
-        final symptomsList = log.symptoms!.map((s) => s.trim());
-        for (final symptom in symptomsList) {
-          symptomCounts[symptom] = (symptomCounts[symptom] ?? 0) + 1;
+      if (log.symptoms != null) {
+        for (final symptomString in log.symptoms!) {
+          final symptom = symptomMap[symptomString.trim()];
+          if (symptom != null) {
+            symptomCounts[symptom] = (symptomCounts[symptom] ?? 0) + 1;
+          }
         }
       }
     }
@@ -24,18 +31,18 @@ class SymptomFrequencyWidget extends StatelessWidget {
     final sortedSymptoms = symptomCounts.entries.sortedBy<num>((e) => e.value).reversed.toList();
     
     if (sortedSymptoms.isEmpty) {
-        return const Card(child: Padding(padding: EdgeInsets.all(24.0), child: Center(child: Text("No symptoms logged yet."))));
+        return Card(child: Padding(padding: EdgeInsets.all(24.0), child: Center(child: Text(l10n.symptomFrequencyWidget_noSymptomsLoggedYet))));
     }
 
     return Card(
       elevation: 0,
-      color: colorScheme.surfaceVariant.withValues(alpha: 0.3),
+      color: colorScheme.surfaceContainerHighest,
       child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Most Common Symptoms', style: textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
+            Text(l10n.symptomFrequencyWidget_mostCommonSymptoms, style: textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
             const SizedBox(height: 16),
             ...List.generate(sortedSymptoms.length.clamp(0, 5), (index) {
                 final entry = sortedSymptoms[index];
@@ -45,14 +52,15 @@ class SymptomFrequencyWidget extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Text(
-                          entry.key,
+                          entry.key.getDisplayName(l10n),
+                          maxLines: 1,
                           style: textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
                       const SizedBox(width: 12),
                       Text(
-                        '${entry.value} days',
+                        l10n.dayCount(entry.value),
                         style: textTheme.bodyMedium?.copyWith(color: colorScheme.onSurfaceVariant),
                       ),
                     ],

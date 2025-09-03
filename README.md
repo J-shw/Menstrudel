@@ -1,8 +1,11 @@
+[![Crowdin](https://badges.crowdin.net/menstrudel/localized.svg)](https://crowdin.com/project/menstrudel) [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=J-shw_Menstrudel&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=J-shw_Menstrudel) [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=J-shw_Menstrudel&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=J-shw_Menstrudel) [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=J-shw_Menstrudel&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=J-shw_Menstrudel)
 # <img src="icon/Menstrudle_cropped.png" alt="Menstrudel App Icon" width="100"> Menstrudel 
 
 Free, offline, and open source period tracking app.
 
-[Join our Playstore beta](https://groups.google.com/g/menstrudel-app-testers)
+🤖 [Join our Playstore beta](https://groups.google.com/g/menstrudel-app-testers)
+
+🌐 [Help translate](https://crowdin.com/project/menstrudel)
 
 ## About Menstrudel
 
@@ -40,6 +43,6 @@ You can view our privacy policy [here](https://menstrudel.app/privacy/).
 
 | Your daily logs |  Quick symptom entry | Tampon reminder |
 | :---: | :---: | :---: |
-| ![Log View](docs/screenshots/v2.5.0/android/logs_screen.webp) | ![Symptom Entry Dialog](docs/screenshots/v2.5.0/android/log_day.webp) | ![Symptom Entry Dialog](docs/screenshots/v2.5.0/android/tampon_reminder.webp) |
+| ![Log View](docs/screenshots/android/logs_screen.webp) | ![Symptom Entry Dialog](docs/screenshots/android/log_screen.webp) | ![Symptom Entry Dialog](docs/screenshots/android/tampon_reminder.webp) |
 | Pill Reminder | Quick insights | Settings |
-| ![Screenshot of the pill reminder screen in Menstrudel](docs/screenshots/v2.5.0/android/pill_screen.webp)  | ![Insights View](docs/screenshots/v2.5.0/android/insights_screen.webp) | ![Symptom Entry Dialog](docs/screenshots/v2.5.0/android/settings_screen.webp) |  |
+| ![Screenshot of the pill reminder screen in Menstrudel](docs/screenshots/android/pills_screen.webp)  | ![Insights View](docs/screenshots/android/insights_screen.webp) | ![Symptom Entry Dialog](docs/screenshots/android/settings_screen.webp) |  |

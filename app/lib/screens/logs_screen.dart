@@ -14,6 +14,8 @@ import 'package:menstrudel/services/settings_service.dart';
 import 'package:menstrudel/services/period_logger_service.dart';
 import 'package:menstrudel/widgets/logs/dynamic_history_view.dart';
 
+import 'package:menstrudel/l10n/app_localizations.dart';
+
 
 class LogsScreen extends StatefulWidget {
    final Function(FabState) onFabStateChange;
@@ -33,7 +35,7 @@ class LogsScreenState extends State<LogsScreen> {
 
 	List<PeriodLogEntry> _periodLogEntries = [];
   List<PeriodEntry> _periodEntries = [];
-	bool _isLoading = false;
+	bool _isLoading = true;
 	PeriodPredictionResult? _predictionResult;
   PeriodHistoryView _selectedView = PeriodHistoryView.journal;
 
@@ -46,30 +48,36 @@ class LogsScreenState extends State<LogsScreen> {
   }
   
   Future<void> handleTamponReminder(BuildContext context) async {
+    final l10n = AppLocalizations.of(context)!;
     final reminderTime = await showDialog<TimeOfDay>(
       context: context,
       builder: (BuildContext context) => const TimeSelectionDialog(),
     );
     if (reminderTime == null) return;
-    await NotificationService.scheduleTamponReminder(reminderTime: reminderTime);
+    await NotificationService.scheduleTamponReminder(
+      reminderTime: reminderTime,
+      title: l10n.notification_tamponReminderTitle,
+      body: l10n.notification_tamponReminderBody,
+      );
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
-      ..showSnackBar(SnackBar(content: Text('Reminder set for ${reminderTime.format(context)}')));
+      ..showSnackBar(SnackBar(content: Text('${l10n.logScreen_tamponReminderSetFor} ${reminderTime.format(context)}')));
       _refreshPeriodLogs();
   }
 
   Future<void> handleCancelReminder() async {
+    final l10n = AppLocalizations.of(context)!;
     try {
       await NotificationService.cancelTamponReminder();
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Tampon reminder cancelled.')),
+          SnackBar(content: Text(l10n.logScreen_tamponReminderCancelled)),
         );
       }
     } catch (e) {
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Could not cancel reminder: $e'), backgroundColor: Colors.red),
+          SnackBar(content: Text('${l10n.logScreen_couldNotCancelReminder}: $e'), backgroundColor: Colors.red),
         );
       }
     } finally {
@@ -84,10 +92,6 @@ class LogsScreenState extends State<LogsScreen> {
 	}
 
 	Future<void> _refreshPeriodLogs() async {
-    setState(() {
-      _isLoading = true;
-    });
-
     final periodLogData = await periodsRepo.readAllPeriodLogs();
     final periodData = await periodsRepo.readAllPeriods();
     final isReminderSet = await NotificationService.isTamponReminderScheduled();
@@ -99,12 +103,15 @@ class LogsScreenState extends State<LogsScreen> {
       final notificationsEnabled = await settingsService.areNotificationsEnabled();
       final notificationDays = await settingsService.getNotificationDays();
       final notificationTime = await settingsService.getNotificationTime();
+      final l10n = AppLocalizations.of(context)!;
       
       await NotificationService.schedulePeriodNotification(
         scheduledTime: predictionResult.estimatedDate,
         areEnabled: notificationsEnabled,
         daysBefore: notificationDays,
         notificationTime: notificationTime,
+        title: l10n.notification_periodTitle,
+        body: l10n.notification_periodBody(notificationDays),
       );
     }
     
@@ -128,6 +135,12 @@ class LogsScreenState extends State<LogsScreen> {
     });
   }
 
+  void _handleSaveLog(PeriodLogEntry updatedLog) {
+    periodsRepo.updatePeriodLog(updatedLog);
+    Navigator.of(context).pop();
+    _refreshPeriodLogs();
+  }
+
 	Future<void> _deletePeriodEntry(int id) async {
 		await periodsRepo.deletePeriodLog(id);
 		_refreshPeriodLogs();
@@ -135,23 +148,25 @@ class LogsScreenState extends State<LogsScreen> {
 
 	@override
 	Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
 		int daysUntilDueForCircle = _predictionResult?.daysUntilDue ?? 0; 
 		int circleMaxValue = _predictionResult?.averageCycleLength ?? 28;
 		int circleCurrentValue = daysUntilDueForCircle.clamp(0, circleMaxValue); 
 
 		String predictionText = '';
 		if (_isLoading) {
-			predictionText = 'Calculating prediction...';
+			predictionText = l10n.logsScreen_calculatingPrediction;
 		} else if (_predictionResult == null) {
-			predictionText = 'Log at least two periods to estimate next cycle.';
+			predictionText = l10n.logScreen_logAtLeastTwoPeriods;
 		} else {
 			String datePart = DateFormat('dd/MM/yyyy').format(_predictionResult!.estimatedDate);
 		if (_predictionResult!.daysUntilDue > 0) {
-			predictionText = 'Next Period Est: $datePart';
+			predictionText = '${l10n.logScreen_nextPeriodEstimate}: $datePart';
 		} else if (_predictionResult!.daysUntilDue == 0) {
-			predictionText = 'Period due TODAY: $datePart';
+			predictionText = '${l10n.logScreen_periodDueToday} $datePart';
 		} else { // _predictionResult.daysUntilDue is negative, meaning overdue
-			predictionText = 'Period overdue by ${-_predictionResult!.daysUntilDue} days: $datePart';
+			predictionText = '${l10n.logScreen_periodOverdueBy(-_predictionResult!.daysUntilDue)}: $datePart';
 		}
 		}
 		return Column(
@@ -186,6 +201,7 @@ class LogsScreenState extends State<LogsScreen> {
           periodEntries: _periodEntries,
           isLoading: _isLoading,
           onDelete: _deletePeriodEntry,
+          onSave: _handleSaveLog,
           onLogRequested: handleLogPeriod,
         ),
       ],

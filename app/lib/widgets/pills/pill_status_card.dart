@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:menstrudel/l10n/app_localizations.dart';
 
 class PillStatusCard extends StatelessWidget {
   final int currentPillNumberInCycle;
@@ -18,6 +19,7 @@ class PillStatusCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final double progressValue = totalPills > 0 ? currentPillNumberInCycle / totalPills : 0.0;
     final Color primaryColor = Theme.of(context).colorScheme.primary;
+    final l10n = AppLocalizations.of(context)!;
 
     return Padding(
       padding: const EdgeInsets.all(20.0),
@@ -49,7 +51,7 @@ class PillStatusCard extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      'of $totalPills pills',
+                      l10n.pillStatus_pillsOfTotal(totalPills),
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         color: Colors.grey.shade600,
                       ),
@@ -66,7 +68,7 @@ class PillStatusCard extends StatelessWidget {
               onPressed: isTodayPillTaken ? null : onTakePill,
               icon: Icon(isTodayPillTaken ? Icons.check_circle : Icons.medical_services_rounded),
               label: Text(
-                isTodayPillTaken ? 'All Set!' : 'Mark as Taken',
+                isTodayPillTaken ? l10n.pillStatus_allSet : l10n.pillStatus_markAsTaken,
                 style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
               style: FilledButton.styleFrom(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:menstrudel/models/pills/pill_intake.dart';
 import 'package:menstrudel/models/pills/pill_regimen.dart';
 import 'pill_circle.dart';
+import 'package:menstrudel/l10n/app_localizations.dart';
 
 enum PillStatus { taken, today, future, placebo, missed }
 
@@ -20,11 +21,12 @@ class PillPackVisualiser extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final totalPills = activeRegimen.activePills + activeRegimen.placeboPills;
+    final l10n = AppLocalizations.of(context)!;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Your Pack', style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
+        Text(l10n.pillPackVisualiser_yourPack, style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
         const SizedBox(height: 12),
         GridView.builder(
           physics: const NeverScrollableScrollPhysics(),

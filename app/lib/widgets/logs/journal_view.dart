@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:menstrudel/models/period_logs/period_logs.dart';
 import 'package:menstrudel/models/period_prediction_result.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:menstrudel/l10n/app_localizations.dart';
+import 'package:menstrudel/widgets/sheets/period_details_bottom_sheet.dart';
 
 class PeriodJournalView extends StatefulWidget {
   final List<PeriodLogEntry> periodLogEntries;
   final bool isLoading;
   final Function(int) onDelete;
+  final Function(PeriodLogEntry) onSave;
   final PeriodPredictionResult? predictionResult;
   final Function(DateTime) onLogRequested;
 
@@ -16,6 +18,7 @@ class PeriodJournalView extends StatefulWidget {
     required this.periodLogEntries,
     required this.isLoading,
     required this.onDelete,
+    required this.onSave,
     this.predictionResult,
     required this.onLogRequested,
   });
@@ -57,111 +60,18 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
     }
   }
 
-  String _getFlowLabel(int flow) {
-    switch (flow) {
-      case 0:
-        return 'Light';
-      case 1:
-        return 'Medium';
-      case 2:
-        return 'Heavy';
-      default:
-        return '';
-    }
-  }
-
   void _showDetailsBottomSheet(PeriodLogEntry log) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
-
-    showModalBottomSheet(
+    showModalBottomSheet<void>(
       context: context,
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
       builder: (context) {
-        return Container(
-          height: MediaQuery.of(context).size.height * 0.4,
-          padding: const EdgeInsets.fromLTRB(24, 8, 24, 32),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Center(
-                child: Container(
-                  width: 40,
-                  height: 4,
-                  margin: const EdgeInsets.symmetric(vertical: 8),
-                  decoration: BoxDecoration(
-                    color: Colors.grey.shade300,
-                    borderRadius: BorderRadius.circular(2),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 12),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    DateFormat('EEEE, MMMM d').format(log.date),
-                    style: textTheme.titleLarge
-                        ?.copyWith(fontWeight: FontWeight.bold),
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.delete_outline,
-                        size: 24, color: colorScheme.error),
-                    onPressed: () => _handleDelete(log),
-                  ),
-                ],
-              ),
-              const Divider(height: 24),
-              Row(
-                children: [
-                  Icon(Icons.opacity,
-                      color: colorScheme.onSurfaceVariant, size: 20),
-                  const SizedBox(width: 12),
-                  Text('Flow: ', style: textTheme.bodyLarge),
-                  Text(_getFlowLabel(log.flow),
-                      style: textTheme.bodyLarge
-                          ?.copyWith(fontWeight: FontWeight.bold)),
-                  const Spacer(),
-                  ...List.generate(
-                    3,
-                    (index) => Icon(
-                      index < log.flow + 1
-                          ? Icons.water_drop
-                          : Icons.water_drop_outlined,
-                      size: 20,
-                      color: colorScheme.primary,
-                    ),
-                  )
-                ],
-              ),
-              const SizedBox(height: 16),
-              if (log.symptoms != null && log.symptoms!.isNotEmpty) ...[
-                Row(
-                  children: [
-                    Icon(Icons.bubble_chart_outlined,
-                        color: colorScheme.onSurfaceVariant, size: 20),
-                    const SizedBox(width: 12),
-                    Text('Symptoms:', style: textTheme.bodyLarge),
-                  ],
-                ),
-                const SizedBox(height: 8),
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: Wrap(
-                      spacing: 8.0,
-                      runSpacing: 4.0,
-                      children: log.symptoms!
-                          .map((s) => Chip(label: Text(s)))
-                          .toList(),
-                    ),
-                  ),
-                ),
-              ]
-            ],
-          ),
+        return PeriodDetailsBottomSheet(
+          log: log,
+          onDelete: () => _handleDelete(log),
+          onSave: widget.onSave,
         );
       },
     ).then((_) {
@@ -173,11 +83,13 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     if (widget.isLoading) {
       return const Expanded(child: Center(child: CircularProgressIndicator()));
     }
     if (widget.periodLogEntries.isEmpty) {
-      return const Expanded(child: Center(child: Text('Log your first period.')));
+      return Expanded(child: Center(child: Text(l10n.journalViewWidget_logYourFirstPeriod)));
     }
 
     final colorScheme = Theme.of(context).colorScheme;

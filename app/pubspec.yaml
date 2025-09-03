@@ -2,13 +2,15 @@ name: menstrudel
 description: "Your private, offline, menstrual cycle tracker."
 publish_to: 'none'
 
-version: 2.5.0+9
+version: 2.6.0+10
 
 environment:
   sdk: ^3.8.1
 
 dependencies:
   flutter:
+    sdk: flutter
+  flutter_localizations:
     sdk: flutter
   intl: ^0.20.2
   sqflite: ^2.3.3+1
@@ -21,6 +23,7 @@ dependencies:
   flutter_timezone: ^4.1.1
   fl_chart: ^1.0.0
   table_calendar: ^3.2.0
+  path: ^1.9.1
 
 dev_dependencies:
   flutter_test:
@@ -29,3 +32,4 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  generate: true

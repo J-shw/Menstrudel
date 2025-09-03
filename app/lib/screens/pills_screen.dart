@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:menstrudel/database/repositories/pills_repository.dart';
 import 'package:menstrudel/models/pills/pill_regimen.dart';
 import 'package:menstrudel/models/pills/pill_intake.dart';
-import 'package:menstrudel/models/pills/pill_reminder.dart';
 
 import 'package:menstrudel/widgets/pills/empty_pills_state.dart';
 import 'package:menstrudel/widgets/pills/pill_pack_visualiser.dart';
 import 'package:menstrudel/widgets/pills/pill_status_card.dart';
+import 'package:menstrudel/l10n/app_localizations.dart';
 
 class PillsScreen extends StatefulWidget {
   const PillsScreen({super.key});
@@ -20,7 +20,6 @@ class _PillsScreenState extends State<PillsScreen> {
 
   bool _isLoading = true;
   PillRegimen? _activeRegimen;
-  PillReminder? _reminder;
   List<PillIntake> _intakes = [];
   int _currentPillNumberInCycle = 0;
 
@@ -35,14 +34,12 @@ class _PillsScreenState extends State<PillsScreen> {
     final regimen = await pillsRepo.readActivePillRegimen();
     if (regimen != null) {
       final intakes = await pillsRepo.readIntakesForRegimen(regimen.id!);
-      final reminder = await pillsRepo.readReminderForRegimen(regimen.id!);
       final cycleDay = DateTime.now().difference(regimen.startDate).inDays;
       final totalCycleLength = regimen.activePills + regimen.placeboPills;
       if (mounted) {
         setState(() {
           _activeRegimen = regimen;
           _intakes = intakes;
-          _reminder = reminder;
           _currentPillNumberInCycle = (cycleDay % totalCycleLength) + 1;
         });
       }
@@ -53,6 +50,7 @@ class _PillsScreenState extends State<PillsScreen> {
   }
 
   Future<void> _takePill() async {
+    final l10n = AppLocalizations.of(context)!;
     if (_activeRegimen == null) return;
     final newIntake = PillIntake(
       regimenId: _activeRegimen!.id!,
@@ -63,8 +61,8 @@ class _PillsScreenState extends State<PillsScreen> {
     );
     await pillsRepo.createPillIntake(newIntake);
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Pill for today marked as taken!'),
+      SnackBar(
+        content: Text(l10n.pillScreen_pillForTodayMarkedAsTaken),
         backgroundColor: Colors.green,
       ),
     );

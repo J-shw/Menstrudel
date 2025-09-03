@@ -9,6 +9,7 @@ import 'package:menstrudel/utils/exceptions.dart';
 
 class PeriodsRepository {
   final dbProvider = AppDatabase.instance;
+  static const String _whereId = 'id = ?';
 
   Future<void> deleteAllEntries() async {
     final db = await dbProvider.database;
@@ -54,7 +55,7 @@ class PeriodsRepository {
     return db.update(
       'periods',
       period.toMap(),
-      where: 'id = ?',
+      where: _whereId,
       whereArgs: [period.id],
     );
   }
@@ -63,7 +64,7 @@ class PeriodsRepository {
     final db = await dbProvider.database;
     return await db.delete(
       'periods',
-      where: 'id = ?',
+      where: _whereId,
       whereArgs: [id],
     );
   }
@@ -91,6 +92,7 @@ class PeriodsRepository {
     return await readPeriodLog(id);
   }
 
+
   Future<List<PeriodLogEntry>> readAllPeriodLogs() async {
     final db = await dbProvider.database;
     const orderBy = 'date DESC';
@@ -104,17 +106,34 @@ class PeriodsRepository {
 
     final result = await db.query(
       'period_logs', 
-      where: 'id = $id', 
+      where: _whereId, 
+      whereArgs: [id],
     );
 
     return result.map((json) => PeriodLogEntry.fromMap(json)).first;
+  }
+
+  Future<int> updatePeriodLog(PeriodLogEntry entry) async {
+    final db = await dbProvider.database;
+    final int result = await db.update(
+      'period_logs',
+      entry.toMap(),
+      where: _whereId,
+      whereArgs: [entry.id],
+    );
+
+    if (result > 0) {
+      await _recalculateAndAssignPeriods(db);
+    }
+
+    return result;
   }
 
   Future<int> deletePeriodLog(int id) async {
     final db = await dbProvider.database;
     final int result = await db.delete(
       'period_logs',
-      where: 'id = ?',
+      where: _whereId,
       whereArgs: [id],
     );
 
@@ -174,7 +193,7 @@ class PeriodsRepository {
         await txn.update(
           'period_logs',
           {'period_id': periodId},
-          where: 'id = ?',
+          where: _whereId,
           whereArgs: [logId],
         );
       }

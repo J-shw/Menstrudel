@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:menstrudel/l10n/app_localizations.dart';
 
 class ConfirmationDialog extends StatelessWidget {
   final String title;
@@ -16,12 +17,13 @@ class ConfirmationDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return AlertDialog(
       title: Text(title),
       content: content,
       actions: <Widget>[
         TextButton(
-          child: const Text('Cancel'),
+          child: Text(l10n.cancel),
           onPressed: () {
             Navigator.of(context).pop();
           },

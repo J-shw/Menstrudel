@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:menstrudel/models/period_logs/period_logs.dart';
+import 'package:menstrudel/l10n/app_localizations.dart';
 
 class YearHeatmapWidget extends StatelessWidget {
   final List<PeriodLogEntry> logs;
@@ -16,6 +17,7 @@ class YearHeatmapWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context)!;
 
     final Map<DateTime, int> flowEvents = {
       for (var log in logs) DateTime.utc(log.date.year, log.date.month, log.date.day): log.flow
@@ -23,13 +25,13 @@ class YearHeatmapWidget extends StatelessWidget {
 
     return Card(
       elevation: 0,
-      color: colorScheme.surfaceVariant.withValues(alpha: 0.3),
+      color: colorScheme.surfaceContainerHighest,
       child: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Yearly Overview', style: textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
+            Text(l10n.yearHeatMapWidget_yearlyOverview, style: textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
             const SizedBox(height: 16),
             TableCalendar(
               firstDay: DateTime.utc(DateTime.now().year, 1, 1),
