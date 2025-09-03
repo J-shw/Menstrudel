@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 
 enum FlowRate {
@@ -20,5 +21,15 @@ extension FlowExtension on FlowRate {
   }
   int get intValue {
     return index;
+  }
+  Color get color {
+    switch (this) {
+      case FlowRate.light:
+        return Colors.pink.shade200;
+      case FlowRate.medium:
+        return Colors.pink.shade400;
+      case FlowRate.heavy:
+        return Colors.red.shade700;
+    }
   }
 }
