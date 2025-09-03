@@ -2,6 +2,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:menstrudel/models/flows/flow_data.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
+import 'package:menstrudel/models/period_logs/flow_enum.dart';
 
 class FlowPatternsWidget extends StatelessWidget {
   final List<MonthlyFlowData> monthlyFlowData;
@@ -11,20 +12,17 @@ class FlowPatternsWidget extends StatelessWidget {
     required this.monthlyFlowData,
   });
 
-  double _numericFromFlow(FlowLevel flow) => flow.index.toDouble() + 1;
+  double _numericFromFlow(FlowRate flow) => flow.index.toDouble() + 1;
 
   Widget _getFlowLabel(BuildContext context, double value, TextStyle? style) {
     final l10n = AppLocalizations.of(context)!;
-    switch (value.round()) {
-      case 1:
-        return Text(l10n.flowIntensity_light, style: style);
-      case 2:
-        return Text(l10n.flowIntensity_moderate, style: style);
-      case 3:
-        return Text(l10n.flowIntensity_heavy, style: style);
-      default:
-        return const SizedBox.shrink();
+    final index = value.round() - 1;
+
+    if (index >= 0 && index < FlowRate.values.length) {
+      final flow = FlowRate.values[index];
+      return Text(flow.getDisplayName(l10n), style: style);
     }
+    return const SizedBox.shrink();
   }
 
   @override
@@ -49,7 +47,7 @@ class FlowPatternsWidget extends StatelessWidget {
       final List<FlSpot> spotsForThisCycle = [];
       for (int i = 0; i < monthData.flows.length; i++) {
         final day = i + 1;
-        final flow = flowLevelFromInt(monthData.flows[i]);
+        final flow = FlowRate.values[monthData.flows[i]];
         spotsForThisCycle.add(FlSpot(day.toDouble(), _numericFromFlow(flow)));
       }
 

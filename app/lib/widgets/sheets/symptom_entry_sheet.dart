@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
+import 'package:menstrudel/models/period_logs/flow_enum.dart';
 import 'package:menstrudel/models/period_logs/symptom_enum.dart';
 
 class SymptomEntrySheet extends StatefulWidget {
@@ -18,7 +19,7 @@ class SymptomEntrySheet extends StatefulWidget {
 class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
   late DateTime _selectedDate;
   final Set<Symptom> _selectedSymptoms = {};
-  Set<int> _flowSelection = {1};
+  Set<FlowRate> _flowSelection = {FlowRate.medium};
 
   @override
   void initState() {
@@ -80,14 +81,15 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
             const SizedBox(height: 8),
             SizedBox(
               width: double.infinity,
-              child: SegmentedButton<int>(
-                segments: [
-                  ButtonSegment(value: 0, label: Text(l10n.flowIntensity_light)),
-                  ButtonSegment(value: 1, label: Text(l10n.flowIntensity_moderate)),
-                  ButtonSegment(value: 2, label: Text(l10n.flowIntensity_heavy)),
-                ],
+              child: SegmentedButton<FlowRate>(
+                segments: FlowRate.values.map((flow) {
+                  return ButtonSegment<FlowRate>(
+                    value: flow,
+                    label: Text(flow.getDisplayName(l10n)),
+                  );
+                }).toList(),
                 selected: _flowSelection,
-                onSelectionChanged: (Set<int> newSelection) {
+                onSelectionChanged: (Set<FlowRate> newSelection) { 
                   setState(() {
                     if (newSelection.isNotEmpty) {
                       _flowSelection = newSelection;
@@ -144,7 +146,7 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
 
                       Navigator.of(context).pop({
                         'date': _selectedDate,
-                        'flow': _flowSelection.first,
+                        'flow': _flowSelection.first.intValue,
                         'symptoms': symptomsToSave,
                       });
                     },

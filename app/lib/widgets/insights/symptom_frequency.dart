@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
 import 'package:menstrudel/models/period_logs/period_logs.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
+import 'package:menstrudel/models/period_logs/symptom_enum.dart';
 
 class SymptomFrequencyWidget extends StatelessWidget {
   final List<PeriodLogEntry> logs;
@@ -13,12 +14,16 @@ class SymptomFrequencyWidget extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
     final l10n = AppLocalizations.of(context)!;
 
-    final Map<String, int> symptomCounts = {};
+    final Map<Symptom, int> symptomCounts = {};
+    final symptomMap = {for (var s in Symptom.values) s.name: s};
+
     for (final log in logs) {
-      if (log.symptoms != null && log.symptoms!.isNotEmpty) {
-        final symptomsList = log.symptoms!.map((s) => s.trim());
-        for (final symptom in symptomsList) {
-          symptomCounts[symptom] = (symptomCounts[symptom] ?? 0) + 1;
+      if (log.symptoms != null) {
+        for (final symptomString in log.symptoms!) {
+          final symptom = symptomMap[symptomString.trim()];
+          if (symptom != null) {
+            symptomCounts[symptom] = (symptomCounts[symptom] ?? 0) + 1;
+          }
         }
       }
     }
@@ -47,14 +52,15 @@ class SymptomFrequencyWidget extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Text(
-                          entry.key,
+                          entry.key.getDisplayName(l10n),
+                          maxLines: 1,
                           style: textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
                       const SizedBox(width: 12),
                       Text(
-                        '${entry.value} days',
+                        '${entry.value} ${l10n.days.toLowerCase()}',
                         style: textTheme.bodyMedium?.copyWith(color: colorScheme.onSurfaceVariant),
                       ),
                     ],
