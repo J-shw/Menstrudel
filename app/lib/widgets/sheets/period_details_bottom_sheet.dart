@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/models/period_logs/period_logs.dart';
+import 'package:menstrudel/models/period_logs/flow_enum.dart';
 import 'package:menstrudel/models/period_logs/symptom_enum.dart';
 
 class PeriodDetailsBottomSheet extends StatefulWidget {
@@ -24,7 +25,7 @@ class PeriodDetailsBottomSheet extends StatefulWidget {
 class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
   bool _isEditing = false;
 
-  late int _editedFlow;
+  late FlowRate _editedFlow;
   late List<Symptom> _editedSymptoms;
   final List<Symptom> _allSymptoms = Symptom.values;
 
@@ -35,7 +36,7 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
   }
 
   void _resetEditableState() {
-    _editedFlow = widget.log.flow;
+    _editedFlow = FlowRate.values[widget.log.flow];
     _editedSymptoms = widget.log.symptoms?.map((symptomString) {
     try {
         return Symptom.values.firstWhere((e) => e.name == symptomString);
@@ -48,7 +49,7 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
   void _handleSave() {
     final symptomsToSave = _editedSymptoms.map((s) => s.name).toList();
     final updatedLog = widget.log.copyWith(
-      flow: _editedFlow,
+      flow: _editedFlow.intValue,
       symptoms: symptomsToSave,
     );
 
@@ -57,20 +58,6 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
     setState(() {
       _isEditing = false;
     });
-  }
-
-  String _getFlowLabel(BuildContext context, int flow) {
-    final l10n = AppLocalizations.of(context)!;
-    switch (flow) {
-      case 1:
-        return l10n.flowIntensity_light;
-      case 2:
-        return l10n.flowIntensity_moderate;
-      case 3:
-        return l10n.flowIntensity_heavy;
-      default:
-        return '';
-    }
   }
 
   @override
@@ -163,25 +150,21 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
 
-    final flowOptions = {
-      1: l10n.flowIntensity_light,
-      2: l10n.flowIntensity_moderate,
-      3: l10n.flowIntensity_heavy,
-    };
-
     if (!_isEditing) {
+      final flow = FlowRate.values[widget.log.flow];
+
       return Row(
         children: [
           Icon(Icons.opacity, color: colorScheme.onSurfaceVariant, size: 20),
           const SizedBox(width: 12),
           Text('${l10n.periodDetailsSheet_flow}: ', style: textTheme.bodyLarge),
           Text(
-            _getFlowLabel(context, widget.log.flow),
+            flow.getDisplayName(l10n),
             style: textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
           ),
           const Spacer(),
           ...List.generate(3, (index) => Icon(
-                index < widget.log.flow ? Icons.water_drop : Icons.water_drop_outlined,
+                index <= flow.intValue ? Icons.water_drop : Icons.water_drop_outlined,
                 size: 20,
                 color: colorScheme.primary,
           ))
@@ -195,14 +178,14 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
           const SizedBox(height: 8),
           Wrap(
             spacing: 8.0,
-            children: flowOptions.entries.map((entry) {
+            children: FlowRate.values.map((flow) {
               return ChoiceChip(
-                label: Text(entry.value),
-                selected: _editedFlow == entry.key,
+                label: Text(flow.getDisplayName(l10n)),
+                selected: _editedFlow == flow,
                 onSelected: (isSelected) {
                   if (isSelected) {
                     setState(() {
-                      _editedFlow = entry.key;
+                      _editedFlow = flow;
                     });
                   }
                 },
