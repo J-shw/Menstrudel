@@ -217,7 +217,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastUpgradeCheck = 1510;
+				LastUpgradeCheck = 1640;
 				ORGANIZATIONNAME = "";
 				TargetAttributes = {
 					331C8080294A63A400263BE5 = {
@@ -295,9 +295,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -727,7 +731,7 @@
 				331C808A294A63A400263BE5 /* Profile */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		97C146E91CF9000F007C117D /* Build configuration list for PBXProject "Runner" */ = {
 			isa = XCConfigurationList;
@@ -737,7 +741,7 @@
 				249021D3217E4FDB00AE95B9 /* Profile */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		97C147051CF9000F007C117D /* Build configuration list for PBXNativeTarget "Runner" */ = {
 			isa = XCConfigurationList;
@@ -747,7 +751,7 @@
 				249021D4217E4FDB00AE95B9 /* Profile */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
