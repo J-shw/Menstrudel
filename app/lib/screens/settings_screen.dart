@@ -28,7 +28,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   bool _isLoading = true;
   bool _notificationsEnabled = true;
-  bool _dynamicThemeEnabled = false;
   int _notificationDays = 1;
   TimeOfDay _notificationTime = const TimeOfDay(hour: 9, minute: 0);
 
@@ -55,7 +54,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
     _notificationTime = await _settingsService.getNotificationTime();
     _selectedView = await _settingsService.getHistoryView();
     _activeRegimen = await pillsRepo.readActivePillRegimen();
-    _dynamicThemeEnabled = await _settingsService.isDynamicThemeEnabled();
     _themeColor = await _settingsService.getThemeColor();
 
 
@@ -267,6 +265,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    final themeNotifier = context.watch<ThemeNotifier>();
 
     if (_isLoading) {
       return const Center(child: CircularProgressIndicator());
@@ -288,15 +287,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
         SwitchListTile(
           title: Text(l10n.settingsScreen_dynamicTheme),
           subtitle: Text(l10n.settingsScreen_useWallpaperColors),
-          value: _dynamicThemeEnabled,
+          value: themeNotifier.isDynamicEnabled,
           onChanged: (bool value) {
             context.read<ThemeNotifier>().setDynamicThemeEnabled(value);
-            setState(() {
-              _dynamicThemeEnabled = value;
-            });
           },
         ),
-        if (!_dynamicThemeEnabled) ...{
+        if (!themeNotifier.isDynamicEnabled) ...{
           ListTile(
             title: Text(l10n.settingsScreen_themeColor),
             trailing: Container(
