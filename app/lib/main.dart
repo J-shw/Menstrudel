@@ -6,7 +6,6 @@ import 'package:menstrudel/screens/main_screen.dart';
 import 'package:menstrudel/services/notification_service.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:menstrudel/l10n/app_localizations.dart'; 
-import 'package:menstrudel/utils/constants.dart';
 import 'package:menstrudel/notifiers/theme_notifier.dart';
 import 'package:provider/provider.dart';
 
@@ -42,12 +41,14 @@ class MainApp extends StatelessWidget {
         ColorScheme lightColorScheme;
         ColorScheme darkColorScheme;
 
-        final Color seed = themeNotifier.themeColor;
+        final bool useDynamicTheme = themeNotifier.isDynamicEnabled;
 
-        if (lightDynamic != null && darkDynamic != null) {
+        if (useDynamicTheme && lightDynamic != null && darkDynamic != null) {
           lightColorScheme = lightDynamic.harmonized();
           darkColorScheme = darkDynamic.harmonized();
         } else {
+          final Color seed = themeNotifier.themeColor;
+          
           lightColorScheme = ColorScheme.fromSeed(seedColor: seed);
           darkColorScheme = ColorScheme.fromSeed(
             seedColor: seed,
