@@ -226,6 +226,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsScreen_historyViewStyle => 'History View Style';
 
   @override
+  String get settingsScreen_themeColor => 'Theme Color';
+
+  @override
+  String get settingsScreen_pickAColor => 'Pick a Color';
+
+  @override
   String get settingsScreen_view => 'View';
 
   @override

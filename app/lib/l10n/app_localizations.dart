@@ -470,6 +470,18 @@ abstract class AppLocalizations {
   /// **'History View Style'**
   String get settingsScreen_historyViewStyle;
 
+  /// No description provided for @settingsScreen_themeColor.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme Color'**
+  String get settingsScreen_themeColor;
+
+  /// No description provided for @settingsScreen_pickAColor.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick a Color'**
+  String get settingsScreen_pickAColor;
+
   /// No description provided for @settingsScreen_view.
   ///
   /// In en, this message translates to:
