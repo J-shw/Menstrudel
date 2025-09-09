@@ -65,6 +65,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get cancel => 'Cancel';
 
   @override
+  String get select => 'Select';
+
+  @override
   String get flow => 'Flow';
 
   @override
@@ -224,6 +227,18 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get settingsScreen_historyViewStyle => 'History View Style';
+
+  @override
+  String get settingsScreen_dynamicTheme => 'Dynamic Theme';
+
+  @override
+  String get settingsScreen_useWallpaperColors => 'Use Wallpaper Colors';
+
+  @override
+  String get settingsScreen_themeColor => 'Theme Color';
+
+  @override
+  String get settingsScreen_pickAColor => 'Pick a Color';
 
   @override
   String get settingsScreen_view => 'View';
