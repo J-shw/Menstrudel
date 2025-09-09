@@ -8,6 +8,8 @@ import 'package:menstrudel/models/pills/pill_regimen.dart';
 import 'package:menstrudel/widgets/settings/regimen_setup_dialog.dart';
 import 'package:menstrudel/services/notification_service.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:menstrudel/utils/constants.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -19,6 +21,7 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   final periodsRepo = PeriodsRepository();
   final pillsRepo = PillsRepository();
+  Color _themeColor = seedColor;
 
   final SettingsService _settingsService = SettingsService();
 
@@ -223,6 +226,36 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
+  void _showColorPicker() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Pick a color'), // Replace with l10n
+          content: SingleChildScrollView(
+            child: ColorPicker(
+              pickerColor: _themeColor,
+              onColorChanged: (Color color) {
+                setState(() => _themeColor = color);
+              },
+              pickerAreaHeightPercent: 0.8,
+            ),
+          ),
+          actions: <Widget>[
+            ElevatedButton(
+              child: Text('Select'), // Replace with l10n
+              onPressed: () {
+                // Here you would save the color to your app's state management
+                // For example: context.read<ThemeNotifier>().setColor(_themeColor);
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
@@ -242,6 +275,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
           title: Text(l10n.settingsScreen_historyViewStyle),
           subtitle: Text('$selectedViewName ${l10n.settingsScreen_view}'),
           onTap: showViewPicker,
+        ),
+        ListTile(
+          title: Text('Theme Color'), // Replace with l10n
+          trailing: Container(
+            width: 24,
+            height: 24,
+            decoration: BoxDecoration(
+              color: _themeColor,
+              shape: BoxShape.circle,
+              border: Border.all(width: 1, color: Colors.grey.shade400),
+            ),
+          ),
+          onTap: _showColorPicker,
         ),
 
         const Divider(),
