@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:menstrudel/utils/constants.dart';
@@ -9,6 +11,7 @@ class SettingsService {
   static const String _notificationDaysKey = 'notification_days';
   static const _notificationTimeKey = 'notification_time';
   static const _historyViewKey = 'history_view';
+  static const _dynamicColorKey = 'dynamic_color';
   static const _themeColorKey = 'theme_color';
 
   Future<void> deleteAllSettings() async {
@@ -69,6 +72,16 @@ class SettingsService {
       (e) => e.name == viewName,
       orElse: () => PeriodHistoryView.journal,
     );
+  }
+
+  Future<void> setDynamicColorEnabled(bool isEnabled) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_dynamicColorKey, isEnabled);
+  }
+  Future<bool> isDynamicThemeEnabled() async {
+    final prefs = await SharedPreferences.getInstance();
+    final isEnabled = prefs.getBool(_dynamicColorKey) ?? false;
+    return isEnabled;
   }
 
   Future<void> setThemeColor(Color color) async {
