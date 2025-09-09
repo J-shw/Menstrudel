@@ -120,6 +120,8 @@
     "settingsScreen_deleteAllLogsDescription": "This will permanently delete all your period logs. Your app settings will not be affected.",
     "settingsScreen_appearance": "Appearance",
     "settingsScreen_historyViewStyle": "History View Style",
+    "settingsScreen_dynamicTheme": "Dynamic Theme",
+    "settingsScreen_useWallpaperColors": "Use Wallpaper Colors",
     "settingsScreen_themeColor": "Theme Color",
     "settingsScreen_pickAColor": "Pick a Color",
     "settingsScreen_view": "View",

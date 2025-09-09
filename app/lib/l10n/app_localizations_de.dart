@@ -229,6 +229,12 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsScreen_historyViewStyle => 'History View Style';
 
   @override
+  String get settingsScreen_dynamicTheme => 'Dynamic Theme';
+
+  @override
+  String get settingsScreen_useWallpaperColors => 'Use Wallpaper Colors';
+
+  @override
   String get settingsScreen_themeColor => 'Theme Color';
 
   @override

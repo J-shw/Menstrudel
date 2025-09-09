@@ -476,6 +476,18 @@ abstract class AppLocalizations {
   /// **'History View Style'**
   String get settingsScreen_historyViewStyle;
 
+  /// No description provided for @settingsScreen_dynamicTheme.
+  ///
+  /// In en, this message translates to:
+  /// **'Dynamic Theme'**
+  String get settingsScreen_dynamicTheme;
+
+  /// No description provided for @settingsScreen_useWallpaperColors.
+  ///
+  /// In en, this message translates to:
+  /// **'Use Wallpaper Colors'**
+  String get settingsScreen_useWallpaperColors;
+
   /// No description provided for @settingsScreen_themeColor.
   ///
   /// In en, this message translates to:
