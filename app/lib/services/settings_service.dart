@@ -1,5 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
+import 'package:menstrudel/utils/constants.dart';
 
 enum PeriodHistoryView { list, journal }
 
@@ -8,6 +9,7 @@ class SettingsService {
   static const String _notificationDaysKey = 'notification_days';
   static const _notificationTimeKey = 'notification_time';
   static const _historyViewKey = 'history_view';
+  static const _themeColorKey = 'theme_color';
 
   Future<void> deleteAllSettings() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -67,5 +69,15 @@ class SettingsService {
       (e) => e.name == viewName,
       orElse: () => PeriodHistoryView.journal,
     );
+  }
+
+  Future<void> setThemeColor(Color color) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt(_themeColorKey, color.toARGB32());
+  }
+  Future<Color> getThemeColor() async {
+    final prefs = await SharedPreferences.getInstance();
+    final colorValue = prefs.getInt(_themeColorKey) ?? seedColor.toARGB32();
+    return Color(colorValue);
   }
 }
