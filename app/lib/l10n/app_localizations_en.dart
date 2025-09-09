@@ -65,6 +65,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get cancel => 'Cancel';
 
   @override
+  String get select => 'Select';
+
+  @override
   String get flow => 'Flow';
 
   @override

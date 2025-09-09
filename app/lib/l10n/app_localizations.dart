@@ -194,6 +194,12 @@ abstract class AppLocalizations {
   /// **'Cancel'**
   String get cancel;
 
+  /// No description provided for @select.
+  ///
+  /// In en, this message translates to:
+  /// **'Select'**
+  String get select;
+
   /// No description provided for @flow.
   ///
   /// In en, this message translates to:
