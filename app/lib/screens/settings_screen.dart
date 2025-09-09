@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/services/settings_service.dart';
+import 'package:menstrudel/utils/constants.dart';
 import 'package:menstrudel/widgets/dialogs/delete_confirmation_dialog.dart';
 import 'package:menstrudel/database/repositories/periods_repository.dart';
 import 'package:menstrudel/database/repositories/pills_repository.dart';
@@ -9,7 +10,8 @@ import 'package:menstrudel/widgets/settings/regimen_setup_dialog.dart';
 import 'package:menstrudel/services/notification_service.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
-import 'package:menstrudel/utils/constants.dart';
+import 'package:menstrudel/notifiers/theme_notifier.dart';
+import 'package:provider/provider.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -21,7 +23,6 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   final periodsRepo = PeriodsRepository();
   final pillsRepo = PillsRepository();
-  Color _themeColor = seedColor;
 
   final SettingsService _settingsService = SettingsService();
 
@@ -35,6 +36,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
   bool _pillNotificationsEnabled = false;
   TimeOfDay _pillNotificationTime = const TimeOfDay(hour: 21, minute: 0);
   PeriodHistoryView _selectedView = PeriodHistoryView.journal;
+  Color _themeColor = seedColor;
+
 
 
   @override
@@ -51,6 +54,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
     _notificationTime = await _settingsService.getNotificationTime();
     _selectedView = await _settingsService.getHistoryView();
     _activeRegimen = await pillsRepo.readActivePillRegimen();
+    _themeColor = await _settingsService.getThemeColor();
+
 
     if (_activeRegimen != null) {
       _pillReminder = await pillsRepo.readReminderForRegimen(_activeRegimen!.id!);
@@ -227,11 +232,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   void _showColorPicker() {
+    final l10n = AppLocalizations.of(context)!;
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Pick a color'), // Replace with l10n
+          title: Text(l10n.settingsScreen_pickAColor),
           content: SingleChildScrollView(
             child: ColorPicker(
               pickerColor: _themeColor,
@@ -243,10 +249,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
           actions: <Widget>[
             ElevatedButton(
-              child: Text('Select'), // Replace with l10n
-              onPressed: () {
-                // Here you would save the color to your app's state management
-                // For example: context.read<ThemeNotifier>().setColor(_themeColor);
+              child: Text(l10n.select),
+              onPressed: () async {
+                await _settingsService.setThemeColor(_themeColor);
+                if (!context.mounted) return;
+                context.read<ThemeNotifier>().setColor(_themeColor);
                 Navigator.of(context).pop();
               },
             ),
@@ -277,7 +284,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           onTap: showViewPicker,
         ),
         ListTile(
-          title: Text('Theme Color'), // Replace with l10n
+          title: Text(l10n.settingsScreen_themeColor),
           trailing: Container(
             width: 24,
             height: 24,
