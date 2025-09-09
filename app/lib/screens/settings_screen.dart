@@ -28,6 +28,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   bool _isLoading = true;
   bool _notificationsEnabled = true;
+  bool _dynamicThemeEnabled = false;
   int _notificationDays = 1;
   TimeOfDay _notificationTime = const TimeOfDay(hour: 9, minute: 0);
 
@@ -54,6 +55,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     _notificationTime = await _settingsService.getNotificationTime();
     _selectedView = await _settingsService.getHistoryView();
     _activeRegimen = await pillsRepo.readActivePillRegimen();
+    _dynamicThemeEnabled = await _settingsService.isDynamicThemeEnabled();
     _themeColor = await _settingsService.getThemeColor();
 
 
@@ -251,7 +253,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ElevatedButton(
               child: Text(l10n.select),
               onPressed: () async {
-                await _settingsService.setThemeColor(_themeColor);
                 if (!context.mounted) return;
                 context.read<ThemeNotifier>().setColor(_themeColor);
                 Navigator.of(context).pop();
@@ -275,6 +276,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
     return ListView(
       children: [
+        /* - - App Theme - -*/
         ListTile(
           title: Text(l10n.settingsScreen_appearance, style: TextStyle(fontWeight: FontWeight.bold)),
         ),
@@ -283,22 +285,33 @@ class _SettingsScreenState extends State<SettingsScreen> {
           subtitle: Text('$selectedViewName ${l10n.settingsScreen_view}'),
           onTap: showViewPicker,
         ),
-        ListTile(
-          title: Text(l10n.settingsScreen_themeColor),
-          trailing: Container(
-            width: 24,
-            height: 24,
-            decoration: BoxDecoration(
-              color: _themeColor,
-              shape: BoxShape.circle,
-              border: Border.all(width: 1, color: Colors.grey.shade400),
-            ),
-          ),
-          onTap: _showColorPicker,
+        SwitchListTile(
+          title: Text(l10n.settingsScreen_dynamicTheme),
+          subtitle: Text(l10n.settingsScreen_useWallpaperColors),
+          value: _dynamicThemeEnabled,
+          onChanged: (bool value) {
+            context.read<ThemeNotifier>().setDynamicThemeEnabled(value);
+            setState(() {
+              _dynamicThemeEnabled = value;
+            });
+          },
         ),
-
+        if (!_dynamicThemeEnabled) ...{
+          ListTile(
+            title: Text(l10n.settingsScreen_themeColor),
+            trailing: Container(
+              width: 24,
+              height: 24,
+              decoration: BoxDecoration(
+                color: _themeColor,
+                shape: BoxShape.circle,
+              ),
+            ),
+            onTap: _showColorPicker,
+          ),
+        },
         const Divider(),
-
+        /* - - Birth Control - -*/
         ListTile(
           title: Text(l10n.settingsScreen_birthControl, style: TextStyle(fontWeight: FontWeight.bold)),
         ),
@@ -337,6 +350,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
         ],
         const Divider(),
+        /* - - Periods - -*/
         ListTile(
           title: Text(l10n.settingsScreen_periodPredictionAndReminders, style: TextStyle(fontWeight: FontWeight.bold)),
         ),
@@ -384,6 +398,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
         ],
         const Divider(),
+        /* - - Other - -*/
         ListTile(
           leading: Icon(
             Icons.playlist_remove,
