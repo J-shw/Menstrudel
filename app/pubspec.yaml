@@ -24,6 +24,7 @@ dependencies:
   fl_chart: ^1.0.0
   table_calendar: ^3.2.0
   path: ^1.9.1
+  flutter_colorpicker: ^1.1.0
 
 dev_dependencies:
   flutter_test:
