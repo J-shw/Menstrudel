@@ -194,6 +194,12 @@ abstract class AppLocalizations {
   /// **'Cancel'**
   String get cancel;
 
+  /// No description provided for @select.
+  ///
+  /// In en, this message translates to:
+  /// **'Select'**
+  String get select;
+
   /// No description provided for @flow.
   ///
   /// In en, this message translates to:
@@ -469,6 +475,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'History View Style'**
   String get settingsScreen_historyViewStyle;
+
+  /// No description provided for @settingsScreen_dynamicTheme.
+  ///
+  /// In en, this message translates to:
+  /// **'Dynamic Theme'**
+  String get settingsScreen_dynamicTheme;
+
+  /// No description provided for @settingsScreen_useWallpaperColors.
+  ///
+  /// In en, this message translates to:
+  /// **'Use Wallpaper Colors'**
+  String get settingsScreen_useWallpaperColors;
+
+  /// No description provided for @settingsScreen_themeColor.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme Color'**
+  String get settingsScreen_themeColor;
+
+  /// No description provided for @settingsScreen_pickAColor.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick a Color'**
+  String get settingsScreen_pickAColor;
 
   /// No description provided for @settingsScreen_view.
   ///

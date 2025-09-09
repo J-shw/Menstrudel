@@ -6,6 +6,8 @@ import 'package:menstrudel/screens/main_screen.dart';
 import 'package:menstrudel/services/notification_service.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:menstrudel/l10n/app_localizations.dart'; 
+import 'package:menstrudel/notifiers/theme_notifier.dart';
+import 'package:provider/provider.dart';
 
 void main() async { 
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,7 +21,12 @@ void main() async {
   }
   
   await NotificationService.initialize();
-  runApp(const MainApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => ThemeNotifier(),
+      child: const MainApp(),
+    ),
+  );
 }
 
 class MainApp extends StatelessWidget {
@@ -27,20 +34,24 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-	const seedColor = Color(0xFF60A5FA);
+    final themeNotifier = context.watch<ThemeNotifier>();
 
     return DynamicColorBuilder(
       builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
         ColorScheme lightColorScheme;
         ColorScheme darkColorScheme;
 
-        if (lightDynamic != null && darkDynamic != null) {
+        final bool useDynamicTheme = themeNotifier.isDynamicEnabled;
+
+        if (useDynamicTheme && lightDynamic != null && darkDynamic != null) {
           lightColorScheme = lightDynamic.harmonized();
           darkColorScheme = darkDynamic.harmonized();
         } else {
-          lightColorScheme = ColorScheme.fromSeed(seedColor: seedColor);
+          final Color seed = themeNotifier.themeColor;
+          
+          lightColorScheme = ColorScheme.fromSeed(seedColor: seed);
           darkColorScheme = ColorScheme.fromSeed(
-            seedColor: seedColor,
+            seedColor: seed,
             brightness: Brightness.dark,
           );
         }

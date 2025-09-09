@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/services/settings_service.dart';
+import 'package:menstrudel/utils/constants.dart';
 import 'package:menstrudel/widgets/dialogs/delete_confirmation_dialog.dart';
 import 'package:menstrudel/database/repositories/periods_repository.dart';
 import 'package:menstrudel/database/repositories/pills_repository.dart';
@@ -8,6 +9,9 @@ import 'package:menstrudel/models/pills/pill_regimen.dart';
 import 'package:menstrudel/widgets/settings/regimen_setup_dialog.dart';
 import 'package:menstrudel/services/notification_service.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:menstrudel/notifiers/theme_notifier.dart';
+import 'package:provider/provider.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -32,6 +36,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
   bool _pillNotificationsEnabled = false;
   TimeOfDay _pillNotificationTime = const TimeOfDay(hour: 21, minute: 0);
   PeriodHistoryView _selectedView = PeriodHistoryView.journal;
+  Color _themeColor = seedColor;
+
 
 
   @override
@@ -48,6 +54,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
     _notificationTime = await _settingsService.getNotificationTime();
     _selectedView = await _settingsService.getHistoryView();
     _activeRegimen = await pillsRepo.readActivePillRegimen();
+    _themeColor = await _settingsService.getThemeColor();
+
 
     if (_activeRegimen != null) {
       _pillReminder = await pillsRepo.readReminderForRegimen(_activeRegimen!.id!);
@@ -223,9 +231,41 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
+  void _showColorPicker() {
+    final l10n = AppLocalizations.of(context)!;
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(l10n.settingsScreen_pickAColor),
+          content: SingleChildScrollView(
+            child: ColorPicker(
+              pickerColor: _themeColor,
+              onColorChanged: (Color color) {
+                setState(() => _themeColor = color);
+              },
+              pickerAreaHeightPercent: 0.8,
+            ),
+          ),
+          actions: <Widget>[
+            ElevatedButton(
+              child: Text(l10n.select),
+              onPressed: () async {
+                if (!context.mounted) return;
+                context.read<ThemeNotifier>().setColor(_themeColor);
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    final themeNotifier = context.watch<ThemeNotifier>();
 
     if (_isLoading) {
       return const Center(child: CircularProgressIndicator());
@@ -235,6 +275,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
     return ListView(
       children: [
+        /* - - App Theme - -*/
         ListTile(
           title: Text(l10n.settingsScreen_appearance, style: TextStyle(fontWeight: FontWeight.bold)),
         ),
@@ -243,9 +284,30 @@ class _SettingsScreenState extends State<SettingsScreen> {
           subtitle: Text('$selectedViewName ${l10n.settingsScreen_view}'),
           onTap: showViewPicker,
         ),
-
+        SwitchListTile(
+          title: Text(l10n.settingsScreen_dynamicTheme),
+          subtitle: Text(l10n.settingsScreen_useWallpaperColors),
+          value: themeNotifier.isDynamicEnabled,
+          onChanged: (bool value) {
+            context.read<ThemeNotifier>().setDynamicThemeEnabled(value);
+          },
+        ),
+        if (!themeNotifier.isDynamicEnabled) ...{
+          ListTile(
+            title: Text(l10n.settingsScreen_themeColor),
+            trailing: Container(
+              width: 24,
+              height: 24,
+              decoration: BoxDecoration(
+                color: _themeColor,
+                shape: BoxShape.circle,
+              ),
+            ),
+            onTap: _showColorPicker,
+          ),
+        },
         const Divider(),
-
+        /* - - Birth Control - -*/
         ListTile(
           title: Text(l10n.settingsScreen_birthControl, style: TextStyle(fontWeight: FontWeight.bold)),
         ),
@@ -284,6 +346,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
         ],
         const Divider(),
+        /* - - Periods - -*/
         ListTile(
           title: Text(l10n.settingsScreen_periodPredictionAndReminders, style: TextStyle(fontWeight: FontWeight.bold)),
         ),
@@ -331,6 +394,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
         ],
         const Divider(),
+        /* - - Other - -*/
         ListTile(
           leading: Icon(
             Icons.playlist_remove,

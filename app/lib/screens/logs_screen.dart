@@ -59,10 +59,12 @@ class LogsScreenState extends State<LogsScreen> {
       title: l10n.notification_tamponReminderTitle,
       body: l10n.notification_tamponReminderBody,
       );
-    ScaffoldMessenger.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(SnackBar(content: Text('${l10n.logScreen_tamponReminderSetFor} ${reminderTime.format(context)}')));
-      _refreshPeriodLogs();
+    if (context.mounted) {
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(SnackBar(content: Text('${l10n.logScreen_tamponReminderSetFor} ${reminderTime.format(context)}')));
+        _refreshPeriodLogs();
+    }
   }
 
   Future<void> handleCancelReminder() async {
