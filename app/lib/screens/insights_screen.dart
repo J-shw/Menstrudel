@@ -7,6 +7,7 @@ import 'package:menstrudel/models/flows/flow_data.dart';
 import 'package:menstrudel/widgets/insights/symptom_frequency.dart';
 import 'package:menstrudel/widgets/insights/cycle_length_variance.dart';
 import 'package:menstrudel/widgets/insights/flow_intensity.dart';
+import 'package:menstrudel/widgets/insights/pain_intensity.dart';
 import 'package:menstrudel/widgets/insights/year_heat_map.dart';
 import 'package:menstrudel/widgets/insights/monthly_flow.dart';
 
@@ -65,6 +66,8 @@ class _InsightsScreenState extends State<InsightsScreen> {
               SymptomFrequencyWidget(logs: allLogs),
 
               CycleLengthVarianceWidget(periods: allPeriods),
+
+              PainBreakdownWidget(logs: allLogs),
 
               FlowBreakdownWidget(logs: allLogs),
 
