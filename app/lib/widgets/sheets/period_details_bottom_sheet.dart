@@ -4,6 +4,7 @@ import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/models/period_logs/period_logs.dart';
 import 'package:menstrudel/models/period_logs/flow_enum.dart';
 import 'package:menstrudel/models/period_logs/symptom_enum.dart';
+import 'package:menstrudel/models/period_logs/pain_level_enum.dart';
 
 class PeriodDetailsBottomSheet extends StatefulWidget {
   final PeriodLogEntry log;
@@ -26,6 +27,7 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
   bool _isEditing = false;
 
   late FlowRate _editedFlow;
+  late PainLevel _editedPainLevel;
   late List<Symptom> _editedSymptoms;
   final List<Symptom> _allSymptoms = Symptom.values;
 
@@ -37,6 +39,7 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
 
   void _resetEditableState() {
     _editedFlow = FlowRate.values[widget.log.flow];
+    _editedPainLevel = PainLevel.values[widget.log.painLevel];
     _editedSymptoms = widget.log.symptoms?.map((symptomString) {
     try {
         return Symptom.values.firstWhere((e) => e.name == symptomString);
@@ -50,6 +53,7 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
     final symptomsToSave = _editedSymptoms.map((s) => s.name).toList();
     final updatedLog = widget.log.copyWith(
       flow: _editedFlow.intValue,
+      painLevel: _editedPainLevel.intValue,
       symptoms: symptomsToSave,
     );
 
@@ -73,6 +77,8 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
           _buildHeader(context),
           const Divider(height: 24),
           _buildFlowSection(context),
+          const SizedBox(height: 16),
+          _buildPainLevelSection(context),
           const SizedBox(height: 16),
           _buildSymptomsSection(context),
         ],
@@ -188,6 +194,59 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
                       _editedFlow = flow;
                     });
                   }
+                },
+              );
+            }).toList(),
+          ),
+        ],
+      );
+    }
+  }
+
+  Widget _buildPainLevelSection(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
+    
+    if (!_isEditing) {
+      final painLevel = PainLevel.values[widget.log.painLevel];
+
+      return Row(
+        children: [
+          Icon(painLevel.icon, color: colorScheme.onSurfaceVariant, size: 20),
+          const SizedBox(width: 12),
+          Text('${l10n.painLevel_title}: ', style: textTheme.bodyLarge),
+          Text(
+            painLevel.getDisplayName(l10n),
+            style: textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
+          ),
+        ],
+      );
+    } 
+    else {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            '${l10n.painLevel_title}: ${_editedPainLevel.getDisplayName(l10n)}',
+            style: textTheme.bodyLarge,
+          ),
+          const SizedBox(height: 8),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: PainLevel.values.map((painLevel) {
+              final bool isSelected = _editedPainLevel == painLevel;
+
+              return IconButton(
+                icon: Icon(painLevel.icon),
+                iconSize: 36,
+                color: isSelected
+                    ? colorScheme.primary
+                    : colorScheme.onSurfaceVariant,
+                onPressed: () {
+                  setState(() {
+                    _editedPainLevel = painLevel;
+                  });
                 },
               );
             }).toList(),

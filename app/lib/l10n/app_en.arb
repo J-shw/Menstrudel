@@ -52,6 +52,13 @@
     "symptom_bloating": "Bloating",
     "symptom_acne": "Acne",
 
+    "painLevel_title": "Pain Level",
+    "painLevel_none": "None",
+    "painLevel_mild": "Mild",
+    "painLevel_moderate": "Moderate",
+    "painLevel_severe": "Severe",
+    "pain_unbearable": "Unbearable",
+
     "notification_periodTitle": "Period Approaching",
     "@notification_periodTitle": {
         "description": "Title for the upcoming period notification."

@@ -5,6 +5,7 @@ class PeriodLogEntry {
 	DateTime date;
 	List<String>? symptoms;
 	int flow;
+  int painLevel;
 	int? periodId;
 
 	PeriodLogEntry({
@@ -12,6 +13,7 @@ class PeriodLogEntry {
 		required this.date,
 		this.symptoms,
 		required this.flow,
+    required this.painLevel,
 		this.periodId,
 	});
 
@@ -21,6 +23,7 @@ class PeriodLogEntry {
 			'date': date.toIso8601String(),
 			'symptoms': symptoms != null ? jsonEncode(symptoms) : null,
 			'flow': flow,
+      'painLevel': painLevel,
 			'period_id': periodId,
 		};
 	}
@@ -37,6 +40,7 @@ class PeriodLogEntry {
 			date: DateTime.parse(map['date'] as String),
 			symptoms: symptomsFromMap,
 			flow: map['flow'] as int,
+      painLevel: map['painLevel'] as int,
 			periodId: map['period_id'] as int?,
 		);
 	}
@@ -46,6 +50,7 @@ class PeriodLogEntry {
 		DateTime? date,
 		List<String>? symptoms,
 		int? flow,
+    int? painLevel,
 		int? periodId,
 	}) {
 		return PeriodLogEntry(
@@ -53,6 +58,7 @@ class PeriodLogEntry {
 			date: date ?? this.date,
 			symptoms: symptoms ?? this.symptoms,
 			flow: flow ?? this.flow,
+      painLevel: painLevel ?? this.painLevel,
 			periodId: periodId ?? this.periodId,
 		);
 	}

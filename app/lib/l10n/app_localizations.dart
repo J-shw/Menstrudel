@@ -290,6 +290,42 @@ abstract class AppLocalizations {
   /// **'Acne'**
   String get symptom_acne;
 
+  /// No description provided for @painLevel_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Pain Level'**
+  String get painLevel_title;
+
+  /// No description provided for @painLevel_none.
+  ///
+  /// In en, this message translates to:
+  /// **'None'**
+  String get painLevel_none;
+
+  /// No description provided for @painLevel_mild.
+  ///
+  /// In en, this message translates to:
+  /// **'Mild'**
+  String get painLevel_mild;
+
+  /// No description provided for @painLevel_moderate.
+  ///
+  /// In en, this message translates to:
+  /// **'Moderate'**
+  String get painLevel_moderate;
+
+  /// No description provided for @painLevel_severe.
+  ///
+  /// In en, this message translates to:
+  /// **'Severe'**
+  String get painLevel_severe;
+
+  /// No description provided for @pain_unbearable.
+  ///
+  /// In en, this message translates to:
+  /// **'Unbearable'**
+  String get pain_unbearable;
+
   /// Title for the upcoming period notification.
   ///
   /// In en, this message translates to:

@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/models/period_logs/flow_enum.dart';
 import 'package:menstrudel/models/period_logs/symptom_enum.dart';
+import 'package:menstrudel/models/period_logs/pain_level_enum.dart';
 
 class SymptomEntrySheet extends StatefulWidget {
   const SymptomEntrySheet({
@@ -20,6 +21,7 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
   late DateTime _selectedDate;
   final Set<Symptom> _selectedSymptoms = {};
   Set<FlowRate> _flowSelection = {FlowRate.medium};
+  PainLevel _painLevel = PainLevel.none;
 
   @override
   void initState() {
@@ -75,7 +77,7 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
               ),
               onPressed: _pickDate,
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: 8),
             // --- Flow Selection ---
             Text(l10n.flow, style: Theme.of(context).textTheme.bodySmall),
             const SizedBox(height: 8),
@@ -98,7 +100,36 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
                 },
               ),
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: 8),
+            // --- Pain Level ---
+            Text('${l10n.painLevel_title}: ${_painLevel.getDisplayName(l10n)}',
+                style: Theme.of(context).textTheme.bodySmall),
+            const SizedBox(height: 8),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: PainLevel.values.map((painLevel) {
+                    final bool isSelected = _painLevel == painLevel;
+
+                    return IconButton(
+                      icon: Icon(painLevel.icon),
+                      iconSize: 36,
+                      color: isSelected 
+                          ? Theme.of(context).colorScheme.primary 
+                          : Theme.of(context).colorScheme.onSurfaceVariant,
+                      onPressed: () {
+                        setState(() {
+                          _painLevel = painLevel;
+                        });
+                      },
+                    );
+                  }).toList(),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
             // --- Symptoms ---
             Text(l10n.symptomEntrySheet_symptomsOptional,
                 style: Theme.of(context).textTheme.bodySmall),
@@ -148,6 +179,7 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
                         'date': _selectedDate,
                         'flow': _flowSelection.first.intValue,
                         'symptoms': symptomsToSave,
+                        'painLevel': _painLevel.intValue,
                       });
                     },
                     child: Text(l10n.save),
