@@ -20,6 +20,7 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
   late DateTime _selectedDate;
   final Set<Symptom> _selectedSymptoms = {};
   Set<FlowRate> _flowSelection = {FlowRate.medium};
+  int _painLevel = 0;
 
   @override
   void initState() {
@@ -30,6 +31,14 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+
+      final Map<int, Map<String, dynamic>> _painLevels = {
+        0: {'icon': Icons.sentiment_very_satisfied_outlined, 'label': l10n.painLevel_none},
+        1: {'icon': Icons.sentiment_satisfied_outlined, 'label': l10n.painLevel_mild},
+        2: {'icon': Icons.sentiment_neutral_outlined, 'label': l10n.painLevel_moderate},
+        3: {'icon': Icons.sentiment_dissatisfied_outlined, 'label': l10n.painLevel_severe},
+        4: {'icon': Icons.sentiment_very_dissatisfied_outlined, 'label': l10n.pain_unbearable},
+      };
 
     return Padding(
       padding: EdgeInsets.only(
@@ -75,7 +84,7 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
               ),
               onPressed: _pickDate,
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: 8),
             // --- Flow Selection ---
             Text(l10n.flow, style: Theme.of(context).textTheme.bodySmall),
             const SizedBox(height: 8),
@@ -98,8 +107,8 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
                 },
               ),
             ),
-            const SizedBox(height: 24),
             // --- Symptoms ---
+            const SizedBox(height: 8),
             Text(l10n.symptomEntrySheet_symptomsOptional,
                 style: Theme.of(context).textTheme.bodySmall),
             const SizedBox(height: 8),
@@ -121,6 +130,35 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
                   },
                 );
               }).toList(),
+            ),
+            const SizedBox(height: 8),
+            // --- Pain Level ---
+            Text('${l10n.painLevel_title}: ${_painLevels[_painLevel]!['label']}',
+                style: Theme.of(context).textTheme.bodySmall),
+            const SizedBox(height: 8),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: _painLevels.entries.map((entry) {
+                    final int level = entry.key;
+                    final IconData icon = entry.value['icon'];
+                    final bool isSelected = _painLevel == level;
+
+                    return IconButton(
+                      icon: Icon(icon),
+                      iconSize: 36,
+                      color: isSelected ? Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.onSurfaceVariant,
+                      onPressed: () {
+                        setState(() {
+                          _painLevel = level;
+                        });
+                      },
+                    );
+                  }).toList(),
+                ),
+              ],
             ),
             const SizedBox(height: 24),
             // --- Action Buttons ---
