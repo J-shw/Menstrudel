@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/models/period_logs/flow_enum.dart';
 import 'package:menstrudel/models/period_logs/symptom_enum.dart';
+import 'package:menstrudel/models/period_logs/pain_level_enum.dart';
 
 class SymptomEntrySheet extends StatefulWidget {
   const SymptomEntrySheet({
@@ -20,7 +21,7 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
   late DateTime _selectedDate;
   final Set<Symptom> _selectedSymptoms = {};
   Set<FlowRate> _flowSelection = {FlowRate.medium};
-  int _painLevel = 0;
+  PainLevel _painLevel = PainLevel.none;
 
   @override
   void initState() {
@@ -31,14 +32,6 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-
-      final Map<int, Map<String, dynamic>> _painLevels = {
-        0: {'icon': Icons.sentiment_very_satisfied_outlined, 'label': l10n.painLevel_none},
-        1: {'icon': Icons.sentiment_satisfied_outlined, 'label': l10n.painLevel_mild},
-        2: {'icon': Icons.sentiment_neutral_outlined, 'label': l10n.painLevel_moderate},
-        3: {'icon': Icons.sentiment_dissatisfied_outlined, 'label': l10n.painLevel_severe},
-        4: {'icon': Icons.sentiment_very_dissatisfied_outlined, 'label': l10n.pain_unbearable},
-      };
 
     return Padding(
       padding: EdgeInsets.only(
@@ -133,7 +126,7 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
             ),
             const SizedBox(height: 8),
             // --- Pain Level ---
-            Text('${l10n.painLevel_title}: ${_painLevels[_painLevel]!['label']}',
+            Text('${l10n.painLevel_title}: ${_painLevel.getDisplayName(l10n)}',
                 style: Theme.of(context).textTheme.bodySmall),
             const SizedBox(height: 8),
             Column(
@@ -141,18 +134,18 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: _painLevels.entries.map((entry) {
-                    final int level = entry.key;
-                    final IconData icon = entry.value['icon'];
-                    final bool isSelected = _painLevel == level;
+                  children: PainLevel.values.map((painLevel) {
+                    final bool isSelected = _painLevel == painLevel;
 
                     return IconButton(
-                      icon: Icon(icon),
+                      icon: Icon(painLevel.icon),
                       iconSize: 36,
-                      color: isSelected ? Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.onSurfaceVariant,
+                      color: isSelected 
+                          ? Theme.of(context).colorScheme.primary 
+                          : Theme.of(context).colorScheme.onSurfaceVariant,
                       onPressed: () {
                         setState(() {
-                          _painLevel = level;
+                          _painLevel = painLevel;
                         });
                       },
                     );
