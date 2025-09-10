@@ -38,11 +38,13 @@ void main() {
         final regimen = _regimen();
         final createdRegimen = await repository.createPillRegimen(regimen);
 
+        DateTime truncateToDay(DateTime dt) => DateTime(dt.year, dt.month, dt.day);
+
         expect(createdRegimen.id, isNotNull);
         expect(createdRegimen.name, regimen.name);
         expect(createdRegimen.activePills, regimen.activePills);
         expect(createdRegimen.placeboPills, regimen.placeboPills);
-        expect(createdRegimen.startDate.day, regimen.startDate.day);
+        expect(truncateToDay(createdRegimen.startDate), truncateToDay(regimen.startDate));
         expect(createdRegimen.isActive, isTrue);
 
         final readRegimen = await repository.readActivePillRegimen();
@@ -65,19 +67,18 @@ void main() {
       });
     });
 
+    group('Pill Reminder - Update Operations', () {
+      test('savePillReminder should update an existing reminder', () async {
+        final regimen = await repository.createPillRegimen(_regimen());
+        await repository.savePillReminder(_reminder(regimen.id!)); 
 
-    // group('Pill Reminder', () { //  - - - - Does not work yet...
-    //   test('savePillReminder should update an existing reminder', () async {
-    //     final regimen = await repository.createPillRegimen(_regimen());
-    //     await repository.savePillReminder(_reminder(regimen.id!)); 
+        final updatedReminderData = _reminder(regimen.id!).copyWith(reminderTime: '12:30');
+        await repository.savePillReminder(updatedReminderData);
 
-    //     final updatedReminderData = _reminder(regimen.id!).copyWith(reminderTime: '12:30');
-    //     await repository.savePillReminder(updatedReminderData);
-
-    //     final reminder = await repository.readReminderForRegimen(regimen.id!);
-    //     expect(reminder, isNotNull);
-    //     expect(reminder!.reminderTime, '12:30');
-    //   });
-    // });
+        final reminder = await repository.readReminderForRegimen(regimen.id!);
+        expect(reminder, isNotNull);
+        expect(reminder!.reminderTime, '12:30');
+      });
+    });
   });
 }
