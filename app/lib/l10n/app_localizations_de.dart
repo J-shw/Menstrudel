@@ -326,6 +326,12 @@ class AppLocalizationsDe extends AppLocalizations {
       'No flow data logged yet.';
 
   @override
+  String get painLevelWidget_noPainDataLoggedYet => 'No pain data logged yet.';
+
+  @override
+  String get painLevelWidget_painLevelBreakdown => 'Pain Level Breakdown';
+
+  @override
   String get monthlyFlowChartWidget_noDataToDisplay => 'No data to display.';
 
   @override
