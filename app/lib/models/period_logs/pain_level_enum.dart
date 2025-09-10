@@ -43,4 +43,19 @@ extension FlowExtension on PainLevel {
         return Icons.sentiment_very_dissatisfied_outlined;
     }
   }
+
+  Color get color {
+    switch (this) {
+      case PainLevel.none:
+        return Colors.blue.shade300;
+      case PainLevel.mild:
+        return Colors.teal.shade300;
+      case PainLevel.moderate:
+        return Colors.amber.shade400;
+      case PainLevel.severe:
+        return Colors.red.shade400;
+      case PainLevel.unbearable:
+        return Colors.purple.shade300;
+    }
+  }
 }
