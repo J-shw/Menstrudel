@@ -11,12 +11,17 @@ class PillReminder {
     required this.isEnabled,
   });
 
-  PillReminder copyWith({int? id}) {
+  PillReminder copyWith({
+    int? id,
+    int? regimenId,
+    String? reminderTime,
+    bool? isEnabled,
+  }) {
     return PillReminder(
       id: id ?? this.id,
-      regimenId: regimenId,
-      reminderTime: reminderTime,
-      isEnabled: isEnabled,
+      regimenId: regimenId ?? this.regimenId,
+      reminderTime: reminderTime ?? this.reminderTime,
+      isEnabled: isEnabled ?? this.isEnabled,
     );
   }
 
