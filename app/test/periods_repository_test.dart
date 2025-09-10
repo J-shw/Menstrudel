@@ -120,14 +120,24 @@ void main() {
         await repository.updatePeriodLog(updatedLog);
 
         final periods = await repository.readAllPeriods();
-        expect(periods.length, 2);
-
-        expect(periods.any((p) => p.startDate == DateTime.parse('2025-09-05')), isTrue);
         
-        final originalPeriod = periods.firstWhere((p) => p.startDate != DateTime.parse('2025-09-05'));
-        expect(originalPeriod.startDate, DateTime.parse('2025-09-01'));
-        expect(originalPeriod.endDate, DateTime.parse('2025-09-03'));
-        expect(originalPeriod.totalDays, 2);
+        expect(periods.length, 3);
+        
+        expect(
+          periods.any((p) => p.startDate == DateTime.parse('2025-09-01') && p.totalDays == 1),
+          isTrue,
+          reason: 'Should have a period for Sep 1st',
+        );
+        expect(
+          periods.any((p) => p.startDate == DateTime.parse('2025-09-03') && p.totalDays == 1),
+          isTrue,
+          reason: 'Should have a period for Sep 3rd',
+        );
+        expect(
+          periods.any((p) => p.startDate == DateTime.parse('2025-09-05') && p.totalDays == 1),
+          isTrue,
+          reason: 'Should have a period for the updated log on Sep 5th',
+        );
       });
 
       test('updating a log flow should not affect period structure', () async {
