@@ -179,6 +179,7 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
                         'date': _selectedDate,
                         'flow': _flowSelection.first.intValue,
                         'symptoms': symptomsToSave,
+                        'painLevel': _painLevel.intValue,
                       });
                     },
                     child: Text(l10n.save),
