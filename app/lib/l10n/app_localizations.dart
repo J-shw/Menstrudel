@@ -656,6 +656,18 @@ abstract class AppLocalizations {
   /// **'No flow data logged yet.'**
   String get flowIntensityWidget_noFlowDataLoggedYet;
 
+  /// No description provided for @painLevelWidget_noPainDataLoggedYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No pain data logged yet.'**
+  String get painLevelWidget_noPainDataLoggedYet;
+
+  /// No description provided for @painLevelWidget_painLevelBreakdown.
+  ///
+  /// In en, this message translates to:
+  /// **'Pain Level Breakdown'**
+  String get painLevelWidget_painLevelBreakdown;
+
   /// No description provided for @monthlyFlowChartWidget_noDataToDisplay.
   ///
   /// In en, this message translates to:

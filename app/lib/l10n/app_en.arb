@@ -155,6 +155,9 @@
     "flowIntensityWidget_flowIntensityBreakdown": "Flow Intensity Breakdown",
     "flowIntensityWidget_noFlowDataLoggedYet": "No flow data logged yet.",
 
+    "painLevelWidget_noPainDataLoggedYet": "No pain data logged yet.",
+    "painLevelWidget_painLevelBreakdown": "Pain Level Breakdown",
+
     "monthlyFlowChartWidget_noDataToDisplay": "No data to display.",
     "monthlyFlowChartWidget_cycleFlowPatterns": "Cycle Flow Patterns",
     "monthlyFlowChartWidget_cycleFlowPatternsDescription": "Each line represents one complete cycle",
