@@ -58,7 +58,7 @@ class PeriodLogEntry {
 			date: date ?? this.date,
 			symptoms: symptoms ?? this.symptoms,
 			flow: flow ?? this.flow,
-      painLevel: this.painLevel,
+      painLevel: painLevel ?? this.painLevel,
 			periodId: periodId ?? this.periodId,
 		);
 	}
