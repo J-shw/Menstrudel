@@ -52,6 +52,7 @@ class AppDatabase {
           date TEXT NOT NULL,
           symptoms  TEXT,
           flow INTEGER NOT NULL,
+          painLevel INTEGER NOT NULL,
           period_id INTEGER,
           FOREIGN KEY (period_id) REFERENCES periods(id) ON DELETE SET NULL
       )
