@@ -21,7 +21,7 @@ class PainBreakdownWidget extends StatelessWidget {
           value: percentage,
           minHeight: 8,
           borderRadius: BorderRadius.circular(4),
-          backgroundColor: Theme.of(context).colorScheme.surfaceContainer,
+          backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
           color: color,
         ),
       ],
