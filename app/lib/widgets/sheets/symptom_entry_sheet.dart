@@ -100,30 +100,6 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
                 },
               ),
             ),
-            // --- Symptoms ---
-            const SizedBox(height: 8),
-            Text(l10n.symptomEntrySheet_symptomsOptional,
-                style: Theme.of(context).textTheme.bodySmall),
-            const SizedBox(height: 8),
-            Wrap(
-              spacing: 8.0,
-              runSpacing: 4.0,
-              children: Symptom.values.map((symptom) {
-                return FilterChip(
-                  label: Text(symptom.getDisplayName(l10n)),
-                  selected: _selectedSymptoms.contains(symptom),
-                  onSelected: (bool selected) {
-                    setState(() {
-                      if (selected) {
-                        _selectedSymptoms.add(symptom);
-                      } else {
-                        _selectedSymptoms.remove(symptom);
-                      }
-                    });
-                  },
-                );
-              }).toList(),
-            ),
             const SizedBox(height: 8),
             // --- Pain Level ---
             Text('${l10n.painLevel_title}: ${_painLevel.getDisplayName(l10n)}',
@@ -152,6 +128,30 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
                   }).toList(),
                 ),
               ],
+            ),
+            const SizedBox(height: 8),
+            // --- Symptoms ---
+            Text(l10n.symptomEntrySheet_symptomsOptional,
+                style: Theme.of(context).textTheme.bodySmall),
+            const SizedBox(height: 8),
+            Wrap(
+              spacing: 8.0,
+              runSpacing: 4.0,
+              children: Symptom.values.map((symptom) {
+                return FilterChip(
+                  label: Text(symptom.getDisplayName(l10n)),
+                  selected: _selectedSymptoms.contains(symptom),
+                  onSelected: (bool selected) {
+                    setState(() {
+                      if (selected) {
+                        _selectedSymptoms.add(symptom);
+                      } else {
+                        _selectedSymptoms.remove(symptom);
+                      }
+                    });
+                  },
+                );
+              }).toList(),
             ),
             const SizedBox(height: 24),
             // --- Action Buttons ---

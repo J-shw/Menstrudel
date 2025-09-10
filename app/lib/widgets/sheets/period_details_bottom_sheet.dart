@@ -78,9 +78,9 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
           const Divider(height: 24),
           _buildFlowSection(context),
           const SizedBox(height: 16),
-          _buildSymptomsSection(context),
-          const SizedBox(height: 16),
           _buildPainLevelSection(context),
+          const SizedBox(height: 16),
+          _buildSymptomsSection(context),
         ],
       ),
     );
