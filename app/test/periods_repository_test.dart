@@ -28,22 +28,24 @@ void main() {
       await dbProvider.close();
     });
 
-    test('deleteAllEntries should clear all periods and logs', () async {
-      await repository.createPeriodLog(_log('2025-09-01'));
-      var periods = await repository.readAllPeriods();
-      var logs = await repository.readAllPeriodLogs();
-      expect(periods, isNotEmpty);
-      expect(logs, isNotEmpty);
+    group('General Operations', (){
+      test('deleteAllEntries should clear all periods and logs', () async {
+        await repository.createPeriodLog(_log('2025-09-01'));
+        var periods = await repository.readAllPeriods();
+        var logs = await repository.readAllPeriodLogs();
+        expect(periods, isNotEmpty);
+        expect(logs, isNotEmpty);
 
-      await repository.deleteAllEntries();
+        await repository.deleteAllEntries();
 
-      periods = await repository.readAllPeriods();
-      logs = await repository.readAllPeriodLogs();
-      expect(periods, isEmpty);
-      expect(logs, isEmpty);
+        periods = await repository.readAllPeriods();
+        logs = await repository.readAllPeriodLogs();
+        expect(periods, isEmpty);
+        expect(logs, isEmpty);
+      });
     });
 
-    group('Period Logs CRUD and Period Calculation', () {
+    group('Period Logs - Create Operations', () {
       test('createPeriodLog should add a log and create a new period', () async {
         await repository.createPeriodLog(_log('2025-09-01'));
         
@@ -91,6 +93,83 @@ void main() {
         final future = repository.createPeriodLog(_log('2025-09-01'));
         expect(future, throwsA(isA<DuplicateLogException>()));
       });
+    });
+
+    group('Period Logs - Update Operations', () {
+      test('updatePeriodLog by changing date should correctly recalculate periods', () async {
+        final logToUpdate = await repository.createPeriodLog(_log('2025-09-01'));
+        await repository.createPeriodLog(_log('2025-09-03'));
+
+        var periods = await repository.readAllPeriods();
+        expect(periods.length, 2);
+
+        final updatedLog = logToUpdate.copyWith(date: DateTime.parse('2025-09-02'));
+        await repository.updatePeriodLog(updatedLog);
+
+        periods = await repository.readAllPeriods();
+        expect(periods.length, 1);
+        expect(periods.first.totalDays, 2);
+      });
+
+      test('updating a log date to create a gap should split the period', () async {
+        await repository.createPeriodLog(_log('2025-09-01'));
+        final logToUpdate = await repository.createPeriodLog(_log('2025-09-02'));
+        await repository.createPeriodLog(_log('2025-09-03'));
+
+        final updatedLog = logToUpdate.copyWith(date: DateTime.parse('2025-09-05'));
+        await repository.updatePeriodLog(updatedLog);
+
+        final periods = await repository.readAllPeriods();
+        
+        expect(periods.length, 3);
+        
+        expect(
+          periods.any((p) => p.startDate == DateTime.parse('2025-09-01') && p.totalDays == 1),
+          isTrue,
+          reason: 'Should have a period for Sep 1st',
+        );
+        expect(
+          periods.any((p) => p.startDate == DateTime.parse('2025-09-03') && p.totalDays == 1),
+          isTrue,
+          reason: 'Should have a period for Sep 3rd',
+        );
+        expect(
+          periods.any((p) => p.startDate == DateTime.parse('2025-09-05') && p.totalDays == 1),
+          isTrue,
+          reason: 'Should have a period for the updated log on Sep 5th',
+        );
+      });
+
+      test('updating a log flow should not affect period structure', () async {
+        final logToUpdate = await repository.createPeriodLog(_log('2025-09-01', flow: 1));
+        await repository.createPeriodLog(_log('2025-09-02'));
+
+        final updatedLog = logToUpdate.copyWith(flow: 5);
+        await repository.updatePeriodLog(updatedLog);
+
+        final periods = await repository.readAllPeriods();
+        expect(periods.length, 1);
+        expect(periods.first.totalDays, 2);
+        
+        final allLogs = await repository.readAllPeriodLogs();
+        final changedLog = allLogs.firstWhere((log) => log.id == logToUpdate.id);
+        expect(changedLog.flow, 5);
+      });
+    });
+
+    group('Period Logs - Delete Operations', () {
+      test('deleting the first log should shorten the period from the start', () async {
+        final logToDelete = await repository.createPeriodLog(_log('2025-09-01'));
+        await repository.createPeriodLog(_log('2025-09-02'));
+
+        await repository.deletePeriodLog(logToDelete!.id!);
+
+        final periods = await repository.readAllPeriods();
+        expect(periods.length, 1);
+        expect(periods.first.startDate, DateTime.parse('2025-09-02'));
+        expect(periods.first.endDate, DateTime.parse('2025-09-02'));
+        expect(periods.first.totalDays, 1);
+      });
 
       test('deletePeriodLog from middle of a period should split it into two', () async {
         await repository.createPeriodLog(_log('2025-09-01'));
@@ -109,19 +188,15 @@ void main() {
         expect(periods[1].totalDays, 1);
       });
 
-      test('updatePeriodLog by changing date should correctly recalculate periods', () async {
-        final logToUpdate = await repository.createPeriodLog(_log('2025-09-01'));
-        await repository.createPeriodLog(_log('2025-09-03'));
+      test('deleting the only log should remove the period entirely', () async {
+        final logToDelete = await repository.createPeriodLog(_log('2025-09-01'));
 
-        var periods = await repository.readAllPeriods();
-        expect(periods.length, 2);
+        await repository.deletePeriodLog(logToDelete.id!);
 
-        final updatedLog = logToUpdate.copyWith(date: DateTime.parse('2025-09-02'));
-        await repository.updatePeriodLog(updatedLog);
-
-        periods = await repository.readAllPeriods();
-        expect(periods.length, 1);
-        expect(periods.first.totalDays, 2);
+        final periods = await repository.readAllPeriods();
+        final logs = await repository.readAllPeriodLogs();
+        expect(periods, isEmpty);
+        expect(logs, isEmpty);
       });
     });
 
