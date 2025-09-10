@@ -136,6 +136,11 @@ section h2 {
     text-align: center;
 }
 
+.feature:hover {
+  transform: scale(1.05);
+  transition: transform 0.2s ease-in-out;
+}
+
 .feature h3 {
     margin-top: 0.5rem;
 }
