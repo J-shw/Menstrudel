@@ -87,9 +87,7 @@ class _WearProgressCircleState extends State<WearProgressCircle>
           SizedBox(
             width: widget.circleSize,
             height: widget.circleSize,
-            child: Transform.rotate(
-              angle: -pi / 2,
-              child: CircularProgressIndicator(
+            child: CircularProgressIndicator(
                 year2023: false,
                 value: _animation.value,
                 strokeWidth: widget.strokeWidth,
@@ -97,7 +95,7 @@ class _WearProgressCircleState extends State<WearProgressCircle>
                 backgroundColor: widget.trackColor,
               ),
             ),
-          ),
+          
           Text(
             '$displayValue',
             style: TextStyle(
