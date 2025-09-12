@@ -33,7 +33,8 @@ class LogsScreen extends StatefulWidget {
 class LogsScreenState extends State<LogsScreen> {
   final periodsRepo = PeriodsRepository();
   final SettingsService _settingsService = SettingsService();
-  final _wearSyncService = WearSyncService();
+
+  final _watchSyncService = WatchSyncService();
 
 	List<PeriodDay> _periodLogEntries = [];
   List<Period> _periodEntries = [];
@@ -108,7 +109,7 @@ class LogsScreenState extends State<LogsScreen> {
       final notificationDays = await settingsService.getNotificationDays();
       final notificationTime = await settingsService.getNotificationTime();
 
-      await _wearSyncService.savePrediction(
+      await _watchSyncService.sendPrediction(
         daysUntilDue: predictionResult.daysUntilDue,
       );
 
