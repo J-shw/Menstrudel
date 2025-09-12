@@ -87,22 +87,89 @@ void main() {
         expect(periods[1].totalDays, 2);
       });
 
-      test('createPeriodLog should throw DuplicateLogException for existing date', () async {
+      test('creating a log between two existing periods should merge them into one', () async {
         await repository.createPeriodLog(_log('2025-09-01'));
+        await repository.createPeriodLog(_log('2025-09-02'));
+
+        await repository.createPeriodLog(_log('2025-09-04'));
+        await repository.createPeriodLog(_log('2025-09-05'));
         
-        final future = repository.createPeriodLog(_log('2025-09-01'));
-        expect(future, throwsA(isA<DuplicateLogException>()));
+        var periods = await repository.readAllPeriods();
+        expect(periods.length, 2, reason: 'Should initially be two separate periods');
+
+        await repository.createPeriodLog(_log('2025-09-03'));
+
+        periods = await repository.readAllPeriods();
+        expect(periods.length, 1, reason: 'The periods should now be merged');
+        expect(periods.first.startDate, DateTime.parse('2025-09-01'));
+        expect(periods.first.endDate, DateTime.parse('2025-09-05'));
+        expect(periods.first.totalDays, 5);
       });
 
-      test('createPeriodLog should throw FutureDateException for a future date', () async {
-        final tomorrow = DateTime.now().add(const Duration(days: 1));
-        final futureLog = PeriodDay(date: tomorrow, flow: 2, painLevel: 0, symptoms: []);
+      test('creating a log between two existing periods should merge them into one', () async {
+        await repository.createPeriodLog(_log('2025-09-01'));
+        await repository.createPeriodLog(_log('2025-09-02'));
 
-        final futureCall = repository.createPeriodLog(futureLog);
-        expect(futureCall, throwsA(isA<FutureDateException>()));
+        await repository.createPeriodLog(_log('2025-09-04'));
+        await repository.createPeriodLog(_log('2025-09-05'));
+        
+        var periods = await repository.readAllPeriods();
+        expect(periods.length, 2, reason: 'Should initially be two separate periods');
+
+        await repository.createPeriodLog(_log('2025-09-03'));
+
+        periods = await repository.readAllPeriods();
+        expect(periods.length, 1, reason: 'The periods should now be merged');
+        expect(periods.first.startDate, DateTime.parse('2025-09-01'));
+        expect(periods.first.endDate, DateTime.parse('2025-09-05'));
+        expect(periods.first.totalDays, 5);
+      });
+
+      group('Exceptions', () {
+        test('createPeriodLog should throw DuplicateLogException for existing date', () async {
+          await repository.createPeriodLog(_log('2025-09-01'));
+          
+          final future = repository.createPeriodLog(_log('2025-09-01'));
+          expect(future, throwsA(isA<DuplicateLogException>()));
+        });
+
+        test('createPeriodLog should throw FutureDateException for a future date', () async {
+          final tomorrow = DateTime.now().add(const Duration(days: 1));
+          final futureLog = PeriodDay(date: tomorrow, flow: 2, painLevel: 0, symptoms: []);
+
+          final futureCall = repository.createPeriodLog(futureLog);
+          expect(futureCall, throwsA(isA<FutureDateException>()));
+        });
       });
     });
 
+    group('Period Logs - Read Operations', () {
+      test('readAllPeriods should return periods in descending order of start date', () async {
+        await repository.createPeriodLog(_log('2024-09-15'));
+        await repository.createPeriodLog(_log('2024-07-20'));
+        await repository.createPeriodLog(_log('2024-08-25'));
+
+        final periods = await repository.readAllPeriods();
+
+        expect(periods.length, 3);
+        expect(periods[0].startDate, DateTime.parse('2024-09-15'));
+        expect(periods[1].startDate, DateTime.parse('2024-08-25'));
+        expect(periods[2].startDate, DateTime.parse('2024-07-20'));
+      });
+
+      test('periods spanning across month boundaries should have correct total days', () async {
+        await repository.createPeriodLog(_log('2025-08-31'));
+        await repository.createPeriodLog(_log('2025-09-01'));
+
+        final periods = await repository.readAllPeriods();
+        
+        expect(periods.length, 1);
+        expect(periods.first.startDate, DateTime.parse('2025-08-31'));
+        expect(periods.first.endDate, DateTime.parse('2025-09-01'));
+        expect(periods.first.totalDays, 2);
+      });
+    });
+    
     group('Period Logs - Update Operations', () {
       test('updatePeriodLog by changing date should correctly recalculate periods', () async {
         final logToUpdate = await repository.createPeriodLog(_log('2025-09-01'));
@@ -208,7 +275,7 @@ void main() {
       });
     });
 
-    group('Period Read Operations', () {
+    group('Period - Read Operations', () {
       test('readLastPeriod should return the most recent period', () async {
         await repository.createPeriodLog(_log('2025-08-10'));
         await repository.createPeriodLog(_log('2025-09-05'));
