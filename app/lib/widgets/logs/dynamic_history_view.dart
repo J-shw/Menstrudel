@@ -11,7 +11,7 @@ class DynamicHistoryView extends StatelessWidget {
   final PeriodPredictionResult? predictionResult; 
   final PeriodHistoryView selectedView;
   final List<PeriodLogEntry> periodLogEntries;
-  final List<PeriodEntry> periodEntries;
+  final List<Period> periodEntries;
   final bool isLoading;
   final Function(int) onDelete;
   final Function(PeriodLogEntry) onSave;

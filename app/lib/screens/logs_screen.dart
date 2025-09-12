@@ -34,7 +34,7 @@ class LogsScreenState extends State<LogsScreen> {
   final SettingsService _settingsService = SettingsService();
 
 	List<PeriodLogEntry> _periodLogEntries = [];
-  List<PeriodEntry> _periodEntries = [];
+  List<Period> _periodEntries = [];
 	bool _isLoading = true;
 	PeriodPredictionResult? _predictionResult;
   PeriodHistoryView _selectedView = PeriodHistoryView.journal;

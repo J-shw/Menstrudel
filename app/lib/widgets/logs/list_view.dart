@@ -9,7 +9,7 @@ import 'package:menstrudel/models/period_logs/symptom_enum.dart';
 
 class PeriodListView extends StatelessWidget {
   final List<PeriodLogEntry> periodLogEntries;
-  final List<PeriodEntry> periodEntries;
+  final List<Period> periodEntries;
   final bool isLoading;
   final Function(int) onDelete;
 
@@ -48,7 +48,7 @@ class PeriodListView extends StatelessWidget {
         itemCount: items.length,
         itemBuilder: (context, index) {
           final item = items[index];
-          if (item is PeriodEntry) {
+          if (item is Period) {
             return _buildPeriodHeader(item, context);
           } else if (item is PeriodLogEntry) {
             return _buildPeriodLog(item, context);
@@ -70,7 +70,7 @@ class PeriodListView extends StatelessWidget {
     return items;
   }
 
-  Widget _buildPeriodHeader(PeriodEntry period, BuildContext context) {
+  Widget _buildPeriodHeader(Period period, BuildContext context) {
     final duration = period.endDate.difference(period.startDate).inDays + 1;
     final isOngoing = DateUtils.isSameDay(period.endDate, DateTime.now());
 
