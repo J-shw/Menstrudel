@@ -14,7 +14,7 @@
   <p>A free, private, and open-source period & pill tracking app for Android and iOS.</p>
 
   <p>
-    <a href="https://github.com/YOUR_USERNAME/YOUR_REPO">
+    <a href="https://github.com/J-shw/Menstrudel">
       <img src="https://img.shields.io/github/stars/J-shw/Menstrudel?style=social" alt="GitHub stars">
     </a>
   </p>
