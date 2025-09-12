@@ -36,21 +36,24 @@ class PeriodLoggerService {
       try {
         await periodsRepo.createPeriodLog(newEntry);
       } on DuplicateLogException catch (e) {
+        if (!context.mounted) return false;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(e.message)),
         );
         return false;
       } on FutureDateException catch (e) { 
+        if (!context.mounted) return false;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(e.message)),
         );
         return false;
       }
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Log saved!')),
-      );
-      
+      if (context.mounted){
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Log saved!')),
+        );
+      }
       return true;
 
     } catch (e) {
