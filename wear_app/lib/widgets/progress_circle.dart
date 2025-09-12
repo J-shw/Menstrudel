@@ -90,6 +90,7 @@ class _WearProgressCircleState extends State<WearProgressCircle>
             child: Transform.rotate(
               angle: -pi / 2,
               child: CircularProgressIndicator(
+                year2023: false,
                 value: _animation.value,
                 strokeWidth: widget.strokeWidth,
                 valueColor: AlwaysStoppedAnimation<Color>(widget.progressColor),
