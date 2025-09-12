@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:menstrudel/models/period_logs/period_logs.dart';
+import 'package:menstrudel/models/period_logs/period_day.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/models/period_logs/flow_enum.dart';
 
 class FlowBreakdownWidget extends StatelessWidget {
-  final List<PeriodLogEntry> logs;
+  final List<PeriodDay> logs;
   const FlowBreakdownWidget({super.key, required this.logs});
 
   Widget _buildBar(BuildContext context, {required String label, required int count, required int total, required Color color}) {

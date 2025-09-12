@@ -4,7 +4,7 @@ import 'package:menstrudel/models/periods/period.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 
 class CycleLengthVarianceWidget extends StatelessWidget {
-  final List<PeriodEntry> periods;
+  final List<Period> periods;
 
   const CycleLengthVarianceWidget({super.key, required this.periods});
 
@@ -19,7 +19,7 @@ class CycleLengthVarianceWidget extends StatelessWidget {
     }
 
     final List<double> cycleLengths = [];
-    final List<PeriodEntry> reversedPeriods = periods.reversed.toList();
+    final List<Period> reversedPeriods = periods.reversed.toList();
 
     for (int i = 0; i < reversedPeriods.length - 1; i++) {
       final currentPeriod = reversedPeriods[i];

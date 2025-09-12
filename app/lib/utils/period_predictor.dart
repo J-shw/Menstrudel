@@ -1,4 +1,4 @@
-import 'package:menstrudel/models/period_logs/period_logs.dart';
+import 'package:menstrudel/models/period_logs/period_day.dart';
 import 'package:menstrudel/models/periods/period.dart';
 import 'package:menstrudel/models/period_prediction_result.dart';
 import 'package:menstrudel/models/cycles/cycle_stats.dart';
@@ -13,100 +13,117 @@ class PeriodPredictor {
   	static const int _maxValidCycleLength = 45;
   	static const int _minValidCycleLength = 20;
 
-	static List<int> _getValidCycleLengths(List<PeriodLogEntry> entries) {
-		if (entries.length < 2) {
-			return [];
-		}
+	static List<int> _getValidCycleLengths(List<Period> periods) {
+    if (periods.length < 2) {
+      return [];
+    }
 
-		final List<PeriodLogEntry> sortedEntries = List.from(entries);
-		sortedEntries.sort((a, b) => a.date.compareTo(b.date));
+    final List<Period> sortedPeriods = List.from(periods);
+    sortedPeriods.sort((a, b) => a.startDate.compareTo(b.startDate));
 
-		List<int> cycleLengths = [];
-		for (int i = 0; i < sortedEntries.length - 1; i++) {
-			int days = sortedEntries[i + 1].date.difference(sortedEntries[i].date).inDays;
-			
-			if (days >= _minValidCycleLength && days <= _maxValidCycleLength) {
-				cycleLengths.add(days);
-			}
-		}
-		return cycleLengths;
-	}
+    List<int> cycleLengths = [];
+    for (int i = 0; i < sortedPeriods.length - 1; i++) {
+      int days = sortedPeriods[i + 1].startDate.difference(sortedPeriods[i].startDate).inDays;
+      
+      if (days >= _minValidCycleLength && days <= _maxValidCycleLength) {
+        cycleLengths.add(days);
+      }
+    }
+    return cycleLengths;
+  }
 
-  static PeriodPredictionResult? estimateNextPeriod(List<PeriodLogEntry> entries, DateTime now) {
+  static List<int> _getValidPeriodDurations(List<Period> entries) {
+    final List<int> durations = [];
+    for (final entry in entries) {
+      final duration = entry.endDate.difference(entry.startDate).inDays + 1;
+      if (duration > 0) {
+        durations.add(duration);
+      }
+      
+    }
+    return durations;
+  }
 
+  static PeriodPredictionResult? estimateNextPeriod(List<Period> entries, DateTime now) {
     if (entries.length < 2) {
       return null;
     }
 
-    final sortedEntries = List<PeriodLogEntry>.from(entries)
-    ..sort((a, b) => a.date.compareTo(b.date));
+    final sortedEntries = List<Period>.from(entries)
+      ..sort((a, b) => a.startDate.compareTo(b.startDate));
 
+    final List<int> cycleLengths = _getValidCycleLengths(sortedEntries);
+    if (cycleLengths.isEmpty) {
+      return null;
+    }
+    final int totalCycleDays = cycleLengths.reduce((a, b) => a + b);
+    final int averageCycleLength = (totalCycleDays / cycleLengths.length).round();
 
-		final List<int> cycleLengths = _getValidCycleLengths(sortedEntries);
+    final List<int> periodDurations = _getValidPeriodDurations(sortedEntries);
+    if (periodDurations.isEmpty) {
+      return null;
+    }
+    final int totalDurationDays = periodDurations.reduce((a, b) => a + b);
+    final int averagePeriodDuration = (totalDurationDays / periodDurations.length).round();
 
+    if (averageCycleLength <= 0 || averagePeriodDuration <= 0) {
+      return null;
+    }
 
-		if (cycleLengths.isNotEmpty) {
-			final int totalCycleDays = cycleLengths.reduce((a, b) => a + b);
-			final int averageCycleLength = (totalCycleDays / cycleLengths.length).round();
+    DateTime lastPeriodStartDate = sortedEntries.last.startDate;
 
-      if (averageCycleLength <= 0) {
-        return null;
-      }
+    DateTime estimatedStartDate = lastPeriodStartDate.add(Duration(days: averageCycleLength));
 
-			DateTime lastPeriodDate = sortedEntries.last.date;
+    DateTime estimatedEndDate = estimatedStartDate.add(Duration(days: averagePeriodDuration - 1));
 
-			DateTime estimatedDate = lastPeriodDate.add(Duration(days: averageCycleLength));
+    int daysUntilDue = estimatedStartDate.difference(now).inDays;
 
-			int daysUntilDue = estimatedDate.difference(now).inDays;
+    return PeriodPredictionResult(
+      estimatedStartDate: estimatedStartDate,
+      estimatedEndDate: estimatedEndDate,
+      daysUntilDue: daysUntilDue,
+      averageCycleLength: averageCycleLength,
+      averagePeriodDuration: averagePeriodDuration,
+    );
+  }
 
-			return PeriodPredictionResult(
-				estimatedDate: estimatedDate,
-				daysUntilDue: daysUntilDue,
-				averageCycleLength: averageCycleLength,
-			);
-		}else{
-			return null;
-		}
-	}
+	static CycleStats? getCycleStats(List<Period> periods) {
+    if (periods.length < 2) {
+      return null;
+    }
 
-	static CycleStats? getCycleStats(List<PeriodLogEntry> entries) {
-		if (entries.length < 2) {
-			return null;
-		}
+    List<int> validCycleLengths = _getValidCycleLengths(periods);
 
-		final List<PeriodLogEntry> sortedEntries = List.from(entries);
-		sortedEntries.sort((a, b) => a.date.compareTo(b.date));
+    if (validCycleLengths.isEmpty) {
+      return null;
+    }
 
-		List<int> validCycleLengths = _getValidCycleLengths(entries);
+    int totalCycleDays = validCycleLengths.reduce((a, b) => a + b);
+    int averageCycleLength = (totalCycleDays / validCycleLengths.length).round();
+    
+    if (averageCycleLength == 0) {
+      averageCycleLength = _defaultCycleLength;
+    }
 
-		if (validCycleLengths.isEmpty) {
-			return null;
-		}
+    int shortestCycle = validCycleLengths.reduce(min);
+    int longestCycle = validCycleLengths.reduce(max);
 
-		int totalCycleDays = validCycleLengths.reduce((a, b) => a + b);
-		int averageCycleLength = (totalCycleDays / validCycleLengths.length).round();
-		
-		if (averageCycleLength == 0) averageCycleLength = _defaultCycleLength; 
-
-		int shortestCycle = validCycleLengths.reduce(min);
-		int longestCycle = validCycleLengths.reduce(max);
-
-		return CycleStats(
+    return CycleStats(
       averageCycleLength: averageCycleLength,
       shortestCycleLength: shortestCycle,
       longestCycleLength: longestCycle,
       numberOfCycles: validCycleLengths.length,
-		);
-	}
+    );
+  }
 
-	static List<MonthlyCycleData> getMonthlyCycleData(List<PeriodLogEntry> entries) {
+	static List<MonthlyCycleData> getMonthlyCycleData(List<PeriodDay> entries) {
 		List<MonthlyCycleData> monthlyData = [];
 
 		if (entries.length < 2) {
 			return monthlyData; 
 		}
 
-		final List<PeriodLogEntry> sortedEntries = List.from(entries);
+		final List<PeriodDay> sortedEntries = List.from(entries);
 		sortedEntries.sort((a, b) => a.date.compareTo(b.date));
 
 		for (int i = 0; i < sortedEntries.length - 1; i++) {
@@ -124,12 +141,12 @@ class PeriodPredictor {
 		return monthlyData;
   }
 
-  static PeriodStats? getPeriodData(List<PeriodEntry> entries) {
+  static PeriodStats? getPeriodData(List<Period> entries) {
     if (entries.length < 2) {
 			return null;
 		}
 
-		final List<PeriodEntry> sortedEntries = List.from(entries);
+		final List<Period> sortedEntries = List.from(entries);
 		sortedEntries.sort((a, b) => a.startDate.compareTo(b.startDate));
 
 		int totalCycleDays = sortedEntries.fold(0, (sum, entry) => sum + entry.totalDays);
