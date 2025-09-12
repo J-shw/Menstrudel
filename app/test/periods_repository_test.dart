@@ -5,8 +5,8 @@ import 'package:menstrudel/database/repositories/periods_repository.dart';
 import 'package:menstrudel/utils/exceptions.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
-PeriodLogEntry _log(String date, {int flow = 2}) =>
-    PeriodLogEntry(date: DateTime.parse(date), flow: flow, symptoms: [], painLevel: 0);
+PeriodDay _log(String date, {int flow = 2}) =>
+    PeriodDay(date: DateTime.parse(date), flow: flow, symptoms: [], painLevel: 0);
 
 void main() {
   setUpAll(() {

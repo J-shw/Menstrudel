@@ -5,7 +5,7 @@ import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/models/period_logs/symptom_enum.dart';
 
 class SymptomFrequencyWidget extends StatelessWidget {
-  final List<PeriodLogEntry> logs;
+  final List<PeriodDay> logs;
   const SymptomFrequencyWidget({super.key, required this.logs});
 
   @override

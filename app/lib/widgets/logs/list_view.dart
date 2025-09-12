@@ -8,7 +8,7 @@ import 'package:menstrudel/models/period_logs/flow_enum.dart';
 import 'package:menstrudel/models/period_logs/symptom_enum.dart';
 
 class PeriodListView extends StatelessWidget {
-  final List<PeriodLogEntry> periodLogEntries;
+  final List<PeriodDay> periodLogEntries;
   final List<Period> periodEntries;
   final bool isLoading;
   final Function(int) onDelete;
@@ -50,7 +50,7 @@ class PeriodListView extends StatelessWidget {
           final item = items[index];
           if (item is Period) {
             return _buildPeriodHeader(item, context);
-          } else if (item is PeriodLogEntry) {
+          } else if (item is PeriodDay) {
             return _buildPeriodLog(item, context);
           }
           return const SizedBox.shrink();
@@ -99,7 +99,7 @@ class PeriodListView extends StatelessWidget {
     );
   }
 
-  Widget _buildPeriodLog(PeriodLogEntry entry, BuildContext context) {
+  Widget _buildPeriodLog(PeriodDay entry, BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
     final l10n = AppLocalizations.of(context)!;

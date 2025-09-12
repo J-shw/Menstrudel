@@ -6,10 +6,10 @@ import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/widgets/sheets/period_details_bottom_sheet.dart';
 
 class PeriodJournalView extends StatefulWidget {
-  final List<PeriodLogEntry> periodLogEntries;
+  final List<PeriodDay> periodLogEntries;
   final bool isLoading;
   final Function(int) onDelete;
-  final Function(PeriodLogEntry) onSave;
+  final Function(PeriodDay) onSave;
   final PeriodPredictionResult? predictionResult;
   final Function(DateTime) onLogRequested;
 
@@ -30,7 +30,7 @@ class PeriodJournalView extends StatefulWidget {
 class _PeriodJournalViewState extends State<PeriodJournalView> {
   late DateTime _focusedDay;
   DateTime? _selectedDay;
-  Map<DateTime, PeriodLogEntry> _logMap = {};
+  Map<DateTime, PeriodDay> _logMap = {};
 
   @override
   void initState() {
@@ -53,14 +53,14 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
     };
   }
 
-  void _handleDelete(PeriodLogEntry entryToDelete) {
+  void _handleDelete(PeriodDay entryToDelete) {
     Navigator.of(context).pop();
     if (entryToDelete.id != null) {
       widget.onDelete(entryToDelete.id!);
     }
   }
 
-  void _showDetailsBottomSheet(PeriodLogEntry log) {
+  void _showDetailsBottomSheet(PeriodDay log) {
     showModalBottomSheet<void>(
       context: context,
       isScrollControlled: true,

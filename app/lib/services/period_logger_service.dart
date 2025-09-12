@@ -26,7 +26,7 @@ class PeriodLoggerService {
         return false; // Failure
       }
 
-      final newEntry = PeriodLogEntry(
+      final newEntry = PeriodDay(
         date: date,
         symptoms: result['symptoms'] ?? [],
         flow: result['flow'] ?? 0,

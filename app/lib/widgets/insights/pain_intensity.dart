@@ -4,7 +4,7 @@ import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/models/period_logs/pain_level_enum.dart';
 
 class PainBreakdownWidget extends StatelessWidget {
-  final List<PeriodLogEntry> logs;
+  final List<PeriodDay> logs;
   const PainBreakdownWidget({super.key, required this.logs});
 
   Widget _buildBar(BuildContext context, {required String label, required int count, required int total, required Color color}) {

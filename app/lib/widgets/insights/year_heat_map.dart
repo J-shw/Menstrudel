@@ -4,7 +4,7 @@ import 'package:menstrudel/models/period_logs/period_logs.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 
 class YearHeatmapWidget extends StatelessWidget {
-  final List<PeriodLogEntry> logs;
+  final List<PeriodDay> logs;
   const YearHeatmapWidget({super.key, required this.logs});
   
   Color _getFlowColor(int flow) {

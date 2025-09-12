@@ -57,7 +57,7 @@ class _InsightsScreenState extends State<InsightsScreen> {
 
         if (snapshot.hasData) {
           final allPeriods = snapshot.data![0] as List<Period>;
-          final allLogs = snapshot.data![1] as List<PeriodLogEntry>;
+          final allLogs = snapshot.data![1] as List<PeriodDay>;
           final allFlows = snapshot.data![2] as List<MonthlyFlowData>;
 
           return ListView(

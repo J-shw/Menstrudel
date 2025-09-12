@@ -10,11 +10,11 @@ import 'package:menstrudel/models/period_prediction_result.dart';
 class DynamicHistoryView extends StatelessWidget {
   final PeriodPredictionResult? predictionResult; 
   final PeriodHistoryView selectedView;
-  final List<PeriodLogEntry> periodLogEntries;
+  final List<PeriodDay> periodLogEntries;
   final List<Period> periodEntries;
   final bool isLoading;
   final Function(int) onDelete;
-  final Function(PeriodLogEntry) onSave;
+  final Function(PeriodDay) onSave;
   final Function(DateTime) onLogRequested;
 
   const DynamicHistoryView({

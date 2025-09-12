@@ -33,7 +33,7 @@ class LogsScreenState extends State<LogsScreen> {
   final periodsRepo = PeriodsRepository();
   final SettingsService _settingsService = SettingsService();
 
-	List<PeriodLogEntry> _periodLogEntries = [];
+	List<PeriodDay> _periodLogEntries = [];
   List<Period> _periodEntries = [];
 	bool _isLoading = true;
 	PeriodPredictionResult? _predictionResult;
@@ -137,7 +137,7 @@ class LogsScreenState extends State<LogsScreen> {
     });
   }
 
-  void _handleSaveLog(PeriodLogEntry updatedLog) {
+  void _handleSaveLog(PeriodDay updatedLog) {
     periodsRepo.updatePeriodLog(updatedLog);
     Navigator.of(context).pop();
     _refreshPeriodLogs();
