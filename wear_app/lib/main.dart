@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:wear_plus/wear_plus.dart';
 import 'dart:async';
 import 'package:watch_connectivity/watch_connectivity.dart';
+import 'package:menstrudel/widgets/progress_circle.dart';
 
 void main() {
   runApp(const MyApp());
@@ -55,14 +56,21 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return WatchShape(
       builder: (context, shape, child) {
-        String displayText = (_daysUntilDue == -1) ? '--' : _daysUntilDue.abs().toString();
+        if (_daysUntilDue == -1) {
+          return const Center(
+            child: Text(
+              '--',
+              style: TextStyle(fontSize: 60, fontWeight: FontWeight.bold),
+            ),
+          );
+        }
 
         return Center(
-          child: Text(
-            displayText,
-            style: Theme.of(context).textTheme.displayLarge?.copyWith(
-              fontWeight: FontWeight.bold,
-            ),
+          child: WearProgressCircle(
+            currentValue: _daysUntilDue,
+            maxValue: 28,
+            progressColor: const Color.fromARGB(255, 255, 118, 118),
+            trackColor: const Color.fromARGB(20, 255, 118, 118),
           ),
         );
       },
