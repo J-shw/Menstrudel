@@ -154,9 +154,6 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
               calendarBuilders: CalendarBuilders(
                 prioritizedBuilder: (context, day, focusedDay) {
                   final log = _logMap[DateUtils.dateOnly(day)];
-                  final isPredictedDay =
-                      isSameDay(day, widget.predictionResult?.estimatedDate);
-
                   if (log != null) {
                     final flowOpacity = 0.3 + (log.flow * 0.33);
                     return Container(
@@ -173,6 +170,18 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
                         ),
                       ),
                     );
+                  }
+
+                  final startDate = widget.predictionResult?.estimatedStartDate;
+                  final endDate = widget.predictionResult?.estimatedEndDate;
+                  bool isPredictedDay = false;
+
+                  if (startDate != null && endDate != null) {
+                    final dayOnly = DateUtils.dateOnly(day);
+                    final startOnly = DateUtils.dateOnly(startDate);
+                    final endOnly = DateUtils.dateOnly(endDate);
+
+                    isPredictedDay = !dayOnly.isBefore(startOnly) && !dayOnly.isAfter(endOnly);
                   }
 
                   if (isPredictedDay) {
