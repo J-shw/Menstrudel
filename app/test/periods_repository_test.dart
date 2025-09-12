@@ -171,6 +171,21 @@ void main() {
     });
     
     group('Period Logs - Update Operations', () {
+      test('adding a back-dated log should correctly extend an existing period backwards', () async {
+        await repository.createPeriodLog(_log('2025-09-10'));
+        await repository.createPeriodLog(_log('2025-09-11'));
+
+        var periods = await repository.readAllPeriods();
+        expect(periods.first.startDate, DateTime.parse('2025-09-10'));
+        expect(periods.first.totalDays, 2);
+
+        await repository.createPeriodLog(_log('2025-09-09'));
+
+        periods = await repository.readAllPeriods();
+        expect(periods.length, 1);
+        expect(periods.first.startDate, DateTime.parse('2025-09-09'));
+        expect(periods.first.totalDays, 3);
+      });
       test('updatePeriodLog by changing date should correctly recalculate periods', () async {
         final logToUpdate = await repository.createPeriodLog(_log('2025-09-01'));
         await repository.createPeriodLog(_log('2025-09-03'));
@@ -213,6 +228,16 @@ void main() {
           isTrue,
           reason: 'Should have a period for the updated log on Sep 5th',
         );
+      });
+
+      test('updating a log to a date that already exists should throw DuplicateLogException', () async {
+        await repository.createPeriodLog(_log('2025-09-01'));
+        final logToUpdate = await repository.createPeriodLog(_log('2025-09-05'));
+
+        final updatedLog = logToUpdate.copyWith(date: DateTime.parse('2025-09-01'));
+        
+        final futureCall = repository.updatePeriodLog(updatedLog);
+        expect(futureCall, throwsA(isA<DuplicateLogException>()));
       });
 
       test('updating a log flow should not affect period structure', () async {
@@ -272,6 +297,27 @@ void main() {
         final logs = await repository.readAllPeriodLogs();
         expect(periods, isEmpty);
         expect(logs, isEmpty);
+      });
+
+      test('deleting all logs from a period sequentially should correctly remove the period', () async {
+        final log1 = await repository.createPeriodLog(_log('2025-09-01'));
+        final log2 = await repository.createPeriodLog(_log('2025-09-02'));
+        final log3 = await repository.createPeriodLog(_log('2025-09-03'));
+
+        await repository.deletePeriodLog(log1.id!);
+        var periods = await repository.readAllPeriods();
+        expect(periods.first.totalDays, 2);
+        expect(periods.first.startDate, DateTime.parse('2025-09-02'));
+
+        await repository.deletePeriodLog(log3.id!);
+        periods = await repository.readAllPeriods();
+        expect(periods.first.totalDays, 1);
+        expect(periods.first.startDate, DateTime.parse('2025-09-02'));
+        expect(periods.first.endDate, DateTime.parse('2025-09-02'));
+
+        await repository.deletePeriodLog(log2.id!);
+        periods = await repository.readAllPeriods();
+        expect(periods, isEmpty, reason: 'The period should be gone after its last log is deleted');
       });
     });
 
