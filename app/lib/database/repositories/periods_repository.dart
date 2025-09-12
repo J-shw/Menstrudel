@@ -12,6 +12,32 @@ class PeriodsRepository {
   final dbProvider = AppDatabase.instance;
   static const String _whereId = 'id = ?';
 
+  /// Validates a log's date, throwing exceptions for future or duplicate dates.
+  Future<void> _validateLogDate(Database db, DateTime date, {int? idToExclude}) async {
+    final today = DateUtils.dateOnly(DateTime.now());
+    final entryDate = DateUtils.dateOnly(date);
+
+    if (entryDate.isAfter(today)) {
+      throw FutureDateException('Logs cannot be for future dates.');
+    }
+
+    String whereClause = 'date(date) = date(?)';
+    if (idToExclude != null) {
+      whereClause += ' AND id != ?';
+    }
+
+    final existingLogs = await db.query(
+      'period_logs',
+      where: whereClause,
+      whereArgs: idToExclude != null ? [date.toIso8601String(), idToExclude] : [date.toIso8601String()],
+      limit: 1,
+    );
+
+    if (existingLogs.isNotEmpty) {
+      throw DuplicateLogException('A log already exists for this date.');
+    }
+  }
+
   Future<void> deleteAllEntries() async {
     final db = await dbProvider.database;
     await db.transaction((txn) async {
@@ -73,25 +99,9 @@ class PeriodsRepository {
   // Period logs
 
   Future<PeriodDay> createPeriodLog(PeriodDay entry) async {
-    final today = DateUtils.dateOnly(DateTime.now());
-    final entryDate = DateUtils.dateOnly(entry.date);
-
-    if (entryDate.isAfter(today)) {
-      throw FutureDateException('Logs cannot be created for future dates.');
-    }
-
     final db = await dbProvider.database;
 
-    final existingLogs = await db.query(
-      'period_logs',
-      where: 'date(date) = date(?)',
-      whereArgs: [entry.date.toIso8601String()],
-      limit: 1, 
-    );
-
-    if (existingLogs.isNotEmpty) {
-      throw DuplicateLogException('A log already exists for this date.');
-    }
+    await _validateLogDate(db, entry.date);
       
     final id = await db.insert('period_logs', entry.toMap());
 
@@ -123,6 +133,9 @@ class PeriodsRepository {
 
   Future<int> updatePeriodLog(PeriodDay entry) async {
     final db = await dbProvider.database;
+
+    await _validateLogDate(db, entry.date, idToExclude: entry.id);
+
     final int result = await db.update(
       'period_logs',
       entry.toMap(),
