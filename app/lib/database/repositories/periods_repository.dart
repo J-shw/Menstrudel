@@ -2,7 +2,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:intl/intl.dart';
 
 import 'package:menstrudel/database/app_database.dart';
-import 'package:menstrudel/models/period_logs/period_logs.dart';
+import 'package:menstrudel/models/period_logs/period_day.dart';
 import 'package:menstrudel/models/periods/period.dart';
 import 'package:menstrudel/models/flows/flow_data.dart';
 import 'package:menstrudel/utils/exceptions.dart';
@@ -21,21 +21,21 @@ class PeriodsRepository {
 
   // Periods
 
-  Future<PeriodEntry> createPeriod(PeriodEntry entry) async {
+  Future<Period> createPeriod(Period entry) async {
     final db = await dbProvider.database;
     final id = await db.insert('periods', entry.toMap());
     return entry.copyWith(id: id);
   }
 
-  Future<List<PeriodEntry>> readAllPeriods() async {
+  Future<List<Period>> readAllPeriods() async {
     final db = await dbProvider.database;
     const orderBy = 'start_date DESC';
     final result = await db.query('periods', orderBy: orderBy);
 
-    return result.map((json) => PeriodEntry.fromMap(json)).toList();
+    return result.map((json) => Period.fromMap(json)).toList();
   }
 
-  Future<PeriodEntry?> readLastPeriod() async {
+  Future<Period?> readLastPeriod() async {
     final db = await dbProvider.database;
     final maps = await db.query(
       'periods',
@@ -44,13 +44,13 @@ class PeriodsRepository {
     );
 
     if (maps.isNotEmpty) {
-      return PeriodEntry.fromMap(maps.first);
+      return Period.fromMap(maps.first);
     } else {
       return null;
     }
   }
 
-  Future<int> updatePeriod(PeriodEntry period) async {
+  Future<int> updatePeriod(Period period) async {
     final db = await dbProvider.database;
     return db.update(
       'periods',
@@ -71,7 +71,7 @@ class PeriodsRepository {
 
   // Period logs
 
-  Future<PeriodLogEntry> createPeriodLog(PeriodLogEntry entry) async {
+  Future<PeriodDay> createPeriodLog(PeriodDay entry) async {
     final db = await dbProvider.database;
 
     final existingLogs = await db.query(
@@ -93,15 +93,15 @@ class PeriodsRepository {
   }
 
 
-  Future<List<PeriodLogEntry>> readAllPeriodLogs() async {
+  Future<List<PeriodDay>> readAllPeriodLogs() async {
     final db = await dbProvider.database;
     const orderBy = 'date DESC';
     final result = await db.query('period_logs', orderBy: orderBy);
 
-    return result.map((json) => PeriodLogEntry.fromMap(json)).toList();
+    return result.map((json) => PeriodDay.fromMap(json)).toList();
   }
 
-  Future<PeriodLogEntry> readPeriodLog(id) async {
+  Future<PeriodDay> readPeriodLog(id) async {
     final db = await dbProvider.database;
 
     final result = await db.query(
@@ -110,10 +110,10 @@ class PeriodsRepository {
       whereArgs: [id],
     );
 
-    return result.map((json) => PeriodLogEntry.fromMap(json)).first;
+    return result.map((json) => PeriodDay.fromMap(json)).first;
   }
 
-  Future<int> updatePeriodLog(PeriodLogEntry entry) async {
+  Future<int> updatePeriodLog(PeriodDay entry) async {
     final db = await dbProvider.database;
     final int result = await db.update(
       'period_logs',
@@ -150,13 +150,13 @@ class PeriodsRepository {
     await db.delete('periods');
 
     final allEntryMaps = await db.query('period_logs', orderBy: 'date ASC');
-    final allEntries = allEntryMaps.map((e) => PeriodLogEntry.fromMap(e)).toList();
+    final allEntries = allEntryMaps.map((e) => PeriodDay.fromMap(e)).toList();
 
     if (allEntries.isEmpty) {
       return; 
     }
 
-    List<PeriodLogEntry> currentPeriodLogs = [];
+    List<PeriodDay> currentPeriodLogs = [];
 
     for (final entry in allEntries) {
       if (currentPeriodLogs.isEmpty || entry.date.difference(currentPeriodLogs.last.date).inDays > 1) {
@@ -173,7 +173,7 @@ class PeriodsRepository {
     }
   }
 
-  Future<void> _createPeriodFromLogs(Database db, List<PeriodLogEntry> logs) async {
+  Future<void> _createPeriodFromLogs(Database db, List<PeriodDay> logs) async {
     final startDate = logs.first.date;
     final endDate = logs.last.date;
     final totalDays = endDate.difference(startDate).inDays + 1;
