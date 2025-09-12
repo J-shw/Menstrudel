@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wear_plus/wear_plus.dart';
+import 'dart:async';
+import 'services/wear_sync_service.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,8 +12,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // A dark theme is better for OLED watch screens
     return MaterialApp(
+      title: 'Menstrudel Wear',
       theme: ThemeData.dark(),
       home: const MyHomePage(),
     );
@@ -26,40 +28,55 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  final _wearSyncService = WearSyncService();
+  WearPredictionData _predictionData = WearPredictionData(daysUntilDue: -1);
+  Timer? _timer;
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+  @override
+  void initState() {
+    super.initState();
+    _loadData();
+    // Periodically check for new data from the phone app
+    _timer = Timer.periodic(const Duration(seconds: 10), (timer) => _loadData());
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  /// Reads the latest prediction data using the sync service.
+  Future<void> _loadData() async {
+    final data = await _wearSyncService.readPrediction();
+    if (mounted) {
+      setState(() {
+        _predictionData = data;
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    // Use WatchShape to build a UI that is aware of the screen shape
     return WatchShape(
       builder: (context, shape, child) {
-        // A GestureDetector makes a larger area of the screen tappable
-        return GestureDetector(
-          onTap: _incrementCounter,
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                const Text(
-                  'Taps:',
-                ),
-                Text(
-                  '$_counter',
-                  style: Theme.of(context).textTheme.headlineMedium,
-                ),
-                // Display the detected screen shape
-                SizedBox(height: 8),
-                Text(
-                  'Shape: ${shape == WearShape.round ? 'Round' : 'Square'}',
-                  style: Theme.of(context).textTheme.bodySmall,
-                ),
-              ],
+        final daysUntilDue = _predictionData.daysUntilDue;
+        String displayText;
+
+        if (daysUntilDue == -1) {
+          // Display '--' if no data is available yet
+          displayText = '--';
+        } else {
+          // Display the number of days (or its absolute value if overdue)
+          displayText = daysUntilDue.abs().toString();
+        }
+
+        return Center(
+          child: Text(
+            displayText,
+            // Use a large, bold font style to make the number prominent
+            style: Theme.of(context).textTheme.displayLarge?.copyWith(
+              fontWeight: FontWeight.bold,
             ),
           ),
         );
