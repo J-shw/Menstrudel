@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-class PeriodLogEntry {
+class PeriodDay {
 	int? id;
 	DateTime date;
 	List<String>? symptoms;
@@ -8,7 +8,7 @@ class PeriodLogEntry {
   int painLevel;
 	int? periodId;
 
-	PeriodLogEntry({
+	PeriodDay({
 		this.id,
 		required this.date,
 		this.symptoms,
@@ -28,14 +28,14 @@ class PeriodLogEntry {
 		};
 	}
 
-	factory PeriodLogEntry.fromMap(Map<String, dynamic> map) {
+	factory PeriodDay.fromMap(Map<String, dynamic> map) {
     List<String>? symptomsFromMap;
     if (map['symptoms'] != null) {
       final decoded = jsonDecode(map['symptoms'] as String);
       symptomsFromMap = List<String>.from(decoded);
     }
 
-		return PeriodLogEntry(
+		return PeriodDay(
 			id: map['id'] as int?,
 			date: DateTime.parse(map['date'] as String),
 			symptoms: symptomsFromMap,
@@ -45,7 +45,7 @@ class PeriodLogEntry {
 		);
 	}
 
-	PeriodLogEntry copyWith({
+	PeriodDay copyWith({
 		int? id,
 		DateTime? date,
 		List<String>? symptoms,
@@ -53,7 +53,7 @@ class PeriodLogEntry {
     int? painLevel,
 		int? periodId,
 	}) {
-		return PeriodLogEntry(
+		return PeriodDay(
 			id: id ?? this.id,
 			date: date ?? this.date,
 			symptoms: symptoms ?? this.symptoms,
