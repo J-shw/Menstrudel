@@ -125,6 +125,19 @@ void main() {
         expect(periods.first.totalDays, 5);
       });
 
+      test('period duration should be calculated correctly over a leap year', () async {
+        await repository.createPeriodLog(_log('2024-02-28'));
+        await repository.createPeriodLog(_log('2024-02-29'));
+        await repository.createPeriodLog(_log('2024-03-01'));
+
+        final periods = await repository.readAllPeriods();
+        
+        expect(periods.length, 1);
+        expect(periods.first.totalDays, 3);
+        expect(periods.first.startDate, DateTime.parse('2024-02-28'));
+        expect(periods.first.endDate, DateTime.parse('2024-03-01'));
+      });
+
       group('Exceptions', () {
         test('createPeriodLog should throw DuplicateLogException for existing date', () async {
           await repository.createPeriodLog(_log('2025-09-01'));
@@ -238,6 +251,21 @@ void main() {
         
         final futureCall = repository.updatePeriodLog(updatedLog);
         expect(futureCall, throwsA(isA<DuplicateLogException>()));
+      });
+
+      test('updating a log with its own date should not change the period structure', () async {
+        final logToUpdate = await repository.createPeriodLog(_log('2025-09-01'));
+        await repository.createPeriodLog(_log('2025-09-02'));
+
+        final updatedLog = logToUpdate.copyWith(date: DateTime.parse('2025-09-01'), flow: 5);
+        await repository.updatePeriodLog(updatedLog);
+
+        final periods = await repository.readAllPeriods();
+        expect(periods.length, 1);
+        expect(periods.first.totalDays, 2);
+        
+        final changedLog = await repository.readPeriodLog(logToUpdate.id!);
+        expect(changedLog.flow, 5);
       });
 
       test('updating a log flow should not affect period structure', () async {
