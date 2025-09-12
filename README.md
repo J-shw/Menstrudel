@@ -1,19 +1,42 @@
 ![Flutter](https://img.shields.io/badge/Flutter-%2302569B.svg?style=for-the-badge&logo=Flutter&logoColor=white)
 
 [![Crowdin](https://badges.crowdin.net/menstrudel/localized.svg)](https://crowdin.com/project/menstrudel) [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=J-shw_Menstrudel&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=J-shw_Menstrudel) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=J-shw_Menstrudel&metric=coverage)](https://sonarcloud.io/summary/new_code?id=J-shw_Menstrudel) [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=J-shw_Menstrudel&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=J-shw_Menstrudel) [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=J-shw_Menstrudel&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=J-shw_Menstrudel) [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=J-shw_Menstrudel&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=J-shw_Menstrudel)
-# <img src="icon/Menstrudle_cropped.png" alt="Menstrudel App Icon" width="100"> Menstrudel 
 
-Free, offline, and open source period tracking app.
+<br>
 
-🤖 [Join our Play Store beta](https://groups.google.com/g/menstrudel-app-testers)
+<div align="center">
+  <img src="icon/Menstrudle_cropped.png" alt="Menstrudel App Icon" width="120">
 
-🍎 [Join our App Store beta](https://testflight.apple.com/join/VZPHnFqU)
+  # Menstrudel
 
-🌐 [Help translate](https://crowdin.com/project/menstrudel)
+  **Your Cycle & Pill Companion**
+
+  <p>A free, private, and open-source period & pill tracking app for Android and iOS.</p>
+
+  <p>
+    <a href="https://github.com/YOUR_USERNAME/YOUR_REPO">
+      <img src="https://img.shields.io/github/stars/J-shw/Menstrudel?style=social" alt="GitHub stars">
+    </a>
+  </p>
+</div>
+
+<br>
+
+## Get Involved
+
+- 🤖 **Android Users:** [Join our Play Store beta](https://groups.google.com/g/menstrudel-app-testers)
+
+- 🍎 **iOS Users:** [Join our App Store beta](https://testflight.apple.com/join/VZPHnFqU)
+
+- 🌐 **Translators:** [Help translate](https://crowdin.com/project/menstrudel)
+
+<br>
 
 ## About Menstrudel
 
 Menstrudel is a simple, private, and intuitive mobile application built with Flutter to help you track your menstrual cycle. Log your period start dates, record symptoms and flow intensity, and get predictions for your next cycle. Designed with privacy in mind, all your personal health data is stored securely offline on your device.
+
+<br>
 
 ## Key Features
 
@@ -46,15 +69,21 @@ Take control of your menstrual health with an intuitive, private, and powerful t
 * **Stunning Themes:** Seamlessly switches between Light and Dark mode to match your system's theme.
 * **Clutter-Free Design:** A clean, intuitive interface designed to be a pleasure to use every day.
 
+<br>
+
 ## Privacy Policy
 
 You can view our privacy policy [here](https://menstrudel.app/privacy/).
+
+<br>
 
 ## Socials
 
 - [Website](https://menstrudel.app/)
 - [ItsAllWidgets](https://itsallwidgets.com/menstrudel)
 - [AlternativeTo](https://alternativeto.net/software/menstrudel/about/)
+
+<br>
 
 # App Screenshots
 
