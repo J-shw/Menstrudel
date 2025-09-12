@@ -3,6 +3,7 @@ import 'package:wear_plus/wear_plus.dart';
 import 'dart:async';
 import 'package:watch_connectivity/watch_connectivity.dart';
 import 'package:menstrudel/widgets/progress_circle.dart';
+import 'package:menstrudel/utils/constants.dart';
 
 void main() {
   runApp(const MyApp());
@@ -60,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
           return const Center(
             child: Text(
               '--',
-              style: TextStyle(fontSize: 60, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: middleTextSize, fontWeight: FontWeight.bold),
             ),
           );
         }
