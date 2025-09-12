@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:menstrudel/models/period_logs/period_logs.dart';
+import 'package:menstrudel/models/period_logs/period_day.dart';
 import 'package:menstrudel/models/period_prediction_result.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
