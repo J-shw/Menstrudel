@@ -1,5 +1,6 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter/material.dart';
 
 import 'package:menstrudel/database/app_database.dart';
 import 'package:menstrudel/models/period_logs/period_day.dart';
@@ -72,6 +73,13 @@ class PeriodsRepository {
   // Period logs
 
   Future<PeriodDay> createPeriodLog(PeriodDay entry) async {
+    final today = DateUtils.dateOnly(DateTime.now());
+    final entryDate = DateUtils.dateOnly(entry.date);
+
+    if (entryDate.isAfter(today)) {
+      throw FutureDateException('Logs cannot be created for future dates.');
+    }
+
     final db = await dbProvider.database;
 
     final existingLogs = await db.query(
