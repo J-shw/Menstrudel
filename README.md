@@ -15,7 +15,7 @@ Free, offline, and open source period tracking app.
 
 Menstrudel is a simple, private, and intuitive mobile application built with Flutter to help you track your menstrual cycle. Log your period start dates, record symptoms and flow intensity, and get predictions for your next cycle. Designed with privacy in mind, all your personal health data is stored securely offline on your device.
 
-## Key Features for Your Menstrual Health
+## Key Features
 
 Take control of your menstrual health with an intuitive, private, and powerful tracker. Designed to be your all-in-one companion, it helps you understand your body, stay on top of your regimen, and anticipate your cycle with confidence.
 
