@@ -40,6 +40,11 @@ class PeriodLoggerService {
           SnackBar(content: Text(e.message)),
         );
         return false;
+      } on FutureDateException catch (e) { 
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(e.message)),
+        );
+        return false;
       }
 
       ScaffoldMessenger.of(context).showSnackBar(
