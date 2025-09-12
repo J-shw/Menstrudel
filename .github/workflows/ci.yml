@@ -22,6 +22,8 @@ jobs:
 
       - name: Install dependencies
         run: flutter pub get
+        working-directory: app
 
       - name: Run tests
         run: flutter test
+        working-directory: app
