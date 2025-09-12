@@ -1,4 +1,4 @@
-name: Deploy GitHub Pages Site
+name: Website Deploy
 on:
   push:
     branches:

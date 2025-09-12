@@ -1,4 +1,4 @@
-name: Build and Release Android App
+name: Android Release Build
 
 on:
   release:

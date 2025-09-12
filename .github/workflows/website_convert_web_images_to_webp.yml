@@ -1,4 +1,4 @@
-name: Convert PNG to WebP in Docs for Website
+name: Website Convert Web Images to WebP
 
 on:
   push:
