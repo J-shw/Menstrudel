@@ -1,5 +1,9 @@
 import 'dart:convert';
 
+/// Represents a single day's log within a menstrual cycle.
+///
+/// This class stores daily observations such as symptoms, flow, and pain level.
+/// Each [PeriodDay] object is associated with a parent [Period] via the [periodId].
 class PeriodDay {
 	int? id;
 	DateTime date;
