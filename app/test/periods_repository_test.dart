@@ -93,6 +93,14 @@ void main() {
         final future = repository.createPeriodLog(_log('2025-09-01'));
         expect(future, throwsA(isA<DuplicateLogException>()));
       });
+
+      test('createPeriodLog should throw FutureDateException for a future date', () async {
+        final tomorrow = DateTime.now().add(const Duration(days: 1));
+        final futureLog = PeriodDay(date: tomorrow, flow: 2, painLevel: 0, symptoms: []);
+
+        final futureCall = repository.createPeriodLog(futureLog);
+        expect(futureCall, throwsA(isA<FutureDateException>()));
+      });
     });
 
     group('Period Logs - Update Operations', () {
