@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.whitticase.menstrudel.wear"
+    namespace = "com.whitticase.menstrudel"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = "27.0.12077973"
 
@@ -20,9 +20,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.whitticase.menstrudel.wear"
-        // You can update the following values to match your application needs.
-        // For more information, see: https://flutter.dev/to/review-gradle-config.
+        applicationId = "com.whitticase.menstrudel"
         minSdk = 23
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode

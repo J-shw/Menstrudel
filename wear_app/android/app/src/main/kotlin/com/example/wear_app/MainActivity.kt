@@ -1,4 +1,4 @@
-package com.whitticase.menstrudel.wear
+package com.whitticase.menstrudel
 
 import io.flutter.embedding.android.FlutterActivity
 
