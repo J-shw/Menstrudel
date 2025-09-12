@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'dart:math';
+import 'package:menstrudel/utils/constants.dart';
 
 class WearProgressCircle extends StatefulWidget {
   final int currentValue;
@@ -14,7 +14,7 @@ class WearProgressCircle extends StatefulWidget {
     super.key,
     required this.currentValue,
     required this.maxValue,
-    this.circleSize = 150.0,
+    this.circleSize = 200.0,
     this.strokeWidth = 10.0,
     this.progressColor = Colors.red,
     this.trackColor = const Color(0xFF333333),
@@ -88,18 +88,17 @@ class _WearProgressCircleState extends State<WearProgressCircle>
             width: widget.circleSize,
             height: widget.circleSize,
             child: CircularProgressIndicator(
-                year2023: false,
-                value: _animation.value,
-                strokeWidth: widget.strokeWidth,
-                valueColor: AlwaysStoppedAnimation<Color>(widget.progressColor),
-                backgroundColor: widget.trackColor,
-              ),
+              year2023: false,
+              value: _animation.value,
+              strokeWidth: widget.strokeWidth,
+              valueColor: AlwaysStoppedAnimation<Color>(widget.progressColor),
+              backgroundColor: widget.trackColor,
             ),
-          
+          ),
           Text(
             '$displayValue',
             style: TextStyle(
-              fontSize: 60,
+              fontSize: middleTextSize,
               fontWeight: FontWeight.bold,
               color: colorScheme.primary,
             ),
