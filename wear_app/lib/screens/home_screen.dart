@@ -3,10 +3,12 @@ import 'package:flutter/services.dart';
 import 'package:wear_plus/wear_plus.dart';
 import 'dart:async';
 import 'package:watch_connectivity/watch_connectivity.dart';
-import 'package:menstrudel/models/circle_data.dart';
+import 'package:menstrudel/models/phone_sync/circle_data.dart';
 import 'package:menstrudel/services/phone_sync_service.dart';
 import 'package:menstrudel/widgets/progress_circle.dart';
-import 'package:menstrudel/models/phone_sync/app_context.dart';
+import 'package:menstrudel/models/phone_sync/shared_context.dart';
+import 'package:menstrudel/models/phone_sync/log_request.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -34,14 +36,16 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _logPeriod() {
-    final appContext = AppContext(
-      timestamp: DateTime.now().millisecondsSinceEpoch,
-      type: ContextType.logPeriodRequest,
+    final context = SharedContextData(
+      circleData: _circleData,
+      
+      logRequest: LogRequest(timestamp: DateTime.now().millisecondsSinceEpoch),
     );
 
-    _watch.updateApplicationContext(appContext.toJson());
-    debugPrint('Sent context: ${appContext.toJson()}');
+    _watch.updateApplicationContext(context.toJson());
+    debugPrint('Sent log request with context: ${context.toJson()}');
   }
+
 
   void _showConfirmationDialog() {
     HapticFeedback.mediumImpact();
