@@ -3,7 +3,6 @@ import 'package:wear_plus/wear_plus.dart';
 import 'dart:async';
 import 'package:watch_connectivity/watch_connectivity.dart';
 import 'package:menstrudel/widgets/progress_circle.dart';
-import 'package:menstrudel/utils/constants.dart';
 
 void main() {
   runApp(const MyApp());
@@ -31,17 +30,22 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final _watch = WatchConnectivity();
-  int _daysUntilDue = -1;
+  int _circleCurrentValue = 0;
+  int _circleMaxValue = 28;
   StreamSubscription? _messageSubscription;
 
   @override
   void initState() {
     super.initState();
     _messageSubscription = _watch.messageStream.listen((message) {
-      final days = message['daysUntilDue'] as int?;
-      if (days != null && mounted) {
+
+      final circleMaxValue = message['circleMaxValue'] as int;
+      final circleCurrentValue = message['circleCurrentValue'] as int;
+
+      if (mounted) {
         setState(() {
-          _daysUntilDue = days;
+          _circleCurrentValue = circleCurrentValue;
+          _circleMaxValue = circleMaxValue;
         });
       }
     });
@@ -57,19 +61,10 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return WatchShape(
       builder: (context, shape, child) {
-        if (_daysUntilDue == -1) {
-          return const Center(
-            child: Text(
-              '--',
-              style: TextStyle(fontSize: middleTextSize, fontWeight: FontWeight.bold),
-            ),
-          );
-        }
-
         return Center(
           child: WearProgressCircle(
-            currentValue: _daysUntilDue,
-            maxValue: 28,
+            currentValue: _circleCurrentValue,
+            maxValue: _circleMaxValue,
             progressColor: const Color.fromARGB(255, 255, 118, 118),
             trackColor: const Color.fromARGB(20, 255, 118, 118),
           ),
