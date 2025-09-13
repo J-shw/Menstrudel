@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:watch_connectivity/watch_connectivity.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:menstrudel/models/watch_sync/app_context.dart';
 
 class WatchSyncService {
   final _watch = WatchConnectivity();
@@ -26,23 +27,23 @@ class WatchSyncService {
   }
   
   Future<void> _handleContext(Map<String, dynamic> context) async {
-    debugPrint('Processing context: $context');
-    final int? timestamp = context['timestamp'];
-    if (timestamp == null) return; 
-
+    final appContext = AppContext.fromJson(context);
     final prefs = await SharedPreferences.getInstance();
     final processedIds = prefs.getStringList(_processedTimestampsKey) ?? [];
-
-    if (processedIds.contains(timestamp.toString())) {
-      debugPrint('Ignoring already processed context: $timestamp');
+    if (processedIds.contains(appContext.timestamp.toString())) {
+      debugPrint('Ignoring already processed context: ${appContext.timestamp}');
       return;
     }
 
-    if (context['log_period'] == true) {
-      onPeriodLogRequested?.call();
+    switch (appContext.type) {
+      case ContextType.logPeriodRequest:
+        debugPrint('Processing logPeriodRequest: ${appContext.timestamp}');
+        onPeriodLogRequested?.call();
+        break;
+      default:
+        break;
     }
-
-    processedIds.add(timestamp.toString());
+    processedIds.add(appContext.timestamp.toString());
     await prefs.setStringList(_processedTimestampsKey, processedIds);
   }
 
@@ -50,13 +51,16 @@ class WatchSyncService {
     required int circleMaxValue,
     required int circleCurrentValue,
   }) async {
-    final data = <String, dynamic>{
-      'circleMaxValue': circleMaxValue,
-      'circleCurrentValue': circleCurrentValue,
-      'context_type': 'circle_data', 
-    };
-    
-    _watch.updateApplicationContext(data);
+    final appContext = AppContext(
+      timestamp: DateTime.now().millisecondsSinceEpoch,
+      type: ContextType.circleDataUpdate,
+      data: {
+        'circleMaxValue': circleMaxValue,
+        'circleCurrentValue': circleCurrentValue,
+      },
+    );
+
+    _watch.updateApplicationContext(appContext.toJson());
   }
 
   void dispose() {
