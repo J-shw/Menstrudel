@@ -6,6 +6,7 @@ import 'package:watch_connectivity/watch_connectivity.dart';
 import 'package:menstrudel/models/circle_data.dart';
 import 'package:menstrudel/services/phone_sync_service.dart';
 import 'package:menstrudel/widgets/progress_circle.dart';
+import 'package:menstrudel/models/phone_sync/app_context.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -33,12 +34,13 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _logPeriod() {
-    debugPrint('Sent request to log period from the watch.');
-    final data = {
-      'log_period': true,
-      'timestamp': DateTime.now().millisecondsSinceEpoch,
-    };
-    _watch.updateApplicationContext(data);
+    final appContext = AppContext(
+      timestamp: DateTime.now().millisecondsSinceEpoch,
+      type: ContextType.logPeriodRequest,
+    );
+
+    _watch.updateApplicationContext(appContext.toJson());
+    debugPrint('Sent context: ${appContext.toJson()}');
   }
 
   void _showConfirmationDialog() {
