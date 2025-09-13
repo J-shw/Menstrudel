@@ -134,8 +134,8 @@ class LogsScreenState extends State<LogsScreen> {
     }
     widget.onFabStateChange(currentState);
 
-    int daysUntilDueForCircle = _predictionResult?.daysUntilDue ?? 0; 
-		int circleMaxValue = _predictionResult?.averageCycleLength ?? 28;
+    int daysUntilDueForCircle = predictionResult?.daysUntilDue ?? 0; 
+		int circleMaxValue = predictionResult?.averageCycleLength ?? 28;
 		int circleCurrentValue = daysUntilDueForCircle.clamp(0, circleMaxValue); 
 
     setState(() {
