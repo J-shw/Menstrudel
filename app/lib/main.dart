@@ -8,6 +8,11 @@ import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:menstrudel/l10n/app_localizations.dart'; 
 import 'package:menstrudel/notifiers/theme_notifier.dart';
 import 'package:provider/provider.dart';
+import 'package:menstrudel/services/wear_sync_service.dart';
+import 'package:menstrudel/database/repositories/periods_repository.dart';
+
+final watchService = WatchSyncService();
+final periodsRepository = PeriodsRepository();
 
 void main() async { 
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,6 +26,11 @@ void main() async {
   }
   
   await NotificationService.initialize();
+
+  watchService.initialize(
+    onPeriodLog: periodsRepository.logPeriodFromWatch,
+  );
+
   runApp(
     ChangeNotifierProvider(
       create: (_) => ThemeNotifier(),
