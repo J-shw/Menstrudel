@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:watch_connectivity/watch_connectivity.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:menstrudel/models/watch_sync/app_context.dart';
+import 'package:menstrudel/models/watch_sync/shared_context.dart';
+import 'package:menstrudel/models/watch_sync/circle_data.dart';
 
 class WatchSyncService {
   final _watch = WatchConnectivity();
@@ -26,24 +27,26 @@ class WatchSyncService {
     _subscription = _watch.contextStream.listen(_handleContext);
   }
   
-  Future<void> _handleContext(Map<String, dynamic> context) async {
-    final appContext = AppContext.fromJson(context);
-    final prefs = await SharedPreferences.getInstance();
-    final processedIds = prefs.getStringList(_processedTimestampsKey) ?? [];
-    if (processedIds.contains(appContext.timestamp.toString())) {
-      debugPrint('Ignoring already processed context: ${appContext.timestamp}');
+  Future<void> _handleContext(Map<String, dynamic> contextMap) async {
+    final context = SharedContextData.fromJson(contextMap);
+
+    if (context.logRequest == null) {
       return;
     }
 
-    switch (appContext.type) {
-      case ContextType.logPeriodRequest:
-        debugPrint('Processing logPeriodRequest: ${appContext.timestamp}');
-        onPeriodLogRequested?.call();
-        break;
-      default:
-        break;
+    final timestamp = context.logRequest!.timestamp;
+    final prefs = await SharedPreferences.getInstance();
+    final processedIds = prefs.getStringList(_processedTimestampsKey) ?? [];
+
+    if (processedIds.contains(timestamp.toString())) {
+      debugPrint('Ignoring already processed log request: $timestamp');
+      return;
     }
-    processedIds.add(appContext.timestamp.toString());
+
+    debugPrint('Processing new log request: $timestamp');
+    onPeriodLogRequested?.call();
+
+    processedIds.add(timestamp.toString());
     await prefs.setStringList(_processedTimestampsKey, processedIds);
   }
 
@@ -51,16 +54,16 @@ class WatchSyncService {
     required int circleMaxValue,
     required int circleCurrentValue,
   }) async {
-    final appContext = AppContext(
-      timestamp: DateTime.now().millisecondsSinceEpoch,
-      type: ContextType.circleDataUpdate,
-      data: {
-        'circleMaxValue': circleMaxValue,
-        'circleCurrentValue': circleCurrentValue,
-      },
+    final newCircleData = CircleData(
+      currentValue: circleCurrentValue,
+      maxValue: circleMaxValue,
     );
+    
+    final context = SharedContextData(circleData: newCircleData);
 
-    _watch.updateApplicationContext(appContext.toJson());
+    debugPrint('Sending circle data: ${context.toString()}');
+    
+    _watch.updateApplicationContext(context.toJson());
   }
 
   void dispose() {
