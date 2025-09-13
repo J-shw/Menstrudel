@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:watch_connectivity/watch_connectivity.dart';
 import 'package:flutter/foundation.dart';
-import 'package:menstrudel/models/circle_data.dart';
-import 'package:menstrudel/models/phone_sync/app_context.dart';
+import 'package:menstrudel/models/phone_sync/circle_data.dart';
+import 'package:menstrudel/models/phone_sync/shared_context.dart';
 
 class WatchDataService {
   final _watch = WatchConnectivity();
@@ -22,21 +22,14 @@ class WatchDataService {
     }
   }
 
-  void _handleContext(Map<String, dynamic> context) {
-    final appContext = AppContext.fromJson(context);
+  void _handleContext(Map<dynamic, dynamic> contextMap) {
+    final context = SharedContextData.fromJson(contextMap);
+    debugPrint('Received context: ${context.toString()}');
 
-    switch (appContext.type) {
-      case ContextType.circleDataUpdate:
-        debugPrint("Processing circleDataUpdate");
-        
-        final data = CircleData(
-          currentValue: appContext.data['circleCurrentValue'] as int? ?? 0,
-          maxValue: appContext.data['circleMaxValue'] as int? ?? 28,
-        );
-        _circleDataController.add(data);
-        break;
-      default:
-        break;
+    if (context.circleData != null) {
+      debugPrint("Processing circleData update");
+      
+      _circleDataController.add(context.circleData!);
     }
   }
 
