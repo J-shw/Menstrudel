@@ -52,8 +52,12 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _logPeriod() {
-    _watch.sendMessage({'log_period': true});
-    print('Sent request to log period from the watch.');
+    debugPrint('Sent request to log period from the watch.');
+    final data = {
+      'log_period': true,
+      'timestamp': DateTime.now().millisecondsSinceEpoch,
+    };
+    _watch.updateApplicationContext(data);
   }
 
   void _showConfirmationDialog() {
