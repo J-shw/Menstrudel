@@ -4,6 +4,8 @@ import 'dart:async';
 import 'package:watch_connectivity/watch_connectivity.dart';
 import 'package:menstrudel/widgets/progress_circle.dart';
 import 'package:flutter/services.dart';
+import 'package:menstrudel/models/circle_data.dart';
+import 'package:menstrudel/services/phone_sync_service.dart';
 
 void main() {
   runApp(const MyApp());
@@ -31,21 +33,17 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final _watch = WatchConnectivity();
-  int _circleCurrentValue = 0;
-  int _circleMaxValue = 28;
-  StreamSubscription? _messageSubscription;
+  final _dataService = WatchDataService();
+  StreamSubscription? _dataSubscription;
+  CircleData _circleData = CircleData();
 
   @override
   void initState() {
     super.initState();
-    _messageSubscription = _watch.messageStream.listen((message) {
-      final circleMaxValue = message['circleMaxValue'] as int;
-      final circleCurrentValue = message['circleCurrentValue'] as int;
-
+    _dataSubscription = _dataService.circleDataStream.listen((newData) {
       if (mounted) {
         setState(() {
-          _circleCurrentValue = circleCurrentValue;
-          _circleMaxValue = circleMaxValue;
+          _circleData = newData;
         });
       }
     });
@@ -56,6 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
     final data = {
       'log_period': true,
       'timestamp': DateTime.now().millisecondsSinceEpoch,
+      'context_type': 'log_period', 
     };
     _watch.updateApplicationContext(data);
   }
@@ -114,7 +113,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void dispose() {
-    _messageSubscription?.cancel();
+    _dataSubscription?.cancel();
     super.dispose();
   }
 
@@ -127,8 +126,8 @@ class _MyHomePageState extends State<MyHomePage> {
             onLongPress: _showConfirmationDialog,
             child: Center(
               child: WearProgressCircle(
-                currentValue: _circleCurrentValue,
-                maxValue: _circleMaxValue,
+                currentValue: _circleData.currentValue,
+                maxValue: _circleData.maxValue,
                 progressColor: const Color.fromARGB(255, 255, 118, 118),
                 trackColor: const Color.fromARGB(20, 255, 118, 118),
               ),
