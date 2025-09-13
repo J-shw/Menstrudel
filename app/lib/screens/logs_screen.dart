@@ -41,6 +41,8 @@ class LogsScreenState extends State<LogsScreen> {
 	bool _isLoading = true;
 	PeriodPredictionResult? _predictionResult;
   PeriodHistoryView _selectedView = PeriodHistoryView.journal;
+  int _circleCurrentValue = 0;
+  int _circleMaxValue = 28;
 
   Future<void> handleLogPeriod(DateTime selectedDate) async {
     final bool wasLogSuccessful = await PeriodLoggerService.showAndLogPeriod(context, selectedDate);
@@ -109,26 +111,20 @@ class LogsScreenState extends State<LogsScreen> {
       final notificationDays = await settingsService.getNotificationDays();
       final notificationTime = await settingsService.getNotificationTime();
 
-      await _watchSyncService.sendPrediction(
-        daysUntilDue: predictionResult.daysUntilDue,
-      );
-
-      if (!mounted) return;
-
-      final l10n = AppLocalizations.of(context)!;
+      if (mounted){
+        final l10n = AppLocalizations.of(context)!;
       
-      await NotificationService.schedulePeriodNotification(
-        scheduledTime: predictionResult.estimatedStartDate,
-        areEnabled: notificationsEnabled,
-        daysBefore: notificationDays,
-        notificationTime: notificationTime,
-        title: l10n.notification_periodTitle,
-        body: l10n.notification_periodBody(notificationDays),
-      );
+        await NotificationService.schedulePeriodNotification(
+          scheduledTime: predictionResult.estimatedStartDate,
+          areEnabled: notificationsEnabled,
+          daysBefore: notificationDays,
+          notificationTime: notificationTime,
+          title: l10n.notification_periodTitle,
+          body: l10n.notification_periodBody(notificationDays),
+        );
+      }
     }
     
-    if (!mounted) return;
-
     final isPeriodOngoing = periods.isNotEmpty && DateUtils.isSameDay(periods.first.endDate, DateTime.now());
     FabState currentState;
     if (!isPeriodOngoing) {
@@ -138,13 +134,24 @@ class LogsScreenState extends State<LogsScreen> {
     }
     widget.onFabStateChange(currentState);
 
+    int daysUntilDueForCircle = _predictionResult?.daysUntilDue ?? 0; 
+		int circleMaxValue = _predictionResult?.averageCycleLength ?? 28;
+		int circleCurrentValue = daysUntilDueForCircle.clamp(0, circleMaxValue); 
+
     setState(() {
       _isLoading = false;
       _periodLogEntries = periodDays;
       _periodEntries = periods;
       _predictionResult = predictionResult;
       _selectedView = selectedView;
+      _circleCurrentValue = circleCurrentValue;
+      _circleMaxValue = circleMaxValue;
     });
+
+    await _watchSyncService.sendCircleData(
+      circleMaxValue: _circleMaxValue,
+      circleCurrentValue: _circleCurrentValue,
+    );
   }
 
   void _handleSaveLog(PeriodDay updatedLog) {
@@ -161,10 +168,6 @@ class LogsScreenState extends State<LogsScreen> {
 	@override
 	Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-
-		int daysUntilDueForCircle = _predictionResult?.daysUntilDue ?? 0; 
-		int circleMaxValue = _predictionResult?.averageCycleLength ?? 28;
-		int circleCurrentValue = daysUntilDueForCircle.clamp(0, circleMaxValue); 
 
 		String predictionText = '';
 		if (_isLoading) {
@@ -188,8 +191,8 @@ class LogsScreenState extends State<LogsScreen> {
       children: [
         const SizedBox(height: 100),
         BasicProgressCircle(
-          currentValue: circleCurrentValue,
-          maxValue: circleMaxValue,
+          currentValue: _circleCurrentValue,
+          maxValue: _circleMaxValue,
           circleSize: 220,
           strokeWidth: 20,
           progressColor: const Color.fromARGB(255, 255, 118, 118),
