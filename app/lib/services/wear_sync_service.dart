@@ -3,9 +3,13 @@ import 'package:watch_connectivity/watch_connectivity.dart';
 class WatchSyncService {
   final _watch = WatchConnectivity();
 
-  Future<void> sendPrediction({required int daysUntilDue}) async {
+  Future<void> sendCircleData({
+      required int circleMaxValue,
+      required int circleCurrentValue,
+    }) async {
     final data = <String, dynamic>{
-      'daysUntilDue': daysUntilDue,
+      'circleMaxValue': circleMaxValue,
+      'circleCurrentValue': circleCurrentValue,
     };
     _watch.sendMessage(data);
   }
