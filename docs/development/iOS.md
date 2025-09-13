@@ -1,0 +1,1 @@
+from the 'app' folder run `open ios/Runner.xcworkspace`
