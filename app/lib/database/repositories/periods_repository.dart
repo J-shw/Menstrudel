@@ -12,6 +12,26 @@ class PeriodsRepository {
   final dbProvider = AppDatabase.instance;
   static const String _whereId = 'id = ?';
 
+  Future<void> logPeriodFromWatch() async {
+    print('Received request from watch! Logging period now...');
+
+    try {
+      final newLog = PeriodDay(
+        date: DateTime.now(),
+        flow: 2,
+        painLevel: 0,
+      );
+
+      await createPeriodLog(newLog);
+      debugPrint('Successfully logged period from the watch.');
+
+    } on DuplicateLogException {
+      debugPrint('Watch log ignored: A log for today already exists.');
+    } catch (e) {
+      debugPrint('An error occurred while logging from the watch: $e');
+    }
+  }
+
   /// Validates a log's date, throwing exceptions for future or duplicate dates.
   Future<void> _validateLogDate(Database db, DateTime date, {int? idToExclude}) async {
     final today = DateUtils.dateOnly(DateTime.now());
