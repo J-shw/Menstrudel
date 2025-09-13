@@ -47,14 +47,16 @@ class WatchSyncService {
   }
 
   Future<void> sendCircleData({
-      required int circleMaxValue,
-      required int circleCurrentValue,
-    }) async {
+    required int circleMaxValue,
+    required int circleCurrentValue,
+  }) async {
     final data = <String, dynamic>{
       'circleMaxValue': circleMaxValue,
       'circleCurrentValue': circleCurrentValue,
+      'context_type': 'circle_data', 
     };
-    _watch.sendMessage(data);
+    
+    _watch.updateApplicationContext(data);
   }
 
   void dispose() {
