@@ -27,7 +27,7 @@ class WatchSyncService {
     _subscription = _watch.contextStream.listen(_handleContext);
   }
   
-  Future<void> _handleContext(Map<String, dynamic> contextMap) async {
+  Future<void> _handleContext(Map<dynamic, dynamic> contextMap) async {
     final context = SharedContextData.fromJson(contextMap);
 
     if (context.logRequest == null) {
