@@ -1,11 +1,9 @@
+import 'dart:math' as math;
 import 'package:flutter/material.dart';
-import 'package:menstrudel/utils/constants.dart';
 
 class WearProgressCircle extends StatefulWidget {
   final int currentValue;
   final int maxValue;
-  final double circleSize;
-  final double strokeWidth;
   final Color progressColor;
   final Color trackColor;
   final Duration animationDuration;
@@ -14,8 +12,6 @@ class WearProgressCircle extends StatefulWidget {
     super.key,
     required this.currentValue,
     required this.maxValue,
-    this.circleSize = 200.0,
-    this.strokeWidth = 10.0,
     this.progressColor = Colors.red,
     this.trackColor = const Color(0xFF333333),
     this.animationDuration = const Duration(milliseconds: 700),
@@ -78,33 +74,55 @@ class _WearProgressCircleState extends State<WearProgressCircle>
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final int displayValue = widget.currentValue.abs();
 
-    return SizedBox(
-      width: widget.circleSize,
-      height: widget.circleSize,
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          SizedBox(
-            width: widget.circleSize,
-            height: widget.circleSize,
-            child: CircularProgressIndicator(
-              year2023: false,
-              value: _animation.value,
-              strokeWidth: widget.strokeWidth,
-              valueColor: AlwaysStoppedAnimation<Color>(widget.progressColor),
-              backgroundColor: widget.trackColor,
-            ),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final double size = math.min(constraints.maxWidth, constraints.maxHeight);
+
+        final double strokeWidth = size * 0.06;
+        final double fontSize = size * 0.35;
+
+        return SizedBox(
+          width: size,
+          height: size,
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              SizedBox(
+                width: size,
+                height: size,
+                child: CircularProgressIndicator(
+                  year2023: false,
+                  value: _animation.value,
+                  strokeWidth: strokeWidth,
+                  valueColor: AlwaysStoppedAnimation<Color>(widget.progressColor),
+                  backgroundColor: widget.trackColor,
+                ),
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    '$displayValue',
+                    style: TextStyle(
+                      fontSize: fontSize,
+                      fontWeight: FontWeight.bold,
+                      color: colorScheme.primary,
+                    ),
+                  ),
+                  Text(
+                    'Days',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.normal,
+                      color: colorScheme.secondary,
+                    ),
+                  ),
+                ]
+              ),
+            ],
           ),
-          Text(
-            '$displayValue',
-            style: TextStyle(
-              fontSize: middleTextSize,
-              fontWeight: FontWeight.bold,
-              color: colorScheme.primary,
-            ),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
