@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/database/repositories/periods_repository.dart';
-import 'package:menstrudel/models/period_logs/period_logs.dart';
+import 'package:menstrudel/models/period_logs/period_day.dart';
 import 'package:menstrudel/models/periods/period.dart';
 import 'package:menstrudel/models/flows/flow_data.dart';
 
 import 'package:menstrudel/widgets/insights/symptom_frequency.dart';
 import 'package:menstrudel/widgets/insights/cycle_length_variance.dart';
 import 'package:menstrudel/widgets/insights/flow_intensity.dart';
+import 'package:menstrudel/widgets/insights/pain_intensity.dart';
 import 'package:menstrudel/widgets/insights/year_heat_map.dart';
 import 'package:menstrudel/widgets/insights/monthly_flow.dart';
 
@@ -55,8 +56,8 @@ class _InsightsScreenState extends State<InsightsScreen> {
         }
 
         if (snapshot.hasData) {
-          final allPeriods = snapshot.data![0] as List<PeriodEntry>;
-          final allLogs = snapshot.data![1] as List<PeriodLogEntry>;
+          final allPeriods = snapshot.data![0] as List<Period>;
+          final allLogs = snapshot.data![1] as List<PeriodDay>;
           final allFlows = snapshot.data![2] as List<MonthlyFlowData>;
 
           return ListView(
@@ -65,6 +66,8 @@ class _InsightsScreenState extends State<InsightsScreen> {
               SymptomFrequencyWidget(logs: allLogs),
 
               CycleLengthVarianceWidget(periods: allPeriods),
+
+              PainBreakdownWidget(logs: allLogs),
 
               FlowBreakdownWidget(logs: allLogs),
 

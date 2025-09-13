@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:menstrudel/models/period_logs/period_logs.dart';
+import 'package:menstrudel/models/period_logs/period_day.dart';
 import 'package:menstrudel/models/period_prediction_result.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/widgets/sheets/period_details_bottom_sheet.dart';
 
 class PeriodJournalView extends StatefulWidget {
-  final List<PeriodLogEntry> periodLogEntries;
+  final List<PeriodDay> periodLogEntries;
   final bool isLoading;
   final Function(int) onDelete;
-  final Function(PeriodLogEntry) onSave;
+  final Function(PeriodDay) onSave;
   final PeriodPredictionResult? predictionResult;
   final Function(DateTime) onLogRequested;
 
@@ -30,7 +30,7 @@ class PeriodJournalView extends StatefulWidget {
 class _PeriodJournalViewState extends State<PeriodJournalView> {
   late DateTime _focusedDay;
   DateTime? _selectedDay;
-  Map<DateTime, PeriodLogEntry> _logMap = {};
+  Map<DateTime, PeriodDay> _logMap = {};
 
   @override
   void initState() {
@@ -53,14 +53,14 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
     };
   }
 
-  void _handleDelete(PeriodLogEntry entryToDelete) {
+  void _handleDelete(PeriodDay entryToDelete) {
     Navigator.of(context).pop();
     if (entryToDelete.id != null) {
       widget.onDelete(entryToDelete.id!);
     }
   }
 
-  void _showDetailsBottomSheet(PeriodLogEntry log) {
+  void _showDetailsBottomSheet(PeriodDay log) {
     showModalBottomSheet<void>(
       context: context,
       isScrollControlled: true,
@@ -154,9 +154,6 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
               calendarBuilders: CalendarBuilders(
                 prioritizedBuilder: (context, day, focusedDay) {
                   final log = _logMap[DateUtils.dateOnly(day)];
-                  final isPredictedDay =
-                      isSameDay(day, widget.predictionResult?.estimatedDate);
-
                   if (log != null) {
                     final flowOpacity = 0.3 + (log.flow * 0.33);
                     return Container(
@@ -173,6 +170,18 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
                         ),
                       ),
                     );
+                  }
+
+                  final startDate = widget.predictionResult?.estimatedStartDate;
+                  final endDate = widget.predictionResult?.estimatedEndDate;
+                  bool isPredictedDay = false;
+
+                  if (startDate != null && endDate != null) {
+                    final dayOnly = DateUtils.dateOnly(day);
+                    final startOnly = DateUtils.dateOnly(startDate);
+                    final endOnly = DateUtils.dateOnly(endDate);
+
+                    isPredictedDay = !dayOnly.isBefore(startOnly) && !dayOnly.isAfter(endOnly);
                   }
 
                   if (isPredictedDay) {

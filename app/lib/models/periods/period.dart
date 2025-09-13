@@ -1,6 +1,10 @@
 import 'package:intl/intl.dart';
 
-class PeriodEntry {
+/// Represents a single, complete period event, defined by a start and end date.
+///
+/// Each [Period] object can be linked to a list of [PeriodDay] objects
+/// that contain day-to-day details.
+class Period {
 	final int? id;
 	final DateTime startDate;
 	final DateTime endDate;
@@ -10,7 +14,7 @@ class PeriodEntry {
     return DateFormat('MMM').format(startDate);
   }
 
-	PeriodEntry({
+	Period({
 		this.id, 
 		required this.startDate, 
 		required this.endDate,
@@ -26,8 +30,8 @@ class PeriodEntry {
 		};
 	}
 
-	factory PeriodEntry.fromMap(Map<String, dynamic> map) {
-		return PeriodEntry(
+	factory Period.fromMap(Map<String, dynamic> map) {
+		return Period(
 			id: map['id'],
 			startDate: DateTime.fromMillisecondsSinceEpoch(map['start_date']),
 			endDate: DateTime.fromMillisecondsSinceEpoch(map['end_date']),
@@ -35,13 +39,13 @@ class PeriodEntry {
 		);
 	}
 
-	PeriodEntry copyWith({
+	Period copyWith({
 		int? id,
 		DateTime? startDate,
 		DateTime? endDate,
 		int? totalDays,
 	}) {
-		return PeriodEntry(
+		return Period(
 			id: id ?? this.id,
 			startDate: startDate ?? this.startDate,
 			endDate: endDate ?? this.endDate,

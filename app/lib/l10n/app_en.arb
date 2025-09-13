@@ -31,6 +31,7 @@
     "yes": "Yes",
     "no": "No",
     "cancel": "Cancel",
+    "select": "Select",
 
     "flow": "Flow",
 
@@ -50,6 +51,13 @@
     "symptom_moodSwings": "Mood Swings",
     "symptom_bloating": "Bloating",
     "symptom_acne": "Acne",
+
+    "painLevel_title": "Pain Level",
+    "painLevel_none": "None",
+    "painLevel_mild": "Mild",
+    "painLevel_moderate": "Moderate",
+    "painLevel_severe": "Severe",
+    "pain_unbearable": "Unbearable",
 
     "notification_periodTitle": "Period Approaching",
     "@notification_periodTitle": {
@@ -119,6 +127,10 @@
     "settingsScreen_deleteAllLogsDescription": "This will permanently delete all your period logs. Your app settings will not be affected.",
     "settingsScreen_appearance": "Appearance",
     "settingsScreen_historyViewStyle": "History View Style",
+    "settingsScreen_dynamicTheme": "Dynamic Theme",
+    "settingsScreen_useWallpaperColors": "Use Wallpaper Colors",
+    "settingsScreen_themeColor": "Theme Color",
+    "settingsScreen_pickAColor": "Pick a Color",
     "settingsScreen_view": "View",
     "settingsScreen_birthControl": "Birth Control",
     "settingsScreen_setUpPillRegimen": "Set Up Pill Regimen",
@@ -142,6 +154,9 @@
 
     "flowIntensityWidget_flowIntensityBreakdown": "Flow Intensity Breakdown",
     "flowIntensityWidget_noFlowDataLoggedYet": "No flow data logged yet.",
+
+    "painLevelWidget_noPainDataLoggedYet": "No pain data logged yet.",
+    "painLevelWidget_painLevelBreakdown": "Pain Level Breakdown",
 
     "monthlyFlowChartWidget_noDataToDisplay": "No data to display.",
     "monthlyFlowChartWidget_cycleFlowPatterns": "Cycle Flow Patterns",

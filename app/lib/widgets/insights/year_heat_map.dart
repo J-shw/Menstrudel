@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:menstrudel/models/period_logs/period_logs.dart';
+import 'package:menstrudel/models/period_logs/period_day.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 
 class YearHeatmapWidget extends StatelessWidget {
-  final List<PeriodLogEntry> logs;
+  final List<PeriodDay> logs;
   const YearHeatmapWidget({super.key, required this.logs});
   
   Color _getFlowColor(int flow) {
@@ -25,7 +25,6 @@ class YearHeatmapWidget extends StatelessWidget {
 
     return Card(
       elevation: 0,
-      color: colorScheme.surfaceContainerHighest,
       child: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(

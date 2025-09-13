@@ -56,12 +56,14 @@ class PillsRepository {
 
   Future<PillRegimen> createPillRegimen(PillRegimen regimen) async {
     final db = await dbProvider.database;
+    late PillRegimen createdRegimen; 
+    
     await db.transaction((txn) async {
       await txn.update('PillRegimen', {'is_active': 0}, where: 'is_active = 1');
       final id = await txn.insert('PillRegimen', regimen.toMap());
-      return regimen.copyWith(id: id);
+      createdRegimen = regimen.copyWith(id: id); 
     });
-    return regimen;
+    return createdRegimen; 
   }
 
   Future<void> deletePillRegimen(int id) async {

@@ -9,21 +9,29 @@ class AppDatabase {
     AppDatabase._init();
 
     Future<Database> get database async {
-      if (_database != null) return _database!;
-      _database = await _initDB('app_database.db');
-      return _database!;
+      return _database ??= await init();
     }
 
-    Future<Database> _initDB(String filePath) async {
-      final dbPath = await getDatabasesPath();
-      final path = join(dbPath, filePath);
+    Future<Database> init({bool inMemory = false}) async {
+      if (_database != null && !inMemory) {
+        return _database!;
+      }
 
-      return await openDatabase(
+      String path;
+      if (inMemory) {
+        path = inMemoryDatabasePath;
+      } else {
+        final dbPath = await getDatabasesPath();
+        path = join(dbPath, 'app_database.db');
+      }
+
+      _database = await openDatabase(
         path,
-        version: 3,
+        version: 4,
         onCreate: _createDB,
         onUpgrade: _upgradeDB,
       );
+      return _database!;
     }
 
   Future _createDB(Database db, int version) async {
@@ -44,6 +52,7 @@ class AppDatabase {
           date TEXT NOT NULL,
           symptoms  TEXT,
           flow INTEGER NOT NULL,
+          painLevel INTEGER NOT NULL,
           period_id INTEGER,
           FOREIGN KEY (period_id) REFERENCES periods(id) ON DELETE SET NULL
       )
@@ -59,6 +68,9 @@ class AppDatabase {
     }
     if (oldVersion < 3) {
       await _migrateSymptoms(db);
+    }
+    if (oldVersion < 4) {
+      await db.execute('ALTER TABLE period_logs ADD COLUMN painLevel INTEGER NOT NULL DEFAULT 0');
     }
   }
 
@@ -140,9 +152,9 @@ class AppDatabase {
     }
   }
 
-  Future close() async {
-    final db = await instance.database;
+  Future<void> close() async {
+    final db = await database;
+    await db.close();
     _database = null;
-    db.close();
   }
 }

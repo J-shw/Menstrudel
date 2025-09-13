@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:menstrudel/models/period_logs/period_logs.dart';
+import 'package:menstrudel/models/period_logs/period_day.dart';
 import 'package:menstrudel/models/periods/period.dart';
 import 'package:collection/collection.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
@@ -8,8 +8,8 @@ import 'package:menstrudel/models/period_logs/flow_enum.dart';
 import 'package:menstrudel/models/period_logs/symptom_enum.dart';
 
 class PeriodListView extends StatelessWidget {
-  final List<PeriodLogEntry> periodLogEntries;
-  final List<PeriodEntry> periodEntries;
+  final List<PeriodDay> periodLogEntries;
+  final List<Period> periodEntries;
   final bool isLoading;
   final Function(int) onDelete;
 
@@ -48,9 +48,9 @@ class PeriodListView extends StatelessWidget {
         itemCount: items.length,
         itemBuilder: (context, index) {
           final item = items[index];
-          if (item is PeriodEntry) {
+          if (item is Period) {
             return _buildPeriodHeader(item, context);
-          } else if (item is PeriodLogEntry) {
+          } else if (item is PeriodDay) {
             return _buildPeriodLog(item, context);
           }
           return const SizedBox.shrink();
@@ -70,7 +70,7 @@ class PeriodListView extends StatelessWidget {
     return items;
   }
 
-  Widget _buildPeriodHeader(PeriodEntry period, BuildContext context) {
+  Widget _buildPeriodHeader(Period period, BuildContext context) {
     final duration = period.endDate.difference(period.startDate).inDays + 1;
     final isOngoing = DateUtils.isSameDay(period.endDate, DateTime.now());
 
@@ -99,7 +99,7 @@ class PeriodListView extends StatelessWidget {
     );
   }
 
-  Widget _buildPeriodLog(PeriodLogEntry entry, BuildContext context) {
+  Widget _buildPeriodLog(PeriodDay entry, BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
     final l10n = AppLocalizations.of(context)!;

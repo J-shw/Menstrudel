@@ -194,6 +194,12 @@ abstract class AppLocalizations {
   /// **'Cancel'**
   String get cancel;
 
+  /// No description provided for @select.
+  ///
+  /// In en, this message translates to:
+  /// **'Select'**
+  String get select;
+
   /// No description provided for @flow.
   ///
   /// In en, this message translates to:
@@ -283,6 +289,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Acne'**
   String get symptom_acne;
+
+  /// No description provided for @painLevel_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Pain Level'**
+  String get painLevel_title;
+
+  /// No description provided for @painLevel_none.
+  ///
+  /// In en, this message translates to:
+  /// **'None'**
+  String get painLevel_none;
+
+  /// No description provided for @painLevel_mild.
+  ///
+  /// In en, this message translates to:
+  /// **'Mild'**
+  String get painLevel_mild;
+
+  /// No description provided for @painLevel_moderate.
+  ///
+  /// In en, this message translates to:
+  /// **'Moderate'**
+  String get painLevel_moderate;
+
+  /// No description provided for @painLevel_severe.
+  ///
+  /// In en, this message translates to:
+  /// **'Severe'**
+  String get painLevel_severe;
+
+  /// No description provided for @pain_unbearable.
+  ///
+  /// In en, this message translates to:
+  /// **'Unbearable'**
+  String get pain_unbearable;
 
   /// Title for the upcoming period notification.
   ///
@@ -470,6 +512,30 @@ abstract class AppLocalizations {
   /// **'History View Style'**
   String get settingsScreen_historyViewStyle;
 
+  /// No description provided for @settingsScreen_dynamicTheme.
+  ///
+  /// In en, this message translates to:
+  /// **'Dynamic Theme'**
+  String get settingsScreen_dynamicTheme;
+
+  /// No description provided for @settingsScreen_useWallpaperColors.
+  ///
+  /// In en, this message translates to:
+  /// **'Use Wallpaper Colors'**
+  String get settingsScreen_useWallpaperColors;
+
+  /// No description provided for @settingsScreen_themeColor.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme Color'**
+  String get settingsScreen_themeColor;
+
+  /// No description provided for @settingsScreen_pickAColor.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick a Color'**
+  String get settingsScreen_pickAColor;
+
   /// No description provided for @settingsScreen_view.
   ///
   /// In en, this message translates to:
@@ -589,6 +655,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No flow data logged yet.'**
   String get flowIntensityWidget_noFlowDataLoggedYet;
+
+  /// No description provided for @painLevelWidget_noPainDataLoggedYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No pain data logged yet.'**
+  String get painLevelWidget_noPainDataLoggedYet;
+
+  /// No description provided for @painLevelWidget_painLevelBreakdown.
+  ///
+  /// In en, this message translates to:
+  /// **'Pain Level Breakdown'**
+  String get painLevelWidget_painLevelBreakdown;
 
   /// No description provided for @monthlyFlowChartWidget_noDataToDisplay.
   ///

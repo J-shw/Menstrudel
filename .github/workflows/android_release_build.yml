@@ -1,0 +1,85 @@
+name: Android Release Build
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+  build_android:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write 
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Java Development Kit (JDK)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Set up Flutter SDK
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+
+      - name: Decode Keystore
+        run: echo "${{ secrets.SIGNING_KEY_STORE_BASE64 }}" | base64 --decode > app/android/app/upload-keystore.jks
+
+      - name: Create key.properties
+        run: |
+          echo "storeFile=upload-keystore.jks" > app/android/app/key.properties
+          echo "storePassword=${{ secrets.KEY_STORE_PASSWORD }}" >> app/android/app/key.properties
+          echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> app/android/app/key.properties
+          echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> app/android/app/key.properties
+
+
+      - name: Install Flutter dependencies
+        working-directory: ./app
+        run: flutter pub get
+
+      - name: Build Android App Bundle (AAB)
+        working-directory: ./app
+        run: flutter build appbundle --release
+
+      - name: Build Android APK
+        working-directory: ./app
+        run: flutter build apk --release
+
+      - name: Upload App Bundle as an artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: menstrudel-release-aab
+          path: ./app/build/app/outputs/bundle/release/app-release.aab
+
+      - name: Upload APK as an artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: menstrudel-release-apk
+          path: ./app/build/app/outputs/flutter-apk/app-release.apk
+
+      - name: Get version from Git tag
+        id: get_version
+        run: echo "VERSION=${{ github.ref_name }}" >> $GITHUB_ENV
+
+      - name: Upload App Bundle to Release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ./app/build/app/outputs/bundle/release/app-release.aab
+          asset_name: menstrudel-${{ env.VERSION }}.aab
+          asset_content_type: application/octet-stream
+
+      - name: Upload APK to Release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ./app/build/app/outputs/flutter-apk/app-release.apk
+          asset_name: menstrudel-${{ env.VERSION }}.apk
+          asset_content_type: application/vnd.android.package-archive

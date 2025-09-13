@@ -15,14 +15,21 @@ class PillRegimen {
     required this.isActive,
   });
 
-  PillRegimen copyWith({int? id}) {
+  PillRegimen copyWith({
+    int? id,
+    String? name,
+    int? activePills,
+    int? placeboPills,
+    DateTime? startDate,
+    bool? isActive,
+  }) {
     return PillRegimen(
       id: id ?? this.id,
-      name: name,
-      activePills: activePills,
-      placeboPills: placeboPills,
-      startDate: startDate,
-      isActive: isActive,
+      name: name ?? this.name,
+      activePills: activePills ?? this.activePills,
+      placeboPills: placeboPills ?? this.placeboPills,
+      startDate: startDate ?? this.startDate,
+      isActive: isActive ?? this.isActive,
     );
   }
 

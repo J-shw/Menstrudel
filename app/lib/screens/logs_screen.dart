@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:menstrudel/database/repositories/periods_repository.dart';
 import 'package:menstrudel/widgets/basic_progress_circle.dart';
-import 'package:menstrudel/models/period_logs/period_logs.dart';
+import 'package:menstrudel/models/period_logs/period_day.dart';
 import 'package:menstrudel/models/periods/period.dart';
 
 import 'package:menstrudel/models/period_prediction_result.dart';
@@ -33,8 +33,8 @@ class LogsScreenState extends State<LogsScreen> {
   final periodsRepo = PeriodsRepository();
   final SettingsService _settingsService = SettingsService();
 
-	List<PeriodLogEntry> _periodLogEntries = [];
-  List<PeriodEntry> _periodEntries = [];
+	List<PeriodDay> _periodLogEntries = [];
+  List<Period> _periodEntries = [];
 	bool _isLoading = true;
 	PeriodPredictionResult? _predictionResult;
   PeriodHistoryView _selectedView = PeriodHistoryView.journal;
@@ -59,10 +59,12 @@ class LogsScreenState extends State<LogsScreen> {
       title: l10n.notification_tamponReminderTitle,
       body: l10n.notification_tamponReminderBody,
       );
-    ScaffoldMessenger.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(SnackBar(content: Text('${l10n.logScreen_tamponReminderSetFor} ${reminderTime.format(context)}')));
-      _refreshPeriodLogs();
+    if (context.mounted) {
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(SnackBar(content: Text('${l10n.logScreen_tamponReminderSetFor} ${reminderTime.format(context)}')));
+        _refreshPeriodLogs();
+    }
   }
 
   Future<void> handleCancelReminder() async {
@@ -92,10 +94,10 @@ class LogsScreenState extends State<LogsScreen> {
 	}
 
 	Future<void> _refreshPeriodLogs() async {
-    final periodLogData = await periodsRepo.readAllPeriodLogs();
-    final periodData = await periodsRepo.readAllPeriods();
+    final periodDays = await periodsRepo.readAllPeriodLogs();
+    final periods = await periodsRepo.readAllPeriods();
     final isReminderSet = await NotificationService.isTamponReminderScheduled();
-    final predictionResult = PeriodPredictor.estimateNextPeriod(periodLogData, DateTime.now());
+    final predictionResult = PeriodPredictor.estimateNextPeriod(periods, DateTime.now());
     final selectedView = await _settingsService.getHistoryView();
 
     if (predictionResult != null) {
@@ -106,7 +108,7 @@ class LogsScreenState extends State<LogsScreen> {
       final l10n = AppLocalizations.of(context)!;
       
       await NotificationService.schedulePeriodNotification(
-        scheduledTime: predictionResult.estimatedDate,
+        scheduledTime: predictionResult.estimatedStartDate,
         areEnabled: notificationsEnabled,
         daysBefore: notificationDays,
         notificationTime: notificationTime,
@@ -117,7 +119,7 @@ class LogsScreenState extends State<LogsScreen> {
     
     if (!mounted) return;
 
-    final isPeriodOngoing = periodData.isNotEmpty && DateUtils.isSameDay(periodData.first.endDate, DateTime.now());
+    final isPeriodOngoing = periods.isNotEmpty && DateUtils.isSameDay(periods.first.endDate, DateTime.now());
     FabState currentState;
     if (!isPeriodOngoing) {
       currentState = FabState.logPeriod;
@@ -128,14 +130,14 @@ class LogsScreenState extends State<LogsScreen> {
 
     setState(() {
       _isLoading = false;
-      _periodLogEntries = periodLogData;
-      _periodEntries = periodData;
+      _periodLogEntries = periodDays;
+      _periodEntries = periods;
       _predictionResult = predictionResult;
       _selectedView = selectedView;
     });
   }
 
-  void _handleSaveLog(PeriodLogEntry updatedLog) {
+  void _handleSaveLog(PeriodDay updatedLog) {
     periodsRepo.updatePeriodLog(updatedLog);
     Navigator.of(context).pop();
     _refreshPeriodLogs();
@@ -160,7 +162,7 @@ class LogsScreenState extends State<LogsScreen> {
 		} else if (_predictionResult == null) {
 			predictionText = l10n.logScreen_logAtLeastTwoPeriods;
 		} else {
-			String datePart = DateFormat('dd/MM/yyyy').format(_predictionResult!.estimatedDate);
+			String datePart = DateFormat('dd/MM/yyyy').format(_predictionResult!.estimatedStartDate);
 		if (_predictionResult!.daysUntilDue > 0) {
 			predictionText = '${l10n.logScreen_nextPeriodEstimate}: $datePart';
 		} else if (_predictionResult!.daysUntilDue == 0) {

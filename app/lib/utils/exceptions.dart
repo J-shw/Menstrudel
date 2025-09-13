@@ -6,3 +6,9 @@ class DuplicateLogException implements Exception {
   @override
   String toString() => message;
 }
+
+/// Thrown when trying to create a period log on a date in the future.
+class FutureDateException implements Exception {
+  final String message;
+  FutureDateException(this.message);
+}

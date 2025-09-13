@@ -65,6 +65,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get cancel => 'Cancel';
 
   @override
+  String get select => 'Select';
+
+  @override
   String get flow => 'Flow';
 
   @override
@@ -108,6 +111,24 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get symptom_acne => 'Acne';
+
+  @override
+  String get painLevel_title => 'Pain Level';
+
+  @override
+  String get painLevel_none => 'None';
+
+  @override
+  String get painLevel_mild => 'Mild';
+
+  @override
+  String get painLevel_moderate => 'Moderate';
+
+  @override
+  String get painLevel_severe => 'Severe';
+
+  @override
+  String get pain_unbearable => 'Unbearable';
 
   @override
   String get notification_periodTitle => 'Period Approaching';
@@ -226,6 +247,18 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsScreen_historyViewStyle => 'History View Style';
 
   @override
+  String get settingsScreen_dynamicTheme => 'Dynamic Theme';
+
+  @override
+  String get settingsScreen_useWallpaperColors => 'Use Wallpaper Colors';
+
+  @override
+  String get settingsScreen_themeColor => 'Theme Color';
+
+  @override
+  String get settingsScreen_pickAColor => 'Pick a Color';
+
+  @override
   String get settingsScreen_view => 'View';
 
   @override
@@ -291,6 +324,12 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get flowIntensityWidget_noFlowDataLoggedYet =>
       'No flow data logged yet.';
+
+  @override
+  String get painLevelWidget_noPainDataLoggedYet => 'No pain data logged yet.';
+
+  @override
+  String get painLevelWidget_painLevelBreakdown => 'Pain Level Breakdown';
 
   @override
   String get monthlyFlowChartWidget_noDataToDisplay => 'No data to display.';
