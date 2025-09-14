@@ -389,7 +389,7 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
-  String get pillStatus_allSet => 'All Set!';
+  String get pillStatus_undo => 'Undo';
 
   @override
   String get pillStatus_markAsTaken => 'Mark As Taken';

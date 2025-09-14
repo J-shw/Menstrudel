@@ -752,11 +752,11 @@ abstract class AppLocalizations {
   /// **'{count, plural, =1{of 1 pill} other{of {count} pills}}'**
   String pillStatus_pillsOfTotal(int count);
 
-  /// No description provided for @pillStatus_allSet.
+  /// No description provided for @pillStatus_undo.
   ///
   /// In en, this message translates to:
-  /// **'All Set!'**
-  String get pillStatus_allSet;
+  /// **'Undo'**
+  String get pillStatus_undo;
 
   /// No description provided for @pillStatus_markAsTaken.
   ///
