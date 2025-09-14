@@ -10,6 +10,7 @@ import 'package:menstrudel/notifiers/theme_notifier.dart';
 import 'package:provider/provider.dart';
 import 'package:menstrudel/services/wear_sync_service.dart';
 import 'package:menstrudel/database/repositories/periods_repository.dart';
+import 'package:menstrudel/models/themes/app_theme_mode_enum.dart';
 
 final watchService = WatchSyncService();
 final periodsRepository = PeriodsRepository();
@@ -82,7 +83,7 @@ class MainApp extends StatelessWidget {
             useMaterial3: true,
             colorScheme: darkColorScheme,
           ),
-          themeMode: ThemeMode.system,
+          themeMode: themeNotifier.themeMode.getThemeMode(),
           home: const MainScreen(),
         );
       },
