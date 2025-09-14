@@ -176,3 +176,78 @@ section h2 {
 .screenshot-grid img:hover {
     transform: scale(1.03);
 }
+
+/* --- Blog --- */
+
+.post-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.post-list li {
+  margin-bottom: 2.5rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.post-list li:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.post-list h2 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.post-list h2 a {
+  color: #333;
+  text-decoration: none;
+}
+
+.post-list h2 a:hover {
+  color: #e91e63;
+}
+
+.post-meta {
+  display: block;
+  font-size: 0.9rem;
+  color: #777;
+  margin-bottom: 1rem;
+}
+
+.post-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.post-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.post-content {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.post-content p {
+  margin-bottom: 1.5rem;
+}
+
+.post-content h3 {
+  font-size: 1.5rem;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.post-content a {
+  color: #e91e63;
+  text-decoration: underline;
+}
+
+.post-content ul, .post-content ol {
+  padding-left: 2rem;
+  margin-bottom: 1.5rem;
+}
