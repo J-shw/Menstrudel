@@ -251,3 +251,43 @@ section h2 {
   padding-left: 2rem;
   margin-bottom: 1.5rem;
 }
+
+.post-preview {
+  margin-bottom: 2.5rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.post-preview:last-child {
+  border-bottom: none;
+}
+
+.post-preview h2 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.post-details {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem; 
+  flex-wrap: wrap;
+}
+
+.post-details .post-meta {
+  color: #777;
+  font-size: 0.9rem;
+  flex-shrink: 0; 
+  font-weight: bold;
+}
+
+.post-details .post-meta::after {
+  content: '•';
+  margin-left: 0.75rem;
+  color: #ccc;
+}
+
+.post-details p {
+  margin: 0;
+  color: #555;
+}
