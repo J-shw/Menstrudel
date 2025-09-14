@@ -37,6 +37,7 @@ This repository is a monorepo containing several projects. When creating a branc
     -   `app`: The main application.
     -   `wear`: The Wear OS application.
     -   `web`: The project's website.
+    -   `repo`: The projects repository
 
     **Examples:**
     - `feature/web/add-contact-form`
