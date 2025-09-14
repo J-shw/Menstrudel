@@ -1,7 +1,12 @@
 <nav>
   <div class="container">
     <a class="site-title" href="{{ "/" | relative_url }}">Menstrudel</a>
-    <ul>
+    
+    <input type="checkbox" id="nav-toggle" class="nav-toggle">
+    <label for="nav-toggle" class="nav-toggle-label">
+      <i class="fas fa-bars"></i> </label>
+    
+    <ul class="nav-menu">
       <li><a href="{{ "/screenshots/" | relative_url }}">Screenshots</a></li>
       <li><a href="{{ "/privacy/" | relative_url }}">Privacy</a></li>
       <li><a href="{{ "/blog/" | relative_url }}">Blog</a></li>
