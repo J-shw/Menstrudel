@@ -6,6 +6,7 @@ class PillStatusCard extends StatelessWidget {
   final int totalPills;
   final bool isTodayPillTaken;
   final VoidCallback onTakePill;
+  final VoidCallback undoTakePill;
 
   const PillStatusCard({
     super.key,
@@ -13,6 +14,7 @@ class PillStatusCard extends StatelessWidget {
     required this.totalPills,
     required this.isTodayPillTaken,
     required this.onTakePill,
+    required this.undoTakePill,
   });
 
   @override
@@ -65,16 +67,18 @@ class PillStatusCard extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: FilledButton.icon(
-              onPressed: isTodayPillTaken ? null : onTakePill,
-              icon: Icon(isTodayPillTaken ? Icons.check_circle : Icons.medical_services_rounded),
+              onPressed: isTodayPillTaken ? undoTakePill : onTakePill,
+              icon: Icon(isTodayPillTaken ? Icons.undo : Icons.medical_services_rounded),
               label: Text(
-                isTodayPillTaken ? l10n.pillStatus_allSet : l10n.pillStatus_markAsTaken,
+                isTodayPillTaken ? l10n.pillStatus_undo : l10n.pillStatus_markAsTaken,
                 style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
               style: FilledButton.styleFrom(
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                disabledBackgroundColor: Colors.green.withValues(alpha: 0.7),
+                backgroundColor: isTodayPillTaken
+                    ? Colors.grey[600]
+                    : primaryColor,
               ),
             ),
           ),

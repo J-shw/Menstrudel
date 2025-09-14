@@ -68,6 +68,12 @@ class _PillsScreenState extends State<PillsScreen> {
     );
     _loadPillData();
   }
+
+  Future<void> _undoTakePill() async {
+    if (_activeRegimen == null) return;
+    await pillsRepo.undoLastPillIntake(_activeRegimen!.id!);
+    _loadPillData();
+  }
   
   bool get _isTodayPillTaken {
     return _intakes.any((intake) =>
@@ -100,6 +106,7 @@ class _PillsScreenState extends State<PillsScreen> {
               totalPills: _activeRegimen!.activePills + _activeRegimen!.placeboPills,
               isTodayPillTaken: _isTodayPillTaken,
               onTakePill: _takePill,
+              undoTakePill: _undoTakePill,
             ),
             const SizedBox(height: 24),
             PillPackVisualiser(
