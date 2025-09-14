@@ -78,7 +78,7 @@ class PillStatusCard extends StatelessWidget {
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                 backgroundColor: isTodayPillTaken
                     ? Colors.grey[600]
-                    : Colors.green,
+                    : primaryColor,
               ),
             ),
           ),
