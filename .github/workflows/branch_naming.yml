@@ -1,0 +1,27 @@
+name: 'Branch Name Check'
+
+on:
+  push:
+    branches-ignore:
+      - 'main'
+      - 'dev'
+
+jobs:
+  check-branch-name:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Validate Branch Name'
+        run: |
+          branch_name="${{ github.ref_name }}"
+
+          regex="^(feature|bugfix|docs|chore|refactor|style|test)\/(app|wear|web|repo)(\/[0-9]+)?\/[a-z0-9-]+$"
+
+          if [[ $branch_name =~ $regex ]]; then
+            echo "Branch name '$branch_name' is valid."
+            exit 0
+          else
+            echo "Error: Branch name '$branch_name' does not match the required format."
+            echo "Please use the format: <type>/<scope>/<description>"
+            echo "Example: feature/web/new-contact-form"
+            exit 1
+          fi
