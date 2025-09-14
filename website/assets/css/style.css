@@ -14,12 +14,12 @@ body {
 }
 
 main {
-  padding-top: 2rem;
   padding-bottom: 2rem;
 }
 
 /* --- Navigation Bar --- */
 nav {
+  position: relative;
   background-color: #fff;
   border-bottom: 1px solid #eee;
   padding: 1rem 0;
@@ -55,6 +55,51 @@ nav a {
 nav a:hover {
   color: #e91e63;
 }
+
+/* --- Responsive Navigation --- */
+
+.nav-toggle {
+  display: none;
+}
+
+.nav-toggle-label {
+  display: none; 
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #333;
+}
+
+@media (max-width: 768px) {
+
+  .nav-toggle-label {
+    display: block;
+  }
+
+  .nav-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    border-top: 1px solid #eee;
+    text-align: center;
+  }
+  
+  .nav-menu ul {
+    flex-direction: column;
+  }
+
+  .nav-menu li {
+    padding: 1rem 0;
+    border-bottom: 1px solid #eee;
+  }
+
+  .nav-toggle:checked ~ .nav-menu {
+    display: block;
+  }
+}
+
 
 /* --- Hero --- */
 
