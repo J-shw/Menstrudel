@@ -4,14 +4,12 @@ import 'package:menstrudel/models/period_prediction_result.dart';
 import 'package:menstrudel/models/cycles/cycle_stats.dart';
 import 'package:menstrudel/models/periods/period_stats.dart';
 import 'package:menstrudel/models/cycles/monthly_cycle_data.dart';
+import 'package:menstrudel/utils/constants.dart';
 import 'dart:math';
 
 
 class PeriodPredictor {
   	static const int _defaultCycleLength = 28;
-	 
-  	static const int _maxValidCycleLength = 45;
-  	static const int _minValidCycleLength = 10;
 
 	static List<int> _getValidCycleLengths(List<Period> periods) {
     if (periods.length < 2) {
@@ -25,7 +23,7 @@ class PeriodPredictor {
     for (int i = 0; i < sortedPeriods.length - 1; i++) {
       int days = sortedPeriods[i + 1].startDate.difference(sortedPeriods[i].startDate).inDays;
       
-      if (days >= _minValidCycleLength && days <= _maxValidCycleLength) {
+      if (days >= minValidCycleLength && days <= maxValidCycleLength) {
         cycleLengths.add(days);
       }
     }
@@ -129,7 +127,7 @@ class PeriodPredictor {
 		for (int i = 0; i < sortedEntries.length - 1; i++) {
       int days = sortedEntries[i + 1].date.difference(sortedEntries[i].date).inDays;
 
-      if (days >= _minValidCycleLength && days <= _maxValidCycleLength) {
+      if (days >= minValidCycleLength && days <= maxValidCycleLength) {
         final DateTime cycleEndDate = sortedEntries[i + 1].date;
         monthlyData.add(MonthlyCycleData(
           year: cycleEndDate.year,
