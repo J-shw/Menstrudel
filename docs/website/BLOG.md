@@ -2,6 +2,13 @@
 
 This guide explains how to create and publish a new blog post.
 
+## Post catagories
+
+- release notes
+- announcements
+
+## Create a New Post
+
 ### 1. Create a New File
 
 All blog posts are located in the `_posts` folder. To create a new post, add a new file to this directory.
@@ -38,6 +45,9 @@ Below the Front Matter, you can write your post using standard Markdown.
 
 ```markdown
 ### This is a Subheading
+
+![This is an image](/assets/images/blog/image.png) <!-- Make sure to put your image in the `assets/images/blog` folder -->
+
 
 This is a regular paragraph. You can add lists, links, and other formatting.
 
