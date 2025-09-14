@@ -227,6 +227,22 @@ section h2 {
   margin-bottom: 0.5rem;
 }
 
+.post-categories {
+  margin-bottom: 0.75rem;
+}
+
+.category-tag {
+  display: inline-block;
+  background-color: #eee;
+  padding: 4px 10px;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: #555;
+  text-transform: capitalize;
+  margin-right: 5px; 
+}
+
 .post-content {
   max-width: 700px;
   margin: 0 auto;

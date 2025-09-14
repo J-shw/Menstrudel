@@ -15,6 +15,11 @@ permalink: /blog/
     {% for post in site.posts %}
         <li class="post-preview">
         <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+        <div class="post-categories">
+          {% for category in post.categories %}
+            <span class="category-tag">{{ category }}</span>
+          {% endfor %}
+        </div>
         <div class="post-details">
             <span class="post-meta">{{ post.date | date: "%B %d, %Y" }}</span>
             <p>{{ post.excerpt | strip_html | truncatewords: 30 }}</p>
