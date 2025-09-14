@@ -12,6 +12,7 @@ import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:menstrudel/notifiers/theme_notifier.dart';
 import 'package:provider/provider.dart';
+import 'package:menstrudel/models/themes/app_theme_mode_enum.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -37,6 +38,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   TimeOfDay _pillNotificationTime = const TimeOfDay(hour: 21, minute: 0);
   PeriodHistoryView _selectedView = PeriodHistoryView.journal;
   Color _themeColor = seedColor;
+  AppThemeMode _themeMode = AppThemeMode.system;
 
 
 
@@ -55,6 +57,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
     _selectedView = await _settingsService.getHistoryView();
     _activeRegimen = await pillsRepo.readActivePillRegimen();
     _themeColor = await _settingsService.getThemeColor();
+    _themeMode = await _settingsService.getThemeMode();
+
 
 
     if (_activeRegimen != null) {
@@ -231,6 +235,37 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
+  Future<void> _showThemeModePicker() async {
+    final l10n = AppLocalizations.of(context)!;
+    final currentThemeMode = _themeMode;
+
+    final AppThemeMode? result = await showDialog<AppThemeMode>(
+      context: context,
+      builder: (BuildContext context) {
+        return SimpleDialog(
+          title: Text(l10n.settingsScreen_appTheme),
+          children: AppThemeMode.values.map((mode) {
+            return RadioListTile<AppThemeMode>(
+              title: Text(mode.getDisplayName(l10n)),
+              value: mode,
+              groupValue: currentThemeMode,
+              onChanged: (AppThemeMode? value) {
+                Navigator.of(context).pop(value);
+              },
+            );
+          }).toList(),
+        );
+      },
+    );
+
+    if (result != null && result != currentThemeMode) {
+      setState(() => _themeMode = result);
+      if (mounted) {
+        context.read<ThemeNotifier>().setThemeMode(result);
+      }
+    }
+  }
+
   void _showColorPicker() {
     final l10n = AppLocalizations.of(context)!;
     showDialog(
@@ -283,6 +318,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
           title: Text(l10n.settingsScreen_historyViewStyle),
           subtitle: Text('$selectedViewName ${l10n.settingsScreen_view}'),
           onTap: showViewPicker,
+        ),
+        ListTile(
+          title: Text(l10n.settingsScreen_appTheme),
+          subtitle: Text(_themeMode.getDisplayName(l10n)),
+          onTap: _showThemeModePicker,
         ),
         SwitchListTile(
           title: Text(l10n.settingsScreen_dynamicTheme),
