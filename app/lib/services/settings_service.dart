@@ -1,6 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:menstrudel/utils/constants.dart';
+import 'package:menstrudel/models/themes/app_theme_mode_enum.dart';
 
 enum PeriodHistoryView { list, journal }
 
@@ -11,6 +12,7 @@ class SettingsService {
   static const _historyViewKey = 'history_view';
   static const _dynamicColorKey = 'dynamic_color';
   static const _themeColorKey = 'theme_color';
+  static const _themeModeKey = 'theme_mode';
 
   Future<void> deleteAllSettings() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -90,5 +92,15 @@ class SettingsService {
     final prefs = await SharedPreferences.getInstance();
     final colorValue = prefs.getInt(_themeColorKey) ?? seedColor.toARGB32();
     return Color(colorValue);
+  }
+
+  Future<void> setThemeMode(AppThemeMode theme) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt(_themeModeKey, theme.index);
+  }
+  Future<AppThemeMode> getThemeMode() async {
+    final prefs = await SharedPreferences.getInstance();
+    final themeIndex = prefs.getInt(_themeModeKey) ?? AppThemeMode.system.index;
+    return AppThemeMode.values[themeIndex];
   }
 }
