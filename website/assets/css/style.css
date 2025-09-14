@@ -5,6 +5,8 @@ body {
   margin: 0;
   padding: 0;
   color: #333;
+  background-color: #fff;
+  transition: color 0.3s, background-color 0.3s;
 }
 
 .container {
@@ -365,4 +367,67 @@ section h2 {
 .post-details p {
   margin: 0;
   color: #555;
+}
+
+/* --- Dark Mode --- */
+
+@media (prefers-color-scheme: dark) {
+
+  body {
+    background-color: #121212;
+    color: #e0e0e0;
+  }
+
+  ::selection {
+    background-color: #e91e63;
+    color: #fff;
+  }
+
+  nav, .nav-menu {
+    background-color: #1a1a1a;
+    border-color: #333;
+  }
+
+  .site-title, nav a, .nav-toggle-label {
+    color: #e0e0e0;
+  }
+
+  .hero, .page-header {
+    background-color: #1a1a1a;
+    border-color: #333;
+  }
+  
+  .hero p {
+    color: #aaa;
+  }
+
+  section, .post-preview, .nav-menu li {
+    border-color: #333;
+  }
+
+  .secondary {
+    background-color: #e0e0e0;
+    color: #121212;
+  }
+  
+  .category-tag {
+    background-color: #333;
+    color: #e0e0e0;
+  }
+  
+  .post-list h2 a {
+    color: #e0e0e0;
+  }
+  
+  .post-details p {
+    color: #aaa;
+  }
+  
+  .post-details .post-meta::after {
+    color: #555;
+  }
+  
+  .post-content img {
+    background-color: #fff;
+  }
 }
