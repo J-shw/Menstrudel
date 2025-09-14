@@ -17,6 +17,25 @@ Thank you for considering contributing!
 ## Pull Request Process
 
 1.  Fork the repository and create your branch from `dev`.
-2.  Add your changes and commit them with a clear commit message.
-3.  Push your branch and open a pull request.
-4.  Clearly describe the changes in your pull request.
+
+2.  **Name your branch correctly.** Please use the following convention for your branch names:
+    `<type>/<short-description>`
+
+    Where `<type>` can be one of the following:
+    -   `feature/`: For new features.
+    -   `bugfix/`: For fixing a bug.
+    -   `docs/`: For changes to documentation.
+    -   `chore/`: For maintenance tasks (e.g., updating dependencies).
+    -   `refactor/`: For code improvements without changing functionality.
+    -   `style/`: For code formatting changes.
+    -   `test/`: For adding or improving tests.
+
+    **Examples:**
+    - `feature/add-user-login`
+    - `bugfix/fix-homepage-crash`
+
+3.  Add your changes and commit them with a clear commit message.
+
+4.  Push your branch and open a pull request.
+
+5.  Clearly describe the changes in your pull request.
