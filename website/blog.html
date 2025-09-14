@@ -1,18 +1,25 @@
 ---
 layout: default
-title: News and Announcements
+title: Blog
 permalink: /blog/
 ---
 
-<h1>{{ page.title }}</h1>
-<p>Here are the latest updates for Menstrudel.</p>
+<div class="page-header">
+  <div class="container">
+    <h1>{{ page.title }}</h1>
+  </div>
+</div>
 
-<ul class="post-list">
-  {% for post in site.posts %}
-    <li>
-      <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
-      <p class="post-meta">{{ post.date | date: "%B %d, %Y" }}</p>
-      <p>{{ post.excerpt }}</p>
-    </li>
-  {% endfor %}
-</ul>
+<div class="container" style="padding-top: 2rem; padding-bottom: 2rem;">
+  <ul class="post-list">
+    {% for post in site.posts %}
+        <li class="post-preview">
+        <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+        <div class="post-details">
+            <span class="post-meta">{{ post.date | date: "%B %d, %Y" }}</span>
+            <p>{{ post.excerpt | strip_html | truncatewords: 30 }}</p>
+        </div>
+        </li>
+    {% endfor %}
+    </ul>
+</div>
