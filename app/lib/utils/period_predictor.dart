@@ -11,7 +11,7 @@ class PeriodPredictor {
   	static const int _defaultCycleLength = 28;
 	 
   	static const int _maxValidCycleLength = 45;
-  	static const int _minValidCycleLength = 20;
+  	static const int _minValidCycleLength = 10;
 
 	static List<int> _getValidCycleLengths(List<Period> periods) {
     if (periods.length < 2) {
