@@ -512,6 +512,30 @@ abstract class AppLocalizations {
   /// **'History View Style'**
   String get settingsScreen_historyViewStyle;
 
+  /// No description provided for @settingsScreen_appTheme.
+  ///
+  /// In en, this message translates to:
+  /// **'App Theme'**
+  String get settingsScreen_appTheme;
+
+  /// No description provided for @settingsScreen_themeLight.
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get settingsScreen_themeLight;
+
+  /// No description provided for @settingsScreen_themeDark.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark'**
+  String get settingsScreen_themeDark;
+
+  /// No description provided for @settingsScreen_themeSystem.
+  ///
+  /// In en, this message translates to:
+  /// **'System'**
+  String get settingsScreen_themeSystem;
+
   /// No description provided for @settingsScreen_dynamicTheme.
   ///
   /// In en, this message translates to:

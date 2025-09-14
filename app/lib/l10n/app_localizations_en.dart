@@ -247,6 +247,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsScreen_historyViewStyle => 'History View Style';
 
   @override
+  String get settingsScreen_appTheme => 'App Theme';
+
+  @override
+  String get settingsScreen_themeLight => 'Light';
+
+  @override
+  String get settingsScreen_themeDark => 'Dark';
+
+  @override
+  String get settingsScreen_themeSystem => 'System';
+
+  @override
   String get settingsScreen_dynamicTheme => 'Dynamic Theme';
 
   @override
