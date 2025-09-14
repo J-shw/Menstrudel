@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/services/settings_service.dart';
 import 'package:menstrudel/utils/constants.dart';
+import 'package:menstrudel/models/themes/app_theme_mode_enum.dart';
 
 class ThemeNotifier with ChangeNotifier {
   late Color _themeColor;
   late bool _isDynamicEnabled;
   final SettingsService _settingsService = SettingsService();
+  AppThemeMode _themeMode = AppThemeMode.system;
+  AppThemeMode get themeMode => _themeMode;
 
-
-   ThemeNotifier() {
+  ThemeNotifier() {
     _themeColor = seedColor;
     _isDynamicEnabled = false;
     loadAllThemeSettings();
@@ -28,15 +30,17 @@ class ThemeNotifier with ChangeNotifier {
     await _settingsService.setDynamicColorEnabled(isEnabled);
     notifyListeners();
   }
-  
-  Future<void> loadTheme() async {
-    _themeColor = await _settingsService.getThemeColor();
+
+  Future<void> setThemeMode(AppThemeMode mode) async {
+    _themeMode = mode;
+    await _settingsService.setThemeMode(mode);
     notifyListeners();
   }
 
   Future<void> loadAllThemeSettings() async {
     _themeColor = await _settingsService.getThemeColor();
     _isDynamicEnabled = await _settingsService.isDynamicThemeEnabled();
+    _themeMode = await _settingsService.getThemeMode();
     notifyListeners();
   }
 }
