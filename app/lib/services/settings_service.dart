@@ -9,6 +9,9 @@ class SettingsService {
   static const String _notificationsEnabledKey = 'notifications_enabled';
   static const String _notificationDaysKey = 'notification_days';
   static const _notificationTimeKey = 'notification_time';
+  static const String _periodOverdueNotificationsEnabledKey = 'period_overdue_notifications_enabled';
+  static const String _periodOverdueNotificationDaysKey = 'period_overdue_notification_days';
+  static const _periodOverdueNotificationTimeKey = 'period_overdue_notification_time';
   static const _historyViewKey = 'history_view';
   static const _dynamicColorKey = 'dynamic_color';
   static const _themeColorKey = 'theme_color';
@@ -48,6 +51,49 @@ class SettingsService {
   Future<TimeOfDay> getNotificationTime() async {
     final prefs = await SharedPreferences.getInstance();
     final String? storedTime = prefs.getString(_notificationTimeKey);
+
+    if (storedTime == null) {
+      return const TimeOfDay(hour: 9, minute: 0);
+    }
+
+    final parts = storedTime.split(':');
+    return TimeOfDay(
+      hour: int.parse(parts[0]),
+      minute: int.parse(parts[1]),
+    );
+  }
+
+  // Period Overdue Notifications
+
+  Future<void> setPeriodOverdueNotificationsEnabled(bool isEnabled) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_periodOverdueNotificationsEnabledKey, isEnabled);
+  }
+
+  Future<bool> arePeriodOverdueNotificationsEnabled() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool(_periodOverdueNotificationsEnabledKey) ?? true;
+  }
+
+  Future<void> setPeriodOverdueNotificationDays(int days) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt(_periodOverdueNotificationDaysKey, days);
+  }
+
+  Future<int> getPeriodOverdueNotificationDays() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getInt(_periodOverdueNotificationDaysKey) ?? 1;
+  }
+
+  Future<void> setPeriodOverdueNotificationTime(TimeOfDay time) async {
+    final prefs = await SharedPreferences.getInstance();
+    final String formattedTime = '${time.hour}:${time.minute}';
+    await prefs.setString(_periodOverdueNotificationTimeKey, formattedTime);
+  }
+
+  Future<TimeOfDay> getPeriodOverdueNotificationTime() async {
+    final prefs = await SharedPreferences.getInstance();
+    final String? storedTime = prefs.getString(_periodOverdueNotificationTimeKey);
 
     if (storedTime == null) {
       return const TimeOfDay(hour: 9, minute: 0);
