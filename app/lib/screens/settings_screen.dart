@@ -29,9 +29,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   bool _isLoading = true;
   bool _periodNotificationsEnabled = true;
+  int _periodNotificationDays = 1;
+  TimeOfDay _periodNotificationTime = const TimeOfDay(hour: 9, minute: 0);
+
   bool _periodOverdueNotificationsEnabled = true;
-  int _notificationDays = 1;
-  TimeOfDay _notificationTime = const TimeOfDay(hour: 9, minute: 0);
+  int _periodOverdueNotificationDays = 1;
+  TimeOfDay _periodOverdueNotificationTime = const TimeOfDay(hour: 9, minute: 0);
+
 
   PillRegimen? _activeRegimen;
   PillReminder? _pillReminder;
@@ -52,9 +56,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Future<void> _loadSettings() async {
     setState(() { _isLoading = true; });
     
-    _notificationsEnabled = await _settingsService.areNotificationsEnabled();
-    _notificationDays = await _settingsService.getNotificationDays();
-    _notificationTime = await _settingsService.getNotificationTime();
+    _periodNotificationsEnabled = await _settingsService.areNotificationsEnabled();
+    _periodNotificationDays = await _settingsService.getNotificationDays();
+    _periodNotificationTime = await _settingsService.getNotificationTime();
+    _periodOverdueNotificationsEnabled = await _settingsService.arePeriodOverdueNotificationsEnabled();
+    _periodOverdueNotificationDays = await _settingsService.getPeriodOverdueNotificationDays();
+    _periodOverdueNotificationTime = await _settingsService.getPeriodOverdueNotificationTime();
     _selectedView = await _settingsService.getHistoryView();
     _activeRegimen = await pillsRepo.readActivePillRegimen();
     _themeColor = await _settingsService.getThemeColor();
@@ -188,12 +195,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Future<void> selectPeriodReminderTime() async {
     final TimeOfDay? pickedTime = await showTimePicker(
       context: context,
-      initialTime: _notificationTime,
+      initialTime: _periodNotificationTime,
     );
 
-    if (pickedTime != null && pickedTime != _notificationTime) {
+    if (pickedTime != null && pickedTime != _periodNotificationTime) {
       setState(() {
-        _notificationTime = pickedTime;
+        _periodNotificationTime = pickedTime;
       });
       await _settingsService.setNotificationTime(pickedTime);
     }
@@ -202,12 +209,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
     Future<void> selectOverduePeriodReminderTime() async {
     final TimeOfDay? pickedTime = await showTimePicker(
       context: context,
-      initialTime: _notificationTime,
+      initialTime: _periodOverdueNotificationTime,
     );
 
-    if (pickedTime != null && pickedTime != _notificationTime) {
+    if (pickedTime != null && pickedTime != _periodOverdueNotificationTime) {
       setState(() {
-        _notificationTime = pickedTime;
+        _periodOverdueNotificationTime = pickedTime;
       });
       await _settingsService.setPeriodOverdueNotificationTime(pickedTime);
     }
@@ -419,7 +426,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ListTile(
             title: Text(l10n.settingsScreen_remindMeBefore),
             trailing: DropdownButton<int>(
-              value: _notificationDays,
+              value: _periodNotificationDays,
               items: [1, 2, 3].map((int days) {
                 return DropdownMenuItem<int>(
                   value: days,
@@ -429,7 +436,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               onChanged: (int? newDays) {
                 if (newDays != null) {
                   setState(() {
-                    _notificationDays = newDays;
+                    _periodNotificationDays = newDays;
                   });
                   _settingsService.setNotificationDays(newDays);
                 }
@@ -439,7 +446,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ListTile(
             title: Text(l10n.settingsScreen_notificationTime),
             trailing: Text(
-              _notificationTime.format(context),
+              _periodNotificationTime.format(context),
               style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -462,7 +469,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ListTile(
             title: Text(l10n.settingsScreen_remindMeAfter),
             trailing: DropdownButton<int>(
-              value: _notificationDays,
+              value: _periodOverdueNotificationDays,
               items: [1, 2, 3].map((int days) {
                 return DropdownMenuItem<int>(
                   value: days,
@@ -472,7 +479,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               onChanged: (int? newDays) {
                 if (newDays != null) {
                   setState(() {
-                    _notificationDays = newDays;
+                    _periodOverdueNotificationDays = newDays;
                   });
                   _settingsService.setPeriodOverdueNotificationDays(newDays);
                 }
@@ -482,7 +489,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ListTile(
             title: Text(l10n.settingsScreen_notificationTime),
             trailing: Text(
-              _notificationTime.format(context),
+              _periodOverdueNotificationTime.format(context),
               style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
