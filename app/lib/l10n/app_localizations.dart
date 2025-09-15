@@ -620,6 +620,18 @@ abstract class AppLocalizations {
   /// **'Notification Time'**
   String get settingsScreen_notificationTime;
 
+  /// No description provided for @settingsScreen_overduePeriodReminder.
+  ///
+  /// In en, this message translates to:
+  /// **'Overdue Period Reminder'**
+  String get settingsScreen_overduePeriodReminder;
+
+  /// No description provided for @settingsScreen_remindMeAfter.
+  ///
+  /// In en, this message translates to:
+  /// **'Remind Me After'**
+  String get settingsScreen_remindMeAfter;
+
   /// No description provided for @settingsScreen_clearAllLogs.
   ///
   /// In en, this message translates to:

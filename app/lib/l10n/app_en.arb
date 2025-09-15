@@ -145,6 +145,8 @@
     "settingsScreen_upcomingPeriodReminder": "Upcoming Period Reminder",
     "settingsScreen_remindMeBefore": "Remind Me Before",
     "settingsScreen_notificationTime": "Notification Time",
+    "settingsScreen_overduePeriodReminder": "Overdue Period Reminder",
+    "settingsScreen_remindMeAfter": "Remind Me After",
     "settingsScreen_clearAllLogs": "Clear All Logs",
 
     "tamponReminderDialog_tamponReminderTitle": "Tampon Reminder",

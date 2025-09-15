@@ -304,6 +304,12 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsScreen_notificationTime => 'Notification Time';
 
   @override
+  String get settingsScreen_overduePeriodReminder => 'Overdue Period Reminder';
+
+  @override
+  String get settingsScreen_remindMeAfter => 'Remind Me After';
+
+  @override
   String get settingsScreen_clearAllLogs => 'Clear All Logs';
 
   @override
