@@ -170,7 +170,9 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
           ),
           const Spacer(),
           ...List.generate(3, (index) => Icon(
-                index <= flow.intValue ? Icons.water_drop : Icons.water_drop_outlined,
+                flow != FlowRate.none && index < flow.intValue
+                    ? Icons.water_drop
+                    : Icons.water_drop_outlined,
                 size: 20,
                 color: colorScheme.primary,
           ))
