@@ -104,7 +104,6 @@ class PeriodListView extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
     final l10n = AppLocalizations.of(context)!;
 
-    final flow = FlowRate.values[entry.flow];
     final symptomMap = {for (var s in Symptom.values) s.name: s};
     final symptoms = entry.symptoms
             ?.map((s) => symptomMap[s])
@@ -172,7 +171,7 @@ class PeriodListView extends StatelessWidget {
                 children: [
                   Row(
                     children: List.generate(
-                      flow.intValue + 1,
+                      entry.flow.intValue + 1,
                       (index) => Icon(
                         Icons.water_drop,
                         size: 18,
