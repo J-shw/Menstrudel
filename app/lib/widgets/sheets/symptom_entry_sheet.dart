@@ -179,7 +179,7 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
 
                       Navigator.of(context).pop({
                         'date': _selectedDate,
-                        'flow': _flowSelection.intValue,
+                        'flow': _flowSelection,
                         'symptoms': symptomsToSave,
                         'painLevel': _painLevel.intValue,
                       });
