@@ -60,6 +60,19 @@
             }
         }
     },
+    "notification_periodOverdueTitle": "Period Overdue",
+    "@notification_periodOverdueTitle": {
+        "description": "Title for the overdue period notification."
+    },
+    "notification_periodOverdueBody": "{count, plural, =1{Your next period is overdue by 1 day.} other{Your next period is overdue by {count} days.}}",
+    "@notification_periodOverdueBody": {
+        "description": "Body for the overdue period notification.",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
     "notification_pillTitle": "Pill Reminder",
     "@notification_pillTitle": {
         "description": "Title for the daily pill reminder notification."
@@ -127,6 +140,8 @@
     "settingsScreen_upcomingPeriodReminder": "Upcoming Period Reminder",
     "settingsScreen_remindMeBefore": "Remind Me Before",
     "settingsScreen_notificationTime": "Notification Time",
+    "settingsScreen_overduePeriodReminder": "Overdue Period Reminder",
+    "settingsScreen_remindMeAfter": "Remind Me After",
     "settingsScreen_clearAllLogs": "Clear All Logs",
     "tamponReminderDialog_tamponReminderTitle": "Tampon Reminder",
     "cycleLengthVarianceWidget_LogAtLeastTwoPeriods": "Need at least two cycles to show variance.",
@@ -162,6 +177,7 @@
         }
     },
     "pillStatus_undo": "Undo",
+    "pillStatus_skip": "Skip",
     "pillStatus_markAsTaken": "Mark As Taken",
     "regimenSetupWidget_setUpPillRegimen": "Set Up Pill Regimen",
     "regimenSetupWidget_packName": "Pack Name",
