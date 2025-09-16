@@ -43,7 +43,7 @@ extension PillExtension on PillVisualStatus {
     final onSecondaryContainerColor = colorScheme.onSecondaryContainer;
     final tertiaryContainerColor = colorScheme.tertiaryContainer;
     final onTertiaryContainerColor = colorScheme.onTertiaryContainer;
-    final surfaceVariantColor = colorScheme.surfaceVariant;
+    final surfaceVariantColor = colorScheme.surfaceContainerHighest;
     final onSurfaceVariantColor = colorScheme.onSurfaceVariant;
 
     switch (this) {
