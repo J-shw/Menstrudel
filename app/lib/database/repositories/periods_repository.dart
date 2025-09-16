@@ -14,7 +14,7 @@ class PeriodsRepository {
   static const String _whereId = 'id = ?';
 
   Future<void> logPeriodFromWatch() async {
-    print('Received request from watch! Logging period now...');
+    debugPrint('Received request from watch! Logging period now...');
 
     try {
       final newLog = PeriodDay(
@@ -121,6 +121,8 @@ class PeriodsRepository {
 
   Future<PeriodDay> createPeriodLog(PeriodDay entry) async {
     final db = await dbProvider.database;
+
+    debugPrint(entry.toString());
 
     await _validateLogDate(db, entry.date);
       
