@@ -55,7 +55,8 @@ void main() {
         expect(periods.first.totalDays, 2);
 
         final changedLog = await repository.readPeriodLog(logToUpdate.id!);
-        expect(changedLog.flow, FlowRate.heavy.intValue);
+        
+        expect(changedLog.flow, FlowRate.heavy);
       });
 
       test('deleting the only log should remove the period entirely', () async {
@@ -258,9 +259,14 @@ void main() {
       test('getMonthlyFlows should return correct flow data for multiple months', () async {
         await repository.createPeriodLog(_log('2025-09-01', flow: FlowRate.none));
         await repository.createPeriodLog(_log('2025-08-15', flow: FlowRate.light));
+
         final monthlyFlows = await repository.getMonthlyFlows();
+
         expect(monthlyFlows.length, 2);
-        expect(monthlyFlows.firstWhere((m) => m.monthLabel == 'Sep').flows, [1]);
+        
+        expect(monthlyFlows.firstWhere((m) => m.monthLabel == 'Sep').flows, [FlowRate.none.index]);
+        
+        expect(monthlyFlows.firstWhere((m) => m.monthLabel == 'Aug').flows, [FlowRate.light.index]);
       });
 
       test('getMonthlyFlows should return an empty list when there is no data', () async {
