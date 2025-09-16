@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:menstrudel/models/period_logs/flow_enum.dart';
 
 /// Represents a single day's log within a menstrual cycle.
 ///
@@ -8,7 +9,7 @@ class PeriodDay {
 	int? id;
 	DateTime date;
 	List<String>? symptoms;
-	int flow;
+	FlowRate flow;
   int painLevel;
 	int? periodId;
 
@@ -26,7 +27,7 @@ class PeriodDay {
 			'id': id,
 			'date': date.toIso8601String(),
 			'symptoms': symptoms != null ? jsonEncode(symptoms) : null,
-			'flow': flow,
+			'flow': flow.intValue,
       'painLevel': painLevel,
 			'period_id': periodId,
 		};
@@ -43,7 +44,7 @@ class PeriodDay {
 			id: map['id'] as int?,
 			date: DateTime.parse(map['date'] as String),
 			symptoms: symptomsFromMap,
-			flow: map['flow'] as int,
+			flow: FlowRate.values[map['flow'] as int],
       painLevel: map['painLevel'] as int,
 			periodId: map['period_id'] as int?,
 		);
@@ -53,7 +54,7 @@ class PeriodDay {
 		int? id,
 		DateTime? date,
 		List<String>? symptoms,
-		int? flow,
+		FlowRate? flow,
     int? painLevel,
 		int? periodId,
 	}) {
