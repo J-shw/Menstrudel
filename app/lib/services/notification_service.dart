@@ -53,7 +53,7 @@ class NotificationService {
 
     if (!areEnabled) return;
 
-    if(daysBefore != null || daysAfter != null){
+    if(daysBefore != null && daysAfter != null){
       debugPrint("daysBefore or daysAfter are required.");
       return;
     }
