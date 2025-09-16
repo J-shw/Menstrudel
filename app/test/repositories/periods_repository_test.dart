@@ -260,7 +260,7 @@ void main() {
         await repository.createPeriodLog(_log('2025-09-01', flow: FlowRate.medium));
         await repository.createPeriodLog(_log('2025-08-15', flow: FlowRate.light));
 
-        final monthlyFlows = await repository.getMonthlyFlows();
+        final monthlyFlows = await repository.getMonthlyPeriodFlows();
 
         expect(monthlyFlows.length, 2);
         
@@ -270,7 +270,7 @@ void main() {
       });
 
       test('getMonthlyFlows should return an empty list when there is no data', () async {
-        final monthlyFlows = await repository.getMonthlyFlows();
+        final monthlyFlows = await repository.getMonthlyPeriodFlows();
         expect(monthlyFlows, isEmpty);
       });
     });
