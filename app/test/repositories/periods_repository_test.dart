@@ -1,11 +1,12 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:menstrudel/database/app_database.dart';
+import 'package:menstrudel/models/period_logs/flow_enum.dart';
 import 'package:menstrudel/models/period_logs/period_day.dart';
 import 'package:menstrudel/database/repositories/periods_repository.dart';
 import 'package:menstrudel/utils/exceptions.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
-PeriodDay _log(String date, {int flow = 2}) =>
+PeriodDay _log(String date, {FlowRate flow = FlowRate.medium}) =>
     PeriodDay(date: DateTime.parse(date), flow: flow, symptoms: [], painLevel: 0);
 
 void main() {
@@ -43,10 +44,10 @@ void main() {
       });
 
       test('updating a log flow should not affect period structure', () async {
-        final logToUpdate = await repository.createPeriodLog(_log('2025-09-01', flow: 1));
+        final logToUpdate = await repository.createPeriodLog(_log('2025-09-01', flow: FlowRate.medium));
         await repository.createPeriodLog(_log('2025-09-02'));
 
-        final updatedLog = logToUpdate.copyWith(flow: 5);
+        final updatedLog = logToUpdate.copyWith(flow: FlowRate.heavy);
         await repository.updatePeriodLog(updatedLog);
 
         final periods = await repository.readAllPeriods();
@@ -54,7 +55,7 @@ void main() {
         expect(periods.first.totalDays, 2);
 
         final changedLog = await repository.readPeriodLog(logToUpdate.id!);
-        expect(changedLog.flow, 5);
+        expect(changedLog.flow, FlowRate.heavy.intValue);
       });
 
       test('deleting the only log should remove the period entirely', () async {
@@ -183,7 +184,7 @@ void main() {
 
       test('createPeriodLog should throw FutureDateException for a future date', () async {
         final tomorrow = DateTime.now().add(const Duration(days: 1));
-        final futureLog = PeriodDay(date: tomorrow, flow: 2, painLevel: 0, symptoms: []);
+        final futureLog = PeriodDay(date: tomorrow, flow: FlowRate.medium, painLevel: 0, symptoms: []);
         final futureCall = repository.createPeriodLog(futureLog);
         expect(futureCall, throwsA(isA<FutureDateException>()));
       });
@@ -203,7 +204,7 @@ void main() {
         final logToUpdate = await repository.createPeriodLog(_log('2025-09-01'));
         await repository.createPeriodLog(_log('2025-09-02'));
 
-        final updatedLog = logToUpdate.copyWith(date: DateTime.parse('2025-09-01'), flow: 5);
+        final updatedLog = logToUpdate.copyWith(date: DateTime.parse('2025-09-01'), flow: FlowRate.light);
         await repository.updatePeriodLog(updatedLog);
 
         final periods = await repository.readAllPeriods();
@@ -255,8 +256,8 @@ void main() {
       });
 
       test('getMonthlyFlows should return correct flow data for multiple months', () async {
-        await repository.createPeriodLog(_log('2025-09-01', flow: 1));
-        await repository.createPeriodLog(_log('2025-08-15', flow: 3));
+        await repository.createPeriodLog(_log('2025-09-01', flow: FlowRate.none));
+        await repository.createPeriodLog(_log('2025-08-15', flow: FlowRate.light));
         final monthlyFlows = await repository.getMonthlyFlows();
         expect(monthlyFlows.length, 2);
         expect(monthlyFlows.firstWhere((m) => m.monthLabel == 'Sep').flows, [1]);
