@@ -806,6 +806,12 @@ abstract class AppLocalizations {
   /// **'Undo'**
   String get pillStatus_undo;
 
+  /// No description provided for @pillStatus_skip.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip'**
+  String get pillStatus_skip;
+
   /// No description provided for @pillStatus_markAsTaken.
   ///
   /// In en, this message translates to:

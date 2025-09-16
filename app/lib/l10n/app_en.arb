@@ -207,6 +207,7 @@
         }
     },
     "pillStatus_undo": "Undo",
+    "pillStatus_skip": "Skip",
     "pillStatus_markAsTaken": "Mark As Taken",
 
     "regimenSetupWidget_setUpPillRegimen": "Set Up Pill Regimen",
