@@ -11,7 +11,6 @@ class PeriodListView extends StatelessWidget {
   final List<PeriodDay> periodLogEntries;
   final List<Period> periodEntries;
   final bool isLoading;
-  final Function(int) onDelete;
   final Function(PeriodDay) onLogTapped;
 
   const PeriodListView({
@@ -19,7 +18,6 @@ class PeriodListView extends StatelessWidget {
     required this.periodEntries,
     required this.periodLogEntries,
     required this.isLoading,
-    required this.onDelete,
     required this.onLogTapped,
   });
 
