@@ -134,7 +134,7 @@ class LogsScreenState extends State<LogsScreen> {
         await NotificationService.schedulePeriodNotifications(
           scheduledTime: predictionResult.estimatedStartDate,
           areEnabled: periodOverdueNotificationsEnabled,
-          daysBefore: periodOverdueNotificationDays,
+          daysAfter: periodOverdueNotificationDays,
           notificationTime: periodOverdueNotificationTime,
           title: l10n.notification_periodOverdueTitle,
           body: l10n.notification_periodOverdueBody(periodOverdueNotificationDays),
