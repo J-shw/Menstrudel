@@ -58,6 +58,7 @@ class PeriodLoggerService {
       return true;
 
     } catch (e) {
+      debugPrint('Error logging period: $e');
       if (!context.mounted) return false;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
