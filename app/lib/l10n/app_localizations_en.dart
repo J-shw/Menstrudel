@@ -145,6 +145,20 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get notification_periodOverdueTitle => 'Period Overdue';
+
+  @override
+  String notification_periodOverdueBody(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Your next period is overdue by $count days.',
+      one: 'Your next period is overdue by 1 day.',
+    );
+    return '$_temp0';
+  }
+
+  @override
   String get notification_pillTitle => 'Pill Reminder';
 
   @override
@@ -302,6 +316,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get settingsScreen_notificationTime => 'Notification Time';
+
+  @override
+  String get settingsScreen_overduePeriodReminder => 'Overdue Period Reminder';
+
+  @override
+  String get settingsScreen_remindMeAfter => 'Remind Me After';
 
   @override
   String get settingsScreen_clearAllLogs => 'Clear All Logs';

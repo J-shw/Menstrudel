@@ -4,6 +4,7 @@ import 'package:menstrudel/database/repositories/periods_repository.dart';
 import 'package:menstrudel/widgets/basic_progress_circle.dart';
 import 'package:menstrudel/models/period_logs/period_day.dart';
 import 'package:menstrudel/models/periods/period.dart';
+import 'package:menstrudel/utils/constants.dart';
 
 import 'package:menstrudel/models/period_prediction_result.dart';
 import 'package:menstrudel/utils/period_predictor.dart';
@@ -107,20 +108,37 @@ class LogsScreenState extends State<LogsScreen> {
 
     if (predictionResult != null) {
       final settingsService = SettingsService();
-      final notificationsEnabled = await settingsService.areNotificationsEnabled();
-      final notificationDays = await settingsService.getNotificationDays();
-      final notificationTime = await settingsService.getNotificationTime();
+      final periodNotificationsEnabled = await settingsService.areNotificationsEnabled();
+      final periodNotificationDays = await settingsService.getNotificationDays();
+      final periodNotificationTime = await settingsService.getNotificationTime();
+
+      final periodOverdueNotificationsEnabled = await settingsService.areNotificationsEnabled();
+      final periodOverdueNotificationDays = await settingsService.getNotificationDays();
+      final periodOverdueNotificationTime = await settingsService.getNotificationTime();
 
       if (mounted){
         final l10n = AppLocalizations.of(context)!;
-      
-        await NotificationService.schedulePeriodNotification(
+
+        // Period due notification
+        await NotificationService.schedulePeriodNotifications(
           scheduledTime: predictionResult.estimatedStartDate,
-          areEnabled: notificationsEnabled,
-          daysBefore: notificationDays,
-          notificationTime: notificationTime,
+          areEnabled: periodNotificationsEnabled,
+          daysBefore: periodNotificationDays,
+          notificationTime: periodNotificationTime,
           title: l10n.notification_periodTitle,
-          body: l10n.notification_periodBody(notificationDays),
+          body: l10n.notification_periodBody(periodNotificationDays),
+          notificationID: periodDueNotificationId,
+        );
+
+        // Overdue period notification
+        await NotificationService.schedulePeriodNotifications(
+          scheduledTime: predictionResult.estimatedStartDate,
+          areEnabled: periodOverdueNotificationsEnabled,
+          daysAfter: periodOverdueNotificationDays,
+          notificationTime: periodOverdueNotificationTime,
+          title: l10n.notification_periodOverdueTitle,
+          body: l10n.notification_periodOverdueBody(periodOverdueNotificationDays),
+          notificationID: periodOverdueNotificationId,
         );
       }
     }
