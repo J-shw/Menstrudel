@@ -338,6 +338,18 @@ abstract class AppLocalizations {
   /// **'{count, plural, =1{Your next period is estimated to start in 1 day.} other{Your next period is estimated to start in {count} days.}}'**
   String notification_periodBody(int count);
 
+  /// Title for the overdue period notification.
+  ///
+  /// In en, this message translates to:
+  /// **'Period Overdue'**
+  String get notification_periodOverdueTitle;
+
+  /// Body for the overdue period notification.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{Your next period is overdue by 1 day.} other{Your next period is overdue by {count} days.}}'**
+  String notification_periodOverdueBody(int count);
+
   /// Title for the daily pill reminder notification.
   ///
   /// In en, this message translates to:
