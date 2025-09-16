@@ -217,9 +217,16 @@ class PeriodsRepository {
     }
   }
 
+  /// Creates a Period entry in the DB from logs with at flow rate.
   Future<void> _createPeriodFromLogs(Database db, List<PeriodDay> logs) async {
-    final startDate = logs.first.date;
-    final endDate = logs.last.date;
+    final periodDays = logs.where((log) => log.flow != FlowRate.none).toList();
+
+    if (periodDays.isEmpty) {
+      return;
+    }
+
+    final startDate = periodDays.first.date;
+    final endDate = periodDays.last.date;
     final totalDays = endDate.difference(startDate).inDays + 1;
 
     final newPeriodMap = {
@@ -230,7 +237,7 @@ class PeriodsRepository {
 
     final periodId = await db.insert('periods', newPeriodMap);
 
-    final logIds = logs.map((log) => log.id!).toList();
+    final logIds = periodDays.map((log) => log.id!).toList();
 
     await db.transaction((txn) async {
       for (final logId in logIds) {
