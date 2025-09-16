@@ -77,13 +77,13 @@ class LogsScreenState extends State<LogsScreen> {
     final l10n = AppLocalizations.of(context)!;
     try {
       await NotificationService.cancelTamponReminder();
-      if (context.mounted) {
+      if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(l10n.logScreen_tamponReminderCancelled)),
         );
       }
     } catch (e) {
-      if (context.mounted) {
+      if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('${l10n.logScreen_couldNotCancelReminder}: $e'), backgroundColor: Colors.red),
         );
