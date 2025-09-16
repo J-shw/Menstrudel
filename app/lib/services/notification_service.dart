@@ -1,29 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart' as fln;
 import 'package:timezone/timezone.dart' as tz;
 import 'package:menstrudel/utils/constants.dart';
+import 'package:menstrudel/utils/exceptions.dart';
 
 @pragma('vm:entry-point')
-void onDidReceiveNotificationResponse(NotificationResponse notificationResponse) {
+void onDidReceiveNotificationResponse(fln.NotificationResponse notificationResponse) {
   debugPrint('Notification tapped: ${notificationResponse.payload}');
 }
 
 @pragma('vm:entry-point')
-void onDidReceiveBackgroundNotificationResponse(NotificationResponse notificationResponse) {
+void onDidReceiveBackgroundNotificationResponse(fln.NotificationResponse notificationResponse) {
   debugPrint('Background notification tapped: ${notificationResponse.payload}');
 }
 
 class NotificationService {
-  static final FlutterLocalNotificationsPlugin _plugin = FlutterLocalNotificationsPlugin();
+  static final fln.FlutterLocalNotificationsPlugin _plugin = fln.FlutterLocalNotificationsPlugin();
 
   static Future<void> initialize() async {
-    const androidSettings = AndroidInitializationSettings('@mipmap/ic_launcher');
-    const iOSSettings = DarwinInitializationSettings(
+    const androidSettings = fln.AndroidInitializationSettings('@mipmap/ic_launcher');
+    const iOSSettings = fln.DarwinInitializationSettings(
       requestAlertPermission: true,
       requestBadgePermission: true,
       requestSoundPermission: true,
     );
-    const initSettings = InitializationSettings(android: androidSettings, iOS: iOSSettings);
+    const initSettings = fln.InitializationSettings(android: androidSettings, iOS: iOSSettings);
 
     await _plugin.initialize(
       initSettings,
@@ -32,7 +33,7 @@ class NotificationService {
     );
 
     await _plugin
-        .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
+        .resolvePlatformSpecificImplementation<fln.AndroidFlutterLocalNotificationsPlugin>()
         ?.requestNotificationsPermission();
   }
 
@@ -42,32 +43,48 @@ class NotificationService {
   static Future<void> schedulePeriodNotifications({
     required DateTime scheduledTime,
     required bool areEnabled,
-    required int daysBefore,
     required TimeOfDay notificationTime,
     required String title,
     required String body,
     required int notificationID,
+    int? daysBefore,
+    int? daysAfter,
   }) async {
 
     if (!areEnabled) return;
 
-    await _plugin.cancel(notificationID);
+    if(daysBefore != null || daysAfter != null){
+      debugPrint("daysBefore or daysAfter are required.");
+      return;
+    }
 
     final notificationDateTime = DateTime(
       scheduledTime.year, scheduledTime.month, scheduledTime.day,
       notificationTime.hour, notificationTime.minute,
     );
-    final tzScheduledTime = tz.TZDateTime.from(notificationDateTime, tz.local)
+
+    tz.TZDateTime? tzScheduledTime;
+
+    if (daysBefore != null) {
+      tzScheduledTime = tz.TZDateTime.from(notificationDateTime, tz.local)
         .subtract(Duration(days: daysBefore));
+    }
+    if (daysAfter != null) {
+      tzScheduledTime = tz.TZDateTime.from(notificationDateTime, tz.local)
+        .subtract(Duration(days: daysAfter));
+    }
+    if (tzScheduledTime == null) return;
 
-    if (tzScheduledTime.isBefore(tz.TZDateTime.now(tz.local))) return;
+    if (tzScheduledTime.isBefore(tz.TZDateTime.now(tz.local))) throw PastNotificationException();
 
-    const details = NotificationDetails(
-      android: AndroidNotificationDetails(
+    await _plugin.cancel(notificationID);
+
+    const details = fln.NotificationDetails(
+      android: fln.AndroidNotificationDetails(
         periodNotificationChannelId, periodNotificationChannelName,
-        importance: Importance.max, priority: Priority.high
+        importance: fln.Importance.max, priority: fln.Priority.high
       ),
-      iOS: DarwinNotificationDetails(),
+      iOS: fln.DarwinNotificationDetails(),
     );
 
     await _plugin.zonedSchedule(
@@ -76,7 +93,7 @@ class NotificationService {
       body,
       tzScheduledTime,
       details,
-      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+      androidScheduleMode: fln.AndroidScheduleMode.exactAllowWhileIdle,
     );
   }
   
@@ -94,13 +111,13 @@ class NotificationService {
 
     final tz.TZDateTime scheduledDate = _nextInstanceOfTime(reminderTime);
 
-    const details = NotificationDetails(
-      android: AndroidNotificationDetails(
+    const details = fln.NotificationDetails(
+      android: fln.AndroidNotificationDetails(
         pillReminderChannelId, pillReminderChannelName,
         channelDescription: 'Daily reminders to take your birth control pill',
-        importance: Importance.max, priority: Priority.high,
+        importance: fln.Importance.max, priority: fln.Priority.high,
       ),
-      iOS: DarwinNotificationDetails(),
+      iOS: fln.DarwinNotificationDetails(),
     );
 
     await _plugin.zonedSchedule(
@@ -109,8 +126,8 @@ class NotificationService {
       body,
       scheduledDate,
       details,
-      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-      matchDateTimeComponents: DateTimeComponents.time,
+      androidScheduleMode: fln.AndroidScheduleMode.exactAllowWhileIdle,
+      matchDateTimeComponents: fln.DateTimeComponents.time,
     );
   }
 
@@ -143,12 +160,12 @@ class NotificationService {
       scheduledDate = scheduledDate.add(const Duration(days: 1));
     }
 
-    const details = NotificationDetails(
-      android: AndroidNotificationDetails(
+    const details = fln.NotificationDetails(
+      android: fln.AndroidNotificationDetails(
         tamponReminderChannelId, tamponReminderChannelName,
-        importance: Importance.max, priority: Priority.high,
+        importance: fln.Importance.max, priority: fln.Priority.high,
       ),
-      iOS: DarwinNotificationDetails(presentSound: true, presentBadge: true, presentAlert: true),
+      iOS: fln.DarwinNotificationDetails(presentSound: true, presentBadge: true, presentAlert: true),
     );
 
     await _plugin.zonedSchedule(
@@ -157,7 +174,7 @@ class NotificationService {
         body,
         scheduledDate,
         details,
-        androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle);
+        androidScheduleMode: fln.AndroidScheduleMode.exactAllowWhileIdle);
   }
 
   static Future<void> cancelTamponReminder() async {
