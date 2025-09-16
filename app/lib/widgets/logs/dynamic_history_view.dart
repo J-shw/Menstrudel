@@ -16,6 +16,7 @@ class DynamicHistoryView extends StatelessWidget {
   final Function(int) onDelete;
   final Function(PeriodDay) onSave;
   final Function(DateTime) onLogRequested;
+  final Function(PeriodDay) onLogTapped;
 
   const DynamicHistoryView({
     super.key,
@@ -27,6 +28,7 @@ class DynamicHistoryView extends StatelessWidget {
     required this.onDelete,
     required this.onSave,
     required this.onLogRequested,
+    required this.onLogTapped,
   });
 
   @override
@@ -38,6 +40,7 @@ class DynamicHistoryView extends StatelessWidget {
           periodEntries: periodEntries,
           isLoading: isLoading,
           onDelete: onDelete,
+          onLogTapped: onLogTapped,
         );
       case PeriodHistoryView.journal:
         return PeriodJournalView(
