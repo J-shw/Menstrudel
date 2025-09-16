@@ -13,8 +13,6 @@ class DynamicHistoryView extends StatelessWidget {
   final List<PeriodDay> periodLogEntries;
   final List<Period> periodEntries;
   final bool isLoading;
-  final Function(int) onDelete;
-  final Function(PeriodDay) onSave;
   final Function(DateTime) onLogRequested;
   final Function(PeriodDay) onLogTapped;
 
@@ -25,8 +23,6 @@ class DynamicHistoryView extends StatelessWidget {
     required this.periodLogEntries,
     required this.periodEntries,
     required this.isLoading,
-    required this.onDelete,
-    required this.onSave,
     required this.onLogRequested,
     required this.onLogTapped,
   });
@@ -39,7 +35,6 @@ class DynamicHistoryView extends StatelessWidget {
           periodLogEntries: periodLogEntries,
           periodEntries: periodEntries,
           isLoading: isLoading,
-          onDelete: onDelete,
           onLogTapped: onLogTapped,
         );
       case PeriodHistoryView.journal:
@@ -47,8 +42,7 @@ class DynamicHistoryView extends StatelessWidget {
           periodLogEntries: periodLogEntries,
           predictionResult: predictionResult, 
           isLoading: isLoading,
-          onDelete: onDelete,
-          onSave: onSave,
+          onLogTapped: onLogTapped,
           onLogRequested: onLogRequested,
         );
     }
