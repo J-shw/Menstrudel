@@ -15,6 +15,7 @@ import 'package:menstrudel/services/settings_service.dart';
 import 'package:menstrudel/services/period_logger_service.dart';
 import 'package:menstrudel/widgets/logs/dynamic_history_view.dart';
 import 'package:menstrudel/services/wear_sync_service.dart';
+import 'package:menstrudel/widgets/sheets/period_details_bottom_sheet.dart';
 
 import 'package:menstrudel/l10n/app_localizations.dart';
 
@@ -91,6 +92,23 @@ class LogsScreenState extends State<LogsScreen> {
     } finally {
       _refreshPeriodLogs();
     }
+  }
+
+  void _showDetailsBottomSheet(PeriodDay log) {
+    showModalBottomSheet<void>(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      ),
+      builder: (context) {
+        return PeriodDetailsBottomSheet(
+          log: log,
+          onDelete: () => _deletePeriodEntry(log.id),
+          onSave: _handleSaveLog,
+        );
+      },
+    );
   }
 
 	@override
@@ -178,7 +196,8 @@ class LogsScreenState extends State<LogsScreen> {
     _refreshPeriodLogs();
   }
 
-	Future<void> _deletePeriodEntry(int id) async {
+	Future<void> _deletePeriodEntry(int? id) async {
+    if (id == null) return;
 		await periodsRepo.deletePeriodLog(id);
 		_refreshPeriodLogs();
 	}
@@ -236,6 +255,7 @@ class LogsScreenState extends State<LogsScreen> {
           onDelete: _deletePeriodEntry,
           onSave: _handleSaveLog,
           onLogRequested: handleLogPeriod,
+          onLogTapped: _showDetailsBottomSheet,
         ),
       ],
     );
