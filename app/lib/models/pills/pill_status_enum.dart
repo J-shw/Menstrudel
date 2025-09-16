@@ -33,51 +33,60 @@ extension PillExtension on PillVisualStatus {
   /// Returns the decoration and child widget for each status.
   PillVisuals getVisuals(BuildContext context, int dayNumber) {
     final theme = Theme.of(context);
-    final primaryColor = theme.colorScheme.primary;
-    final onPrimaryColor = theme.colorScheme.onPrimary;
+    final colorScheme = theme.colorScheme;
+    
+    final primaryColor = colorScheme.primary;
+    final onPrimaryColor = colorScheme.onPrimary;
+    final errorContainerColor = colorScheme.errorContainer;
+    final onErrorContainerColor = colorScheme.onErrorContainer;
+    final secondaryContainerColor = colorScheme.secondaryContainer;
+    final onSecondaryContainerColor = colorScheme.onSecondaryContainer;
+    final tertiaryContainerColor = colorScheme.tertiaryContainer;
+    final onTertiaryContainerColor = colorScheme.onTertiaryContainer;
+    final surfaceVariantColor = colorScheme.surfaceVariant;
+    final onSurfaceVariantColor = colorScheme.onSurfaceVariant;
 
     switch (this) {
-      case PillVisualStatus.today:
-        return (
-          decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: primaryColor, width: 2)),
-          child: Text('$dayNumber', style: TextStyle(fontWeight: FontWeight.bold, color: primaryColor)),
-        );
-
-      case PillVisualStatus.future:
-        return (
-          decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.blueGrey.shade50),
-          child: Text('$dayNumber', style: TextStyle(color: Colors.blueGrey.shade300)),
-        );
       case PillVisualStatus.taken:
         return (
-          decoration: BoxDecoration(shape: BoxShape.circle, color: primaryColor.withOpacity(0.8)),
+          decoration: BoxDecoration(shape: BoxShape.circle, color: primaryColor.withOpacity(0.9)),
           child: Icon(Icons.check, color: onPrimaryColor, size: 18),
         );
 
-      case PillVisualStatus.skipped:
+      case PillVisualStatus.today:
         return (
-          decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.grey.shade300),
-          child: Icon(Icons.skip_next_rounded, color: Colors.grey.shade600, size: 18),
-        );
-
-      case PillVisualStatus.late:
-        return (
-          decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.amber.shade200),
-          child: Text('$dayNumber', style: TextStyle(color: Colors.amber.shade800, fontWeight: FontWeight.bold)),
+          decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: primaryColor, width: 2.5)),
+          child: Text('$dayNumber', style: TextStyle(fontWeight: FontWeight.bold, color: primaryColor)),
         );
 
       case PillVisualStatus.missed:
         return (
-          decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.red.withOpacity(0.1), border: Border.all(color: Colors.red.shade200, width: 1.5)),
-          child: Text('$dayNumber', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red.shade700)),
-        );
-      
-      case PillVisualStatus.placebo:
-        return (
-          decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.grey.shade300),
-          child: Text('$dayNumber', style: TextStyle(color: Colors.grey.shade600)),
+          decoration: BoxDecoration(shape: BoxShape.circle, color: errorContainerColor),
+          child: Text('$dayNumber', style: TextStyle(fontWeight: FontWeight.bold, color: onErrorContainerColor)),
         );
 
+      case PillVisualStatus.late:
+        return (
+          decoration: BoxDecoration(shape: BoxShape.circle, color: tertiaryContainerColor),
+          child: Text('$dayNumber', style: TextStyle(fontWeight: FontWeight.bold, color: onTertiaryContainerColor)),
+        );
+
+      case PillVisualStatus.skipped:
+        return (
+          decoration: BoxDecoration(shape: BoxShape.circle, color: secondaryContainerColor),
+          child: Icon(Icons.skip_next_rounded, color: onSecondaryContainerColor, size: 18),
+        );
+      case PillVisualStatus.placebo:
+        return (
+          decoration: BoxDecoration(shape: BoxShape.circle, color: secondaryContainerColor),
+          child: Text('$dayNumber', style: TextStyle(color: onSecondaryContainerColor)),
+        );
+
+      case PillVisualStatus.future:
+        return (
+          decoration: BoxDecoration(shape: BoxShape.circle, color: surfaceVariantColor),
+          child: Text('$dayNumber', style: TextStyle(color: onSurfaceVariantColor)),
+        );
     }
   }
 }
