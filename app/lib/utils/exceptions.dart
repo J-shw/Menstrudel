@@ -12,3 +12,15 @@ class FutureDateException implements Exception {
   final String message;
   FutureDateException(this.message);
 }
+
+/// A custom exception for errors related to scheduling notifications in the past.
+class PastNotificationException implements Exception {
+  final String message;
+
+  const PastNotificationException([
+    this.message = 'An error occurred while scheduling the notification.',
+  ]);
+
+  @override
+  String toString() => 'PastNotificationException: $message';
+}
