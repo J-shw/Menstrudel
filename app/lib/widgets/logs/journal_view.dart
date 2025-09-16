@@ -4,6 +4,7 @@ import 'package:menstrudel/models/period_prediction_result.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/widgets/sheets/period_details_bottom_sheet.dart';
+import 'package:menstrudel/models/period_logs/flow_enum.dart';
 
 class PeriodJournalView extends StatefulWidget {
   final List<PeriodDay> periodLogEntries;
@@ -155,12 +156,11 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
                 prioritizedBuilder: (context, day, focusedDay) {
                   final log = _logMap[DateUtils.dateOnly(day)];
                   if (log != null) {
-                    final flowOpacity = 0.3 + (log.flow * 0.33);
                     return Container(
                       margin: const EdgeInsets.all(4.0),
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: colorScheme.primary.withValues(alpha: flowOpacity),
+                        color: log.flow.color,
                       ),
                       alignment: Alignment.center,
                       child: Text(
