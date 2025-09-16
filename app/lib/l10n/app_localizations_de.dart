@@ -424,6 +424,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get pillStatus_undo => 'Undo';
 
   @override
+  String get pillStatus_skip => 'Skip';
+
+  @override
   String get pillStatus_markAsTaken => 'Mark As Taken';
 
   @override

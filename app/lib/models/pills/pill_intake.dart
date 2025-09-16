@@ -1,8 +1,4 @@
-enum PillIntakeStatus {
-  taken,
-  skipped,
-  late,
-}
+import 'package:menstrudel/models/pills/pill_status_enum.dart';
 
 class PillIntake {
   final int? id;

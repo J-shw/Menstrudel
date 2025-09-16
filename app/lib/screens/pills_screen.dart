@@ -6,6 +6,7 @@ import 'package:menstrudel/models/pills/pill_intake.dart';
 import 'package:menstrudel/widgets/pills/empty_pills_state.dart';
 import 'package:menstrudel/widgets/pills/pill_pack_visualiser.dart';
 import 'package:menstrudel/widgets/pills/pill_status_card.dart';
+import 'package:menstrudel/models/pills/pill_status_enum.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 
 class PillsScreen extends StatefulWidget {
@@ -50,8 +51,8 @@ class _PillsScreenState extends State<PillsScreen> {
   }
 
   Future<void> _takePill() async {
-    final l10n = AppLocalizations.of(context)!;
     if (_activeRegimen == null) return;
+
     final newIntake = PillIntake(
       regimenId: _activeRegimen!.id!,
       takenAt: DateTime.now(),
@@ -59,13 +60,46 @@ class _PillsScreenState extends State<PillsScreen> {
       status: PillIntakeStatus.taken,
       pillNumberInCycle: _currentPillNumberInCycle,
     );
+
     await pillsRepo.createPillIntake(newIntake);
+
+    if (!mounted) return;
+
+    final l10n = AppLocalizations.of(context)!;
+
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(l10n.pillScreen_pillForTodayMarkedAsTaken),
         backgroundColor: Colors.green,
       ),
     );
+    
+    _loadPillData();
+  }
+
+  Future<void> _skipPill() async {
+    if (_activeRegimen == null) return;
+    final newIntake = PillIntake(
+      regimenId: _activeRegimen!.id!,
+      takenAt: DateTime.now(),
+      scheduledDate: DateTime.now(),
+      status: PillIntakeStatus.skipped,
+      pillNumberInCycle: _currentPillNumberInCycle,
+    );
+
+    await pillsRepo.createPillIntake(newIntake);
+
+    if (!mounted) return;
+
+    final l10n = AppLocalizations.of(context)!;
+    ScaffoldMessenger.of(context).showSnackBar(
+      
+      SnackBar(
+        content: Text(l10n.pillScreen_pillForTodayMarkedAsTaken),
+        backgroundColor: Colors.green,
+      ),
+    );
+    
     _loadPillData();
   }
 
@@ -106,6 +140,7 @@ class _PillsScreenState extends State<PillsScreen> {
               totalPills: _activeRegimen!.activePills + _activeRegimen!.placeboPills,
               isTodayPillTaken: _isTodayPillTaken,
               onTakePill: _takePill,
+              onSkipPill: _skipPill,
               undoTakePill: _undoTakePill,
             ),
             const SizedBox(height: 24),
