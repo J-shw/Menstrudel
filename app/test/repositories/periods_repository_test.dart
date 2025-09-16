@@ -257,14 +257,14 @@ void main() {
       });
 
       test('getMonthlyFlows should return correct flow data for multiple months', () async {
-        await repository.createPeriodLog(_log('2025-09-01', flow: FlowRate.none));
+        await repository.createPeriodLog(_log('2025-09-01', flow: FlowRate.medium));
         await repository.createPeriodLog(_log('2025-08-15', flow: FlowRate.light));
 
         final monthlyFlows = await repository.getMonthlyFlows();
 
         expect(monthlyFlows.length, 2);
         
-        expect(monthlyFlows.firstWhere((m) => m.monthLabel == 'Sep').flows, [FlowRate.none.index]);
+        expect(monthlyFlows.firstWhere((m) => m.monthLabel == 'Sep').flows, [FlowRate.medium.index]);
         
         expect(monthlyFlows.firstWhere((m) => m.monthLabel == 'Aug').flows, [FlowRate.light.index]);
       });
