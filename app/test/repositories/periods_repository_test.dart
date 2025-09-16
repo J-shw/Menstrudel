@@ -286,5 +286,67 @@ void main() {
         expect(logs, isEmpty);
       });
     });
+
+    // --- GROUP 7: Period Logic with "None" Flow ---
+    group('Period Logic with "None" Flow', () {
+      test('creating a log with FlowRate.none should not create a period', () async {
+        await repository.createPeriodLog(_log('2025-09-01', flow: FlowRate.none));
+        final periods = await repository.readAllPeriods();
+        final logs = await repository.readAllPeriodLogs();
+
+        expect(periods, isEmpty);
+        expect(logs.length, 1);
+      });
+
+      test('updating the only log in a period to FlowRate.none should delete the period', () async {
+        final logToUpdate = await repository.createPeriodLog(_log('2025-09-01'));
+        
+        final updatedLog = logToUpdate.copyWith(flow: FlowRate.none);
+        await repository.updatePeriodLog(updatedLog);
+
+        final periods = await repository.readAllPeriods();
+        expect(periods, isEmpty);
+      });
+
+      test('updating a middle log to FlowRate.none should split the period', () async {
+        await repository.createPeriodLog(_log('2025-09-01'));
+        final logToUpdate = await repository.createPeriodLog(_log('2025-09-02'));
+        await repository.createPeriodLog(_log('2025-09-03'));
+
+        final updatedLog = logToUpdate.copyWith(flow: FlowRate.none);
+        await repository.updatePeriodLog(updatedLog);
+
+        final periods = await repository.readAllPeriods();
+        expect(periods.length, 2);
+        expect(periods.first.startDate, DateTime.parse('2025-09-03'));
+        expect(periods.last.startDate, DateTime.parse('2025-09-01'));
+      });
+
+      test('updating a log from FlowRate.none should create or merge periods', () async {
+        await repository.createPeriodLog(_log('2025-09-01'));
+        final logToUpdate = await repository.createPeriodLog(_log('2025-09-02', flow: FlowRate.none));
+        await repository.createPeriodLog(_log('2025-09-03'));
+
+        var periods = await repository.readAllPeriods();
+        expect(periods.length, 2);
+
+        final updatedLog = logToUpdate.copyWith(flow: FlowRate.medium);
+        await repository.updatePeriodLog(updatedLog);
+
+        periods = await repository.readAllPeriods();
+        expect(periods.length, 1);
+        expect(periods.first.totalDays, 3);
+      });
+
+      test('adding a none-flow log between two periods should not merge them', () async {
+        await repository.createPeriodLog(_log('2025-09-01'));
+        await repository.createPeriodLog(_log('2025-09-03'));
+
+        await repository.createPeriodLog(_log('2025-09-02', flow: FlowRate.none));
+
+        final periods = await repository.readAllPeriods();
+        expect(periods.length, 2);
+      });
+    });
   });
 }
