@@ -230,6 +230,12 @@ abstract class AppLocalizations {
   /// **'Settings'**
   String get navBar_settings;
 
+  /// No description provided for @flowIntensity_none.
+  ///
+  /// In en, this message translates to:
+  /// **'None'**
+  String get flowIntensity_none;
+
   /// No description provided for @flowIntensity_light.
   ///
   /// In en, this message translates to:
