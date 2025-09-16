@@ -1,3 +1,4 @@
+import 'package:menstrudel/models/period_logs/flow_enum.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,7 @@ class PeriodsRepository {
     try {
       final newLog = PeriodDay(
         date: DateTime.now(),
-        flow: 2,
+        flow: FlowRate.medium,
         painLevel: 0,
       );
 

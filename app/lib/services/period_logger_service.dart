@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:menstrudel/models/period_logs/flow_enum.dart';
 import 'package:menstrudel/widgets/sheets/symptom_entry_sheet.dart';
 import 'package:menstrudel/models/period_logs/period_day.dart';
 import 'package:menstrudel/database/repositories/periods_repository.dart';
@@ -29,7 +30,7 @@ class PeriodLoggerService {
       final newEntry = PeriodDay(
         date: date,
         symptoms: result['symptoms'] ?? [],
-        flow: result['flow'] ?? 0,
+        flow: result['flow'] ?? FlowRate.none,
         painLevel: result['painLevel'] ?? 0,
       );
 
