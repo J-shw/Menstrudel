@@ -143,7 +143,10 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
               IconButton(
                 icon: Icon(Icons.delete_outline,
                     size: 24, color: colorScheme.error),
-                onPressed: widget.onDelete,
+                onPressed: () {
+                  widget.onDelete();
+                  Navigator.pop(context);
+                },
               ),
             ],
           ),
