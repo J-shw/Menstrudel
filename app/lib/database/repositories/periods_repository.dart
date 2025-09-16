@@ -193,7 +193,12 @@ class PeriodsRepository {
   Future<void> _recalculateAndAssignPeriods(Database db) async {
     await db.delete('periods');
 
-    final allEntryMaps = await db.query('period_logs', orderBy: 'date ASC');
+    final allEntryMaps = await db.query(
+      'period_logs',
+      orderBy: 'date ASC',
+      where: 'flow != ?',
+      whereArgs: [FlowRate.none.index],
+    );
     final allEntries = allEntryMaps.map((e) => PeriodDay.fromMap(e)).toList();
 
     if (allEntries.isEmpty) {
