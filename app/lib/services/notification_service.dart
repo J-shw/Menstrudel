@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz;
+import 'package:menstrudel/utils/constants.dart';
 
 @pragma('vm:entry-point')
 void onDidReceiveNotificationResponse(NotificationResponse notificationResponse) {
@@ -14,10 +15,6 @@ void onDidReceiveBackgroundNotificationResponse(NotificationResponse notificatio
 
 class NotificationService {
   static final FlutterLocalNotificationsPlugin _plugin = FlutterLocalNotificationsPlugin();
-
-  static const int _periodNotificationId = 1;
-  static const int _tamponReminderId = 2;
-  static const int _pillReminderId = 3;
 
   static Future<void> initialize() async {
     const androidSettings = AndroidInitializationSettings('@mipmap/ic_launcher');
@@ -41,17 +38,20 @@ class NotificationService {
 
   // Perdiods
 
-  static Future<void> schedulePeriodNotification({
+  /// Schedules notifications related to periods
+  static Future<void> schedulePeriodNotifications({
     required DateTime scheduledTime,
     required bool areEnabled,
     required int daysBefore,
     required TimeOfDay notificationTime,
     required String title,
-    required String body, 
+    required String body,
+    required int notificationID,
   }) async {
+
     if (!areEnabled) return;
 
-    await _plugin.cancel(_periodNotificationId);
+    await _plugin.cancel(notificationID);
 
     final notificationDateTime = DateTime(
       scheduledTime.year, scheduledTime.month, scheduledTime.day,
@@ -64,14 +64,14 @@ class NotificationService {
 
     const details = NotificationDetails(
       android: AndroidNotificationDetails(
-        'period_channel', 'Period Predictions',
+        periodNotificationChannelId, periodNotificationChannelName,
         importance: Importance.max, priority: Priority.high
       ),
       iOS: DarwinNotificationDetails(),
     );
 
     await _plugin.zonedSchedule(
-      _periodNotificationId,
+      notificationID,
       title,
       body,
       tzScheduledTime,
@@ -88,7 +88,7 @@ class NotificationService {
     required String title,
     required String body, 
   }) async {
-    await _plugin.cancel(_pillReminderId);
+    await _plugin.cancel(pillReminderId);
 
     if (!isEnabled) return;
 
@@ -96,7 +96,7 @@ class NotificationService {
 
     const details = NotificationDetails(
       android: AndroidNotificationDetails(
-        'pill_reminder_channel', 'Pill Reminders',
+        pillReminderChannelId, pillReminderChannelName,
         channelDescription: 'Daily reminders to take your birth control pill',
         importance: Importance.max, priority: Priority.high,
       ),
@@ -104,7 +104,7 @@ class NotificationService {
     );
 
     await _plugin.zonedSchedule(
-      _pillReminderId,
+      pillReminderId,
       title,
       body,
       scheduledDate,
@@ -115,7 +115,7 @@ class NotificationService {
   }
 
   static Future<void> cancelPillReminder() async {
-    await _plugin.cancel(_pillReminderId);
+    await _plugin.cancel(pillReminderId);
   }
 
   static tz.TZDateTime _nextInstanceOfTime(TimeOfDay time) {
@@ -145,14 +145,14 @@ class NotificationService {
 
     const details = NotificationDetails(
       android: AndroidNotificationDetails(
-        'tampon_reminder_channel', 'Tampon Reminders',
+        tamponReminderChannelId, tamponReminderChannelName,
         importance: Importance.max, priority: Priority.high,
       ),
       iOS: DarwinNotificationDetails(presentSound: true, presentBadge: true, presentAlert: true),
     );
 
     await _plugin.zonedSchedule(
-        _tamponReminderId,
+        tamponReminderId,
         title,
         body,
         scheduledDate,
@@ -161,12 +161,12 @@ class NotificationService {
   }
 
   static Future<void> cancelTamponReminder() async {
-    await _plugin.cancel(_tamponReminderId);
+    await _plugin.cancel(tamponReminderId);
   }
 
   static Future<bool> isTamponReminderScheduled() async {
     final pendingRequests = await _plugin.pendingNotificationRequests();
-    return pendingRequests.any((request) => request.id == _tamponReminderId);
+    return pendingRequests.any((request) => request.id == tamponReminderId);
   }
 
   // General
