@@ -36,7 +36,7 @@ class _InsightsScreenState extends State<InsightsScreen> {
     _insightsDataFuture = Future.wait([
       periodsRepo.readAllPeriods(),
       periodsRepo.readAllPeriodLogs(),
-      periodsRepo.getMonthlyFlows()
+      periodsRepo.getMonthlyPeriodFlows()
     ]);
 }
 

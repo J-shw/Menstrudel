@@ -38,7 +38,7 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
   }
 
   void _resetEditableState() {
-    _editedFlow = FlowRate.values[widget.log.flow];
+    _editedFlow = widget.log.flow;
     _editedPainLevel = PainLevel.values[widget.log.painLevel];
     _editedSymptoms = widget.log.symptoms?.map((symptomString) {
     try {
@@ -52,7 +52,7 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
   void _handleSave() {
     final symptomsToSave = _editedSymptoms.map((s) => s.name).toList();
     final updatedLog = widget.log.copyWith(
-      flow: _editedFlow.intValue,
+      flow: _editedFlow,
       painLevel: _editedPainLevel.intValue,
       symptoms: symptomsToSave,
     );
@@ -143,7 +143,10 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
               IconButton(
                 icon: Icon(Icons.delete_outline,
                     size: 24, color: colorScheme.error),
-                onPressed: widget.onDelete,
+                onPressed: () {
+                  widget.onDelete();
+                  Navigator.pop(context);
+                },
               ),
             ],
           ),
@@ -157,7 +160,7 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
     final colorScheme = Theme.of(context).colorScheme;
 
     if (!_isEditing) {
-      final flow = FlowRate.values[widget.log.flow];
+      final flow = widget.log.flow;
 
       return Row(
         children: [
@@ -170,7 +173,9 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
           ),
           const Spacer(),
           ...List.generate(3, (index) => Icon(
-                index <= flow.intValue ? Icons.water_drop : Icons.water_drop_outlined,
+                flow != FlowRate.none && index < flow.intValue
+                    ? Icons.water_drop
+                    : Icons.water_drop_outlined,
                 size: 20,
                 color: colorScheme.primary,
           ))

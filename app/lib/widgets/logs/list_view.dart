@@ -11,14 +11,14 @@ class PeriodListView extends StatelessWidget {
   final List<PeriodDay> periodLogEntries;
   final List<Period> periodEntries;
   final bool isLoading;
-  final Function(int) onDelete;
+  final Function(PeriodDay) onLogTapped;
 
   const PeriodListView({
     super.key,
     required this.periodEntries,
     required this.periodLogEntries,
     required this.isLoading,
-    required this.onDelete,
+    required this.onLogTapped,
   });
 
   @override
@@ -104,47 +104,14 @@ class PeriodListView extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
     final l10n = AppLocalizations.of(context)!;
 
-    final flow = FlowRate.values[entry.flow];
     final symptomMap = {for (var s in Symptom.values) s.name: s};
     final symptoms = entry.symptoms
             ?.map((s) => symptomMap[s])
             .whereType<Symptom>()
             .toList() ?? [];
 
-    return Dismissible(
-      key: ValueKey(entry.id),
-      direction: DismissDirection.endToStart,
-      background: Container(
-        color: Colors.redAccent,
-        alignment: Alignment.centerRight,
-        padding: const EdgeInsets.only(right: 20.0),
-        child: const Icon(Icons.delete, color: Colors.white),
-      ),
-      confirmDismiss: (direction) async {
-        return await showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: Text(l10n.listViewWidget_confirmDelete),
-              content: Text(l10n.listViewWidget_confirmDeleteDescription),
-              actions: <Widget>[
-                TextButton(
-                  onPressed: () => Navigator.of(context).pop(false),
-                  child: Text(l10n.cancel),
-                ),
-                ElevatedButton(
-                  onPressed: () => Navigator.of(context).pop(true),
-                  child: Text(l10n.delete),
-                ),
-              ],
-            );
-          },
-        );
-                      
-      },
-      onDismissed: (_) {
-        if (entry.id != null) onDelete(entry.id!);
-      },
+    return InkWell(
+      onTap: () => onLogTapped(entry),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
         child: Row(
@@ -172,7 +139,7 @@ class PeriodListView extends StatelessWidget {
                 children: [
                   Row(
                     children: List.generate(
-                      flow.intValue + 1,
+                      entry.flow.intValue,
                       (index) => Icon(
                         Icons.water_drop,
                         size: 18,

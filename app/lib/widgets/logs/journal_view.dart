@@ -3,13 +3,12 @@ import 'package:menstrudel/models/period_logs/period_day.dart';
 import 'package:menstrudel/models/period_prediction_result.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
-import 'package:menstrudel/widgets/sheets/period_details_bottom_sheet.dart';
+import 'package:menstrudel/models/period_logs/flow_enum.dart';
 
 class PeriodJournalView extends StatefulWidget {
   final List<PeriodDay> periodLogEntries;
   final bool isLoading;
-  final Function(int) onDelete;
-  final Function(PeriodDay) onSave;
+  final Function(PeriodDay) onLogTapped;
   final PeriodPredictionResult? predictionResult;
   final Function(DateTime) onLogRequested;
 
@@ -17,8 +16,7 @@ class PeriodJournalView extends StatefulWidget {
     super.key,
     required this.periodLogEntries,
     required this.isLoading,
-    required this.onDelete,
-    required this.onSave,
+    required this.onLogTapped,
     this.predictionResult,
     required this.onLogRequested,
   });
@@ -51,34 +49,6 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
     _logMap = {
       for (var log in widget.periodLogEntries) DateUtils.dateOnly(log.date): log
     };
-  }
-
-  void _handleDelete(PeriodDay entryToDelete) {
-    Navigator.of(context).pop();
-    if (entryToDelete.id != null) {
-      widget.onDelete(entryToDelete.id!);
-    }
-  }
-
-  void _showDetailsBottomSheet(PeriodDay log) {
-    showModalBottomSheet<void>(
-      context: context,
-      isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-      ),
-      builder: (context) {
-        return PeriodDetailsBottomSheet(
-          log: log,
-          onDelete: () => _handleDelete(log),
-          onSave: widget.onSave,
-        );
-      },
-    ).then((_) {
-      setState(() {
-        _selectedDay = null;
-      });
-    });
   }
 
   @override
@@ -141,7 +111,7 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
                     _logMap[DateUtils.dateOnly(selectedDay)];
 
                 if (logForSelectedDay != null) {
-                  _showDetailsBottomSheet(logForSelectedDay);
+                  widget.onLogTapped(logForSelectedDay);
                 } else {
                   widget.onLogRequested(selectedDay);
                 }
@@ -155,12 +125,11 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
                 prioritizedBuilder: (context, day, focusedDay) {
                   final log = _logMap[DateUtils.dateOnly(day)];
                   if (log != null) {
-                    final flowOpacity = 0.3 + (log.flow * 0.33);
                     return Container(
                       margin: const EdgeInsets.all(4.0),
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: colorScheme.primary.withValues(alpha: flowOpacity),
+                        color: log.flow.color,
                       ),
                       alignment: Alignment.center,
                       child: Text(

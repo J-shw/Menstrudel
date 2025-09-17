@@ -76,7 +76,7 @@ class _MainScreenState extends State<MainScreen> {
         return FloatingActionButton(
           key: const ValueKey('log_fab'),
           tooltip: l10n.mainScreen_tooltipLogPeriod,
-          onPressed: () => _logsScreenKey.currentState?.handleLogPeriod(DateTime.now()),
+          onPressed: () => _logsScreenKey.currentState?.createNewLog(DateTime.now()),
           child: const Icon(Icons.add),
         );
     }

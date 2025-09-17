@@ -20,7 +20,7 @@ class SymptomEntrySheet extends StatefulWidget {
 class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
   late DateTime _selectedDate;
   final Set<Symptom> _selectedSymptoms = {};
-  Set<FlowRate> _flowSelection = {FlowRate.medium};
+  FlowRate _flowSelection = FlowRate.medium;
   PainLevel _painLevel = PainLevel.none;
 
   @override
@@ -81,24 +81,26 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
             // --- Flow Selection ---
             Text(l10n.flow, style: Theme.of(context).textTheme.bodySmall),
             const SizedBox(height: 8),
-            SizedBox(
-              width: double.infinity,
-              child: SegmentedButton<FlowRate>(
-                segments: FlowRate.values.map((flow) {
-                  return ButtonSegment<FlowRate>(
-                    value: flow,
-                    label: Text(flow.getDisplayName(l10n)),
-                  );
-                }).toList(),
-                selected: _flowSelection,
-                onSelectionChanged: (Set<FlowRate> newSelection) { 
-                  setState(() {
-                    if (newSelection.isNotEmpty) {
-                      _flowSelection = newSelection;
-                    }
-                  });
-                },
-              ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Wrap(
+                  spacing: 8.0,
+                  children: FlowRate.values.map((flow) {
+                    return ChoiceChip(
+                      label: Text(flow.getDisplayName(l10n)),
+                      selected: _flowSelection == flow,
+                      onSelected: (isSelected) {
+                        if (isSelected) {
+                          setState(() {
+                            _flowSelection = flow;
+                          });
+                        }
+                      },
+                    );
+                  }).toList(),
+                ),
+              ],
             ),
             const SizedBox(height: 8),
             // --- Pain Level ---
@@ -177,7 +179,7 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
 
                       Navigator.of(context).pop({
                         'date': _selectedDate,
-                        'flow': _flowSelection.first.intValue,
+                        'flow': _flowSelection,
                         'symptoms': symptomsToSave,
                         'painLevel': _painLevel.intValue,
                       });

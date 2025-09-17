@@ -15,6 +15,7 @@ import 'package:menstrudel/services/settings_service.dart';
 import 'package:menstrudel/services/period_logger_service.dart';
 import 'package:menstrudel/widgets/logs/dynamic_history_view.dart';
 import 'package:menstrudel/services/wear_sync_service.dart';
+import 'package:menstrudel/widgets/sheets/period_details_bottom_sheet.dart';
 
 import 'package:menstrudel/l10n/app_localizations.dart';
 
@@ -44,14 +45,6 @@ class LogsScreenState extends State<LogsScreen> {
   PeriodHistoryView _selectedView = PeriodHistoryView.journal;
   int _circleCurrentValue = 0;
   int _circleMaxValue = 28;
-
-  Future<void> handleLogPeriod(DateTime selectedDate) async {
-    final bool wasLogSuccessful = await PeriodLoggerService.showAndLogPeriod(context, selectedDate);
-
-    if (wasLogSuccessful && mounted) {
-      _refreshPeriodLogs();
-    }
-  }
   
   Future<void> handleTamponReminder(BuildContext context) async {
     final l10n = AppLocalizations.of(context)!;
@@ -77,13 +70,13 @@ class LogsScreenState extends State<LogsScreen> {
     final l10n = AppLocalizations.of(context)!;
     try {
       await NotificationService.cancelTamponReminder();
-      if (context.mounted) {
+      if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(l10n.logScreen_tamponReminderCancelled)),
         );
       }
     } catch (e) {
-      if (context.mounted) {
+      if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('${l10n.logScreen_couldNotCancelReminder}: $e'), backgroundColor: Colors.red),
         );
@@ -91,6 +84,23 @@ class LogsScreenState extends State<LogsScreen> {
     } finally {
       _refreshPeriodLogs();
     }
+  }
+
+  void _showDetailsBottomSheet(PeriodDay log) {
+    showModalBottomSheet<void>(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      ),
+      builder: (context) {
+        return PeriodDetailsBottomSheet(
+          log: log,
+          onDelete: () => _deleteExistingLog(log.id),
+          onSave: _updateExistingLog,
+        );
+      },
+    );
   }
 
 	@override
@@ -172,13 +182,29 @@ class LogsScreenState extends State<LogsScreen> {
     );
   }
 
-  void _handleSaveLog(PeriodDay updatedLog) {
-    periodsRepo.updatePeriodLog(updatedLog);
-    Navigator.of(context).pop();
+  /// Creates a new log entry.
+  Future<void> createNewLog(DateTime selectedDate) async {
+    final bool wasLogSuccessful = await PeriodLoggerService.showAndLogPeriod(context, selectedDate);
+
+    if (wasLogSuccessful && mounted) {
+      _refreshPeriodLogs();
+    }
+  }
+
+  /// updates an existing log entry.
+  Future<void> _updateExistingLog(PeriodDay updatedLog) async {
+    await periodsRepo.updatePeriodLog(updatedLog);
+
+    if (mounted) {
+      Navigator.of(context).pop();
+    }
+
     _refreshPeriodLogs();
   }
 
-	Future<void> _deletePeriodEntry(int id) async {
+  /// Deletes a log entry.
+	Future<void> _deleteExistingLog(int? id) async {
+    if (id == null) return;
 		await periodsRepo.deletePeriodLog(id);
 		_refreshPeriodLogs();
 	}
@@ -233,9 +259,8 @@ class LogsScreenState extends State<LogsScreen> {
           periodLogEntries: _periodLogEntries,
           periodEntries: _periodEntries,
           isLoading: _isLoading,
-          onDelete: _deletePeriodEntry,
-          onSave: _handleSaveLog,
-          onLogRequested: handleLogPeriod,
+          onLogRequested: createNewLog,
+          onLogTapped: _showDetailsBottomSheet,
         ),
       ],
     );

@@ -1,3 +1,4 @@
+import 'package:menstrudel/models/period_logs/flow_enum.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
@@ -13,12 +14,12 @@ class PeriodsRepository {
   static const String _whereId = 'id = ?';
 
   Future<void> logPeriodFromWatch() async {
-    print('Received request from watch! Logging period now...');
+    debugPrint('Received request from watch! Logging period now...');
 
     try {
       final newLog = PeriodDay(
         date: DateTime.now(),
-        flow: 2,
+        flow: FlowRate.medium,
         painLevel: 0,
       );
 
@@ -121,6 +122,8 @@ class PeriodsRepository {
   Future<PeriodDay> createPeriodLog(PeriodDay entry) async {
     final db = await dbProvider.database;
 
+    debugPrint(entry.toString());
+
     await _validateLogDate(db, entry.date);
       
     final id = await db.insert('period_logs', entry.toMap());
@@ -190,7 +193,12 @@ class PeriodsRepository {
   Future<void> _recalculateAndAssignPeriods(Database db) async {
     await db.delete('periods');
 
-    final allEntryMaps = await db.query('period_logs', orderBy: 'date ASC');
+    final allEntryMaps = await db.query(
+      'period_logs',
+      orderBy: 'date ASC',
+      where: 'flow != ?',
+      whereArgs: [FlowRate.none.index],
+    );
     final allEntries = allEntryMaps.map((e) => PeriodDay.fromMap(e)).toList();
 
     if (allEntries.isEmpty) {
@@ -214,9 +222,16 @@ class PeriodsRepository {
     }
   }
 
+  /// Creates a Period entry in the DB from logs with at flow rate.
   Future<void> _createPeriodFromLogs(Database db, List<PeriodDay> logs) async {
-    final startDate = logs.first.date;
-    final endDate = logs.last.date;
+    final periodDays = logs.where((log) => log.flow != FlowRate.none).toList();
+
+    if (periodDays.isEmpty) {
+      return;
+    }
+
+    final startDate = periodDays.first.date;
+    final endDate = periodDays.last.date;
     final totalDays = endDate.difference(startDate).inDays + 1;
 
     final newPeriodMap = {
@@ -227,7 +242,7 @@ class PeriodsRepository {
 
     final periodId = await db.insert('periods', newPeriodMap);
 
-    final logIds = logs.map((log) => log.id!).toList();
+    final logIds = periodDays.map((log) => log.id!).toList();
 
     await db.transaction((txn) async {
       for (final logId in logIds) {
@@ -241,7 +256,8 @@ class PeriodsRepository {
     });
   }
 
-  Future<List<MonthlyFlowData>> getMonthlyFlows() async {
+  /// Fetches monthly flow data exclusively from logs that are part of a period.
+  Future<List<MonthlyFlowData>> getMonthlyPeriodFlows() async {
     final db = await dbProvider.database;
     final List<MonthlyFlowData> allMonthlyFlows = [];
 

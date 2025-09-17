@@ -20,6 +20,9 @@ class FlowPatternsWidget extends StatelessWidget {
 
     if (index >= 0 && index < FlowRate.values.length) {
       final flow = FlowRate.values[index];
+      if (flow == FlowRate.none) {
+        return const SizedBox.shrink();
+      }
       return Text(flow.getDisplayName(l10n), style: style);
     }
     return const SizedBox.shrink();
@@ -48,6 +51,9 @@ class FlowPatternsWidget extends StatelessWidget {
       for (int i = 0; i < monthData.flows.length; i++) {
         final day = i + 1;
         final flow = FlowRate.values[monthData.flows[i]];
+        if (flow == FlowRate.none) {
+          continue;
+        }
         spotsForThisCycle.add(FlSpot(day.toDouble(), _numericFromFlow(flow)));
       }
 
@@ -89,7 +95,7 @@ class FlowPatternsWidget extends StatelessWidget {
               aspectRatio: 1.7,
               child: LineChart(
                 LineChartData(
-                  minY: 0,
+                  minY: 1,
                   maxY: 4,
                   minX: 1,
                   maxX: maxDay,

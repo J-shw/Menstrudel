@@ -43,7 +43,7 @@ class FlowBreakdownWidget extends StatelessWidget {
     };
 
     for (final log in logs) {
-      final flow = FlowRate.values[log.flow];
+      final flow = log.flow;
       flowCounts[flow] = (flowCounts[flow] ?? 0) + 1;
     }
 

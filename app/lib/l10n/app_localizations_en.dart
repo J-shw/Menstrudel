@@ -83,6 +83,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get navBar_settings => 'Settings';
 
   @override
+  String get flowIntensity_none => 'None';
+
+  @override
   String get flowIntensity_light => 'Light';
 
   @override
