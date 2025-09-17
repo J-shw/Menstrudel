@@ -13,11 +13,7 @@ This is where an **offline-first** approach changes everything.
 
 An offline-first application is designed from the ground up to work without an internet connection. For a period tracker, this means all your data—your cycle dates, symptoms, and personal notes—is stored securely and exclusively on your own device.
 
-The logic is simple but powerful: **If your data never leaves your phone, it can't be compromised by anyone else.**
-
-
-
-This principle isn't just a feature; it's a fundamental statement about your privacy. When an app works offline, it means:
+This isn't just a feature; it's a fundamental statement about your privacy. When an app works offline, it means:
 * **No Data Harvesting:** Without a server connection, a company can't collect and sell your health data to advertisers.
 * **Total Data Ownership:** You are the sole owner and controller of your information. It stays with you, always.
 
