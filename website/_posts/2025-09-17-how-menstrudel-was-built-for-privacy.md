@@ -2,7 +2,7 @@
 layout: post
 title: "No Cloud, No Login, No Problem: How We Built Menstrudel for Your Privacy"
 date: 2025-09-17
-categories: [blog, tech, design, privacy]
+categories: [blog, tech, privacy]
 ---
 
 In a world where almost every app wants an internet connection, have you ever stopped to ask why? Many apps, especially health trackers, collect your personal data and store it on their servers. While this can be convenient, it means your most sensitive information is no longer in your control. It can be sold, mishandled, or exposed in a data breach.
