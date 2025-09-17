@@ -21,12 +21,12 @@ This is a one-time setup to download all the necessary project files (called gem
 
 1.  **Clone the Repository (if you haven't already)**
     ```bash
-    git clone <your-repository-url>
+    git clone <https://github.com/J-shw/Menstrude>
     ```
 
 2.  **Navigate to the Website Directory**
     ```bash
-    cd path/to/your/website
+    cd /website
     ```
 
 3.  **Install Dependencies**
