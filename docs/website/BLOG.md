@@ -28,6 +28,9 @@ Use for: Practical tutorials and guides to help users get the most out of Menstr
 ### 8. **Wellness**
 Use for: Broader lifestyle topics that relate to the menstrual cycle, such as nutrition, exercise, and stress management.
 
+### 9. **Blog**
+Use for: General articles and editorial content, such as stories, opinion pieces, and deep dives. This category distinguishes regular posts from specific updates like Release Notes or Announcements
+
 ## Create a New Post
 
 ### 1. Create a New File
