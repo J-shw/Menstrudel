@@ -2,10 +2,31 @@
 
 This guide explains how to create and publish a new blog post.
 
-## Post catagories
+# Blog Content Categories
 
-- release notes
-- announcements
+### 1. **Announcements**
+Use for: Big news, milestones, and general updates about the Menstrudel project.
+
+### 2. **Release Notes**
+Use for: Detailed posts about new app versions, listing specific features and bug fixes.
+
+### 3. **Privacy**
+Use for: Articles about data security, the importance of privacy, and why Menstrudel is a safe choice.
+
+### 4. **Open Source**
+Use for: Posts about the benefits of open-source software, transparency, and community contributions.
+
+### 5. **Tech**
+Use for: "Behind-the-scenes" articles explaining the technical decisions behind the app, like the "offline-first" design.
+
+### 6. **User Stories**
+Use for: Testimonials and case studies showing how real people benefit from using the app.
+
+### 7. **App Tips**
+Use for: Practical tutorials and guides to help users get the most out of Menstrudel's features.
+
+### 8. **Wellness**
+Use for: Broader lifestyle topics that relate to the menstrual cycle, such as nutrition, exercise, and stress management.
 
 ## Create a New Post
 
