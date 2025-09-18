@@ -9,14 +9,44 @@ class TimeSelectionDialog extends StatefulWidget {
 }
 
 class _TimeSelectionDialogState extends State<TimeSelectionDialog> {
-  late TimeOfDay _selectedTime;
+  late TimeOfDay _startTime;
+  late TimeOfDay _endTime;
 
   @override
   void initState() {
     super.initState();
     final DateTime now = DateTime.now();
-    final DateTime futureDateTime = now.add(const Duration(hours: 6));
-    _selectedTime = TimeOfDay.fromDateTime(futureDateTime);
+    _startTime = TimeOfDay.fromDateTime(now);
+    _endTime = TimeOfDay.fromDateTime(now.add(const Duration(hours: 6)));
+  }
+
+  Widget _buildTimePicker({
+    required String label,
+    required TimeOfDay selectedTime,
+    required ValueChanged<TimeOfDay> onTimeChanged,
+  }) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(label, style: Theme.of(context).textTheme.labelLarge),
+        const SizedBox(height: 8),
+        InkWell(
+          onTap: () async {
+            final TimeOfDay? picked = await showTimePicker(
+              context: context,
+              initialTime: selectedTime,
+            );
+            if (picked != null && picked != selectedTime) {
+              onTimeChanged(picked);
+            }
+          },
+          child: Text(
+            selectedTime.format(context),
+            style: const TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
+          ),
+        ),
+      ],
+    );
   }
 
   @override
@@ -28,36 +58,34 @@ class _TimeSelectionDialogState extends State<TimeSelectionDialog> {
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          const SizedBox(height: 16),
-          InkWell(
-            onTap: () async {
-              final TimeOfDay? picked = await showTimePicker(
-                context: context,
-                initialTime: _selectedTime,
-              );
-              if (picked != null && picked != _selectedTime) {
-                setState(() {
-                  _selectedTime = picked;
-                });
-              }
+          _buildTimePicker(
+            label: 'Start',
+            selectedTime: _startTime,
+            onTimeChanged: (newTime) {
+              setState(() => _startTime = newTime);
             },
-            child: Text(
-              _selectedTime.format(context),
-              style: const TextStyle(fontSize: 48, fontWeight: FontWeight.bold),
-            ),
+          ),
+          const SizedBox(height: 24),
+          _buildTimePicker(
+            label: 'End',
+            selectedTime: _endTime,
+            onTimeChanged: (newTime) {
+              setState(() => _endTime = newTime);
+            },
           ),
         ],
       ),
       actions: <Widget>[
         TextButton(
-          onPressed: () {
-            Navigator.pop(context); 
-          },
+          onPressed: () => Navigator.pop(context),
           child: Text(l10n.cancel),
         ),
         TextButton(
           onPressed: () {
-            Navigator.pop(context, _selectedTime);
+            Navigator.pop(context, {
+              'start': _startTime,
+              'end': _endTime,
+            });
           },
           child: Text(l10n.set),
         ),
