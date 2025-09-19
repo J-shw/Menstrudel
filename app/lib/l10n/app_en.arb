@@ -7,6 +7,9 @@
     "date": "Date",
     "time": "Time",
 
+    "start": "Start",
+    "end": "End",
+
     "day": "Day",
     "days": "Days",
 
@@ -164,6 +167,7 @@
     "settingsScreen_clearAllLogs": "Clear All Logs",
 
     "tamponReminderDialog_tamponReminderTitle": "Tampon Reminder",
+    "tamponReminderDialog_tamponReminderMaxDuration": "Max duration is 8 hours.",
 
     "cycleLengthVarianceWidget_LogAtLeastTwoPeriods": "Need at least two cycles to show variance.",
     "cycleLengthVarianceWidget_cycleAndPeriodVeriance": "Cycle & Period Variance",
