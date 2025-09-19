@@ -18,7 +18,7 @@ jobs:
           
           regex="^(feature|bugfix|docs|chore|refactor|style|test)\/(app|wear|web|repo)\/[a-z0-9-]+$"
 
-          if [[ "$branch_name" == 'New Crowdin updates' ]] || [[ "$branch_name" =~ $regex ]]; then
+          if [[ "$branch_name" == 'l10n_dev' ]] || [[ "$branch_name" =~ $regex ]]; then
             echo "Branch name'$branch_name' is valid."
             echo "is_valid=true" >> $GITHUB_OUTPUT
           else
