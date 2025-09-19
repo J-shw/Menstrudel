@@ -54,6 +54,16 @@ class WatchSyncService {
     required int circleMaxValue,
     required int circleCurrentValue,
   }) async {
+    if (!await _watch.isSupported) {
+      debugPrint('Watch communication is not supported on this device.');
+      return;
+    }
+
+    if (!await _watch.isPaired) {
+      debugPrint('No watch is paired. Skipping data send.');
+      return;
+    }
+
     final newCircleData = CircleData(
       currentValue: circleCurrentValue,
       maxValue: circleMaxValue,
