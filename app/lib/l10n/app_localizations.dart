@@ -122,6 +122,18 @@ abstract class AppLocalizations {
   /// **'Time'**
   String get time;
 
+  /// No description provided for @start.
+  ///
+  /// In en, this message translates to:
+  /// **'Start'**
+  String get start;
+
+  /// No description provided for @end.
+  ///
+  /// In en, this message translates to:
+  /// **'End'**
+  String get end;
+
   /// No description provided for @day.
   ///
   /// In en, this message translates to:
@@ -661,6 +673,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Tampon Reminder'**
   String get tamponReminderDialog_tamponReminderTitle;
+
+  /// No description provided for @tamponReminderDialog_tamponReminderMaxDuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Max duration is 8 hours.'**
+  String get tamponReminderDialog_tamponReminderMaxDuration;
 
   /// No description provided for @cycleLengthVarianceWidget_LogAtLeastTwoPeriods.
   ///

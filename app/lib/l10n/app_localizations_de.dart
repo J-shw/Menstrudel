@@ -21,6 +21,12 @@ class AppLocalizationsDe extends AppLocalizations {
   String get time => 'Time';
 
   @override
+  String get start => 'Start';
+
+  @override
+  String get end => 'End';
+
+  @override
   String get day => 'Day';
 
   @override
@@ -331,6 +337,10 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get tamponReminderDialog_tamponReminderTitle => 'Tampon Reminder';
+
+  @override
+  String get tamponReminderDialog_tamponReminderMaxDuration =>
+      'Max duration is 8 hours.';
 
   @override
   String get cycleLengthVarianceWidget_LogAtLeastTwoPeriods =>
