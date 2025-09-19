@@ -36,9 +36,12 @@ jobs:
           echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> app/android/app/key.properties
 
 
-      - name: Install Flutter dependencies
-        working-directory: ./app
-        run: flutter pub get
+      - name: Install Flutter dependencies for all modules
+        run: |
+          cd ./app
+          flutter pub get
+          cd ./wear_app
+          flutter pub get
 
       - name: Build Android App Bundle (AAB)
         working-directory: ./app
