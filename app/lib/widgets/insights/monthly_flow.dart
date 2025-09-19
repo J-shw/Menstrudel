@@ -96,7 +96,7 @@ class FlowPatternsWidget extends StatelessWidget {
               child: LineChart(
                 LineChartData(
                   minY: 1,
-                  maxY: 4,
+                  maxY: 5,
                   minX: 1,
                   maxX: maxDay,
                   lineBarsData: cycleLines,
@@ -133,7 +133,7 @@ class FlowPatternsWidget extends StatelessWidget {
                     horizontalInterval: 1,
                     getDrawingHorizontalLine: (value) => FlLine(
                       color: colorScheme.onSurface.withValues(alpha: 0.1),
-                      strokeWidth: 1,
+                      strokeWidth: 2,
                     ),
                   ),
                   borderData: FlBorderData(show: false),
