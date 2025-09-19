@@ -27,6 +27,10 @@ jobs:
 
       - name: Decode Keystore
         run: echo "${{ secrets.SIGNING_KEY_STORE_BASE64 }}" | base64 --decode > app/android/app/upload-keystore.jks
+      
+      - name: Decode Keystore for Wear App
+        run: echo "${{ secrets.SIGNING_KEY_STORE_BASE64 }}" | base64 --decode > wear_app/android/app/upload-keystore.jks
+
 
       - name: Create key.properties for android app
         run: |
