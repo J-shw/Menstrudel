@@ -34,6 +34,7 @@
     "navBar_pill": "Pill",
     "navBar_settings": "Settings",
     "flowIntensity_none": "None",
+    "flowIntensity_spotting": "Spotting",
     "flowIntensity_light": "Light",
     "flowIntensity_moderate": "Moderate",
     "flowIntensity_heavy": "Heavy",
