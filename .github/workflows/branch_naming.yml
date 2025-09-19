@@ -1,32 +1,35 @@
 name: 'Branch Name Check'
 
 on:
-  push:
-    branches-ignore:
-      - 'main'
-      - 'dev'
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  pull-requests: write
 
 jobs:
   check-branch-name:
     runs-on: ubuntu-latest
     steps:
       - name: 'Validate Branch Name'
+        id: validate_name
         run: |
-          branch_name="${{ github.ref_name }}"
-
-          regex="^(feature|bugfix|docs|chore|refactor|style|test)\/(app|wear|web|repo)(\/[0-9]+)?\/[a-z0-9-]+$"
+          branch_name="${{ github.head_ref }}" # Use github.head_ref for PRs
+          
+          regex="^(feature|bugfix|docs|chore|refactor|style|test)\/(app|wear|web|repo)\/[a-z0-9-]+$"
 
           if [[ "$branch_name" == 'New Crowdin updates' ]] || [[ "$branch_name" =~ $regex ]]; then
-            echo "Branch name '$branch_name' is valid."
-            exit 0
+            echo "Branch name'$branch_name' is valid."
+            echo "is_valid=true" >> $GITHUB_OUTPUT
           else
-            echo "Error: Branch name '$branch_name' does not match the required format."
+            echo "Branch name '$branch_name' does not match the required format."
             echo "Please use the format: <type>/<scope>/<description>"
             echo "Example: feature/web/new-contact-form"
-            exit 1
+            echo "is_valid=false" >> $GITHUB_OUTPUT
           fi
+
       - name: 'Add PR Comment on Failure'
-        if: failure() && steps.validate_name.conclusion == 'failure'
+        if: steps.validate_name.outputs.is_valid == 'false' 
         uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -39,7 +42,7 @@ jobs:
 
               **Please use the format:** \`<type>/<scope>/<description>\`
               - **Example:** \`feature/web/new-contact-form\`
-
+              
               Please rename your branch and push the changes to update this pull request.
             `;
 
@@ -49,3 +52,7 @@ jobs:
               issue_number: context.issue.number,
               body: commentBody
             });
+
+      - name: 'Mark Job as Failed'
+        if: steps.validate_name.outputs.is_valid == 'false'
+        run: exit 1
