@@ -28,12 +28,20 @@ jobs:
       - name: Decode Keystore
         run: echo "${{ secrets.SIGNING_KEY_STORE_BASE64 }}" | base64 --decode > app/android/app/upload-keystore.jks
 
-      - name: Create key.properties
+      - name: Create key.properties for android app
         run: |
           echo "storeFile=upload-keystore.jks" > app/android/app/key.properties
           echo "storePassword=${{ secrets.KEY_STORE_PASSWORD }}" >> app/android/app/key.properties
           echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> app/android/app/key.properties
           echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> app/android/app/key.properties
+      
+    
+      - name: Create key.properties for Wear app
+        run: |
+          echo "storeFile=upload-keystore.jks" > wear_app/android/app/key.properties
+          echo "storePassword=${{ secrets.KEY_STORE_PASSWORD }}" >> wear_app/android/app/key.properties
+          echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> wear_app/android/app/key.properties
+          echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> wear_app/android/app/key.properties
 
 
       - name: Install Flutter dependencies for mobile app
