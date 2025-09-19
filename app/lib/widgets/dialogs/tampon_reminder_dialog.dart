@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:math' as math;
 import 'package:menstrudel/l10n/app_localizations.dart';
 
 class TimeSelectionDialog extends StatefulWidget {
@@ -81,7 +80,6 @@ class _TimeSelectionDialogState extends State<TimeSelectionDialog> {
     required TimeOfDay time,
     required VoidCallback onTap,
   }) {
-    // This widget now uses a Row for a more compact, list-like feel.
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(12),
@@ -187,10 +185,7 @@ class _TimeSelectionDialogState extends State<TimeSelectionDialog> {
                 FilledButton(
                   onPressed: _isDurationValid
                       ? () {
-                          Navigator.pop(context, {
-                            'start': _startTime,
-                            'end': _endTime,
-                          });
+                          Navigator.pop(context, _endTime);
                         }
                       : null,
                   child: Text(l10n.set),
