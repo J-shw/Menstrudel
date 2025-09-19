@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:menstrudel/models/period_logs/flow_enum.dart';
+import 'package:menstrudel/models/flows/flow_enum.dart';
 
 /// Represents a single day's log within a menstrual cycle.
 ///
