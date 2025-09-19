@@ -20,7 +20,7 @@ class SymptomEntrySheet extends StatefulWidget {
 class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
   late DateTime _selectedDate;
   final Set<Symptom> _selectedSymptoms = {};
-  FlowRate _flowSelection = FlowRate.medium;
+  FlowRate _flowSelection = FlowRate.none;
   PainLevel _painLevel = PainLevel.none;
 
   @override
@@ -81,26 +81,23 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
             // --- Flow Selection ---
             Text(l10n.flow, style: Theme.of(context).textTheme.bodySmall),
             const SizedBox(height: 8),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Wrap(
-                  spacing: 8.0,
-                  children: FlowRate.values.map((flow) {
-                    return ChoiceChip(
-                      label: Text(flow.getDisplayName(l10n)),
-                      selected: _flowSelection == flow,
-                      onSelected: (isSelected) {
-                        if (isSelected) {
-                          setState(() {
-                            _flowSelection = flow;
-                          });
-                        }
-                      },
-                    );
-                  }).toList(),
-                ),
-              ],
+            Wrap(
+              spacing: 8.0,
+              children: FlowRate.periodFlows.map((flow) {
+                return ChoiceChip(
+                  label: Text(flow.getDisplayName(l10n)),
+                  selected: _flowSelection == flow,
+                  onSelected: (isSelected) {
+                    setState(() {
+                      if (isSelected) {
+                        _flowSelection = flow;
+                      } else {
+                        _flowSelection = FlowRate.none;
+                      }
+                    });
+                  },
+                );
+              }).toList(),
             ),
             const SizedBox(height: 8),
             // --- Pain Level ---
