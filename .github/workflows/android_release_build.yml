@@ -36,24 +36,25 @@ jobs:
           echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> app/android/app/key.properties
 
 
-      - name: Install Flutter dependencies for all modules
-        run: |
-          cd ./app
-          flutter pub get
-          cd ./wear_app
-          flutter pub get
+      - name: Install Flutter dependencies for mobile app
+        working-directory: ./app
+        run: flutter pub get
 
       - name: Build Android App Bundle (AAB)
         working-directory: ./app
         run: flutter build appbundle --release
-      
-      - name: Build Android Wear OS App Bundle (AAB)
-        working-directory: ./wear_app
-        run: flutter build appbundle --release
 
       - name: Build Android APK
         working-directory: ./app
-        run: flutter build apk --release
+        run: flutter build apk --release      
+      
+      - name: Install Flutter dependencies for wear app
+        working-directory: ./wear_app
+        run: flutter pub get
+
+      - name: Build Android Wear App Bundle (AAB)
+        working-directory: ./wear_app
+        run: flutter build appbundle --release
 
       - name: Upload App Bundle as an artifact
         uses: actions/upload-artifact@v4
