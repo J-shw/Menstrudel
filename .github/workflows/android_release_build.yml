@@ -65,7 +65,7 @@ jobs:
       - name: Upload Wear OS App Bundle as an artifact
         uses: actions/upload-artifact@v4
         with:
-          name: menstrudel-release-aab
+          name: menstrudel-wear-release-aab
           path: ./wear_app/build/app/outputs/bundle/release/app-release.aab
 
       - name: Upload APK as an artifact
