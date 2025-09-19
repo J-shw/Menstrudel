@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:menstrudel/database/app_database.dart';
-import 'package:menstrudel/models/period_logs/flow_enum.dart';
+import 'package:menstrudel/models/flows/flow_enum.dart';
 import 'package:menstrudel/models/period_logs/period_day.dart';
 import 'package:menstrudel/database/repositories/periods_repository.dart';
 import 'package:menstrudel/utils/exceptions.dart';

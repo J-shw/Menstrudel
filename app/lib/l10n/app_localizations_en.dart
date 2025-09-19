@@ -92,6 +92,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get flowIntensity_none => 'None';
 
   @override
+  String get flowIntensity_spotting => 'Spotting';
+
+  @override
   String get flowIntensity_light => 'Light';
 
   @override
