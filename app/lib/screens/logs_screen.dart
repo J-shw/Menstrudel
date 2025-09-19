@@ -130,26 +130,34 @@ class LogsScreenState extends State<LogsScreen> {
         final l10n = AppLocalizations.of(context)!;
 
         // Period due notification
-        await NotificationService.schedulePeriodNotifications(
-          scheduledTime: predictionResult.estimatedStartDate,
-          areEnabled: periodNotificationsEnabled,
-          daysBefore: periodNotificationDays,
-          notificationTime: periodNotificationTime,
-          title: l10n.notification_periodTitle,
-          body: l10n.notification_periodBody(periodNotificationDays),
-          notificationID: periodDueNotificationId,
-        );
+        try {
+          await NotificationService.schedulePeriodNotifications(
+            scheduledTime: predictionResult.estimatedStartDate,
+            areEnabled: periodNotificationsEnabled,
+            daysBefore: periodNotificationDays,
+            notificationTime: periodNotificationTime,
+            title: l10n.notification_periodTitle,
+            body: l10n.notification_periodBody(periodNotificationDays),
+            notificationID: periodDueNotificationId,
+          );
+        } catch (e) {
+          debugPrint('Error creating period notification: $e');
+        }
 
         // Overdue period notification
-        await NotificationService.schedulePeriodNotifications(
-          scheduledTime: predictionResult.estimatedStartDate,
-          areEnabled: periodOverdueNotificationsEnabled,
-          daysAfter: periodOverdueNotificationDays,
-          notificationTime: periodOverdueNotificationTime,
-          title: l10n.notification_periodOverdueTitle,
-          body: l10n.notification_periodOverdueBody(periodOverdueNotificationDays),
-          notificationID: periodOverdueNotificationId,
-        );
+        try {
+          await NotificationService.schedulePeriodNotifications(
+            scheduledTime: predictionResult.estimatedStartDate,
+            areEnabled: periodOverdueNotificationsEnabled,
+            daysAfter: periodOverdueNotificationDays,
+            notificationTime: periodOverdueNotificationTime,
+            title: l10n.notification_periodOverdueTitle,
+            body: l10n.notification_periodOverdueBody(periodOverdueNotificationDays),
+            notificationID: periodOverdueNotificationId,
+          );
+        } catch (e) {
+          debugPrint('Error creating period overdue notification: $e');
+        }
       }
     }
     
