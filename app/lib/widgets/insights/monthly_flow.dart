@@ -2,7 +2,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:menstrudel/models/flows/flow_data.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
-import 'package:menstrudel/models/period_logs/flow_enum.dart';
+import 'package:menstrudel/models/flows/flow_enum.dart';
 
 class FlowPatternsWidget extends StatelessWidget {
   final List<MonthlyFlowData> monthlyFlowData;
@@ -12,14 +12,12 @@ class FlowPatternsWidget extends StatelessWidget {
     required this.monthlyFlowData,
   });
 
-  double _numericFromFlow(FlowRate flow) => flow.index.toDouble() + 1;
-
   Widget _getFlowLabel(BuildContext context, double value, TextStyle? style) {
     final l10n = AppLocalizations.of(context)!;
     final index = value.round() - 1;
 
-    if (index >= 0 && index < FlowRate.values.length) {
-      final flow = FlowRate.values[index];
+    if (index >= 0 && index < FlowRate.periodFlows.length) {
+      final flow = FlowRate.periodFlows[index];
       return Text(flow.getDisplayName(l10n), style: style);
     }
     return const SizedBox.shrink();
@@ -48,7 +46,11 @@ class FlowPatternsWidget extends StatelessWidget {
       for (int i = 0; i < monthData.flows.length; i++) {
         final day = i + 1;
         final flow = FlowRate.values[monthData.flows[i]];
-        spotsForThisCycle.add(FlSpot(day.toDouble(), _numericFromFlow(flow)));
+        if (flow == FlowRate.none) {
+          continue;
+        }
+        final yValue = FlowRate.periodFlows.indexOf(flow).toDouble() + 1;
+        spotsForThisCycle.add(FlSpot(day.toDouble(), yValue));
       }
 
       if (monthData.flows.length > maxDay) {
@@ -89,8 +91,8 @@ class FlowPatternsWidget extends StatelessWidget {
               aspectRatio: 1.7,
               child: LineChart(
                 LineChartData(
-                  minY: 0,
-                  maxY: 4,
+                  minY: 1,
+                  maxY: FlowRate.periodFlows.length.toDouble(),
                   minX: 1,
                   maxX: maxDay,
                   lineBarsData: cycleLines,
@@ -127,7 +129,7 @@ class FlowPatternsWidget extends StatelessWidget {
                     horizontalInterval: 1,
                     getDrawingHorizontalLine: (value) => FlLine(
                       color: colorScheme.onSurface.withValues(alpha: 0.1),
-                      strokeWidth: 1,
+                      strokeWidth: 2,
                     ),
                   ),
                   borderData: FlBorderData(show: false),

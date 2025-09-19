@@ -14,6 +14,28 @@ class PillsRepository {
     return intake.copyWith(id: id);
   }
 
+  /// Delete the last taken pill entry. For if user accidentally logs pill taken.
+  Future<void> undoLastPillIntake(int regimenId) async {
+    final db = await dbProvider.database;
+
+    final List<Map<String, dynamic>> lastIntake = await db.query(
+      'PillIntake',
+      where: _whereRegimenId,
+      whereArgs: [regimenId],
+      orderBy: 'id DESC',
+      limit: 1,
+    );
+
+    if (lastIntake.isNotEmpty) {
+      final int idToDelete = lastIntake.first['id'] as int;
+      await db.delete(
+        'PillIntake',
+        where: 'id = ?',
+        whereArgs: [idToDelete],
+      );
+    }
+  }
+
   Future<PillRegimen?> readActivePillRegimen() async {
     final db = await dbProvider.database;
     final maps = await db.query(

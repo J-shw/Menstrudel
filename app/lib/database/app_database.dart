@@ -27,7 +27,7 @@ class AppDatabase {
 
       _database = await openDatabase(
         path,
-        version: 4,
+        version: 6,
         onCreate: _createDB,
         onUpgrade: _upgradeDB,
       );
@@ -71,6 +71,12 @@ class AppDatabase {
     }
     if (oldVersion < 4) {
       await db.execute('ALTER TABLE period_logs ADD COLUMN painLevel INTEGER NOT NULL DEFAULT 0');
+    }
+    if (oldVersion < 5) {
+      await db.execute('UPDATE period_logs SET flow = flow + 1');
+    }
+      if (oldVersion < 6) {
+      await db.execute('UPDATE period_logs SET flow = flow + 1 WHERE flow > 0');
     }
   }
 

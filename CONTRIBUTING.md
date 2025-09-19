@@ -16,7 +16,36 @@ Thank you for considering contributing!
 
 ## Pull Request Process
 
+This repository is a monorepo containing several projects. When creating a branch, please include the project scope in the name.
+
+
 1.  Fork the repository and create your branch from `dev`.
-2.  Add your changes and commit them with a clear commit message.
-3.  Push your branch and open a pull request.
-4.  Clearly describe the changes in your pull request.
+
+2.  **Name your branch correctly.** Use the following format, including the project scope:
+    `<type>/<scope>/<short-description>`
+
+    Where `<type>` can be one of the following:
+    -   `feature`: For new features.
+    -   `bugfix`: For fixing a bug.
+    -   `docs`: For changes to documentation.
+    -   `chore`: For maintenance tasks (e.g., updating dependencies).
+    -   `refactor`: For code improvements without changing functionality.
+    -   `style`: For code formatting changes.
+    -   `test`: For adding or improving tests.
+
+    Where `<scope>` is one of the following:
+    -   `app`: The main application.
+    -   `wear`: The Wear OS application.
+    -   `web`: The project's website.
+    -   `repo`: The projects repository
+
+    **Examples:**
+    - `feature/web/add-contact-form`
+    - `bugfix/app/fix-user-login-crash`
+    - `docs/wear/update-build-instructions`
+
+3.  Add your changes and commit them with a clear commit message.
+
+4.  Push your branch and open a pull request.
+
+5.  Clearly describe the changes in your pull request.

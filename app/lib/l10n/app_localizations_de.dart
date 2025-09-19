@@ -21,6 +21,12 @@ class AppLocalizationsDe extends AppLocalizations {
   String get time => 'Time';
 
   @override
+  String get start => 'Start';
+
+  @override
+  String get end => 'End';
+
+  @override
   String get day => 'Day';
 
   @override
@@ -83,6 +89,12 @@ class AppLocalizationsDe extends AppLocalizations {
   String get navBar_settings => 'Settings';
 
   @override
+  String get flowIntensity_none => 'None';
+
+  @override
+  String get flowIntensity_spotting => 'Spotting';
+
+  @override
   String get flowIntensity_light => 'Light';
 
   @override
@@ -140,6 +152,20 @@ class AppLocalizationsDe extends AppLocalizations {
       locale: localeName,
       other: 'Your next period is estimated to start in $count days.',
       one: 'Your next period is estimated to start in 1 day.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get notification_periodOverdueTitle => 'Period Overdue';
+
+  @override
+  String notification_periodOverdueBody(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Your next period is overdue by $count days.',
+      one: 'Your next period is overdue by 1 day.',
     );
     return '$_temp0';
   }
@@ -247,6 +273,18 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsScreen_historyViewStyle => 'History View Style';
 
   @override
+  String get settingsScreen_appTheme => 'App Theme';
+
+  @override
+  String get settingsScreen_themeLight => 'Light';
+
+  @override
+  String get settingsScreen_themeDark => 'Dark';
+
+  @override
+  String get settingsScreen_themeSystem => 'System';
+
+  @override
   String get settingsScreen_dynamicTheme => 'Dynamic Theme';
 
   @override
@@ -292,10 +330,20 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsScreen_notificationTime => 'Notification Time';
 
   @override
+  String get settingsScreen_overduePeriodReminder => 'Overdue Period Reminder';
+
+  @override
+  String get settingsScreen_remindMeAfter => 'Remind Me After';
+
+  @override
   String get settingsScreen_clearAllLogs => 'Clear All Logs';
 
   @override
   String get tamponReminderDialog_tamponReminderTitle => 'Tampon Reminder';
+
+  @override
+  String get tamponReminderDialog_tamponReminderMaxDuration =>
+      'Max duration is 8 hours.';
 
   @override
   String get cycleLengthVarianceWidget_LogAtLeastTwoPeriods =>
@@ -389,7 +437,10 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
-  String get pillStatus_allSet => 'All Set!';
+  String get pillStatus_undo => 'Undo';
+
+  @override
+  String get pillStatus_skip => 'Skip';
 
   @override
   String get pillStatus_markAsTaken => 'Mark As Taken';

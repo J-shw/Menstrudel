@@ -1,0 +1,1 @@
+const double middleTextSize = 55;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/models/period_logs/period_day.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
-import 'package:menstrudel/models/period_logs/flow_enum.dart';
+import 'package:menstrudel/models/flows/flow_enum.dart';
 
 class FlowBreakdownWidget extends StatelessWidget {
   final List<PeriodDay> logs;
@@ -30,7 +30,6 @@ class FlowBreakdownWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
     final l10n = AppLocalizations.of(context)!;
 
@@ -43,7 +42,7 @@ class FlowBreakdownWidget extends StatelessWidget {
     };
 
     for (final log in logs) {
-      final flow = FlowRate.values[log.flow];
+      final flow = log.flow;
       flowCounts[flow] = (flowCounts[flow] ?? 0) + 1;
     }
 

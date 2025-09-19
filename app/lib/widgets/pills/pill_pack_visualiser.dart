@@ -3,8 +3,7 @@ import 'package:menstrudel/models/pills/pill_intake.dart';
 import 'package:menstrudel/models/pills/pill_regimen.dart';
 import 'pill_circle.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
-
-enum PillStatus { taken, today, future, placebo, missed }
+import 'package:menstrudel/models/pills/pill_status_enum.dart';
 
 class PillPackVisualiser extends StatelessWidget {
   final PillRegimen activeRegimen;
@@ -40,23 +39,24 @@ class PillPackVisualiser extends StatelessWidget {
           itemBuilder: (context, index) {
             final dayNumber = index + 1;
             final intakeRecord = intakes.where((i) => i.pillNumberInCycle == dayNumber).firstOrNull;
-            PillStatus status;
+            PillVisualStatus visualStatus;
+
 
             if (intakeRecord != null) {
-              status = PillStatus.taken;
+              visualStatus = PillVisualStatus.fromIntakeStatus(intakeRecord.status);
             } else if (dayNumber == currentPillNumberInCycle) {
-              status = PillStatus.today;
+              visualStatus = PillVisualStatus.today;
             } else if (dayNumber < currentPillNumberInCycle) {
-              status = PillStatus.missed;
+              visualStatus = PillVisualStatus.missed;
             } else {
-              status = PillStatus.future;
+              visualStatus = PillVisualStatus.future;
             }
             
             if (dayNumber > activeRegimen.activePills) {
-              status = status == PillStatus.taken ? PillStatus.taken : PillStatus.placebo;
+              visualStatus = visualStatus == PillVisualStatus.taken ? PillVisualStatus.taken : PillVisualStatus.placebo;
             }
 
-            return PillCircle(dayNumber: dayNumber, status: status);
+            return PillCircle(dayNumber: dayNumber, status: visualStatus);
           },
         ),
       ],

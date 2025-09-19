@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/models/period_logs/period_day.dart';
-import 'package:menstrudel/models/period_logs/flow_enum.dart';
+import 'package:menstrudel/models/flows/flow_enum.dart';
 import 'package:menstrudel/models/period_logs/symptom_enum.dart';
 import 'package:menstrudel/models/period_logs/pain_level_enum.dart';
 
@@ -38,7 +38,7 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
   }
 
   void _resetEditableState() {
-    _editedFlow = FlowRate.values[widget.log.flow];
+    _editedFlow = widget.log.flow;
     _editedPainLevel = PainLevel.values[widget.log.painLevel];
     _editedSymptoms = widget.log.symptoms?.map((symptomString) {
     try {
@@ -52,7 +52,7 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
   void _handleSave() {
     final symptomsToSave = _editedSymptoms.map((s) => s.name).toList();
     final updatedLog = widget.log.copyWith(
-      flow: _editedFlow.intValue,
+      flow: _editedFlow,
       painLevel: _editedPainLevel.intValue,
       symptoms: symptomsToSave,
     );
@@ -143,7 +143,10 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
               IconButton(
                 icon: Icon(Icons.delete_outline,
                     size: 24, color: colorScheme.error),
-                onPressed: widget.onDelete,
+                onPressed: () {
+                  widget.onDelete();
+                  Navigator.pop(context);
+                },
               ),
             ],
           ),
@@ -157,7 +160,7 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
     final colorScheme = Theme.of(context).colorScheme;
 
     if (!_isEditing) {
-      final flow = FlowRate.values[widget.log.flow];
+      final flow = widget.log.flow;
 
       return Row(
         children: [
@@ -169,8 +172,10 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
             style: textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
           ),
           const Spacer(),
-          ...List.generate(3, (index) => Icon(
-                index <= flow.intValue ? Icons.water_drop : Icons.water_drop_outlined,
+          ...List.generate(4, (index) => Icon(
+                flow != FlowRate.none && index < flow.intValue
+                    ? Icons.water_drop
+                    : Icons.water_drop_outlined,
                 size: 20,
                 color: colorScheme.primary,
           ))
@@ -184,16 +189,18 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
           const SizedBox(height: 8),
           Wrap(
             spacing: 8.0,
-            children: FlowRate.values.map((flow) {
+            children: FlowRate.periodFlows.map((flow) {
               return ChoiceChip(
                 label: Text(flow.getDisplayName(l10n)),
                 selected: _editedFlow == flow,
                 onSelected: (isSelected) {
-                  if (isSelected) {
-                    setState(() {
+                  setState(() {
+                    if (isSelected) {
                       _editedFlow = flow;
-                    });
-                  }
+                    } else {
+                      _editedFlow = FlowRate.none;
+                    }
+                  });
                 },
               );
             }).toList(),

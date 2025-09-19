@@ -5,8 +5,15 @@ logo: /assets/images/favicon.png
 plugins:
   - jekyll-seo-tag
   - jekyll-sitemap 
+  - jekyll-webp
 
 social:
   name: Menstrudel
   links:
     - https://github.com/J-shw/Menstrudel
+
+webp:
+  enabled: true
+  quality: 75
+  img_dir: ["/assets/images", "/assets/images/blog"]
+  nested: true

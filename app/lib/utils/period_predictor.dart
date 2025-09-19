@@ -1,17 +1,14 @@
-import 'package:menstrudel/models/period_logs/period_day.dart';
 import 'package:menstrudel/models/periods/period.dart';
 import 'package:menstrudel/models/period_prediction_result.dart';
 import 'package:menstrudel/models/cycles/cycle_stats.dart';
 import 'package:menstrudel/models/periods/period_stats.dart';
 import 'package:menstrudel/models/cycles/monthly_cycle_data.dart';
+import 'package:menstrudel/utils/constants.dart';
 import 'dart:math';
 
 
 class PeriodPredictor {
   	static const int _defaultCycleLength = 28;
-	 
-  	static const int _maxValidCycleLength = 45;
-  	static const int _minValidCycleLength = 20;
 
 	static List<int> _getValidCycleLengths(List<Period> periods) {
     if (periods.length < 2) {
@@ -25,7 +22,7 @@ class PeriodPredictor {
     for (int i = 0; i < sortedPeriods.length - 1; i++) {
       int days = sortedPeriods[i + 1].startDate.difference(sortedPeriods[i].startDate).inDays;
       
-      if (days >= _minValidCycleLength && days <= _maxValidCycleLength) {
+      if (days >= minValidCycleLength && days <= maxValidCycleLength) {
         cycleLengths.add(days);
       }
     }
@@ -116,29 +113,28 @@ class PeriodPredictor {
     );
   }
 
-	static List<MonthlyCycleData> getMonthlyCycleData(List<PeriodDay> entries) {
-		List<MonthlyCycleData> monthlyData = [];
+	static List<MonthlyCycleData> getMonthlyCycleData(List<Period> periods) {
+    if (periods.length < 2) {
+      return [];
+    }
 
-		if (entries.length < 2) {
-			return monthlyData; 
-		}
+    final sortedPeriods = List<Period>.from(periods)
+      ..sort((a, b) => a.startDate.compareTo(b.startDate));
 
-		final List<PeriodDay> sortedEntries = List.from(entries);
-		sortedEntries.sort((a, b) => a.date.compareTo(b.date));
+    final List<MonthlyCycleData> monthlyData = [];
+    for (int i = 0; i < sortedPeriods.length - 1; i++) {
+      int days = sortedPeriods[i + 1].startDate.difference(sortedPeriods[i].startDate).inDays;
 
-		for (int i = 0; i < sortedEntries.length - 1; i++) {
-      int days = sortedEntries[i + 1].date.difference(sortedEntries[i].date).inDays;
-
-      if (days >= _minValidCycleLength && days <= _maxValidCycleLength) {
-        final DateTime cycleEndDate = sortedEntries[i + 1].date;
+      if (days >= minValidCycleLength && days <= maxValidCycleLength) {
+        final DateTime cycleEndDate = sortedPeriods[i + 1].startDate;
         monthlyData.add(MonthlyCycleData(
           year: cycleEndDate.year,
           month: cycleEndDate.month,
           cycleLength: days,
         ));
       }
-		}
-		return monthlyData;
+    }
+    return monthlyData;
   }
 
   static PeriodStats? getPeriodData(List<Period> entries) {

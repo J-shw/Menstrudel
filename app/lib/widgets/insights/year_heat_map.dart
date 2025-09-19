@@ -2,16 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:menstrudel/models/period_logs/period_day.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
+import 'package:menstrudel/models/flows/flow_enum.dart'; 
 
 class YearHeatmapWidget extends StatelessWidget {
   final List<PeriodDay> logs;
   const YearHeatmapWidget({super.key, required this.logs});
-  
-  Color _getFlowColor(int flow) {
-    if (flow <= 1) return Colors.pink.shade100;
-    if (flow == 2) return Colors.pink.shade300;
-    return Colors.red.shade400;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +14,9 @@ class YearHeatmapWidget extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
     final l10n = AppLocalizations.of(context)!;
 
-    final Map<DateTime, int> flowEvents = {
-      for (var log in logs) DateTime.utc(log.date.year, log.date.month, log.date.day): log.flow
+    final Map<DateTime, PeriodDay> periodDayEvents = {
+      for (var log in logs)
+        DateTime.utc(log.date.year, log.date.month, log.date.day): log
     };
 
     return Card(
@@ -52,16 +48,22 @@ class YearHeatmapWidget extends StatelessWidget {
                 ),
               ),
               calendarBuilders: CalendarBuilders(
-                markerBuilder: (context, date, events) {
+                defaultBuilder: (context, date, focusedDay) {
                   final dayKey = DateTime.utc(date.year, date.month, date.day);
+                  final logForDay = periodDayEvents[dayKey];
 
-                  if (flowEvents.containsKey(dayKey)) {
+                  if (logForDay != null && logForDay.flow != FlowRate.none) {
                     return Container(
                       decoration: BoxDecoration(
-                        color: _getFlowColor(flowEvents[dayKey]!),
+                        color: logForDay.flow.color,
                         shape: BoxShape.circle,
                       ),
                       margin: const EdgeInsets.all(5.0),
+                      alignment: Alignment.center,
+                      child: Text(
+                        '${date.day}',
+                        style: const TextStyle(color: Colors.white),
+                      ),
                     );
                   }
                   return null;

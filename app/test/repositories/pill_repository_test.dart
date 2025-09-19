@@ -5,6 +5,7 @@ import 'package:menstrudel/models/pills/pill_intake.dart';
 import 'package:menstrudel/models/pills/pill_regimen.dart';
 import 'package:menstrudel/models/pills/pill_reminder.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
+import 'package:menstrudel/models/pills/pill_status_enum.dart';
 
 void main() {
   setUpAll(() {

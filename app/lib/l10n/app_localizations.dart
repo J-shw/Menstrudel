@@ -122,6 +122,18 @@ abstract class AppLocalizations {
   /// **'Time'**
   String get time;
 
+  /// No description provided for @start.
+  ///
+  /// In en, this message translates to:
+  /// **'Start'**
+  String get start;
+
+  /// No description provided for @end.
+  ///
+  /// In en, this message translates to:
+  /// **'End'**
+  String get end;
+
   /// No description provided for @day.
   ///
   /// In en, this message translates to:
@@ -230,6 +242,18 @@ abstract class AppLocalizations {
   /// **'Settings'**
   String get navBar_settings;
 
+  /// No description provided for @flowIntensity_none.
+  ///
+  /// In en, this message translates to:
+  /// **'None'**
+  String get flowIntensity_none;
+
+  /// No description provided for @flowIntensity_spotting.
+  ///
+  /// In en, this message translates to:
+  /// **'Spotting'**
+  String get flowIntensity_spotting;
+
   /// No description provided for @flowIntensity_light.
   ///
   /// In en, this message translates to:
@@ -337,6 +361,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{count, plural, =1{Your next period is estimated to start in 1 day.} other{Your next period is estimated to start in {count} days.}}'**
   String notification_periodBody(int count);
+
+  /// Title for the overdue period notification.
+  ///
+  /// In en, this message translates to:
+  /// **'Period Overdue'**
+  String get notification_periodOverdueTitle;
+
+  /// Body for the overdue period notification.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{Your next period is overdue by 1 day.} other{Your next period is overdue by {count} days.}}'**
+  String notification_periodOverdueBody(int count);
 
   /// Title for the daily pill reminder notification.
   ///
@@ -512,6 +548,30 @@ abstract class AppLocalizations {
   /// **'History View Style'**
   String get settingsScreen_historyViewStyle;
 
+  /// No description provided for @settingsScreen_appTheme.
+  ///
+  /// In en, this message translates to:
+  /// **'App Theme'**
+  String get settingsScreen_appTheme;
+
+  /// No description provided for @settingsScreen_themeLight.
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get settingsScreen_themeLight;
+
+  /// No description provided for @settingsScreen_themeDark.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark'**
+  String get settingsScreen_themeDark;
+
+  /// No description provided for @settingsScreen_themeSystem.
+  ///
+  /// In en, this message translates to:
+  /// **'System'**
+  String get settingsScreen_themeSystem;
+
   /// No description provided for @settingsScreen_dynamicTheme.
   ///
   /// In en, this message translates to:
@@ -596,6 +656,18 @@ abstract class AppLocalizations {
   /// **'Notification Time'**
   String get settingsScreen_notificationTime;
 
+  /// No description provided for @settingsScreen_overduePeriodReminder.
+  ///
+  /// In en, this message translates to:
+  /// **'Overdue Period Reminder'**
+  String get settingsScreen_overduePeriodReminder;
+
+  /// No description provided for @settingsScreen_remindMeAfter.
+  ///
+  /// In en, this message translates to:
+  /// **'Remind Me After'**
+  String get settingsScreen_remindMeAfter;
+
   /// No description provided for @settingsScreen_clearAllLogs.
   ///
   /// In en, this message translates to:
@@ -607,6 +679,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Tampon Reminder'**
   String get tamponReminderDialog_tamponReminderTitle;
+
+  /// No description provided for @tamponReminderDialog_tamponReminderMaxDuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Max duration is 8 hours.'**
+  String get tamponReminderDialog_tamponReminderMaxDuration;
 
   /// No description provided for @cycleLengthVarianceWidget_LogAtLeastTwoPeriods.
   ///
@@ -752,11 +830,17 @@ abstract class AppLocalizations {
   /// **'{count, plural, =1{of 1 pill} other{of {count} pills}}'**
   String pillStatus_pillsOfTotal(int count);
 
-  /// No description provided for @pillStatus_allSet.
+  /// No description provided for @pillStatus_undo.
   ///
   /// In en, this message translates to:
-  /// **'All Set!'**
-  String get pillStatus_allSet;
+  /// **'Undo'**
+  String get pillStatus_undo;
+
+  /// No description provided for @pillStatus_skip.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip'**
+  String get pillStatus_skip;
 
   /// No description provided for @pillStatus_markAsTaken.
   ///
