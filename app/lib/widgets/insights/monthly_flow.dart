@@ -12,17 +12,12 @@ class FlowPatternsWidget extends StatelessWidget {
     required this.monthlyFlowData,
   });
 
-  double _numericFromFlow(FlowRate flow) => flow.index.toDouble() + 1;
-
   Widget _getFlowLabel(BuildContext context, double value, TextStyle? style) {
     final l10n = AppLocalizations.of(context)!;
     final index = value.round() - 1;
 
-    if (index >= 0 && index < FlowRate.values.length) {
-      final flow = FlowRate.values[index];
-      if (flow == FlowRate.none) {
-        return const SizedBox.shrink();
-      }
+    if (index >= 0 && index < FlowRate.periodFlows.length) {
+      final flow = FlowRate.periodFlows[index];
       return Text(flow.getDisplayName(l10n), style: style);
     }
     return const SizedBox.shrink();
@@ -54,7 +49,8 @@ class FlowPatternsWidget extends StatelessWidget {
         if (flow == FlowRate.none) {
           continue;
         }
-        spotsForThisCycle.add(FlSpot(day.toDouble(), _numericFromFlow(flow)));
+        final yValue = FlowRate.periodFlows.indexOf(flow).toDouble() + 1;
+        spotsForThisCycle.add(FlSpot(day.toDouble(), yValue));
       }
 
       if (monthData.flows.length > maxDay) {
@@ -96,7 +92,7 @@ class FlowPatternsWidget extends StatelessWidget {
               child: LineChart(
                 LineChartData(
                   minY: 1,
-                  maxY: 5,
+                  maxY: FlowRate.periodFlows.length.toDouble(),
                   minX: 1,
                   maxX: maxDay,
                   lineBarsData: cycleLines,
