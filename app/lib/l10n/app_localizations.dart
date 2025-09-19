@@ -248,6 +248,12 @@ abstract class AppLocalizations {
   /// **'None'**
   String get flowIntensity_none;
 
+  /// No description provided for @flowIntensity_spotting.
+  ///
+  /// In en, this message translates to:
+  /// **'Spotting'**
+  String get flowIntensity_spotting;
+
   /// No description provided for @flowIntensity_light.
   ///
   /// In en, this message translates to:
