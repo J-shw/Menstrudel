@@ -6,7 +6,11 @@ enum FlowRate {
   spotting,
   light,
   medium,
-  heavy,
+  heavy;
+
+  /// Returns flow rates that represent an actual flow during a period.
+  static List<FlowRate> get periodFlows  =>
+    values.where((flow) => flow != FlowRate.none).toList();
 }
 
 extension FlowExtension on FlowRate {
