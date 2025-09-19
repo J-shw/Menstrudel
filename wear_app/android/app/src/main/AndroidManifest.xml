@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-feature android:name="android.hardware.type.watch" />
     <application
-        android:label="wear_app"
+        android:label="Menstrudel"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <meta-data
