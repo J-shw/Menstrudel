@@ -7,6 +7,9 @@
     "date": "Date",
     "time": "Time",
 
+    "start": "Start",
+    "end": "End",
+
     "day": "Day",
     "days": "Days",
 
