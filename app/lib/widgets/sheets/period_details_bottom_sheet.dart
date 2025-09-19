@@ -189,16 +189,18 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
           const SizedBox(height: 8),
           Wrap(
             spacing: 8.0,
-            children: FlowRate.values.map((flow) {
+            children: FlowRate.periodFlows.map((flow) {
               return ChoiceChip(
                 label: Text(flow.getDisplayName(l10n)),
                 selected: _editedFlow == flow,
                 onSelected: (isSelected) {
-                  if (isSelected) {
-                    setState(() {
+                  setState(() {
+                    if (isSelected) {
                       _editedFlow = flow;
-                    });
-                  }
+                    } else {
+                      _editedFlow = FlowRate.none;
+                    }
+                  });
                 },
               );
             }).toList(),
