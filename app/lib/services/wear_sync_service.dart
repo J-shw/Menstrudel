@@ -64,11 +64,6 @@ class WatchSyncService {
       return;
     }
 
-    if (!await _watch.isReachable) {
-      debugPrint('Watch not reachable. Skipping data send.');
-      return;
-    }
-
     final newCircleData = CircleData(
       currentValue: circleCurrentValue,
       maxValue: circleMaxValue,
