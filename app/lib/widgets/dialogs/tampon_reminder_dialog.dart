@@ -12,6 +12,7 @@ class _TimeSelectionDialogState extends State<TimeSelectionDialog> {
   late TimeOfDay _startTime;
   late TimeOfDay _endTime;
   final Duration _maxDuration = const Duration(hours: 8);
+  String? _errorMessage;
 
   @override
   void initState() {
@@ -102,22 +103,28 @@ class _TimeSelectionDialogState extends State<TimeSelectionDialog> {
                 final cappedEndDateTime = startDateTime.add(_maxDuration);
                 setState(() {
                   _endTime = TimeOfDay.fromDateTime(cappedEndDateTime);
+                  _errorMessage = l10n.tamponReminderDialog_tamponReminderMaxDuration;
                 });
-
-                if (mounted) {
-                  ScaffoldMessenger.of(context)
-                    ..hideCurrentSnackBar()
-                    ..showSnackBar(
-                      SnackBar(content: Text(l10n.tamponReminderDialog_tamponReminderMaxDuration)),
-                    );
-                }
               } else {
                 setState(() {
                   _endTime = newEndTime;
+                  _errorMessage = null;
                 });
               }
             },
           ),
+          if (_errorMessage != null)
+            Padding(
+              padding: const EdgeInsets.only(top: 16),
+              child: Text(
+                _errorMessage!,
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.error,
+                  fontSize: 14,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
         ],
       ),
       actions: <Widget>[
