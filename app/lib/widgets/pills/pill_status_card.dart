@@ -42,6 +42,7 @@ class PillStatusCard extends StatelessWidget {
                 height: 200,
                 width: 200,
                 child: CircularProgressIndicator(
+                  year2023: false,
                   value: progressValue,
                   strokeWidth: 15,
                   backgroundColor: primaryColor.withValues(alpha: 0.1),
