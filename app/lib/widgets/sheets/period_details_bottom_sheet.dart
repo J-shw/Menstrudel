@@ -172,7 +172,7 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
             style: textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
           ),
           const Spacer(),
-          ...List.generate(3, (index) => Icon(
+          ...List.generate(4, (index) => Icon(
                 flow != FlowRate.none && index < flow.intValue
                     ? Icons.water_drop
                     : Icons.water_drop_outlined,
