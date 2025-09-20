@@ -90,6 +90,16 @@ jobs:
         id: get_version
         run: echo "VERSION=${{ github.ref_name }}" >> $GITHUB_ENV
 
+      - name: Upload Wear OS App Bundle to Release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ./wear_app/build/app/outputs/bundle/release/app-release.aab
+          asset_name: menstrudel-wearOS-${{ env.VERSION }}.aab
+          asset_content_type: application/octet-stream
+
       - name: Upload App Bundle to Release
         uses: actions/upload-release-asset@v1
         env:
