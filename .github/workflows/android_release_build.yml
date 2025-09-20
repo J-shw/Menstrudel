@@ -27,16 +27,28 @@ jobs:
 
       - name: Decode Keystore
         run: echo "${{ secrets.SIGNING_KEY_STORE_BASE64 }}" | base64 --decode > app/android/app/upload-keystore.jks
+      
+      - name: Decode Keystore for Wear App
+        run: echo "${{ secrets.SIGNING_KEY_STORE_BASE64 }}" | base64 --decode > wear_app/android/app/upload-keystore.jks
 
-      - name: Create key.properties
+
+      - name: Create key.properties for android app
         run: |
           echo "storeFile=upload-keystore.jks" > app/android/app/key.properties
           echo "storePassword=${{ secrets.KEY_STORE_PASSWORD }}" >> app/android/app/key.properties
           echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> app/android/app/key.properties
           echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> app/android/app/key.properties
+      
+    
+      - name: Create key.properties for Wear app
+        run: |
+          echo "storeFile=upload-keystore.jks" > wear_app/android/app/key.properties
+          echo "storePassword=${{ secrets.KEY_STORE_PASSWORD }}" >> wear_app/android/app/key.properties
+          echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> wear_app/android/app/key.properties
+          echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> wear_app/android/app/key.properties
 
 
-      - name: Install Flutter dependencies
+      - name: Install Flutter dependencies for mobile app
         working-directory: ./app
         run: flutter pub get
 
@@ -46,13 +58,27 @@ jobs:
 
       - name: Build Android APK
         working-directory: ./app
-        run: flutter build apk --release
+        run: flutter build apk --release      
+      
+      - name: Install Flutter dependencies for wear app
+        working-directory: ./wear_app
+        run: flutter pub get
+
+      - name: Build Android Wear App Bundle (AAB)
+        working-directory: ./wear_app
+        run: flutter build appbundle --release
 
       - name: Upload App Bundle as an artifact
         uses: actions/upload-artifact@v4
         with:
           name: menstrudel-release-aab
           path: ./app/build/app/outputs/bundle/release/app-release.aab
+    
+      - name: Upload Wear OS App Bundle as an artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: menstrudel-wear-release-aab
+          path: ./wear_app/build/app/outputs/bundle/release/app-release.aab
 
       - name: Upload APK as an artifact
         uses: actions/upload-artifact@v4
