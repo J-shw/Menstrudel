@@ -73,7 +73,11 @@ class PeriodPredictor {
 
     DateTime estimatedEndDate = estimatedStartDate.add(Duration(days: averagePeriodDuration - 1));
 
-    int daysUntilDue = estimatedStartDate.difference(now).inDays;
+    DateTime today = DateTime(now.year, now.month, now.day);
+    DateTime startOfEstimatedDate = DateTime(estimatedStartDate.year, estimatedStartDate.month, estimatedStartDate.day);
+
+    int daysUntilDue = startOfEstimatedDate.difference(today).inDays;
+
 
     return PeriodPredictionResult(
       estimatedStartDate: estimatedStartDate,
