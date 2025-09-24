@@ -668,6 +668,12 @@ abstract class AppLocalizations {
   /// **'Remind Me After'**
   String get settingsScreen_remindMeAfter;
 
+  /// No description provided for @settingsScreen_dataManagement.
+  ///
+  /// In en, this message translates to:
+  /// **'Data Management'**
+  String get settingsScreen_dataManagement;
+
   /// No description provided for @settingsScreen_clearAllLogs.
   ///
   /// In en, this message translates to:

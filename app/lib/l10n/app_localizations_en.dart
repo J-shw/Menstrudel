@@ -336,6 +336,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsScreen_remindMeAfter => 'Remind Me After';
 
   @override
+  String get settingsScreen_dataManagement => 'Data Management';
+
+  @override
   String get settingsScreen_clearAllLogs => 'Clear All Logs';
 
   @override
