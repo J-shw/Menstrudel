@@ -121,4 +121,13 @@ class PillsRepository {
       await db.insert('PillReminder', reminder.toMap());
     }
   }
+
+  Future<void> deleteAllEntries() async {
+    final db = await dbProvider.database;
+    await db.transaction((txn) async {
+      await txn.delete('PillRegimen');
+      await txn.delete('PillIntake');
+      await txn.delete('PillReminder');
+    });
+  }
 }
