@@ -165,6 +165,7 @@
     "settingsScreen_notificationTime": "Notification Time",
     "settingsScreen_overduePeriodReminder": "Overdue Period Reminder",
     "settingsScreen_remindMeAfter": "Remind Me After",
+    "settingsScreen_dataManagement": "Data Management",
     "settingsScreen_clearAllLogs": "Clear All Logs",
 
     "tamponReminderDialog_tamponReminderTitle": "Tampon Reminder",
