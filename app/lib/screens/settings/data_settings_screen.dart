@@ -39,9 +39,7 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
       builder: (BuildContext context) {
         return ConfirmationDialog(
           title: l10n.settingsScreen_clearAllLogs_question,
-          content: Text(
-            l10n.settingsScreen_deleteAllLogsDescription,
-          ),
+          contentText: l10n.settingsScreen_deleteAllLogsDescription,
           confirmButtonText: l10n.clear,
           onConfirm: clearLogs,
         );

@@ -116,7 +116,7 @@ class _BirthControlSettingsScreenState extends State<BirthControlSettingsScreen>
       builder: (BuildContext context) {
         return ConfirmationDialog(
           title: l10n.settingsScreen_deleteRegimen_question,
-          content: Text(l10n.settingsScreen_deleteRegimenDescription),
+          contentText: l10n.settingsScreen_deleteRegimenDescription,
           confirmButtonText: l10n.delete,
           onConfirm: () async {
             await pillsRepo.deletePillRegimen(_activeRegimen!.id!);
