@@ -336,7 +336,35 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsScreen_remindMeAfter => 'Remind Me After';
 
   @override
+  String get settingsScreen_dataManagement => 'Data Management';
+
+  @override
   String get settingsScreen_clearAllLogs => 'Clear All Logs';
+
+  @override
+  String get settingsScreen_clearAllPillData => 'Clear All Pill Data';
+
+  @override
+  String get settingsScreen_clearAllPillData_question => 'Clear All Pill Data?';
+
+  @override
+  String get settingsScreen_deleteAllPillDataDescription =>
+      'This will permanently delete your pill regimen, reminders, and intake history. This action cannot be undone.';
+
+  @override
+  String get settingsScreen_allPillDataCleared =>
+      'All pill data has been cleared.';
+
+  @override
+  String get settingsScreen_dangerZone => 'Danger Zone';
+
+  @override
+  String get settingsScreen_clearAllLogsSubtitle =>
+      'Deletes your entire period and symptom history.';
+
+  @override
+  String get settingsScreen_clearAllPillDataSubtitle =>
+      'Removes your pill regimen and intake history.';
 
   @override
   String get tamponReminderDialog_tamponReminderTitle => 'Tampon Reminder';

@@ -69,9 +69,9 @@ class NotificationService {
       tzScheduledTime = tz.TZDateTime.from(notificationDateTime, tz.local)
         .subtract(Duration(days: daysBefore));
     }
-    if (daysAfter != null) {
+    else if (daysAfter != null) {
       tzScheduledTime = tz.TZDateTime.from(notificationDateTime, tz.local)
-        .subtract(Duration(days: daysAfter));
+        .add(Duration(days: daysAfter));
     }
     if (tzScheduledTime == null) return;
 
