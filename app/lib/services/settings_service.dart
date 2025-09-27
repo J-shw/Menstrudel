@@ -12,6 +12,7 @@ class SettingsService {
   static const String _periodOverdueNotificationsEnabledKey = 'period_overdue_notifications_enabled';
   static const String _periodOverdueNotificationDaysKey = 'period_overdue_notification_days';
   static const _periodOverdueNotificationTimeKey = 'period_overdue_notification_time';
+  static const _biometricEnabledKey = 'biometric_enabled';
   static const _historyViewKey = 'history_view';
   static const _dynamicColorKey = 'dynamic_color';
   static const _themeColorKey = 'theme_color';
@@ -20,6 +21,16 @@ class SettingsService {
   Future<void> deleteAllSettings() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.clear();
+  }
+
+  Future<void> setBiometricsEnabled(bool isEnabled) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_biometricEnabledKey, isEnabled);
+  }
+
+  Future<bool> areBiometricsEnabled() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool(_biometricEnabledKey) ?? false;
   }
 
   Future<void> setNotificationsEnabled(bool isEnabled) async {

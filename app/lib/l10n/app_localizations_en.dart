@@ -367,6 +367,20 @@ class AppLocalizationsEn extends AppLocalizations {
       'Removes your pill regimen and intake history.';
 
   @override
+  String get settingsScreen_security => 'Security';
+
+  @override
+  String get securityScreen_enableBiometricLock => 'Enable Biometric Lock';
+
+  @override
+  String get securityScreen_enableBiometricLockSubtitle =>
+      'Require fingerprint or face ID to open the app.';
+
+  @override
+  String get securityScreen_noBiometricsAvailable =>
+      'No passcode, fingerprint, or face ID found. Please set one up in your device\'s settings.';
+
+  @override
   String get tamponReminderDialog_tamponReminderTitle => 'Tampon Reminder';
 
   @override

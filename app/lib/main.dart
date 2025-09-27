@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:timezone/data/latest.dart' as tz_data;
 import 'package:timezone/timezone.dart' as tz;
 import 'package:dynamic_color/dynamic_color.dart';
-import 'package:menstrudel/screens/main_screen.dart';
 import 'package:menstrudel/services/notification_service.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:menstrudel/l10n/app_localizations.dart'; 
@@ -11,6 +10,7 @@ import 'package:provider/provider.dart';
 import 'package:menstrudel/services/wear_sync_service.dart';
 import 'package:menstrudel/database/repositories/periods_repository.dart';
 import 'package:menstrudel/models/themes/app_theme_mode_enum.dart';
+import 'package:menstrudel/screens/auth_gate.dart';
 
 final watchService = WatchSyncService();
 final periodsRepository = PeriodsRepository();
@@ -84,7 +84,7 @@ class MainApp extends StatelessWidget {
             colorScheme: darkColorScheme,
           ),
           themeMode: themeNotifier.themeMode.getThemeMode(),
-          home: const MainScreen(),
+          home: const AuthGate(),
         );
       },
     );

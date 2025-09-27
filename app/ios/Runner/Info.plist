@@ -33,10 +33,14 @@
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UISupportedInterfaceOrientations</key>
+
 	<array>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+
+	<key>NSFaceIDUsageDescription</key>
+	<string>Menstrudel uses Face ID to secure your private health data.</string>
 </dict>
 </plist>
