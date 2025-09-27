@@ -174,6 +174,10 @@
     "settingsScreen_dangerZone": "Danger Zone",
     "settingsScreen_clearAllLogsSubtitle": "Deletes your entire period and symptom history.",
     "settingsScreen_clearAllPillDataSubtitle": "Removes your pill regimen and intake history.",
+    "settingsScreen_security": "Security",
+    "securityScreen_enableBiometricLock": "Enable Biometric Lock",
+    "securityScreen_enableBiometricLockSubtitle": "Require fingerprint or face ID to open the app.",
+    "securityScreen_noBiometricsAvailable": "No passcode, fingerprint, or face ID found. Please set one up in your device's settings.",
 
     "tamponReminderDialog_tamponReminderTitle": "Tampon Reminder",
     "tamponReminderDialog_tamponReminderMaxDuration": "Max duration is 8 hours.",
