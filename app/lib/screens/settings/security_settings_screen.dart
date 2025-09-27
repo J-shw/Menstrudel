@@ -32,8 +32,8 @@ class _SecuritySettingsScreenState extends State<SecuritySettingsScreen> {
 
     if (mounted) {
       setState(() {
-        _isBiometricEnabled = responses[0] as bool;
-        _isDeviceSupported = responses[1] as bool;
+        _isBiometricEnabled = responses[0];
+        _isDeviceSupported = responses[1];
         _isLoading = false;
       });
     }
@@ -52,7 +52,7 @@ class _SecuritySettingsScreenState extends State<SecuritySettingsScreen> {
             ),
           );
         }
-        return; // Stop execution here
+        return;
       }
     }
 
