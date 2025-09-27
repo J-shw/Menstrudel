@@ -722,6 +722,30 @@ abstract class AppLocalizations {
   /// **'Removes your pill regimen and intake history.'**
   String get settingsScreen_clearAllPillDataSubtitle;
 
+  /// No description provided for @settingsScreen_security.
+  ///
+  /// In en, this message translates to:
+  /// **'Security'**
+  String get settingsScreen_security;
+
+  /// No description provided for @securityScreen_enableBiometricLock.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable Biometric Lock'**
+  String get securityScreen_enableBiometricLock;
+
+  /// No description provided for @securityScreen_enableBiometricLockSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Require fingerprint or face ID to open the app.'**
+  String get securityScreen_enableBiometricLockSubtitle;
+
+  /// No description provided for @securityScreen_noBiometricsAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'No passcode, fingerprint, or face ID found. Please set one up in your device\'s settings.'**
+  String get securityScreen_noBiometricsAvailable;
+
   /// No description provided for @tamponReminderDialog_tamponReminderTitle.
   ///
   /// In en, this message translates to:
