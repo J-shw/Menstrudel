@@ -4,12 +4,10 @@ import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/models/flows/flow_enum.dart';
 import 'package:menstrudel/models/period_logs/symptom_enum.dart';
 import 'package:menstrudel/models/period_logs/pain_level_enum.dart';
+import 'package:menstrudel/widgets/dialogs/custom_symptom_dialog.dart';
 
 class SymptomEntrySheet extends StatefulWidget {
-  const SymptomEntrySheet({
-    super.key,
-    required this.selectedDate
-  });
+  const SymptomEntrySheet({super.key, required this.selectedDate});
 
   final DateTime selectedDate;
 
@@ -19,7 +17,8 @@ class SymptomEntrySheet extends StatefulWidget {
 
 class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
   late DateTime _selectedDate;
-  final Set<Symptom> _selectedSymptoms = {};
+  final Set<String> _selectedSymptoms = {};
+  final Set<String> _symptoms = {};
   FlowRate _flowSelection = FlowRate.none;
   PainLevel _painLevel = PainLevel.none;
 
@@ -27,6 +26,41 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
   void initState() {
     super.initState();
     _selectedDate = widget.selectedDate;
+
+    _symptoms.addAll(defaultSymptoms());
+    _symptoms.add("+");
+  }
+
+  Set<String> defaultSymptoms() {
+    return {
+      "Headache",
+      "Fatigue",
+      "Cramps",
+      "Nausea",
+      "Mood Swings",
+      "Bloating",
+      "Acne",
+      "Back pain"
+    };
+  }
+
+  Future<void> showAdditionalSymptomDialog() async {
+    final result = await showDialog<String>(
+      context: context,
+      builder: (BuildContext context) {
+        return const CustomSymptomDialog();
+      },
+    );
+
+    if (result != null && mounted) {
+      setState(() {
+        _symptoms.remove("+");
+        _symptoms.add(result);
+        _symptoms.add("+");
+
+        _selectedSymptoms.add(result);
+      });
+    }
   }
 
   @override
@@ -70,7 +104,9 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
             const SizedBox(height: 8),
             FilledButton.tonalIcon(
               icon: const Icon(Icons.calendar_today, size: 18),
-              label: Text(DateFormat('EEEE, d MMMM yyyy').format(_selectedDate)),
+              label: Text(
+                DateFormat('EEEE, d MMMM yyyy').format(_selectedDate),
+              ),
               style: FilledButton.styleFrom(
                 minimumSize: const Size.fromHeight(50),
                 alignment: Alignment.centerLeft,
@@ -101,8 +137,10 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
             ),
             const SizedBox(height: 8),
             // --- Pain Level ---
-            Text('${l10n.painLevel_title}: ${_painLevel.getDisplayName(l10n)}',
-                style: Theme.of(context).textTheme.bodySmall),
+            Text(
+              '${l10n.painLevel_title}: ${_painLevel.getDisplayName(l10n)}',
+              style: Theme.of(context).textTheme.bodySmall,
+            ),
             const SizedBox(height: 8),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -115,8 +153,8 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
                     return IconButton(
                       icon: Icon(painLevel.icon),
                       iconSize: 36,
-                      color: isSelected 
-                          ? Theme.of(context).colorScheme.primary 
+                      color: isSelected
+                          ? Theme.of(context).colorScheme.primary
                           : Theme.of(context).colorScheme.onSurfaceVariant,
                       onPressed: () {
                         setState(() {
@@ -130,22 +168,32 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
             ),
             const SizedBox(height: 8),
             // --- Symptoms ---
-            Text(l10n.symptomEntrySheet_symptomsOptional,
-                style: Theme.of(context).textTheme.bodySmall),
+            Text(
+              l10n.symptomEntrySheet_symptomsOptional,
+              style: Theme.of(context).textTheme.bodySmall,
+            ),
             const SizedBox(height: 8),
             Wrap(
               spacing: 8.0,
               runSpacing: 4.0,
-              children: Symptom.values.map((symptom) {
+              children: _symptoms.map((symptom) {
+                var isAdd = symptom == "+";
                 return FilterChip(
-                  label: Text(symptom.getDisplayName(l10n)),
+                  label: Text(symptom),
                   selected: _selectedSymptoms.contains(symptom),
                   onSelected: (bool selected) {
                     setState(() {
-                      if (selected) {
-                        _selectedSymptoms.add(symptom);
+                      if (isAdd) {
+                        showAdditionalSymptomDialog();
                       } else {
-                        _selectedSymptoms.remove(symptom);
+                        if (selected) {
+                          _selectedSymptoms.add(symptom);
+                        } else {
+                          _selectedSymptoms.remove(symptom);
+                          if (defaultSymptoms().contains(symptom) == false) {
+                            _symptoms.remove(symptom);
+                          }
+                        }
                       }
                     });
                   },
@@ -172,12 +220,10 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
                       minimumSize: const Size.fromHeight(50),
                     ),
                     onPressed: () {
-                      final symptomsToSave = _selectedSymptoms.map((s) => s.name).toList();
-
                       Navigator.of(context).pop({
                         'date': _selectedDate,
                         'flow': _flowSelection,
-                        'symptoms': symptomsToSave,
+                        'symptoms': _selectedSymptoms,
                         'painLevel': _painLevel.intValue,
                       });
                     },
@@ -185,7 +231,7 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
                   ),
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),
