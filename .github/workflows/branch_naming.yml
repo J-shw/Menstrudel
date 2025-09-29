@@ -13,16 +13,16 @@ jobs:
     steps:
       - name: 'Validate Branch Name'
         id: validate_name
+        env:
+          BRANCH_NAME: ${{ github.head_ref }}
         run: |
-          branch_name="${{ github.head_ref }}" # Use github.head_ref for PRs
-          
           regex="^(feature|bugfix|docs|chore|refactor|style|test)\/(app|wear|web|repo)\/[a-z0-9-]+$"
 
-          if [[ "$branch_name" == 'l10n_dev' ]] || [[ "$branch_name" =~ $regex ]]; then
-            echo "Branch name'$branch_name' is valid."
+          if [[ "$BRANCH_NAME" == 'l10n_dev' ]] || [[ "$BRANCH_NAME" =~ $regex ]]; then
+            echo "Branch name'$BRANCH_NAME' is valid."
             echo "is_valid=true" >> $GITHUB_OUTPUT
           else
-            echo "Branch name '$branch_name' does not match the required format."
+            echo "Branch name '$BRANCH_NAME' does not match the required format."
             echo "Please use the format: <type>/<scope>/<description>"
             echo "Example: feature/web/new-contact-form"
             echo "is_valid=false" >> $GITHUB_OUTPUT
