@@ -6,6 +6,7 @@ import 'package:menstrudel/screens/settings/birth_control_settings_screen.dart';
 import 'package:menstrudel/screens/settings/period_settings_screen.dart';
 import 'package:menstrudel/screens/settings/data_settings_screen.dart';
 import 'package:menstrudel/screens/settings/security_settings_screen.dart';
+import 'package:menstrudel/screens/settings/preferences_settings_screen.dart';
 
 
 class SettingsScreen extends StatelessWidget {
@@ -17,6 +18,16 @@ class SettingsScreen extends StatelessWidget {
     
     return ListView(
       children: [
+        _SettingsSectionButton(
+          title: l10n.settingsScreen_preferences,
+          icon: Icons.tune_outlined,
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const PreferencesSettingsScreen()),
+            );
+          },
+        ),
         _SettingsSectionButton(
           title: l10n.settingsScreen_appearance,
           icon: Icons.palette_outlined,
