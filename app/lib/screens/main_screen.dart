@@ -59,7 +59,6 @@ class _MainScreenState extends State<MainScreen> {
   void _onFabStateChange(FabState suggestedState) {
     FabState finalState;
 
-    debugPrint(_isReminderButtonAlwaysVisible.toString());
     if (_isReminderButtonAlwaysVisible) {
       if (suggestedState == FabState.cancelReminder) {
         finalState = FabState.cancelReminder;
