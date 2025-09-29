@@ -381,6 +381,17 @@ class AppLocalizationsEn extends AppLocalizations {
       'No passcode, fingerprint, or face ID found. Please set one up in your device\'s settings.';
 
   @override
+  String get settingsScreen_preferences => 'Preferences';
+
+  @override
+  String get preferencesScreen_tamponReminderButton =>
+      'Always Show Reminder Button';
+
+  @override
+  String get preferencesScreen_tamponReminderButtonSubtitle =>
+      'Makes the tampon reminder button permanently visible on the main screen.';
+
+  @override
   String get tamponReminderDialog_tamponReminderTitle => 'Tampon Reminder';
 
   @override

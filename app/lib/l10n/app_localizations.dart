@@ -746,6 +746,24 @@ abstract class AppLocalizations {
   /// **'No passcode, fingerprint, or face ID found. Please set one up in your device\'s settings.'**
   String get securityScreen_noBiometricsAvailable;
 
+  /// No description provided for @settingsScreen_preferences.
+  ///
+  /// In en, this message translates to:
+  /// **'Preferences'**
+  String get settingsScreen_preferences;
+
+  /// No description provided for @preferencesScreen_tamponReminderButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Always Show Reminder Button'**
+  String get preferencesScreen_tamponReminderButton;
+
+  /// No description provided for @preferencesScreen_tamponReminderButtonSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Makes the tampon reminder button permanently visible on the main screen.'**
+  String get preferencesScreen_tamponReminderButtonSubtitle;
+
   /// No description provided for @tamponReminderDialog_tamponReminderTitle.
   ///
   /// In en, this message translates to:
