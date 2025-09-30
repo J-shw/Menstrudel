@@ -17,10 +17,21 @@ class SettingsService {
   static const _dynamicColorKey = 'dynamic_color';
   static const _themeColorKey = 'theme_color';
   static const _themeModeKey = 'theme_mode';
+  static const _persistentReminderKey = "always_show_reminder_button";
 
   Future<void> deleteAllSettings() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.clear();
+  }
+
+  Future<void> setAlwaysShowReminderButtonEnabled(bool isEnabled) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_persistentReminderKey, isEnabled);
+  }
+
+  Future<bool> areAlwaysShowReminderButtonEnabled() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool(_persistentReminderKey) ?? false;
   }
 
   Future<void> setBiometricsEnabled(bool isEnabled) async {

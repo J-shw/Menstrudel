@@ -6,6 +6,7 @@ import 'package:menstrudel/screens/pills_screen.dart';
 import 'package:menstrudel/widgets/main/main_navigation_bar.dart';
 import 'package:menstrudel/widgets/main/app_bar.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
+import 'package:menstrudel/services/settings_service.dart';
 
 enum FabState {
   logPeriod,
@@ -26,9 +27,14 @@ class _MainScreenState extends State<MainScreen> {
   FabState _fabState = FabState.logPeriod;
   late final List<Widget> _pages;
 
+  final SettingsService _settingsService = SettingsService();
+  bool _isLoading = true;
+  bool _isReminderButtonAlwaysVisible = false;
+
   @override
   void initState() {
     super.initState();
+    _loadSettings();
     _pages = <Widget>[
       const InsightsScreen(),
       LogsScreen(
@@ -40,18 +46,44 @@ class _MainScreenState extends State<MainScreen> {
     ];
   }
 
-  void _onFabStateChange(FabState newState) {
-    if (_fabState != newState) {
+  Future<void> _loadSettings() async {
+    final isEnabled = await _settingsService.areAlwaysShowReminderButtonEnabled();
+    if (mounted) {
       setState(() {
-        _fabState = newState;
+        _isReminderButtonAlwaysVisible = isEnabled;
+        _isLoading = false;
+      });
+    }
+  }
+  
+  void _onFabStateChange(FabState suggestedState) {
+    FabState finalState;
+
+    if (_isReminderButtonAlwaysVisible) {
+      if (suggestedState == FabState.cancelReminder) {
+        finalState = FabState.cancelReminder;
+      } else {
+        finalState = FabState.setReminder;
+      }
+    } else {
+      finalState = suggestedState;
+    }
+
+    if (_fabState != finalState) {
+      setState(() {
+        _fabState = finalState;
       });
     }
   }
 
-  void _onItemTapped(int index) {
+  void _onItemTapped(int index) async {
     setState(() {
       _selectedIndex = index;
     });
+
+    if (index == 1) {
+      await _loadSettings();
+    }
   }
 
   Widget _buildFab(BuildContext context) {
@@ -84,7 +116,6 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     final l10n = AppLocalizations.of(context)!;
 
     final List<PreferredSizeWidget?> appBars = [
@@ -101,7 +132,7 @@ class _MainScreenState extends State<MainScreen> {
         selectedIndex: _selectedIndex,
         onDestinationSelected: _onItemTapped,
       ),
-      floatingActionButton: _selectedIndex == 1
+      floatingActionButton: !_isLoading && _selectedIndex == 1
           ? AnimatedSwitcher(
               duration: const Duration(milliseconds: 200),
               transitionBuilder: (Widget child, Animation<double> animation) {
