@@ -23,7 +23,8 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 1;
-  final GlobalKey<LogsScreenState> _logsScreenKey = GlobalKey<LogsScreenState>();
+  final GlobalKey<LogsScreenState> _logsScreenKey =
+      GlobalKey<LogsScreenState>();
   FabState _fabState = FabState.logPeriod;
   late final List<Widget> _pages;
 
@@ -47,7 +48,8 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   Future<void> _loadSettings() async {
-    final isEnabled = await _settingsService.areAlwaysShowReminderButtonEnabled();
+    final isEnabled =
+        await _settingsService.areAlwaysShowReminderButtonEnabled();
     if (mounted) {
       setState(() {
         _isReminderButtonAlwaysVisible = isEnabled;
@@ -55,7 +57,7 @@ class _MainScreenState extends State<MainScreen> {
       });
     }
   }
-  
+
   void _onFabStateChange(FabState suggestedState) {
     FabState finalState;
 
@@ -86,31 +88,62 @@ class _MainScreenState extends State<MainScreen> {
     }
   }
 
-  Widget _buildFab(BuildContext context) {
+  Widget _buildLogPeriodFab(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    
+    return FloatingActionButton(
+      key: const ValueKey('log_fab'),
+      tooltip: l10n.mainScreen_tooltipLogPeriod,
+      onPressed: () =>
+          _logsScreenKey.currentState?.createNewLog(DateTime.now()),
+      child: const Icon(Icons.add),
+    );
+  }
+
+  Widget _buildSetReminderFab(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    return FloatingActionButton(
+      key: const ValueKey('set_reminder_fab'),
+      tooltip: l10n.mainScreen_tooltipSetReminder,
+      onPressed: () =>
+          _logsScreenKey.currentState?.handleTamponReminder(context),
+      child: const Icon(Icons.add_alarm),
+    );
+  }
+
+  Widget _buildCancelReminderFab(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    return FloatingActionButton(
+      key: const ValueKey('cancel_reminder_fab'),
+      tooltip: l10n.mainScreen_tooltipCancelReminder,
+      onPressed: () => _logsScreenKey.currentState?.handleCancelReminder(),
+      child: const Icon(Icons.alarm_off),
+    );
+  }
+
+  Widget _buildFab(BuildContext context) {
+    if (_isReminderButtonAlwaysVisible) {
+      final Widget reminderFab = _fabState == FabState.cancelReminder
+          ? _buildCancelReminderFab(context)
+          : _buildSetReminderFab(context);
+
+      return Column(
+        key: const ValueKey('multi_fab'),
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          reminderFab,
+          const SizedBox(height: 16),
+          _buildLogPeriodFab(context),
+        ],
+      );
+    }
+
     switch (_fabState) {
       case FabState.setReminder:
-        return FloatingActionButton(
-          key: const ValueKey('set_reminder_fab'),
-          tooltip: l10n.mainScreen_tooltipSetReminder,
-          onPressed: () => _logsScreenKey.currentState?.handleTamponReminder(context),
-          child: const Icon(Icons.add_alarm),
-        );
+        return _buildSetReminderFab(context);
       case FabState.cancelReminder:
-        return FloatingActionButton(
-          key: const ValueKey('cancel_reminder_fab'),
-          tooltip: l10n.mainScreen_tooltipCancelReminder,
-          onPressed: () => _logsScreenKey.currentState?.handleCancelReminder(),
-          child: const Icon(Icons.alarm_off),
-        );
+        return _buildCancelReminderFab(context);
       case FabState.logPeriod:
-        return FloatingActionButton(
-          key: const ValueKey('log_fab'),
-          tooltip: l10n.mainScreen_tooltipLogPeriod,
-          onPressed: () => _logsScreenKey.currentState?.createNewLog(DateTime.now()),
-          child: const Icon(Icons.add),
-        );
+        return _buildLogPeriodFab(context);
     }
   }
 
