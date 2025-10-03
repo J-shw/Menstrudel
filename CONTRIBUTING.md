@@ -14,10 +14,15 @@ Thank you for considering contributing!
 - Open a new issue to discuss your idea.
 - Clearly describe the feature and why it would be useful.
 
+
+## Branch uses
+
+- `dev` is the default branch. This is where all in development changes should be merged too.
+- `main` is considered live code.
+
 ## Pull Request Process
 
 This repository is a monorepo containing several projects. When creating a branch, please include the project scope in the name.
-
 
 1.  Fork the repository and create your branch from `dev`.
 
