@@ -243,11 +243,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get pillScreen_pillForTodayMarkedAsTaken =>
-      'Pill for today marked as taken!';
+      'Pill for today marked as taken.';
 
   @override
   String get pillScreen_pillForTodayMarkedAsSkipped =>
-      'Pill for today marked as skipped!';
+      'Pill for today marked as skipped.';
 
   @override
   String get settingsScreen_selectHistoryView => 'Select History View';
