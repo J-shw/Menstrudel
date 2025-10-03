@@ -95,8 +95,7 @@ class _PillsScreenState extends State<PillsScreen> {
     ScaffoldMessenger.of(context).showSnackBar(
       
       SnackBar(
-        content: Text(l10n.pillScreen_pillForTodayMarkedAsTaken),
-        backgroundColor: Colors.green,
+        content: Text(l10n.pillScreen_pillForTodayMarkedAsSkipped),
       ),
     );
     

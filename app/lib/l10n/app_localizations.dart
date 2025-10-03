@@ -497,8 +497,14 @@ abstract class AppLocalizations {
   /// No description provided for @pillScreen_pillForTodayMarkedAsTaken.
   ///
   /// In en, this message translates to:
-  /// **'Pill for today marked as taken!'**
+  /// **'Pill for today marked as taken.'**
   String get pillScreen_pillForTodayMarkedAsTaken;
+
+  /// No description provided for @pillScreen_pillForTodayMarkedAsSkipped.
+  ///
+  /// In en, this message translates to:
+  /// **'Pill for today marked as skipped.'**
+  String get pillScreen_pillForTodayMarkedAsSkipped;
 
   /// No description provided for @settingsScreen_selectHistoryView.
   ///
