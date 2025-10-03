@@ -44,13 +44,14 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
       _processEntries();
 
       if (widget.periodLogEntries.isNotEmpty) {
-        final newestLogDate = widget.periodLogEntries.first.date;
-        final oldestLogDate = widget.periodLogEntries.last.date;
+        final earliestLogDate = widget.periodLogEntries.reduce((a, b) => a.date.isBefore(b.date) ? a : b).date;
+        final latestLogDate = widget.periodLogEntries.reduce((a, b) => a.date.isAfter(b.date) ? a : b).date;
+        
+        final focusedDateOnly = DateUtils.dateOnly(_focusedDay);
 
-        if (_focusedDay.isAfter(newestLogDate) || _focusedDay.isBefore(oldestLogDate)) {
-          
+        if (focusedDateOnly.isAfter(latestLogDate) || focusedDateOnly.isBefore(earliestLogDate)) {
           setState(() {
-            _focusedDay = newestLogDate;
+            _focusedDay = latestLogDate;
           });
         }
       }
@@ -76,15 +77,21 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
 
     final colorScheme = Theme.of(context).colorScheme;
 
+    final earliestLogDate = widget.periodLogEntries.reduce((a, b) => a.date.isBefore(b.date) ? a : b).date;
+    final latestLogDate = widget.periodLogEntries.reduce((a, b) => a.date.isAfter(b.date) ? a : b).date;
+
+    final focusedDateOnly = DateUtils.dateOnly(_focusedDay);
+
+    final calendarBoundary = focusedDateOnly.isAfter(latestLogDate) ? focusedDateOnly : latestLogDate;
+
+
     return Expanded(
       child: Column(
         children: [
           Expanded(
             child: TableCalendar(
-              firstDay: widget.periodLogEntries.first.date
-                  .subtract(const Duration(days: 365)),
-              lastDay: widget.periodLogEntries.last.date
-                  .add(const Duration(days: 365)),
+              firstDay: earliestLogDate.subtract(const Duration(days: 365)),
+              lastDay: calendarBoundary.add(const Duration(days: 365)),
               focusedDay: _focusedDay,
               headerStyle: const HeaderStyle(
                 formatButtonVisible: false,
