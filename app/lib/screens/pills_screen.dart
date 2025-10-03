@@ -96,7 +96,6 @@ class _PillsScreenState extends State<PillsScreen> {
       
       SnackBar(
         content: Text(l10n.pillScreen_pillForTodayMarkedAsSkipped),
-        backgroundColor: Colors.green,
       ),
     );
     
