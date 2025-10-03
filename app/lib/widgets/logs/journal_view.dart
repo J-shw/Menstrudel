@@ -42,19 +42,6 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
     super.didUpdateWidget(oldWidget);
     if (widget.periodLogEntries != oldWidget.periodLogEntries) {
       _processEntries();
-
-      if (widget.periodLogEntries.isNotEmpty) {
-        final earliestLogDate = widget.periodLogEntries.reduce((a, b) => a.date.isBefore(b.date) ? a : b).date;
-        final latestLogDate = widget.periodLogEntries.reduce((a, b) => a.date.isAfter(b.date) ? a : b).date;
-        
-        final focusedDateOnly = DateUtils.dateOnly(_focusedDay);
-
-        if (focusedDateOnly.isAfter(latestLogDate) || focusedDateOnly.isBefore(earliestLogDate)) {
-          setState(() {
-            _focusedDay = latestLogDate;
-          });
-        }
-      }
     }
   }
 
