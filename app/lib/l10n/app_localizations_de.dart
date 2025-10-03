@@ -246,6 +246,10 @@ class AppLocalizationsDe extends AppLocalizations {
       'Pill for today marked as taken!';
 
   @override
+  String get pillScreen_pillForTodayMarkedAsSkipped =>
+      'Pill for today marked as skipped!';
+
+  @override
   String get settingsScreen_selectHistoryView => 'Select History View';
 
   @override
