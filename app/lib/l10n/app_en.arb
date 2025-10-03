@@ -136,6 +136,7 @@
     "logScreen_couldNotCancelReminder": "Could not cancel reminder",
 
     "pillScreen_pillForTodayMarkedAsTaken": "Pill for today marked as taken!",
+    "pillScreen_pillForTodayMarkedAsSkipped": "Pill for today marked as skipped!",
 
     "settingsScreen_selectHistoryView": "Select History View",
     "settingsScreen_deleteRegimen_question": "Delete Regimen?",
