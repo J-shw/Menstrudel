@@ -102,6 +102,18 @@ nav a:hover {
   }
 }
 
+/* --- Page Header --- */
+
+.page-header {
+    text-align: center;
+    padding: 3rem 1rem 1rem;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 2rem;
+}
+
+.page-header h1 {
+    font-size: 2.5rem;
+}
 
 /* --- Hero --- */
 
@@ -222,6 +234,54 @@ section h2 {
 
 .screenshot-grid img:hover {
     transform: scale(1.03);
+}
+
+/* --- FAQ Section --- */
+
+.faq-section h2 {
+    font-size: 1.8rem;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+.faq-item {
+  border-bottom: 1px solid #eee;
+  padding: 1rem 0;
+}
+
+.faq-item summary {
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item summary::after {
+  content: '\f078';
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  transition: transform 0.2s ease-in-out;
+}
+
+.faq-item[open] > summary::after {
+  transform: rotate(180deg);
+}
+
+.faq-content {
+  padding: 1rem 0 0 1rem;
+  color: #555;
+}
+
+.faq-content p {
+  margin-top: 0;
 }
 
 /* --- Blog --- */
@@ -392,7 +452,11 @@ section h2 {
     color: #e0e0e0;
   }
 
-  .hero, .page-header {
+  .page-header, .faq-item {
+    border-color: #333;
+  }
+
+  .hero{
     background-color: #1a1a1a;
     border-color: #333;
   }
@@ -414,6 +478,11 @@ section h2 {
     background-color: #333;
     color: #e0e0e0;
   }
+
+  .faq-content {
+    color: #aaa;
+  }
+
   
   .post-list h2 a {
     color: #e0e0e0;
