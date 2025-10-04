@@ -3,7 +3,10 @@ layout: post
 title: "Menstrudel v2.8.0"
 date: 2025-09-19
 categories: [release notes, announcements]
+image: /assets/images/blog/new-release.png
 ---
+
+![New release image](/assets/images/blog/new-release.png)
 
 We're excited to release version **2.8.0** of Menstrudel. This update includes many new features requested by the community and (as always) important bug fixes.
 
