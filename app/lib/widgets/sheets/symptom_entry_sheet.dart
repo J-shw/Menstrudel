@@ -213,7 +213,7 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
                         child: FilledButton(
                           style: FilledButton.styleFrom(minimumSize: const Size.fromHeight(50)),
                           onPressed: () {
-                            Navigator.of(context).pop({'date': _selectedDate, 'flow': _flowSelection, 'symptoms': _selectedSymptoms, 'painLevel': _painLevel.intValue});
+                            Navigator.of(context).pop({'date': _selectedDate, 'flow': _flowSelection, 'symptoms': _selectedSymptoms.toList(), 'painLevel': _painLevel.intValue});
                           },
                           child: Text(l10n.save),
                         ),
