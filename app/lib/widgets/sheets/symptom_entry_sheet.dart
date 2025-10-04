@@ -17,8 +17,11 @@ class SymptomEntrySheet extends StatefulWidget {
 
 class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
   late DateTime _selectedDate;
+
+  final Set<String> _defaultSymptoms = {};
   final Set<String> _selectedSymptoms = {};
   final Set<String> _symptoms = {};
+
   FlowRate _flowSelection = FlowRate.none;
   PainLevel _painLevel = PainLevel.none;
 
@@ -27,7 +30,8 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
     super.initState();
     _selectedDate = widget.selectedDate;
 
-    _symptoms.addAll(defaultSymptoms());
+    _defaultSymptoms.addAll(defaultSymptoms());
+    _symptoms.addAll(_defaultSymptoms);
     _symptoms.add("+");
   }
 
@@ -40,25 +44,36 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
       "Mood Swings",
       "Bloating",
       "Acne",
-      "Back pain"
+      "Back pain",
     };
   }
 
   Future<void> showAdditionalSymptomDialog() async {
-    final result = await showDialog<String>(
-      context: context,
-      builder: (BuildContext context) {
-        return const CustomSymptomDialog();
-      },
-    );
+    final (String name, bool isDefault)? result =
+        await showDialog<(String, bool)>(
+          context: context,
+          builder: (BuildContext context) {
+            return const CustomSymptomDialog();
+          },
+        );
 
     if (result != null && mounted) {
       setState(() {
+        var customSymptomName = result.$1;
+
+        if (_symptoms.contains(customSymptomName)) {
+          return;
+        }
+
         _symptoms.remove("+");
-        _symptoms.add(result);
+        _symptoms.add(customSymptomName);
         _symptoms.add("+");
 
-        _selectedSymptoms.add(result);
+        _selectedSymptoms.add(customSymptomName);
+
+        if (result.$2) {
+          _defaultSymptoms.add(customSymptomName);
+        }
       });
     }
   }
@@ -190,7 +205,7 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
                           _selectedSymptoms.add(symptom);
                         } else {
                           _selectedSymptoms.remove(symptom);
-                          if (defaultSymptoms().contains(symptom) == false) {
+                          if (_defaultSymptoms.contains(symptom) == false) {
                             _symptoms.remove(symptom);
                           }
                         }

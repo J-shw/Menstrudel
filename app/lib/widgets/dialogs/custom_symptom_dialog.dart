@@ -25,7 +25,7 @@ class _CustomSymptomDialogState extends State<CustomSymptomDialog> {
     final l10n = AppLocalizations.of(context)!;
 
     return AlertDialog.adaptive(
-      title: Text("Add custom symptom", textAlign: TextAlign.center),
+      title: Text("New custom symptom", textAlign: TextAlign.center),
       content: SizedBox(
         width: double.maxFinite,
         child: Form(
@@ -36,17 +36,23 @@ class _CustomSymptomDialogState extends State<CustomSymptomDialog> {
               TextFormField(
                 controller: _nameController,
                 validator: (value) =>
-                    value!.isEmpty ? "Please enter a custom symptom" : null,
+                value!.isEmpty ? "Please enter a custom symptom" : null,
+                autofocus: true,
+                maxLength: 60,
+                maxLines: 1,
               ),
-              //const SizedBox(height: 16),
-              // Checkbox(
-              //   value: _isDefault,
-              //   onChanged: (value) {
-              //     setState(() {
-              //       _isDefault = value ?? false;
-              //     });
-              //   },
-              // ),
+              const SizedBox(height: 16),
+              SwitchListTile(
+                subtitle: Text("Make default symptom"),
+                secondary: const Icon(Icons.fact_check),
+                value: _isDefault,
+                onChanged: (value) =>
+                {
+                  setState(() {
+                    _isDefault = value;
+                  }),
+                },
+              ),
             ],
           ),
         ),
@@ -57,11 +63,16 @@ class _CustomSymptomDialogState extends State<CustomSymptomDialog> {
           child: Text(l10n.cancel),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        ElevatedButton(
-          onPressed: () {
-            Navigator.of(context).pop(_nameController.text);
-          },
-          child: Text(l10n.confirm),
+        ValueListenableBuilder<TextEditingValue>(
+            valueListenable: _nameController,
+            builder: (context, value, child1) {
+              return ElevatedButton(
+                onPressed: value.text.isNotEmpty ? () {
+                  Navigator.of(context).pop((_nameController.text, _isDefault));
+                } : null,
+                child: Text(l10n.confirm),
+              );
+            }
         ),
       ],
     );
