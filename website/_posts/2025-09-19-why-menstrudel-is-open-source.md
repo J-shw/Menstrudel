@@ -3,6 +3,7 @@ layout: post
 title: "Trust Through Transparency: Why Menstrudel is Open Source"
 date: 2025-09-19
 categories: [blog, tech, open source]
+image: /assets/images/blog/2025-09-19-why-menstrudel-is-open-source/lock.png
 ---
 
 Apps make bold claims about privacy, we wanted to do more than just make a promise. We wanted to provide proof. That's why we made the decision to build Menstrudel as a fully **open-source** project.
