@@ -5,7 +5,6 @@ import 'package:menstrudel/models/periods/period.dart';
 import 'package:collection/collection.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/models/flows/flow_enum.dart';
-import 'package:menstrudel/models/period_logs/symptom_enum.dart';
 
 class PeriodListView extends StatelessWidget {
   final List<PeriodDay> periodLogEntries;
@@ -139,7 +138,6 @@ class PeriodListView extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
     final l10n = AppLocalizations.of(context)!;
-    final symptomMap = {for (var s in Symptom.values) s.name: s};
     final symptoms =
         entry.symptoms.map((s) => symptomMap[s]).whereType<Symptom>().toList();
     return InkWell(
@@ -184,7 +182,7 @@ class PeriodListView extends StatelessWidget {
                       runSpacing: 4.0,
                       children: symptoms.map((symptom) {
                         return Chip(
-                          label: Text(symptom.getDisplayName(l10n)),
+                          label: Text(symptom),
                           side: BorderSide.none,
                           padding: EdgeInsets.zero,
                           visualDensity: const VisualDensity(horizontal: 0, vertical: -4),

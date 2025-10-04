@@ -3,43 +3,54 @@ import 'package:intl/intl.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/models/period_logs/period_day.dart';
 import 'package:menstrudel/models/flows/flow_enum.dart';
-import 'package:menstrudel/models/period_logs/symptom_enum.dart';
 import 'package:menstrudel/models/period_logs/pain_level_enum.dart';
+
+import '../../services/settings_service.dart';
 
 class PeriodDetailsBottomSheet extends StatefulWidget {
   final PeriodDay log;
   final VoidCallback onDelete;
   final void Function(PeriodDay) onSave;
 
-  const PeriodDetailsBottomSheet({
-    super.key,
-    required this.log,
-    required this.onDelete,
-    required this.onSave,
-  });
+  const PeriodDetailsBottomSheet({super.key, required this.log, required this.onDelete, required this.onSave});
 
   @override
-  State<PeriodDetailsBottomSheet> createState() =>
-      _PeriodDetailsBottomSheetState();
+  State<PeriodDetailsBottomSheet> createState() => _PeriodDetailsBottomSheetState();
 }
 
 class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
+  final SettingsService _settingsService = SettingsService();
+
   bool _isEditing = false;
 
   late FlowRate _editedFlow;
   late PainLevel _editedPainLevel;
-  late List<Symptom> _editedSymptoms;
-  final List<Symptom> _allSymptoms = Symptom.values;
+
+  final Set<String> _defaultSymptoms = {};
+  final Set<String> _selectedSymptoms = {};
+  final Set<String> _symptoms = {};
 
   @override
   void initState() {
     super.initState();
+    _loadDefaultSymptoms();
     _resetEditableState();
   }
 
   void _resetEditableState() {
     _editedFlow = widget.log.flow;
     _editedPainLevel = PainLevel.values[widget.log.painLevel];
+    _selectedSymptoms.clear();
+    _selectedSymptoms.addAll(widget.log.symptoms ?? {});
+  }
+
+  void _loadDefaultSymptoms() async {
+    var defaultSymptoms = await _settingsService.getDefaultSymptoms();
+    setState(() {
+      _defaultSymptoms.addAll(defaultSymptoms);
+      _symptoms.addAll(_defaultSymptoms);
+      _symptoms.addAll(widget.log.symptoms ?? []);
+    });
     _editedSymptoms = widget.log.symptoms.map((symptomString) {
     try {
         return Symptom.values.firstWhere((e) => e.name == symptomString);
@@ -50,15 +61,10 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
   }
 
   void _handleSave() {
-    final symptomsToSave = _editedSymptoms.map((s) => s.name).toList();
-    final updatedLog = widget.log.copyWith(
-      flow: _editedFlow,
-      painLevel: _editedPainLevel.intValue,
-      symptoms: symptomsToSave,
-    );
+    final updatedLog = widget.log.copyWith(flow: _editedFlow, painLevel: _editedPainLevel.intValue, symptoms: _selectedSymptoms.toList());
 
     widget.onSave(updatedLog);
-    
+
     setState(() {
       _isEditing = false;
     });
@@ -69,20 +75,7 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
     return Container(
       height: MediaQuery.of(context).size.height * (_isEditing ? 0.6 : 0.4),
       padding: const EdgeInsets.fromLTRB(24, 8, 24, 32),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _buildDragHandle(),
-          const SizedBox(height: 12),
-          _buildHeader(context),
-          const Divider(height: 24),
-          _buildFlowSection(context),
-          const SizedBox(height: 16),
-          _buildPainLevelSection(context),
-          const SizedBox(height: 16),
-          _buildSymptomsSection(context),
-        ],
-      ),
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [_buildDragHandle(), const SizedBox(height: 12), _buildHeader(context), const Divider(height: 24), _buildFlowSection(context), const SizedBox(height: 16), _buildPainLevelSection(context), const SizedBox(height: 16), _buildSymptomsSection(context)]),
     );
   }
 
@@ -92,10 +85,7 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
         width: 40,
         height: 4,
         margin: const EdgeInsets.symmetric(vertical: 8),
-        decoration: BoxDecoration(
-          color: Colors.grey.shade300,
-          borderRadius: BorderRadius.circular(2),
-        ),
+        decoration: BoxDecoration(color: Colors.grey.shade300, borderRadius: BorderRadius.circular(2)),
       ),
     );
   }
@@ -107,10 +97,7 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          DateFormat('EEEE, MMMM d').format(widget.log.date),
-          style: textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
-        ),
+        Text(DateFormat('EEEE, MMMM d').format(widget.log.date), style: textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
         if (_isEditing)
           Row(
             children: [
@@ -141,8 +128,7 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
                 },
               ),
               IconButton(
-                icon: Icon(Icons.delete_outline,
-                    size: 24, color: colorScheme.error),
+                icon: Icon(Icons.delete_outline, size: 24, color: colorScheme.error),
                 onPressed: () {
                   widget.onDelete();
                   Navigator.pop(context);
@@ -167,18 +153,9 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
           Icon(Icons.opacity, color: colorScheme.onSurfaceVariant, size: 20),
           const SizedBox(width: 12),
           Text('${l10n.periodDetailsSheet_flow}: ', style: textTheme.bodyLarge),
-          Text(
-            flow.getDisplayName(l10n),
-            style: textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
-          ),
+          Text(flow.getDisplayName(l10n), style: textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold)),
           const Spacer(),
-          ...List.generate(4, (index) => Icon(
-                flow != FlowRate.none && index < flow.intValue
-                    ? Icons.water_drop
-                    : Icons.water_drop_outlined,
-                size: 20,
-                color: colorScheme.primary,
-          ))
+          ...List.generate(4, (index) => Icon(flow != FlowRate.none && index < flow.intValue ? Icons.water_drop : Icons.water_drop_outlined, size: 20, color: colorScheme.primary)),
         ],
       );
     } else {
@@ -214,7 +191,7 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
     final l10n = AppLocalizations.of(context)!;
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
-    
+
     if (!_isEditing) {
       final painLevel = PainLevel.values[widget.log.painLevel];
 
@@ -223,21 +200,14 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
           Icon(painLevel.icon, color: colorScheme.onSurfaceVariant, size: 20),
           const SizedBox(width: 12),
           Text('${l10n.painLevel_title}: ', style: textTheme.bodyLarge),
-          Text(
-            painLevel.getDisplayName(l10n),
-            style: textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
-          ),
+          Text(painLevel.getDisplayName(l10n), style: textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold)),
         ],
       );
-    } 
-    else {
+    } else {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            '${l10n.painLevel_title}: ${_editedPainLevel.getDisplayName(l10n)}',
-            style: textTheme.bodyLarge,
-          ),
+          Text('${l10n.painLevel_title}: ${_editedPainLevel.getDisplayName(l10n)}', style: textTheme.bodyLarge),
           const SizedBox(height: 8),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -247,9 +217,7 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
               return IconButton(
                 icon: Icon(painLevel.icon),
                 iconSize: 36,
-                color: isSelected
-                    ? colorScheme.primary
-                    : colorScheme.onSurfaceVariant,
+                color: isSelected ? colorScheme.primary : colorScheme.onSurfaceVariant,
                 onPressed: () {
                   setState(() {
                     _editedPainLevel = painLevel;
@@ -277,7 +245,7 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
     );
 
     if (!_isEditing) {
-      if (_editedSymptoms.isEmpty) {
+      if (_selectedSymptoms.isEmpty) {
         return const SizedBox.shrink();
       }
 
@@ -292,8 +260,8 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
                 child: Wrap(
                   spacing: 8.0,
                   runSpacing: 4.0,
-                  children: _editedSymptoms.map((symptom) {
-                    return Chip(label: Text(symptom.getDisplayName(l10n)));
+                  children: _selectedSymptoms.map((symptom) {
+                    return Chip(label: Text(symptom));
                   }).toList(),
                 ),
               ),
@@ -314,16 +282,19 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
                 child: Wrap(
                   spacing: 8.0,
                   runSpacing: 4.0,
-                  children: _allSymptoms.map((symptom) {
+                  children: _symptoms.map((symptom) {
                     return FilterChip(
-                      label: Text(symptom.getDisplayName(l10n)),
-                      selected: _editedSymptoms.contains(symptom),
+                      label: Text(symptom),
+                      selected: _selectedSymptoms.contains(symptom),
                       onSelected: (isSelected) {
                         setState(() {
                           if (isSelected) {
-                            _editedSymptoms.add(symptom);
+                            _selectedSymptoms.add(symptom);
                           } else {
-                            _editedSymptoms.remove(symptom);
+                            _selectedSymptoms.remove(symptom);
+                            if (_defaultSymptoms.contains(symptom) == false) {
+                              _symptoms.remove(symptom);
+                            }
                           }
                         });
                       },
