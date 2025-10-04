@@ -12,6 +12,19 @@ social:
   links:
     - https://github.com/J-shw/Menstrudel
 
+author:
+  "@type": Organization
+  name: Menstrudel
+
+defaults:
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      schema: "schema-article.html"
+
 webp:
   enabled: true
   quality: 75
