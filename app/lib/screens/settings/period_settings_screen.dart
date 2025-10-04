@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:menstrudel/database/repositories/periods_repository.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/services/settings_service.dart';
 
 import '../../widgets/dialogs/custom_symptom_dialog.dart';
+import '../../widgets/dialogs/delete_confirmation_dialog.dart';
 
 class PeriodSettingsScreen extends StatefulWidget {
   const PeriodSettingsScreen({super.key});
@@ -13,6 +15,8 @@ class PeriodSettingsScreen extends StatefulWidget {
 
 class _PeriodSettingsScreenState extends State<PeriodSettingsScreen> {
   final SettingsService _settingsService = SettingsService();
+  final periodsRepo = PeriodsRepository();
+
   bool _isLoading = true;
 
   Set<String> _defaultSymptoms = {};
@@ -99,35 +103,63 @@ class _PeriodSettingsScreenState extends State<PeriodSettingsScreen> {
   }
 
   Future<void> _removeDefaultSymptom(String symptom) async {
-    setState(() {
-      _defaultSymptoms.remove(symptom);
-    });
+    final l10n = AppLocalizations.of(context)!;
+    final symptomUsageCount = await periodsRepo.getSymptomUseCount(symptom);
 
-    await _settingsService.removeDefaultSymptom(symptom);
+    var description = "'$symptom' will no longer be available when logging a period.";
+
+    if (symptomUsageCount == 1) {
+      description += "\n\nThere is already $symptomUsageCount period log with this symptom!\nThis log will not be changed.";
+    } else if (symptomUsageCount > 1) {
+      description += "\n\nThere are $symptomUsageCount period logs with this symptom!\nThese logs will not be changed.";
+    }
+
+    if (mounted) {
+      return showDialog<void>(
+        context: context,
+        builder: (BuildContext context) {
+          return ConfirmationDialog(
+            title: "Delete '$symptom'?",
+            contentText: description,
+            confirmButtonText: symptomUsageCount > 0 ? "Delete anyways" : l10n.delete,
+            onConfirm: () async {
+              setState(() {
+                _defaultSymptoms.remove(symptom);
+              });
+              await _settingsService.removeDefaultSymptom(symptom);
+            },
+          );
+        },
+      );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
     return Scaffold(
       appBar: AppBar(title: Text(l10n.settingsScreen_periodPredictionAndReminders)),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
           : ListView(
               children: [
-                ListTile(title: Text("Default symptoms")),
+                ListTile(
+                  title: Text("Default symptoms"),
+                  leading: Icon(Icons.bubble_chart_outlined, color: colorScheme.onSurfaceVariant, size: 20),
+                ),
+                ListTile(subtitle: Text("These are always available when logging new periods.\nTap an existing symptom to delete or '+' to add a new one.")),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 12),
-                  child: Expanded(
-                    child: Wrap(
-                      alignment: WrapAlignment.start,
-                      spacing: 4.0,
-                      runSpacing: 4.0,
-                      children: _defaultSymptoms.map((symptom) {
-                        var isAdd = symptom == "+";
-                        return RawChip(label: Text(symptom), tapEnabled: true, onPressed: () => {if (isAdd) _showNewCustomSymptomDialog() else _removeDefaultSymptom(symptom)});
-                      }).toList(),
-                    ),
+                  child: Wrap(
+                    alignment: WrapAlignment.start,
+                    spacing: 4.0,
+                    runSpacing: 4.0,
+                    children: _defaultSymptoms.map((symptom) {
+                      var isAdd = symptom == "+";
+                      return RawChip(label: Text(symptom), backgroundColor: isAdd ? colorScheme.onSecondary : null, tapEnabled: true, onPressed: () => {if (isAdd) _showNewCustomSymptomDialog() else _removeDefaultSymptom(symptom)});
+                    }).toList(),
                   ),
                 ),
                 const Divider(),

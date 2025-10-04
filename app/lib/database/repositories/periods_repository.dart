@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:menstrudel/models/flows/flow_enum.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:intl/intl.dart';
@@ -271,6 +273,22 @@ class PeriodsRepository {
   }
 
   // Other
+
+  Future<int> getSymptomUseCount(String symptom) async {
+    final db = await dbProvider.database;
+
+    // this is a bit annoying, but it's easiest to do this way without messing around too much with the WHERE statement
+    // as this method should not be called too often and the period_logs should have a few thousand entries max, this should not be a big performance issue
+
+    // 1. filter for rows with parts of that symptom in db
+    // this can return false positives (when deleting a symptom called 'a', this will return logs with symptoms like 'headache')
+    final result = await db.query(
+      'period_logs',
+      where: "symptoms like '%$symptom%'"
+    );
+    // 2. filter for logs with exact match after parsing to List<String>
+    return result.map((json) => PeriodDay.fromMap(json)).where((f) => f.symptoms != null && f.symptoms!.any((g) => g == symptom)).length;
+  }
 
   Future<void> _recalculateAndAssignPeriods(Database db) async {
     await db.delete('periods');
