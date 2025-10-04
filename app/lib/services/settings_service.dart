@@ -6,6 +6,19 @@ import 'package:menstrudel/models/themes/app_theme_mode_enum.dart';
 enum PeriodHistoryView { list, journal }
 
 class SettingsService {
+  static const String _notificationsEnabledKey = 'notifications_enabled';
+  static const String _notificationDaysKey = 'notification_days';
+  static const _notificationTimeKey = 'notification_time';
+  static const String _periodOverdueNotificationsEnabledKey = 'period_overdue_notifications_enabled';
+  static const String _periodOverdueNotificationDaysKey = 'period_overdue_notification_days';
+  static const _periodOverdueNotificationTimeKey = 'period_overdue_notification_time';
+  static const _biometricEnabledKey = 'biometric_enabled';
+  static const _historyViewKey = 'history_view';
+  static const _dynamicColorKey = 'dynamic_color';
+  static const _themeColorKey = 'theme_color';
+  static const _themeModeKey = 'theme_mode';
+  static const _persistentReminderKey = "always_show_reminder_button";
+
   Future<void> deleteAllSettings() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.clear();
@@ -132,7 +145,7 @@ class SettingsService {
 
   Future<PeriodHistoryView> getHistoryView() async {
     final prefs = await SharedPreferences.getInstance();
-    final viewName = prefs.getString(historyViewKey);
+    final viewName = prefs.getString(_historyViewKey);
     return PeriodHistoryView.values.firstWhere(
       (e) => e.name == viewName,
       orElse: () => PeriodHistoryView.journal,
@@ -167,5 +180,33 @@ class SettingsService {
     final prefs = await SharedPreferences.getInstance();
     final themeIndex = prefs.getInt(themeModeKey) ?? AppThemeMode.system.index;
     return AppThemeMode.values[themeIndex];
+  }
+
+  Future<Set<String>> getDefaultSymptoms() async {
+    final prefs = await SharedPreferences.getInstance();
+    final storedDefaultSymptoms = prefs.getStringList(_defaultSymptomsKey);
+
+    if (storedDefaultSymptoms == null || storedDefaultSymptoms.isEmpty) {
+      return {"Headache", "Fatigue", "Cramps", "Nausea", "Mood Swings", "Bloating", "Acne", "Back pain"};
+    }
+
+    return storedDefaultSymptoms.toSet();
+  }
+
+  Future<void> setDefaultSymptoms(Set<String> symptoms) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setStringList(_defaultSymptomsKey, symptoms.toList());
+  }
+
+  Future<void> addDefaultSymptom(String symptom) async {
+    var defaultSymptoms = await getDefaultSymptoms();
+    defaultSymptoms.add(symptom);
+    await setDefaultSymptoms(defaultSymptoms);
+  }
+
+  Future<void> removeDefaultSymptom(String symptom) async {
+    var defaultSymptoms = await getDefaultSymptoms();
+    defaultSymptoms.remove(symptom);
+    await setDefaultSymptoms(defaultSymptoms);
   }
 }
