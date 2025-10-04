@@ -50,7 +50,7 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
     }
   }
 
-  Future<void> showAdditionalSymptomDialog() async {
+  Future<void> _showNewCustomSymptomDialog() async {
     final (String name, bool isDefault)? result = await showDialog<(String, bool)>(
       context: context,
       builder: (BuildContext context) {
@@ -182,7 +182,7 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
                         onSelected: (bool selected) {
                           setState(() {
                             if (isAdd) {
-                              showAdditionalSymptomDialog();
+                              _showNewCustomSymptomDialog();
                             } else {
                               if (selected) {
                                 _selectedSymptoms.add(symptom);

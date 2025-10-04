@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 
 class CustomSymptomDialog extends StatefulWidget {
-  const CustomSymptomDialog({super.key});
+  final bool showMakeDefaultButton;
+
+  const CustomSymptomDialog({super.key, this.showMakeDefaultButton = true});
 
   @override
   State<CustomSymptomDialog> createState() => _CustomSymptomDialogState();
@@ -33,46 +35,38 @@ class _CustomSymptomDialogState extends State<CustomSymptomDialog> {
           child: ListView(
             shrinkWrap: true,
             children: [
-              TextFormField(
-                controller: _nameController,
-                validator: (value) =>
-                value!.isEmpty ? "Please enter a custom symptom" : null,
-                autofocus: true,
-                maxLength: 60,
-                maxLines: 1,
-              ),
-              const SizedBox(height: 16),
-              SwitchListTile(
-                subtitle: Text("Make default symptom"),
-                secondary: const Icon(Icons.fact_check),
-                value: _isDefault,
-                onChanged: (value) =>
-                {
-                  setState(() {
-                    _isDefault = value;
-                  }),
-                },
-              ),
+              TextFormField(controller: _nameController, validator: (value) => value!.isEmpty ? "Please enter a custom symptom" : null, autofocus: true, maxLength: 60, maxLines: 1),
+              if (widget.showMakeDefaultButton) const SizedBox(height: 16),
+              if (widget.showMakeDefaultButton)
+                SwitchListTile(
+                  subtitle: Text("Make default symptom"),
+                  secondary: const Icon(Icons.fact_check),
+                  value: _isDefault,
+                  onChanged: (value) => {
+                    setState(() {
+                      _isDefault = value;
+                    }),
+                  },
+                ),
             ],
           ),
         ),
       ),
       actionsAlignment: MainAxisAlignment.center,
       actions: <Widget>[
-        TextButton(
-          child: Text(l10n.cancel),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
+        TextButton(child: Text(l10n.cancel), onPressed: () => Navigator.of(context).pop()),
         ValueListenableBuilder<TextEditingValue>(
-            valueListenable: _nameController,
-            builder: (context, value, child1) {
-              return ElevatedButton(
-                onPressed: value.text.isNotEmpty ? () {
-                  Navigator.of(context).pop((_nameController.text, _isDefault));
-                } : null,
-                child: Text(l10n.confirm),
-              );
-            }
+          valueListenable: _nameController,
+          builder: (context, value, child1) {
+            return ElevatedButton(
+              onPressed: value.text.isNotEmpty
+                  ? () {
+                      Navigator.of(context).pop((_nameController.text, _isDefault));
+                    }
+                  : null,
+              child: Text(l10n.confirm),
+            );
+          },
         ),
       ],
     );

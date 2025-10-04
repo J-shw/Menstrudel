@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/services/settings_service.dart';
 
+import '../../widgets/dialogs/custom_symptom_dialog.dart';
+
 class PeriodSettingsScreen extends StatefulWidget {
   const PeriodSettingsScreen({super.key});
 
@@ -12,6 +14,8 @@ class PeriodSettingsScreen extends StatefulWidget {
 class _PeriodSettingsScreenState extends State<PeriodSettingsScreen> {
   final SettingsService _settingsService = SettingsService();
   bool _isLoading = true;
+
+  Set<String> _defaultSymptoms = {};
 
   bool _periodNotificationsEnabled = true;
   int _periodNotificationDays = 1;
@@ -34,6 +38,8 @@ class _PeriodSettingsScreenState extends State<PeriodSettingsScreen> {
     final periodOverdueNotificationsEnabled = await _settingsService.arePeriodOverdueNotificationsEnabled();
     final periodOverdueNotificationDays = await _settingsService.getPeriodOverdueNotificationDays();
     final periodOverdueNotificationTime = await _settingsService.getPeriodOverdueNotificationTime();
+    final defaultSymptoms = await _settingsService.getDefaultSymptoms();
+    defaultSymptoms.add("+");
 
     if (mounted) {
       setState(() {
@@ -43,16 +49,14 @@ class _PeriodSettingsScreenState extends State<PeriodSettingsScreen> {
         _periodOverdueNotificationsEnabled = periodOverdueNotificationsEnabled;
         _periodOverdueNotificationDays = periodOverdueNotificationDays;
         _periodOverdueNotificationTime = periodOverdueNotificationTime;
+        _defaultSymptoms = defaultSymptoms;
         _isLoading = false;
       });
     }
   }
 
   Future<void> selectPeriodReminderTime() async {
-    final TimeOfDay? pickedTime = await showTimePicker(
-      context: context,
-      initialTime: _periodNotificationTime,
-    );
+    final TimeOfDay? pickedTime = await showTimePicker(context: context, initialTime: _periodNotificationTime);
 
     if (pickedTime != null && pickedTime != _periodNotificationTime) {
       setState(() {
@@ -63,10 +67,7 @@ class _PeriodSettingsScreenState extends State<PeriodSettingsScreen> {
   }
 
   Future<void> selectOverduePeriodReminderTime() async {
-    final TimeOfDay? pickedTime = await showTimePicker(
-      context: context,
-      initialTime: _periodOverdueNotificationTime,
-    );
+    final TimeOfDay? pickedTime = await showTimePicker(context: context, initialTime: _periodOverdueNotificationTime);
 
     if (pickedTime != null && pickedTime != _periodOverdueNotificationTime) {
       setState(() {
@@ -76,17 +77,60 @@ class _PeriodSettingsScreenState extends State<PeriodSettingsScreen> {
     }
   }
 
+  Future<void> _showNewCustomSymptomDialog() async {
+    final (String name, bool isDefault)? result = await showDialog<(String, bool)>(
+      context: context,
+      builder: (BuildContext context) {
+        return const CustomSymptomDialog(showMakeDefaultButton: false);
+      },
+    );
+
+    if (result != null && mounted) {
+      var customSymptomName = result.$1;
+
+      await _settingsService.addDefaultSymptom(customSymptomName);
+
+      setState(() {
+        _defaultSymptoms.remove("+");
+        _defaultSymptoms.add(customSymptomName);
+        _defaultSymptoms.add("+");
+      });
+    }
+  }
+
+  Future<void> _removeDefaultSymptom(String symptom) async {
+    setState(() {
+      _defaultSymptoms.remove(symptom);
+    });
+
+    await _settingsService.removeDefaultSymptom(symptom);
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: AppBar(
-        title: Text(l10n.settingsScreen_periodPredictionAndReminders),
-      ),
+      appBar: AppBar(title: Text(l10n.settingsScreen_periodPredictionAndReminders)),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
           : ListView(
               children: [
+                ListTile(title: Text("Default symptoms")),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 12),
+                  child: Expanded(
+                    child: Wrap(
+                      alignment: WrapAlignment.start,
+                      spacing: 4.0,
+                      runSpacing: 4.0,
+                      children: _defaultSymptoms.map((symptom) {
+                        var isAdd = symptom == "+";
+                        return RawChip(label: Text(symptom), tapEnabled: true, onPressed: () => {if (isAdd) _showNewCustomSymptomDialog() else _removeDefaultSymptom(symptom)});
+                      }).toList(),
+                    ),
+                  ),
+                ),
+                const Divider(),
                 SwitchListTile(
                   title: Text(l10n.settingsScreen_upcomingPeriodReminder),
                   value: _periodNotificationsEnabled,
@@ -103,10 +147,7 @@ class _PeriodSettingsScreenState extends State<PeriodSettingsScreen> {
                     trailing: DropdownButton<int>(
                       value: _periodNotificationDays,
                       items: [1, 2, 3].map((int days) {
-                        return DropdownMenuItem<int>(
-                          value: days,
-                          child: Text(l10n.dayCount(days)),
-                        );
+                        return DropdownMenuItem<int>(value: days, child: Text(l10n.dayCount(days)));
                       }).toList(),
                       onChanged: (int? newDays) {
                         if (newDays != null) {
@@ -120,13 +161,7 @@ class _PeriodSettingsScreenState extends State<PeriodSettingsScreen> {
                   ),
                   ListTile(
                     title: Text(l10n.settingsScreen_notificationTime),
-                    trailing: Text(
-                      _periodNotificationTime.format(context),
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                    trailing: Text(_periodNotificationTime.format(context), style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                     onTap: selectPeriodReminderTime,
                   ),
                 ],
@@ -147,31 +182,21 @@ class _PeriodSettingsScreenState extends State<PeriodSettingsScreen> {
                     trailing: DropdownButton<int>(
                       value: _periodOverdueNotificationDays,
                       items: [1, 2, 3].map((int days) {
-                        return DropdownMenuItem<int>(
-                          value: days,
-                          child: Text(l10n.dayCount(days)),
-                        );
+                        return DropdownMenuItem<int>(value: days, child: Text(l10n.dayCount(days)));
                       }).toList(),
                       onChanged: (int? newDays) {
                         if (newDays != null) {
                           setState(() {
                             _periodOverdueNotificationDays = newDays;
                           });
-                          _settingsService
-                              .setPeriodOverdueNotificationDays(newDays);
+                          _settingsService.setPeriodOverdueNotificationDays(newDays);
                         }
                       },
                     ),
                   ),
                   ListTile(
                     title: Text(l10n.settingsScreen_notificationTime),
-                    trailing: Text(
-                      _periodOverdueNotificationTime.format(context),
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                    trailing: Text(_periodOverdueNotificationTime.format(context), style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                     onTap: selectOverduePeriodReminderTime,
                   ),
                 ],
