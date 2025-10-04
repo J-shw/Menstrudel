@@ -1,30 +1,35 @@
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "{{ page.url | absolute_url }}"
-  },
-  "headline": "{{ page.title | escape }}",
-  "description": "{{ page.excerpt | strip_html | strip_newlines | escape }}",
-  "image": {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "{{ page.url | absolute_url }}"
+    },
+    "headline": "{{ page.title | escape }}",
+    "description": "{{ page.excerpt | strip_html | strip_newlines | escape }}",
+    "image": {
     "@type": "ImageObject",
     "url": "{{ page.image | absolute_url }}"
-  },
-"author": {
-    "@type": "Person",
-    "name": "{{ page.author | default: site.author | escape }}"
-  },
-  "publisher": {
+    },
+    "author": {
+    {% if page.author %}
+        "@type": "Person",
+        "name": "{{ page.author | escape }}"
+    {% else %}
+        "@type": "Organization",
+        "name": "{{ site.author.name | escape }}"
+    {% endif %}
+    },
+    "publisher": {
     "@type": "Organization",
     "name": "Menstrudel",
     "logo": {
-      "@type": "ImageObject",
-      "url": "{{ '/assets/images/favicon.png' | absolute_url }}"
+        "@type": "ImageObject",
+        "url": "{{ '/assets/images/favicon.png' | absolute_url }}"
     }
-  },
-  "datePublished": "{{ page.date | date_to_xmlschema }}",
-  "dateModified": "{{ page.last_modified_at | default: page.date | date_to_xmlschema }}"
+    },
+    "datePublished": "{{ page.date | date_to_xmlschema }}",
+    "dateModified": "{{ page.last_modified_at | default: page.date | date_to_xmlschema }}"
 }
 </script>
