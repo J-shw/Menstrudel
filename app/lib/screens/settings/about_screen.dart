@@ -77,7 +77,7 @@ class _AboutScreenState extends State<AboutScreen> {
                 subtitle: Text(l10n.aboutScreen_githubSubtitle),
                 trailing: const Icon(Icons.chevron_right),
                 onTap: () {
-                  _launchUrl('https://github.com/J-shw/Menstrudel', l10n);
+                  _launchUrl('https://github.com/J-shw/Menstrudel?utm_source=menstrudel_app', l10n);
                 },
               ),
 
