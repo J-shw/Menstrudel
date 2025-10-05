@@ -105,16 +105,28 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
                   color: colorScheme.onPrimary,
                   fontWeight: FontWeight.bold,
                 ),
+                disabledTextStyle: TextStyle(color: Colors.grey.shade400),
               ),
               selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
+              
+              enabledDayPredicate: (day) {
+                final today = DateUtils.dateOnly(DateTime.now());
+                final currentDay = DateUtils.dateOnly(day);
+
+                if (!currentDay.isAfter(today)) {
+                  return true;
+                }
+
+                return false;
+              },
+
               onDaySelected: (selectedDay, focusedDay) {
                 setState(() {
                   _selectedDay = selectedDay;
                   _focusedDay = focusedDay;
                 });
 
-                final logForSelectedDay =
-                    _logMap[DateUtils.dateOnly(selectedDay)];
+                final logForSelectedDay = _logMap[DateUtils.dateOnly(selectedDay)];
 
                 if (logForSelectedDay != null) {
                   widget.onLogTapped(logForSelectedDay);
