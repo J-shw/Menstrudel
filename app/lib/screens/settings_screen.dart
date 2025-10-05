@@ -7,6 +7,7 @@ import 'package:menstrudel/screens/settings/period_settings_screen.dart';
 import 'package:menstrudel/screens/settings/data_settings_screen.dart';
 import 'package:menstrudel/screens/settings/security_settings_screen.dart';
 import 'package:menstrudel/screens/settings/preferences_settings_screen.dart';
+import 'package:menstrudel/screens/settings/about_screen.dart';
 
 
 class SettingsScreen extends StatelessWidget {
@@ -75,6 +76,16 @@ class SettingsScreen extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => const DataSettingsScreen()),
+            );
+          },
+        ),
+        _SettingsSectionButton(
+          title: l10n.settingsScreen_about,
+          icon: Icons.info_outline,
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const AboutScreen()),
             );
           },
         ),
