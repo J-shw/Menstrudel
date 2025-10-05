@@ -78,6 +78,16 @@ class SettingsScreen extends StatelessWidget {
             );
           },
         ),
+        _SettingsSectionButton(
+          title: l10n.settingsScreen_about,
+          icon: Icons.info_outline,
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const DataSettingsScreen()),
+            );
+          },
+        ),
       ],
     );
   }
