@@ -61,7 +61,6 @@ class _AboutScreenState extends State<AboutScreen> {
         padding: const EdgeInsets.all(16.0),
         child: Card(
           elevation: 0,
-          color: colorScheme.surfaceVariant.withOpacity(0.5),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
           child: Column(
             mainAxisSize: MainAxisSize.min,
