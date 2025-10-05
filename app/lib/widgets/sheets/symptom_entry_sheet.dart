@@ -87,6 +87,7 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    final colorScheme = Theme.of(context).colorScheme;
 
     return Padding(
       padding: EdgeInsets.only(top: 20, left: 16, right: 16, bottom: MediaQuery.of(context).viewInsets.bottom + 32),
@@ -177,6 +178,7 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
                       var isAdd = symptom == "+";
                       return FilterChip(
                         label: Text(symptom),
+                          backgroundColor: isAdd ? colorScheme.onSecondary : null,
                         selected: _selectedSymptoms.contains(symptom),
                         onSelected: (bool selected) {
                           setState(() {

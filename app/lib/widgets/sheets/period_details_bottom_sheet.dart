@@ -6,6 +6,7 @@ import 'package:menstrudel/models/flows/flow_enum.dart';
 import 'package:menstrudel/models/period_logs/pain_level_enum.dart';
 
 import '../../services/settings_service.dart';
+import '../dialogs/custom_symptom_dialog.dart';
 
 class PeriodDetailsBottomSheet extends StatefulWidget {
   final PeriodDay log;
@@ -50,6 +51,7 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
       _defaultSymptoms.addAll(defaultSymptoms);
       _symptoms.addAll(_defaultSymptoms);
       _symptoms.addAll(widget.log.symptoms ?? []);
+      _symptoms.add("+");
     });
     _editedSymptoms = widget.log.symptoms.map((symptomString) {
     try {
@@ -68,6 +70,32 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
     setState(() {
       _isEditing = false;
     });
+  }
+
+  Future<void> _showNewCustomSymptomDialog() async {
+    final (String name, bool isDefault)? result = await showDialog<(String, bool)>(
+      context: context,
+      builder: (BuildContext context) {
+        return const CustomSymptomDialog();
+      },
+    );
+
+    if (result != null && mounted && _symptoms.contains(result.$1) == false) {
+      var customSymptomName = result.$1;
+
+      if (result.$2) {
+        _defaultSymptoms.add(customSymptomName);
+        await _settingsService.addDefaultSymptom(customSymptomName);
+      }
+
+      setState(() {
+        _symptoms.remove("+");
+        _symptoms.add(customSymptomName);
+        _symptoms.add("+");
+
+        _selectedSymptoms.add(customSymptomName);
+      });
+    }
   }
 
   @override
@@ -283,17 +311,23 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
                   spacing: 8.0,
                   runSpacing: 4.0,
                   children: _symptoms.map((symptom) {
+                    var isAdd = symptom == "+";
                     return FilterChip(
                       label: Text(symptom),
+                      backgroundColor: isAdd ? colorScheme.onSecondary : null,
                       selected: _selectedSymptoms.contains(symptom),
                       onSelected: (isSelected) {
                         setState(() {
-                          if (isSelected) {
-                            _selectedSymptoms.add(symptom);
+                          if (isAdd) {
+                            _showNewCustomSymptomDialog();
                           } else {
-                            _selectedSymptoms.remove(symptom);
-                            if (_defaultSymptoms.contains(symptom) == false) {
-                              _symptoms.remove(symptom);
+                            if (isSelected) {
+                              _selectedSymptoms.add(symptom);
+                            } else {
+                              _selectedSymptoms.remove(symptom);
+                              if (_defaultSymptoms.contains(symptom) == false) {
+                                _symptoms.remove(symptom);
+                              }
                             }
                           }
                         });
