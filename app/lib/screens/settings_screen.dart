@@ -7,6 +7,7 @@ import 'package:menstrudel/screens/settings/period_settings_screen.dart';
 import 'package:menstrudel/screens/settings/data_settings_screen.dart';
 import 'package:menstrudel/screens/settings/security_settings_screen.dart';
 import 'package:menstrudel/screens/settings/preferences_settings_screen.dart';
+import 'package:menstrudel/screens/settings/about_screen.dart';
 
 
 class SettingsScreen extends StatelessWidget {
@@ -84,7 +85,7 @@ class SettingsScreen extends StatelessWidget {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const DataSettingsScreen()),
+              MaterialPageRoute(builder: (context) => const AboutScreen()),
             );
           },
         ),
