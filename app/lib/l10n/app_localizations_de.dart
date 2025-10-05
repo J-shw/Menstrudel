@@ -12,84 +12,84 @@ class AppLocalizationsDe extends AppLocalizations {
   String get appTitle => 'Menstrudel';
 
   @override
-  String get ongoing => 'Ongoing';
+  String get ongoing => 'Fortlaufend';
 
   @override
-  String get date => 'Date';
+  String get date => 'Datum';
 
   @override
-  String get time => 'Time';
+  String get time => 'Zeit';
 
   @override
-  String get start => 'Start';
+  String get start => 'Beginn';
 
   @override
-  String get end => 'End';
+  String get end => 'Ende';
 
   @override
-  String get day => 'Day';
+  String get day => 'Tag';
 
   @override
-  String get days => 'Days';
+  String get days => 'Tage';
 
   @override
   String dayCount(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count Days',
-      one: '$count Day',
+      other: '$count Tage',
+      one: '$count Tag',
     );
     return '$_temp0';
   }
 
   @override
-  String get delete => 'Delete';
+  String get delete => 'Löschen';
 
   @override
   String get clear => 'Clear';
 
   @override
-  String get save => 'Save';
+  String get save => 'Speichern';
 
   @override
   String get ok => 'OK';
 
   @override
-  String get confirm => 'Confirm';
+  String get confirm => 'Bestätigen';
 
   @override
   String get set => 'Set';
 
   @override
-  String get yes => 'Yes';
+  String get yes => 'Ja';
 
   @override
-  String get no => 'No';
+  String get no => 'Nein';
 
   @override
-  String get cancel => 'Cancel';
+  String get cancel => 'Abbrechen';
 
   @override
-  String get select => 'Select';
+  String get select => 'Auswählen';
 
   @override
   String get flow => 'Flow';
 
   @override
-  String get navBar_insights => 'Insights';
+  String get navBar_insights => 'Einblicke';
 
   @override
-  String get navBar_logs => 'Logs';
+  String get navBar_logs => 'Protokolle';
 
   @override
-  String get navBar_pill => 'Pill';
+  String get navBar_pill => 'Pille';
 
   @override
-  String get navBar_settings => 'Settings';
+  String get navBar_settings => 'Einstellungen';
 
   @override
-  String get flowIntensity_none => 'None';
+  String get flowIntensity_none => 'Keine';
 
   @override
   String get flowIntensity_spotting => 'Spotting';
@@ -104,28 +104,28 @@ class AppLocalizationsDe extends AppLocalizations {
   String get flowIntensity_heavy => 'Heavy';
 
   @override
-  String get symptom_headache => 'Headache';
+  String get symptom_headache => 'Kopfschmerzen';
 
   @override
   String get symptom_fatigue => 'Fatigue';
 
   @override
-  String get symptom_cramps => 'Cramps';
+  String get symptom_cramps => 'Krämpfe';
 
   @override
-  String get symptom_nausea => 'Nausea';
+  String get symptom_nausea => 'Übelkeit';
 
   @override
-  String get symptom_moodSwings => 'Mood Swings';
+  String get symptom_moodSwings => 'Stimmungsschwankungen';
 
   @override
-  String get symptom_bloating => 'Bloating';
+  String get symptom_bloating => 'Blähungen';
 
   @override
-  String get symptom_acne => 'Acne';
+  String get symptom_acne => 'Akne';
 
   @override
-  String get painLevel_title => 'Pain Level';
+  String get painLevel_title => 'Schmerzgrad';
 
   @override
   String get painLevel_none => 'None';
@@ -137,13 +137,13 @@ class AppLocalizationsDe extends AppLocalizations {
   String get painLevel_moderate => 'Moderate';
 
   @override
-  String get painLevel_severe => 'Severe';
+  String get painLevel_severe => 'Schwerwiegend';
 
   @override
-  String get pain_unbearable => 'Unbearable';
+  String get pain_unbearable => 'Unerträglich';
 
   @override
-  String get notification_periodTitle => 'Period Approaching';
+  String get notification_periodTitle => 'Periode nähert sich';
 
   @override
   String notification_periodBody(int count) {
@@ -157,7 +157,7 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
-  String get notification_periodOverdueTitle => 'Period Overdue';
+  String get notification_periodOverdueTitle => 'Fälligkeitstag überschritten';
 
   @override
   String notification_periodOverdueBody(int count) {
@@ -171,30 +171,30 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
-  String get notification_pillTitle => 'Pill Reminder';
+  String get notification_pillTitle => 'Pillenerinnerung';
 
   @override
   String get notification_pillBody =>
-      'Don\'t forget to take your pill for today.';
+      'Vergiss nicht, Deine Pille für heute einzunehmen.';
 
   @override
-  String get notification_tamponReminderTitle => 'Tampon Reminder';
+  String get notification_tamponReminderTitle => 'Tampon-Erinnerung';
 
   @override
   String get notification_tamponReminderBody =>
-      'Remember to change your tampon.';
+      'Denk daran, Deinen Tampon zu wechseln.';
 
   @override
-  String get mainScreen_insightsPageTitle => 'Your Insights';
+  String get mainScreen_insightsPageTitle => 'Deine Erkenntnisse';
 
   @override
   String get mainScreen_pillsPageTitle => 'Pills';
 
   @override
-  String get mainScreen_settingsPageTitle => 'Settings';
+  String get mainScreen_settingsPageTitle => 'Einstellungen';
 
   @override
-  String get mainScreen_tooltipSetReminder => 'Tampon reminder';
+  String get mainScreen_tooltipSetReminder => 'Tampon-Erinnerung';
 
   @override
   String get mainScreen_tooltipCancelReminder => 'Cancel reminder';
@@ -206,10 +206,10 @@ class AppLocalizationsDe extends AppLocalizations {
   String get insightsScreen_errorPrefix => 'Error:';
 
   @override
-  String get insightsScreen_noDataAvailable => 'No data available.';
+  String get insightsScreen_noDataAvailable => 'Keine Daten verfügbar.';
 
   @override
-  String get logsScreen_calculatingPrediction => 'Calculating prediction...';
+  String get logsScreen_calculatingPrediction => 'Berechnung der Vorhersage...';
 
   @override
   String get logScreen_logAtLeastTwoPeriods =>
@@ -236,14 +236,16 @@ class AppLocalizationsDe extends AppLocalizations {
   String get logScreen_tamponReminderSetFor => 'Tampon reminder set for';
 
   @override
-  String get logScreen_tamponReminderCancelled => 'Tampon reminder cancelled.';
+  String get logScreen_tamponReminderCancelled =>
+      'Tampon-Erinnerung abgebrochen.';
 
   @override
-  String get logScreen_couldNotCancelReminder => 'Could not cancel reminder';
+  String get logScreen_couldNotCancelReminder =>
+      'Erinnerung konnte nicht abgebrochen werden';
 
   @override
   String get pillScreen_pillForTodayMarkedAsTaken =>
-      'Pill for today marked as taken!';
+      'Pill for today marked as taken.';
 
   @override
   String get pillScreen_pillForTodayMarkedAsSkipped =>
@@ -271,7 +273,7 @@ class AppLocalizationsDe extends AppLocalizations {
       'This will permanently delete all your period logs. Your app settings will not be affected.';
 
   @override
-  String get settingsScreen_appearance => 'Appearance';
+  String get settingsScreen_appearance => 'Aussehen';
 
   @override
   String get settingsScreen_historyViewStyle => 'History View Style';
@@ -280,10 +282,10 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsScreen_appTheme => 'App Theme';
 
   @override
-  String get settingsScreen_themeLight => 'Light';
+  String get settingsScreen_themeLight => 'Hell';
 
   @override
-  String get settingsScreen_themeDark => 'Dark';
+  String get settingsScreen_themeDark => 'Dunkel';
 
   @override
   String get settingsScreen_themeSystem => 'System';
@@ -292,19 +294,19 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsScreen_dynamicTheme => 'Dynamic Theme';
 
   @override
-  String get settingsScreen_useWallpaperColors => 'Use Wallpaper Colors';
+  String get settingsScreen_useWallpaperColors => 'Nutze Hintergrundfarben';
 
   @override
   String get settingsScreen_themeColor => 'Theme Color';
 
   @override
-  String get settingsScreen_pickAColor => 'Pick a Color';
+  String get settingsScreen_pickAColor => 'Eine Farbe auswählen';
 
   @override
   String get settingsScreen_view => 'View';
 
   @override
-  String get settingsScreen_birthControl => 'Birth Control';
+  String get settingsScreen_birthControl => 'Empfängnisverhütung';
 
   @override
   String get settingsScreen_setUpPillRegimen => 'Set Up Pill Regimen';
@@ -321,17 +323,17 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get settingsScreen_periodPredictionAndReminders =>
-      'Period Prediction & Reminders';
+      'Periodenvorhersage & Erinnerungen';
 
   @override
   String get settingsScreen_upcomingPeriodReminder =>
-      'Upcoming Period Reminder';
+      'Erinnerung an die bevorstehende Periode';
 
   @override
-  String get settingsScreen_remindMeBefore => 'Remind Me Before';
+  String get settingsScreen_remindMeBefore => 'Erinnere mich vorher';
 
   @override
-  String get settingsScreen_notificationTime => 'Notification Time';
+  String get settingsScreen_notificationTime => 'Benachrichtigungszeit';
 
   @override
   String get settingsScreen_overduePeriodReminder => 'Overdue Period Reminder';
@@ -518,7 +520,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get regimenSetupWidget_enterANumber => 'Enter a number';
 
   @override
-  String get regimenSetupWidget_placeboPills => 'Placebo Pills';
+  String get regimenSetupWidget_placeboPills => 'Placebo-Pillen';
 
   @override
   String get regimenSetupWidget_firstDayOfThisPack => 'First Day of This Pack';
@@ -527,10 +529,10 @@ class AppLocalizationsDe extends AppLocalizations {
   String get symptomEntrySheet_logYourDay => 'Log Your Day';
 
   @override
-  String get symptomEntrySheet_symptomsOptional => 'Symptoms (Optional)';
+  String get symptomEntrySheet_symptomsOptional => 'Symptome (optional)';
 
   @override
-  String get periodDetailsSheet_symptoms => 'Symptoms';
+  String get periodDetailsSheet_symptoms => 'Symptome';
 
   @override
   String get periodDetailsSheet_flow => 'Flow';
