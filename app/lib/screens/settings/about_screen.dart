@@ -29,12 +29,12 @@ class _AboutScreenState extends State<AboutScreen> {
     }
   }
 
-  Future<void> _launchUrl(String url) async {
+  Future<void> _launchUrl(String url, AppLocalizations l10n) async {
     final uri = Uri.parse(url);
     if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Could not open the link.')),
+          SnackBar(content: Text(l10n.aboutScreen_urlError)),
         );
       }
     }
@@ -50,8 +50,6 @@ class _AboutScreenState extends State<AboutScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
 
     return Scaffold(
       appBar: AppBar(
@@ -79,7 +77,7 @@ class _AboutScreenState extends State<AboutScreen> {
                 subtitle: Text(l10n.aboutScreen_githubSubtitle),
                 trailing: const Icon(Icons.chevron_right),
                 onTap: () {
-                  _launchUrl('https://github.com/J-shw/Menstrudel');
+                  _launchUrl('https://github.com/J-shw/Menstrudel', l10n);
                 },
               ),
 
