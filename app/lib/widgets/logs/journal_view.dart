@@ -106,7 +106,7 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
                   fontWeight: FontWeight.bold,
                 ),
                 disabledTextStyle: TextStyle(
-                  color: colorScheme.onSurface.withAlpha(65),
+                  color: colorScheme.onSurface.withAlpha(75),
                 ),
               ),
               selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
