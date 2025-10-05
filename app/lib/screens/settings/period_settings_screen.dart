@@ -106,12 +106,15 @@ class _PeriodSettingsScreenState extends State<PeriodSettingsScreen> {
     final l10n = AppLocalizations.of(context)!;
     final symptomUsageCount = await periodsRepo.getSymptomUseCount(symptom);
 
-    var description = "'$symptom' will no longer be available when logging a period.";
+    var description = "'$symptom' will no longer be available when logging a period.\n\n";
 
-    if (symptomUsageCount == 1) {
-      description += "\n\nThere is already $symptomUsageCount period log with this symptom!\nThis log will not be changed.";
+    if (symptomUsageCount == 0) {
+      description += "There are currently no period logs with this symptom!";
+    }
+    else if (symptomUsageCount == 1) {
+      description += "There is already $symptomUsageCount period log with this symptom!\nThis log will not be changed.";
     } else if (symptomUsageCount > 1) {
-      description += "\n\nThere are $symptomUsageCount period logs with this symptom!\nThese logs will not be changed.";
+      description += "There are $symptomUsageCount period logs with this symptom!\nThese logs will not be changed.";
     }
 
     if (mounted) {
