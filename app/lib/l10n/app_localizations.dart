@@ -776,6 +776,42 @@ abstract class AppLocalizations {
   /// **'About'**
   String get settingsScreen_about;
 
+  /// No description provided for @aboutScreen_version.
+  ///
+  /// In en, this message translates to:
+  /// **'Version'**
+  String get aboutScreen_version;
+
+  /// No description provided for @aboutScreen_github.
+  ///
+  /// In en, this message translates to:
+  /// **'GitHub'**
+  String get aboutScreen_github;
+
+  /// No description provided for @aboutScreen_githubSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Source code and issue tracking'**
+  String get aboutScreen_githubSubtitle;
+
+  /// No description provided for @aboutScreen_share.
+  ///
+  /// In en, this message translates to:
+  /// **'Share'**
+  String get aboutScreen_share;
+
+  /// No description provided for @aboutScreen_shareSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Share the app with friends'**
+  String get aboutScreen_shareSubtitle;
+
+  /// No description provided for @aboutScreen_urlError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not open the link.'**
+  String get aboutScreen_urlError;
+
   /// No description provided for @tamponReminderDialog_tamponReminderTitle.
   ///
   /// In en, this message translates to:

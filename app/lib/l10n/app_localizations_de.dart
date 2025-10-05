@@ -401,6 +401,24 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsScreen_about => 'About';
 
   @override
+  String get aboutScreen_version => 'Version';
+
+  @override
+  String get aboutScreen_github => 'GitHub';
+
+  @override
+  String get aboutScreen_githubSubtitle => 'Source code and issue tracking';
+
+  @override
+  String get aboutScreen_share => 'Share';
+
+  @override
+  String get aboutScreen_shareSubtitle => 'Share the app with friends';
+
+  @override
+  String get aboutScreen_urlError => 'Could not open the link.';
+
+  @override
   String get tamponReminderDialog_tamponReminderTitle => 'Tampon Reminder';
 
   @override
