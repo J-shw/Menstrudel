@@ -396,6 +396,9 @@ class AppLocalizationsEn extends AppLocalizations {
       'Makes the tampon reminder button permanently visible on the main screen.';
 
   @override
+  String get settingsScreen_about => 'About';
+
+  @override
   String get tamponReminderDialog_tamponReminderTitle => 'Tampon Reminder';
 
   @override

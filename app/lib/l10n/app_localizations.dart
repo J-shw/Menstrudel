@@ -770,6 +770,12 @@ abstract class AppLocalizations {
   /// **'Makes the tampon reminder button permanently visible on the main screen.'**
   String get preferencesScreen_tamponReminderButtonSubtitle;
 
+  /// No description provided for @settingsScreen_about.
+  ///
+  /// In en, this message translates to:
+  /// **'About'**
+  String get settingsScreen_about;
+
   /// No description provided for @tamponReminderDialog_tamponReminderTitle.
   ///
   /// In en, this message translates to:

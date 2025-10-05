@@ -182,6 +182,7 @@
     "settingsScreen_preferences": "Preferences",
     "preferencesScreen_tamponReminderButton": "Always Show Reminder Button",
     "preferencesScreen_tamponReminderButtonSubtitle": "Makes the tampon reminder button permanently visible on the main screen.",
+    "settingsScreen_about": "About",
 
     "tamponReminderDialog_tamponReminderTitle": "Tampon Reminder",
     "tamponReminderDialog_tamponReminderMaxDuration": "Max duration is 8 hours.",
