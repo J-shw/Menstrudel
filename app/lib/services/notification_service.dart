@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart' as fln;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:menstrudel/utils/constants.dart';
 import 'package:menstrudel/utils/exceptions.dart';
@@ -145,7 +146,7 @@ class NotificationService {
     return scheduledDate;
   }
 
-  // Other
+  // Tampon Reminders
 
   static Future<void> scheduleTamponReminder({
     required TimeOfDay reminderTime,
@@ -184,6 +185,24 @@ class NotificationService {
   static Future<bool> isTamponReminderScheduled() async {
     final pendingRequests = await _plugin.pendingNotificationRequests();
     return pendingRequests.any((request) => request.id == tamponReminderId);
+  }
+
+  /// Saves the date and time for when the tampon reminder is scheduled
+  Future<void> setTamponReminderScheduledTime(DateTime scheduledDateTime) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt(tamponReminderDateTimeKey, scheduledDateTime.millisecondsSinceEpoch);
+  }
+
+  /// Gets the date and time for when the tampon reminder is scheduled
+  Future<DateTime?> getTamponReminderScheduledTime() async {
+    final prefs = await SharedPreferences.getInstance();
+    final storedTimestamp = prefs.getInt(tamponReminderDateTimeKey);
+
+    if (storedTimestamp == null) {
+      return null;
+    }
+
+    return DateTime.fromMillisecondsSinceEpoch(storedTimestamp);
   }
 
   // General
