@@ -110,20 +110,20 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 
-  Widget _buildCancelReminderFab(BuildContext context) {
+  Widget _buildCountDownReminderFab(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return FloatingActionButton(
-      key: const ValueKey('cancel_reminder_fab'),
+      key: const ValueKey('countdown_reminder_fab'),
       tooltip: l10n.mainScreen_tooltipCancelReminder,
-      onPressed: () => _logsScreenKey.currentState?.handleCancelReminder(),
-      child: const Icon(Icons.alarm_off),
+      onPressed: () => _logsScreenKey.currentState?.handleTamponReminderCountdown(),
+      child: const Icon(Icons.timer),
     );
   }
 
   Widget _buildFab(BuildContext context) {
     if (_isReminderButtonAlwaysVisible) {
       final Widget reminderFab = _fabState == FabState.cancelReminder
-          ? _buildCancelReminderFab(context)
+          ? _buildCountDownReminderFab(context)
           : _buildSetReminderFab(context);
 
       return Column(
@@ -141,7 +141,7 @@ class _MainScreenState extends State<MainScreen> {
       case FabState.setReminder:
         return _buildSetReminderFab(context);
       case FabState.cancelReminder:
-        return _buildCancelReminderFab(context);
+        return _buildCountDownReminderFab(context);
       case FabState.logPeriod:
         return _buildLogPeriodFab(context);
     }
