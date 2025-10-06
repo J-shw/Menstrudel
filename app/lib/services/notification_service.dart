@@ -149,17 +149,11 @@ class NotificationService {
   // Tampon Reminders
 
   static Future<void> scheduleTamponReminder({
-    required TimeOfDay reminderTime,
+    required DateTime reminderDateTime,
     required String title,
     required String body,
   }) async {
-    final now = tz.TZDateTime.now(tz.local);
-    tz.TZDateTime scheduledDate = tz.TZDateTime(
-        tz.local, now.year, now.month, now.day, reminderTime.hour, reminderTime.minute);
-
-    if (scheduledDate.isBefore(now)) {
-      scheduledDate = scheduledDate.add(const Duration(days: 1));
-    }
+    final scheduledDate = tz.TZDateTime.from(reminderDateTime, tz.local);
 
     const details = fln.NotificationDetails(
       android: fln.AndroidNotificationDetails(
@@ -188,13 +182,13 @@ class NotificationService {
   }
 
   /// Saves the date and time for when the tampon reminder is scheduled
-  Future<void> setTamponReminderScheduledTime(DateTime scheduledDateTime) async {
+  static Future<void> setTamponReminderScheduledTime(DateTime scheduledDateTime) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setInt(tamponReminderDateTimeKey, scheduledDateTime.millisecondsSinceEpoch);
   }
 
   /// Gets the date and time for when the tampon reminder is scheduled
-  Future<DateTime?> getTamponReminderScheduledTime() async {
+  static Future<DateTime?> getTamponReminderScheduledTime() async {
     final prefs = await SharedPreferences.getInstance();
     final storedTimestamp = prefs.getInt(tamponReminderDateTimeKey);
 
