@@ -16,6 +16,7 @@ import 'package:menstrudel/services/period_logger_service.dart';
 import 'package:menstrudel/widgets/logs/dynamic_history_view.dart';
 import 'package:menstrudel/services/wear_sync_service.dart';
 import 'package:menstrudel/widgets/sheets/period_details_bottom_sheet.dart';
+import 'package:menstrudel/widgets/dialogs/reminder_countdown_dialog.dart';
 
 import 'package:menstrudel/l10n/app_localizations.dart';
 
@@ -45,24 +46,55 @@ class LogsScreenState extends State<LogsScreen> {
   PeriodHistoryView _selectedView = PeriodHistoryView.journal;
   int _circleCurrentValue = 0;
   int _circleMaxValue = 28;
+
+  Future<void> handleTamponReminderCountdown() async {
+    final dueDate = await NotificationService.getTamponReminderScheduledTime();
+
+    if (dueDate == null) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(AppLocalizations.of(context)!.logScreen_couldNotCancelReminder)),
+        );
+      }
+      return;
+    }
+
+    if (mounted) {
+      showDialog(
+        context: context,
+        builder: (context) => ReminderCountdownDialog(
+          dueDate: dueDate,
+          onDelete: handleCancelReminder,
+        ),
+      );
+    }
+  }
   
   Future<void> handleTamponReminder(BuildContext context) async {
     final l10n = AppLocalizations.of(context)!;
-    final reminderTime = await showDialog<TimeOfDay>(
+
+    final reminderDateTime = await showDialog<DateTime>(
       context: context,
       builder: (BuildContext context) => const TimeSelectionDialog(),
     );
-    if (reminderTime == null) return;
+
+    if (reminderDateTime == null) return;
+
     await NotificationService.scheduleTamponReminder(
-      reminderTime: reminderTime,
+      reminderDateTime: reminderDateTime,
       title: l10n.notification_tamponReminderTitle,
       body: l10n.notification_tamponReminderBody,
-      );
+    );
+    
+    await NotificationService.setTamponReminderScheduledTime(reminderDateTime);
+
     if (context.mounted) {
+      final formattedTime = TimeOfDay.fromDateTime(reminderDateTime).format(context);
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
-        ..showSnackBar(SnackBar(content: Text('${l10n.logScreen_tamponReminderSetFor} ${reminderTime.format(context)}')));
-        _refreshPeriodLogs();
+        ..showSnackBar(SnackBar(content: Text('${l10n.logScreen_tamponReminderSetFor} $formattedTime')));
+        
+      _refreshPeriodLogs();
     }
   }
 
