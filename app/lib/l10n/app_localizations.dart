@@ -212,6 +212,12 @@ abstract class AppLocalizations {
   /// **'Select'**
   String get select;
 
+  /// No description provided for @close.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get close;
+
   /// No description provided for @flow.
   ///
   /// In en, this message translates to:
@@ -823,6 +829,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Max duration is 8 hours.'**
   String get tamponReminderDialog_tamponReminderMaxDuration;
+
+  /// No description provided for @reminderCountdownDialog_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Reminder Due In'**
+  String get reminderCountdownDialog_title;
+
+  /// Indicates the time a reminder is due. The {time} placeholder will be a formatted time string (e.g., '2:30 PM').
+  ///
+  /// In en, this message translates to:
+  /// **'Due at {time}'**
+  String reminderCountdownDialog_dueAt(Object time);
 
   /// No description provided for @cycleLengthVarianceWidget_LogAtLeastTwoPeriods.
   ///

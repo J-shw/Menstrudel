@@ -12,6 +12,7 @@ class _TimeSelectionDialogState extends State<TimeSelectionDialog> {
   late TimeOfDay _startTime;
   late TimeOfDay _endTime;
   final Duration _maxDuration = const Duration(hours: 8);
+  late DateTime _finalEndDateTime;
 
   Duration _currentDuration = Duration.zero;
   bool _isDurationValid = true;
@@ -22,7 +23,7 @@ class _TimeSelectionDialogState extends State<TimeSelectionDialog> {
     final DateTime now = DateTime.now();
     _startTime = TimeOfDay.fromDateTime(now);
     _endTime = TimeOfDay.fromDateTime(now.add(const Duration(hours: 6)));
-    _updateDuration();
+    _updateDurationAndDateTime();
   }
 
   DateTime _toDateTime(TimeOfDay time) {
@@ -30,7 +31,7 @@ class _TimeSelectionDialogState extends State<TimeSelectionDialog> {
     return DateTime(now.year, now.month, now.day, time.hour, time.minute);
   }
 
-  void _updateDuration() {
+  void _updateDurationAndDateTime() {
     final startDateTime = _toDateTime(_startTime);
     var endDateTime = _toDateTime(_endTime);
 
@@ -42,6 +43,7 @@ class _TimeSelectionDialogState extends State<TimeSelectionDialog> {
     setState(() {
       _currentDuration = duration;
       _isDurationValid = duration <= _maxDuration;
+      _finalEndDateTime = endDateTime;
     });
   }
 
@@ -71,7 +73,7 @@ class _TimeSelectionDialogState extends State<TimeSelectionDialog> {
           _endTime = newTime;
         });
       }
-      _updateDuration();
+      _updateDurationAndDateTime();
     }
   }
 
@@ -185,7 +187,7 @@ class _TimeSelectionDialogState extends State<TimeSelectionDialog> {
                 FilledButton(
                   onPressed: _isDurationValid
                       ? () {
-                          Navigator.pop(context, _endTime);
+                          Navigator.pop(context, _finalEndDateTime);
                         }
                       : null,
                   child: Text(l10n.set),

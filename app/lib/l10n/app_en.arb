@@ -35,6 +35,7 @@
     "no": "No",
     "cancel": "Cancel",
     "select": "Select",
+    "close": "Close",
 
     "flow": "Flow",
 
@@ -192,6 +193,15 @@
 
     "tamponReminderDialog_tamponReminderTitle": "Tampon Reminder",
     "tamponReminderDialog_tamponReminderMaxDuration": "Max duration is 8 hours.",
+
+    "reminderCountdownDialog_title": "Reminder Due In",
+    "reminderCountdownDialog_dueAt": "Due at {time}",
+    "@reminderCountdownDialog_dueAt": {
+        "description": "Indicates the time a reminder is due. The {time} placeholder will be a formatted time string (e.g., '2:30 PM').",
+        "placeholders": {
+            "time": {}
+        }
+    },
 
     "cycleLengthVarianceWidget_LogAtLeastTwoPeriods": "Need at least two cycles to show variance.",
     "cycleLengthVarianceWidget_cycleAndPeriodVeriance": "Cycle & Period Variance",
