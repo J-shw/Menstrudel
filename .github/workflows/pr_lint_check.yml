@@ -31,7 +31,7 @@ jobs:
           # --- 2. Validate PR Title ---
           # Follows conventional commit format: <type>: <description>
           title_regex="^(Feature|Bugfix|Docs|Chore|Refactor|Style|Test)\/(app|wear|web|repo)\/([a-z0-9-]+\/)?[a-z0-9-]+"
-          if [[ "$PR_TITLE" =~ $title_regex ]]; then
+          if [[ "$PR_TITLE" =~ $title_regex ]] || [["$PR_TITLE" == 'New Crowdin updates']]; then
             title_is_valid=true
           fi
           echo "PR title validation: $title_is_valid"
