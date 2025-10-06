@@ -74,6 +74,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get select => 'Select';
 
   @override
+  String get close => 'Close';
+
+  @override
   String get flow => 'Flow';
 
   @override
@@ -422,6 +425,14 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get tamponReminderDialog_tamponReminderMaxDuration =>
       'Max duration is 8 hours.';
+
+  @override
+  String get reminderCountdownDialog_title => 'Reminder Due In';
+
+  @override
+  String reminderCountdownDialog_dueAt(Object time) {
+    return 'Due at $time';
+  }
 
   @override
   String get cycleLengthVarianceWidget_LogAtLeastTwoPeriods =>
