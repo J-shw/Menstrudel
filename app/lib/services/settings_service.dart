@@ -2,7 +2,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:menstrudel/utils/constants.dart';
 import 'package:menstrudel/models/themes/app_theme_mode_enum.dart';
-import 'package:menstrudel/utils/constants.dart';
 
 enum PeriodHistoryView { list, journal }
 
