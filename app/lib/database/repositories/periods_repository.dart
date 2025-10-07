@@ -300,14 +300,15 @@ class Manager {
     
     final periodLogs = await db.query('period_logs');
     final periods = await db.query('periods');
-
     final packageInfo = await PackageInfo.fromPlatform();
+    final dbVersion = await db.getVersion();
 
     final exportData = {
       'periods': periods,
       'period_logs': periodLogs,
       'exported_at': DateTime.now().toIso8601String(),
       'app_version': packageInfo.version,
+      'db_version': dbVersion,
     };
 
     final jsonString = jsonEncode(exportData);
