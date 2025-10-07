@@ -13,9 +13,9 @@ class PeriodsRepository {
   final dbProvider = AppDatabase.instance;
   static const String _whereId = 'id = ?';
 
-  final actions;
+  final Actions actions;
 
-  PeriodsRepository() : actions = _Actions(AppDatabase.instance); 
+  PeriodsRepository() : actions = Actions(AppDatabase.instance); 
 
   Future<void> logPeriodFromWatch() async {
     debugPrint('Received request from watch! Logging period now...');
@@ -287,10 +287,10 @@ class PeriodsRepository {
   }
 }
 
-class _Actions {
+class Actions {
   final AppDatabase dbProvider;
 
-  _Actions(this.dbProvider);
+  Actions(this.dbProvider);
 
   /// Deletes all entries from the period_logs and periods tables.
   Future<void> deleteAllEntries() async {
