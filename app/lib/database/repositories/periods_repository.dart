@@ -140,7 +140,7 @@ class PeriodsRepository {
     return result.map((json) => PeriodDay.fromMap(json)).toList();
   }
 
-  Future<PeriodDay> readPeriodLog(id) async {
+  Future<PeriodDay> readPeriodLog(int id) async {
     final db = await dbProvider.database;
 
     final result = await db.query(
