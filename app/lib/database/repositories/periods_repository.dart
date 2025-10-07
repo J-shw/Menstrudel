@@ -294,14 +294,33 @@ class Manager {
 
   Manager(this.dbProvider);
 
+  /// Converts symptom JSON string to JSON object
+  dynamic _decodeSymptoms(String? jsonString) {
+    if (jsonString == null || jsonString.isEmpty) {
+      return [];
+    }
+    try {
+      return jsonDecode(jsonString);
+    } catch (e) {
+      debugPrint('Error decoding symptoms JSON: $e'); 
+      return []; 
+    }
+  }
+
   /// Returns periods and period_logs data as json - ready for exporting data.
   Future<String> exportDataAsJson() async {
     final db = await dbProvider.database;
-    
-    final periodLogs = await db.query('period_logs');
+
+    final periodLogsRaw = await db.query('period_logs');
     final periods = await db.query('periods');
     final packageInfo = await PackageInfo.fromPlatform();
     final dbVersion = await db.getVersion();
+
+    final periodLogs = periodLogsRaw.map((log) {
+      final mutableLog = Map<String, dynamic>.from(log); 
+      mutableLog['symptoms'] = _decodeSymptoms(mutableLog['symptoms'] as String?);
+      return mutableLog;
+    }).toList();
 
     final exportData = {
       'periods': periods,
