@@ -13,6 +13,10 @@ class PeriodsRepository {
   final dbProvider = AppDatabase.instance;
   static const String _whereId = 'id = ?';
 
+  final actions;
+
+  PeriodsRepository() : actions = _Actions(AppDatabase.instance); 
+
   Future<void> logPeriodFromWatch() async {
     debugPrint('Received request from watch! Logging period now...');
 
@@ -57,14 +61,6 @@ class PeriodsRepository {
     if (existingLogs.isNotEmpty) {
       throw DuplicateLogException('A log already exists for this date.');
     }
-  }
-
-  Future<void> deleteAllEntries() async {
-    final db = await dbProvider.database;
-    await db.transaction((txn) async {
-      await txn.delete('period_logs');
-      await txn.delete('periods');
-    });
   }
 
   // Periods
@@ -288,5 +284,20 @@ class PeriodsRepository {
     }
     
     return allMonthlyFlows;
+  }
+}
+
+class _Actions {
+  final AppDatabase dbProvider;
+
+  _Actions(this.dbProvider);
+
+  /// Deletes all entries from the period_logs and periods tables.
+  Future<void> deleteAllEntries() async {
+    final db = await dbProvider.database;
+    await db.transaction((txn) async {
+      await txn.delete('period_logs');
+      await txn.delete('periods');
+    });
   }
 }
