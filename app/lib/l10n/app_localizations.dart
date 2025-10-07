@@ -734,16 +734,22 @@ abstract class AppLocalizations {
   /// **'Removes your pill regimen and intake history.'**
   String get settingsScreen_clearAllPillDataSubtitle;
 
-  /// No description provided for @settingsScreen_exportData.
+  /// No description provided for @settingsScreen_exportPeriodData.
   ///
   /// In en, this message translates to:
-  /// **'Export Data'**
-  String get settingsScreen_exportData;
+  /// **'Export Period Data'**
+  String get settingsScreen_exportPeriodData;
+
+  /// No description provided for @settingsScreen_exportPillData.
+  ///
+  /// In en, this message translates to:
+  /// **'Export Pill Data'**
+  String get settingsScreen_exportPillData;
 
   /// No description provided for @settingsScreen_exportDataSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Create a JSON backup file of your period logs and cycles.'**
+  /// **'Create a JSON backup file.'**
   String get settingsScreen_exportDataSubtitle;
 
   /// No description provided for @settingsScreen_exportSuccessful.
