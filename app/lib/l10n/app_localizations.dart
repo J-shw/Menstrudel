@@ -734,6 +734,42 @@ abstract class AppLocalizations {
   /// **'Removes your pill regimen and intake history.'**
   String get settingsScreen_clearAllPillDataSubtitle;
 
+  /// No description provided for @settingsScreen_exportData.
+  ///
+  /// In en, this message translates to:
+  /// **'Export Data'**
+  String get settingsScreen_exportData;
+
+  /// No description provided for @settingsScreen_exportDataSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Create a JSON backup file of your period logs and cycles.'**
+  String get settingsScreen_exportDataSubtitle;
+
+  /// No description provided for @settingsScreen_exportSuccessful.
+  ///
+  /// In en, this message translates to:
+  /// **'Data exported successfully and ready to share.'**
+  String get settingsScreen_exportSuccessful;
+
+  /// No description provided for @settingsScreen_exportFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Export failed. Please try again.'**
+  String get settingsScreen_exportFailed;
+
+  /// No description provided for @settingsScreen_noDataToExport.
+  ///
+  /// In en, this message translates to:
+  /// **'No data found to export.'**
+  String get settingsScreen_noDataToExport;
+
+  /// No description provided for @settingsScreen_exportDataMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Here is my MenstruDel data export.'**
+  String get settingsScreen_exportDataMessage;
+
   /// No description provided for @settingsScreen_security.
   ///
   /// In en, this message translates to:
