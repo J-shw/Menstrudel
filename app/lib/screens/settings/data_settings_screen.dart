@@ -19,7 +19,7 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
 
   Future<void> clearPeriodLogs() async {
     setState(() { _isLoading = true; });
-    await periodsRepo.deleteAllEntries();
+    await periodsRepo.manager.clearAllData();
     if (!mounted) return;
 
     final l10n = AppLocalizations.of(context)!;
