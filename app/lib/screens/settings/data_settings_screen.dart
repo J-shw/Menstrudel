@@ -51,7 +51,7 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
   Future<void> clearPillData() async {
     setState(() { _isLoading = true; });
     
-    await pillsRepo.deleteAllEntries();
+    await pillsRepo.manager.clearAllData();
     await NotificationService.cancelPillReminder();
 
     if (!mounted) return;
