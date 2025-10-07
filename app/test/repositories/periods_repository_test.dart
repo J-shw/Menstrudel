@@ -277,7 +277,7 @@ void main() {
       
     // --- GROUP 6: General State Management ---
     group('General State Management', () {
-      test('deleteAllEntries should clear all periods and logs', () async {
+      test('clearAllData should clear all periods and logs', () async {
         await repository.createPeriodLog(_log('2025-09-01'));
         await repository.manager.clearAllData();
         final periods = await repository.readAllPeriods();
