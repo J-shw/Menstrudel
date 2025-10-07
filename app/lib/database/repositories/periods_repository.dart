@@ -2,6 +2,8 @@ import 'package:menstrudel/models/flows/flow_enum.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
+import 'dart:convert';
+import 'package:package_info_plus/package_info_plus.dart';
 
 import 'package:menstrudel/database/app_database.dart';
 import 'package:menstrudel/models/period_logs/period_day.dart';
@@ -291,6 +293,27 @@ class Manager {
   final AppDatabase dbProvider;
 
   Manager(this.dbProvider);
+
+  /// Returns periods and period_logs data as json - ready for exporting data.
+  Future<String> exportDataAsJson() async {
+    final db = await dbProvider.database;
+    
+    final periodLogs = await db.query('period_logs');
+    final periods = await db.query('periods');
+
+    final packageInfo = await PackageInfo.fromPlatform();
+
+    final exportData = {
+      'periods': periods,
+      'period_logs': periodLogs,
+      'exported_at': DateTime.now().toIso8601String(),
+      'app_version': packageInfo.version,
+    };
+
+    final jsonString = jsonEncode(exportData);
+    
+    return jsonString;
+  }
 
   /// Deletes all entries from the period_logs and periods tables.
   Future<void> clearAllData() async {
