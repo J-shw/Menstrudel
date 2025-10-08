@@ -8,6 +8,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:intl/intl.dart';
 import 'dart:io';
+import 'package:file_picker/file_picker.dart';
 
 class DataSettingsScreen extends StatefulWidget {
   const DataSettingsScreen({super.key});
@@ -188,9 +189,102 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
     }
   }
 
+  Future<void> _importData(String filePath, {required bool isPillData}) async {
+    setState(() { _isLoading = true; });
+
+    final l10n = AppLocalizations.of(context)!;
+
+    try {
+      final file = File(filePath);
+      final jsonString = await file.readAsString();
+
+      if (isPillData) {
+        await pillsRepo.manager.importDataFromJson(jsonString, l10n);
+      } else {
+        await periodsRepo.manager.importDataFromJson(jsonString);
+      }
+
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(l10n.settingsScreen_importSuccessful)),
+      );
+    } on FormatException catch (e) {
+      debugPrint('Import failed: $e');
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(l10n.settingsScreen_importInvalidFile)),
+        );
+      }
+    } catch (e) {
+      debugPrint('Import failed: $e');
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(l10n.settingsScreen_importFailed)),
+        );
+      }
+    } finally {
+      if (mounted) {
+        setState(() { _isLoading = false; });
+      }
+    }
+  }
+
+  Future<void> importPeriodData() async {
+    final l10n = AppLocalizations.of(context)!;
+    
+    final result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['json'],
+    );
+
+    if (result != null && result.files.single.path != null) {
+      final filePath = result.files.single.path!;
+      
+      if (!mounted) return;
+      return showDialog<void>(
+        context: context,
+        builder: (BuildContext context) {
+          return ConfirmationDialog(
+            title: l10n.settingsScreen_importPeriodData_question,
+            contentText: l10n.settingsScreen_importPeriodDataDescription,
+            confirmButtonText: l10n.import,
+            onConfirm: () => _importData(filePath, isPillData: false),
+          );
+        },
+      );
+    }
+  }
+
+  Future<void> importPillData() async {
+    final l10n = AppLocalizations.of(context)!;
+    
+    final result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['json'],
+    );
+
+    if (result != null && result.files.single.path != null) {
+      final filePath = result.files.single.path!;
+      
+      if (!mounted) return;
+      return showDialog<void>(
+        context: context,
+        builder: (BuildContext context) {
+          return ConfirmationDialog(
+            title: l10n.settingsScreen_importPillData_question,
+            contentText: l10n.settingsScreen_importPillDataDescription,
+            confirmButtonText: l10n.import,
+            onConfirm: () => _importData(filePath, isPillData: true),
+          );
+        },
+      );
+    }
+  }
+
+
 
   @override
-Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
@@ -201,7 +295,9 @@ Widget build(BuildContext context) {
       ),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
-          : Column(
+          : SingleChildScrollView(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Card(
@@ -252,7 +348,9 @@ Widget build(BuildContext context) {
                       ],
                     ),
                   ),
+                  
                   const SizedBox(height: 24),
+                  
                   Card(
                     elevation: 1,
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -260,7 +358,19 @@ Widget build(BuildContext context) {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         ListTile(
-                          leading: Icon(Icons.download, color: theme.primaryColor),
+                          leading: Icon(Icons.download_rounded, color: colorScheme.primary),
+                          title: Text(
+                            l10n.settingsScreen_exportDataTitle,
+                            style: theme.textTheme.titleMedium?.copyWith(
+                              color: colorScheme.primary,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        
+                        Divider(height: 1, color: colorScheme.onErrorContainer.withValues(alpha: 0.3)),
+
+                        ListTile(
                           title: Text(
                             l10n.settingsScreen_exportPeriodData,
                             style: theme.textTheme.titleMedium,
@@ -272,11 +382,8 @@ Widget build(BuildContext context) {
                           trailing: const Icon(Icons.chevron_right),
                           onTap: exportPeriodData,
                         ),
-                        
-                        const Divider(height: 1, indent: 16, endIndent: 16), 
 
                         ListTile(
-                          leading: Icon(Icons.download, color: theme.primaryColor),
                           title: Text(
                             l10n.settingsScreen_exportPillData,
                             style: theme.textTheme.titleMedium,
@@ -291,8 +398,59 @@ Widget build(BuildContext context) {
                       ],
                     ),
                   ),
+
+                  const SizedBox(height: 24),
+
+                  Card(
+                    elevation: 1,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        ListTile(
+                          leading: Icon(Icons.upload_rounded, color: colorScheme.primary),
+                          title: Text(
+                            l10n.settingsScreen_importDataTitle,
+                            style: theme.textTheme.titleMedium?.copyWith(
+                              color: colorScheme.primary,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+
+                        Divider(height: 1, color: colorScheme.onErrorContainer.withValues(alpha: 0.3)),
+
+                        ListTile(
+                          title: Text(
+                            l10n.settingsScreen_importPeriodData,
+                            style: theme.textTheme.titleMedium,
+                          ),
+                          subtitle: Text(
+                            l10n.settingsScreen_importDataSubtitle,
+                            style: theme.textTheme.bodyMedium,
+                          ),
+                          trailing: const Icon(Icons.chevron_right),
+                          onTap: importPeriodData,
+                        ),
+                        
+                        ListTile(
+                          title: Text(
+                            l10n.settingsScreen_importPillData,
+                            style: theme.textTheme.titleMedium,
+                          ),
+                          subtitle: Text(
+                            l10n.settingsScreen_importDataSubtitle,
+                            style: theme.textTheme.bodyMedium,
+                          ),
+                          trailing: const Icon(Icons.chevron_right),
+                          onTap: importPillData,
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
+          )
     );
   }
 }
