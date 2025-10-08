@@ -51,7 +51,7 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
   Future<void> clearPillData() async {
     setState(() { _isLoading = true; });
     
-    await pillsRepo.deleteAllEntries();
+    await pillsRepo.manager.clearAllData();
     await NotificationService.cancelPillReminder();
 
     if (!mounted) return;
@@ -94,7 +94,62 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
 
       final Directory directory = await getTemporaryDirectory();
       final timestamp = DateFormat('yyyyMMdd_HHmmss').format(DateTime.now());
-      final fileName = 'menstrudel_data_$timestamp.json';
+      final fileName = 'menstrudel_period_data_$timestamp.json';
+      final exportFile = File('${directory.path}/$fileName');
+
+      await exportFile.writeAsString(jsonData);
+      filePath = exportFile.path;
+
+      final params = ShareParams(
+        text: l10n.settingsScreen_exportDataMessage,
+        files: [XFile(filePath)],
+      );
+
+      final result = await SharePlus.instance.share(params);
+      if (result.status == ShareResultStatus.success && mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(l10n.settingsScreen_exportSuccessful)),
+        );
+      }
+
+    } catch (e) {
+      debugPrint('Export failed: $e');
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(l10n.settingsScreen_exportFailed)),
+        );
+      }
+    } finally {
+      if (mounted){
+        setState(() { _isLoading = false; });
+        if (filePath.isNotEmpty) {
+          try {
+            await File(filePath).delete();
+          } catch (e) {
+            debugPrint('Failed to delete temporary file: $e');
+          }
+        }
+      }
+    }
+  }
+
+  Future<void> exportPillData() async {
+    setState(() { _isLoading = true; });
+
+    final l10n = AppLocalizations.of(context)!;
+    String filePath = '';
+
+
+    try {
+      final jsonData = await pillsRepo.manager.exportDataAsJson();
+      
+      if (jsonData.isEmpty) {
+        throw Exception(l10n.settingsScreen_noDataToExport);
+      }
+
+      final Directory directory = await getTemporaryDirectory();
+      final timestamp = DateFormat('yyyyMMdd_HHmmss').format(DateTime.now());
+      final fileName = 'menstrudel_pill_data_$timestamp.json';
       final exportFile = File('${directory.path}/$fileName');
 
       await exportFile.writeAsString(jsonData);
@@ -207,7 +262,7 @@ Widget build(BuildContext context) {
                       ListTile(
                         leading: Icon(Icons.download, color: theme.primaryColor),
                         title: Text(
-                          l10n.settingsScreen_exportData,
+                          l10n.settingsScreen_exportPeriodData,
                           style: theme.textTheme.titleMedium,
                         ),
                         subtitle: Text(
@@ -216,6 +271,29 @@ Widget build(BuildContext context) {
                         ),
                         trailing: Icon(Icons.chevron_right),
                         onTap: exportPeriodData,
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Card(
+                  elevation: 1,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      ListTile(
+                        leading: Icon(Icons.download, color: theme.primaryColor),
+                        title: Text(
+                          l10n.settingsScreen_exportPillData,
+                          style: theme.textTheme.titleMedium,
+                        ),
+                        subtitle: Text(
+                          l10n.settingsScreen_exportDataSubtitle,
+                          style: theme.textTheme.bodyMedium,
+                        ),
+                        trailing: Icon(Icons.chevron_right),
+                        onTap: exportPillData,
                       ),
                     ],
                   ),

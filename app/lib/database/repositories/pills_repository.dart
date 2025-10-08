@@ -2,11 +2,17 @@ import 'package:menstrudel/database/app_database.dart';
 import 'package:menstrudel/models/pills/pill_regimen.dart';
 import 'package:menstrudel/models/pills/pill_intake.dart';
 import 'package:menstrudel/models/pills/pill_reminder.dart';
+import 'package:package_info_plus/package_info_plus.dart';
+import 'dart:convert';
+import 'package:sqflite/sqflite.dart';
 
 class PillsRepository {
   final dbProvider = AppDatabase.instance;
-
   static const String _whereRegimenId = 'regimen_id = ?';
+
+  final Manager manager;
+
+  PillsRepository() : manager = Manager(AppDatabase.instance); 
 
   Future<PillIntake> createPillIntake(PillIntake intake) async {
     final db = await dbProvider.database;
@@ -121,8 +127,40 @@ class PillsRepository {
       await db.insert('PillReminder', reminder.toMap());
     }
   }
+}
 
-  Future<void> deleteAllEntries() async {
+class Manager {
+  final AppDatabase dbProvider;
+
+  Manager(this.dbProvider);
+
+  /// Returns pill data as json - ready for exporting data.
+  Future<String> exportDataAsJson() async {
+    final db = await dbProvider.database;
+
+    final pillRegimen = await db.query('PillRegimen');
+    final pillIntakes = await db.query('PillIntake');
+    final pillReminders = await db.query('PillReminder');
+    
+    final packageInfo = await PackageInfo.fromPlatform();
+    final dbVersion = await db.getVersion();
+
+    final exportData = {
+      'pill_regimen': pillRegimen,
+      'pill_intake': pillIntakes,
+      'pill_reminder': pillReminders,
+      'exported_at': DateTime.now().toIso8601String(),
+      'app_version': packageInfo.version,
+      'db_version': dbVersion,
+    };
+
+    final jsonString = jsonEncode(exportData);
+    
+    return jsonString;
+  }
+
+  /// Deletes all entries from the pill related tables.
+  Future<void> clearAllData() async {
     final db = await dbProvider.database;
     await db.transaction((txn) async {
       await txn.delete('PillRegimen');
