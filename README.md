@@ -98,3 +98,8 @@ You can view our privacy policy [here](https://menstrudel.app/privacy/).
 | Prediction View | Quick logging |
 | :---: | :---: |
 | ![Log View](docs/screenshots/wearos/logs_screen.webp) | ![Symptom Entry Dialog](docs/screenshots/wearos/log_screen.webp) | 
+
+
+# Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=J-shw/Menstrudel&type=Date)](https://www.star-history.com/#J-shw/Menstrudel&Date)
