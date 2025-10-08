@@ -350,6 +350,7 @@ class Manager {
   }
 
   /// Imports periods and period_logs data from a JSON string.
+  /// Throws an exception if the JSON format is invalid or the database version is incompatible.
   Future<void> importDataFromJson(String jsonString) async {
     final db = await dbProvider.database;
 
@@ -400,6 +401,8 @@ class Manager {
           await txn.insert('period_logs', logToInsert, conflictAlgorithm: ConflictAlgorithm.replace);
         }
       });
+    } on FormatException catch (_) {
+      rethrow;
     } catch (e) {
       throw Exception('Failed to import data: $e');
     }
