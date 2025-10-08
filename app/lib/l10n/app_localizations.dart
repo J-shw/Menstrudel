@@ -782,6 +782,18 @@ abstract class AppLocalizations {
   /// **'Here is my MenstruDel data export.'**
   String get settingsScreen_exportDataMessage;
 
+  /// No description provided for @settingsScreen_exportDataTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Export Data'**
+  String get settingsScreen_exportDataTitle;
+
+  /// No description provided for @settingsScreen_importDataTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Import Data'**
+  String get settingsScreen_importDataTitle;
+
   /// No description provided for @settingsScreen_importPeriodData.
   ///
   /// In en, this message translates to:

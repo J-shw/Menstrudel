@@ -146,7 +146,7 @@
     "settingsScreen_allLogsHaveBeenCleared": "All logs have been cleared.",
     "settingsScreen_clearAllLogs_question": "Clear All Logs?",
     "settingsScreen_deleteAllLogsDescription": "This will permanently delete all your period logs. Your app settings will not be affected.",
-    
+
     "settingsScreen_appearance": "Appearance",
     "settingsScreen_historyViewStyle": "History View Style",
     "settingsScreen_appTheme": "App Theme",
@@ -187,6 +187,8 @@
     "settingsScreen_exportFailed": "Export failed. Please try again.",
     "settingsScreen_noDataToExport": "No data found to export.",
     "settingsScreen_exportDataMessage": "Here is my MenstruDel data export.",
+    "settingsScreen_exportDataTitle": "Export Data",
+    "settingsScreen_importDataTitle": "Import Data",
     "settingsScreen_importPeriodData": "Import Period Data",
     "settingsScreen_importPillData": "Import Pill Data",
     "settingsScreen_importDataSubtitle": "Overwrites existing data.",

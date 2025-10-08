@@ -401,6 +401,12 @@ class AppLocalizationsDe extends AppLocalizations {
       'Here is my MenstruDel data export.';
 
   @override
+  String get settingsScreen_exportDataTitle => 'Export Data';
+
+  @override
+  String get settingsScreen_importDataTitle => 'Import Data';
+
+  @override
   String get settingsScreen_importPeriodData => 'Import Period Data';
 
   @override
