@@ -376,6 +376,28 @@ class AppLocalizationsDe extends AppLocalizations {
       'Removes your pill regimen and intake history.';
 
   @override
+  String get settingsScreen_exportPeriodData => 'Export Period Data';
+
+  @override
+  String get settingsScreen_exportPillData => 'Export Pill Data';
+
+  @override
+  String get settingsScreen_exportDataSubtitle => 'Create a JSON backup file.';
+
+  @override
+  String get settingsScreen_exportSuccessful => 'Data exported successfully.';
+
+  @override
+  String get settingsScreen_exportFailed => 'Export failed. Please try again.';
+
+  @override
+  String get settingsScreen_noDataToExport => 'No data found to export.';
+
+  @override
+  String get settingsScreen_exportDataMessage =>
+      'Here is my MenstruDel data export.';
+
+  @override
   String get settingsScreen_security => 'Security';
 
   @override

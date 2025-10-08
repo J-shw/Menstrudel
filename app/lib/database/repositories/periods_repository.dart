@@ -2,6 +2,8 @@ import 'package:menstrudel/models/flows/flow_enum.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
+import 'dart:convert';
+import 'package:package_info_plus/package_info_plus.dart';
 
 import 'package:menstrudel/database/app_database.dart';
 import 'package:menstrudel/models/period_logs/period_day.dart';
@@ -12,6 +14,10 @@ import 'package:menstrudel/utils/exceptions.dart';
 class PeriodsRepository {
   final dbProvider = AppDatabase.instance;
   static const String _whereId = 'id = ?';
+
+  final Manager manager;
+
+  PeriodsRepository() : manager = Manager(AppDatabase.instance); 
 
   Future<void> logPeriodFromWatch() async {
     debugPrint('Received request from watch! Logging period now...');
@@ -57,14 +63,6 @@ class PeriodsRepository {
     if (existingLogs.isNotEmpty) {
       throw DuplicateLogException('A log already exists for this date.');
     }
-  }
-
-  Future<void> deleteAllEntries() async {
-    final db = await dbProvider.database;
-    await db.transaction((txn) async {
-      await txn.delete('period_logs');
-      await txn.delete('periods');
-    });
   }
 
   // Periods
@@ -142,7 +140,7 @@ class PeriodsRepository {
     return result.map((json) => PeriodDay.fromMap(json)).toList();
   }
 
-  Future<PeriodDay> readPeriodLog(id) async {
+  Future<PeriodDay> readPeriodLog(int id) async {
     final db = await dbProvider.database;
 
     final result = await db.query(
@@ -288,5 +286,61 @@ class PeriodsRepository {
     }
     
     return allMonthlyFlows;
+  }
+}
+
+class Manager {
+  final AppDatabase dbProvider;
+
+  Manager(this.dbProvider);
+
+  /// Converts symptom JSON string to JSON object
+  dynamic _decodeSymptoms(String? jsonString) {
+    if (jsonString == null || jsonString.isEmpty) {
+      return [];
+    }
+    try {
+      return jsonDecode(jsonString);
+    } catch (e) {
+      debugPrint('Error decoding symptoms JSON: $e'); 
+      return []; 
+    }
+  }
+
+  /// Returns periods and period_logs data as json - ready for exporting data.
+  Future<String> exportDataAsJson() async {
+    final db = await dbProvider.database;
+
+    final periodLogsRaw = await db.query('period_logs');
+    final periods = await db.query('periods');
+    final packageInfo = await PackageInfo.fromPlatform();
+    final dbVersion = await db.getVersion();
+
+    final periodLogs = periodLogsRaw.map((log) {
+      final mutableLog = Map<String, dynamic>.from(log); 
+      mutableLog['symptoms'] = _decodeSymptoms(mutableLog['symptoms'] as String?);
+      return mutableLog;
+    }).toList();
+
+    final exportData = {
+      'periods': periods,
+      'period_logs': periodLogs,
+      'exported_at': DateTime.now().toIso8601String(),
+      'app_version': packageInfo.version,
+      'db_version': dbVersion,
+    };
+
+    final jsonString = jsonEncode(exportData);
+    
+    return jsonString;
+  }
+
+  /// Deletes all entries from the period_logs and periods tables.
+  Future<void> clearAllData() async {
+    final db = await dbProvider.database;
+    await db.transaction((txn) async {
+      await txn.delete('period_logs');
+      await txn.delete('periods');
+    });
   }
 }
