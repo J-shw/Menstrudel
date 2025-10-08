@@ -170,6 +170,12 @@ abstract class AppLocalizations {
   /// **'Save'**
   String get save;
 
+  /// No description provided for @import.
+  ///
+  /// In en, this message translates to:
+  /// **'Import'**
+  String get import;
+
   /// No description provided for @ok.
   ///
   /// In en, this message translates to:
@@ -775,6 +781,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Here is my MenstruDel data export.'**
   String get settingsScreen_exportDataMessage;
+
+  /// No description provided for @settingsScreen_importPeriodData.
+  ///
+  /// In en, this message translates to:
+  /// **'Import Period Data'**
+  String get settingsScreen_importPeriodData;
+
+  /// No description provided for @settingsScreen_importPillData.
+  ///
+  /// In en, this message translates to:
+  /// **'Import Pill Data'**
+  String get settingsScreen_importPillData;
+
+  /// No description provided for @settingsScreen_importDataSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Overwrites existing data.'**
+  String get settingsScreen_importDataSubtitle;
+
+  /// No description provided for @settingsScreen_importPeriodData_question.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to import Period Data?'**
+  String get settingsScreen_importPeriodData_question;
+
+  /// No description provided for @settingsScreen_importPillData_question.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to import Pill Data?'**
+  String get settingsScreen_importPillData_question;
+
+  /// No description provided for @settingsScreen_importPeriodDataDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Importing data will permanently overwrite all your existing period logs and period settings. This cannot be undone.'**
+  String get settingsScreen_importPeriodDataDescription;
+
+  /// No description provided for @settingsScreen_importPillDataDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Importing data will permanently overwrite all your existing pill history. This cannot be undone.'**
+  String get settingsScreen_importPillDataDescription;
+
+  /// No description provided for @settingsScreen_importSuccessful.
+  ///
+  /// In en, this message translates to:
+  /// **'Data imported successfully!'**
+  String get settingsScreen_importSuccessful;
+
+  /// No description provided for @settingsScreen_importFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to import data. Please try again.'**
+  String get settingsScreen_importFailed;
+
+  /// No description provided for @settingsScreen_importInvalidFile.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid file format or data structure.'**
+  String get settingsScreen_importInvalidFile;
 
   /// No description provided for @settingsScreen_security.
   ///

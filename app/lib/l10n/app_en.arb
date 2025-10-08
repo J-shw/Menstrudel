@@ -27,6 +27,7 @@
     "delete": "Delete",
     "clear": "Clear",
     "save": "Save",
+    "import": "Import",
 
     "ok": "OK",
     "confirm": "Confirm",
@@ -145,6 +146,7 @@
     "settingsScreen_allLogsHaveBeenCleared": "All logs have been cleared.",
     "settingsScreen_clearAllLogs_question": "Clear All Logs?",
     "settingsScreen_deleteAllLogsDescription": "This will permanently delete all your period logs. Your app settings will not be affected.",
+    
     "settingsScreen_appearance": "Appearance",
     "settingsScreen_historyViewStyle": "History View Style",
     "settingsScreen_appTheme": "App Theme",
@@ -156,6 +158,7 @@
     "settingsScreen_themeColor": "Theme Color",
     "settingsScreen_pickAColor": "Pick a Color",
     "settingsScreen_view": "View",
+
     "settingsScreen_birthControl": "Birth Control",
     "settingsScreen_setUpPillRegimen": "Set Up Pill Regimen",
     "settingsScreen_trackYourDailyPillIntake": "Track Your Daily Pill Intake",
@@ -167,6 +170,7 @@
     "settingsScreen_notificationTime": "Notification Time",
     "settingsScreen_overduePeriodReminder": "Overdue Period Reminder",
     "settingsScreen_remindMeAfter": "Remind Me After",
+
     "settingsScreen_dataManagement": "Data Management",
     "settingsScreen_clearAllLogs": "Clear All Logs",
     "settingsScreen_clearAllPillData": "Clear All Pill Data",
@@ -183,6 +187,17 @@
     "settingsScreen_exportFailed": "Export failed. Please try again.",
     "settingsScreen_noDataToExport": "No data found to export.",
     "settingsScreen_exportDataMessage": "Here is my MenstruDel data export.",
+    "settingsScreen_importPeriodData": "Import Period Data",
+    "settingsScreen_importPillData": "Import Pill Data",
+    "settingsScreen_importDataSubtitle": "Overwrites existing data.",
+    "settingsScreen_importPeriodData_question": "Are you sure you want to import Period Data?",
+    "settingsScreen_importPillData_question": "Are you sure you want to import Pill Data?",
+    "settingsScreen_importPeriodDataDescription": "Importing data will permanently overwrite all your existing period logs and period settings. This cannot be undone.",
+    "settingsScreen_importPillDataDescription": "Importing data will permanently overwrite all your existing pill history. This cannot be undone.",
+    "settingsScreen_importSuccessful": "Data imported successfully!",
+    "settingsScreen_importFailed": "Failed to import data. Please try again.",
+    "settingsScreen_importInvalidFile": "Invalid file format or data structure.",
+
     "settingsScreen_security": "Security",
     "securityScreen_enableBiometricLock": "Enable Biometric Lock",
     "securityScreen_enableBiometricLockSubtitle": "Require fingerprint or face ID to open the app.",
