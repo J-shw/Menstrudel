@@ -191,115 +191,108 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
 
   @override
 Widget build(BuildContext context) {
-  final l10n = AppLocalizations.of(context)!;
-  final theme = Theme.of(context);
-  final colorScheme = theme.colorScheme;
+    final l10n = AppLocalizations.of(context)!;
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
 
-  return Scaffold(
-    appBar: AppBar(
-      title: Text(l10n.settingsScreen_dataManagement),
-    ),
-    body: _isLoading
-        ? const Center(child: CircularProgressIndicator())
-        : Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Card(
-                  elevation: 0,
-                  color: colorScheme.errorContainer,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      ListTile(
-                        leading: Icon(Icons.warning_amber_rounded, color: colorScheme.error),
-                        title: Text(
-                          l10n.settingsScreen_dangerZone,
-                          style: theme.textTheme.titleMedium?.copyWith(
-                            color: colorScheme.error,
-                            fontWeight: FontWeight.bold,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(l10n.settingsScreen_dataManagement),
+      ),
+      body: _isLoading
+          ? const Center(child: CircularProgressIndicator())
+          : Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Card(
+                    elevation: 0,
+                    color: colorScheme.errorContainer,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        ListTile(
+                          leading: Icon(Icons.warning_amber_rounded, color: colorScheme.error),
+                          title: Text(
+                            l10n.settingsScreen_dangerZone,
+                            style: theme.textTheme.titleMedium?.copyWith(
+                              color: colorScheme.error,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
-                      ),
-                      
-                      Divider(height: 1, color: colorScheme.onErrorContainer.withValues(alpha:0.3)),
+                        
+                        Divider(height: 1, color: colorScheme.onErrorContainer.withValues(alpha: 0.3)),
 
-                      ListTile(
-                        title: Text(
-                          l10n.settingsScreen_clearAllLogs,
-                          style: theme.textTheme.titleMedium?.copyWith(color: colorScheme.onErrorContainer),
+                        ListTile(
+                          title: Text(
+                            l10n.settingsScreen_clearAllLogs,
+                            style: theme.textTheme.titleMedium?.copyWith(color: colorScheme.onErrorContainer),
+                          ),
+                          subtitle: Text(
+                            l10n.settingsScreen_clearAllLogsSubtitle,
+                            style: theme.textTheme.bodyMedium?.copyWith(color: colorScheme.onErrorContainer.withValues(alpha: 0.8)),
+                          ),
+                          trailing: Icon(Icons.chevron_right, color: colorScheme.onErrorContainer),
+                          onTap: showClearPeriodLogsDialog,
                         ),
-                        subtitle: Text(
-                          l10n.settingsScreen_clearAllLogsSubtitle,
-                          style: theme.textTheme.bodyMedium?.copyWith(color: colorScheme.onErrorContainer.withValues(alpha:0.8)),
-                        ),
-                        trailing: Icon(Icons.chevron_right, color: colorScheme.onErrorContainer),
-                        onTap: showClearPeriodLogsDialog,
-                      ),
 
-                      ListTile(
-                        title: Text(
-                          l10n.settingsScreen_clearAllPillData,
-                          style: theme.textTheme.titleMedium?.copyWith(color: colorScheme.onErrorContainer),
+                        ListTile(
+                          title: Text(
+                            l10n.settingsScreen_clearAllPillData,
+                            style: theme.textTheme.titleMedium?.copyWith(color: colorScheme.onErrorContainer),
+                          ),
+                          subtitle: Text(
+                            l10n.settingsScreen_clearAllPillDataSubtitle,
+                            style: theme.textTheme.bodyMedium?.copyWith(color: colorScheme.onErrorContainer.withValues(alpha: 0.8)),
+                          ),
+                          trailing: Icon(Icons.chevron_right, color: colorScheme.onErrorContainer),
+                          onTap: showClearPillDataDialog,
                         ),
-                        subtitle: Text(
-                          l10n.settingsScreen_clearAllPillDataSubtitle,
-                          style: theme.textTheme.bodyMedium?.copyWith(color: colorScheme.onErrorContainer.withValues(alpha:0.8)),
-                        ),
-                        trailing: Icon(Icons.chevron_right, color: colorScheme.onErrorContainer),
-                        onTap: showClearPillDataDialog,
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                const SizedBox(height: 24),
-                Card(
-                  elevation: 1,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      ListTile(
-                        leading: Icon(Icons.download, color: theme.primaryColor),
-                        title: Text(
-                          l10n.settingsScreen_exportPeriodData,
-                          style: theme.textTheme.titleMedium,
+                  const SizedBox(height: 24),
+                  Card(
+                    elevation: 1,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        ListTile(
+                          leading: Icon(Icons.download, color: theme.primaryColor),
+                          title: Text(
+                            l10n.settingsScreen_exportPeriodData,
+                            style: theme.textTheme.titleMedium,
+                          ),
+                          subtitle: Text(
+                            l10n.settingsScreen_exportDataSubtitle,
+                            style: theme.textTheme.bodyMedium,
+                          ),
+                          trailing: const Icon(Icons.chevron_right),
+                          onTap: exportPeriodData,
                         ),
-                        subtitle: Text(
-                          l10n.settingsScreen_exportDataSubtitle,
-                          style: theme.textTheme.bodyMedium,
+                        
+                        const Divider(height: 1, indent: 16, endIndent: 16), 
+
+                        ListTile(
+                          leading: Icon(Icons.download, color: theme.primaryColor),
+                          title: Text(
+                            l10n.settingsScreen_exportPillData,
+                            style: theme.textTheme.titleMedium,
+                          ),
+                          subtitle: Text(
+                            l10n.settingsScreen_exportDataSubtitle,
+                            style: theme.textTheme.bodyMedium,
+                          ),
+                          trailing: const Icon(Icons.chevron_right),
+                          onTap: exportPillData,
                         ),
-                        trailing: Icon(Icons.chevron_right),
-                        onTap: exportPeriodData,
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                const SizedBox(height: 8),
-                Card(
-                  elevation: 1,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      ListTile(
-                        leading: Icon(Icons.download, color: theme.primaryColor),
-                        title: Text(
-                          l10n.settingsScreen_exportPillData,
-                          style: theme.textTheme.titleMedium,
-                        ),
-                        subtitle: Text(
-                          l10n.settingsScreen_exportDataSubtitle,
-                          style: theme.textTheme.bodyMedium,
-                        ),
-                        trailing: Icon(Icons.chevron_right),
-                        onTap: exportPillData,
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-  );
-}
+                ],
+              ),
+    );
+  }
 }
