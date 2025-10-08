@@ -755,7 +755,7 @@ abstract class AppLocalizations {
   /// No description provided for @settingsScreen_exportSuccessful.
   ///
   /// In en, this message translates to:
-  /// **'Data exported successfully and ready to share.'**
+  /// **'Data exported successfully.'**
   String get settingsScreen_exportSuccessful;
 
   /// No description provided for @settingsScreen_exportFailed.

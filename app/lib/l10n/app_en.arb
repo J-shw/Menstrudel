@@ -179,7 +179,7 @@
     "settingsScreen_exportPeriodData": "Export Period Data",
     "settingsScreen_exportPillData": "Export Pill Data",
     "settingsScreen_exportDataSubtitle": "Create a JSON backup file.",
-    "settingsScreen_exportSuccessful": "Data exported successfully and ready to share.",
+    "settingsScreen_exportSuccessful": "Data exported successfully.",
     "settingsScreen_exportFailed": "Export failed. Please try again.",
     "settingsScreen_noDataToExport": "No data found to export.",
     "settingsScreen_exportDataMessage": "Here is my MenstruDel data export.",

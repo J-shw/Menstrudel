@@ -383,8 +383,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsScreen_exportDataSubtitle => 'Create a JSON backup file.';
 
   @override
-  String get settingsScreen_exportSuccessful =>
-      'Data exported successfully and ready to share.';
+  String get settingsScreen_exportSuccessful => 'Data exported successfully.';
 
   @override
   String get settingsScreen_exportFailed => 'Export failed. Please try again.';
