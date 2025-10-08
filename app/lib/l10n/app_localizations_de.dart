@@ -53,6 +53,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get save => 'Speichern';
 
   @override
+  String get import => 'Import';
+
+  @override
   String get ok => 'OK';
 
   @override
@@ -396,6 +399,48 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get settingsScreen_exportDataMessage =>
       'Here is my MenstruDel data export.';
+
+  @override
+  String get settingsScreen_exportDataTitle => 'Export Data';
+
+  @override
+  String get settingsScreen_importDataTitle => 'Import Data';
+
+  @override
+  String get settingsScreen_importPeriodData => 'Import Period Data';
+
+  @override
+  String get settingsScreen_importPillData => 'Import Pill Data';
+
+  @override
+  String get settingsScreen_importDataSubtitle => 'Overwrites existing data.';
+
+  @override
+  String get settingsScreen_importPeriodData_question =>
+      'Are you sure you want to import Period Data?';
+
+  @override
+  String get settingsScreen_importPillData_question =>
+      'Are you sure you want to import Pill Data?';
+
+  @override
+  String get settingsScreen_importPeriodDataDescription =>
+      'Importing data will permanently overwrite all your existing period logs and period settings. This cannot be undone.';
+
+  @override
+  String get settingsScreen_importPillDataDescription =>
+      'Importing data will permanently overwrite all your existing pill history. This cannot be undone.';
+
+  @override
+  String get settingsScreen_importSuccessful => 'Data imported successfully!';
+
+  @override
+  String get settingsScreen_importFailed =>
+      'Failed to import data. Please try again.';
+
+  @override
+  String get settingsScreen_importInvalidFile =>
+      'Invalid file format or data structure.';
 
   @override
   String get settingsScreen_security => 'Security';
