@@ -22,11 +22,13 @@ import 'package:menstrudel/l10n/app_localizations.dart';
 
 
 class LogsScreen extends StatefulWidget {
-   final Function(FabState) onFabStateChange;
+  final Function(FabState) onFabStateChange;
+  final bool isReminderButtonAlwaysVisible;
 
 	const LogsScreen({
     super.key,
     required this.onFabStateChange,
+    required this.isReminderButtonAlwaysVisible,
   });
 
   @override
@@ -195,7 +197,8 @@ class LogsScreenState extends State<LogsScreen> {
     
     final isPeriodOngoing = periods.isNotEmpty && DateUtils.isSameDay(periods.first.endDate, DateTime.now());
     FabState currentState;
-    if (!isPeriodOngoing) {
+
+    if (!isPeriodOngoing && !widget.isReminderButtonAlwaysVisible) {
       currentState = FabState.logPeriod;
     } else {
       currentState = isReminderSet ? FabState.cancelReminder : FabState.setReminder;
