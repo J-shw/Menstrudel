@@ -19,6 +19,7 @@ class _BirthControlSettingsScreenState extends State<BirthControlSettingsScreen>
   final pillsRepo = PillsRepository();
   bool _isLoading = true;
 
+  List<PillRegimen> _allRegimens = []; 
   PillRegimen? _activeRegimen;
   bool _pillNotificationsEnabled = false;
   TimeOfDay _pillNotificationTime = const TimeOfDay(hour: 21, minute: 0);
@@ -30,6 +31,7 @@ class _BirthControlSettingsScreenState extends State<BirthControlSettingsScreen>
   }
 
   Future<void> _loadSettings() async {
+    final allRegimens = await pillsRepo.readAllPillRegimens();
     final activeRegimen = await pillsRepo.readActivePillRegimen();
     PillReminder? pillReminder;
     bool pillNotificationsEnabled = false;
@@ -47,6 +49,7 @@ class _BirthControlSettingsScreenState extends State<BirthControlSettingsScreen>
 
     if (mounted) {
       setState(() {
+        _allRegimens = allRegimens;
         _activeRegimen = activeRegimen;
         _pillNotificationsEnabled = pillNotificationsEnabled;
         _pillNotificationTime = pillNotificationTime;
@@ -107,9 +110,8 @@ class _BirthControlSettingsScreenState extends State<BirthControlSettingsScreen>
     }
   }
 
-  Future<void> showDeleteRegimenDialog() async {
+  Future<void> showDeleteRegimenDialog(PillRegimen regimenToDelete) async {
     final l10n = AppLocalizations.of(context)!;
-    if (_activeRegimen == null) return;
 
     return showDialog<void>(
       context: context,
@@ -119,8 +121,11 @@ class _BirthControlSettingsScreenState extends State<BirthControlSettingsScreen>
           contentText: l10n.settingsScreen_deleteRegimenDescription,
           confirmButtonText: l10n.delete,
           onConfirm: () async {
-            await pillsRepo.deletePillRegimen(_activeRegimen!.id!);
-            await NotificationService.cancelPillReminder();
+            await pillsRepo.deletePillRegimen(regimenToDelete.id!);
+            
+            if (regimenToDelete.id == _activeRegimen?.id) {
+              await NotificationService.cancelPillReminder();
+            }
             _loadSettings();
           },
         );
@@ -128,9 +133,16 @@ class _BirthControlSettingsScreenState extends State<BirthControlSettingsScreen>
     );
   }
 
+  Future<void> _setActiveRegimen(PillRegimen regimen) async {
+    await pillsRepo.setActiveRegimen(regimen.id!);
+    await NotificationService.cancelPillReminder();
+    await _loadSettings();
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    final bool showReminderSettings = _activeRegimen != null && !_isLoading; 
 
     return Scaffold(
       appBar: AppBar(
@@ -140,22 +152,79 @@ class _BirthControlSettingsScreenState extends State<BirthControlSettingsScreen>
           ? const Center(child: CircularProgressIndicator())
           : ListView(
               children: [
-                if (_activeRegimen == null)
-                  ListTile(
-                    title: Text(l10n.settingsScreen_setUpPillRegimen),
-                    subtitle: Text(l10n.settingsScreen_trackYourDailyPillIntake),
-                    trailing: const Icon(Icons.add),
-                    onTap: showRegimenSetupDialog,
-                  )
-                else ...[
-                  ListTile(
-                    title: Text(_activeRegimen!.name),
-                    subtitle: Text(
-                        '${_activeRegimen!.activePills}/${_activeRegimen!.placeboPills} Pack'),
-                    trailing: IconButton(
-                      icon: Icon(Icons.delete_outline,
-                          color: Theme.of(context).colorScheme.error),
-                      onPressed: showDeleteRegimenDialog,
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+                  child: Text(
+                    l10n.settingsScreen_pillRegimens,
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+                  ),
+                ),
+                
+                ..._allRegimens.map((regimen) {
+                  final bool isActive = regimen.id == _activeRegimen?.id;
+                  final l10n = AppLocalizations.of(context)!;
+                  
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Column(
+                      children: [
+                        ListTile(
+                          contentPadding: EdgeInsets.zero,
+                          
+                          leading: Icon(
+                            isActive ? Icons.check_circle : Icons.circle_outlined,
+                            color: isActive ? Theme.of(context).colorScheme.primary : Colors.grey,
+                            size: 28,
+                          ),
+                          title: Text(
+                            regimen.name,
+                            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                              fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
+                            ),
+                          ),
+                          subtitle: Text(
+                              '${regimen.activePills}/${regimen.placeboPills} Pack'),
+                          
+                          trailing: isActive 
+                              ? null
+                              : Row(
+                                  mainAxisSize: MainAxisSize.min, 
+                                  children: [
+                                    TextButton(
+                                      style: TextButton.styleFrom(
+                                        padding: const EdgeInsets.symmetric(horizontal: 8.0), 
+                                      ),
+                                      onPressed: () => _setActiveRegimen(regimen),
+                                      child: Text(l10n.settingsScreen_makeActive),
+                                    ),
+                                    
+                                    IconButton(
+                                      icon: Icon(Icons.delete_outline, color: Theme.of(context).colorScheme.error),
+                                      onPressed: () => showDeleteRegimenDialog(regimen),
+                                      tooltip: l10n.delete,
+                                    ),
+                                  ],
+                                )
+                        ),
+                      ],
+                    ),
+                  );
+                }),
+
+                ListTile(
+                  title: Text(l10n.settingsScreen_setUpPillRegimen),
+                  trailing: const Icon(Icons.add_circle, size: 30),
+                  onTap: showRegimenSetupDialog,
+                ),
+
+                const Divider(),
+                
+                if (showReminderSettings) ...[
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+                    child: Text(
+                      l10n.settingsScreen_activeRegimenReminder,
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
                     ),
                   ),
                   SwitchListTile(
