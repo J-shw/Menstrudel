@@ -443,6 +443,15 @@ class AppLocalizationsDe extends AppLocalizations {
       'Invalid file format or data structure.';
 
   @override
+  String get settingsScreen_importErrorGeneral =>
+      'Failed to import data. Please ensure the file is saved locally.';
+
+  @override
+  String settingsScreen_importErrorPlatform(String message) {
+    return 'Import failed: $message. Please ensure the file is saved on the device and try again.';
+  }
+
+  @override
   String get settingsScreen_security => 'Security';
 
   @override

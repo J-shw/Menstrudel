@@ -854,6 +854,18 @@ abstract class AppLocalizations {
   /// **'Invalid file format or data structure.'**
   String get settingsScreen_importInvalidFile;
 
+  /// General message when file import fails for unknown reasons.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to import data. Please ensure the file is saved locally.'**
+  String get settingsScreen_importErrorGeneral;
+
+  /// Error when the native file picker fails, includes the specific error message.
+  ///
+  /// In en, this message translates to:
+  /// **'Import failed: {message}. Please ensure the file is saved on the device and try again.'**
+  String settingsScreen_importErrorPlatform(String message);
+
   /// No description provided for @settingsScreen_security.
   ///
   /// In en, this message translates to:

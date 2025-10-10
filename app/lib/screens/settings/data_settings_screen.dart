@@ -9,6 +9,8 @@ import 'package:share_plus/share_plus.dart';
 import 'package:intl/intl.dart';
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/services.dart';
+import 'dart:async';
 
 class DataSettingsScreen extends StatefulWidget {
   const DataSettingsScreen({super.key});
@@ -231,53 +233,103 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
 
   Future<void> importPeriodData() async {
     final l10n = AppLocalizations.of(context)!;
-    
-    final result = await FilePicker.platform.pickFiles(
-      type: FileType.custom,
-      allowedExtensions: ['json'],
-    );
-
-    if (result != null && result.files.single.path != null) {
-      final filePath = result.files.single.path!;
-      
-      if (!mounted) return;
-      return showDialog<void>(
-        context: context,
-        builder: (BuildContext context) {
-          return ConfirmationDialog(
-            title: l10n.settingsScreen_importPeriodData_question,
-            contentText: l10n.settingsScreen_importPeriodDataDescription,
-            confirmButtonText: l10n.import,
-            onConfirm: () => _importData(filePath, isPillData: false),
-          );
+    try{
+      final result = await FilePicker.platform.pickFiles(
+        type: FileType.custom,
+        allowedExtensions: ['json'],
+      ).timeout(
+        const Duration(seconds: 30),
+        onTimeout: () {
+          throw TimeoutException('File picking timed out.');
         },
       );
+
+      if (result != null && result.files.single.path != null) {
+        final filePath = result.files.single.path!;
+        
+        if (!mounted) return;
+        return showDialog<void>(
+          context: context,
+          builder: (BuildContext context) {
+            return ConfirmationDialog(
+              title: l10n.settingsScreen_importPeriodData_question,
+              contentText: l10n.settingsScreen_importPeriodDataDescription,
+              confirmButtonText: l10n.import,
+              onConfirm: () => _importData(filePath, isPillData: false),
+            );
+          },
+        );
+      }
+    }on PlatformException catch (e) {
+    debugPrint("File picker platform error: $e");
+    if (mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(l10n.settingsScreen_importErrorPlatform(e.message ?? 'An unknown error occurred.')),
+        ),
+      );
     }
+  } catch (e) {
+    debugPrint("General file picker error: $e");
+    if (mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(l10n.settingsScreen_importErrorGeneral),
+        ),
+      );
+    }
+  }
   }
 
   Future<void> importPillData() async {
     final l10n = AppLocalizations.of(context)!;
-    
-    final result = await FilePicker.platform.pickFiles(
-      type: FileType.custom,
-      allowedExtensions: ['json'],
-    );
+    try {
 
-    if (result != null && result.files.single.path != null) {
-      final filePath = result.files.single.path!;
       
-      if (!mounted) return;
-      return showDialog<void>(
-        context: context,
-        builder: (BuildContext context) {
-          return ConfirmationDialog(
-            title: l10n.settingsScreen_importPillData_question,
-            contentText: l10n.settingsScreen_importPillDataDescription,
-            confirmButtonText: l10n.import,
-            onConfirm: () => _importData(filePath, isPillData: true),
-          );
+      final result = await FilePicker.platform.pickFiles(
+        type: FileType.custom,
+        allowedExtensions: ['json'],
+      ).timeout(
+        const Duration(seconds: 30),
+        onTimeout: () {
+          throw TimeoutException('File picking timed out.');
         },
       );
+
+      if (result != null && result.files.single.path != null) {
+        final filePath = result.files.single.path!;
+        
+        if (!mounted) return;
+        return showDialog<void>(
+          context: context,
+          builder: (BuildContext context) {
+            return ConfirmationDialog(
+              title: l10n.settingsScreen_importPillData_question,
+              contentText: l10n.settingsScreen_importPillDataDescription,
+              confirmButtonText: l10n.import,
+              onConfirm: () => _importData(filePath, isPillData: true),
+            );
+          },
+        );
+      }
+    } on PlatformException catch (e) {
+      debugPrint("File picker platform error: $e");
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(l10n.settingsScreen_importErrorPlatform(e.message ?? 'An unknown error occurred.')),
+          ),
+        );
+      }
+    } catch (e) {
+      debugPrint("General file picker error: $e");
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(l10n.settingsScreen_importErrorGeneral),
+          ),
+        );
+      }
     }
   }
 
