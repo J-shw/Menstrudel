@@ -19,10 +19,65 @@ class PillsRepository {
     manager = Manager(AppDatabase.instance, this);
   }
 
-  Future<PillIntake> createPillIntake(PillIntake intake) async {
+  /// Deletes a specific pill entry by its ID.
+  Future<void> deletePillIntake(int intakeId) async {
     final db = await dbProvider.database;
-    final id = await db.insert('PillIntake', intake.toMap());
-    return intake.copyWith(id: id);
+    await db.delete(
+      'PillIntake',
+      where: 'id = ?',
+      whereArgs: [intakeId],
+    );
+  }
+
+  /// Deletes a pill entry from provide regimenID using pillNumberInCycle
+  Future<void> deletePillIntakeByDay(int regimenId, int pillNumberInCycle) async {
+    final db = await dbProvider.database;
+    
+    final List<Map<String, dynamic>> intake = await db.query(
+      'PillIntake',
+      where: 'regimen_id = ? AND pill_number_in_cycle = ?',
+      whereArgs: [regimenId, pillNumberInCycle],
+      limit: 1,
+    );
+
+    if (intake.isNotEmpty) {
+      final int idToDelete = intake.first['id'] as int;
+      await db.delete(
+        'PillIntake',
+        where: 'id = ?',
+        whereArgs: [idToDelete],
+      );
+    }
+  }
+
+  /// Creates a new pill intake record or updates an existing one for the same regimen/pill number.
+  Future<PillIntake> createOrUpdatePillIntake(PillIntake intake) async {
+    final db = await dbProvider.database;
+    
+    final existingIntakes = await db.query(
+      'PillIntake',
+      where: 'regimen_id = ? AND pill_number_in_cycle = ?',
+      whereArgs: [intake.regimenId, intake.pillNumberInCycle],
+      limit: 1,
+    );
+
+    if (existingIntakes.isNotEmpty) {
+      final existingId = existingIntakes.first['id'] as int;
+      
+      final Map<String, dynamic> dataToUpdate = intake.toMap();
+      dataToUpdate.remove('id');
+      
+      await db.update(
+        'PillIntake',
+        dataToUpdate,
+        where: 'id = ?',
+        whereArgs: [existingId],
+      );
+      return intake.copyWith(id: existingId);
+    } else {
+      final id = await db.insert('PillIntake', intake.toMap());
+      return intake.copyWith(id: id);
+    }
   }
 
   /// Delete the last taken pill entry. For if user accidentally logs pill taken.
