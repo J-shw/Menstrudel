@@ -4,7 +4,7 @@ import 'package:menstrudel/l10n/app_localizations.dart';
 class PillStatusCard extends StatelessWidget {
   final int currentPillNumberInCycle;
   final int totalPills;
-  final bool isTodayPillTaken;
+  final bool isSelectedPillTaken;
   final VoidCallback onTakePill;
   final VoidCallback onSkipPill;
   final VoidCallback undoTakePill;
@@ -14,7 +14,7 @@ class PillStatusCard extends StatelessWidget {
     super.key,
     required this.currentPillNumberInCycle,
     required this.totalPills,
-    required this.isTodayPillTaken,
+    required this.isSelectedPillTaken,
     required this.onTakePill,
     required this.onSkipPill,
     required this.undoTakePill,
@@ -99,7 +99,7 @@ class PillStatusCard extends StatelessWidget {
                 ],
               ),
             )
-          else if (isTodayPillTaken)
+          else if (isSelectedPillTaken)
             SizedBox(
               width: double.infinity,
               child: FilledButton.icon(
