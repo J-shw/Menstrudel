@@ -177,6 +177,20 @@
     "settingsScreen_importSuccessful": "Data imported successfully!",
     "settingsScreen_importFailed": "Failed to import data. Please try again.",
     "settingsScreen_importInvalidFile": "Invalid file format or data structure.",
+    "settingsScreen_importErrorGeneral": "Failed to import data. Please ensure the file is saved locally.",
+    "@settingsScreen_importErrorGeneral": {
+        "description": "General message when file import fails for unknown reasons."
+    },
+    "settingsScreen_importErrorPlatform": "Import failed: {message}. Please ensure the file is saved on the device and try again.",
+    "@settingsScreen_importErrorPlatform": {
+        "description": "Error when the native file picker fails, includes the specific error message.",
+        "placeholders": {
+            "message": {
+                "type": "String",
+                "example": "Unknown path or network access required."
+            }
+        }
+    },
     "settingsScreen_security": "Security",
     "securityScreen_enableBiometricLock": "Enable Biometric Lock",
     "securityScreen_enableBiometricLockSubtitle": "Require fingerprint or face ID to open the app.",
@@ -236,6 +250,16 @@
     "pillStatus_undo": "Undo",
     "pillStatus_skip": "Skip",
     "pillStatus_markAsTaken": "Mark As Taken",
+    "pillStatus_packStartInFuture": "Your next pill pack starts on {date}.",
+    "@pillStatus_packStartInFuture": {
+        "description": "Message shown when the pill pack start date is in the future.",
+        "placeholders": {
+            "date": {
+                "type": "DateTime",
+                "format": "yMMMd"
+            }
+        }
+    },
     "regimenSetupWidget_setUpPillRegimen": "Set Up Pill Regimen",
     "regimenSetupWidget_packName": "Pack Name",
     "regimenSetupWidget_pleaseEnterAName": "Please enter a name",
