@@ -36,15 +36,6 @@ class _MainScreenState extends State<MainScreen> {
   void initState() {
     super.initState();
     _loadSettings();
-    _pages = <Widget>[
-      const InsightsScreen(),
-      LogsScreen(
-        key: _logsScreenKey,
-        onFabStateChange: _onFabStateChange,
-      ),
-      const PillsScreen(),
-      const SettingsScreen(),
-    ];
   }
 
   Future<void> _loadSettings() async {
@@ -54,6 +45,16 @@ class _MainScreenState extends State<MainScreen> {
       setState(() {
         _isReminderButtonAlwaysVisible = isEnabled;
         _isLoading = false;
+        _pages = <Widget>[
+          const InsightsScreen(),
+          LogsScreen(
+            key: _logsScreenKey,
+            onFabStateChange: _onFabStateChange,
+            isReminderButtonAlwaysVisible: _isReminderButtonAlwaysVisible,
+          ),
+          const PillsScreen(),
+          const SettingsScreen(),
+        ];
       });
     }
   }
