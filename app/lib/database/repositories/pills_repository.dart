@@ -102,6 +102,13 @@ class PillsRepository {
     }
   }
 
+  Future<List<PillRegimen>> readAllPillRegimens() async {
+    final db = await dbProvider.database;
+    final result = await db.query('PillRegimen',);
+
+    return result.map((json) => PillRegimen.fromMap(json)).toList();
+  }
+
   Future<PillRegimen?> readActivePillRegimen() async {
     final db = await dbProvider.database;
     final maps = await db.query(
@@ -140,6 +147,23 @@ class PillsRepository {
       return PillReminder.fromMap(maps.first);
     }
     return null;
+  }
+
+  Future<void> setActiveRegimen(int regimenId) async {
+    final db = await dbProvider.database;
+
+    await db.transaction((txn) async {
+      await txn.update(
+        'PillRegimen',
+        {'is_active': 0},
+      );
+      await txn.update(
+        'PillRegimen',
+        {'is_active': 1},
+        where: 'id = ?',
+        whereArgs: [regimenId],
+      );
+    });
   }
 
   Future<PillRegimen> createPillRegimen(PillRegimen regimen) async {
