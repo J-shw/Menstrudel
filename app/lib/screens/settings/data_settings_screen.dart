@@ -240,7 +240,7 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
       ).timeout(
         const Duration(seconds: 30),
         onTimeout: () {
-          throw TimeoutException('File picking timed out after 30 seconds.');
+          throw TimeoutException('File picking timed out.');
         },
       );
 
@@ -292,7 +292,7 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
       ).timeout(
         const Duration(seconds: 30),
         onTimeout: () {
-          throw TimeoutException('File picking timed out after 30 seconds.');
+          throw TimeoutException('File picking timed out.');
         },
       );
 
