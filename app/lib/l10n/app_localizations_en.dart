@@ -602,6 +602,14 @@ class AppLocalizationsEn extends AppLocalizations {
   String get pillStatus_markAsTaken => 'Mark As Taken';
 
   @override
+  String pillStatus_packStartInFuture(DateTime date) {
+    final intl.DateFormat dateDateFormat = intl.DateFormat.yMMMd(localeName);
+    final String dateString = dateDateFormat.format(date);
+
+    return 'Your next pill pack starts on $dateString.';
+  }
+
+  @override
   String get regimenSetupWidget_setUpPillRegimen => 'Set Up Pill Regimen';
 
   @override

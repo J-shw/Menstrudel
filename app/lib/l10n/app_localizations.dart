@@ -1124,6 +1124,12 @@ abstract class AppLocalizations {
   /// **'Mark As Taken'**
   String get pillStatus_markAsTaken;
 
+  /// Message shown when the pill pack start date is in the future.
+  ///
+  /// In en, this message translates to:
+  /// **'Your next pill pack starts on {date}.'**
+  String pillStatus_packStartInFuture(DateTime date);
+
   /// No description provided for @regimenSetupWidget_setUpPillRegimen.
   ///
   /// In en, this message translates to:
