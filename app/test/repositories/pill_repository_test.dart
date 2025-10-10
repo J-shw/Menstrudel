@@ -75,7 +75,7 @@ void main() {
           pillNumberInCycle: 1,
         );
         
-        final createdIntake = await repository.createPillIntake(intake);
+        final createdIntake = await repository.createOrUpdatePillIntake(intake);
         expect(createdIntake.id, isNotNull);
         expect(createdIntake.status, PillIntakeStatus.taken);
       });
@@ -84,9 +84,9 @@ void main() {
         final createdRegimenA = await repository.createPillRegimen(regimenA);
         final createdRegimenB = await repository.createPillRegimen(regimenB);
 
-        await repository.createPillIntake(PillIntake(regimenId: createdRegimenA.id!, takenAt: DateTime.now(), scheduledDate: DateTime(2025, 9, 1), status: PillIntakeStatus.taken, pillNumberInCycle: 1));
-        await repository.createPillIntake(PillIntake(regimenId: createdRegimenB.id!, takenAt: DateTime.now(), scheduledDate: DateTime(2025, 9, 1), status: PillIntakeStatus.taken, pillNumberInCycle: 1));
-        await repository.createPillIntake(PillIntake(regimenId: createdRegimenA.id!, takenAt: DateTime.now(), scheduledDate: DateTime(2025, 9, 2), status: PillIntakeStatus.skipped, pillNumberInCycle: 2));
+        await repository.createOrUpdatePillIntake(PillIntake(regimenId: createdRegimenA.id!, takenAt: DateTime.now(), scheduledDate: DateTime(2025, 9, 1), status: PillIntakeStatus.taken, pillNumberInCycle: 1));
+        await repository.createOrUpdatePillIntake(PillIntake(regimenId: createdRegimenB.id!, takenAt: DateTime.now(), scheduledDate: DateTime(2025, 9, 1), status: PillIntakeStatus.taken, pillNumberInCycle: 1));
+        await repository.createOrUpdatePillIntake(PillIntake(regimenId: createdRegimenA.id!, takenAt: DateTime.now(), scheduledDate: DateTime(2025, 9, 2), status: PillIntakeStatus.skipped, pillNumberInCycle: 2));
 
         final intakes = await repository.readIntakesForRegimen(createdRegimenA.id!);
         expect(intakes.length, 2);
@@ -136,7 +136,7 @@ void main() {
     group('Data Integrity and Relationships', () {
       test('deletePillRegimen does not delete associated intakes', () async {
         final regimen = await repository.createPillRegimen(regimenA);
-        await repository.createPillIntake(PillIntake(regimenId: regimen.id!, takenAt: DateTime.now(), scheduledDate: DateTime(2025, 9, 1), status: PillIntakeStatus.taken, pillNumberInCycle: 1));
+        await repository.createOrUpdatePillIntake(PillIntake(regimenId: regimen.id!, takenAt: DateTime.now(), scheduledDate: DateTime(2025, 9, 1), status: PillIntakeStatus.taken, pillNumberInCycle: 1));
         await repository.deletePillRegimen(regimen.id!);
         final intakes = await repository.readIntakesForRegimen(regimen.id!);
         expect(intakes, isNotEmpty);
