@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:menstrudel/database/repositories/pills_repository.dart';
 import 'package:menstrudel/models/pills/pill_regimen.dart';
 import 'package:menstrudel/models/pills/pill_intake.dart';
+import 'package:menstrudel/services/notification_service.dart';
 
 import 'package:menstrudel/widgets/pills/empty_pills_state.dart';
 import 'package:menstrudel/widgets/pills/pill_pack_visualiser.dart';
@@ -62,6 +63,7 @@ class _PillsScreenState extends State<PillsScreen> {
     );
 
     await pillsRepo.createPillIntake(newIntake);
+    await NotificationService.cancelPillReminder();
 
     if (!mounted) return;
 
@@ -88,6 +90,7 @@ class _PillsScreenState extends State<PillsScreen> {
     );
 
     await pillsRepo.createPillIntake(newIntake);
+    await NotificationService.cancelPillReminder();
 
     if (!mounted) return;
 
@@ -105,6 +108,28 @@ class _PillsScreenState extends State<PillsScreen> {
   Future<void> _undoTakePill() async {
     if (_activeRegimen == null) return;
     await pillsRepo.undoLastPillIntake(_activeRegimen!.id!);
+
+
+    final pillReminder = await pillsRepo.readReminderForRegimen(_activeRegimen!.id!);
+    bool pillNotificationsEnabled = false;
+    TimeOfDay pillNotificationTime = const TimeOfDay(hour: 9, minute: 0);
+    
+    if (pillReminder != null) {
+      pillNotificationsEnabled = pillReminder.isEnabled;
+      final timeParts = pillReminder.reminderTime.split(':');
+      pillNotificationTime = TimeOfDay(
+        hour: int.parse(timeParts[0]), minute: int.parse(timeParts[1]))
+      ;
+    }
+    if(mounted){
+      final l10n = AppLocalizations.of(context)!;
+      await NotificationService.schedulePillReminder(
+        reminderTime: pillNotificationTime,
+        isEnabled: pillNotificationsEnabled,
+        title: l10n.notification_pillTitle,
+        body: l10n.notification_pillBody,
+      );
+    }
     _loadPillData();
   }
   

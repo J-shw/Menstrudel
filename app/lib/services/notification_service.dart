@@ -106,6 +106,7 @@ class NotificationService {
     required String title,
     required String body, 
   }) async {
+    debugPrint('Scheduling pill reminder');
     await _plugin.cancel(pillReminderId);
 
     if (!isEnabled) return;
@@ -133,6 +134,7 @@ class NotificationService {
   }
 
   static Future<void> cancelPillReminder() async {
+    debugPrint('Canceling pill reminder');
     await _plugin.cancel(pillReminderId);
   }
 
