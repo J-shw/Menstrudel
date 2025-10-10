@@ -163,6 +163,7 @@ class _PillsScreenState extends State<PillsScreen> {
               currentPillNumberInCycle: _currentPillNumberInCycle,
               totalPills: _activeRegimen!.activePills + _activeRegimen!.placeboPills,
               isTodayPillTaken: _isTodayPillTaken,
+              packStartDate: _activeRegimen!.startDate,
               onTakePill: _takePill,
               onSkipPill: _skipPill,
               undoTakePill: _undoTakePill,
