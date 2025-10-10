@@ -91,6 +91,7 @@ class _PillsScreenState extends State<PillsScreen> {
     );
 
     await pillsRepo.createPillIntake(newIntake);
+    await NotificationService.cancelPillReminder();
 
     if (!mounted) return;
 
