@@ -8,6 +8,7 @@ class PillStatusCard extends StatelessWidget {
   final VoidCallback onTakePill;
   final VoidCallback onSkipPill;
   final VoidCallback undoTakePill;
+  final DateTime packStartDate;
 
   const PillStatusCard({
     super.key,
@@ -17,6 +18,7 @@ class PillStatusCard extends StatelessWidget {
     required this.onTakePill,
     required this.onSkipPill,
     required this.undoTakePill,
+    required this.packStartDate,
   });
 
   @override
@@ -30,6 +32,11 @@ class PillStatusCard extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
     );
+
+    final today = DateTime.now();
+    final todayDateOnly = DateTime(today.year, today.month, today.day);
+    final packStartDateOnly = DateTime(packStartDate.year, packStartDate.month, packStartDate.day);
+    final isPackStartInFuture = packStartDateOnly.isAfter(todayDateOnly);
 
     return Padding(
       padding: const EdgeInsets.all(20.0),
@@ -72,7 +79,27 @@ class PillStatusCard extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 20),
-          if (isTodayPillTaken)
+          if (isPackStartInFuture)
+            Center(
+              child: Column(
+                children: [
+                  Icon(
+                    Icons.calendar_month,
+                    size: 60,
+                    color: primaryColor.withAlpha(60),
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    l10n.pillStatus_packStartInFuture(packStartDateOnly),
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      color: Colors.grey.shade700,
+                    ),
+                  ),
+                ],
+              ),
+            )
+          else if (isTodayPillTaken)
             SizedBox(
               width: double.infinity,
               child: FilledButton.icon(

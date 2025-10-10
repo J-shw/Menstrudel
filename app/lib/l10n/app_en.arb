@@ -286,6 +286,16 @@
     "pillStatus_undo": "Undo",
     "pillStatus_skip": "Skip",
     "pillStatus_markAsTaken": "Mark As Taken",
+    "pillStatus_packStartInFuture": "Your next pill pack starts on {date}.",
+    "@pillStatus_packStartInFuture": {
+        "description": "Message shown when the pill pack start date is in the future.",
+        "placeholders": {
+        "date": {
+            "type": "DateTime",
+            "format": "yMMMd"
+        }
+        }
+    },
 
     "regimenSetupWidget_setUpPillRegimen": "Set Up Pill Regimen",
     "regimenSetupWidget_packName": "Pack Name",
