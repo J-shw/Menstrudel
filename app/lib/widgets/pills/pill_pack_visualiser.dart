@@ -9,12 +9,16 @@ class PillPackVisualiser extends StatelessWidget {
   final PillRegimen activeRegimen;
   final List<PillIntake> intakes;
   final int currentPillNumberInCycle;
+  final int selectedPillNumber;
+  final ValueChanged<int> onPillTapped;
 
   const PillPackVisualiser({
     super.key,
     required this.activeRegimen,
     required this.intakes,
     required this.currentPillNumberInCycle,
+    required this.selectedPillNumber,
+    required this.onPillTapped,
   });
 
   @override
@@ -56,7 +60,21 @@ class PillPackVisualiser extends StatelessWidget {
               visualStatus = visualStatus == PillVisualStatus.taken ? PillVisualStatus.taken : PillVisualStatus.placebo;
             }
 
-            return PillCircle(dayNumber: dayNumber, status: visualStatus);
+            final bool isSelected = dayNumber == selectedPillNumber; 
+            
+            final bool isEditable = dayNumber < currentPillNumberInCycle; 
+
+            return GestureDetector(
+              onTap: isEditable || dayNumber == currentPillNumberInCycle
+                  ? () => onPillTapped(dayNumber)
+                  : null,
+              child: PillCircle(
+                dayNumber: dayNumber, 
+                status: visualStatus,
+                isSelected: isSelected,
+              ),
+            );
+
           },
         ),
       ],
