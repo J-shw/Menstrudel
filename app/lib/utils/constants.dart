@@ -37,6 +37,7 @@ const String dynamicColorKey = 'dynamic_color';
 const String themeColorKey = 'theme_color';
 const String themeModeKey = 'theme_mode';
 const String persistentReminderKey = "always_show_reminder_button";
+const String defaultSymptomsKey = "default_symptoms";
 const String languageKey = "language";
 
 // Notifications
