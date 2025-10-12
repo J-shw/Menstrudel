@@ -598,9 +598,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'Set up your pill pack in settings to start tracking.';
 
   @override
-  String get pillPackVisualiser_yourPack => 'Your Pack';
-
-  @override
   String pillStatus_pillsOfTotal(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
