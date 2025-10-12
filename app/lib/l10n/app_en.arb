@@ -182,6 +182,7 @@
     "@settingsScreen_activeRegimenReminder": {
         "description": "Header for the daily reminder settings section."
     },
+    "settingsScreen_pack": "Pack",
 
     "settingsScreen_dataManagement": "Data Management",
     "settingsScreen_clearAllLogs": "Clear All Logs",

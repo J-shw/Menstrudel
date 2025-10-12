@@ -358,6 +358,9 @@ class AppLocalizationsDe extends AppLocalizations {
       'Active Regimen Reminder Settings';
 
   @override
+  String get settingsScreen_pack => 'Pack';
+
+  @override
   String get settingsScreen_dataManagement => 'Data Management';
 
   @override

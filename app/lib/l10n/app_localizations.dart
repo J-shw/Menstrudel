@@ -704,6 +704,12 @@ abstract class AppLocalizations {
   /// **'Active Regimen Reminder Settings'**
   String get settingsScreen_activeRegimenReminder;
 
+  /// No description provided for @settingsScreen_pack.
+  ///
+  /// In en, this message translates to:
+  /// **'Pack'**
+  String get settingsScreen_pack;
+
   /// No description provided for @settingsScreen_dataManagement.
   ///
   /// In en, this message translates to:
