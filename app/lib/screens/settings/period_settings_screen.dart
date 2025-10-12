@@ -106,25 +106,14 @@ class _PeriodSettingsScreenState extends State<PeriodSettingsScreen> {
     final l10n = AppLocalizations.of(context)!;
     final symptomUsageCount = await periodsRepo.getSymptomUseCount(symptom);
 
-    var description = "'$symptom' will no longer be available when logging a period.\n\n";
-
-    if (symptomUsageCount == 0) {
-      description += "There are currently no period logs with this symptom!";
-    }
-    else if (symptomUsageCount == 1) {
-      description += "There is already $symptomUsageCount period log with this symptom!\nThis log will not be changed.";
-    } else if (symptomUsageCount > 1) {
-      description += "There are $symptomUsageCount period logs with this symptom!\nThese logs will not be changed.";
-    }
-
     if (mounted) {
       return showDialog<void>(
         context: context,
         builder: (BuildContext context) {
           return ConfirmationDialog(
-            title: "Delete '$symptom'?",
-            contentText: description,
-            confirmButtonText: symptomUsageCount > 0 ? "Delete anyways" : l10n.delete,
+            title: l10n.settingsScreen_deleteDefaultSymptomQuestion(symptom),
+            contentText: l10n.settingsScreen_deleteDefaultSymptomDescription(symptom, symptomUsageCount),
+            confirmButtonText: symptomUsageCount > 0 ? l10n.deleteAnyways : l10n.delete,
             onConfirm: () async {
               setState(() {
                 _defaultSymptoms.remove(symptom);
@@ -149,10 +138,10 @@ class _PeriodSettingsScreenState extends State<PeriodSettingsScreen> {
           : ListView(
               children: [
                 ListTile(
-                  title: Text("Default symptoms"),
+                  title: Text(l10n.settingsScreen_defaultSymptoms),
                   leading: Icon(Icons.bubble_chart_outlined, color: colorScheme.onSurfaceVariant, size: 20),
                 ),
-                ListTile(subtitle: Text("These are always available when logging new periods.\nTap an existing symptom to delete or '+' to add a new one.")),
+                ListTile(subtitle: Text(l10n.settingsScreen_defaultSymptomsSubtitle)),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 12),
                   child: Wrap(

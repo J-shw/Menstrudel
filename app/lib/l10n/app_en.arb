@@ -25,6 +25,7 @@
     },
 
     "delete": "Delete",
+    "deleteAnyways": "Delete anyways",
     "clear": "Clear",
     "save": "Save",
     "import": "Import",
@@ -172,6 +173,31 @@
     "settingsScreen_notificationTime": "Notification Time",
     "settingsScreen_overduePeriodReminder": "Overdue Period Reminder",
     "settingsScreen_remindMeAfter": "Remind Me After",
+    "settingsScreen_defaultSymptoms": "Default Symptoms",
+    "settingsScreen_defaultSymptomsSubtitle": "These are always available when logging new periods.\nTap an existing symptom to delete or '+' to add a new one.",
+    "settingsScreen_deleteDefaultSymptomQuestion": "Delete '{symptom}'?",
+    "@settingsScreen_deleteDefaultSymptomQuestion": {
+        "description": "Question whether a symptom should be deleted.",
+        "placeholders": {
+            "symptom": {
+                "type": "String",
+                "example": "The name of the symptom."
+            }
+        }
+    },
+    "settingsScreen_deleteDefaultSymptomDescription": "'{symptom}' will no longer be available when logging a period.\n\n{usageCount, plural, zero{There are currently no period logs with this symptom!} one{There is already 1 period log with this symptom!\nThis log will not be changed.} other{There are {usageCount} period logs with this symptom!\nThese logs will not be changed.}}",
+    "@settingsScreen_deleteDefaultSymptomDescription": {
+        "description": "Question whether a symptom should be deleted.",
+        "placeholders": {
+            "symptom": {
+                "type": "String",
+                "example": "The name of the symptom."
+            },
+            "usageCount" : {
+
+            }
+        }
+    },
     "settingsScreen_pillRegimens": "Pill Regimens",
     "@settingsScreen_pillRegimens": {
         "description": "Header for the section listing all created pill regimens."
@@ -238,7 +264,7 @@
     "preferencesScreen_language": "Language",
     "preferencesScreen_tamponReminderButton": "Always Show Reminder Button",
     "preferencesScreen_tamponReminderButtonSubtitle": "Makes the tampon reminder button permanently visible on the main screen.",
-    
+
     "settingsScreen_about": "About",
     "aboutScreen_version": "Version",
     "aboutScreen_github": "GitHub",
@@ -335,5 +361,8 @@
                 "type": "int"
             }
         }
-    }
+    },
+    "customSymptomDialog_newCustomSymptom": "New custom symptom",
+    "customSymptomDialog_enterCustomSymptom": "Please enter a custom symptom",
+    "customSymptomDialog_makeDefault": "Make default symptom"
 }

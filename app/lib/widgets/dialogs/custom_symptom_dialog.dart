@@ -27,7 +27,7 @@ class _CustomSymptomDialogState extends State<CustomSymptomDialog> {
     final l10n = AppLocalizations.of(context)!;
 
     return AlertDialog.adaptive(
-      title: Text("New custom symptom", textAlign: TextAlign.center),
+      title: Text(l10n.customSymptomDialog_newCustomSymptom, textAlign: TextAlign.center),
       content: SizedBox(
         width: double.maxFinite,
         child: Form(
@@ -35,11 +35,11 @@ class _CustomSymptomDialogState extends State<CustomSymptomDialog> {
           child: ListView(
             shrinkWrap: true,
             children: [
-              TextFormField(controller: _nameController, validator: (value) => value!.isEmpty ? "Please enter a custom symptom" : null, autofocus: true, maxLength: 60, maxLines: 1),
+              TextFormField(controller: _nameController, validator: (value) => value!.isEmpty ? l10n.customSymptomDialog_enterCustomSymptom : null, autofocus: true, maxLength: 60, maxLines: 1),
               if (widget.showMakeDefaultButton) const SizedBox(height: 16),
               if (widget.showMakeDefaultButton)
                 SwitchListTile(
-                  subtitle: Text("Make default symptom"),
+                  subtitle: Text(l10n.customSymptomDialog_makeDefault),
                   secondary: const Icon(Icons.fact_check),
                   value: _isDefault,
                   onChanged: (value) => {
