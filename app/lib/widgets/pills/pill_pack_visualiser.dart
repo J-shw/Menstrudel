@@ -24,12 +24,11 @@ class PillPackVisualiser extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final totalPills = activeRegimen.activePills + activeRegimen.placeboPills;
-    final l10n = AppLocalizations.of(context)!;
-
+    
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(l10n.pillPackVisualiser_yourPack, style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
+        Text(activeRegimen.name, style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
         const SizedBox(height: 12),
         GridView.builder(
           physics: const NeverScrollableScrollPhysics(),
