@@ -43,7 +43,7 @@ class _PillsScreenState extends State<PillsScreen> {
 
       int currentPillNumber;
       if (regimen.startDate.isAfter(now)) {
-        currentPillNumber = 1; 
+        currentPillNumber = 0; 
       } else {
         final cycleDayIndex = now.difference(regimen.startDate).inDays; 
         currentPillNumber = (cycleDayIndex % totalCycleLength) + 1;
