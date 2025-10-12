@@ -183,7 +183,7 @@ class _BirthControlSettingsScreenState extends State<BirthControlSettingsScreen>
                             ),
                           ),
                           subtitle: Text(
-                              '${regimen.activePills}/${regimen.placeboPills} Pack'),
+                              '${regimen.activePills}/${regimen.placeboPills} ${l10n.settingsScreen_pack} | ${regimen.startDate.day}/${regimen.startDate.month}/${regimen.startDate.year}'),
                           
                           trailing: isActive 
                               ? null
