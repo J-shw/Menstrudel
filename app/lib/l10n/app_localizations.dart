@@ -686,6 +686,30 @@ abstract class AppLocalizations {
   /// **'Remind Me After'**
   String get settingsScreen_remindMeAfter;
 
+  /// Header for the section listing all created pill regimens.
+  ///
+  /// In en, this message translates to:
+  /// **'Pill Regimens'**
+  String get settingsScreen_pillRegimens;
+
+  /// Button to select a regimen and set it as the one currently being tracked.
+  ///
+  /// In en, this message translates to:
+  /// **'Set as Active'**
+  String get settingsScreen_makeActive;
+
+  /// Header for the daily reminder settings section.
+  ///
+  /// In en, this message translates to:
+  /// **'Active Regimen Reminder Settings'**
+  String get settingsScreen_activeRegimenReminder;
+
+  /// No description provided for @settingsScreen_pack.
+  ///
+  /// In en, this message translates to:
+  /// **'Pack'**
+  String get settingsScreen_pack;
+
   /// No description provided for @settingsScreen_dataManagement.
   ///
   /// In en, this message translates to:
@@ -1105,12 +1129,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Set up your pill pack in settings to start tracking.'**
   String get emptyPillStateWidget_noPillRegimenFoundDescription;
-
-  /// No description provided for @pillPackVisualiser_yourPack.
-  ///
-  /// In en, this message translates to:
-  /// **'Your Pack'**
-  String get pillPackVisualiser_yourPack;
 
   /// A label showing the total number of pills.
   ///

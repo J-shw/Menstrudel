@@ -170,6 +170,19 @@
     "settingsScreen_notificationTime": "Notification Time",
     "settingsScreen_overduePeriodReminder": "Overdue Period Reminder",
     "settingsScreen_remindMeAfter": "Remind Me After",
+    "settingsScreen_pillRegimens": "Pill Regimens",
+    "@settingsScreen_pillRegimens": {
+        "description": "Header for the section listing all created pill regimens."
+    },
+    "settingsScreen_makeActive": "Set as Active",
+    "@settingsScreen_makeActive": {
+        "description": "Button to select a regimen and set it as the one currently being tracked."
+    },
+    "settingsScreen_activeRegimenReminder": "Active Regimen Reminder Settings",
+    "@settingsScreen_activeRegimenReminder": {
+        "description": "Header for the daily reminder settings section."
+    },
+    "settingsScreen_pack": "Pack",
 
     "settingsScreen_dataManagement": "Data Management",
     "settingsScreen_clearAllLogs": "Clear All Logs",
@@ -271,8 +284,6 @@
 
     "emptyPillStateWidget_noPillRegimenFound": "No pill regimen found.",
     "emptyPillStateWidget_noPillRegimenFoundDescription": "Set up your pill pack in settings to start tracking.",
-
-    "pillPackVisualiser_yourPack": "Your Pack",
 
     "pillStatus_pillsOfTotal": "{count, plural, =1{of 1 pill} other{of {count} pills}}",
     "@pillStatus_pillsOfTotal": {

@@ -37,14 +37,23 @@ class _PillsScreenState extends State<PillsScreen> {
     final regimen = await pillsRepo.readActivePillRegimen();
     if (regimen != null) {
       final intakes = await pillsRepo.readIntakesForRegimen(regimen.id!);
-      final cycleDay = DateTime.now().difference(regimen.startDate).inDays;
+
+      final now = DateTime.now();
       final totalCycleLength = regimen.activePills + regimen.placeboPills;
+
+      int currentPillNumber;
+      if (regimen.startDate.isAfter(now)) {
+        currentPillNumber = 0; 
+      } else {
+        final cycleDayIndex = now.difference(regimen.startDate).inDays; 
+        currentPillNumber = (cycleDayIndex % totalCycleLength) + 1;
+      }
       if (mounted) {
         setState(() {
           _activeRegimen = regimen;
           _intakes = intakes;
-          _currentPillNumberInCycle = (cycleDay % totalCycleLength) + 1;
-          _selectedPillNumber = _currentPillNumberInCycle;
+          _currentPillNumberInCycle = currentPillNumber;
+          _selectedPillNumber = currentPillNumber;
         });
       }
     }

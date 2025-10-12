@@ -346,6 +346,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsScreen_remindMeAfter => 'Remind Me After';
 
   @override
+  String get settingsScreen_pillRegimens => 'Pill Regimens';
+
+  @override
+  String get settingsScreen_makeActive => 'Set as Active';
+
+  @override
+  String get settingsScreen_activeRegimenReminder =>
+      'Active Regimen Reminder Settings';
+
+  @override
+  String get settingsScreen_pack => 'Pack';
+
+  @override
   String get settingsScreen_dataManagement => 'Data Management';
 
   @override
@@ -586,9 +599,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get emptyPillStateWidget_noPillRegimenFoundDescription =>
       'Set up your pill pack in settings to start tracking.';
-
-  @override
-  String get pillPackVisualiser_yourPack => 'Your Pack';
 
   @override
   String pillStatus_pillsOfTotal(int count) {
