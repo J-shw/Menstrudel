@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:menstrudel/models/pills/pill_intake.dart';
 import 'package:menstrudel/models/pills/pill_regimen.dart';
 import 'pill_circle.dart';
-import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/models/pills/pill_status_enum.dart';
 
 class PillPackVisualiser extends StatelessWidget {
