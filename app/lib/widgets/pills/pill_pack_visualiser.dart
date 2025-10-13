@@ -55,7 +55,9 @@ class PillPackVisualiser extends StatelessWidget {
             }
             
             if (dayNumber > activeRegimen.activePills) {
-              visualStatus = visualStatus == PillVisualStatus.taken ? PillVisualStatus.taken : PillVisualStatus.placebo;
+              if (visualStatus != PillVisualStatus.taken && visualStatus != PillVisualStatus.skipped) {
+                visualStatus = PillVisualStatus.placebo;
+              }
             }
 
             final bool isSelected = dayNumber == selectedPillNumber; 
