@@ -49,7 +49,7 @@ extension PillExtension on PillVisualStatus {
     switch (this) {
       case PillVisualStatus.taken:
         return (
-          decoration: BoxDecoration(shape: BoxShape.circle, color: primaryColor.withOpacity(0.9)),
+          decoration: BoxDecoration(shape: BoxShape.circle, color: primaryColor.withAlpha(90)),
           child: Icon(Icons.check, color: onPrimaryColor, size: 18),
         );
 
