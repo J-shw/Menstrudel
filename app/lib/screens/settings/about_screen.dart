@@ -41,11 +41,11 @@ class _AboutScreenState extends State<AboutScreen> {
   }
   
   void _shareWebsite() {
+    final RenderBox box = context.findRenderObject() as RenderBox;
     SharePlus.instance.share(
-      ShareParams(text: 'Your cycle, your data. Check out Menstrudel, the free and private period tracker: https://menstrudel.app/')
+      ShareParams(text: 'Your cycle, your data. Check out Menstrudel, the free and private period tracker: https://menstrudel.app/', sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size,)
     );
   }
-
 
   @override
   Widget build(BuildContext context) {
