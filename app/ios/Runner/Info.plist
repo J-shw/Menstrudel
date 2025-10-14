@@ -42,5 +42,8 @@
 
 	<key>NSFaceIDUsageDescription</key>
 	<string>Menstrudel uses Face ID to secure your private health data.</string>
+
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Menstrudel needs access to the photo library to allow you to share your exported user data to other apps like files, email or messengers.</string>	
 </dict>
 </plist>
