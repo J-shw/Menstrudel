@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 
-// Import the new screen files you will create
 import 'package:menstrudel/screens/settings/appearance_settings_screen.dart';
 import 'package:menstrudel/screens/settings/birth_control_settings_screen.dart';
 import 'package:menstrudel/screens/settings/period_settings_screen.dart';
 import 'package:menstrudel/screens/settings/data_settings_screen.dart';
+import 'package:menstrudel/screens/settings/security_settings_screen.dart';
+import 'package:menstrudel/screens/settings/preferences_settings_screen.dart';
+import 'package:menstrudel/screens/settings/about_screen.dart';
 
 
 class SettingsScreen extends StatelessWidget {
@@ -18,12 +20,32 @@ class SettingsScreen extends StatelessWidget {
     return ListView(
       children: [
         _SettingsSectionButton(
+          title: l10n.settingsScreen_preferences,
+          icon: Icons.tune_outlined,
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const PreferencesSettingsScreen()),
+            );
+          },
+        ),
+        _SettingsSectionButton(
           title: l10n.settingsScreen_appearance,
           icon: Icons.palette_outlined,
           onTap: () {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => const AppearanceSettingsScreen()),
+            );
+          },
+        ),
+        _SettingsSectionButton(
+          title: l10n.settingsScreen_security,
+          icon: Icons.security_outlined,
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const SecuritySettingsScreen()),
             );
           },
         ),
@@ -54,6 +76,16 @@ class SettingsScreen extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => const DataSettingsScreen()),
+            );
+          },
+        ),
+        _SettingsSectionButton(
+          title: l10n.settingsScreen_about,
+          icon: Icons.info_outline,
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const AboutScreen()),
             );
           },
         ),

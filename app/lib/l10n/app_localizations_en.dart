@@ -53,6 +53,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get save => 'Save';
 
   @override
+  String get import => 'Import';
+
+  @override
   String get ok => 'OK';
 
   @override
@@ -72,6 +75,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get select => 'Select';
+
+  @override
+  String get close => 'Close';
 
   @override
   String get flow => 'Flow';
@@ -243,7 +249,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get pillScreen_pillForTodayMarkedAsTaken =>
-      'Pill for today marked as taken!';
+      'Pill for today marked as taken.';
+
+  @override
+  String get pillScreen_pillForTodayMarkedAsSkipped =>
+      'Pill for today marked as skipped.';
 
   @override
   String get settingsScreen_selectHistoryView => 'Select History View';
@@ -336,6 +346,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsScreen_remindMeAfter => 'Remind Me After';
 
   @override
+  String get settingsScreen_pillRegimens => 'Pill Regimens';
+
+  @override
+  String get settingsScreen_makeActive => 'Set as Active';
+
+  @override
+  String get settingsScreen_activeRegimenReminder =>
+      'Active Regimen Reminder Settings';
+
+  @override
+  String get settingsScreen_pack => 'Pack';
+
+  @override
   String get settingsScreen_dataManagement => 'Data Management';
 
   @override
@@ -367,11 +390,138 @@ class AppLocalizationsEn extends AppLocalizations {
       'Removes your pill regimen and intake history.';
 
   @override
+  String get settingsScreen_exportPeriodData => 'Export Period Data';
+
+  @override
+  String get settingsScreen_exportPillData => 'Export Pill Data';
+
+  @override
+  String get settingsScreen_exportDataSubtitle => 'Create a JSON backup file.';
+
+  @override
+  String get settingsScreen_exportSuccessful => 'Data exported successfully.';
+
+  @override
+  String get settingsScreen_exportFailed => 'Export failed. Please try again.';
+
+  @override
+  String get settingsScreen_noDataToExport => 'No data found to export.';
+
+  @override
+  String get settingsScreen_exportDataMessage =>
+      'Here is my MenstruDel data export.';
+
+  @override
+  String get settingsScreen_exportDataTitle => 'Export Data';
+
+  @override
+  String get settingsScreen_importDataTitle => 'Import Data';
+
+  @override
+  String get settingsScreen_importPeriodData => 'Import Period Data';
+
+  @override
+  String get settingsScreen_importPillData => 'Import Pill Data';
+
+  @override
+  String get settingsScreen_importDataSubtitle => 'Overwrites existing data.';
+
+  @override
+  String get settingsScreen_importPeriodData_question =>
+      'Are you sure you want to import Period Data?';
+
+  @override
+  String get settingsScreen_importPillData_question =>
+      'Are you sure you want to import Pill Data?';
+
+  @override
+  String get settingsScreen_importPeriodDataDescription =>
+      'Importing data will permanently overwrite all your existing period logs and period settings. This cannot be undone.';
+
+  @override
+  String get settingsScreen_importPillDataDescription =>
+      'Importing data will permanently overwrite all your existing pill history. This cannot be undone.';
+
+  @override
+  String get settingsScreen_importSuccessful => 'Data imported successfully!';
+
+  @override
+  String get settingsScreen_importFailed =>
+      'Failed to import data. Please try again.';
+
+  @override
+  String get settingsScreen_importInvalidFile =>
+      'Invalid file format or data structure.';
+
+  @override
+  String get settingsScreen_importErrorGeneral =>
+      'Failed to import data. Please ensure the file is saved locally.';
+
+  @override
+  String settingsScreen_importErrorPlatform(String message) {
+    return 'Import failed: $message. Please ensure the file is saved on the device and try again.';
+  }
+
+  @override
+  String get settingsScreen_security => 'Security';
+
+  @override
+  String get securityScreen_enableBiometricLock => 'Enable Biometric Lock';
+
+  @override
+  String get securityScreen_enableBiometricLockSubtitle =>
+      'Require fingerprint or face ID to open the app.';
+
+  @override
+  String get securityScreen_noBiometricsAvailable =>
+      'No passcode, fingerprint, or face ID found. Please set one up in your device\'s settings.';
+
+  @override
+  String get settingsScreen_preferences => 'Preferences';
+
+  @override
+  String get preferencesScreen_tamponReminderButton =>
+      'Always Show Reminder Button';
+
+  @override
+  String get preferencesScreen_tamponReminderButtonSubtitle =>
+      'Makes the tampon reminder button permanently visible on the main screen.';
+
+  @override
+  String get settingsScreen_about => 'About';
+
+  @override
+  String get aboutScreen_version => 'Version';
+
+  @override
+  String get aboutScreen_github => 'GitHub';
+
+  @override
+  String get aboutScreen_githubSubtitle => 'Source code and issue tracking';
+
+  @override
+  String get aboutScreen_share => 'Share';
+
+  @override
+  String get aboutScreen_shareSubtitle => 'Share the app with friends';
+
+  @override
+  String get aboutScreen_urlError => 'Could not open the link.';
+
+  @override
   String get tamponReminderDialog_tamponReminderTitle => 'Tampon Reminder';
 
   @override
   String get tamponReminderDialog_tamponReminderMaxDuration =>
       'Max duration is 8 hours.';
+
+  @override
+  String get reminderCountdownDialog_title => 'Reminder Due In';
+
+  @override
+  String reminderCountdownDialog_dueAt(Object time) {
+    return 'Due at $time';
+  }
 
   @override
   String get cycleLengthVarianceWidget_LogAtLeastTwoPeriods =>
@@ -451,9 +601,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'Set up your pill pack in settings to start tracking.';
 
   @override
-  String get pillPackVisualiser_yourPack => 'Your Pack';
-
-  @override
   String pillStatus_pillsOfTotal(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
@@ -472,6 +619,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get pillStatus_markAsTaken => 'Mark As Taken';
+
+  @override
+  String pillStatus_packStartInFuture(DateTime date) {
+    final intl.DateFormat dateDateFormat = intl.DateFormat.yMMMd(localeName);
+    final String dateString = dateDateFormat.format(date);
+
+    return 'Your next pill pack starts on $dateString.';
+  }
 
   @override
   String get regimenSetupWidget_setUpPillRegimen => 'Set Up Pill Regimen';

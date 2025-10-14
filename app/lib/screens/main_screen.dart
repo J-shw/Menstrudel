@@ -6,6 +6,7 @@ import 'package:menstrudel/screens/pills_screen.dart';
 import 'package:menstrudel/widgets/main/main_navigation_bar.dart';
 import 'package:menstrudel/widgets/main/app_bar.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
+import 'package:menstrudel/services/settings_service.dart';
 
 enum FabState {
   logPeriod,
@@ -22,69 +23,133 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 1;
-  final GlobalKey<LogsScreenState> _logsScreenKey = GlobalKey<LogsScreenState>();
+  final GlobalKey<LogsScreenState> _logsScreenKey =
+      GlobalKey<LogsScreenState>();
   FabState _fabState = FabState.logPeriod;
   late final List<Widget> _pages;
+
+  final SettingsService _settingsService = SettingsService();
+  bool _isLoading = true;
+  bool _isReminderButtonAlwaysVisible = false;
 
   @override
   void initState() {
     super.initState();
-    _pages = <Widget>[
-      const InsightsScreen(),
-      LogsScreen(
-        key: _logsScreenKey,
-        onFabStateChange: _onFabStateChange,
-      ),
-      const PillsScreen(),
-      const SettingsScreen(),
-    ];
+    _loadSettings();
   }
 
-  void _onFabStateChange(FabState newState) {
-    if (_fabState != newState) {
+  Future<void> _loadSettings() async {
+    final isEnabled =
+        await _settingsService.areAlwaysShowReminderButtonEnabled();
+    if (mounted) {
       setState(() {
-        _fabState = newState;
+        _isReminderButtonAlwaysVisible = isEnabled;
+        _isLoading = false;
+        _pages = <Widget>[
+          const InsightsScreen(),
+          LogsScreen(
+            key: _logsScreenKey,
+            onFabStateChange: _onFabStateChange,
+            isReminderButtonAlwaysVisible: _isReminderButtonAlwaysVisible,
+          ),
+          const PillsScreen(),
+          const SettingsScreen(),
+        ];
       });
     }
   }
 
-  void _onItemTapped(int index) {
+  void _onFabStateChange(FabState suggestedState) {
+    FabState finalState;
+
+    if (_isReminderButtonAlwaysVisible) {
+      if (suggestedState == FabState.cancelReminder) {
+        finalState = FabState.cancelReminder;
+      } else {
+        finalState = FabState.setReminder;
+      }
+    } else {
+      finalState = suggestedState;
+    }
+
+    if (_fabState != finalState) {
+      setState(() {
+        _fabState = finalState;
+      });
+    }
+  }
+
+  void _onItemTapped(int index) async {
     setState(() {
       _selectedIndex = index;
     });
+
+    if (index == 1) {
+      await _loadSettings();
+    }
+  }
+
+  Widget _buildLogPeriodFab(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    return FloatingActionButton(
+      key: const ValueKey('log_fab'),
+      tooltip: l10n.mainScreen_tooltipLogPeriod,
+      onPressed: () =>
+          _logsScreenKey.currentState?.createNewLog(DateTime.now()),
+      child: const Icon(Icons.add),
+    );
+  }
+
+  Widget _buildSetReminderFab(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    return FloatingActionButton(
+      key: const ValueKey('set_reminder_fab'),
+      tooltip: l10n.mainScreen_tooltipSetReminder,
+      onPressed: () =>
+          _logsScreenKey.currentState?.handleTamponReminder(context),
+      child: const Icon(Icons.add_alarm),
+    );
+  }
+
+  Widget _buildCountDownReminderFab(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    return FloatingActionButton(
+      key: const ValueKey('countdown_reminder_fab'),
+      tooltip: l10n.mainScreen_tooltipCancelReminder,
+      onPressed: () => _logsScreenKey.currentState?.handleTamponReminderCountdown(),
+      child: const Icon(Icons.timer),
+    );
   }
 
   Widget _buildFab(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
-    
+    if (_isReminderButtonAlwaysVisible) {
+      final Widget reminderFab = _fabState == FabState.cancelReminder
+          ? _buildCountDownReminderFab(context)
+          : _buildSetReminderFab(context);
+
+      return Column(
+        key: const ValueKey('multi_fab'),
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          reminderFab,
+          const SizedBox(height: 16),
+          _buildLogPeriodFab(context),
+        ],
+      );
+    }
+
     switch (_fabState) {
       case FabState.setReminder:
-        return FloatingActionButton(
-          key: const ValueKey('set_reminder_fab'),
-          tooltip: l10n.mainScreen_tooltipSetReminder,
-          onPressed: () => _logsScreenKey.currentState?.handleTamponReminder(context),
-          child: const Icon(Icons.add_alarm),
-        );
+        return _buildSetReminderFab(context);
       case FabState.cancelReminder:
-        return FloatingActionButton(
-          key: const ValueKey('cancel_reminder_fab'),
-          tooltip: l10n.mainScreen_tooltipCancelReminder,
-          onPressed: () => _logsScreenKey.currentState?.handleCancelReminder(),
-          child: const Icon(Icons.alarm_off),
-        );
+        return _buildCountDownReminderFab(context);
       case FabState.logPeriod:
-        return FloatingActionButton(
-          key: const ValueKey('log_fab'),
-          tooltip: l10n.mainScreen_tooltipLogPeriod,
-          onPressed: () => _logsScreenKey.currentState?.createNewLog(DateTime.now()),
-          child: const Icon(Icons.add),
-        );
+        return _buildLogPeriodFab(context);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-
     final l10n = AppLocalizations.of(context)!;
 
     final List<PreferredSizeWidget?> appBars = [
@@ -101,7 +166,7 @@ class _MainScreenState extends State<MainScreen> {
         selectedIndex: _selectedIndex,
         onDestinationSelected: _onItemTapped,
       ),
-      floatingActionButton: _selectedIndex == 1
+      floatingActionButton: !_isLoading && _selectedIndex == 1
           ? AnimatedSwitcher(
               duration: const Duration(milliseconds: 200),
               transitionBuilder: (Widget child, Animation<double> animation) {

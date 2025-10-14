@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart' as fln;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:menstrudel/utils/constants.dart';
 import 'package:menstrudel/utils/exceptions.dart';
@@ -105,6 +106,7 @@ class NotificationService {
     required String title,
     required String body, 
   }) async {
+    debugPrint('Scheduling pill reminder');
     await _plugin.cancel(pillReminderId);
 
     if (!isEnabled) return;
@@ -132,6 +134,7 @@ class NotificationService {
   }
 
   static Future<void> cancelPillReminder() async {
+    debugPrint('Canceling pill reminder');
     await _plugin.cancel(pillReminderId);
   }
 
@@ -145,20 +148,14 @@ class NotificationService {
     return scheduledDate;
   }
 
-  // Other
+  // Tampon Reminders
 
   static Future<void> scheduleTamponReminder({
-    required TimeOfDay reminderTime,
+    required DateTime reminderDateTime,
     required String title,
     required String body,
   }) async {
-    final now = tz.TZDateTime.now(tz.local);
-    tz.TZDateTime scheduledDate = tz.TZDateTime(
-        tz.local, now.year, now.month, now.day, reminderTime.hour, reminderTime.minute);
-
-    if (scheduledDate.isBefore(now)) {
-      scheduledDate = scheduledDate.add(const Duration(days: 1));
-    }
+    final scheduledDate = tz.TZDateTime.from(reminderDateTime, tz.local);
 
     const details = fln.NotificationDetails(
       android: fln.AndroidNotificationDetails(
@@ -184,6 +181,24 @@ class NotificationService {
   static Future<bool> isTamponReminderScheduled() async {
     final pendingRequests = await _plugin.pendingNotificationRequests();
     return pendingRequests.any((request) => request.id == tamponReminderId);
+  }
+
+  /// Saves the date and time for when the tampon reminder is scheduled
+  static Future<void> setTamponReminderScheduledTime(DateTime scheduledDateTime) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt(tamponReminderDateTimeKey, scheduledDateTime.millisecondsSinceEpoch);
+  }
+
+  /// Gets the date and time for when the tampon reminder is scheduled
+  static Future<DateTime?> getTamponReminderScheduledTime() async {
+    final prefs = await SharedPreferences.getInstance();
+    final storedTimestamp = prefs.getInt(tamponReminderDateTimeKey);
+
+    if (storedTimestamp == null) {
+      return null;
+    }
+
+    return DateTime.fromMillisecondsSinceEpoch(storedTimestamp);
   }
 
   // General

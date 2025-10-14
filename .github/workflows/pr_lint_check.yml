@@ -1,0 +1,84 @@
+name: 'PR Lint Check'
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+
+permissions:
+  pull-requests: write
+
+jobs:
+  lint-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Validate PR Branch and Title'
+        id: validate
+        env:
+          BRANCH_NAME: ${{ github.head_ref }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          # --- Initialize Flags ---
+          branch_is_valid=false
+          title_is_valid=false
+
+          # --- 1. Validate Branch Name ---
+          branch_regex="^(feature|bugfix|docs|chore|refactor|style|test)\/(app|wear|web|repo)\/[a-z0-9-]+$"
+          if [[ "$BRANCH_NAME" == 'l10n_dev' ]] || [[ "$BRANCH_NAME" =~ $branch_regex ]]; then
+            branch_is_valid=true
+          fi
+          echo "Branch name validation: $branch_is_valid"
+
+          # --- 2. Validate PR Title ---
+          # Follows conventional commit format: <type>: <description>
+          title_regex="^(Feature|Bugfix|Docs|Chore|Refactor|Style|Test)\/(app|wear|web|repo)\/([a-z0-9-]+\/)?[a-z0-9-]+"
+          if [[ "$PR_TITLE" =~ $title_regex ]] || [["$PR_TITLE" == 'New Crowdin updates']]; then
+            title_is_valid=true
+          fi
+          echo "PR title validation: $title_is_valid"
+          
+          # --- 3. Set Outputs ---
+          echo "branch_is_valid=$branch_is_valid" >> $GITHUB_OUTPUT
+          echo "title_is_valid=$title_is_valid" >> $GITHUB_OUTPUT
+
+      - name: 'Add PR Comment on Failure'
+        # Run if either check fails
+        if: steps.validate.outputs.branch_is_valid == 'false' || steps.validate.outputs.title_is_valid == 'false'
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const branchIsValid = ${{ steps.validate.outputs.branch_is_valid }};
+            const titleIsValid = ${{ steps.validate.outputs.title_is_valid }};
+            const branchName = "${{ github.head_ref }}";
+            const prTitle = "${{ github.event.pull_request.title }}";
+            
+            let errorMessages = [];
+
+            if (!branchIsValid) {
+              errorMessages.push(
+                `### :x: Invalid Branch Name\n\nThe branch name \`${branchName}\` does not follow the required format: \`<type>/<scope>/<description>\`.\n- **Example:** \`feature/web/new-contact-form\``
+              );
+            }
+
+            if (!titleIsValid) {
+              errorMessages.push(
+                `### :x: Invalid PR Title\n\nThe PR title \`${prTitle}\` does not follow the required format: \`<type>/<scope>/<description>\`.\n- **Example:** \`Feature/web/Add new contact form\``
+              );
+            }
+
+            const commentBody = `
+              ## PR Validation Failed
+              ${errorMessages.join('\n\n---\n\n')}
+              \nPlease correct the issues and push the changes to update this pull request.
+            `;
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: commentBody
+            });
+
+      - name: 'Mark Job as Failed'
+        if: steps.validate.outputs.branch_is_valid == 'false' || steps.validate.outputs.title_is_valid == 'false'
+        run: exit 1

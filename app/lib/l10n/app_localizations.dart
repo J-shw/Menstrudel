@@ -170,6 +170,12 @@ abstract class AppLocalizations {
   /// **'Save'**
   String get save;
 
+  /// No description provided for @import.
+  ///
+  /// In en, this message translates to:
+  /// **'Import'**
+  String get import;
+
   /// No description provided for @ok.
   ///
   /// In en, this message translates to:
@@ -211,6 +217,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Select'**
   String get select;
+
+  /// No description provided for @close.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get close;
 
   /// No description provided for @flow.
   ///
@@ -497,8 +509,14 @@ abstract class AppLocalizations {
   /// No description provided for @pillScreen_pillForTodayMarkedAsTaken.
   ///
   /// In en, this message translates to:
-  /// **'Pill for today marked as taken!'**
+  /// **'Pill for today marked as taken.'**
   String get pillScreen_pillForTodayMarkedAsTaken;
+
+  /// No description provided for @pillScreen_pillForTodayMarkedAsSkipped.
+  ///
+  /// In en, this message translates to:
+  /// **'Pill for today marked as skipped.'**
+  String get pillScreen_pillForTodayMarkedAsSkipped;
 
   /// No description provided for @settingsScreen_selectHistoryView.
   ///
@@ -668,6 +686,30 @@ abstract class AppLocalizations {
   /// **'Remind Me After'**
   String get settingsScreen_remindMeAfter;
 
+  /// Header for the section listing all created pill regimens.
+  ///
+  /// In en, this message translates to:
+  /// **'Pill Regimens'**
+  String get settingsScreen_pillRegimens;
+
+  /// Button to select a regimen and set it as the one currently being tracked.
+  ///
+  /// In en, this message translates to:
+  /// **'Set as Active'**
+  String get settingsScreen_makeActive;
+
+  /// Header for the daily reminder settings section.
+  ///
+  /// In en, this message translates to:
+  /// **'Active Regimen Reminder Settings'**
+  String get settingsScreen_activeRegimenReminder;
+
+  /// No description provided for @settingsScreen_pack.
+  ///
+  /// In en, this message translates to:
+  /// **'Pack'**
+  String get settingsScreen_pack;
+
   /// No description provided for @settingsScreen_dataManagement.
   ///
   /// In en, this message translates to:
@@ -722,6 +764,216 @@ abstract class AppLocalizations {
   /// **'Removes your pill regimen and intake history.'**
   String get settingsScreen_clearAllPillDataSubtitle;
 
+  /// No description provided for @settingsScreen_exportPeriodData.
+  ///
+  /// In en, this message translates to:
+  /// **'Export Period Data'**
+  String get settingsScreen_exportPeriodData;
+
+  /// No description provided for @settingsScreen_exportPillData.
+  ///
+  /// In en, this message translates to:
+  /// **'Export Pill Data'**
+  String get settingsScreen_exportPillData;
+
+  /// No description provided for @settingsScreen_exportDataSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Create a JSON backup file.'**
+  String get settingsScreen_exportDataSubtitle;
+
+  /// No description provided for @settingsScreen_exportSuccessful.
+  ///
+  /// In en, this message translates to:
+  /// **'Data exported successfully.'**
+  String get settingsScreen_exportSuccessful;
+
+  /// No description provided for @settingsScreen_exportFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Export failed. Please try again.'**
+  String get settingsScreen_exportFailed;
+
+  /// No description provided for @settingsScreen_noDataToExport.
+  ///
+  /// In en, this message translates to:
+  /// **'No data found to export.'**
+  String get settingsScreen_noDataToExport;
+
+  /// No description provided for @settingsScreen_exportDataMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Here is my MenstruDel data export.'**
+  String get settingsScreen_exportDataMessage;
+
+  /// No description provided for @settingsScreen_exportDataTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Export Data'**
+  String get settingsScreen_exportDataTitle;
+
+  /// No description provided for @settingsScreen_importDataTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Import Data'**
+  String get settingsScreen_importDataTitle;
+
+  /// No description provided for @settingsScreen_importPeriodData.
+  ///
+  /// In en, this message translates to:
+  /// **'Import Period Data'**
+  String get settingsScreen_importPeriodData;
+
+  /// No description provided for @settingsScreen_importPillData.
+  ///
+  /// In en, this message translates to:
+  /// **'Import Pill Data'**
+  String get settingsScreen_importPillData;
+
+  /// No description provided for @settingsScreen_importDataSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Overwrites existing data.'**
+  String get settingsScreen_importDataSubtitle;
+
+  /// No description provided for @settingsScreen_importPeriodData_question.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to import Period Data?'**
+  String get settingsScreen_importPeriodData_question;
+
+  /// No description provided for @settingsScreen_importPillData_question.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to import Pill Data?'**
+  String get settingsScreen_importPillData_question;
+
+  /// No description provided for @settingsScreen_importPeriodDataDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Importing data will permanently overwrite all your existing period logs and period settings. This cannot be undone.'**
+  String get settingsScreen_importPeriodDataDescription;
+
+  /// No description provided for @settingsScreen_importPillDataDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Importing data will permanently overwrite all your existing pill history. This cannot be undone.'**
+  String get settingsScreen_importPillDataDescription;
+
+  /// No description provided for @settingsScreen_importSuccessful.
+  ///
+  /// In en, this message translates to:
+  /// **'Data imported successfully!'**
+  String get settingsScreen_importSuccessful;
+
+  /// No description provided for @settingsScreen_importFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to import data. Please try again.'**
+  String get settingsScreen_importFailed;
+
+  /// No description provided for @settingsScreen_importInvalidFile.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid file format or data structure.'**
+  String get settingsScreen_importInvalidFile;
+
+  /// General message when file import fails for unknown reasons.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to import data. Please ensure the file is saved locally.'**
+  String get settingsScreen_importErrorGeneral;
+
+  /// Error when the native file picker fails, includes the specific error message.
+  ///
+  /// In en, this message translates to:
+  /// **'Import failed: {message}. Please ensure the file is saved on the device and try again.'**
+  String settingsScreen_importErrorPlatform(String message);
+
+  /// No description provided for @settingsScreen_security.
+  ///
+  /// In en, this message translates to:
+  /// **'Security'**
+  String get settingsScreen_security;
+
+  /// No description provided for @securityScreen_enableBiometricLock.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable Biometric Lock'**
+  String get securityScreen_enableBiometricLock;
+
+  /// No description provided for @securityScreen_enableBiometricLockSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Require fingerprint or face ID to open the app.'**
+  String get securityScreen_enableBiometricLockSubtitle;
+
+  /// No description provided for @securityScreen_noBiometricsAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'No passcode, fingerprint, or face ID found. Please set one up in your device\'s settings.'**
+  String get securityScreen_noBiometricsAvailable;
+
+  /// No description provided for @settingsScreen_preferences.
+  ///
+  /// In en, this message translates to:
+  /// **'Preferences'**
+  String get settingsScreen_preferences;
+
+  /// No description provided for @preferencesScreen_tamponReminderButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Always Show Reminder Button'**
+  String get preferencesScreen_tamponReminderButton;
+
+  /// No description provided for @preferencesScreen_tamponReminderButtonSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Makes the tampon reminder button permanently visible on the main screen.'**
+  String get preferencesScreen_tamponReminderButtonSubtitle;
+
+  /// No description provided for @settingsScreen_about.
+  ///
+  /// In en, this message translates to:
+  /// **'About'**
+  String get settingsScreen_about;
+
+  /// No description provided for @aboutScreen_version.
+  ///
+  /// In en, this message translates to:
+  /// **'Version'**
+  String get aboutScreen_version;
+
+  /// No description provided for @aboutScreen_github.
+  ///
+  /// In en, this message translates to:
+  /// **'GitHub'**
+  String get aboutScreen_github;
+
+  /// No description provided for @aboutScreen_githubSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Source code and issue tracking'**
+  String get aboutScreen_githubSubtitle;
+
+  /// No description provided for @aboutScreen_share.
+  ///
+  /// In en, this message translates to:
+  /// **'Share'**
+  String get aboutScreen_share;
+
+  /// No description provided for @aboutScreen_shareSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Share the app with friends'**
+  String get aboutScreen_shareSubtitle;
+
+  /// No description provided for @aboutScreen_urlError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not open the link.'**
+  String get aboutScreen_urlError;
+
   /// No description provided for @tamponReminderDialog_tamponReminderTitle.
   ///
   /// In en, this message translates to:
@@ -733,6 +985,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Max duration is 8 hours.'**
   String get tamponReminderDialog_tamponReminderMaxDuration;
+
+  /// No description provided for @reminderCountdownDialog_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Reminder Due In'**
+  String get reminderCountdownDialog_title;
+
+  /// Indicates the time a reminder is due. The {time} placeholder will be a formatted time string (e.g., '2:30 PM').
+  ///
+  /// In en, this message translates to:
+  /// **'Due at {time}'**
+  String reminderCountdownDialog_dueAt(Object time);
 
   /// No description provided for @cycleLengthVarianceWidget_LogAtLeastTwoPeriods.
   ///
@@ -866,12 +1130,6 @@ abstract class AppLocalizations {
   /// **'Set up your pill pack in settings to start tracking.'**
   String get emptyPillStateWidget_noPillRegimenFoundDescription;
 
-  /// No description provided for @pillPackVisualiser_yourPack.
-  ///
-  /// In en, this message translates to:
-  /// **'Your Pack'**
-  String get pillPackVisualiser_yourPack;
-
   /// A label showing the total number of pills.
   ///
   /// In en, this message translates to:
@@ -895,6 +1153,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Mark As Taken'**
   String get pillStatus_markAsTaken;
+
+  /// Message shown when the pill pack start date is in the future.
+  ///
+  /// In en, this message translates to:
+  /// **'Your next pill pack starts on {date}.'**
+  String pillStatus_packStartInFuture(DateTime date);
 
   /// No description provided for @regimenSetupWidget_setUpPillRegimen.
   ///

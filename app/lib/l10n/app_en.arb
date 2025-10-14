@@ -27,6 +27,7 @@
     "delete": "Delete",
     "clear": "Clear",
     "save": "Save",
+    "import": "Import",
 
     "ok": "OK",
     "confirm": "Confirm",
@@ -35,6 +36,7 @@
     "no": "No",
     "cancel": "Cancel",
     "select": "Select",
+    "close": "Close",
 
     "flow": "Flow",
 
@@ -135,7 +137,8 @@
     "logScreen_tamponReminderCancelled": "Tampon reminder cancelled.",
     "logScreen_couldNotCancelReminder": "Could not cancel reminder",
 
-    "pillScreen_pillForTodayMarkedAsTaken": "Pill for today marked as taken!",
+    "pillScreen_pillForTodayMarkedAsTaken": "Pill for today marked as taken.",
+    "pillScreen_pillForTodayMarkedAsSkipped": "Pill for today marked as skipped.",
 
     "settingsScreen_selectHistoryView": "Select History View",
     "settingsScreen_deleteRegimen_question": "Delete Regimen?",
@@ -143,6 +146,7 @@
     "settingsScreen_allLogsHaveBeenCleared": "All logs have been cleared.",
     "settingsScreen_clearAllLogs_question": "Clear All Logs?",
     "settingsScreen_deleteAllLogsDescription": "This will permanently delete all your period logs. Your app settings will not be affected.",
+
     "settingsScreen_appearance": "Appearance",
     "settingsScreen_historyViewStyle": "History View Style",
     "settingsScreen_appTheme": "App Theme",
@@ -154,6 +158,7 @@
     "settingsScreen_themeColor": "Theme Color",
     "settingsScreen_pickAColor": "Pick a Color",
     "settingsScreen_view": "View",
+
     "settingsScreen_birthControl": "Birth Control",
     "settingsScreen_setUpPillRegimen": "Set Up Pill Regimen",
     "settingsScreen_trackYourDailyPillIntake": "Track Your Daily Pill Intake",
@@ -165,6 +170,20 @@
     "settingsScreen_notificationTime": "Notification Time",
     "settingsScreen_overduePeriodReminder": "Overdue Period Reminder",
     "settingsScreen_remindMeAfter": "Remind Me After",
+    "settingsScreen_pillRegimens": "Pill Regimens",
+    "@settingsScreen_pillRegimens": {
+        "description": "Header for the section listing all created pill regimens."
+    },
+    "settingsScreen_makeActive": "Set as Active",
+    "@settingsScreen_makeActive": {
+        "description": "Button to select a regimen and set it as the one currently being tracked."
+    },
+    "settingsScreen_activeRegimenReminder": "Active Regimen Reminder Settings",
+    "@settingsScreen_activeRegimenReminder": {
+        "description": "Header for the daily reminder settings section."
+    },
+    "settingsScreen_pack": "Pack",
+
     "settingsScreen_dataManagement": "Data Management",
     "settingsScreen_clearAllLogs": "Clear All Logs",
     "settingsScreen_clearAllPillData": "Clear All Pill Data",
@@ -174,9 +193,66 @@
     "settingsScreen_dangerZone": "Danger Zone",
     "settingsScreen_clearAllLogsSubtitle": "Deletes your entire period and symptom history.",
     "settingsScreen_clearAllPillDataSubtitle": "Removes your pill regimen and intake history.",
+    "settingsScreen_exportPeriodData": "Export Period Data",
+    "settingsScreen_exportPillData": "Export Pill Data",
+    "settingsScreen_exportDataSubtitle": "Create a JSON backup file.",
+    "settingsScreen_exportSuccessful": "Data exported successfully.",
+    "settingsScreen_exportFailed": "Export failed. Please try again.",
+    "settingsScreen_noDataToExport": "No data found to export.",
+    "settingsScreen_exportDataMessage": "Here is my MenstruDel data export.",
+    "settingsScreen_exportDataTitle": "Export Data",
+    "settingsScreen_importDataTitle": "Import Data",
+    "settingsScreen_importPeriodData": "Import Period Data",
+    "settingsScreen_importPillData": "Import Pill Data",
+    "settingsScreen_importDataSubtitle": "Overwrites existing data.",
+    "settingsScreen_importPeriodData_question": "Are you sure you want to import Period Data?",
+    "settingsScreen_importPillData_question": "Are you sure you want to import Pill Data?",
+    "settingsScreen_importPeriodDataDescription": "Importing data will permanently overwrite all your existing period logs and period settings. This cannot be undone.",
+    "settingsScreen_importPillDataDescription": "Importing data will permanently overwrite all your existing pill history. This cannot be undone.",
+    "settingsScreen_importSuccessful": "Data imported successfully!",
+    "settingsScreen_importFailed": "Failed to import data. Please try again.",
+    "settingsScreen_importInvalidFile": "Invalid file format or data structure.",
+    "settingsScreen_importErrorGeneral": "Failed to import data. Please ensure the file is saved locally.",
+    "@settingsScreen_importErrorGeneral": {
+        "description": "General message when file import fails for unknown reasons."
+    },
+    "settingsScreen_importErrorPlatform": "Import failed: {message}. Please ensure the file is saved on the device and try again.",
+    "@settingsScreen_importErrorPlatform": {
+        "description": "Error when the native file picker fails, includes the specific error message.",
+        "placeholders": {
+        "message": {
+            "type": "String",
+            "example": "Unknown path or network access required."
+        }
+        }
+    },
+
+    "settingsScreen_security": "Security",
+    "securityScreen_enableBiometricLock": "Enable Biometric Lock",
+    "securityScreen_enableBiometricLockSubtitle": "Require fingerprint or face ID to open the app.",
+    "securityScreen_noBiometricsAvailable": "No passcode, fingerprint, or face ID found. Please set one up in your device's settings.",
+    "settingsScreen_preferences": "Preferences",
+    "preferencesScreen_tamponReminderButton": "Always Show Reminder Button",
+    "preferencesScreen_tamponReminderButtonSubtitle": "Makes the tampon reminder button permanently visible on the main screen.",
+    "settingsScreen_about": "About",
+    "aboutScreen_version": "Version",
+    "aboutScreen_github": "GitHub",
+    "aboutScreen_githubSubtitle": "Source code and issue tracking",
+    "aboutScreen_share": "Share",
+    "aboutScreen_shareSubtitle": "Share the app with friends",
+    "aboutScreen_urlError": "Could not open the link.",
 
     "tamponReminderDialog_tamponReminderTitle": "Tampon Reminder",
     "tamponReminderDialog_tamponReminderMaxDuration": "Max duration is 8 hours.",
+
+    "reminderCountdownDialog_title": "Reminder Due In",
+    "reminderCountdownDialog_dueAt": "Due at {time}",
+    "@reminderCountdownDialog_dueAt": {
+        "description": "Indicates the time a reminder is due. The {time} placeholder will be a formatted time string (e.g., '2:30 PM').",
+        "placeholders": {
+            "time": {}
+        }
+    },
 
     "cycleLengthVarianceWidget_LogAtLeastTwoPeriods": "Need at least two cycles to show variance.",
     "cycleLengthVarianceWidget_cycleAndPeriodVeriance": "Cycle & Period Variance",
@@ -209,8 +285,6 @@
     "emptyPillStateWidget_noPillRegimenFound": "No pill regimen found.",
     "emptyPillStateWidget_noPillRegimenFoundDescription": "Set up your pill pack in settings to start tracking.",
 
-    "pillPackVisualiser_yourPack": "Your Pack",
-
     "pillStatus_pillsOfTotal": "{count, plural, =1{of 1 pill} other{of {count} pills}}",
     "@pillStatus_pillsOfTotal": {
         "description": "A label showing the total number of pills.",
@@ -223,6 +297,16 @@
     "pillStatus_undo": "Undo",
     "pillStatus_skip": "Skip",
     "pillStatus_markAsTaken": "Mark As Taken",
+    "pillStatus_packStartInFuture": "Your next pill pack starts on {date}.",
+    "@pillStatus_packStartInFuture": {
+        "description": "Message shown when the pill pack start date is in the future.",
+        "placeholders": {
+        "date": {
+            "type": "DateTime",
+            "format": "yMMMd"
+        }
+        }
+    },
 
     "regimenSetupWidget_setUpPillRegimen": "Set Up Pill Regimen",
     "regimenSetupWidget_packName": "Pack Name",
