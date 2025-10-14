@@ -95,7 +95,7 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
         throw Exception(l10n.settingsScreen_noDataToExport);
       }
 
-      final Directory directory = await getTemporaryDirectory();
+      final Directory directory = await getApplicationDocumentsDirectory();
       final timestamp = DateFormat('yyyyMMdd_HHmmss').format(DateTime.now());
       final fileName = 'menstrudel_period_data_$timestamp.json';
       final exportFile = File('${directory.path}/$fileName');
@@ -103,9 +103,13 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
       await exportFile.writeAsString(jsonData);
       filePath = exportFile.path;
 
+      if(!mounted){return;}
+
+      final RenderBox box = context.findRenderObject() as RenderBox;
+
       final params = ShareParams(
-        text: l10n.settingsScreen_exportDataMessage,
         files: [XFile(filePath)],
+        sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size,
       );
 
       final result = await SharePlus.instance.share(params);
@@ -150,7 +154,7 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
         throw Exception(l10n.settingsScreen_noDataToExport);
       }
 
-      final Directory directory = await getTemporaryDirectory();
+      final Directory directory = await getApplicationDocumentsDirectory();
       final timestamp = DateFormat('yyyyMMdd_HHmmss').format(DateTime.now());
       final fileName = 'menstrudel_pill_data_$timestamp.json';
       final exportFile = File('${directory.path}/$fileName');
@@ -158,9 +162,13 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
       await exportFile.writeAsString(jsonData);
       filePath = exportFile.path;
 
+      if(!mounted){return;}
+
+      final RenderBox box = context.findRenderObject() as RenderBox;
+
       final params = ShareParams(
-        text: l10n.settingsScreen_exportDataMessage,
         files: [XFile(filePath)],
+        sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size,
       );
 
       final result = await SharePlus.instance.share(params);
