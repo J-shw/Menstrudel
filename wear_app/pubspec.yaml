@@ -23,3 +23,12 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+flutter_native_splash:
+  color: "#000000"
+
+  image: assets/splash_icon.png
+
+  android_12:
+    color: "#000000"
+    image: assets/splash_icon.png
