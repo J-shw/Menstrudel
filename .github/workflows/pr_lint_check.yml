@@ -32,8 +32,8 @@ jobs:
           echo "title_is_valid=$title_is_valid" >> $GITHUB_OUTPUT
 
       - name: 'Add PR Comment on Failure'
-        # Run if either check fails
-        if: steps.validate.outputs.branch_is_valid == 'false' || steps.validate.outputs.title_is_valid == 'false'
+        # Run check fails
+        if: steps.validate.outputs.title_is_valid == 'false'
         uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
