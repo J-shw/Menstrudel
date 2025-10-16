@@ -13,7 +13,8 @@ dependencies:
   cupertino_icons: ^1.0.8
   wear_plus: ^1.2.3
   shared_preferences: ^2.5.3
-  watch_connectivity: ^0.2.1+1
+  watch_connectivity: ^0.2.3
+  flutter_native_splash: ^2.4.6
 
 dev_dependencies:
   flutter_test:
