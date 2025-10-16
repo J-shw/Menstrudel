@@ -11,24 +11,16 @@ jobs:
   lint-pr:
     runs-on: ubuntu-latest
     steps:
-      - name: 'Validate PR Branch and Title'
+      - name: 'Validate PR Title'
         id: validate
         env:
           BRANCH_NAME: ${{ github.head_ref }}
           PR_TITLE: ${{ github.event.pull_request.title }}
         run: |
           # --- Initialize Flags ---
-          branch_is_valid=false
           title_is_valid=false
 
-          # --- 1. Validate Branch Name ---
-          branch_regex="^(feature|bugfix|docs|chore|refactor|style|test)\/(app|wear|web|repo)\/[a-z0-9-]+$"
-          if [[ "$BRANCH_NAME" == 'l10n_dev' ]] || [[ "$BRANCH_NAME" =~ $branch_regex ]]; then
-            branch_is_valid=true
-          fi
-          echo "Branch name validation: $branch_is_valid"
-
-          # --- 2. Validate PR Title ---
+          # --- 1. Validate PR Title ---
           # Follows conventional commit format: <type>: <description>
           title_regex="^(Feature|Bugfix|Docs|Chore|Refactor|Style|Test)\/(app|wear|web|repo)\/([a-z0-9-]+\/)?[a-z0-9-]+"
           if [[ "$PR_TITLE" =~ $title_regex ]] || [["$PR_TITLE" == 'New Crowdin updates']]; then
@@ -36,8 +28,7 @@ jobs:
           fi
           echo "PR title validation: $title_is_valid"
           
-          # --- 3. Set Outputs ---
-          echo "branch_is_valid=$branch_is_valid" >> $GITHUB_OUTPUT
+          # --- 2. Set Outputs ---
           echo "title_is_valid=$title_is_valid" >> $GITHUB_OUTPUT
 
       - name: 'Add PR Comment on Failure'
@@ -47,18 +38,10 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const branchIsValid = ${{ steps.validate.outputs.branch_is_valid }};
             const titleIsValid = ${{ steps.validate.outputs.title_is_valid }};
-            const branchName = "${{ github.head_ref }}";
             const prTitle = "${{ github.event.pull_request.title }}";
             
             let errorMessages = [];
-
-            if (!branchIsValid) {
-              errorMessages.push(
-                `### :x: Invalid Branch Name\n\nThe branch name \`${branchName}\` does not follow the required format: \`<type>/<scope>/<description>\`.\n- **Example:** \`feature/web/new-contact-form\``
-              );
-            }
 
             if (!titleIsValid) {
               errorMessages.push(
@@ -80,5 +63,5 @@ jobs:
             });
 
       - name: 'Mark Job as Failed'
-        if: steps.validate.outputs.branch_is_valid == 'false' || steps.validate.outputs.title_is_valid == 'false'
+        if: steps.validate.outputs.title_is_valid == 'false'
         run: exit 1
