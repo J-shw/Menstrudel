@@ -28,7 +28,7 @@ After months of hard work, the main functions are stable and we feel the app is 
 * **Data Import** Added the ability to import your data.
 * **Edit Past Pill States** You can now edit the state (taken/skipped) of past pills.
 * **Multi-Pill Pack Support** The app now supports multiple pill packs.
-* **Italian Translations** Thanks to the hard work of a dedicated user, the app is now completly translated to Italian. 
+* **Italian Translations** Thanks to the hard work of a dedicated user, the app is now completely translated to Italian. 
 
 ---
 
