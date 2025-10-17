@@ -14,7 +14,7 @@ After months of hard work, the main functions are stable and we feel the app is 
 ## Get the Menstrudel App
 
 - 🤖 [Google Playstore](https://play.google.com/store/apps/details?id=com.whitticase.menstrudel)
-- 🍎 [Apple AppStore](URL_NEEDED_HERE)
+- 🍎 [Apple AppStore](https://apps.apple.com/us/app/menstrudel/id6751970511)
 
 
 ### What's New
