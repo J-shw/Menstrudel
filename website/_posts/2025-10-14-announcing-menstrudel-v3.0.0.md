@@ -14,7 +14,7 @@ After months of hard work, the main functions are stable and we feel the app is 
 ## Get the Menstrudel App
 
 - 🤖 [Google Playstore](https://play.google.com/store/apps/details?id=com.whitticase.menstrudel)
-- 🍎 [Apple AppStore](URL_HERE)
+- 🍎 [Apple AppStore](URL_NEEDED_HERE)
 
 
 ### What's New
@@ -28,6 +28,7 @@ After months of hard work, the main functions are stable and we feel the app is 
 * **Data Import** Added the ability to import your data.
 * **Edit Past Pill States** You can now edit the state (taken/skipped) of past pills.
 * **Multi-Pill Pack Support** The app now supports multiple pill packs.
+* **Italian Translations** Thanks to the hard work of a dedicated user, the app is now completly translated to Italian. 
 
 ---
 
@@ -41,5 +42,26 @@ After months of hard work, the main functions are stable and we feel the app is 
 * Fixed an issue where marking a pill as taken did not cancel the reminder.
 * Fixed a bug that disabled pill actions when the pack start date was in the future.
 * Fixed an issue where placebo pills were not showing the skipped state.
+
+## Get Involved
+
+Want to support the apps progress? Then checkout the [GitHub](https://github.com/J-shw/Menstrudel) and share your thoughts! 
+
+Is there a language you want supported? Help out on [Crowdin](https://crowdin.com/project/menstrudel)
+
+## Get Involved
+
+We love hearing from you! Menstrudel is an open-source project, and its success is a team effort. Here’s how you can help us make it even better:
+
+* **Share Your Thoughts:** Found a **bug**? Have an idea for a **new feature**? We track all development on **GitHub**.
+    * **Open a Discussion:** [GitHub Discussions](https://github.com/J-shw/Menstrudel/discussions) is the best place to share general feedback and ideas.
+    * **Report an Issue:** If you find a bug, please [open an issue on GitHub](https://github.com/J-shw/Menstrudel/issues) to help us fix it quickly.
+    * **Contribute Code:** If you're a developer, check out the source code and [submit a Pull Request](https://github.com/J-shw/Menstrudel).
+
+* **Help with Translations:** Is there a language *you* want supported? Join our effort and help us translate Menstrudel on **Crowdin**: [https://crowdin.com/project/menstrudel](https://crowdin.com/project/menstrudel)
+
+* **Spread the Word:** Tell your friends about Menstrudel! Leaving a **5-star review** on the App Store or Google Play is one of the easiest, yet most powerful, ways to support the app.
+
+---
 
 Thanks for your continued support!
