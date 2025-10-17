@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Menstrudel v3.0.0"
-date: 2025-10-14
+date: 2025-10-17
 categories: [release notes, announcements]
 image: /assets/images/blog/new-release.png
 ---
