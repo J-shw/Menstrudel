@@ -27,6 +27,8 @@ All app translations are managed through Crowdin. We welcome contributions, whet
 
 You do not need to edit any `.arb` or `.dart` files in this repository. All translation changes will be synced from Crowdin by the maintainers.
 
+For more details please see the [translation docs](docs/translation/README.md)
+
 ---
 
 ## Branching Model
