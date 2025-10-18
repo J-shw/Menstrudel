@@ -47,7 +47,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String get delete => 'Elimina';
 
   @override
-  String get clear => 'Elimina';
+  String get clear => 'Cancella';
 
   @override
   String get save => 'Salva';
@@ -487,6 +487,9 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get settingsScreen_preferences => 'Preferenze';
+
+  @override
+  String get preferencesScreen_language => 'Language';
 
   @override
   String get preferencesScreen_tamponReminderButton =>

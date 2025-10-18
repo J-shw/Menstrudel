@@ -482,6 +482,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsScreen_preferences => 'Preferences';
 
   @override
+  String get preferencesScreen_language => 'Language';
+
+  @override
   String get preferencesScreen_tamponReminderButton =>
       'Always Show Reminder Button';
 
