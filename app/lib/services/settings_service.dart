@@ -11,6 +11,16 @@ class SettingsService {
     await prefs.clear();
   }
 
+  Future<void> setLanguageCode(String code) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(languageKey, code);
+  }
+
+  Future<String> getLanguageCode() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString(languageKey) ?? 'system';
+  }
+
   Future<void> setAlwaysShowReminderButtonEnabled(bool isEnabled) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(persistentReminderKey, isEnabled);
