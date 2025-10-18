@@ -1,4 +1,4 @@
-# How to Add a New Blog Post
+# How to Add a New Blog Post 📝
 
 This guide explains how to create and publish a new blog post.
 
