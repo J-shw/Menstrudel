@@ -12,176 +12,179 @@ class AppLocalizationsFr extends AppLocalizations {
   String get appTitle => 'Menstrudel';
 
   @override
-  String get ongoing => 'Ongoing';
+  String get ongoing => 'En cours';
 
   @override
   String get date => 'Date';
 
   @override
-  String get time => 'Time';
+  String get time => 'Heure';
 
   @override
-  String get start => 'Start';
+  String get start => 'Début';
 
   @override
-  String get end => 'End';
+  String get end => 'Fin';
 
   @override
-  String get day => 'Day';
+  String get day => 'Jour';
 
   @override
-  String get days => 'Days';
+  String get days => 'Jours';
 
   @override
   String dayCount(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count Days',
-      one: '$count Day',
+      other: '$count Jours',
+      one: '$count Jour',
     );
     return '$_temp0';
   }
 
   @override
-  String get delete => 'Delete';
+  String get delete => 'Supprimer';
 
   @override
-  String get clear => 'Clear';
+  String get clear => 'Effacer';
 
   @override
-  String get save => 'Save';
+  String get save => 'Sauvegarder';
 
   @override
-  String get import => 'Import';
+  String get import => 'Importer';
 
   @override
   String get ok => 'OK';
 
   @override
-  String get confirm => 'Confirm';
+  String get confirm => 'Confirmer';
 
   @override
-  String get set => 'Set';
+  String get set => 'Définir';
 
   @override
-  String get yes => 'Yes';
+  String get yes => 'Oui';
 
   @override
-  String get no => 'No';
+  String get no => 'Non';
 
   @override
-  String get cancel => 'Cancel';
+  String get cancel => 'Annuler';
 
   @override
-  String get select => 'Select';
+  String get select => 'Sélectionner';
 
   @override
-  String get close => 'Close';
+  String get close => 'Fermer';
 
   @override
-  String get flow => 'Flow';
+  String get systemDefault => 'System Default';
 
   @override
-  String get navBar_insights => 'Insights';
+  String get flow => 'Flux /';
 
   @override
-  String get navBar_logs => 'Logs';
+  String get navBar_insights => 'Statistiques';
 
   @override
-  String get navBar_pill => 'Pill';
+  String get navBar_logs => 'Historique';
 
   @override
-  String get navBar_settings => 'Settings';
+  String get navBar_pill => 'Pilule';
 
   @override
-  String get flowIntensity_none => 'None';
+  String get navBar_settings => 'Paramètres';
 
   @override
-  String get flowIntensity_spotting => 'Spotting';
+  String get flowIntensity_none => 'Aucun';
 
   @override
-  String get flowIntensity_light => 'Light';
+  String get flowIntensity_spotting => 'Saignement léger';
 
   @override
-  String get flowIntensity_moderate => 'Moderate';
+  String get flowIntensity_light => 'Léger';
 
   @override
-  String get flowIntensity_heavy => 'Heavy';
+  String get flowIntensity_moderate => 'Modéré';
 
   @override
-  String get symptom_headache => 'Headache';
+  String get flowIntensity_heavy => 'Abondant';
+
+  @override
+  String get symptom_headache => 'Maux de tête';
 
   @override
   String get symptom_fatigue => 'Fatigue';
 
   @override
-  String get symptom_cramps => 'Cramps';
+  String get symptom_cramps => 'Crampes';
 
   @override
-  String get symptom_nausea => 'Nausea';
+  String get symptom_nausea => 'Nausée';
 
   @override
-  String get symptom_moodSwings => 'Mood Swings';
+  String get symptom_moodSwings => 'Sauts d’humeur';
 
   @override
-  String get symptom_bloating => 'Bloating';
+  String get symptom_bloating => 'Ballonnements';
 
   @override
-  String get symptom_acne => 'Acne';
+  String get symptom_acne => 'Acné';
 
   @override
-  String get painLevel_title => 'Pain Level';
+  String get painLevel_title => 'Intensité de la douleur';
 
   @override
-  String get painLevel_none => 'None';
+  String get painLevel_none => 'Aucune';
 
   @override
-  String get painLevel_mild => 'Mild';
+  String get painLevel_mild => 'Légère';
 
   @override
-  String get painLevel_moderate => 'Moderate';
+  String get painLevel_moderate => 'Modérée';
 
   @override
-  String get painLevel_severe => 'Severe';
+  String get painLevel_severe => 'Forte';
 
   @override
-  String get pain_unbearable => 'Unbearable';
+  String get pain_unbearable => 'Insupportable';
 
   @override
-  String get notification_periodTitle => 'Period Approaching';
+  String get notification_periodTitle => 'Règles imminentes';
 
   @override
   String notification_periodBody(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'Your next period is estimated to start in $count days.',
-      one: 'Your next period is estimated to start in 1 day.',
+      other: 'Vos prochaines règles devraient commencer dans $count jours.',
+      one: 'Vos prochaines règles devraient commencer dans 1 jour.',
     );
     return '$_temp0';
   }
 
   @override
-  String get notification_periodOverdueTitle => 'Period Overdue';
+  String get notification_periodOverdueTitle => 'Règles en retard';
 
   @override
   String notification_periodOverdueBody(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'Your next period is overdue by $count days.',
-      one: 'Your next period is overdue by 1 day.',
+      other: 'Vos prochaines règles sont en retard de $count jours.',
+      one: 'Vos prochaines règles sont en retard d\'un jour.',
     );
     return '$_temp0';
   }
 
   @override
-  String get notification_pillTitle => 'Pill Reminder';
+  String get notification_pillTitle => 'Rappel de pilule';
 
   @override
   String get notification_pillBody =>
-      'Don\'t forget to take your pill for today.';
+      'N’oubliez pas de prendre votre pilule aujourd’hui.';
 
   @override
   String get notification_tamponReminderTitle => 'Tampon Reminder';
@@ -478,6 +481,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get settingsScreen_preferences => 'Preferences';
+
+  @override
+  String get preferencesScreen_language => 'Language';
 
   @override
   String get preferencesScreen_tamponReminderButton =>

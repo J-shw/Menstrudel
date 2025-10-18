@@ -80,6 +80,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get close => 'Close';
 
   @override
+  String get systemDefault => 'System Default';
+
+  @override
   String get flow => 'Flow';
 
   @override
@@ -478,6 +481,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get settingsScreen_preferences => 'Preferences';
+
+  @override
+  String get preferencesScreen_language => 'Language';
 
   @override
   String get preferencesScreen_tamponReminderButton =>

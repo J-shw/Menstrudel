@@ -228,6 +228,12 @@ abstract class AppLocalizations {
   /// **'Close'**
   String get close;
 
+  /// No description provided for @systemDefault.
+  ///
+  /// In en, this message translates to:
+  /// **'System Default'**
+  String get systemDefault;
+
   /// No description provided for @flow.
   ///
   /// In en, this message translates to:
@@ -923,6 +929,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Preferences'**
   String get settingsScreen_preferences;
+
+  /// No description provided for @preferencesScreen_language.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get preferencesScreen_language;
 
   /// No description provided for @preferencesScreen_tamponReminderButton.
   ///
