@@ -89,7 +89,7 @@ Once you have saved your file, commit the changes and push them to your own bran
 
 ---
 
-## Complete Example
+### Complete Example
 
 ```markdown
 ---
