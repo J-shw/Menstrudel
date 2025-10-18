@@ -87,7 +87,7 @@ This is a regular paragraph. You can add lists, links, and other formatting.
 
 Once you have saved your file, commit the changes and push them to your own branch using the scheme `feature/web/my-blog-example`. Once ready, make a pull request to the `dev` branch on GitHub. The website will automatically update with your new post once accepted.
 
---
+---
 
 ## Complete Example
 
