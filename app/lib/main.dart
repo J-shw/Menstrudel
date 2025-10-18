@@ -11,6 +11,7 @@ import 'package:menstrudel/services/wear_sync_service.dart';
 import 'package:menstrudel/database/repositories/periods_repository.dart';
 import 'package:menstrudel/models/themes/app_theme_mode_enum.dart';
 import 'package:menstrudel/screens/auth_gate.dart';
+import 'package:menstrudel/notifiers/locale_notifier.dart';
 
 final watchService = WatchSyncService();
 final periodsRepository = PeriodsRepository();
@@ -33,8 +34,11 @@ void main() async {
   );
 
   runApp(
-    ChangeNotifierProvider(
-      create: (_) => ThemeNotifier(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => ThemeNotifier()),
+        ChangeNotifierProvider(create: (_) => LocaleNotifier()),
+      ],
       child: const MainApp(),
     ),
   );
@@ -46,6 +50,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeNotifier = context.watch<ThemeNotifier>();
+    final localeNotifier = context.watch<LocaleNotifier>();
 
     return DynamicColorBuilder(
       builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
@@ -70,6 +75,7 @@ class MainApp extends StatelessWidget {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
 
+          locale: localeNotifier.locale,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
           onGenerateTitle: (context) {
