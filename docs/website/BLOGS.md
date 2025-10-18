@@ -1,4 +1,4 @@
-# How to Add a New Blog Post
+# How to Add a New Blog Post 📝
 
 This guide explains how to create and publish a new blog post.
 
@@ -86,3 +86,23 @@ This is a regular paragraph. You can add lists, links, and other formatting.
 ### 4. Publish the Post
 
 Once you have saved your file, commit the changes and push them to your own branch using the scheme `feature/web/my-blog-example`. Once ready, make a pull request to the `dev` branch on GitHub. The website will automatically update with your new post once accepted.
+
+---
+
+### Complete Example
+
+```markdown
+---
+layout: post
+title: "My new announcement"
+date: 2025-10-20
+categories: [release notes, announcements]
+image: /assets/images/blog/new-release.png
+---
+
+![New release image](/assets/images/blog/new-release.png)
+I am excited to announce a new release! 🎉
+
+More writing here for the rest of the blog ect..
+
+```
