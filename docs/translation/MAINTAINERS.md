@@ -10,7 +10,7 @@ After the new file is added, you must manually update the in-app language dropdo
 
 #### Steps:
 
-* Run `flutter gen-l10n` to update the localisation delegates.
+* Run `flutter gen-l10n` to update the Localization delegates.
 
 * Open `lib/l10n/l10n.dart`.
 
