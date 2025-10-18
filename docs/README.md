@@ -20,4 +20,4 @@ Guides for contributing to and managing the project website (including the blog)
 
 Instructions for adding new translations, adding new text to the app, and managing the localization files.
 
-* [**Go to Website Documentation**](./translation/)
+* [**Go to Translation Documentation**](./translation/)
