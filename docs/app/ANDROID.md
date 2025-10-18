@@ -33,7 +33,9 @@ To change native settings (like app icon, `build.gradle` versions, or `AndroidMa
 
 This is the main command you will use for development. It builds, installs, and launches the app on your connected device or emulator with "hot reload" enabled.
 
-Make sure an emulator is running or a physical device is connected:
+Make sure an emulator is running or a physical device is connected.
+
+From the `/app` terminal, run:
 
 ```sh
 flutter run
