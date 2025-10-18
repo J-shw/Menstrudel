@@ -71,15 +71,6 @@ class _PreferencesSettingsScreenState extends State<PreferencesSettingsScreen> {
           ? const Center(child: CircularProgressIndicator())
           : ListView(
               children: [
-                SwitchListTile(
-                  title: Text(l10n.preferencesScreen_tamponReminderButton),
-                  subtitle:
-                      Text(l10n.preferencesScreen_tamponReminderButtonSubtitle),
-                  secondary: const Icon(Icons.notifications_active_outlined),
-                  value: _isPersistentReminderEnabled,
-                  onChanged: _onToggleChanged,
-                ),
-
                 ListTile(
                   leading: const Icon(Icons.language_outlined),
                   title: Text(l10n.preferencesScreen_language),
@@ -93,6 +84,14 @@ class _PreferencesSettingsScreenState extends State<PreferencesSettingsScreen> {
                     }).toList(),
                     onChanged: _onLanguageChanged,
                   ),
+                ),
+                SwitchListTile(
+                  title: Text(l10n.preferencesScreen_tamponReminderButton),
+                  subtitle:
+                      Text(l10n.preferencesScreen_tamponReminderButtonSubtitle),
+                  secondary: const Icon(Icons.notifications_active_outlined),
+                  value: _isPersistentReminderEnabled,
+                  onChanged: _onToggleChanged,
                 ),
               ],
             ),
