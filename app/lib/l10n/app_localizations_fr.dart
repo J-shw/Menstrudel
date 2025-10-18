@@ -80,6 +80,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get close => 'Fermer';
 
   @override
+  String get systemDefault => 'System Default';
+
+  @override
   String get flow => 'Flux /';
 
   @override
