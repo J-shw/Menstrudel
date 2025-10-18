@@ -2,6 +2,8 @@
 
 Thank you for considering contributing to Menstrudel!
 
+For indepth guides please visit the [project docs](docs/README.md)
+
 ---
 
 ## How Can I Contribute?
