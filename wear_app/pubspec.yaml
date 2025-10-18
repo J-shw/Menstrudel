@@ -2,7 +2,7 @@ name: menstrudel
 description: "Your private, offline, menstrual cycle tracker."
 publish_to: 'none'
 
-version: 1.0.0+1002
+version: 1.0.1+1004
 
 environment:
   sdk: ^3.8.1
@@ -13,7 +13,8 @@ dependencies:
   cupertino_icons: ^1.0.8
   wear_plus: ^1.2.3
   shared_preferences: ^2.5.3
-  watch_connectivity: ^0.2.1+1
+  watch_connectivity: ^0.2.3
+  flutter_native_splash: ^2.4.6
 
 dev_dependencies:
   flutter_test:
@@ -22,3 +23,12 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+flutter_native_splash:
+  color: "#000000"
+
+  image: assets/splash_icon.jpg
+
+  android_12:
+    color: "#000000"
+    image: assets/splash_icon.jpg

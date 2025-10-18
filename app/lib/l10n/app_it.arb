@@ -1,0 +1,295 @@
+{
+    "@@locale": "it",
+    "appTitle": "Menstrudel",
+    "ongoing": "In corso",
+    "date": "Data",
+    "time": "Ora",
+    "start": "Inizio",
+    "end": "Fine",
+    "day": "Giorno",
+    "days": "Giorni",
+    "dayCount": "{count, plural, one{{count} Giorno} other{{count} Giorni}}",
+    "@dayCount": {
+        "description": "A message that displays a count of days, handling singular and plural forms.",
+        "placeholders": {
+            "count": {
+                "type": "int",
+                "example": "5"
+            }
+        }
+    },
+    "delete": "Elimina",
+    "clear": "Cancella",
+    "save": "Salva",
+    "import": "Importa",
+    "ok": "OK",
+    "confirm": "Conferma",
+    "set": "Imposta",
+    "yes": "Si",
+    "no": "No",
+    "cancel": "Annulla",
+    "select": "Seleziona",
+    "close": "Chiudi",
+    "flow": "Flusso",
+    "navBar_insights": "Statistiche",
+    "navBar_logs": "Calendario",
+    "navBar_pill": "Pillola",
+    "navBar_settings": "Impostazioni",
+    "flowIntensity_none": "Assente",
+    "flowIntensity_spotting": "Spotting",
+    "flowIntensity_light": "Leggero",
+    "flowIntensity_moderate": "Medio",
+    "flowIntensity_heavy": "Abbondante",
+    "symptom_headache": "Mal di testa",
+    "symptom_fatigue": "Stanchezza",
+    "symptom_cramps": "Crampi",
+    "symptom_nausea": "Nausea",
+    "symptom_moodSwings": "Sbalzi d'umore",
+    "symptom_bloating": "Gonfiore",
+    "symptom_acne": "Acne",
+    "painLevel_title": "Intensità del dolore",
+    "painLevel_none": "Assente",
+    "painLevel_mild": "Leggero",
+    "painLevel_moderate": "Medio",
+    "painLevel_severe": "Forte",
+    "pain_unbearable": "Insopportabile",
+    "notification_periodTitle": "Ciclo in arrivo",
+    "@notification_periodTitle": {
+        "description": "Title for the upcoming period notification."
+    },
+    "notification_periodBody": "{count, plural, =1{Il tuo prossimo ciclo dovrebbe iniziare tra 1 giorno.} other{Il tuo prossimo ciclo dovrebbe iniziare tra {count} giorni.}}",
+    "@notification_periodBody": {
+        "description": "Body for the upcoming period notification.",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "notification_periodOverdueTitle": "Ciclo in ritardo",
+    "@notification_periodOverdueTitle": {
+        "description": "Title for the overdue period notification."
+    },
+    "notification_periodOverdueBody": "{count, plural, =1{Il tuo ciclo è in ritardo di 1 giorno.} other{Il tuo ciclo è in ritardo di {count} giorni.}}",
+    "@notification_periodOverdueBody": {
+        "description": "Body for the overdue period notification.",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "notification_pillTitle": "Promemoria pillola",
+    "@notification_pillTitle": {
+        "description": "Title for the daily pill reminder notification."
+    },
+    "notification_pillBody": "Non dimenticare di prendere la pillola oggi.",
+    "@notification_pillBody": {
+        "description": "Body for the daily pill reminder notification."
+    },
+    "notification_tamponReminderTitle": "Promemoria assorbente",
+    "@notification_tamponReminderTitle": {
+        "description": "Title for the tampon reminder notification."
+    },
+    "notification_tamponReminderBody": "Ricordati di cambiare l'assorbente.",
+    "@notification_tamponReminderBody": {
+        "description": "Body for the tampon reminder notification."
+    },
+    "mainScreen_insightsPageTitle": "Le tue statistiche",
+    "mainScreen_pillsPageTitle": "Pillole",
+    "mainScreen_settingsPageTitle": "Impostazioni",
+    "mainScreen_tooltipSetReminder": "Promemoria assorbente",
+    "mainScreen_tooltipCancelReminder": "Elimina promemoria",
+    "mainScreen_tooltipLogPeriod": "Registra ciclo",
+    "insightsScreen_errorPrefix": "Errore:",
+    "insightsScreen_noDataAvailable": "Nessun dato disponibile.",
+    "logsScreen_calculatingPrediction": "Calcolo previsione in corso...",
+    "logScreen_logAtLeastTwoPeriods": "Registra almeno due cicli per stimare il prossimo.",
+    "logScreen_nextPeriodEstimate": "Prossimo ciclo previsto",
+    "logScreen_periodDueToday": "Ciclo previsto per oggi",
+    "logScreen_periodOverdueBy": "{count, plural, =1{Ciclo in ritardo di 1 giorno} other{Ciclo in ritardo di {count} giorni}}",
+    "@logScreen_periodOverdueBy": {
+        "description": "A label showing the total number of days period is overdue.",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "logScreen_tamponReminderSetFor": "Promemoria assorbente impostato per",
+    "logScreen_tamponReminderCancelled": "Promemoria assorbente eliminato",
+    "logScreen_couldNotCancelReminder": "Impossibile cancellare il promemoria",
+    "pillScreen_pillForTodayMarkedAsTaken": "Pillola di oggi segnata come presa.",
+    "pillScreen_pillForTodayMarkedAsSkipped": "Pillola di oggi segnata come saltata.",
+    "settingsScreen_selectHistoryView": "Seleziona vista cronologia",
+    "settingsScreen_deleteRegimen_question": "Cancellare piano pillola?",
+    "settingsScreen_deleteRegimenDescription": "Questo eliminerà le impostazioni della tua confezione di pillole e tutta la cronologia associata. Questa operazione non può essere annullata.",
+    "settingsScreen_allLogsHaveBeenCleared": "Tutti i dati sono stati eliminati.",
+    "settingsScreen_clearAllLogs_question": "Eliminare tutti i dati?",
+    "settingsScreen_deleteAllLogsDescription": "Questo cancellerà definitivamente tutti i dati del ciclo. Le impostazioni dell'app non verranno modificate.",
+    "settingsScreen_appearance": "Aspetto",
+    "settingsScreen_historyViewStyle": "Aspetto della cronologia",
+    "settingsScreen_appTheme": "Tema app",
+    "settingsScreen_themeLight": "Chiaro",
+    "settingsScreen_themeDark": "Scuro",
+    "settingsScreen_themeSystem": "Come il sistema",
+    "settingsScreen_dynamicTheme": "Tema dinamico",
+    "settingsScreen_useWallpaperColors": "Usa i colori dello sfondo",
+    "settingsScreen_themeColor": "Colore tema",
+    "settingsScreen_pickAColor": "Scegli un colore",
+    "settingsScreen_view": "Visualizza",
+    "settingsScreen_birthControl": "Contraccezione",
+    "settingsScreen_setUpPillRegimen": "Crea piano pillola",
+    "settingsScreen_trackYourDailyPillIntake": "Monitoraggio pillola giornaliero",
+    "settingsScreen_dailyPillReminder": "Promemoria pillola giornaliero",
+    "settingsScreen_reminderTime": "Orario promemoria",
+    "settingsScreen_periodPredictionAndReminders": "Previsioni ciclo e promemoria",
+    "settingsScreen_upcomingPeriodReminder": "Promemoria ciclo in arrivo",
+    "settingsScreen_remindMeBefore": "Avvisami prima",
+    "settingsScreen_notificationTime": "Orario notifica",
+    "settingsScreen_overduePeriodReminder": "Promemoria ciclo in ritardo",
+    "settingsScreen_remindMeAfter": "Avvisami dopo",
+    "settingsScreen_pillRegimens": "Piani pillola",
+    "@settingsScreen_pillRegimens": {
+        "description": "Header for the section listing all created pill regimens."
+    },
+    "settingsScreen_makeActive": "Imposta come attivo",
+    "@settingsScreen_makeActive": {
+        "description": "Button to select a regimen and set it as the one currently being tracked."
+    },
+    "settingsScreen_activeRegimenReminder": "Impostazioni promemoria piano attivo",
+    "@settingsScreen_activeRegimenReminder": {
+        "description": "Header for the daily reminder settings section."
+    },
+    "settingsScreen_pack": "Confezione",
+    "settingsScreen_dataManagement": "Gestione dati",
+    "settingsScreen_clearAllLogs": "Elimina tutti i dati",
+    "settingsScreen_clearAllPillData": "Elimina tutti i dati della pillola",
+    "settingsScreen_clearAllPillData_question": "Eliminare tutti i dati della pillola?",
+    "settingsScreen_deleteAllPillDataDescription": "Questo eliminerà definitivamente il tuo piano pillola, i promemoria e la cronologia delle assunzioni. Questa azione non può essere annullata.",
+    "settingsScreen_allPillDataCleared": "Tutti i dati della pillola sono stati eliminati.",
+    "settingsScreen_dangerZone": "Azioni irreversibili",
+    "settingsScreen_clearAllLogsSubtitle": "Elimina l'intera cronologia del ciclo e dei sintomi.",
+    "settingsScreen_clearAllPillDataSubtitle": "Rimuove il tuo piano pillola e la cronologia delle assunzioni.",
+    "settingsScreen_exportPeriodData": "Esporta dati ciclo",
+    "settingsScreen_exportPillData": "Esporta dati pillola",
+    "settingsScreen_exportDataSubtitle": "Crea un backup JSON.",
+    "settingsScreen_exportSuccessful": "Dati esportati con successo.",
+    "settingsScreen_exportFailed": "Esportazione fallita. Riprova.",
+    "settingsScreen_noDataToExport": "Nessun dato da esportare.",
+    "settingsScreen_exportDataMessage": "Ecco la mia esportazione dati di MenstruDel.",
+    "settingsScreen_exportDataTitle": "Esporta dati",
+    "settingsScreen_importDataTitle": "Importa dati",
+    "settingsScreen_importPeriodData": "Importa dati ciclo",
+    "settingsScreen_importPillData": "Importa dati pillola",
+    "settingsScreen_importDataSubtitle": "Sovrascrive i dati esistenti.",
+    "settingsScreen_importPeriodData_question": "Importare i dati del ciclo?",
+    "settingsScreen_importPillData_question": "Importare i dati della pillola?",
+    "settingsScreen_importPeriodDataDescription": "L'importazione dei dati sovrascriverà definitivamente tutta la tua cronologia e le impostazioni del ciclo. Questa operazione non può essere annullata.",
+    "settingsScreen_importPillDataDescription": "L'importazione dei dati sovrascriverà definitivamente tutta la tua cronologia pillola. Questa operazione non può essere annullata.",
+    "settingsScreen_importSuccessful": "Dati importati con successo",
+    "settingsScreen_importFailed": "Importazione dati fallita. Riprova.",
+    "settingsScreen_importInvalidFile": "Formato file non valido.",
+    "settingsScreen_importErrorGeneral": "Importazione dati fallita. Assicurati che il file sia salvato sul dispositivo.",
+    "@settingsScreen_importErrorGeneral": {
+        "description": "General message when file import fails for unknown reasons."
+    },
+    "settingsScreen_importErrorPlatform": "Importazione fallita: {message}. Assicurati che il file sia salvato sul dispositivo e riprova.",
+    "@settingsScreen_importErrorPlatform": {
+        "description": "Error when the native file picker fails, includes the specific error message.",
+        "placeholders": {
+            "message": {
+                "type": "String",
+                "example": "Unknown path or network access required."
+            }
+        }
+    },
+    "settingsScreen_security": "Sicurezza",
+    "securityScreen_enableBiometricLock": "Abilita blocco biometrico",
+    "securityScreen_enableBiometricLockSubtitle": "Richiedi impronta digitale o riconoscimento facciale per aprire l'app.",
+    "securityScreen_noBiometricsAvailable": "Nessun codice di sblocco, impronta digitale o riconoscimento facciale trovato. Configuralo nelle impostazioni del tuo dispositivo.",
+    "settingsScreen_preferences": "Preferenze",
+    "preferencesScreen_tamponReminderButton": "Mostra sempre il pulsante promemoria",
+    "preferencesScreen_tamponReminderButtonSubtitle": "Rende il pulsante promemoria assorbente sempre visibile nella schermata principale.",
+    "settingsScreen_about": "Informazioni",
+    "aboutScreen_version": "Versione",
+    "aboutScreen_github": "GitHub",
+    "aboutScreen_githubSubtitle": "Codice sorgente e segnalazione errori",
+    "aboutScreen_share": "Condividi",
+    "aboutScreen_shareSubtitle": "Condividi l'app con gli amici",
+    "aboutScreen_urlError": "Impossibile aprire il link.",
+    "tamponReminderDialog_tamponReminderTitle": "Promemoria assorbente",
+    "tamponReminderDialog_tamponReminderMaxDuration": "La durata massima è 8 ore.",
+    "reminderCountdownDialog_title": "Promemoria tra",
+    "reminderCountdownDialog_dueAt": "Scade alle {time}",
+    "@reminderCountdownDialog_dueAt": {
+        "description": "Indicates the time a reminder is due. The {time} placeholder will be a formatted time string (e.g., '2:30 PM').",
+        "placeholders": {
+            "time": {}
+        }
+    },
+    "cycleLengthVarianceWidget_LogAtLeastTwoPeriods": "Servono almeno due cicli per mostrare le variazioni.",
+    "cycleLengthVarianceWidget_cycleAndPeriodVeriance": "Variazioni ciclo e mestruazioni",
+    "cycleLengthVarianceWidget_averageCycle": "Ciclo medio",
+    "cycleLengthVarianceWidget_averagePeriod": "Mestruazioni medie",
+    "cycleLengthVarianceWidget_period": "Mestruazioni",
+    "cycleLengthVarianceWidget_cycle": "Ciclo mestruale",
+    "flowIntensityWidget_flowIntensityBreakdown": "Dettaglio intensità flusso",
+    "flowIntensityWidget_noFlowDataLoggedYet": "Nessun dato del flusso registrato.",
+    "painLevelWidget_noPainDataLoggedYet": "Nessun dato dolore registrato.",
+    "painLevelWidget_painLevelBreakdown": "Dettagli livello dolore",
+    "monthlyFlowChartWidget_noDataToDisplay": "Nessun dato da mostrare.",
+    "monthlyFlowChartWidget_cycleFlowPatterns": "Andamenti del flusso mestruale",
+    "monthlyFlowChartWidget_cycleFlowPatternsDescription": "Ogni linea rappresenta un ciclo completo.",
+    "symptomFrequencyWidget_noSymptomsLoggedYet": "Nessun sintomo registrato.",
+    "symptomFrequencyWidget_mostCommonSymptoms": "Sintomi più comuni",
+    "yearHeatMapWidget_yearlyOverview": "Riepilogo annuale",
+    "journalViewWidget_logYourFirstPeriod": "Registra il tuo primo ciclo.",
+    "listViewWidget_noPeriodsLogged": "Nessun ciclo registrato.\nTocca il pulsante + per aggiungerne uno.",
+    "listViewWidget_confirmDelete": "Conferma eliminazione",
+    "listViewWidget_confirmDeleteDescription": "Sei sicura di voler eliminare questa voce?",
+    "emptyPillStateWidget_noPillRegimenFound": "Nessun piano pillola trovato.",
+    "emptyPillStateWidget_noPillRegimenFoundDescription": "Configura la tua confezione di pillole nelle impostazioni per iniziare il monitoraggio.",
+    "pillStatus_pillsOfTotal": "{count, plural, one {}=1{di 1 pillola} other{di {count} pillole}}",
+    "@pillStatus_pillsOfTotal": {
+        "description": "A label showing the total number of pills.",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "pillStatus_undo": "Annulla",
+    "pillStatus_skip": "Salta",
+    "pillStatus_markAsTaken": "Segna come presa",
+    "pillStatus_packStartInFuture": "La tua prossima confezione di pillole inizia il {date}.",
+    "@pillStatus_packStartInFuture": {
+        "description": "Message shown when the pill pack start date is in the future.",
+        "placeholders": {
+            "date": {
+                "type": "DateTime",
+                "format": "yMMMd"
+            }
+        }
+    },
+    "regimenSetupWidget_setUpPillRegimen": "Configura piano pillola",
+    "regimenSetupWidget_packName": "Nome confezione",
+    "regimenSetupWidget_pleaseEnterAName": "Inserire un nome",
+    "regimenSetupWidget_activePills": "Pillole attive",
+    "regimenSetupWidget_enterANumber": "Inserire un numero",
+    "regimenSetupWidget_placeboPills": "Pillole vuote (placebo)",
+    "regimenSetupWidget_firstDayOfThisPack": "Primo giorno di questa confezione",
+    "symptomEntrySheet_logYourDay": "Inserisci i dati giornalieri",
+    "symptomEntrySheet_symptomsOptional": "Sintomi (facoltativo)",
+    "periodDetailsSheet_symptoms": "Sintomi",
+    "periodDetailsSheet_flow": "Flusso",
+    "periodPredictionCircle_days": "{count, plural, =1{Giorno} other{Giorni}}",
+    "@periodPredictionCircle_days": {
+        "description": "A label showing the total number of days until period is due.",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    }
+}
