@@ -284,14 +284,5 @@
     "symptomEntrySheet_logYourDay": "Inserisci i dati giornalieri",
     "symptomEntrySheet_symptomsOptional": "Sintomi (facoltativo)",
     "periodDetailsSheet_symptoms": "Sintomi",
-    "periodDetailsSheet_flow": "Flusso",
-    "periodPredictionCircle_days": "{count, plural, =1{Giorno} other{Giorni}}",
-    "@periodPredictionCircle_days": {
-        "description": "A label showing the total number of days until period is due.",
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    }
+    "periodDetailsSheet_flow": "Flusso"
 }
