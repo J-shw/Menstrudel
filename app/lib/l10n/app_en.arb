@@ -38,6 +38,8 @@
     "select": "Select",
     "close": "Close",
 
+    "systemDefault": "System Default",
+
     "flow": "Flow",
 
     "navBar_insights": "Insights",
@@ -231,10 +233,12 @@
     "securityScreen_enableBiometricLock": "Enable Biometric Lock",
     "securityScreen_enableBiometricLockSubtitle": "Require fingerprint or face ID to open the app.",
     "securityScreen_noBiometricsAvailable": "No passcode, fingerprint, or face ID found. Please set one up in your device's settings.",
+
     "settingsScreen_preferences": "Preferences",
     "preferencesScreen_language": "Language",
     "preferencesScreen_tamponReminderButton": "Always Show Reminder Button",
     "preferencesScreen_tamponReminderButtonSubtitle": "Makes the tampon reminder button permanently visible on the main screen.",
+    
     "settingsScreen_about": "About",
     "aboutScreen_version": "Version",
     "aboutScreen_github": "GitHub",
