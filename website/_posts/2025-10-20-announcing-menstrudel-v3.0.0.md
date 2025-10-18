@@ -13,8 +13,8 @@ After months of hard work, the main functions are stable and we feel the app is 
 
 ## Get the Menstrudel App
 
-- 🤖 [Google Playstore](https://play.google.com/store/apps/details?id=com.whitticase.menstrudel)
-- 🍎 [Apple AppStore](https://apps.apple.com/us/app/menstrudel/id6751970511)
+- 🤖 [Google Play Store](https://play.google.com/store/apps/details?id=com.whitticase.menstrudel)
+- 🍎 [Apple App Store](https://apps.apple.com/us/app/menstrudel/id6751970511)
 
 
 ### What's New
@@ -42,12 +42,6 @@ After months of hard work, the main functions are stable and we feel the app is 
 * Fixed an issue where marking a pill as taken did not cancel the reminder.
 * Fixed a bug that disabled pill actions when the pack start date was in the future.
 * Fixed an issue where placebo pills were not showing the skipped state.
-
-## Get Involved
-
-Want to support the apps progress? Then checkout the [GitHub](https://github.com/J-shw/Menstrudel) and share your thoughts! 
-
-Is there a language you want supported? Help out on [Crowdin](https://crowdin.com/project/menstrudel)
 
 ## Get Involved
 
