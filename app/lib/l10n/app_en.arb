@@ -232,6 +232,7 @@
     "securityScreen_enableBiometricLockSubtitle": "Require fingerprint or face ID to open the app.",
     "securityScreen_noBiometricsAvailable": "No passcode, fingerprint, or face ID found. Please set one up in your device's settings.",
     "settingsScreen_preferences": "Preferences",
+    "preferencesScreen_language": "Language",
     "preferencesScreen_tamponReminderButton": "Always Show Reminder Button",
     "preferencesScreen_tamponReminderButtonSubtitle": "Makes the tampon reminder button permanently visible on the main screen.",
     "settingsScreen_about": "About",
