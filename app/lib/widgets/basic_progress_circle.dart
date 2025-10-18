@@ -104,7 +104,7 @@ class _BasicProgressCircleState extends State<BasicProgressCircle>
                 ),
               ),
               Text(
-                l10n.periodPredictionCircle_days(widget.currentValue),
+                l10n.dayCount(widget.currentValue),
                 style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.normal,
