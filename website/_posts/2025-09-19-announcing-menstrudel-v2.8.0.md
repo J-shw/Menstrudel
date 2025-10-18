@@ -7,7 +7,6 @@ image: /assets/images/blog/new-release.png
 ---
 
 ![New release image](/assets/images/blog/new-release.png)
-
 We're excited to release version **2.8.0** of Menstrudel. This update includes many new features requested by the community and (as always) important bug fixes.
 
 ### What's New
