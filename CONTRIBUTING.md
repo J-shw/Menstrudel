@@ -58,13 +58,13 @@ This section applies to code contributions. For translations, please see the Cro
     `<type>/<scope>/<short-description>`
 
     **`<type>` can be one of the following:**
-    * `feature`: For new features.
-    * `bugfix`: For fixing a bug.
-    * `docs`: For changes to documentation.
-    * `chore`: For maintenance tasks (e.g., updating dependencies).
-    * `refactor`: For code improvements without changing functionality.
-    * `style`: For code formatting changes.
-    * `test`: For adding or improving tests.
+    * `Feature`: For new features.
+    * `Bugfix`: For fixing a bug.
+    * `Docs`: For changes to documentation.
+    * `Chore`: For maintenance tasks (e.g., updating dependencies).
+    * `Refactor`: For code improvements without changing functionality.
+    * `Style`: For code formatting changes.
+    * `Test`: For adding or improving tests.
 
     **`<scope>` is one of the following:**
     * `app`: The main application.
@@ -73,8 +73,8 @@ This section applies to code contributions. For translations, please see the Cro
     * `repo`: Changes to the repository itself (CI, config, etc.).
 
     **Examples:**
-    * `feature/web/add-contact-form`
-    * `bugfix/app/fix-user-login-crash`
-    * `docs/wear/update-build-instructions`
+    * `Feature/web/add contact form`
+    * `Bugfix/app/fix user login crash`
+    * `Docs/wear/update build instructions`
 
 6.  Clearly describe the changes in your pull request.
