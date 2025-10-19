@@ -46,7 +46,13 @@ This section applies to code contributions. For translations, please see the Cro
 
 1.  Fork the repository and create your branch from `dev`.
 
-2.  **Name your branch correctly.**
+2.  Create a new branch named relative to your changes
+
+3.  Add your changes and commit them with a clear commit message.
+
+4.  Push your branch and open a pull request against the `dev` branch.
+
+5.  **Name your pull request correctly.**
 
     Since this is a monorepo, please include the project scope in the name using the format:
     `<type>/<scope>/<short-description>`
@@ -71,8 +77,4 @@ This section applies to code contributions. For translations, please see the Cro
     * `bugfix/app/fix-user-login-crash`
     * `docs/wear/update-build-instructions`
 
-3.  Add your changes and commit them with a clear commit message.
-
-4.  Push your branch and open a pull request against the `dev` branch.
-
-5.  Clearly describe the changes in your pull request.
+6.  Clearly describe the changes in your pull request.
