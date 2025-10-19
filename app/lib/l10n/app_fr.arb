@@ -88,27 +88,27 @@
     "@notification_pillBody": {
         "description": "Body for the daily pill reminder notification."
     },
-    "notification_tamponReminderTitle": "Tampon Reminder",
+    "notification_tamponReminderTitle": "Rappel de tampon",
     "@notification_tamponReminderTitle": {
         "description": "Title for the tampon reminder notification."
     },
-    "notification_tamponReminderBody": "Remember to change your tampon.",
+    "notification_tamponReminderBody": "N'oubliez pas de changer votre tampon.",
     "@notification_tamponReminderBody": {
         "description": "Body for the tampon reminder notification."
     },
-    "mainScreen_insightsPageTitle": "Your Insights",
-    "mainScreen_pillsPageTitle": "Pills",
-    "mainScreen_settingsPageTitle": "Settings",
-    "mainScreen_tooltipSetReminder": "Tampon reminder",
-    "mainScreen_tooltipCancelReminder": "Cancel reminder",
-    "mainScreen_tooltipLogPeriod": "Log period",
-    "insightsScreen_errorPrefix": "Error:",
+    "mainScreen_insightsPageTitle": "Votre Aperçu",
+    "mainScreen_pillsPageTitle": "Pilules",
+    "mainScreen_settingsPageTitle": "Paramètres",
+    "mainScreen_tooltipSetReminder": "Rappel de tampon",
+    "mainScreen_tooltipCancelReminder": "Annuler le rappel",
+    "mainScreen_tooltipLogPeriod": "Historique des règles",
+    "insightsScreen_errorPrefix": "Erreur:",
     "insightsScreen_noDataAvailable": "No data available.",
-    "logsScreen_calculatingPrediction": "Calculating prediction...",
+    "logsScreen_calculatingPrediction": "Calcul de la prédication...",
     "logScreen_logAtLeastTwoPeriods": "Log at least two periods to estimate next cycle.",
     "logScreen_nextPeriodEstimate": "Next period Est",
     "logScreen_periodDueToday": "Period due today",
-    "logScreen_periodOverdueBy": "{count, plural, =1{Period overdue by 1 day} other{Period overdue by {count} days}}",
+    "logScreen_periodOverdueBy": "{count, plural, =1{Règles en retard d’un jour} other{Règles en retard de {count} jours}}",
     "@logScreen_periodOverdueBy": {
         "description": "A label showing the total number of days period is overdue.",
         "placeholders": {
@@ -121,7 +121,7 @@
     "logScreen_tamponReminderCancelled": "Tampon reminder cancelled.",
     "logScreen_couldNotCancelReminder": "Could not cancel reminder",
     "pillScreen_pillForTodayMarkedAsTaken": "Pill for today marked as taken.",
-    "pillScreen_pillForTodayMarkedAsSkipped": "Pill for today marked as skipped.",
+    "pillScreen_pillForTodayMarkedAsSkipped": "Pilule du jour marquée comme sautée.",
     "settingsScreen_selectHistoryView": "Select History View",
     "settingsScreen_deleteRegimen_question": "Delete Regimen?",
     "settingsScreen_deleteRegimenDescription": "This will delete your current pill pack settings and all associated pill logs. This cannot be undone.",
