@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:menstrudel/database/repositories/periods_repository.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/services/settings_service.dart';
-
-import '../../widgets/dialogs/custom_symptom_dialog.dart';
-import '../../widgets/dialogs/delete_confirmation_dialog.dart';
+import 'package:menstrudel/widgets/dialogs/custom_symptom_dialog.dart';
+import 'package:menstrudel/widgets/dialogs/delete_confirmation_dialog.dart';
 
 class PeriodSettingsScreen extends StatefulWidget {
   const PeriodSettingsScreen({super.key});
