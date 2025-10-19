@@ -183,7 +183,7 @@ class SettingsService {
 
   Future<void> setDefaultSymptoms(Set<String> symptoms) async {
     final prefs = await SharedPreferences.getInstance();
-    prefs.setStringList(defaultSymptomsKey, symptoms.toList());
+    prefs.setStringList(defaultSymptomsKey, symptoms.map((e) => e.toLowerCase()).toList());
   }
 
   Future<void> addDefaultSymptom(String symptom) async {
