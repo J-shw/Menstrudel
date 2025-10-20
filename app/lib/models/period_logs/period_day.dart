@@ -8,7 +8,7 @@ import 'package:menstrudel/models/flows/flow_enum.dart';
 class PeriodDay {
 	int? id;
 	DateTime date;
-	List<String>? symptoms;
+	List<String> symptoms;
 	FlowRate flow;
   int painLevel;
 	int? periodId;
@@ -16,7 +16,7 @@ class PeriodDay {
 	PeriodDay({
 		this.id,
 		required this.date,
-		this.symptoms,
+		this.symptoms = const [],
 		required this.flow,
     required this.painLevel,
 		this.periodId,
@@ -26,24 +26,20 @@ class PeriodDay {
 		return {
 			'id': id,
 			'date': date.toIso8601String(),
-			'symptoms': symptoms != null ? jsonEncode(symptoms) : null,
 			'flow': flow.intValue,
       'painLevel': painLevel,
 			'period_id': periodId,
 		};
 	}
 
-	factory PeriodDay.fromMap(Map<String, dynamic> map) {
-    List<String>? symptomsFromMap;
-    if (map['symptoms'] != null) {
-      final decoded = jsonDecode(map['symptoms'] as String);
-      symptomsFromMap = List<String>.from(decoded);
-    }
-
+	factory PeriodDay.fromMap(
+    Map<String, dynamic> map, {
+    List<String>? symptoms,
+  }) {
 		return PeriodDay(
 			id: map['id'] as int?,
 			date: DateTime.parse(map['date'] as String),
-			symptoms: symptomsFromMap,
+			symptoms: symptoms ?? [],
 			flow: FlowRate.values[map['flow'] as int],
       painLevel: map['painLevel'] as int,
 			periodId: map['period_id'] as int?,
