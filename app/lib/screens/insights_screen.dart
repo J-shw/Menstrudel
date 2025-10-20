@@ -36,7 +36,8 @@ class _InsightsScreenState extends State<InsightsScreen> {
     _insightsDataFuture = Future.wait([
       periodsRepo.readAllPeriods(),
       periodsRepo.readAllPeriodLogs(),
-      periodsRepo.getMonthlyPeriodFlows()
+      periodsRepo.getMonthlyPeriodFlows(),
+      periodsRepo.getSymptomFrequency()
     ]);
 }
 
@@ -59,11 +60,12 @@ class _InsightsScreenState extends State<InsightsScreen> {
           final allPeriods = snapshot.data![0] as List<Period>;
           final allLogs = snapshot.data![1] as List<PeriodDay>;
           final allFlows = snapshot.data![2] as List<MonthlyFlowData>;
+          final symptomCounts =  snapshot.data![3] as Map<String, int>;
 
           return ListView(
             padding: const EdgeInsets.all(16.0),
             children: [
-              SymptomFrequencyWidget(logs: allLogs),
+              SymptomFrequencyWidget(symptomCounts: symptomCounts),
 
               CycleLengthVarianceWidget(periods: allPeriods),
 
