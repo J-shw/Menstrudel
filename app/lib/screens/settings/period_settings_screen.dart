@@ -84,7 +84,7 @@ class _PeriodSettingsScreenState extends State<PeriodSettingsScreen> {
     final (String name, bool isDefault)? result = await showDialog<(String, bool)>(
       context: context,
       builder: (BuildContext context) {
-        return const CustomSymptomDialog(showMakeDefaultButton: false);
+        return const CustomSymptomDialog(showTemporarySymptomButton: true);
       },
     );
 

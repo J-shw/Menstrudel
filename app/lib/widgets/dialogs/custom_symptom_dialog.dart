@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:menstrudel/database/repositories/periods_repository.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 
 class CustomSymptomDialog extends StatefulWidget {
-  final bool showMakeDefaultButton;
+  final bool showTemporarySymptomButton;
 
-  const CustomSymptomDialog({super.key, this.showMakeDefaultButton = true});
+  const CustomSymptomDialog({
+    super.key,
+    this.showTemporarySymptomButton = false,
+  });
 
   @override
   State<CustomSymptomDialog> createState() => _CustomSymptomDialogState();
@@ -13,8 +17,9 @@ class CustomSymptomDialog extends StatefulWidget {
 class _CustomSymptomDialogState extends State<CustomSymptomDialog> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
+  final periodsRepo = PeriodsRepository();
 
-  bool _isDefault = false;
+  bool _isTemporary = false;
 
   @override
   void dispose() {
@@ -22,12 +27,29 @@ class _CustomSymptomDialogState extends State<CustomSymptomDialog> {
     super.dispose();
   }
 
+  Future<void> accept() async {
+    if (_isTemporary) {
+      var count = await periodsRepo.getSymptomUseCount(_nameController.text);
+
+      if (count > 0) {
+
+      }
+    }
+
+    if (mounted) {
+      Navigator.of(context).pop((_nameController.text, _isTemporary));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
 
     return AlertDialog.adaptive(
-      title: Text(l10n.customSymptomDialog_newCustomSymptom, textAlign: TextAlign.center),
+      title: Text(
+        l10n.customSymptomDialog_newCustomSymptom,
+        textAlign: TextAlign.center,
+      ),
       content: SizedBox(
         width: double.maxFinite,
         child: Form(
@@ -35,16 +57,25 @@ class _CustomSymptomDialogState extends State<CustomSymptomDialog> {
           child: ListView(
             shrinkWrap: true,
             children: [
-              TextFormField(controller: _nameController, validator: (value) => value!.isEmpty ? l10n.customSymptomDialog_enterCustomSymptom : null, autofocus: true, maxLength: 60, maxLines: 1),
-              if (widget.showMakeDefaultButton) const SizedBox(height: 16),
-              if (widget.showMakeDefaultButton)
+              TextFormField(
+                controller: _nameController,
+                validator: (value) => value!.isEmpty
+                    ? l10n.customSymptomDialog_enterCustomSymptom
+                    : null,
+                autofocus: true,
+                maxLength: 60,
+                maxLines: 1,
+              ),
+              if (widget.showTemporarySymptomButton == false)
+                const SizedBox(height: 16),
+              if (widget.showTemporarySymptomButton == false)
                 SwitchListTile(
-                  subtitle: Text(l10n.customSymptomDialog_makeDefault),
+                  subtitle: Text(l10n.customSymptomDialog_makeTemporary),
                   secondary: const Icon(Icons.fact_check),
-                  value: _isDefault,
+                  value: _isTemporary,
                   onChanged: (value) => {
                     setState(() {
-                      _isDefault = value;
+                      _isTemporary = value;
                     }),
                   },
                 ),
@@ -54,14 +85,17 @@ class _CustomSymptomDialogState extends State<CustomSymptomDialog> {
       ),
       actionsAlignment: MainAxisAlignment.center,
       actions: <Widget>[
-        TextButton(child: Text(l10n.cancel), onPressed: () => Navigator.of(context).pop()),
+        TextButton(
+          child: Text(l10n.cancel),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
         ValueListenableBuilder<TextEditingValue>(
           valueListenable: _nameController,
           builder: (context, value, child1) {
             return ElevatedButton(
               onPressed: value.text.isNotEmpty
                   ? () {
-                      Navigator.of(context).pop((_nameController.text, _isDefault));
+                      accept();
                     }
                   : null,
               child: Text(l10n.confirm),
