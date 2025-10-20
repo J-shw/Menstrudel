@@ -362,7 +362,7 @@ class Manager {
 
   Manager(this.dbProvider);
 
-  /// Returns periods and period_logs data as json - ready for exporting data.
+  /// Returns periods,log_symptoms and period_logs data as json - ready for exporting data.
   Future<String> exportDataAsJson() async {
     final db = await dbProvider.database;
 
@@ -389,7 +389,7 @@ class Manager {
     return jsonString;
   }
 
-  /// Imports periods and period_logs data from a JSON string.
+  /// Imports periods, log_symptoms and period_logs data from a JSON string.
   /// Throws an exception if the JSON format is invalid or the database version is incompatible.
   Future<void> importDataFromJson(String jsonString) async {
     final db = await dbProvider.database;
@@ -408,6 +408,9 @@ class Manager {
         throw FormatException('Incompatible database version: Imported data is from v$importedDbVersion, but current database is v$currentDbVersion. Please update the app.');
       }
 
+      final Map<int, int> periodIdMap = {};
+      final Map<int, int> logIdMap = {};
+
       await db.transaction((txn) async {
         await txn.delete('period_logs');
         await txn.delete('periods');
@@ -415,31 +418,58 @@ class Manager {
         
         final List periods = importData['periods'] as List;
         for (final Map<String, dynamic> period in periods.cast<Map<String, dynamic>>()) {
-          final Map<String, dynamic> dataToInsert = Map.from(period)..remove('id'); 
-          await txn.insert('periods', dataToInsert, conflictAlgorithm: ConflictAlgorithm.replace);
+          final int oldPeriodId = period['id'] as int;
+          
+          final Map<String, dynamic> dataToInsert = Map.from(period)..remove('id');
+          
+          final int newPeriodId = await txn.insert('periods', dataToInsert, conflictAlgorithm: ConflictAlgorithm.replace);
+          
+          periodIdMap[oldPeriodId] = newPeriodId;
         }
 
         final List periodLogsRaw = importData['period_logs'] as List;
         for (final Map<String, dynamic> logRaw in periodLogsRaw.cast<Map<String, dynamic>>()) {
           final Map<String, dynamic> logToInsert = Map.from(logRaw);
+
+          final int oldLogId = logRaw['id'] as int;
+          final int? oldPeriodIdFk = logRaw['period_id'] as int?;
+
           logToInsert.remove('id');
 
-          final rawFlow = logToInsert['flow'];
+          final int? newPeriodIdFk = periodIdMap[oldPeriodIdFk];
+          logToInsert['period_id'] = newPeriodIdFk;
 
+          final rawFlow = logToInsert['flow'];
           if (rawFlow is int && rawFlow >= 0 && rawFlow < FlowRate.values.length) {
               logToInsert['flow'] = rawFlow;
           } else {
               logToInsert['flow'] = 0; 
           }
           
-          await txn.insert('period_logs', logToInsert, conflictAlgorithm: ConflictAlgorithm.replace);
+          final int newLogId = await txn.insert('period_logs', logToInsert, conflictAlgorithm: ConflictAlgorithm.replace);
+          
+          logIdMap[oldLogId] = newLogId;
         }
 
         final List logSymptoms = importData['log_symptoms'] as List;
         for (final Map<String, dynamic> symptom in logSymptoms.cast<Map<String, dynamic>>()) {
-          await txn.insert('log_symptoms', symptom, conflictAlgorithm: ConflictAlgorithm.replace);
+
+          final int? oldLogIdFk = symptom['log_id_fk'] as int?;
+
+          final int? newLogIdFk = logIdMap[oldLogIdFk];
+
+          if (newLogIdFk != null) {
+            await txn.insert('log_symptoms', 
+              {
+                'log_id_fk': newLogIdFk,
+                'symptom': symptom['symptom'],
+              },
+              conflictAlgorithm: ConflictAlgorithm.replace
+            );
+          }
         }
       });
+
     } on FormatException catch (_) {
       rethrow;
     } catch (e) {
