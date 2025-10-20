@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/database/repositories/periods_repository.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
+import 'package:menstrudel/widgets/dialogs/delete_confirmation_dialog.dart';
 
 class CustomSymptomDialog extends StatefulWidget {
   final bool showTemporarySymptomButton;
@@ -28,16 +29,9 @@ class _CustomSymptomDialogState extends State<CustomSymptomDialog> {
   }
 
   Future<void> accept() async {
-    if (_isTemporary) {
-      var count = await periodsRepo.getSymptomUseCount(_nameController.text);
-
-      if (count > 0) {
-
-      }
-    }
-
+    var symptom = _nameController.text;
     if (mounted) {
-      Navigator.of(context).pop((_nameController.text, _isTemporary));
+      Navigator.of(context).pop((symptom, _isTemporary));
     }
   }
 
