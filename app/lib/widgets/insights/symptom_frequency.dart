@@ -1,36 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
-import 'package:menstrudel/models/period_logs/period_day.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
-import 'package:menstrudel/models/period_logs/symptom_enum.dart';
 
 class SymptomFrequencyWidget extends StatelessWidget {
-  final List<PeriodDay> logs;
-  const SymptomFrequencyWidget({super.key, required this.logs});
+  final Map<String, int> symptomCounts;
+  const SymptomFrequencyWidget({super.key, required this.symptomCounts});
+
+  String _formatSymptomName(String symptom) {
+    if (symptom.isEmpty) return '';
+    return symptom[0].toUpperCase() + symptom.substring(1).replaceAll('_', ' ');
+  }
 
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
     final l10n = AppLocalizations.of(context)!;
-
-    final Map<Symptom, int> symptomCounts = {};
-    final symptomMap = {for (var s in Symptom.values) s.name: s};
-
-    for (final log in logs) {
-      for (final symptomString in log.symptoms) {
-        final symptom = symptomMap[symptomString.trim()];
-        if (symptom != null) {
-          symptomCounts[symptom] = (symptomCounts[symptom] ?? 0) + 1;
-        }
-      }
-      
-    }
     
     final sortedSymptoms = symptomCounts.entries.sortedBy<num>((e) => e.value).reversed.toList();
     
     if (sortedSymptoms.isEmpty) {
-        return Card(child: Padding(padding: EdgeInsets.all(24.0), child: Center(child: Text(l10n.symptomFrequencyWidget_noSymptomsLoggedYet))));
+      return Card(child: Padding(padding: EdgeInsets.all(24.0), child: Center(child: Text(l10n.symptomFrequencyWidget_noSymptomsLoggedYet))));
     }
 
     return Card(
@@ -50,7 +40,7 @@ class SymptomFrequencyWidget extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Text(
-                          entry.key.getDisplayName(l10n),
+                          _formatSymptomName(entry.key),
                           maxLines: 1,
                           style: textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
                           overflow: TextOverflow.ellipsis,
