@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'dart:convert';
@@ -27,7 +28,7 @@ class AppDatabase {
 
       _database = await openDatabase(
         path,
-        version: 6,
+        version: 7,
         onCreate: _createDB,
         onUpgrade: _upgradeDB,
       );
@@ -50,11 +51,20 @@ class AppDatabase {
       CREATE TABLE period_logs (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
           date TEXT NOT NULL,
-          symptoms  TEXT,
           flow INTEGER NOT NULL,
           painLevel INTEGER NOT NULL,
           period_id INTEGER,
           FOREIGN KEY (period_id) REFERENCES periods(id) ON DELETE SET NULL
+      )
+      '''
+    );
+    await db.execute(
+      '''
+      CREATE TABLE log_symptoms (
+        log_id_fk INTEGER,
+        symptom TEXT NOT NULL,
+        PRIMARY KEY (log_id_fk, symptom),
+        FOREIGN KEY (log_id_fk) REFERENCES period_logs (id) ON DELETE CASCADE,
       )
       '''
     );
@@ -75,9 +85,13 @@ class AppDatabase {
     if (oldVersion < 5) {
       await db.execute('UPDATE period_logs SET flow = flow + 1');
     }
-      if (oldVersion < 6) {
+    if (oldVersion < 6) {
       await db.execute('UPDATE period_logs SET flow = flow + 1 WHERE flow > 0');
     }
+    if (oldVersion < 7) {
+      await migrateSymptomsToNewSymptomTable(db);
+    }
+
   }
 
   Future<void> _createPillTables(Database db) async {
@@ -158,6 +172,50 @@ class AppDatabase {
     }
   }
 
+  Future<void> migrateSymptomsToNewSymptomTable(Database db) async {
+    final logsToMigrate = await db.query(
+      'period_logs',
+      columns: ['id', 'symptoms'],
+      where: 'symptoms IS NOT NULL AND symptoms != ?',
+      whereArgs: ['[]'],
+    );
+
+    if (logsToMigrate.isEmpty) {
+      return;
+    }
+
+    final batch = db.batch();
+
+    for (final log in logsToMigrate) {
+      final int logId = log['id'] as int;
+      final String rawSymptoms = log['symptoms'] as String;
+
+      List<String> symptoms = [];
+      try {
+        final List<dynamic> decodedList = jsonDecode(rawSymptoms);
+
+        symptoms = decodedList.cast<String>();
+        
+      } catch (e) {
+        debugPrint('Failed to jsonDecode symptoms "$rawSymptoms" for log $logId: $e');
+        continue; 
+      }
+
+      for (final symptom in symptoms) {
+        batch.insert(
+          'log_symptoms',
+          {
+            'log_id_fk': logId,
+            'symptom': symptom,
+          },
+          conflictAlgorithm: ConflictAlgorithm.ignore,
+        );
+      }
+    }
+
+    await batch.commit(noResult: true);
+  }
+  
   Future<void> close() async {
     final db = await database;
     await db.close();
