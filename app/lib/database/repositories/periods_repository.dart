@@ -128,7 +128,7 @@ class PeriodsRepository {
 
       if (entry.symptoms.isNotEmpty) {
         final batch = txn.batch();
-        for (final symptom in entry.symptoms!) {
+        for (final symptom in entry.symptoms) {
           batch.insert('log_symptoms', {
             'log_id_fk': newLogId,
             'symptom': symptom,
