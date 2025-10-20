@@ -191,6 +191,23 @@ class PeriodsRepository {
     return PeriodDay.fromMap(result.first, symptoms: symptoms);
   }
 
+  /// Calculates the usage count for every symptom in the database.
+  Future<Map<String, int>> getSymptomFrequency() async {
+    final db = await dbProvider.database;
+
+    final result = await db.rawQuery(
+      'SELECT symptom, COUNT(symptom) as count FROM log_symptoms GROUP BY symptom'
+    );
+
+    if (result.isEmpty) {
+      return {};
+    }
+    return {
+      for (var row in result)
+        row['symptom'] as String: row['count'] as int
+    };
+  }
+
   Future<int> updatePeriodLog(PeriodDay entry) async {
     final db = await dbProvider.database;
 
