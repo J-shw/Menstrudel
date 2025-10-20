@@ -18,14 +18,13 @@ class SymptomFrequencyWidget extends StatelessWidget {
     final symptomMap = {for (var s in Symptom.values) s.name: s};
 
     for (final log in logs) {
-      if (log.symptoms != null) {
-        for (final symptomString in log.symptoms!) {
-          final symptom = symptomMap[symptomString.trim()];
-          if (symptom != null) {
-            symptomCounts[symptom] = (symptomCounts[symptom] ?? 0) + 1;
-          }
+      for (final symptomString in log.symptoms!) {
+        final symptom = symptomMap[symptomString.trim()];
+        if (symptom != null) {
+          symptomCounts[symptom] = (symptomCounts[symptom] ?? 0) + 1;
         }
       }
+      
     }
     
     final sortedSymptoms = symptomCounts.entries.sortedBy<num>((e) => e.value).reversed.toList();
