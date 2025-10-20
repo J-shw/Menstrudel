@@ -30,6 +30,8 @@
 
 - 🌐 **Translators:** [Help translate](https://crowdin.com/project/menstrudel)
 
+- 💬 **Community:** [Join our official Discord Server](https://discord.gg/jWrH9DvACS)
+
 <br>
 
 ## About Menstrudel
@@ -80,6 +82,7 @@ You can view our privacy policy [here](https://menstrudel.app/privacy/).
 ## Socials
 
 - [Website](https://menstrudel.app/)
+- [Discord](https://discord.gg/jWrH9DvACS)
 - [ItsAllWidgets](https://itsallwidgets.com/menstrudel)
 - [AlternativeTo](https://alternativeto.net/software/menstrudel/about/)
 
