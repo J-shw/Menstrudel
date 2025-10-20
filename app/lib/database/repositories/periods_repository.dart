@@ -121,49 +121,116 @@ class PeriodsRepository {
   Future<PeriodDay> createPeriodLog(PeriodDay entry) async {
     final db = await dbProvider.database;
 
-    debugPrint(entry.toString());
-
     await _validateLogDate(db, entry.date);
-      
-    final id = await db.insert('period_logs', entry.toMap());
+
+    int newLogId = -1;
+    await db.transaction((txn) async {
+      newLogId = await txn.insert('period_logs', entry.toMap());
+
+      if (entry.symptoms.isNotEmpty) {
+        final batch = txn.batch();
+        for (final symptom in entry.symptoms!) {
+          batch.insert('log_symptoms', {
+            'log_id_fk': newLogId,
+            'symptom': symptom,
+          });
+        }
+        await batch.commit(noResult: true);
+      }
+    });
 
     await _recalculateAndAssignPeriods(db);
-
-    return await readPeriodLog(id);
+    return await readPeriodLog(newLogId);
   }
-
 
   Future<List<PeriodDay>> readAllPeriodLogs() async {
     final db = await dbProvider.database;
-    const orderBy = 'date DESC';
-    final result = await db.query('period_logs', orderBy: orderBy);
 
-    return result.map((json) => PeriodDay.fromMap(json)).toList();
+    const orderBy = 'date DESC';
+    final logsResult = await db.query('period_logs', orderBy: orderBy);
+
+    final symptomsResult = await db.query('log_symptoms');
+
+    final Map<int, List<String>> symptomMap = {};
+    for (final row in symptomsResult) {
+      final int logId = row['log_id_fk'] as int;
+      final String symptom = row['symptom'] as String;
+      (symptomMap[logId] ??= []).add(symptom);
+    }
+
+    return logsResult.map((json) {
+      final int logId = json['id'] as int;
+      final List<String> symptoms = symptomMap[logId] ?? [];
+      return PeriodDay.fromMap(json, symptoms: symptoms);
+    }).toList();
   }
 
   Future<PeriodDay> readPeriodLog(int id) async {
     final db = await dbProvider.database;
 
     final result = await db.query(
-      'period_logs', 
-      where: _whereId, 
+      'period_logs',
+      where: _whereId,
       whereArgs: [id],
     );
 
-    return result.map((json) => PeriodDay.fromMap(json)).first;
+    if (result.isEmpty) {
+      throw Exception('Log with id $id not found');
+    }
+
+    final symptomsResult = await db.query(
+      'log_symptoms',
+      columns: ['symptom'],
+      where: 'log_id_fk = ?',
+      whereArgs: [id],
+    );
+
+    final List<String> symptoms = symptomsResult
+        .map((row) => row['symptom'] as String)
+        .toList();
+
+    return PeriodDay.fromMap(result.first, symptoms: symptoms);
   }
 
   Future<int> updatePeriodLog(PeriodDay entry) async {
     final db = await dbProvider.database;
 
+    if (entry.id == null) {
+      debugPrint('Error: updatePeriodLog called with null ID');
+      return 0;
+    }
+
     await _validateLogDate(db, entry.date, idToExclude: entry.id);
 
-    final int result = await db.update(
-      'period_logs',
-      entry.toMap(),
-      where: _whereId,
-      whereArgs: [entry.id],
-    );
+    int result = 0;
+
+    await db.transaction((txn) async {
+      result = await txn.update(
+        'period_logs',
+        entry.toMap(),
+        where: _whereId,
+        whereArgs: [entry.id],
+      );
+
+      if (result > 0) {
+        await txn.delete(
+          'log_symptoms',
+          where: 'log_id_fk = ?',
+          whereArgs: [entry.id],
+        );
+
+        if (entry.symptoms.isNotEmpty) {
+          final batch = txn.batch();
+          for (final symptom in entry.symptoms) {
+            batch.insert('log_symptoms', {
+              'log_id_fk': entry.id,
+              'symptom': symptom,
+            });
+          }
+          await batch.commit(noResult: true);
+        }
+      }
+    });
 
     if (result > 0) {
       await _recalculateAndAssignPeriods(db);
@@ -295,50 +362,23 @@ class Manager {
 
   Manager(this.dbProvider);
 
-  /// Converts symptom JSON string to JSON object
-  dynamic _decodeSymptoms(String? jsonString) {
-    if (jsonString == null || jsonString.isEmpty) {
-      return [];
-    }
-    try {
-      return jsonDecode(jsonString);
-    } catch (e) {
-      debugPrint('Error decoding symptoms JSON: $e'); 
-      return []; 
-    }
-  }
-
-  /// Validates a list of raw symptoms against the Symptom enum,
-  /// filters out invalid entries, and then JSON encodes the resulting list of valid symptoms for database storage.
-  String _encodeAndValidateSymptoms(List<dynamic> rawSymptoms) {
-    final validSymptoms = Symptom.values.map((e) => e.name).toSet();
-
-    final List<String> filteredSymptoms = rawSymptoms
-        .whereType<String>()
-        .where((symptom) => validSymptoms.contains(symptom))
-        .toList();
-
-    return jsonEncode(filteredSymptoms);
-  }
-
   /// Returns periods and period_logs data as json - ready for exporting data.
   Future<String> exportDataAsJson() async {
     final db = await dbProvider.database;
 
-    final periodLogsRaw = await db.query('period_logs');
+    final periodLogs = await db.query('period_logs');
     final periods = await db.query('periods');
+    final logSymptoms = await db.query('log_symptoms');
+
+
     final packageInfo = await PackageInfo.fromPlatform();
     final dbVersion = await db.getVersion();
 
-    final periodLogs = periodLogsRaw.map((log) {
-      final mutableLog = Map<String, dynamic>.from(log); 
-      mutableLog['symptoms'] = _decodeSymptoms(mutableLog['symptoms'] as String?);
-      return mutableLog;
-    }).toList();
 
     final exportData = {
       'periods': periods,
       'period_logs': periodLogs,
+      'log_symptoms': logSymptoms,
       'exported_at': DateTime.now().toIso8601String(),
       'app_version': packageInfo.version,
       'db_version': dbVersion,
@@ -357,8 +397,8 @@ class Manager {
     try {
       final Map<String, dynamic> importData = jsonDecode(jsonString);
 
-      if (!importData.containsKey('periods') || !importData.containsKey('period_logs')) {
-        throw const FormatException('Invalid import file: Missing "periods" or "period_logs" data.');
+      if (!importData.containsKey('periods') || !importData.containsKey('period_logs') || !importData.containsKey('log_symptoms')) {
+        throw const FormatException('Invalid import file: Missing "periods" or "period_logs" or "log_symptoms" data.');
       }
       
       final importedDbVersion = importData['db_version'] as int?;
@@ -371,6 +411,7 @@ class Manager {
       await db.transaction((txn) async {
         await txn.delete('period_logs');
         await txn.delete('periods');
+        await txn.delete('log_symptoms');
         
         final List periods = importData['periods'] as List;
         for (final Map<String, dynamic> period in periods.cast<Map<String, dynamic>>()) {
@@ -382,13 +423,6 @@ class Manager {
         for (final Map<String, dynamic> logRaw in periodLogsRaw.cast<Map<String, dynamic>>()) {
           final Map<String, dynamic> logToInsert = Map.from(logRaw);
           logToInsert.remove('id');
-          
-          final symptomsList = logToInsert['symptoms'];
-          if (symptomsList is List) {
-            logToInsert['symptoms'] = _encodeAndValidateSymptoms(symptomsList.cast<dynamic>());
-          } else {
-            logToInsert['symptoms'] = _encodeAndValidateSymptoms([]);
-          }
 
           final rawFlow = logToInsert['flow'];
 
@@ -399,6 +433,11 @@ class Manager {
           }
           
           await txn.insert('period_logs', logToInsert, conflictAlgorithm: ConflictAlgorithm.replace);
+        }
+
+        final List logSymptoms = importData['log_symptoms'] as List;
+        for (final Map<String, dynamic> symptom in logSymptoms.cast<Map<String, dynamic>>()) {
+          await txn.insert('log_symptoms', symptom, conflictAlgorithm: ConflictAlgorithm.replace);
         }
       });
     } on FormatException catch (_) {
