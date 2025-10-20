@@ -64,7 +64,7 @@ class AppDatabase {
         log_id_fk INTEGER,
         symptom TEXT NOT NULL,
         PRIMARY KEY (log_id_fk, symptom),
-        FOREIGN KEY (log_id_fk) REFERENCES period_logs (id) ON DELETE CASCADE,
+        FOREIGN KEY (log_id_fk) REFERENCES period_logs (id) ON DELETE CASCADE
       )
       '''
     );
@@ -89,7 +89,19 @@ class AppDatabase {
       await db.execute('UPDATE period_logs SET flow = flow + 1 WHERE flow > 0');
     }
     if (oldVersion < 7) {
+      await db.execute(
+        '''
+        CREATE TABLE log_symptoms (
+          log_id_fk INTEGER,
+          symptom TEXT NOT NULL,
+          PRIMARY KEY (log_id_fk, symptom),
+          FOREIGN KEY (log_id_fk) REFERENCES period_logs (id) ON DELETE CASCADE
+        )
+        '''
+      );
       await migrateSymptomsToNewSymptomTable(db);
+      
+      await db.execute('ALTER TABLE period_logs DROP COLUMN symptoms');
     }
 
   }
