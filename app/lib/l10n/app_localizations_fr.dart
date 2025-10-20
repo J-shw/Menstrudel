@@ -113,25 +113,28 @@ class AppLocalizationsFr extends AppLocalizations {
   String get flowIntensity_heavy => 'Abondant';
 
   @override
-  String get symptom_headache => 'Maux de tête';
+  String get defaultSymptom_acne => 'Acne';
 
   @override
-  String get symptom_fatigue => 'Fatigue';
+  String get defaultSymptom_backPain => 'Back pain';
 
   @override
-  String get symptom_cramps => 'Crampes';
+  String get defaultSymptom_bloating => 'Bloating';
 
   @override
-  String get symptom_nausea => 'Nausée';
+  String get defaultSymptom_cramps => 'Cramps';
 
   @override
-  String get symptom_moodSwings => 'Sauts d’humeur';
+  String get defaultSymptom_fatigue => 'Fatigue';
 
   @override
-  String get symptom_bloating => 'Ballonnements';
+  String get defaultSymptom_headache => 'Headache';
 
   @override
-  String get symptom_acne => 'Acné';
+  String get defaultSymptom_moodSwings => 'Mood Swings';
+
+  @override
+  String get defaultSymptom_nausea => 'Nausea';
 
   @override
   String get painLevel_title => 'Intensité de la douleur';

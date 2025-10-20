@@ -294,47 +294,53 @@ abstract class AppLocalizations {
   /// **'Heavy'**
   String get flowIntensity_heavy;
 
-  /// No description provided for @symptom_headache.
-  ///
-  /// In en, this message translates to:
-  /// **'Headache'**
-  String get symptom_headache;
-
-  /// No description provided for @symptom_fatigue.
-  ///
-  /// In en, this message translates to:
-  /// **'Fatigue'**
-  String get symptom_fatigue;
-
-  /// No description provided for @symptom_cramps.
-  ///
-  /// In en, this message translates to:
-  /// **'Cramps'**
-  String get symptom_cramps;
-
-  /// No description provided for @symptom_nausea.
-  ///
-  /// In en, this message translates to:
-  /// **'Nausea'**
-  String get symptom_nausea;
-
-  /// No description provided for @symptom_moodSwings.
-  ///
-  /// In en, this message translates to:
-  /// **'Mood Swings'**
-  String get symptom_moodSwings;
-
-  /// No description provided for @symptom_bloating.
-  ///
-  /// In en, this message translates to:
-  /// **'Bloating'**
-  String get symptom_bloating;
-
-  /// No description provided for @symptom_acne.
+  /// No description provided for @defaultSymptom_acne.
   ///
   /// In en, this message translates to:
   /// **'Acne'**
-  String get symptom_acne;
+  String get defaultSymptom_acne;
+
+  /// No description provided for @defaultSymptom_backPain.
+  ///
+  /// In en, this message translates to:
+  /// **'Back pain'**
+  String get defaultSymptom_backPain;
+
+  /// No description provided for @defaultSymptom_bloating.
+  ///
+  /// In en, this message translates to:
+  /// **'Bloating'**
+  String get defaultSymptom_bloating;
+
+  /// No description provided for @defaultSymptom_cramps.
+  ///
+  /// In en, this message translates to:
+  /// **'Cramps'**
+  String get defaultSymptom_cramps;
+
+  /// No description provided for @defaultSymptom_fatigue.
+  ///
+  /// In en, this message translates to:
+  /// **'Fatigue'**
+  String get defaultSymptom_fatigue;
+
+  /// No description provided for @defaultSymptom_headache.
+  ///
+  /// In en, this message translates to:
+  /// **'Headache'**
+  String get defaultSymptom_headache;
+
+  /// No description provided for @defaultSymptom_moodSwings.
+  ///
+  /// In en, this message translates to:
+  /// **'Mood Swings'**
+  String get defaultSymptom_moodSwings;
+
+  /// No description provided for @defaultSymptom_nausea.
+  ///
+  /// In en, this message translates to:
+  /// **'Nausea'**
+  String get defaultSymptom_nausea;
 
   /// No description provided for @painLevel_title.
   ///
