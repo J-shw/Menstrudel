@@ -141,7 +141,7 @@ class PeriodListView extends StatelessWidget {
     final l10n = AppLocalizations.of(context)!;
     final symptomMap = {for (var s in Symptom.values) s.name: s};
     final symptoms =
-        entry.symptoms?.map((s) => symptomMap[s]).whereType<Symptom>().toList() ?? [];
+        entry.symptoms.map((s) => symptomMap[s]).whereType<Symptom>().toList();
     return InkWell(
       onTap: () => onLogTapped(entry),
       child: Padding(

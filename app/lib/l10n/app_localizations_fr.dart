@@ -187,38 +187,38 @@ class AppLocalizationsFr extends AppLocalizations {
       'N’oubliez pas de prendre votre pilule aujourd’hui.';
 
   @override
-  String get notification_tamponReminderTitle => 'Tampon Reminder';
+  String get notification_tamponReminderTitle => 'Rappel de tampon';
 
   @override
   String get notification_tamponReminderBody =>
-      'Remember to change your tampon.';
+      'N\'oubliez pas de changer votre tampon.';
 
   @override
-  String get mainScreen_insightsPageTitle => 'Your Insights';
+  String get mainScreen_insightsPageTitle => 'Votre Aperçu';
 
   @override
-  String get mainScreen_pillsPageTitle => 'Pills';
+  String get mainScreen_pillsPageTitle => 'Pilules';
 
   @override
-  String get mainScreen_settingsPageTitle => 'Settings';
+  String get mainScreen_settingsPageTitle => 'Paramètres';
 
   @override
-  String get mainScreen_tooltipSetReminder => 'Tampon reminder';
+  String get mainScreen_tooltipSetReminder => 'Rappel de tampon';
 
   @override
-  String get mainScreen_tooltipCancelReminder => 'Cancel reminder';
+  String get mainScreen_tooltipCancelReminder => 'Annuler le rappel';
 
   @override
-  String get mainScreen_tooltipLogPeriod => 'Log period';
+  String get mainScreen_tooltipLogPeriod => 'Historique des règles';
 
   @override
-  String get insightsScreen_errorPrefix => 'Error:';
+  String get insightsScreen_errorPrefix => 'Erreur:';
 
   @override
   String get insightsScreen_noDataAvailable => 'No data available.';
 
   @override
-  String get logsScreen_calculatingPrediction => 'Calculating prediction...';
+  String get logsScreen_calculatingPrediction => 'Calcul de la prédication...';
 
   @override
   String get logScreen_logAtLeastTwoPeriods =>
@@ -235,8 +235,8 @@ class AppLocalizationsFr extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'Period overdue by $count days',
-      one: 'Period overdue by 1 day',
+      other: 'Règles en retard de $count jours',
+      one: 'Règles en retard d’un jour',
     );
     return '$_temp0';
   }
@@ -256,7 +256,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get pillScreen_pillForTodayMarkedAsSkipped =>
-      'Pill for today marked as skipped.';
+      'Pilule du jour marquée comme sautée.';
 
   @override
   String get settingsScreen_selectHistoryView => 'Select History View';
@@ -666,15 +666,4 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get periodDetailsSheet_flow => 'Flow';
-
-  @override
-  String periodPredictionCircle_days(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'Days',
-      one: 'Day',
-    );
-    return '$_temp0';
-  }
 }

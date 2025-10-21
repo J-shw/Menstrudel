@@ -1241,12 +1241,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Flow'**
   String get periodDetailsSheet_flow;
-
-  /// A label showing the total number of days until period is due.
-  ///
-  /// In en, this message translates to:
-  /// **'{count, plural, =1{Day} other{Days}}'**
-  String periodPredictionCircle_days(int count);
 }
 
 class _AppLocalizationsDelegate

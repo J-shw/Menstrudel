@@ -40,13 +40,13 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
   void _resetEditableState() {
     _editedFlow = widget.log.flow;
     _editedPainLevel = PainLevel.values[widget.log.painLevel];
-    _editedSymptoms = widget.log.symptoms?.map((symptomString) {
+    _editedSymptoms = widget.log.symptoms.map((symptomString) {
     try {
         return Symptom.values.firstWhere((e) => e.name == symptomString);
       } catch (e) {
         return null;
       }
-    }).whereType<Symptom>().toList() ?? [];
+    }).whereType<Symptom>().toList();
   }
 
   void _handleSave() {

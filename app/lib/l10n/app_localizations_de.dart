@@ -47,13 +47,13 @@ class AppLocalizationsDe extends AppLocalizations {
   String get delete => 'Löschen';
 
   @override
-  String get clear => 'Clear';
+  String get clear => 'Löschen';
 
   @override
   String get save => 'Speichern';
 
   @override
-  String get import => 'Import';
+  String get import => 'Importieren';
 
   @override
   String get ok => 'OK';
@@ -62,7 +62,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get confirm => 'Bestätigen';
 
   @override
-  String get set => 'Set';
+  String get set => 'Festlegen';
 
   @override
   String get yes => 'Ja';
@@ -77,10 +77,10 @@ class AppLocalizationsDe extends AppLocalizations {
   String get select => 'Auswählen';
 
   @override
-  String get close => 'Close';
+  String get close => 'Schließen';
 
   @override
-  String get systemDefault => 'System Default';
+  String get systemDefault => 'System Standard';
 
   @override
   String get flow => 'Flow';
@@ -101,22 +101,22 @@ class AppLocalizationsDe extends AppLocalizations {
   String get flowIntensity_none => 'Keine';
 
   @override
-  String get flowIntensity_spotting => 'Spotting';
+  String get flowIntensity_spotting => 'Erkennen';
 
   @override
-  String get flowIntensity_light => 'Light';
+  String get flowIntensity_light => 'Hell';
 
   @override
-  String get flowIntensity_moderate => 'Moderate';
+  String get flowIntensity_moderate => 'Mäßig';
 
   @override
-  String get flowIntensity_heavy => 'Heavy';
+  String get flowIntensity_heavy => 'Schwer';
 
   @override
   String get symptom_headache => 'Kopfschmerzen';
 
   @override
-  String get symptom_fatigue => 'Fatigue';
+  String get symptom_fatigue => 'Müdigkeit';
 
   @override
   String get symptom_cramps => 'Krämpfe';
@@ -137,13 +137,13 @@ class AppLocalizationsDe extends AppLocalizations {
   String get painLevel_title => 'Schmerzgrad';
 
   @override
-  String get painLevel_none => 'None';
+  String get painLevel_none => 'Keine';
 
   @override
   String get painLevel_mild => 'Mild';
 
   @override
-  String get painLevel_moderate => 'Moderate';
+  String get painLevel_moderate => 'Mäßig';
 
   @override
   String get painLevel_severe => 'Schwerwiegend';
@@ -197,7 +197,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get mainScreen_insightsPageTitle => 'Deine Erkenntnisse';
 
   @override
-  String get mainScreen_pillsPageTitle => 'Pills';
+  String get mainScreen_pillsPageTitle => 'Pille';
 
   @override
   String get mainScreen_settingsPageTitle => 'Einstellungen';
@@ -206,13 +206,13 @@ class AppLocalizationsDe extends AppLocalizations {
   String get mainScreen_tooltipSetReminder => 'Tampon-Erinnerung';
 
   @override
-  String get mainScreen_tooltipCancelReminder => 'Cancel reminder';
+  String get mainScreen_tooltipCancelReminder => 'Erinnerung abbrechen';
 
   @override
   String get mainScreen_tooltipLogPeriod => 'Log period';
 
   @override
-  String get insightsScreen_errorPrefix => 'Error:';
+  String get insightsScreen_errorPrefix => 'Fehler:';
 
   @override
   String get insightsScreen_noDataAvailable => 'Keine Daten verfügbar.';
@@ -222,13 +222,13 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get logScreen_logAtLeastTwoPeriods =>
-      'Log at least two periods to estimate next cycle.';
+      'Protokolliere mindestens zwei Perioden, um den nächsten Zyklus zu schätzen.';
 
   @override
   String get logScreen_nextPeriodEstimate => 'Next period Est';
 
   @override
-  String get logScreen_periodDueToday => 'Period due today';
+  String get logScreen_periodDueToday => 'Heute fällige Periode';
 
   @override
   String logScreen_periodOverdueBy(int count) {
@@ -254,17 +254,17 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get pillScreen_pillForTodayMarkedAsTaken =>
-      'Pill for today marked as taken.';
+      'Pille für heute als eingenommen markiert.';
 
   @override
   String get pillScreen_pillForTodayMarkedAsSkipped =>
-      'Pill for today marked as skipped.';
+      'Pille für heute als ausgelassen markiert.';
 
   @override
   String get settingsScreen_selectHistoryView => 'Select History View';
 
   @override
-  String get settingsScreen_deleteRegimen_question => 'Delete Regimen?';
+  String get settingsScreen_deleteRegimen_question => 'Kuren löschen?';
 
   @override
   String get settingsScreen_deleteRegimenDescription =>
@@ -272,14 +272,14 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get settingsScreen_allLogsHaveBeenCleared =>
-      'All logs have been cleared.';
+      'Alle Protokolle wurden gelöscht.';
 
   @override
-  String get settingsScreen_clearAllLogs_question => 'Clear All Logs?';
+  String get settingsScreen_clearAllLogs_question => 'Alle Protokolle löschen?';
 
   @override
   String get settingsScreen_deleteAllLogsDescription =>
-      'This will permanently delete all your period logs. Your app settings will not be affected.';
+      'Dadurch werden alle Deine Periodenprotokolle dauerhaft gelöscht. Deine App-Einstellungen bleiben davon unberührt.';
 
   @override
   String get settingsScreen_appearance => 'Aussehen';
@@ -288,7 +288,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsScreen_historyViewStyle => 'History View Style';
 
   @override
-  String get settingsScreen_appTheme => 'App Theme';
+  String get settingsScreen_appTheme => 'App-Thema';
 
   @override
   String get settingsScreen_themeLight => 'Hell';
@@ -300,19 +300,19 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsScreen_themeSystem => 'System';
 
   @override
-  String get settingsScreen_dynamicTheme => 'Dynamic Theme';
+  String get settingsScreen_dynamicTheme => 'Dynamisches Thema';
 
   @override
   String get settingsScreen_useWallpaperColors => 'Nutze Hintergrundfarben';
 
   @override
-  String get settingsScreen_themeColor => 'Theme Color';
+  String get settingsScreen_themeColor => 'Themenfarbe';
 
   @override
   String get settingsScreen_pickAColor => 'Eine Farbe auswählen';
 
   @override
-  String get settingsScreen_view => 'View';
+  String get settingsScreen_view => 'Ansicht';
 
   @override
   String get settingsScreen_birthControl => 'Empfängnisverhütung';
@@ -328,7 +328,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsScreen_dailyPillReminder => 'Daily Pill Reminder';
 
   @override
-  String get settingsScreen_reminderTime => 'Reminder Time';
+  String get settingsScreen_reminderTime => 'Erinnerungszeit';
 
   @override
   String get settingsScreen_periodPredictionAndReminders =>
@@ -354,11 +354,11 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsScreen_pillRegimens => 'Pill Regimens';
 
   @override
-  String get settingsScreen_makeActive => 'Set as Active';
+  String get settingsScreen_makeActive => 'Als aktiv festlegen';
 
   @override
   String get settingsScreen_activeRegimenReminder =>
-      'Active Regimen Reminder Settings';
+      'Einstellungen für aktive Kurerinnerungen';
 
   @override
   String get settingsScreen_pack => 'Pack';
@@ -367,7 +367,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsScreen_dataManagement => 'Data Management';
 
   @override
-  String get settingsScreen_clearAllLogs => 'Clear All Logs';
+  String get settingsScreen_clearAllLogs => 'Alle Protokolle löschen';
 
   @override
   String get settingsScreen_clearAllPillData => 'Clear All Pill Data';
@@ -384,7 +384,7 @@ class AppLocalizationsDe extends AppLocalizations {
       'All pill data has been cleared.';
 
   @override
-  String get settingsScreen_dangerZone => 'Danger Zone';
+  String get settingsScreen_dangerZone => 'Gefahrenbereich';
 
   @override
   String get settingsScreen_clearAllLogsSubtitle =>
@@ -395,38 +395,41 @@ class AppLocalizationsDe extends AppLocalizations {
       'Removes your pill regimen and intake history.';
 
   @override
-  String get settingsScreen_exportPeriodData => 'Export Period Data';
+  String get settingsScreen_exportPeriodData => 'Periodendaten exportieren';
 
   @override
-  String get settingsScreen_exportPillData => 'Export Pill Data';
+  String get settingsScreen_exportPillData => 'Periodendaten exportieren';
 
   @override
-  String get settingsScreen_exportDataSubtitle => 'Create a JSON backup file.';
+  String get settingsScreen_exportDataSubtitle =>
+      'Erstelle eine JSON Backup Datei.';
 
   @override
-  String get settingsScreen_exportSuccessful => 'Data exported successfully.';
+  String get settingsScreen_exportSuccessful => 'Daten erfolgreich exportiert.';
 
   @override
-  String get settingsScreen_exportFailed => 'Export failed. Please try again.';
+  String get settingsScreen_exportFailed =>
+      'Export fehlgeschlagen. Bitte versuche es erneut.';
 
   @override
-  String get settingsScreen_noDataToExport => 'No data found to export.';
+  String get settingsScreen_noDataToExport =>
+      'Keine Daten zum Exportieren gefunden.';
 
   @override
   String get settingsScreen_exportDataMessage =>
-      'Here is my MenstruDel data export.';
+      'Hier ist mein MenstruDel Datenexport.';
 
   @override
-  String get settingsScreen_exportDataTitle => 'Export Data';
+  String get settingsScreen_exportDataTitle => 'Daten exportieren';
 
   @override
-  String get settingsScreen_importDataTitle => 'Import Data';
+  String get settingsScreen_importDataTitle => 'Daten importieren';
 
   @override
-  String get settingsScreen_importPeriodData => 'Import Period Data';
+  String get settingsScreen_importPeriodData => 'Periodendaten importieren';
 
   @override
-  String get settingsScreen_importPillData => 'Import Pill Data';
+  String get settingsScreen_importPillData => 'Periodendaten importieren';
 
   @override
   String get settingsScreen_importDataSubtitle => 'Overwrites existing data.';
@@ -448,44 +451,44 @@ class AppLocalizationsDe extends AppLocalizations {
       'Importing data will permanently overwrite all your existing pill history. This cannot be undone.';
 
   @override
-  String get settingsScreen_importSuccessful => 'Data imported successfully!';
+  String get settingsScreen_importSuccessful => 'Daten erfolgreich importiert!';
 
   @override
   String get settingsScreen_importFailed =>
-      'Failed to import data. Please try again.';
+      'Datenimport fehlgeschlagen. Bitte versuche es erneut.';
 
   @override
   String get settingsScreen_importInvalidFile =>
-      'Invalid file format or data structure.';
+      'Ungültiges Dateiformat oder ungültige Datenstruktur.';
 
   @override
   String get settingsScreen_importErrorGeneral =>
-      'Failed to import data. Please ensure the file is saved locally.';
+      'Daten konnten nicht importiert werden. Bitte stelle sicher, dass die Datei lokal gespeichert ist.';
 
   @override
   String settingsScreen_importErrorPlatform(String message) {
-    return 'Import failed: $message. Please ensure the file is saved on the device and try again.';
+    return 'Import fehlgeschlagen: $message. Bitte stelle sicher, dass die Datei auf dem Gerät gespeichert ist und versuche es erneut.';
   }
 
   @override
-  String get settingsScreen_security => 'Security';
+  String get settingsScreen_security => 'Sicherheit';
 
   @override
   String get securityScreen_enableBiometricLock => 'Enable Biometric Lock';
 
   @override
   String get securityScreen_enableBiometricLockSubtitle =>
-      'Require fingerprint or face ID to open the app.';
+      'Zum Öffnen der App ist eine Fingerabdruck- oder Gesichtserkennung erforderlich.';
 
   @override
   String get securityScreen_noBiometricsAvailable =>
-      'No passcode, fingerprint, or face ID found. Please set one up in your device\'s settings.';
+      'Es wurde kein Passcode, Fingerabdruck oder Face ID gefunden. Bitte lege einen in den Einstellungen des Geräts fest.';
 
   @override
-  String get settingsScreen_preferences => 'Preferences';
+  String get settingsScreen_preferences => 'Einstellungen';
 
   @override
-  String get preferencesScreen_language => 'Language';
+  String get preferencesScreen_language => 'Sprache';
 
   @override
   String get preferencesScreen_tamponReminderButton =>
@@ -496,7 +499,7 @@ class AppLocalizationsDe extends AppLocalizations {
       'Makes the tampon reminder button permanently visible on the main screen.';
 
   @override
-  String get settingsScreen_about => 'About';
+  String get settingsScreen_about => 'Über';
 
   @override
   String get aboutScreen_version => 'Version';
@@ -508,13 +511,13 @@ class AppLocalizationsDe extends AppLocalizations {
   String get aboutScreen_githubSubtitle => 'Source code and issue tracking';
 
   @override
-  String get aboutScreen_share => 'Share';
+  String get aboutScreen_share => 'Teilen';
 
   @override
-  String get aboutScreen_shareSubtitle => 'Share the app with friends';
+  String get aboutScreen_shareSubtitle => 'Teile die App mit Freunden';
 
   @override
-  String get aboutScreen_urlError => 'Could not open the link.';
+  String get aboutScreen_urlError => 'Der Link konnte nicht geöffnet werden.';
 
   @override
   String get tamponReminderDialog_tamponReminderTitle => 'Tampon Reminder';
@@ -524,32 +527,34 @@ class AppLocalizationsDe extends AppLocalizations {
       'Max duration is 8 hours.';
 
   @override
-  String get reminderCountdownDialog_title => 'Reminder Due In';
+  String get reminderCountdownDialog_title => 'Erinnerung Fällig am';
 
   @override
   String reminderCountdownDialog_dueAt(Object time) {
-    return 'Due at $time';
+    return 'Fällig um $time';
   }
 
   @override
   String get cycleLengthVarianceWidget_LogAtLeastTwoPeriods =>
-      'Need at least two cycles to show variance.';
+      'Es sind mindestens zwei Zyklen erforderlich, um Abweichungen zu zeigen.';
 
   @override
   String get cycleLengthVarianceWidget_cycleAndPeriodVeriance =>
-      'Cycle & Period Variance';
+      'Zyklus- und Periodenabweichung';
 
   @override
-  String get cycleLengthVarianceWidget_averageCycle => 'Average Cycle';
+  String get cycleLengthVarianceWidget_averageCycle =>
+      'Durchschnittlicher Zyklus';
 
   @override
-  String get cycleLengthVarianceWidget_averagePeriod => 'Average Period';
+  String get cycleLengthVarianceWidget_averagePeriod =>
+      'Durchschnittliche Periode';
 
   @override
-  String get cycleLengthVarianceWidget_period => 'Period';
+  String get cycleLengthVarianceWidget_period => 'Periode';
 
   @override
-  String get cycleLengthVarianceWidget_cycle => 'Cycle';
+  String get cycleLengthVarianceWidget_cycle => 'Zyklus';
 
   @override
   String get flowIntensityWidget_flowIntensityBreakdown =>
@@ -560,41 +565,43 @@ class AppLocalizationsDe extends AppLocalizations {
       'No flow data logged yet.';
 
   @override
-  String get painLevelWidget_noPainDataLoggedYet => 'No pain data logged yet.';
+  String get painLevelWidget_noPainDataLoggedYet =>
+      'Es wurden noch keine Schmerzdaten erfasst.';
 
   @override
   String get painLevelWidget_painLevelBreakdown => 'Pain Level Breakdown';
 
   @override
-  String get monthlyFlowChartWidget_noDataToDisplay => 'No data to display.';
+  String get monthlyFlowChartWidget_noDataToDisplay =>
+      'Keine Daten zum Anzeigen.';
 
   @override
-  String get monthlyFlowChartWidget_cycleFlowPatterns => 'Cycle Flow Patterns';
+  String get monthlyFlowChartWidget_cycleFlowPatterns => 'Zyklusverlaufsmuster';
 
   @override
   String get monthlyFlowChartWidget_cycleFlowPatternsDescription =>
-      'Each line represents one complete cycle';
+      'Jede Linie stellt einen vollständigen Zyklus dar';
 
   @override
   String get symptomFrequencyWidget_noSymptomsLoggedYet =>
-      'No symptoms logged yet.';
+      'Noch keine Symptome erfasst.';
 
   @override
-  String get symptomFrequencyWidget_mostCommonSymptoms =>
-      'Most Common Symptoms';
+  String get symptomFrequencyWidget_mostCommonSymptoms => 'Häufigste Symptome';
 
   @override
-  String get yearHeatMapWidget_yearlyOverview => 'Yearly Overview';
+  String get yearHeatMapWidget_yearlyOverview => 'Jahresübersicht';
 
   @override
-  String get journalViewWidget_logYourFirstPeriod => 'Log your first period.';
+  String get journalViewWidget_logYourFirstPeriod =>
+      'Trage deine erste Periode ein.';
 
   @override
   String get listViewWidget_noPeriodsLogged =>
-      'No periods logged yet.\nTap the + button to add one.';
+      'Es wurden noch keine Perioden protokolliert.\nDrücke auf die Schaltfläche „+“, um eine hinzuzufügen.';
 
   @override
-  String get listViewWidget_confirmDelete => 'Confirm Delete';
+  String get listViewWidget_confirmDelete => 'Löschen bestätigen';
 
   @override
   String get listViewWidget_confirmDeleteDescription =>
@@ -620,13 +627,13 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
-  String get pillStatus_undo => 'Undo';
+  String get pillStatus_undo => 'Rückgängig';
 
   @override
-  String get pillStatus_skip => 'Skip';
+  String get pillStatus_skip => 'Überspringen';
 
   @override
-  String get pillStatus_markAsTaken => 'Mark As Taken';
+  String get pillStatus_markAsTaken => 'Als genommen notieren';
 
   @override
   String pillStatus_packStartInFuture(DateTime date) {
@@ -640,16 +647,17 @@ class AppLocalizationsDe extends AppLocalizations {
   String get regimenSetupWidget_setUpPillRegimen => 'Set Up Pill Regimen';
 
   @override
-  String get regimenSetupWidget_packName => 'Pack Name';
+  String get regimenSetupWidget_packName => 'Verpackungsname';
 
   @override
-  String get regimenSetupWidget_pleaseEnterAName => 'Please enter a name';
+  String get regimenSetupWidget_pleaseEnterAName =>
+      'Bitte einen Namen eingeben';
 
   @override
   String get regimenSetupWidget_activePills => 'Active Pills';
 
   @override
-  String get regimenSetupWidget_enterANumber => 'Enter a number';
+  String get regimenSetupWidget_enterANumber => 'Eine Zahl eingeben';
 
   @override
   String get regimenSetupWidget_placeboPills => 'Placebo-Pillen';
@@ -668,15 +676,4 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get periodDetailsSheet_flow => 'Flow';
-
-  @override
-  String periodPredictionCircle_days(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'Days',
-      one: 'Day',
-    );
-    return '$_temp0';
-  }
 }
