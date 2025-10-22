@@ -18,15 +18,16 @@
       <img src="https://img.shields.io/github/stars/J-shw/Menstrudel?style=social" alt="GitHub stars">
     </a>
   </p>
+
+  <div>
+    <a href="https://play.google.com/store/apps/details?id=com.whitticase.menstrudel"><img src="icon/stores/playstore-en.png" alt="Play Store" width="120"></a>
+    <a href="https://apps.apple.com/us/app/menstrudel/id6751970511"><img src="icon/stores/appstore-en.svg" alt="App Store" width="120"></a>
+  </div>
 </div>
 
 <br>
 
 ## Get Involved
-
-- 🤖 **Android Users:** [Join our Play Store beta](https://groups.google.com/g/menstrudel-app-testers)
-
-- 🍎 **iOS Users:** [Join our App Store beta](https://testflight.apple.com/join/VZPHnFqU)
 
 - 🌐 **Translators:** [Help translate](https://crowdin.com/project/menstrudel)
 
