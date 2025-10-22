@@ -20,7 +20,7 @@
   </p>
 
   <div>
-    <a href="https://play.google.com/store/apps/details?id=com.whitticase.menstrudel"><img src="icon/stores/playstore-en.png" alt="Play Store" width="120"></a>
+    <a href="https://play.google.com/store/apps/details?id=com.whitticase.menstrudel"><img src="icon/stores/playstore-en.svg" alt="Play Store" width="120"></a>
     <a href="https://apps.apple.com/us/app/menstrudel/id6751970511"><img src="icon/stores/appstore-en.svg" alt="App Store" width="120"></a>
   </div>
 </div>
