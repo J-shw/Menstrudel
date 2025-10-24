@@ -40,26 +40,24 @@ class _AuthGateState extends State<AuthGate> {
   }
 
   Future<void> _authenticate() async {
-    final LocalAuthentication auth = LocalAuthentication();
-    try {
-      final bool didAuthenticate = await auth.authenticate(
-        localizedReason: 'Please authenticate to open Menstrudel',
-        options: const AuthenticationOptions(
-          stickyAuth: true,
-          biometricOnly: false,
-        ),
-      );
+  final LocalAuthentication auth = LocalAuthentication();
+  try {
+    final bool didAuthenticate = await auth.authenticate(
+      localizedReason: 'Please authenticate to open Menstrudel',
+      persistAcrossBackgrounding: true, 
+      biometricOnly: false, 
+    );
 
-      if (didAuthenticate) {
-        _navigateToMainScreen();
-      } else {
-        SystemNavigator.pop();
-      }
-    } catch (e) {
-      debugPrint('Error during authentication: $e');
+    if (didAuthenticate) {
+      _navigateToMainScreen();
+    } else {
       SystemNavigator.pop();
     }
+  } catch (e) {
+    debugPrint('Error during authentication: $e');
+    SystemNavigator.pop();
   }
+}
 
   @override
   Widget build(BuildContext context) {
