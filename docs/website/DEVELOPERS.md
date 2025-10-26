@@ -41,12 +41,13 @@ This is a one-time setup to download all the necessary project files (called gem
 
 Once the setup is complete, you can run the local test server.
 
-1.  **Open a terminal** and make sure you are in the **project root directory** (where your `Gemfile` is located).
-
-2.  **Run the Jekyll serve command:**
-    You must tell Jekyll where the source files are located (the `website` folder).
+1.  **Open a terminal** and make sure you are in the **website directory** 
     ```bash
-    bundle exec jekyll serve --source website
+    cd website
+    ```
+2.  **Run the Jekyll serve command:**
+    ```bash
+    bundle exec jekyll serve
     ```
 
 This will build the website and start a local server, typically at **`http://127.0.0.1:4000`**. You can open this address in your web browser to see your changes live. The server will automatically rebuild the site whenever you save a file.
