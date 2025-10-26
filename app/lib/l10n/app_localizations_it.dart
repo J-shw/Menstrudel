@@ -47,7 +47,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String get delete => 'Elimina';
 
   @override
-  String get clear => 'Elimina';
+  String get clear => 'Cancella';
 
   @override
   String get save => 'Salva';
@@ -78,6 +78,9 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get close => 'Chiudi';
+
+  @override
+  String get systemDefault => 'System Default';
 
   @override
   String get flow => 'Flusso';
@@ -489,6 +492,9 @@ class AppLocalizationsIt extends AppLocalizations {
   String get settingsScreen_preferences => 'Preferenze';
 
   @override
+  String get preferencesScreen_language => 'Language';
+
+  @override
   String get preferencesScreen_tamponReminderButton =>
       'Mostra sempre il pulsante promemoria';
 
@@ -675,15 +681,4 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get periodDetailsSheet_flow => 'Flusso';
-
-  @override
-  String periodPredictionCircle_days(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'Giorni',
-      one: 'Giorno',
-    );
-    return '$_temp0';
-  }
 }

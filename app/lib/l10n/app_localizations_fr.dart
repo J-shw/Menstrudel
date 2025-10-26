@@ -12,341 +12,353 @@ class AppLocalizationsFr extends AppLocalizations {
   String get appTitle => 'Menstrudel';
 
   @override
-  String get ongoing => 'Ongoing';
+  String get ongoing => 'En cours';
 
   @override
   String get date => 'Date';
 
   @override
-  String get time => 'Time';
+  String get time => 'Heure';
 
   @override
-  String get start => 'Start';
+  String get start => 'Début';
 
   @override
-  String get end => 'End';
+  String get end => 'Fin';
 
   @override
-  String get day => 'Day';
+  String get day => 'Jour';
 
   @override
-  String get days => 'Days';
+  String get days => 'Jours';
 
   @override
   String dayCount(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count Days',
-      one: '$count Day',
+      other: '$count Jours',
+      one: '$count Jour',
     );
     return '$_temp0';
   }
 
   @override
-  String get delete => 'Delete';
+  String get delete => 'Supprimer';
 
   @override
-  String get clear => 'Clear';
+  String get clear => 'Effacer';
 
   @override
-  String get save => 'Save';
+  String get save => 'Sauvegarder';
 
   @override
-  String get import => 'Import';
+  String get import => 'Importer';
 
   @override
   String get ok => 'OK';
 
   @override
-  String get confirm => 'Confirm';
+  String get confirm => 'Confirmer';
 
   @override
-  String get set => 'Set';
+  String get set => 'Définir';
 
   @override
-  String get yes => 'Yes';
+  String get yes => 'Oui';
 
   @override
-  String get no => 'No';
+  String get no => 'Non';
 
   @override
-  String get cancel => 'Cancel';
+  String get cancel => 'Annuler';
 
   @override
-  String get select => 'Select';
+  String get select => 'Sélectionner';
 
   @override
-  String get close => 'Close';
+  String get close => 'Fermer';
 
   @override
-  String get flow => 'Flow';
+  String get systemDefault => 'System Default';
 
   @override
-  String get navBar_insights => 'Insights';
+  String get flow => 'Flux /';
 
   @override
-  String get navBar_logs => 'Logs';
+  String get navBar_insights => 'Statistiques';
 
   @override
-  String get navBar_pill => 'Pill';
+  String get navBar_logs => 'Historique';
 
   @override
-  String get navBar_settings => 'Settings';
+  String get navBar_pill => 'Pilule';
 
   @override
-  String get flowIntensity_none => 'None';
+  String get navBar_settings => 'Paramètres';
 
   @override
-  String get flowIntensity_spotting => 'Spotting';
+  String get flowIntensity_none => 'Aucun';
 
   @override
-  String get flowIntensity_light => 'Light';
+  String get flowIntensity_spotting => 'Saignement léger';
 
   @override
-  String get flowIntensity_moderate => 'Moderate';
+  String get flowIntensity_light => 'Léger';
 
   @override
-  String get flowIntensity_heavy => 'Heavy';
+  String get flowIntensity_moderate => 'Modéré';
 
   @override
-  String get symptom_headache => 'Headache';
+  String get flowIntensity_heavy => 'Abondant';
+
+  @override
+  String get symptom_headache => 'Maux de tête';
 
   @override
   String get symptom_fatigue => 'Fatigue';
 
   @override
-  String get symptom_cramps => 'Cramps';
+  String get symptom_cramps => 'Crampes';
 
   @override
-  String get symptom_nausea => 'Nausea';
+  String get symptom_nausea => 'Nausée';
 
   @override
-  String get symptom_moodSwings => 'Mood Swings';
+  String get symptom_moodSwings => 'Sauts d’humeur';
 
   @override
-  String get symptom_bloating => 'Bloating';
+  String get symptom_bloating => 'Ballonnements';
 
   @override
-  String get symptom_acne => 'Acne';
+  String get symptom_acne => 'Acné';
 
   @override
-  String get painLevel_title => 'Pain Level';
+  String get painLevel_title => 'Intensité de la douleur';
 
   @override
-  String get painLevel_none => 'None';
+  String get painLevel_none => 'Aucune';
 
   @override
-  String get painLevel_mild => 'Mild';
+  String get painLevel_mild => 'Légère';
 
   @override
-  String get painLevel_moderate => 'Moderate';
+  String get painLevel_moderate => 'Modérée';
 
   @override
-  String get painLevel_severe => 'Severe';
+  String get painLevel_severe => 'Forte';
 
   @override
-  String get pain_unbearable => 'Unbearable';
+  String get pain_unbearable => 'Insupportable';
 
   @override
-  String get notification_periodTitle => 'Period Approaching';
+  String get notification_periodTitle => 'Règles imminentes';
 
   @override
   String notification_periodBody(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'Your next period is estimated to start in $count days.',
-      one: 'Your next period is estimated to start in 1 day.',
+      other: 'Vos prochaines règles devraient commencer dans $count jours.',
+      one: 'Vos prochaines règles devraient commencer dans 1 jour.',
     );
     return '$_temp0';
   }
 
   @override
-  String get notification_periodOverdueTitle => 'Period Overdue';
+  String get notification_periodOverdueTitle => 'Règles en retard';
 
   @override
   String notification_periodOverdueBody(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'Your next period is overdue by $count days.',
-      one: 'Your next period is overdue by 1 day.',
+      other: 'Vos prochaines règles sont en retard de $count jours.',
+      one: 'Vos prochaines règles sont en retard d\'un jour.',
     );
     return '$_temp0';
   }
 
   @override
-  String get notification_pillTitle => 'Pill Reminder';
+  String get notification_pillTitle => 'Rappel de pilule';
 
   @override
   String get notification_pillBody =>
-      'Don\'t forget to take your pill for today.';
+      'N’oubliez pas de prendre votre pilule aujourd’hui.';
 
   @override
-  String get notification_tamponReminderTitle => 'Tampon Reminder';
+  String get notification_tamponReminderTitle => 'Rappel de tampon';
 
   @override
   String get notification_tamponReminderBody =>
-      'Remember to change your tampon.';
+      'N\'oubliez pas de changer votre tampon.';
 
   @override
-  String get mainScreen_insightsPageTitle => 'Your Insights';
+  String get mainScreen_insightsPageTitle => 'Votre Aperçu';
 
   @override
-  String get mainScreen_pillsPageTitle => 'Pills';
+  String get mainScreen_pillsPageTitle => 'Pilules';
 
   @override
-  String get mainScreen_settingsPageTitle => 'Settings';
+  String get mainScreen_settingsPageTitle => 'Paramètres';
 
   @override
-  String get mainScreen_tooltipSetReminder => 'Tampon reminder';
+  String get mainScreen_tooltipSetReminder => 'Rappel de tampon';
 
   @override
-  String get mainScreen_tooltipCancelReminder => 'Cancel reminder';
+  String get mainScreen_tooltipCancelReminder => 'Annuler le rappel';
 
   @override
-  String get mainScreen_tooltipLogPeriod => 'Log period';
+  String get mainScreen_tooltipLogPeriod => 'Historique des règles';
 
   @override
-  String get insightsScreen_errorPrefix => 'Error:';
+  String get insightsScreen_errorPrefix => 'Erreur :';
 
   @override
-  String get insightsScreen_noDataAvailable => 'No data available.';
+  String get insightsScreen_noDataAvailable => 'Aucune donnée disponible. ';
 
   @override
-  String get logsScreen_calculatingPrediction => 'Calculating prediction...';
+  String get logsScreen_calculatingPrediction => 'Calcul de la prédication...';
 
   @override
   String get logScreen_logAtLeastTwoPeriods =>
-      'Log at least two periods to estimate next cycle.';
+      'Enregistre au moins deux périodes pour estimer le prochain cycle.';
 
   @override
-  String get logScreen_nextPeriodEstimate => 'Next period Est';
+  String get logScreen_nextPeriodEstimate => 'Prochaine période estimée';
 
   @override
-  String get logScreen_periodDueToday => 'Period due today';
+  String get logScreen_periodDueToday => 'Règles prévues pour aujourd’hui.';
 
   @override
   String logScreen_periodOverdueBy(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'Period overdue by $count days',
-      one: 'Period overdue by 1 day',
+      other: 'Règles en retard de $count jours',
+      one: 'Règles en retard d’un jour',
     );
     return '$_temp0';
   }
 
   @override
-  String get logScreen_tamponReminderSetFor => 'Tampon reminder set for';
+  String get logScreen_tamponReminderSetFor => 'Rappel de tampon réglé pour';
 
   @override
-  String get logScreen_tamponReminderCancelled => 'Tampon reminder cancelled.';
+  String get logScreen_tamponReminderCancelled => 'Rappel de tampon annulé.';
 
   @override
-  String get logScreen_couldNotCancelReminder => 'Could not cancel reminder';
+  String get logScreen_couldNotCancelReminder =>
+      'Impossible d’annuler le rappel';
 
   @override
   String get pillScreen_pillForTodayMarkedAsTaken =>
-      'Pill for today marked as taken.';
+      'Pilule du jour marquée comme prise.';
 
   @override
   String get pillScreen_pillForTodayMarkedAsSkipped =>
-      'Pill for today marked as skipped.';
+      'Pilule du jour marquée comme sautée.';
 
   @override
-  String get settingsScreen_selectHistoryView => 'Select History View';
+  String get settingsScreen_selectHistoryView =>
+      'Sélectionner la vue de l\'historique';
 
   @override
-  String get settingsScreen_deleteRegimen_question => 'Delete Regimen?';
+  String get settingsScreen_deleteRegimen_question =>
+      'Supprimer le traitement ?';
 
   @override
   String get settingsScreen_deleteRegimenDescription =>
-      'This will delete your current pill pack settings and all associated pill logs. This cannot be undone.';
+      'Cela supprimera les réglages de votre plaquette actuelle ainsi que tous les journaux de pilules associés. Cette action est irréversible.';
 
   @override
   String get settingsScreen_allLogsHaveBeenCleared =>
-      'All logs have been cleared.';
+      'Tout l’historique a été supprimé.';
 
   @override
-  String get settingsScreen_clearAllLogs_question => 'Clear All Logs?';
+  String get settingsScreen_clearAllLogs_question =>
+      'Supprimer tout l’historique ?';
 
   @override
   String get settingsScreen_deleteAllLogsDescription =>
-      'This will permanently delete all your period logs. Your app settings will not be affected.';
+      'Tous vos suivis de règles seront définitivement supprimés, mais vos paramètres resteront inchangés.';
 
   @override
-  String get settingsScreen_appearance => 'Appearance';
+  String get settingsScreen_appearance => 'Apparence';
 
   @override
-  String get settingsScreen_historyViewStyle => 'History View Style';
+  String get settingsScreen_historyViewStyle =>
+      'Style d’affichage de l’historique';
 
   @override
-  String get settingsScreen_appTheme => 'App Theme';
+  String get settingsScreen_appTheme => 'Thème de l’application';
 
   @override
-  String get settingsScreen_themeLight => 'Light';
+  String get settingsScreen_themeLight => 'Clair';
 
   @override
-  String get settingsScreen_themeDark => 'Dark';
+  String get settingsScreen_themeDark => 'Sombre';
 
   @override
-  String get settingsScreen_themeSystem => 'System';
+  String get settingsScreen_themeSystem => 'Système';
 
   @override
-  String get settingsScreen_dynamicTheme => 'Dynamic Theme';
+  String get settingsScreen_dynamicTheme => 'Thème dynamique';
 
   @override
-  String get settingsScreen_useWallpaperColors => 'Use Wallpaper Colors';
+  String get settingsScreen_useWallpaperColors =>
+      'Utiliser les couleurs du fond d’écran';
 
   @override
-  String get settingsScreen_themeColor => 'Theme Color';
+  String get settingsScreen_themeColor => 'Couleur du thème';
 
   @override
-  String get settingsScreen_pickAColor => 'Pick a Color';
+  String get settingsScreen_pickAColor => 'Sélectionner une couleur';
 
   @override
-  String get settingsScreen_view => 'View';
+  String get settingsScreen_view => 'Vue';
 
   @override
-  String get settingsScreen_birthControl => 'Birth Control';
+  String get settingsScreen_birthControl => 'Contraception';
 
   @override
-  String get settingsScreen_setUpPillRegimen => 'Set Up Pill Regimen';
+  String get settingsScreen_setUpPillRegimen =>
+      'Configurer le régime de pilule';
 
   @override
   String get settingsScreen_trackYourDailyPillIntake =>
-      'Track Your Daily Pill Intake';
+      'Suivi quotidien de la pilule';
 
   @override
-  String get settingsScreen_dailyPillReminder => 'Daily Pill Reminder';
+  String get settingsScreen_dailyPillReminder =>
+      'Rappel pour la pilule quotidienne';
 
   @override
-  String get settingsScreen_reminderTime => 'Reminder Time';
+  String get settingsScreen_reminderTime => 'Heure du rappel';
 
   @override
   String get settingsScreen_periodPredictionAndReminders =>
-      'Period Prediction & Reminders';
+      'Prédiction des règles et rappels';
 
   @override
   String get settingsScreen_upcomingPeriodReminder =>
-      'Upcoming Period Reminder';
+      'Rappel des prochaines règles';
 
   @override
-  String get settingsScreen_remindMeBefore => 'Remind Me Before';
+  String get settingsScreen_remindMeBefore => 'M’avertir avant';
 
   @override
-  String get settingsScreen_notificationTime => 'Notification Time';
+  String get settingsScreen_notificationTime => 'Heure de la notification';
 
   @override
-  String get settingsScreen_overduePeriodReminder => 'Overdue Period Reminder';
+  String get settingsScreen_overduePeriodReminder =>
+      'Alerte de retard de règles';
 
   @override
-  String get settingsScreen_remindMeAfter => 'Remind Me After';
+  String get settingsScreen_remindMeAfter => 'Me rappeler après';
 
   @override
-  String get settingsScreen_pillRegimens => 'Pill Regimens';
+  String get settingsScreen_pillRegimens => 'Suivis de pilule';
 
   @override
   String get settingsScreen_makeActive => 'Set as Active';
@@ -478,6 +490,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get settingsScreen_preferences => 'Preferences';
+
+  @override
+  String get preferencesScreen_language => 'Language';
 
   @override
   String get preferencesScreen_tamponReminderButton =>
@@ -660,15 +675,4 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get periodDetailsSheet_flow => 'Flow';
-
-  @override
-  String periodPredictionCircle_days(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'Days',
-      one: 'Day',
-    );
-    return '$_temp0';
-  }
 }

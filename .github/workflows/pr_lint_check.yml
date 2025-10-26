@@ -1,7 +1,7 @@
 name: 'PR Lint Check'
 
 on:
-  pull_request:
+  pull_request_target:
     types: [opened, edited, synchronize, reopened]
 
 permissions:
@@ -23,7 +23,7 @@ jobs:
           # --- 1. Validate PR Title ---
           # Follows conventional commit format: <type>: <description>
           title_regex="^(Feature|Bugfix|Docs|Chore|Refactor|Style|Test)\/(app|wear|web|repo)\/([a-z0-9-]+\/)?[a-z0-9-]+"
-          if [[ "$PR_TITLE" =~ $title_regex ]] || [["$PR_TITLE" == 'New Crowdin updates']]; then
+          if [[ "$PR_TITLE" =~ $title_regex || "$PR_TITLE" == 'New Crowdin updates' ]] then
             title_is_valid=true
           fi
           echo "PR title validation: $title_is_valid"
@@ -45,7 +45,7 @@ jobs:
 
             if (!titleIsValid) {
               errorMessages.push(
-                `### :x: Invalid PR Title\n\nThe PR title \`${prTitle}\` does not follow the required format: \`<type>/<scope>/<description>\`.\n- **Example:** \`Feature/web/Add new contact form\``
+                `### :x: Invalid PR Title\n\nThe PR title \`${prTitle}\` does not follow the required format: \`<type>/<scope>/<description>\`.\n- **Example:** \`Feature/web/add new contact form\``
               );
             }
 
@@ -53,6 +53,7 @@ jobs:
               ## PR Validation Failed
               ${errorMessages.join('\n\n---\n\n')}
               \nPlease correct the issues and push the changes to update this pull request.
+              \nFor more info, please check the [Pull Request Process guidance](https://github.com/J-shw/Menstrudel?tab=contributing-ov-file#pull-request-process).
             `;
 
             await github.rest.issues.createComment({

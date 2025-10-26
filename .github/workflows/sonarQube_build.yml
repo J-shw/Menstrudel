@@ -1,0 +1,43 @@
+name: SonarQube Build and Test
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  push:
+    branches:
+      - dev
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+
+      - name: Install dependencies
+        run: flutter pub get
+        working-directory: app
+
+      - name: Run tests and generate coverage
+        run: flutter test --coverage
+        working-directory: app
+
+      - name: Build Android App (Debug)
+
+        run: flutter build apk --debug
+        working-directory: app
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: app/coverage/lcov.info
+          retention-days: 1

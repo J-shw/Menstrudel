@@ -228,6 +228,12 @@ abstract class AppLocalizations {
   /// **'Close'**
   String get close;
 
+  /// No description provided for @systemDefault.
+  ///
+  /// In en, this message translates to:
+  /// **'System Default'**
+  String get systemDefault;
+
   /// No description provided for @flow.
   ///
   /// In en, this message translates to:
@@ -924,6 +930,12 @@ abstract class AppLocalizations {
   /// **'Preferences'**
   String get settingsScreen_preferences;
 
+  /// No description provided for @preferencesScreen_language.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get preferencesScreen_language;
+
   /// No description provided for @preferencesScreen_tamponReminderButton.
   ///
   /// In en, this message translates to:
@@ -1229,12 +1241,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Flow'**
   String get periodDetailsSheet_flow;
-
-  /// A label showing the total number of days until period is due.
-  ///
-  /// In en, this message translates to:
-  /// **'{count, plural, =1{Day} other{Days}}'**
-  String periodPredictionCircle_days(int count);
 }
 
 class _AppLocalizationsDelegate

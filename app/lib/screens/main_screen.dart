@@ -26,7 +26,7 @@ class _MainScreenState extends State<MainScreen> {
   final GlobalKey<LogsScreenState> _logsScreenKey =
       GlobalKey<LogsScreenState>();
   FabState _fabState = FabState.logPeriod;
-  late final List<Widget> _pages;
+  List<Widget>? _pages;
 
   final SettingsService _settingsService = SettingsService();
   bool _isLoading = true;
@@ -159,9 +159,17 @@ class _MainScreenState extends State<MainScreen> {
       TopAppBar(titleText: l10n.mainScreen_settingsPageTitle),
     ];
 
+    if (_pages == null) {
+      return const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
+
     return Scaffold(
       appBar: appBars[_selectedIndex],
-      body: _pages[_selectedIndex],
+      body: _pages![_selectedIndex],
       bottomNavigationBar: MainNavigationBar(
         selectedIndex: _selectedIndex,
         onDestinationSelected: _onItemTapped,
