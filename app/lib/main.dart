@@ -21,8 +21,8 @@ void main() async {
 
   tz_data.initializeTimeZones();
   try {
-    final String localTimezone = await FlutterTimezone.getLocalTimezone();
-    tz.setLocalLocation(tz.getLocation(localTimezone));
+    final timezoneInfo = await FlutterTimezone.getLocalTimezone();
+    tz.setLocalLocation(tz.getLocation(timezoneInfo.identifier));
   } catch (e) {
     tz.setLocalLocation(tz.getLocation('Etc/UTC'));
   }
