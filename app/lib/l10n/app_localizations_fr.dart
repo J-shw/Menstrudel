@@ -212,23 +212,23 @@ class AppLocalizationsFr extends AppLocalizations {
   String get mainScreen_tooltipLogPeriod => 'Historique des règles';
 
   @override
-  String get insightsScreen_errorPrefix => 'Erreur:';
+  String get insightsScreen_errorPrefix => 'Erreur :';
 
   @override
-  String get insightsScreen_noDataAvailable => 'No data available.';
+  String get insightsScreen_noDataAvailable => 'Aucune donnée disponible. ';
 
   @override
   String get logsScreen_calculatingPrediction => 'Calcul de la prédication...';
 
   @override
   String get logScreen_logAtLeastTwoPeriods =>
-      'Log at least two periods to estimate next cycle.';
+      'Enregistre au moins deux périodes pour estimer le prochain cycle.';
 
   @override
-  String get logScreen_nextPeriodEstimate => 'Next period Est';
+  String get logScreen_nextPeriodEstimate => 'Prochaine période estimée';
 
   @override
-  String get logScreen_periodDueToday => 'Period due today';
+  String get logScreen_periodDueToday => 'Règles prévues pour aujourd’hui.';
 
   @override
   String logScreen_periodOverdueBy(int count) {
@@ -242,114 +242,123 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get logScreen_tamponReminderSetFor => 'Tampon reminder set for';
+  String get logScreen_tamponReminderSetFor => 'Rappel de tampon réglé pour';
 
   @override
-  String get logScreen_tamponReminderCancelled => 'Tampon reminder cancelled.';
+  String get logScreen_tamponReminderCancelled => 'Rappel de tampon annulé.';
 
   @override
-  String get logScreen_couldNotCancelReminder => 'Could not cancel reminder';
+  String get logScreen_couldNotCancelReminder =>
+      'Impossible d’annuler le rappel';
 
   @override
   String get pillScreen_pillForTodayMarkedAsTaken =>
-      'Pill for today marked as taken.';
+      'Pilule du jour marquée comme prise.';
 
   @override
   String get pillScreen_pillForTodayMarkedAsSkipped =>
       'Pilule du jour marquée comme sautée.';
 
   @override
-  String get settingsScreen_selectHistoryView => 'Select History View';
+  String get settingsScreen_selectHistoryView =>
+      'Sélectionner la vue de l\'historique';
 
   @override
-  String get settingsScreen_deleteRegimen_question => 'Delete Regimen?';
+  String get settingsScreen_deleteRegimen_question =>
+      'Supprimer le traitement ?';
 
   @override
   String get settingsScreen_deleteRegimenDescription =>
-      'This will delete your current pill pack settings and all associated pill logs. This cannot be undone.';
+      'Cela supprimera les réglages de votre plaquette actuelle ainsi que tous les journaux de pilules associés. Cette action est irréversible.';
 
   @override
   String get settingsScreen_allLogsHaveBeenCleared =>
-      'All logs have been cleared.';
+      'Tout l’historique a été supprimé.';
 
   @override
-  String get settingsScreen_clearAllLogs_question => 'Clear All Logs?';
+  String get settingsScreen_clearAllLogs_question =>
+      'Supprimer tout l’historique ?';
 
   @override
   String get settingsScreen_deleteAllLogsDescription =>
-      'This will permanently delete all your period logs. Your app settings will not be affected.';
+      'Tous vos suivis de règles seront définitivement supprimés, mais vos paramètres resteront inchangés.';
 
   @override
-  String get settingsScreen_appearance => 'Appearance';
+  String get settingsScreen_appearance => 'Apparence';
 
   @override
-  String get settingsScreen_historyViewStyle => 'History View Style';
+  String get settingsScreen_historyViewStyle =>
+      'Style d’affichage de l’historique';
 
   @override
-  String get settingsScreen_appTheme => 'App Theme';
+  String get settingsScreen_appTheme => 'Thème de l’application';
 
   @override
-  String get settingsScreen_themeLight => 'Light';
+  String get settingsScreen_themeLight => 'Clair';
 
   @override
-  String get settingsScreen_themeDark => 'Dark';
+  String get settingsScreen_themeDark => 'Sombre';
 
   @override
-  String get settingsScreen_themeSystem => 'System';
+  String get settingsScreen_themeSystem => 'Système';
 
   @override
-  String get settingsScreen_dynamicTheme => 'Dynamic Theme';
+  String get settingsScreen_dynamicTheme => 'Thème dynamique';
 
   @override
-  String get settingsScreen_useWallpaperColors => 'Use Wallpaper Colors';
+  String get settingsScreen_useWallpaperColors =>
+      'Utiliser les couleurs du fond d’écran';
 
   @override
-  String get settingsScreen_themeColor => 'Theme Color';
+  String get settingsScreen_themeColor => 'Couleur du thème';
 
   @override
-  String get settingsScreen_pickAColor => 'Pick a Color';
+  String get settingsScreen_pickAColor => 'Sélectionner une couleur';
 
   @override
-  String get settingsScreen_view => 'View';
+  String get settingsScreen_view => 'Vue';
 
   @override
-  String get settingsScreen_birthControl => 'Birth Control';
+  String get settingsScreen_birthControl => 'Contraception';
 
   @override
-  String get settingsScreen_setUpPillRegimen => 'Set Up Pill Regimen';
+  String get settingsScreen_setUpPillRegimen =>
+      'Configurer le régime de pilule';
 
   @override
   String get settingsScreen_trackYourDailyPillIntake =>
-      'Track Your Daily Pill Intake';
+      'Suivi quotidien de la pilule';
 
   @override
-  String get settingsScreen_dailyPillReminder => 'Daily Pill Reminder';
+  String get settingsScreen_dailyPillReminder =>
+      'Rappel pour la pilule quotidienne';
 
   @override
-  String get settingsScreen_reminderTime => 'Reminder Time';
+  String get settingsScreen_reminderTime => 'Heure du rappel';
 
   @override
   String get settingsScreen_periodPredictionAndReminders =>
-      'Period Prediction & Reminders';
+      'Prédiction des règles et rappels';
 
   @override
   String get settingsScreen_upcomingPeriodReminder =>
-      'Upcoming Period Reminder';
+      'Rappel des prochaines règles';
 
   @override
-  String get settingsScreen_remindMeBefore => 'Remind Me Before';
+  String get settingsScreen_remindMeBefore => 'M’avertir avant';
 
   @override
-  String get settingsScreen_notificationTime => 'Notification Time';
+  String get settingsScreen_notificationTime => 'Heure de la notification';
 
   @override
-  String get settingsScreen_overduePeriodReminder => 'Overdue Period Reminder';
+  String get settingsScreen_overduePeriodReminder =>
+      'Alerte de retard de règles';
 
   @override
-  String get settingsScreen_remindMeAfter => 'Remind Me After';
+  String get settingsScreen_remindMeAfter => 'Me rappeler après';
 
   @override
-  String get settingsScreen_pillRegimens => 'Pill Regimens';
+  String get settingsScreen_pillRegimens => 'Suivis de pilule';
 
   @override
   String get settingsScreen_makeActive => 'Set as Active';
