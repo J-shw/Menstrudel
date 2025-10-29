@@ -83,6 +83,9 @@ class AppLocalizationsIt extends AppLocalizations {
   String get close => 'Chiudi';
 
   @override
+  String get reset => 'Reset';
+
+  @override
   String get systemDefault => 'System Default';
 
   @override
@@ -372,6 +375,13 @@ class AppLocalizationsIt extends AppLocalizations {
   String settingsScreen_deleteDefaultSymptomQuestion(String symptom) {
     return 'Delete \'$symptom\'?';
   }
+
+  @override
+  String get settingsScreen_resetDefaultSymptoms => 'Reset default symptoms?';
+
+  @override
+  String get settingsScreen_resetDefaultSymptomsDescription =>
+      'This will reset the default symptoms to the built in symptoms.\n\nExisting period logs will not be updated!';
 
   @override
   String get settingsScreen_periodLoggingScreen => 'Period Logging';

@@ -305,7 +305,7 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
                   spacing: 8.0,
                   runSpacing: 4.0,
                   children: _symptoms.map((symptom) {
-                    var isAdd = symptom.type == SymptomType.add;
+                    var isAdd = symptom.type == SymptomType.other;
                     return FilterChip(
                       label: Text(symptom.getDisplayName(l10n)),
                       backgroundColor: isAdd ? colorScheme.onSecondary : null,

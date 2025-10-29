@@ -11,7 +11,8 @@ class PeriodLogSettingsScreen extends StatefulWidget {
   const PeriodLogSettingsScreen({super.key});
 
   @override
-  State<PeriodLogSettingsScreen> createState() => _PeriodLogSettingsScreenState();
+  State<PeriodLogSettingsScreen> createState() =>
+      _PeriodLogSettingsScreenState();
 }
 
 class _PeriodLogSettingsScreenState extends State<PeriodLogSettingsScreen> {
@@ -20,7 +21,7 @@ class _PeriodLogSettingsScreenState extends State<PeriodLogSettingsScreen> {
 
   bool _isLoading = true;
 
-  Set<Symptom> _defaultSymptoms = {};
+  final Set<Symptom> _defaultSymptoms = {};
 
   @override
   void initState() {
@@ -29,55 +30,89 @@ class _PeriodLogSettingsScreenState extends State<PeriodLogSettingsScreen> {
   }
 
   Future<void> _loadSettings() async {
+    _isLoading = true;
+
     var defaultSymptoms = await _settingsService.getDefaultSymptoms();
     defaultSymptoms.add(Symptom.addSymptom());
+    defaultSymptoms.add(Symptom.refreshSymptom());
 
     if (mounted) {
       setState(() {
+        _defaultSymptoms.clear();
         _defaultSymptoms.addAll(defaultSymptoms);
-        _isLoading = false;
       });
     }
+
+    _isLoading = false;
   }
 
   Future<void> _showNewCustomSymptomDialog() async {
-    final (String name, bool isDefault)? result = await showDialog<(String, bool)>(
-      context: context,
-      builder: (BuildContext context) {
-        return const CustomSymptomDialog(showTemporarySymptomButton: true);
-      },
-    );
+    final (String name, bool isDefault)? result =
+        await showDialog<(String, bool)>(
+          context: context,
+          builder: (BuildContext context) {
+            return const CustomSymptomDialog(showTemporarySymptomButton: true);
+          },
+        );
 
-    if (mounted && result != null && _defaultSymptoms.any((element) => element.customName == result.$1) == false) {
+    if (mounted &&
+        result != null &&
+        _defaultSymptoms.any((element) => element.customName == result.$1) ==
+            false) {
       var symptom = Symptom.fromDbString(result.$1);
 
       await _settingsService.addDefaultSymptom(symptom);
-
-      setState(() {
-        _defaultSymptoms.remove(Symptom.addSymptom());
-        _defaultSymptoms.add(symptom);
-        _defaultSymptoms.add(Symptom.addSymptom());
-      });
+      await _loadSettings();
     }
   }
 
   Future<void> _removeDefaultSymptom(Symptom symptom) async {
     final l10n = AppLocalizations.of(context)!;
-    final symptomUsageCount = await periodsRepo.getSingleSymptomFrequency(symptom);
+    final symptomUsageCount = await periodsRepo.getSingleSymptomFrequency(
+      symptom,
+    );
 
     if (mounted) {
       return showDialog<void>(
         context: context,
         builder: (BuildContext context) {
           return ConfirmationDialog(
-            title: l10n.settingsScreen_deleteDefaultSymptomQuestion(symptom.getDisplayName(l10n)),
-            contentText: l10n.settingsScreen_deleteDefaultSymptomDescription(symptom.getDisplayName(l10n), symptomUsageCount),
-            confirmButtonText: symptomUsageCount > 0 ? l10n.deleteAnyways : l10n.delete,
+            title: l10n.settingsScreen_deleteDefaultSymptomQuestion(
+              symptom.getDisplayName(l10n),
+            ),
+            contentText: l10n.settingsScreen_deleteDefaultSymptomDescription(
+              symptom.getDisplayName(l10n),
+              symptomUsageCount,
+            ),
+            confirmButtonText: symptomUsageCount > 0
+                ? l10n.deleteAnyways
+                : l10n.delete,
             onConfirm: () async {
               setState(() {
                 _defaultSymptoms.remove(symptom);
               });
               await _settingsService.removeDefaultSymptom(symptom);
+            },
+          );
+        },
+      );
+    }
+  }
+
+  Future<void> _refreshSymptoms() async {
+    final l10n = AppLocalizations.of(context)!;
+
+    if (mounted) {
+      return showDialog<void>(
+        context: context,
+        builder: (BuildContext context) {
+          return ConfirmationDialog(
+            title: l10n.settingsScreen_resetDefaultSymptoms,
+            contentText: l10n.settingsScreen_resetDefaultSymptomsDescription,
+            confirmButtonText: l10n.reset,
+            onConfirm: () async {
+              await _settingsService.resetDefaultSymptoms();
+              await _loadSettings();
             },
           );
         },
@@ -91,16 +126,24 @@ class _PeriodLogSettingsScreenState extends State<PeriodLogSettingsScreen> {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.settingsScreen_periodPredictionAndReminders)),
+      appBar: AppBar(
+        title: Text(l10n.settingsScreen_periodPredictionAndReminders),
+      ),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
           : ListView(
               children: [
                 ListTile(
                   title: Text(l10n.settingsScreen_defaultSymptoms),
-                  leading: Icon(Icons.bubble_chart_outlined, color: colorScheme.onSurfaceVariant, size: 20),
+                  leading: Icon(
+                    Icons.bubble_chart_outlined,
+                    color: colorScheme.onSurfaceVariant,
+                    size: 20,
+                  ),
                 ),
-                ListTile(subtitle: Text(l10n.settingsScreen_defaultSymptomsSubtitle)),
+                ListTile(
+                  subtitle: Text(l10n.settingsScreen_defaultSymptomsSubtitle),
+                ),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 12),
                   child: Wrap(
@@ -108,8 +151,23 @@ class _PeriodLogSettingsScreenState extends State<PeriodLogSettingsScreen> {
                     spacing: 4.0,
                     runSpacing: 4.0,
                     children: _defaultSymptoms.map((symptom) {
-                      var isAdd = symptom.type == SymptomType.add;
-                      return RawChip(label: Text(symptom.getDisplayName(l10n)), backgroundColor: isAdd ? colorScheme.onSecondary : null, tapEnabled: true, onPressed: () => {if (isAdd) _showNewCustomSymptomDialog() else _removeDefaultSymptom(symptom)});
+                      var isAdd = symptom == Symptom.addSymptom();
+                      var isRefresh = symptom == Symptom.refreshSymptom();
+                      return RawChip(
+                        label: Text(symptom.getDisplayName(l10n)),
+                        backgroundColor: isAdd || isRefresh
+                            ? colorScheme.onSecondary
+                            : null,
+                        tapEnabled: true,
+                        onPressed: () => {
+                          if (isRefresh)
+                            {_refreshSymptoms()}
+                          else if (isAdd)
+                            {_showNewCustomSymptomDialog()}
+                          else
+                            {_removeDefaultSymptom(symptom)},
+                        },
+                      );
                     }).toList(),
                   ),
                 ),

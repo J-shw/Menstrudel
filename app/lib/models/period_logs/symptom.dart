@@ -19,7 +19,11 @@ class Symptom {
   }
 
   factory Symptom.addSymptom() {
-    return Symptom(type: SymptomType.add, customName: "+");
+    return Symptom(type: SymptomType.other, customName: "+");
+  }
+
+  factory Symptom.refreshSymptom() {
+    return Symptom(type: SymptomType.other, customName: "↻");
   }
 
   @override
@@ -34,7 +38,7 @@ class Symptom {
       return false;
     }
 
-    if (type == SymptomType.custom) {
+    if (type == SymptomType.custom || type == SymptomType.other) {
       return customName == otherSymptom.customName;
     }
 
@@ -50,7 +54,7 @@ class Symptom {
     return SymptomType.values
         .where(
           (element) =>
-              element != SymptomType.custom && element != SymptomType.add,
+              element != SymptomType.custom && element != SymptomType.other,
         )
         .map((e) => Symptom.fromDbString(e.toString()))
         .toSet();
@@ -83,10 +87,8 @@ extension SymptomExtension on Symptom {
         return l10n.builtInSymptom_moodSwings;
       case SymptomType.builtInNausea:
         return l10n.builtInSymptom_nausea;
-      case SymptomType.custom:
+      case SymptomType.custom || SymptomType.other:
         return customName;
-      case SymptomType.add:
-        return "+";
     }
   }
 }

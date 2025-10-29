@@ -10,5 +10,5 @@ enum SymptomType {
   builtInMoodSwings,
   builtInNausea,
   custom,
-  add
+  other
 }

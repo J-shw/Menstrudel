@@ -234,6 +234,12 @@ abstract class AppLocalizations {
   /// **'Close'**
   String get close;
 
+  /// No description provided for @reset.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset'**
+  String get reset;
+
   /// No description provided for @systemDefault.
   ///
   /// In en, this message translates to:
@@ -725,6 +731,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Delete \'{symptom}\'?'**
   String settingsScreen_deleteDefaultSymptomQuestion(String symptom);
+
+  /// No description provided for @settingsScreen_resetDefaultSymptoms.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset default symptoms?'**
+  String get settingsScreen_resetDefaultSymptoms;
+
+  /// No description provided for @settingsScreen_resetDefaultSymptomsDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'This will reset the default symptoms to the built in symptoms.\n\nExisting period logs will not be updated!'**
+  String get settingsScreen_resetDefaultSymptomsDescription;
 
   /// No description provided for @settingsScreen_periodLoggingScreen.
   ///

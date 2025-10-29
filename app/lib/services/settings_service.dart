@@ -183,9 +183,14 @@ class SettingsService {
     return storedDefaultSymptoms.map((e) => Symptom.fromDbString(e)).toSet();
   }
 
+  Future<void> resetDefaultSymptoms() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove(defaultSymptomsKey);
+  }
+
   Future<void> setDefaultSymptoms(Set<Symptom> symptoms) async {
     final prefs = await SharedPreferences.getInstance();
-    prefs.setStringList(defaultSymptomsKey, symptoms.map((e) => e.type == SymptomType.custom ? e.customName : e.type.toString()).toList());
+    await prefs.setStringList(defaultSymptomsKey, symptoms.map((e) => e.type == SymptomType.custom ? e.customName : e.type.toString()).toList());
   }
 
   Future<void> addDefaultSymptom(Symptom symptom) async {
