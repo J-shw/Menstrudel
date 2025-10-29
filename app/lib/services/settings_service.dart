@@ -23,20 +23,34 @@ class SettingsService extends ChangeNotifier {
   Color _themeColor = kDefaultThemeColor;
   AppThemeMode _themeMode = kDefaultThemeMode;
 
+  /// Whether the 'Pill' tab is visible in the main navigation bar.
   bool get isPillNavEnabled => _pillNavEnabled;
+  /// The selected language code for the app (e.g., 'en', 'es', or 'system').
   String get languageCode => _languageCode;
+  /// Whether the tampon reminder FAB is persistently shown on the Logs screen.
   bool get areAlwaysShowReminderButtonEnabled => _alwaysShowReminderButton;
+  /// Whether the app requires biometric authentication (e.g., fingerprint, face) on startup.
   bool get areBiometricsEnabled => _biometricsEnabled;
+  /// Whether notifications for the *upcoming* period (due) are enabled.
   bool get areNotificationsEnabled => _notificationsEnabled;
+  /// How many days *before* the period is due to send the notification.
   int get notificationDays => _notificationDays;
+  /// The time of day to send the 'period due' notification.
   TimeOfDay get notificationTime => _notificationTime;
+  /// Whether notifications for an *overdue* period are enabled.
   bool get arePeriodOverdueNotificationsEnabled =>
       _periodOverdueNotificationsEnabled;
+  /// How many days *after* the period is due to send the overdue notification.
   int get periodOverdueNotificationDays => _periodOverdueNotificationDays;
+  /// The time of day to send the 'period overdue' notification.
   TimeOfDay get periodOverdueNotificationTime => _periodOverdueNotificationTime;
+  /// The user's preferred view for the period history (list vs. journal).
   PeriodHistoryView get historyView => _historyView;
+  /// Whether to use Material You dynamic colors from the wallpaper (Android 12+).
   bool get isDynamicThemeEnabled => _dynamicColorEnabled;
+  /// The seed color for the app's theme (used if dynamic color is off).
   Color get themeColor => _themeColor;
+  /// The app's theme mode (Light, Dark, or System).
   AppThemeMode get themeMode => _themeMode;
 
   Future<void> loadSettings() async {
