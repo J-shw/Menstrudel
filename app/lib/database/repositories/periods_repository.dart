@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:menstrudel/models/flows/flow_enum.dart';
+import 'package:menstrudel/models/period_logs/symptom.dart';
+import 'package:menstrudel/models/period_logs/symptom_type_enum.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +21,7 @@ class PeriodsRepository {
 
   final Manager manager;
 
-  PeriodsRepository() : manager = Manager(AppDatabase.instance); 
+  PeriodsRepository() : manager = Manager(AppDatabase.instance);
 
   Future<void> logPeriodFromWatch() async {
     debugPrint('Received request from watch! Logging period now...');
@@ -33,7 +35,6 @@ class PeriodsRepository {
 
       await createPeriodLog(newLog);
       debugPrint('Successfully logged period from the watch.');
-
     } on DuplicateLogException {
       debugPrint('Watch log ignored: A log for today already exists.');
     } catch (e) {
@@ -42,7 +43,11 @@ class PeriodsRepository {
   }
 
   /// Validates a log's date, throwing exceptions for future or duplicate dates.
-  Future<void> _validateLogDate(Database db, DateTime date, {int? idToExclude}) async {
+  Future<void> _validateLogDate(
+    Database db,
+    DateTime date, {
+    int? idToExclude,
+  }) async {
     final today = DateUtils.dateOnly(DateTime.now());
     final entryDate = DateUtils.dateOnly(date);
 
@@ -58,7 +63,9 @@ class PeriodsRepository {
     final existingLogs = await db.query(
       'period_logs',
       where: whereClause,
-      whereArgs: idToExclude != null ? [date.toIso8601String(), idToExclude] : [date.toIso8601String()],
+      whereArgs: idToExclude != null
+          ? [date.toIso8601String(), idToExclude]
+          : [date.toIso8601String()],
       limit: 1,
     );
 
@@ -110,11 +117,7 @@ class PeriodsRepository {
 
   Future<int> deletePeriod(int id) async {
     final db = await dbProvider.database;
-    return await db.delete(
-      'periods',
-      where: _whereId,
-      whereArgs: [id],
-    );
+    return await db.delete('periods', where: _whereId, whereArgs: [id]);
   }
 
   // Period logs
@@ -130,10 +133,10 @@ class PeriodsRepository {
 
       if (entry.symptoms.isNotEmpty) {
         final batch = txn.batch();
-        for (final symptom in entry.symptoms) {
+        for (final symptom in entry.symptoms.where((element) => element.type != SymptomType.add)) {
           batch.insert('log_symptoms', {
             'log_id_fk': newLogId,
-            'symptom': symptom,
+            'symptom': symptom.getDbName(),
           });
         }
         await batch.commit(noResult: true);
@@ -152,16 +155,16 @@ class PeriodsRepository {
 
     final symptomsResult = await db.query('log_symptoms');
 
-    final Map<int, List<String>> symptomMap = {};
+    final Map<int, List<Symptom>> symptomMap = {};
     for (final row in symptomsResult) {
       final int logId = row['log_id_fk'] as int;
       final String symptom = row['symptom'] as String;
-      (symptomMap[logId] ??= []).add(symptom);
+      (symptomMap[logId] ??= []).add(Symptom.fromDbString(symptom));
     }
 
     return logsResult.map((json) {
       final int logId = json['id'] as int;
-      final List<String> symptoms = symptomMap[logId] ?? [];
+      final List<Symptom> symptoms = symptomMap[logId] ?? [];
       return PeriodDay.fromMap(json, symptoms: symptoms);
     }).toList();
   }
@@ -186,19 +189,17 @@ class PeriodsRepository {
       whereArgs: [id],
     );
 
-    final List<String> symptoms = symptomsResult
-        .map((row) => row['symptom'] as String)
-        .toList();
+    final List<Symptom> symptoms = symptomsResult.map((row) => Symptom.fromDbString(row['symptom'] as String)).toList();
 
     return PeriodDay.fromMap(result.first, symptoms: symptoms);
   }
 
   /// Calculates the usage count for every symptom in the database.
-  Future<Map<String, int>> getSymptomFrequency() async {
+  Future<Map<Symptom, int>> getSymptomFrequency() async {
     final db = await dbProvider.database;
 
     final result = await db.rawQuery(
-      'SELECT symptom, COUNT(symptom) as count FROM log_symptoms GROUP BY symptom'
+      'SELECT symptom, COUNT(symptom) as count FROM log_symptoms GROUP BY symptom',
     );
 
     if (result.isEmpty) {
@@ -206,8 +207,20 @@ class PeriodsRepository {
     }
     return {
       for (var row in result)
-        row['symptom'] as String: row['count'] as int
+        Symptom.fromDbString(row['symptom'] as String): row['count'] as int,
     };
+  }
+
+  Future<int> getSingleSymptomFrequency(Symptom symptom) async {
+    final db = await dbProvider.database;
+
+    var key = symptom.getDbName();
+
+    final result = await db.rawQuery(
+      'SELECT symptom, COUNT(symptom) as count FROM log_symptoms WHERE symptom LIKE \'$key\' GROUP BY symptom',
+    );
+
+    return result.length == 1 ? result[0]["count"] as int : 0;
   }
 
   Future<int> updatePeriodLog(PeriodDay entry) async {
@@ -242,7 +255,7 @@ class PeriodsRepository {
           for (final symptom in entry.symptoms) {
             batch.insert('log_symptoms', {
               'log_id_fk': entry.id,
-              'symptom': symptom,
+              'symptom': symptom.getDbName(),
             });
           }
           await batch.commit(noResult: true);
@@ -274,22 +287,6 @@ class PeriodsRepository {
 
   // Other
 
-  Future<int> getSymptomUseCount(String symptom) async {
-    final db = await dbProvider.database;
-
-    // this is a bit annoying, but it's easiest to do this way without messing around too much with the WHERE statement
-    // as this method should not be called too often and the period_logs should have a few thousand entries max, this should not be a big performance issue
-
-    // 1. filter for rows with parts of that symptom in db
-    // this can return false positives (when deleting a symptom called 'a', this will return logs with symptoms like 'headache')
-    final result = await db.query(
-      'period_logs',
-      where: "symptoms like '%$symptom%'"
-    );
-    // 2. filter for logs with exact match after parsing to List<String>
-    return result.map((json) => PeriodDay.fromMap(json)).where((f) => f.symptoms != null && f.symptoms!.any((g) => g == symptom)).length;
-  }
-
   Future<void> _recalculateAndAssignPeriods(Database db) async {
     await db.delete('periods');
 
@@ -302,13 +299,14 @@ class PeriodsRepository {
     final allEntries = allEntryMaps.map((e) => PeriodDay.fromMap(e)).toList();
 
     if (allEntries.isEmpty) {
-      return; 
+      return;
     }
 
     List<PeriodDay> currentPeriodLogs = [];
 
     for (final entry in allEntries) {
-      if (currentPeriodLogs.isEmpty || entry.date.difference(currentPeriodLogs.last.date).inDays > 1) {
+      if (currentPeriodLogs.isEmpty ||
+          entry.date.difference(currentPeriodLogs.last.date).inDays > 1) {
         if (currentPeriodLogs.isNotEmpty) {
           await _createPeriodFromLogs(db, currentPeriodLogs);
         }
@@ -377,16 +375,13 @@ class PeriodsRepository {
 
       if (flowInts.isNotEmpty) {
         final monthKey = DateFormat('MMM').format(period.startDate);
-        
+
         allMonthlyFlows.add(
-          MonthlyFlowData(
-            monthLabel: monthKey,
-            flows: flowInts,
-          ),
+          MonthlyFlowData(monthLabel: monthKey, flows: flowInts),
         );
       }
     }
-    
+
     return allMonthlyFlows;
   }
 }
@@ -404,10 +399,8 @@ class Manager {
     final periods = await db.query('periods');
     final logSymptoms = await db.query('log_symptoms');
 
-
     final packageInfo = await PackageInfo.fromPlatform();
     final dbVersion = await db.getVersion();
-
 
     final exportData = {
       'periods': periods,
@@ -419,7 +412,7 @@ class Manager {
     };
 
     final jsonString = jsonEncode(exportData);
-    
+
     return jsonString;
   }
 
@@ -431,15 +424,21 @@ class Manager {
     try {
       final Map<String, dynamic> importData = jsonDecode(jsonString);
 
-      if (!importData.containsKey('periods') || !importData.containsKey('period_logs') || !importData.containsKey('log_symptoms')) {
-        throw const FormatException('Invalid import file: Missing "periods" or "period_logs" or "log_symptoms" data.');
+      if (!importData.containsKey('periods') ||
+          !importData.containsKey('period_logs') ||
+          !importData.containsKey('log_symptoms')) {
+        throw const FormatException(
+          'Invalid import file: Missing "periods" or "period_logs" or "log_symptoms" data.',
+        );
       }
-      
+
       final importedDbVersion = importData['db_version'] as int?;
       final currentDbVersion = await db.getVersion();
 
       if (importedDbVersion != null && importedDbVersion > currentDbVersion) {
-        throw FormatException('Incompatible database version: Imported data is from v$importedDbVersion, but current database is v$currentDbVersion. Please update the app.');
+        throw FormatException(
+          'Incompatible database version: Imported data is from v$importedDbVersion, but current database is v$currentDbVersion. Please update the app.',
+        );
       }
 
       final Map<int, int> periodIdMap = {};
@@ -449,20 +448,27 @@ class Manager {
         await txn.delete('period_logs');
         await txn.delete('periods');
         await txn.delete('log_symptoms');
-        
+
         final List periods = importData['periods'] as List;
-        for (final Map<String, dynamic> period in periods.cast<Map<String, dynamic>>()) {
+        for (final Map<String, dynamic> period
+            in periods.cast<Map<String, dynamic>>()) {
           final int oldPeriodId = period['id'] as int;
-          
-          final Map<String, dynamic> dataToInsert = Map.from(period)..remove('id');
-          
-          final int newPeriodId = await txn.insert('periods', dataToInsert, conflictAlgorithm: ConflictAlgorithm.replace);
-          
+
+          final Map<String, dynamic> dataToInsert = Map.from(period)
+            ..remove('id');
+
+          final int newPeriodId = await txn.insert(
+            'periods',
+            dataToInsert,
+            conflictAlgorithm: ConflictAlgorithm.replace,
+          );
+
           periodIdMap[oldPeriodId] = newPeriodId;
         }
 
         final List periodLogsRaw = importData['period_logs'] as List;
-        for (final Map<String, dynamic> logRaw in periodLogsRaw.cast<Map<String, dynamic>>()) {
+        for (final Map<String, dynamic> logRaw
+            in periodLogsRaw.cast<Map<String, dynamic>>()) {
           final Map<String, dynamic> logToInsert = Map.from(logRaw);
 
           final int oldLogId = logRaw['id'] as int;
@@ -474,36 +480,38 @@ class Manager {
           logToInsert['period_id'] = newPeriodIdFk;
 
           final rawFlow = logToInsert['flow'];
-          if (rawFlow is int && rawFlow >= 0 && rawFlow < FlowRate.values.length) {
-              logToInsert['flow'] = rawFlow;
+          if (rawFlow is int &&
+              rawFlow >= 0 &&
+              rawFlow < FlowRate.values.length) {
+            logToInsert['flow'] = rawFlow;
           } else {
-              logToInsert['flow'] = 0; 
+            logToInsert['flow'] = 0;
           }
-          
-          final int newLogId = await txn.insert('period_logs', logToInsert, conflictAlgorithm: ConflictAlgorithm.replace);
-          
+
+          final int newLogId = await txn.insert(
+            'period_logs',
+            logToInsert,
+            conflictAlgorithm: ConflictAlgorithm.replace,
+          );
+
           logIdMap[oldLogId] = newLogId;
         }
 
         final List logSymptoms = importData['log_symptoms'] as List;
-        for (final Map<String, dynamic> symptom in logSymptoms.cast<Map<String, dynamic>>()) {
-
+        for (final Map<String, dynamic> symptom
+            in logSymptoms.cast<Map<String, dynamic>>()) {
           final int? oldLogIdFk = symptom['log_id_fk'] as int?;
 
           final int? newLogIdFk = logIdMap[oldLogIdFk];
 
           if (newLogIdFk != null) {
-            await txn.insert('log_symptoms', 
-              {
-                'log_id_fk': newLogIdFk,
-                'symptom': symptom['symptom'],
-              },
-              conflictAlgorithm: ConflictAlgorithm.replace
-            );
+            await txn.insert('log_symptoms', {
+              'log_id_fk': newLogIdFk,
+              'symptom': symptom['symptom'],
+            }, conflictAlgorithm: ConflictAlgorithm.replace);
           }
         }
       });
-
     } on FormatException catch (_) {
       rethrow;
     } catch (e) {

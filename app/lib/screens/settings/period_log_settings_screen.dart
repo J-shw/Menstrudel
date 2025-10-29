@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/database/repositories/periods_repository.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
+import 'package:menstrudel/models/period_logs/symptom.dart';
+import 'package:menstrudel/models/period_logs/symptom_type_enum.dart';
 import 'package:menstrudel/services/settings_service.dart';
 import 'package:menstrudel/widgets/dialogs/custom_symptom_dialog.dart';
 import 'package:menstrudel/widgets/dialogs/delete_confirmation_dialog.dart';
@@ -18,7 +20,7 @@ class _PeriodLogSettingsScreenState extends State<PeriodLogSettingsScreen> {
 
   bool _isLoading = true;
 
-  Set<String> _defaultSymptoms = {};
+  Set<Symptom> _defaultSymptoms = {};
 
   @override
   void initState() {
@@ -27,12 +29,12 @@ class _PeriodLogSettingsScreenState extends State<PeriodLogSettingsScreen> {
   }
 
   Future<void> _loadSettings() async {
-    final defaultSymptoms = await _settingsService.getDefaultSymptoms();
-    defaultSymptoms.add("+");
+    var defaultSymptoms = await _settingsService.getDefaultSymptoms();
+    defaultSymptoms.add(Symptom.addSymptom());
 
     if (mounted) {
       setState(() {
-        _defaultSymptoms = defaultSymptoms;
+        _defaultSymptoms.addAll(defaultSymptoms);
         _isLoading = false;
       });
     }
@@ -46,30 +48,30 @@ class _PeriodLogSettingsScreenState extends State<PeriodLogSettingsScreen> {
       },
     );
 
-    if (result != null && mounted) {
-      var customSymptomName = result.$1;
+    if (mounted && result != null && _defaultSymptoms.any((element) => element.customName == result.$1) == false) {
+      var symptom = Symptom.fromDbString(result.$1);
 
-      await _settingsService.addDefaultSymptom(customSymptomName);
+      await _settingsService.addDefaultSymptom(symptom);
 
       setState(() {
-        _defaultSymptoms.remove("+");
-        _defaultSymptoms.add(customSymptomName);
-        _defaultSymptoms.add("+");
+        _defaultSymptoms.remove(Symptom.addSymptom());
+        _defaultSymptoms.add(symptom);
+        _defaultSymptoms.add(Symptom.addSymptom());
       });
     }
   }
 
-  Future<void> _removeDefaultSymptom(String symptom) async {
+  Future<void> _removeDefaultSymptom(Symptom symptom) async {
     final l10n = AppLocalizations.of(context)!;
-    final symptomUsageCount = await periodsRepo.getSymptomUseCount(symptom);
+    final symptomUsageCount = await periodsRepo.getSingleSymptomFrequency(symptom);
 
     if (mounted) {
       return showDialog<void>(
         context: context,
         builder: (BuildContext context) {
           return ConfirmationDialog(
-            title: l10n.settingsScreen_deleteDefaultSymptomQuestion(symptom),
-            contentText: l10n.settingsScreen_deleteDefaultSymptomDescription(symptom, symptomUsageCount),
+            title: l10n.settingsScreen_deleteDefaultSymptomQuestion(symptom.getDisplayName(l10n)),
+            contentText: l10n.settingsScreen_deleteDefaultSymptomDescription(symptom.getDisplayName(l10n), symptomUsageCount),
             confirmButtonText: symptomUsageCount > 0 ? l10n.deleteAnyways : l10n.delete,
             onConfirm: () async {
               setState(() {
@@ -106,8 +108,8 @@ class _PeriodLogSettingsScreenState extends State<PeriodLogSettingsScreen> {
                     spacing: 4.0,
                     runSpacing: 4.0,
                     children: _defaultSymptoms.map((symptom) {
-                      var isAdd = symptom == "+";
-                      return RawChip(label: Text(symptom), backgroundColor: isAdd ? colorScheme.onSecondary : null, tapEnabled: true, onPressed: () => {if (isAdd) _showNewCustomSymptomDialog() else _removeDefaultSymptom(symptom)});
+                      var isAdd = symptom.type == SymptomType.add;
+                      return RawChip(label: Text(symptom.getDisplayName(l10n)), backgroundColor: isAdd ? colorScheme.onSecondary : null, tapEnabled: true, onPressed: () => {if (isAdd) _showNewCustomSymptomDialog() else _removeDefaultSymptom(symptom)});
                     }).toList(),
                   ),
                 ),

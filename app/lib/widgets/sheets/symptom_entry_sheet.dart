@@ -3,6 +3,8 @@ import 'package:intl/intl.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/models/flows/flow_enum.dart';
 import 'package:menstrudel/models/period_logs/pain_level_enum.dart';
+import 'package:menstrudel/models/period_logs/symptom.dart';
+import 'package:menstrudel/models/period_logs/symptom_type_enum.dart';
 import 'package:menstrudel/widgets/dialogs/custom_symptom_dialog.dart';
 import 'package:menstrudel/services/settings_service.dart';
 
@@ -21,9 +23,9 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
   bool _isLoading = true;
   late DateTime _selectedDate;
 
-  final Set<String> _defaultSymptoms = {};
-  final Set<String> _selectedSymptoms = {};
-  final Set<String> _symptoms = {};
+  final Set<Symptom> _defaultSymptoms = {};
+  final Set<Symptom> _selectedSymptoms = {};
+  final Set<Symptom> _symptoms = {};
 
   FlowRate _flowSelection = FlowRate.none;
   PainLevel _painLevel = PainLevel.none;
@@ -42,7 +44,7 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
     if (mounted) {
       setState(() {
         _symptoms.addAll(_defaultSymptoms);
-        _symptoms.add("+");
+        _symptoms.add(Symptom.addSymptom());
         _isLoading = false;
       });
     }
@@ -57,19 +59,19 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
     );
 
     if (result != null && mounted && _symptoms.contains(result.$1) == false) {
-      var customSymptomName = result.$1;
+      var symptom = Symptom.fromDbString(result.$1);
 
       if (result.$2) {
-        _defaultSymptoms.add(customSymptomName);
-        await _settingsService.addDefaultSymptom(customSymptomName);
+        _defaultSymptoms.add(symptom);
+        await _settingsService.addDefaultSymptom(symptom);
       }
 
       setState(() {
-        _symptoms.remove("+");
-        _symptoms.add(customSymptomName);
-        _symptoms.add("+");
+        _symptoms.remove(Symptom.addSymptom());
+        _symptoms.add(symptom);
+        _symptoms.add(Symptom.addSymptom());
 
-        _selectedSymptoms.add(customSymptomName);
+        _selectedSymptoms.add(symptom);
       });
     }
   }
@@ -174,9 +176,9 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
                     spacing: 8.0,
                     runSpacing: 4.0,
                     children: _symptoms.map((symptom) {
-                      var isAdd = symptom == "+";
+                      var isAdd = symptom.type == SymptomType.add;
                       return FilterChip(
-                        label: Text(symptom),
+                        label: Text(symptom.getDisplayName(l10n)),
                           backgroundColor: isAdd ? colorScheme.onSecondary : null,
                         selected: _selectedSymptoms.contains(symptom),
                         onSelected: (bool selected) {

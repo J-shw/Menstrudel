@@ -47,6 +47,9 @@ class AppLocalizationsIt extends AppLocalizations {
   String get delete => 'Elimina';
 
   @override
+  String get deleteAnyways => 'Delete anyways';
+
+  @override
   String get clear => 'Cancella';
 
   @override
@@ -113,28 +116,28 @@ class AppLocalizationsIt extends AppLocalizations {
   String get flowIntensity_heavy => 'Abbondante';
 
   @override
-  String get defaultSymptom_acne => 'Acne';
+  String get builtInSymptom_acne => 'Acne';
 
   @override
-  String get defaultSymptom_backPain => 'Back pain';
+  String get builtInSymptom_backPain => 'Back pain';
 
   @override
-  String get defaultSymptom_bloating => 'Bloating';
+  String get builtInSymptom_bloating => 'Bloating';
 
   @override
-  String get defaultSymptom_cramps => 'Cramps';
+  String get builtInSymptom_cramps => 'Cramps';
 
   @override
-  String get defaultSymptom_fatigue => 'Fatigue';
+  String get builtInSymptom_fatigue => 'Fatigue';
 
   @override
-  String get defaultSymptom_headache => 'Headache';
+  String get builtInSymptom_headache => 'Headache';
 
   @override
-  String get defaultSymptom_moodSwings => 'Mood Swings';
+  String get builtInSymptom_moodSwings => 'Mood Swings';
 
   @override
-  String get defaultSymptom_nausea => 'Nausea';
+  String get builtInSymptom_nausea => 'Nausea';
 
   @override
   String get painLevel_title => 'Intensità del dolore';
@@ -357,6 +360,38 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get settingsScreen_remindMeAfter => 'Avvisami dopo';
+
+  @override
+  String get settingsScreen_defaultSymptoms => 'Default Symptoms';
+
+  @override
+  String get settingsScreen_defaultSymptomsSubtitle =>
+      'These are always available when logging new periods.\nTap an existing symptom to delete or \'+\' to add a new one.';
+
+  @override
+  String settingsScreen_deleteDefaultSymptomQuestion(String symptom) {
+    return 'Delete \'$symptom\'?';
+  }
+
+  @override
+  String get settingsScreen_periodLoggingScreen => 'Period Logging';
+
+  @override
+  String settingsScreen_deleteDefaultSymptomDescription(
+    String symptom,
+    num usageCount,
+  ) {
+    String _temp0 = intl.Intl.pluralLogic(
+      usageCount,
+      locale: localeName,
+      other:
+          'There are $usageCount period logs with this symptom!\nThese logs will not be changed.',
+      one:
+          'There is already 1 period log with this symptom!\nThis log will not be changed.',
+      zero: 'There are currently no period logs with this symptom!',
+    );
+    return '\'$symptom\' will no longer be available when logging a period.\n\n$_temp0';
+  }
 
   @override
   String get settingsScreen_pillRegimens => 'Piani pillola';
@@ -684,4 +719,25 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get periodDetailsSheet_flow => 'Flusso';
+
+  @override
+  String periodPredictionCircle_days(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Days',
+      one: 'Day',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get customSymptomDialog_newCustomSymptom => 'New custom symptom';
+
+  @override
+  String get customSymptomDialog_enterCustomSymptom =>
+      'Please enter a custom symptom';
+
+  @override
+  String get customSymptomDialog_makeTemporary => 'Is temporary symptom';
 }

@@ -1,3 +1,5 @@
+import 'package:menstrudel/models/period_logs/symptom.dart';
+import 'package:menstrudel/models/period_logs/symptom_type_enum.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:menstrudel/utils/constants.dart';
@@ -170,29 +172,29 @@ class SettingsService {
     return AppThemeMode.values[themeIndex];
   }
 
-  Future<Set<String>> getDefaultSymptoms() async {
+  Future<Set<Symptom>> getDefaultSymptoms() async {
     final prefs = await SharedPreferences.getInstance();
     final storedDefaultSymptoms = prefs.getStringList(defaultSymptomsKey);
 
     if (storedDefaultSymptoms == null || storedDefaultSymptoms.isEmpty) {
-      return {"Headache", "Fatigue", "Cramps", "Nausea", "Mood Swings", "Bloating", "Acne", "Back pain"};
+      return Symptom.getBuiltInSymptoms();
     }
 
-    return storedDefaultSymptoms.toSet();
+    return storedDefaultSymptoms.map((e) => Symptom.fromDbString(e)).toSet();
   }
 
-  Future<void> setDefaultSymptoms(Set<String> symptoms) async {
+  Future<void> setDefaultSymptoms(Set<Symptom> symptoms) async {
     final prefs = await SharedPreferences.getInstance();
-    prefs.setStringList(defaultSymptomsKey, symptoms.map((e) => e.toLowerCase()).toList());
+    prefs.setStringList(defaultSymptomsKey, symptoms.map((e) => e.type == SymptomType.custom ? e.customName : e.type.toString()).toList());
   }
 
-  Future<void> addDefaultSymptom(String symptom) async {
+  Future<void> addDefaultSymptom(Symptom symptom) async {
     var defaultSymptoms = await getDefaultSymptoms();
     defaultSymptoms.add(symptom);
     await setDefaultSymptoms(defaultSymptoms);
   }
 
-  Future<void> removeDefaultSymptom(String symptom) async {
+  Future<void> removeDefaultSymptom(Symptom symptom) async {
     var defaultSymptoms = await getDefaultSymptoms();
     defaultSymptoms.remove(symptom);
     await setDefaultSymptoms(defaultSymptoms);
