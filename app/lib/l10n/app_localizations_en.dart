@@ -316,6 +316,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsScreen_birthControl => 'Birth Control';
 
   @override
+  String get settingsScreen_enablePillTracking => 'Enable Pill Tracking';
+
+  @override
   String get settingsScreen_setUpPillRegimen => 'Set Up Pill Regimen';
 
   @override

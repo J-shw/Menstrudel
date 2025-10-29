@@ -636,6 +636,12 @@ abstract class AppLocalizations {
   /// **'Birth Control'**
   String get settingsScreen_birthControl;
 
+  /// No description provided for @settingsScreen_enablePillTracking.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable Pill Tracking'**
+  String get settingsScreen_enablePillTracking;
+
   /// No description provided for @settingsScreen_setUpPillRegimen.
   ///
   /// In en, this message translates to:
