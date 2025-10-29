@@ -325,5 +325,15 @@
     "symptomEntrySheet_symptomsOptional": "Symptoms (Optional)",
 
     "periodDetailsSheet_symptoms": "Symptoms",
-    "periodDetailsSheet_flow": "Flow"
+    "periodDetailsSheet_flow": "Flow",
+
+    "periodPredictionCircle_days": "{count, plural, =1{Day} other{Days}}",
+    "@periodPredictionCircle_days": {
+        "description": "A label showing the total number of days until period is due.",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    }
 }
