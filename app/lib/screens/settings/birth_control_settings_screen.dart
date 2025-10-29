@@ -7,6 +7,7 @@ import 'package:menstrudel/services/notification_service.dart';
 import 'package:menstrudel/widgets/dialogs/delete_confirmation_dialog.dart';
 import 'package:menstrudel/widgets/settings/regimen_setup_dialog.dart';
 import 'package:menstrudel/services/settings_service.dart';
+import 'package:provider/provider.dart';
 
 class BirthControlSettingsScreen extends StatefulWidget {
   const BirthControlSettingsScreen({super.key});
@@ -18,13 +19,11 @@ class BirthControlSettingsScreen extends StatefulWidget {
 
 class _BirthControlSettingsScreenState extends State<BirthControlSettingsScreen> {
   final pillsRepo = PillsRepository();
-  final SettingsService _settingsService = SettingsService();
   bool _isLoading = true;
 
   List<PillRegimen> _allRegimens = []; 
   PillRegimen? _activeRegimen;
   bool _pillNotificationsEnabled = false;
-  bool _pillNavEnabled = false;
   TimeOfDay _pillNotificationTime = const TimeOfDay(hour: 21, minute: 0);
 
   @override
@@ -36,7 +35,6 @@ class _BirthControlSettingsScreenState extends State<BirthControlSettingsScreen>
   Future<void> _loadSettings() async {
     final allRegimens = await pillsRepo.readAllPillRegimens();
     final activeRegimen = await pillsRepo.readActivePillRegimen();
-    bool pillNavEnabled = await _settingsService.isPillNavEnabled();
     PillReminder? pillReminder;
     bool pillNotificationsEnabled = false;
     TimeOfDay pillNotificationTime = const TimeOfDay(hour: 21, minute: 0);
@@ -56,7 +54,6 @@ class _BirthControlSettingsScreenState extends State<BirthControlSettingsScreen>
         _allRegimens = allRegimens;
         _activeRegimen = activeRegimen;
         _pillNotificationsEnabled = pillNotificationsEnabled;
-        _pillNavEnabled = pillNavEnabled;
         _pillNotificationTime = pillNotificationTime;
         _isLoading = false;
       });
@@ -147,6 +144,8 @@ class _BirthControlSettingsScreenState extends State<BirthControlSettingsScreen>
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    final settingsService = context.watch<SettingsService>();
+    final bool pillNavEnabled = settingsService.isPillNavEnabled;
     final bool showReminderSettings = _activeRegimen != null && !_isLoading; 
 
     return Scaffold(
@@ -159,16 +158,13 @@ class _BirthControlSettingsScreenState extends State<BirthControlSettingsScreen>
               children: [
                 SwitchListTile(
                   title: Text(l10n.settingsScreen_enablePillTracking),
-                  value: _pillNavEnabled,
+                  value: pillNavEnabled,
                   onChanged: (bool value) {
-                    setState(() {
-                      _pillNavEnabled = value;
-                    });
-                    _settingsService.setPillNavEnabled(value);
+                    context.read<SettingsService>().setPillNavEnabled(value);
                   },
                 ),
                 const Divider(),
-                if (_pillNavEnabled) ...[
+                if (pillNavEnabled) ...[
                   Padding(
                     padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
                     child: Text(

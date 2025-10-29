@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:menstrudel/screens/main_screen.dart';
 import 'package:menstrudel/services/settings_service.dart';
+import 'package:provider/provider.dart';
 
 class AuthGate extends StatefulWidget {
   const AuthGate({super.key});
@@ -12,23 +13,25 @@ class AuthGate extends StatefulWidget {
 }
 
 class _AuthGateState extends State<AuthGate> {
-  final SettingsService _settingsService = SettingsService();
 
   @override
   void initState() {
     super.initState();
-    _checkAuthStatusAndProceed();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _checkAuthStatusAndProceed();
+    });
   }
 
   Future<void> _checkAuthStatusAndProceed() async {
-    final bool isEnabled = await _settingsService.areBiometricsEnabled();
+    final settings = context.read<SettingsService>();
+    final bool isEnabled = settings.areBiometricsEnabled;
 
     if (!isEnabled) {
       _navigateToMainScreen();
       return;
     }
 
-    _authenticate();
+    await _authenticate();
   }
 
   void _navigateToMainScreen() {
