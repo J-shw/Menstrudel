@@ -11,6 +11,16 @@ class SettingsService {
     await prefs.clear();
   }
 
+  Future<void> setPillNavEnabled(bool isEnabled) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(pillNavEnabledKey, isEnabled);
+  }
+
+  Future<bool> isPillNavEnabled() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool(pillNavEnabledKey) ?? false;
+  }
+
   Future<void> setLanguageCode(String code) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(languageKey, code);
