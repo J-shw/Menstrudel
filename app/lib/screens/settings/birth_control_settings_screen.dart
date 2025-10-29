@@ -6,6 +6,8 @@ import 'package:menstrudel/models/pills/pill_reminder.dart';
 import 'package:menstrudel/services/notification_service.dart';
 import 'package:menstrudel/widgets/dialogs/delete_confirmation_dialog.dart';
 import 'package:menstrudel/widgets/settings/regimen_setup_dialog.dart';
+import 'package:menstrudel/services/settings_service.dart';
+import 'package:provider/provider.dart';
 
 class BirthControlSettingsScreen extends StatefulWidget {
   const BirthControlSettingsScreen({super.key});
@@ -142,6 +144,8 @@ class _BirthControlSettingsScreenState extends State<BirthControlSettingsScreen>
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    final settingsService = context.watch<SettingsService>();
+    final bool pillNavEnabled = settingsService.isPillNavEnabled;
     final bool showReminderSettings = _activeRegimen != null && !_isLoading; 
 
     return Scaffold(
@@ -152,101 +156,111 @@ class _BirthControlSettingsScreenState extends State<BirthControlSettingsScreen>
           ? const Center(child: CircularProgressIndicator())
           : ListView(
               children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
-                  child: Text(
-                    l10n.settingsScreen_pillRegimens,
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
-                  ),
+                SwitchListTile(
+                  title: Text(l10n.settingsScreen_enablePillTracking),
+                  value: pillNavEnabled,
+                  onChanged: (bool value) {
+                    context.read<SettingsService>().setPillNavEnabled(value);
+                  },
                 ),
-                
-                ..._allRegimens.map((regimen) {
-                  final bool isActive = regimen.id == _activeRegimen?.id;
-                  final l10n = AppLocalizations.of(context)!;
-                  
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: Column(
-                      children: [
-                        ListTile(
-                          contentPadding: EdgeInsets.zero,
-                          
-                          leading: Icon(
-                            isActive ? Icons.check_circle : Icons.circle_outlined,
-                            color: isActive ? Theme.of(context).colorScheme.primary : Colors.grey,
-                            size: 28,
-                          ),
-                          title: Text(
-                            regimen.name,
-                            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                              fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
-                            ),
-                          ),
-                          subtitle: Text(
-                              '${regimen.activePills}/${regimen.placeboPills} ${l10n.settingsScreen_pack} | ${regimen.startDate.day}/${regimen.startDate.month}/${regimen.startDate.year}'),
-                          
-                          trailing: isActive 
-                              ? null
-                              : Row(
-                                  mainAxisSize: MainAxisSize.min, 
-                                  children: [
-                                    TextButton(
-                                      style: TextButton.styleFrom(
-                                        padding: const EdgeInsets.symmetric(horizontal: 8.0), 
-                                      ),
-                                      onPressed: () => _setActiveRegimen(regimen),
-                                      child: Text(l10n.settingsScreen_makeActive),
-                                    ),
-                                    
-                                    IconButton(
-                                      icon: Icon(Icons.delete_outline, color: Theme.of(context).colorScheme.error),
-                                      onPressed: () => showDeleteRegimenDialog(regimen),
-                                      tooltip: l10n.delete,
-                                    ),
-                                  ],
-                                )
-                        ),
-                      ],
-                    ),
-                  );
-                }),
-
-                ListTile(
-                  title: Text(l10n.settingsScreen_setUpPillRegimen),
-                  trailing: const Icon(Icons.add_circle, size: 30),
-                  onTap: showRegimenSetupDialog,
-                ),
-
                 const Divider(),
-                
-                if (showReminderSettings) ...[
+                if (pillNavEnabled) ...[
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+                    padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
                     child: Text(
-                      l10n.settingsScreen_activeRegimenReminder,
+                      l10n.settingsScreen_pillRegimens,
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
                     ),
                   ),
-                  SwitchListTile(
-                    title: Text(l10n.settingsScreen_dailyPillReminder),
-                    value: _pillNotificationsEnabled,
-                    onChanged: (bool value) {
-                      setState(() {
-                        _pillNotificationsEnabled = value;
-                      });
-                      savePillReminderSettings();
-                    },
-                  ),
-                  if (_pillNotificationsEnabled)
-                    ListTile(
-                      title: Text(l10n.settingsScreen_reminderTime),
-                      trailing: Text(
-                        _pillNotificationTime.format(context),
-                        style: const TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.bold),
+                  
+                  ..._allRegimens.map((regimen) {
+                    final bool isActive = regimen.id == _activeRegimen?.id;
+                    final l10n = AppLocalizations.of(context)!;
+                    
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Column(
+                        children: [
+                          ListTile(
+                            contentPadding: EdgeInsets.zero,
+                            
+                            leading: Icon(
+                              isActive ? Icons.check_circle : Icons.circle_outlined,
+                              color: isActive ? Theme.of(context).colorScheme.primary : Colors.grey,
+                              size: 28,
+                            ),
+                            title: Text(
+                              regimen.name,
+                              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
+                              ),
+                            ),
+                            subtitle: Text(
+                                '${regimen.activePills}/${regimen.placeboPills} ${l10n.settingsScreen_pack} | ${regimen.startDate.day}/${regimen.startDate.month}/${regimen.startDate.year}'),
+                            
+                            trailing: isActive 
+                                ? null
+                                : Row(
+                                    mainAxisSize: MainAxisSize.min, 
+                                    children: [
+                                      TextButton(
+                                        style: TextButton.styleFrom(
+                                          padding: const EdgeInsets.symmetric(horizontal: 8.0), 
+                                        ),
+                                        onPressed: () => _setActiveRegimen(regimen),
+                                        child: Text(l10n.settingsScreen_makeActive),
+                                      ),
+                                      
+                                      IconButton(
+                                        icon: Icon(Icons.delete_outline, color: Theme.of(context).colorScheme.error),
+                                        onPressed: () => showDeleteRegimenDialog(regimen),
+                                        tooltip: l10n.delete,
+                                      ),
+                                    ],
+                                  )
+                          ),
+                        ],
                       ),
-                      onTap: selectPillReminderTime,
+                    );
+                  }),
+
+                  ListTile(
+                    title: Text(l10n.settingsScreen_setUpPillRegimen),
+                    trailing: const Icon(Icons.add_circle, size: 30),
+                    onTap: showRegimenSetupDialog,
+                  ),
+
+                  const Divider(),
+                  
+                  if (showReminderSettings) ...[
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+                      child: Text(
+                        l10n.settingsScreen_activeRegimenReminder,
+                        style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+                      ),
                     ),
+                    SwitchListTile(
+                      title: Text(l10n.settingsScreen_dailyPillReminder),
+                      value: _pillNotificationsEnabled,
+                      onChanged: (bool value) {
+                        setState(() {
+                          _pillNotificationsEnabled = value;
+                        });
+                        savePillReminderSettings();
+                      },
+                    ),
+                    if (_pillNotificationsEnabled)
+                      ListTile(
+                        title: Text(l10n.settingsScreen_reminderTime),
+                        trailing: Text(
+                          _pillNotificationTime.format(context),
+                          style: const TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
+                        ),
+                        onTap: selectPillReminderTime,
+                      ),
+                  ],
                 ],
               ],
             ),

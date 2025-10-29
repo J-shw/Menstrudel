@@ -162,6 +162,7 @@
     "settingsScreen_view": "View",
 
     "settingsScreen_birthControl": "Birth Control",
+    "settingsScreen_enablePillTracking": "Enable Pill Tracking",
     "settingsScreen_setUpPillRegimen": "Set Up Pill Regimen",
     "settingsScreen_trackYourDailyPillIntake": "Track Your Daily Pill Intake",
     "settingsScreen_dailyPillReminder": "Daily Pill Reminder",

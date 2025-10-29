@@ -6,11 +6,11 @@ import 'package:menstrudel/models/themes/app_theme_mode_enum.dart';
 class ThemeNotifier with ChangeNotifier {
   late Color _themeColor;
   late bool _isDynamicEnabled;
-  final SettingsService _settingsService = SettingsService();
+  final SettingsService _settingsService;
   AppThemeMode _themeMode = AppThemeMode.system;
   AppThemeMode get themeMode => _themeMode;
 
-  ThemeNotifier() {
+  ThemeNotifier(this._settingsService) {
     _themeColor = seedColor;
     _isDynamicEnabled = false;
     loadAllThemeSettings();
@@ -38,9 +38,9 @@ class ThemeNotifier with ChangeNotifier {
   }
 
   Future<void> loadAllThemeSettings() async {
-    _themeColor = await _settingsService.getThemeColor();
-    _isDynamicEnabled = await _settingsService.isDynamicThemeEnabled();
-    _themeMode = await _settingsService.getThemeMode();
+    _themeColor = _settingsService.themeColor;
+    _isDynamicEnabled = _settingsService.isDynamicThemeEnabled;
+    _themeMode = _settingsService.themeMode;
     notifyListeners();
   }
 }

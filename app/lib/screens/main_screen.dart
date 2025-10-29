@@ -7,6 +7,7 @@ import 'package:menstrudel/widgets/main/main_navigation_bar.dart';
 import 'package:menstrudel/widgets/main/app_bar.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/services/settings_service.dart';
+import 'package:provider/provider.dart';
 
 enum FabState {
   logPeriod,
@@ -26,67 +27,11 @@ class _MainScreenState extends State<MainScreen> {
   final GlobalKey<LogsScreenState> _logsScreenKey =
       GlobalKey<LogsScreenState>();
   FabState _fabState = FabState.logPeriod;
-  List<Widget>? _pages;
 
-  final SettingsService _settingsService = SettingsService();
-  bool _isLoading = true;
-  bool _isReminderButtonAlwaysVisible = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _loadSettings();
-  }
-
-  Future<void> _loadSettings() async {
-    final isEnabled =
-        await _settingsService.areAlwaysShowReminderButtonEnabled();
-    if (mounted) {
-      setState(() {
-        _isReminderButtonAlwaysVisible = isEnabled;
-        _isLoading = false;
-        _pages = <Widget>[
-          const InsightsScreen(),
-          LogsScreen(
-            key: _logsScreenKey,
-            onFabStateChange: _onFabStateChange,
-            isReminderButtonAlwaysVisible: _isReminderButtonAlwaysVisible,
-          ),
-          const PillsScreen(),
-          const SettingsScreen(),
-        ];
-      });
-    }
-  }
-
-  void _onFabStateChange(FabState suggestedState) {
-    FabState finalState;
-
-    if (_isReminderButtonAlwaysVisible) {
-      if (suggestedState == FabState.cancelReminder) {
-        finalState = FabState.cancelReminder;
-      } else {
-        finalState = FabState.setReminder;
-      }
-    } else {
-      finalState = suggestedState;
-    }
-
-    if (_fabState != finalState) {
-      setState(() {
-        _fabState = finalState;
-      });
-    }
-  }
-
-  void _onItemTapped(int index) async {
+  void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
-
-    if (index == 1) {
-      await _loadSettings();
-    }
   }
 
   Widget _buildLogPeriodFab(BuildContext context) {
@@ -121,8 +66,8 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 
-  Widget _buildFab(BuildContext context) {
-    if (_isReminderButtonAlwaysVisible) {
+  Widget _buildFab(BuildContext context, bool isReminderButtonAlwaysVisible) {
+    if (isReminderButtonAlwaysVisible) {
       final Widget reminderFab = _fabState == FabState.cancelReminder
           ? _buildCountDownReminderFab(context)
           : _buildSetReminderFab(context);
@@ -151,30 +96,64 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    final settingsService = context.watch<SettingsService>();
+
+    final bool isPillNavEnabled = settingsService.isPillNavEnabled;
+    final bool isReminderButtonAlwaysVisible =
+        settingsService.areAlwaysShowReminderButtonEnabled;
+
+    final List<Widget> pages = <Widget>[
+      const InsightsScreen(),
+      LogsScreen(
+        key: _logsScreenKey,
+        onFabStateChange: (FabState suggestedState) {
+          FabState finalState;
+          if (isReminderButtonAlwaysVisible) {
+            finalState = (suggestedState == FabState.cancelReminder)
+                ? FabState.cancelReminder
+                : FabState.setReminder;
+          } else {
+            finalState = suggestedState;
+          }
+
+          if (_fabState != finalState) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              if (mounted) {
+                setState(() {
+                  _fabState = finalState;
+                });
+              }
+            });
+          }
+        },
+        isReminderButtonAlwaysVisible: isReminderButtonAlwaysVisible,
+      ),
+      if (isPillNavEnabled)
+        const PillsScreen(),
+      const SettingsScreen(),
+    ];
 
     final List<PreferredSizeWidget?> appBars = [
       TopAppBar(titleText: l10n.mainScreen_insightsPageTitle),
       null,
-      TopAppBar(titleText: l10n.mainScreen_pillsPageTitle),
+      if (isPillNavEnabled)
+        TopAppBar(titleText: l10n.mainScreen_pillsPageTitle),
       TopAppBar(titleText: l10n.mainScreen_settingsPageTitle),
     ];
 
-    if (_pages == null) {
-      return const Scaffold(
-        body: Center(
-          child: CircularProgressIndicator(),
-        ),
-      );
+    int correctedIndex = _selectedIndex;
+    if (_selectedIndex >= pages.length) {
+      correctedIndex = pages.length - 1;
     }
 
     return Scaffold(
-      appBar: appBars[_selectedIndex],
-      body: _pages![_selectedIndex],
+      appBar: appBars[correctedIndex],
+      body: pages[correctedIndex],
       bottomNavigationBar: MainNavigationBar(
-        selectedIndex: _selectedIndex,
+        selectedIndex: correctedIndex,
         onDestinationSelected: _onItemTapped,
       ),
-      floatingActionButton: !_isLoading && _selectedIndex == 1
+      floatingActionButton: correctedIndex == 1
           ? AnimatedSwitcher(
               duration: const Duration(milliseconds: 200),
               transitionBuilder: (Widget child, Animation<double> animation) {
@@ -183,7 +162,7 @@ class _MainScreenState extends State<MainScreen> {
                   child: child,
                 );
               },
-              child: _buildFab(context),
+              child: _buildFab(context, isReminderButtonAlwaysVisible),
             )
           : null,
     );
