@@ -318,6 +318,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsScreen_birthControl => 'Empfängnisverhütung';
 
   @override
+  String get settingsScreen_enablePillTracking => 'Enable Pill Tracking';
+
+  @override
   String get settingsScreen_setUpPillRegimen => 'Set Up Pill Regimen';
 
   @override
@@ -676,4 +679,15 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get periodDetailsSheet_flow => 'Flow';
+
+  @override
+  String periodPredictionCircle_days(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Days',
+      one: 'Day',
+    );
+    return '$_temp0';
+  }
 }

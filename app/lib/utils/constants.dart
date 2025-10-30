@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:menstrudel/models/themes/app_theme_mode_enum.dart';
+import 'package:menstrudel/services/settings_service.dart';
 
 /// The base app seed colour.
 const seedColor = Color(0xFF60A5FA);
@@ -38,6 +40,25 @@ const String themeColorKey = 'theme_color';
 const String themeModeKey = 'theme_mode';
 const String persistentReminderKey = "always_show_reminder_button";
 const String languageKey = "language";
+const String pillNavEnabledKey = "pill_nav_enabled";
 
 // Notifications
 const String tamponReminderDateTimeKey = 'tampon_reminder_date_time';
+
+// Shared prefrences default values
+
+// Settings
+const bool kDefaultPillNavEnabled = false;
+const String kDefaultLanguageCode = 'system';
+const bool kDefaultAlwaysShowReminderButton = false;
+const bool kDefaultBiometricsEnabled = false;
+const bool kDefaultNotificationsEnabled = true;
+const int kDefaultNotificationDays = 1;
+const TimeOfDay kDefaultNotificationTime = TimeOfDay(hour: 9, minute: 0);
+const bool kDefaultPeriodOverdueNotificationsEnabled = true;
+const int kDefaultPeriodOverdueNotificationDays = 1;
+const TimeOfDay kDefaultPeriodOverdueNotificationTime = TimeOfDay(hour: 9, minute: 0);
+const PeriodHistoryView kDefaultHistoryView = PeriodHistoryView.journal;
+const bool kDefaultDynamicColorEnabled = false;
+const Color kDefaultThemeColor = seedColor;
+const AppThemeMode kDefaultThemeMode = AppThemeMode.system;

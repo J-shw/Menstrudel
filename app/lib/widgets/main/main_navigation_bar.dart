@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
+import 'package:menstrudel/services/settings_service.dart';
+import 'package:provider/provider.dart';
 
 class MainNavigationBar extends StatelessWidget {
   final int selectedIndex;
@@ -14,6 +16,7 @@ class MainNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    final settingsService = context.watch<SettingsService>();
 
     return NavigationBar(
       selectedIndex: selectedIndex,
@@ -30,11 +33,12 @@ class MainNavigationBar extends StatelessWidget {
           icon: Icon(Icons.book_outlined),
           label: l10n.navBar_logs,
         ),
-        NavigationDestination(
-          selectedIcon: Icon(Icons.medication_rounded),
-          icon: Icon(Icons.medication_outlined),
-          label: l10n.navBar_pill,
-        ),
+        if (settingsService.isPillNavEnabled)
+          NavigationDestination(
+            selectedIcon: Icon(Icons.medication_rounded),
+            icon: Icon(Icons.medication_outlined),
+            label: l10n.navBar_pill,
+          ),
         NavigationDestination(
           selectedIcon: Icon(Icons.settings),
           icon: Icon(Icons.settings_outlined),
