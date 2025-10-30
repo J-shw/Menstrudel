@@ -140,6 +140,7 @@
     "settingsScreen_pickAColor": "Sélectionner une couleur",
     "settingsScreen_view": "Vue",
     "settingsScreen_birthControl": "Contraception",
+    "settingsScreen_enablePillTracking": "Enable Pill Tracking",
     "settingsScreen_setUpPillRegimen": "Configurer le régime de pilule",
     "settingsScreen_trackYourDailyPillIntake": "Suivi quotidien de la pilule",
     "settingsScreen_dailyPillReminder": "Rappel pour la pilule quotidienne",

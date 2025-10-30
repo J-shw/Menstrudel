@@ -140,6 +140,7 @@
     "settingsScreen_pickAColor": "Eine Farbe auswählen",
     "settingsScreen_view": "Ansicht",
     "settingsScreen_birthControl": "Empfängnisverhütung",
+    "settingsScreen_enablePillTracking": "Enable Pill Tracking",
     "settingsScreen_setUpPillRegimen": "Set Up Pill Regimen",
     "settingsScreen_trackYourDailyPillIntake": "Track Your Daily Pill Intake",
     "settingsScreen_dailyPillReminder": "Daily Pill Reminder",
@@ -284,5 +285,14 @@
     "symptomEntrySheet_logYourDay": "Log Your Day",
     "symptomEntrySheet_symptomsOptional": "Symptome (optional)",
     "periodDetailsSheet_symptoms": "Symptome",
-    "periodDetailsSheet_flow": "Flow"
+    "periodDetailsSheet_flow": "Flow",
+    "periodPredictionCircle_days": "{count, plural, =1{Day} other{Days}}",
+    "@periodPredictionCircle_days": {
+        "description": "A label showing the total number of days until period is due.",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    }
 }
