@@ -224,27 +224,30 @@ class SettingsService extends ChangeNotifier {
     await _prefs.setInt(themeModeKey, theme.index);
   }
 
-  Future<void> resetDefaultSymptoms() async {
-    final prefs = await SharedPreferences.getInstance();
+  Future<void> setDefaultSymptoms(Set<Symptom> symptoms) async {
+    _defaultSymptoms = symptoms;
     notifyListeners();
-    await prefs.remove(defaultSymptomsKey);
+    await _prefs.setStringList(
+      defaultSymptomsKey, 
+      symptoms.map((e) => e.type == SymptomType.custom ? e.customName : e.type.toString()).toList()
+    );
   }
 
-  Future<void> setDefaultSymptoms(Set<Symptom> symptoms) async {
-    final prefs = await SharedPreferences.getInstance();
-    notifyListeners();
-    await prefs.setStringList(defaultSymptomsKey, symptoms.map((e) => e.type == SymptomType.custom ? e.customName : e.type.toString()).toList());
+  Future<void> resetDefaultSymptoms() async {
+    await _prefs.remove(defaultSymptomsKey);
+    final defaultSet = _loadDefaultSymptoms();
+    await setDefaultSymptoms(defaultSet);
   }
 
   Future<void> addDefaultSymptom(Symptom symptom) async {
-    defaultSymptoms.add(symptom);
-    notifyListeners();
-    await setDefaultSymptoms(defaultSymptoms);
+    final newSet = Set<Symptom>.from(_defaultSymptoms);
+    newSet.add(symptom);
+    await setDefaultSymptoms(newSet);
   }
 
   Future<void> removeDefaultSymptom(Symptom symptom) async {
-    defaultSymptoms.remove(symptom);
-    notifyListeners();
-    await setDefaultSymptoms(defaultSymptoms);
+    final newSet = Set<Symptom>.from(_defaultSymptoms);
+    newSet.remove(symptom);
+    await setDefaultSymptoms(newSet);
   }
 }
