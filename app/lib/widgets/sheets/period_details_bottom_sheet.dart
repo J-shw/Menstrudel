@@ -8,6 +8,7 @@ import 'package:menstrudel/models/period_logs/symptom.dart';
 import 'package:menstrudel/models/period_logs/symptom_type_enum.dart';
 import 'package:menstrudel/services/settings_service.dart';
 import 'package:menstrudel/widgets/dialogs/custom_symptom_dialog.dart';
+import 'package:provider/provider.dart';
 
 class PeriodDetailsBottomSheet extends StatefulWidget {
   final PeriodDay log;
@@ -21,7 +22,7 @@ class PeriodDetailsBottomSheet extends StatefulWidget {
 }
 
 class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
-  final SettingsService _settingsService = SettingsService();
+  late SettingsService _settingsService;
 
   bool _isEditing = false;
 
@@ -35,24 +36,23 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
   @override
   void initState() {
     super.initState();
-    _loadDefaultSymptoms();
+    _settingsService = context.read<SettingsService>();
     _resetEditableState();
+    _loadDefaultSymptoms();
   }
 
   void _resetEditableState() {
     _editedFlow = widget.log.flow;
     _editedPainLevel = PainLevel.values[widget.log.painLevel];
     _selectedSymptoms.clear();
-    _selectedSymptoms.addAll(widget.log.symptoms ?? {});
+    _selectedSymptoms.addAll(widget.log.symptoms);
   }
 
-  void _loadDefaultSymptoms() async {
-    setState(() {
-      _defaultSymptoms.addAll(_settingsService.defaultSymptoms);
-      _symptoms.addAll(_defaultSymptoms);
-      _symptoms.addAll(widget.log.symptoms ?? []);
-      _symptoms.add(Symptom.addSymptom());
-    });
+  void _loadDefaultSymptoms() {
+    _defaultSymptoms.addAll(_settingsService.defaultSymptoms);
+    _symptoms.addAll(_defaultSymptoms);
+    _symptoms.addAll(_selectedSymptoms);
+    _symptoms.add(Symptom.addSymptom());
   }
 
   void _handleSave() {
