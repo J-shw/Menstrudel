@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:menstrudel/models/period_logs/symptom.dart';
+import 'package:menstrudel/models/period_logs/symptom_type_enum.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:menstrudel/utils/constants.dart';
 import 'package:menstrudel/models/themes/app_theme_mode_enum.dart';
@@ -22,6 +24,7 @@ class SettingsService extends ChangeNotifier {
   bool _dynamicColorEnabled = kDefaultDynamicColorEnabled;
   Color _themeColor = kDefaultThemeColor;
   AppThemeMode _themeMode = kDefaultThemeMode;
+  Set<Symptom> _defaultSymptoms = kDefaultSymptoms;
 
   /// Whether the 'Pill' tab is visible in the main navigation bar.
   bool get isPillNavEnabled => _pillNavEnabled;
@@ -52,6 +55,8 @@ class SettingsService extends ChangeNotifier {
   Color get themeColor => _themeColor;
   /// The app's theme mode (Light, Dark, or System).
   AppThemeMode get themeMode => _themeMode;
+  /// The user configured default symptoms
+  Set<Symptom> get defaultSymptoms => _defaultSymptoms;
 
   Future<void> loadSettings() async {
     _prefs = await SharedPreferences.getInstance();
@@ -76,6 +81,8 @@ class SettingsService extends ChangeNotifier {
     _dynamicColorEnabled = _prefs.getBool(dynamicColorKey) ?? false;
     _themeColor = _loadThemeColor();
     _themeMode = _loadThemeMode();
+
+    _defaultSymptoms = _loadDefaultSymptoms();
 
     notifyListeners();
   }
@@ -108,6 +115,22 @@ class SettingsService extends ChangeNotifier {
   AppThemeMode _loadThemeMode() {
     final themeIndex = _prefs.getInt(themeModeKey) ?? AppThemeMode.system.index;
     return AppThemeMode.values[themeIndex];
+  }
+
+  Set<Symptom> _loadDefaultSymptoms() {
+    final storedDefaultSymptoms = _prefs.getStringList(defaultSymptomsKey);
+
+    if (storedDefaultSymptoms == null || storedDefaultSymptoms.isEmpty) {
+      return SymptomType.values
+          .where(
+            (element) =>
+        element != SymptomType.custom && element != SymptomType.other,
+      )
+          .map((e) => Symptom.fromDbString(e.toString()))
+          .toSet();
+    }
+
+    return storedDefaultSymptoms.map((e) => Symptom.fromDbString(e)).toSet();
   }
 
   Future<void> deleteAllSettings() async {
@@ -199,5 +222,29 @@ class SettingsService extends ChangeNotifier {
     _themeMode = theme;
     notifyListeners();
     await _prefs.setInt(themeModeKey, theme.index);
+  }
+
+  Future<void> resetDefaultSymptoms() async {
+    final prefs = await SharedPreferences.getInstance();
+    notifyListeners();
+    await prefs.remove(defaultSymptomsKey);
+  }
+
+  Future<void> setDefaultSymptoms(Set<Symptom> symptoms) async {
+    final prefs = await SharedPreferences.getInstance();
+    notifyListeners();
+    await prefs.setStringList(defaultSymptomsKey, symptoms.map((e) => e.type == SymptomType.custom ? e.customName : e.type.toString()).toList());
+  }
+
+  Future<void> addDefaultSymptom(Symptom symptom) async {
+    defaultSymptoms.add(symptom);
+    notifyListeners();
+    await setDefaultSymptoms(defaultSymptoms);
+  }
+
+  Future<void> removeDefaultSymptom(Symptom symptom) async {
+    defaultSymptoms.remove(symptom);
+    notifyListeners();
+    await setDefaultSymptoms(defaultSymptoms);
   }
 }

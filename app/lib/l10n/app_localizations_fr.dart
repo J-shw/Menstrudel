@@ -47,6 +47,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get delete => 'Supprimer';
 
   @override
+  String get deleteAnyways => 'Delete anyways';
+
+  @override
   String get clear => 'Effacer';
 
   @override
@@ -78,6 +81,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get close => 'Fermer';
+
+  @override
+  String get reset => 'Reset';
 
   @override
   String get systemDefault => 'System Default';
@@ -113,25 +119,28 @@ class AppLocalizationsFr extends AppLocalizations {
   String get flowIntensity_heavy => 'Abondant';
 
   @override
-  String get symptom_headache => 'Maux de tête';
+  String get builtInSymptom_acne => 'Acne';
 
   @override
-  String get symptom_fatigue => 'Fatigue';
+  String get builtInSymptom_backPain => 'Back pain';
 
   @override
-  String get symptom_cramps => 'Crampes';
+  String get builtInSymptom_bloating => 'Bloating';
 
   @override
-  String get symptom_nausea => 'Nausée';
+  String get builtInSymptom_cramps => 'Cramps';
 
   @override
-  String get symptom_moodSwings => 'Sauts d’humeur';
+  String get builtInSymptom_fatigue => 'Fatigue';
 
   @override
-  String get symptom_bloating => 'Ballonnements';
+  String get builtInSymptom_headache => 'Headache';
 
   @override
-  String get symptom_acne => 'Acné';
+  String get builtInSymptom_moodSwings => 'Mood Swings';
+
+  @override
+  String get builtInSymptom_nausea => 'Nausea';
 
   @override
   String get painLevel_title => 'Intensité de la douleur';
@@ -361,6 +370,45 @@ class AppLocalizationsFr extends AppLocalizations {
   String get settingsScreen_remindMeAfter => 'Me rappeler après';
 
   @override
+  String get settingsScreen_defaultSymptoms => 'Default Symptoms';
+
+  @override
+  String get settingsScreen_defaultSymptomsSubtitle =>
+      'These are always available when logging new periods.\nTap an existing symptom to delete or \'+\' to add a new one.';
+
+  @override
+  String settingsScreen_deleteDefaultSymptomQuestion(String symptom) {
+    return 'Delete \'$symptom\'?';
+  }
+
+  @override
+  String get settingsScreen_resetDefaultSymptoms => 'Reset default symptoms?';
+
+  @override
+  String get settingsScreen_resetDefaultSymptomsDescription =>
+      'This will reset the default symptoms to the built in symptoms.\n\nExisting period logs will not be updated!';
+
+  @override
+  String get settingsScreen_periodLoggingScreen => 'Period Logging';
+
+  @override
+  String settingsScreen_deleteDefaultSymptomDescription(
+    String symptom,
+    num usageCount,
+  ) {
+    String _temp0 = intl.Intl.pluralLogic(
+      usageCount,
+      locale: localeName,
+      other:
+          'There are $usageCount period logs with this symptom!\nThese logs will not be changed.',
+      one:
+          'There is already 1 period log with this symptom!\nThis log will not be changed.',
+      zero: 'There are currently no period logs with this symptom!',
+    );
+    return '\'$symptom\' will no longer be available when logging a period.\n\n$_temp0';
+  }
+
+  @override
   String get settingsScreen_pillRegimens => 'Suivis de pilule';
 
   @override
@@ -527,68 +575,71 @@ class AppLocalizationsFr extends AppLocalizations {
   String get aboutScreen_github => 'GitHub';
 
   @override
-  String get aboutScreen_githubSubtitle => 'Source code and issue tracking';
+  String get aboutScreen_githubSubtitle => 'Code source et suivis des erreurs';
 
   @override
-  String get aboutScreen_share => 'Share';
+  String get aboutScreen_share => 'Partager';
 
   @override
-  String get aboutScreen_shareSubtitle => 'Share the app with friends';
+  String get aboutScreen_shareSubtitle => 'Partager l\'appli avec vos proches';
 
   @override
-  String get aboutScreen_urlError => 'Could not open the link.';
+  String get aboutScreen_urlError => 'Impossible d\'ouvrir le lien.';
 
   @override
-  String get tamponReminderDialog_tamponReminderTitle => 'Tampon Reminder';
+  String get tamponReminderDialog_tamponReminderTitle => 'Rappel de tampon';
 
   @override
   String get tamponReminderDialog_tamponReminderMaxDuration =>
-      'Max duration is 8 hours.';
+      'La durée maximale est de 8 heures.';
 
   @override
-  String get reminderCountdownDialog_title => 'Reminder Due In';
+  String get reminderCountdownDialog_title => 'Rappel à prévoir dans';
 
   @override
   String reminderCountdownDialog_dueAt(Object time) {
-    return 'Due at $time';
+    return 'À prévoir à $time';
   }
 
   @override
   String get cycleLengthVarianceWidget_LogAtLeastTwoPeriods =>
-      'Need at least two cycles to show variance.';
+      'Il faut au moins deux cycles pour observer une variance.';
 
   @override
   String get cycleLengthVarianceWidget_cycleAndPeriodVeriance =>
-      'Cycle & Period Variance';
+      'Variabilité du cycle et des périodes';
 
   @override
-  String get cycleLengthVarianceWidget_averageCycle => 'Average Cycle';
+  String get cycleLengthVarianceWidget_averageCycle => 'Cycle Moyen';
 
   @override
-  String get cycleLengthVarianceWidget_averagePeriod => 'Average Period';
+  String get cycleLengthVarianceWidget_averagePeriod => 'Période Moyenne';
 
   @override
-  String get cycleLengthVarianceWidget_period => 'Period';
+  String get cycleLengthVarianceWidget_period => 'Période';
 
   @override
   String get cycleLengthVarianceWidget_cycle => 'Cycle';
 
   @override
   String get flowIntensityWidget_flowIntensityBreakdown =>
-      'Flow Intensity Breakdown';
+      'Décomposition de l\'intensité du flux';
 
   @override
   String get flowIntensityWidget_noFlowDataLoggedYet =>
-      'No flow data logged yet.';
+      'Aucune donnée du flux enregistrée pour le moment.';
 
   @override
-  String get painLevelWidget_noPainDataLoggedYet => 'No pain data logged yet.';
+  String get painLevelWidget_noPainDataLoggedYet =>
+      'Aucune donnée sur la douleur n\'a encore été enregistrée.';
 
   @override
-  String get painLevelWidget_painLevelBreakdown => 'Pain Level Breakdown';
+  String get painLevelWidget_painLevelBreakdown =>
+      'Répartition du niveau de douleur';
 
   @override
-  String get monthlyFlowChartWidget_noDataToDisplay => 'No data to display.';
+  String get monthlyFlowChartWidget_noDataToDisplay =>
+      'Aucune donnée à afficher.';
 
   @override
   String get monthlyFlowChartWidget_cycleFlowPatterns => 'Cycle Flow Patterns';
@@ -701,4 +752,14 @@ class AppLocalizationsFr extends AppLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String get customSymptomDialog_newCustomSymptom => 'New custom symptom';
+
+  @override
+  String get customSymptomDialog_enterCustomSymptom =>
+      'Please enter a custom symptom';
+
+  @override
+  String get customSymptomDialog_makeTemporary => 'Is temporary symptom';
 }

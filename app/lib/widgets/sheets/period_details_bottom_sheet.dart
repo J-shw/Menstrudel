@@ -47,9 +47,8 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
   }
 
   void _loadDefaultSymptoms() async {
-    var defaultSymptoms = await _settingsService.getDefaultSymptoms();
     setState(() {
-      _defaultSymptoms.addAll(defaultSymptoms);
+      _defaultSymptoms.addAll(_settingsService.defaultSymptoms);
       _symptoms.addAll(_defaultSymptoms);
       _symptoms.addAll(widget.log.symptoms ?? []);
       _symptoms.add(Symptom.addSymptom());

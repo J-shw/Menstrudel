@@ -32,14 +32,12 @@ class _PeriodLogSettingsScreenState extends State<PeriodLogSettingsScreen> {
   Future<void> _loadSettings() async {
     _isLoading = true;
 
-    var defaultSymptoms = await _settingsService.getDefaultSymptoms();
-    defaultSymptoms.add(Symptom.addSymptom());
-    defaultSymptoms.add(Symptom.refreshSymptom());
-
     if (mounted) {
       setState(() {
         _defaultSymptoms.clear();
-        _defaultSymptoms.addAll(defaultSymptoms);
+        _defaultSymptoms.addAll(_settingsService.defaultSymptoms);
+        _defaultSymptoms.add(Symptom.addSymptom());
+        _defaultSymptoms.add(Symptom.refreshSymptom());
       });
     }
 

@@ -39,10 +39,9 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
   }
 
   Future<void> _loadSymptoms() async {
-    _defaultSymptoms.addAll(await _settingsService.getDefaultSymptoms());
-
     if (mounted) {
       setState(() {
+        _defaultSymptoms.addAll(_settingsService.defaultSymptoms);
         _symptoms.addAll(_defaultSymptoms);
         _symptoms.add(Symptom.addSymptom());
         _isLoading = false;

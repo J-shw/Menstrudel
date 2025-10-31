@@ -49,16 +49,6 @@ class Symptom {
   int get hashCode {
     return type.hashCode + customName.hashCode;
   }
-
-  static Set<Symptom> getBuiltInSymptoms() {
-    return SymptomType.values
-        .where(
-          (element) =>
-              element != SymptomType.custom && element != SymptomType.other,
-        )
-        .map((e) => Symptom.fromDbString(e.toString()))
-        .toSet();
-  }
 }
 
 extension SymptomExtension on Symptom {
