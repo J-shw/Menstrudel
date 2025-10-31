@@ -7,6 +7,7 @@ import 'package:menstrudel/models/period_logs/symptom.dart';
 import 'package:menstrudel/models/period_logs/symptom_type_enum.dart';
 import 'package:menstrudel/widgets/dialogs/custom_symptom_dialog.dart';
 import 'package:menstrudel/services/settings_service.dart';
+import 'package:provider/provider.dart';
 
 class SymptomEntrySheet extends StatefulWidget {
   const SymptomEntrySheet({super.key, required this.selectedDate});
@@ -18,11 +19,8 @@ class SymptomEntrySheet extends StatefulWidget {
 }
 
 class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
-  final SettingsService _settingsService = SettingsService();
-
-  bool _isLoading = true;
+  late SettingsService _settingsService;
   late DateTime _selectedDate;
-
   final Set<Symptom> _defaultSymptoms = {};
   final Set<Symptom> _selectedSymptoms = {};
   final Set<Symptom> _symptoms = {};
@@ -34,19 +32,14 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
   void initState() {
     super.initState();
     _selectedDate = widget.selectedDate;
-
+    _settingsService = context.read<SettingsService>();
     _loadSymptoms();
   }
 
-  Future<void> _loadSymptoms() async {
-    if (mounted) {
-      setState(() {
-        _defaultSymptoms.addAll(_settingsService.defaultSymptoms);
-        _symptoms.addAll(_defaultSymptoms);
-        _symptoms.add(Symptom.addSymptom());
-        _isLoading = false;
-      });
-    }
+  void _loadSymptoms() {
+    _defaultSymptoms.addAll(_settingsService.defaultSymptoms);
+    _symptoms.addAll(_defaultSymptoms);
+    _symptoms.add(Symptom.addSymptom());
   }
 
   Future<void> _showNewCustomSymptomDialog() async {
@@ -91,9 +84,7 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
 
     return Padding(
       padding: EdgeInsets.only(top: 20, left: 16, right: 16, bottom: MediaQuery.of(context).viewInsets.bottom + 32),
-      child: _isLoading
-          ? const Center(child: CircularProgressIndicator())
-          : SingleChildScrollView(
+      child: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
