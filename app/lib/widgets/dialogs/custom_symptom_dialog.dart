@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/database/repositories/periods_repository.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
-import 'package:menstrudel/widgets/dialogs/delete_confirmation_dialog.dart';
 
 class CustomSymptomDialog extends StatefulWidget {
   final bool showTemporarySymptomButton;
