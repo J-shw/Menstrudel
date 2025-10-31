@@ -47,7 +47,10 @@ class Symptom {
 
   @override
   int get hashCode {
-    return type.hashCode + customName.hashCode;
+    if (type == SymptomType.custom || type == SymptomType.other) {
+      return type.hashCode ^ customName.hashCode;
+    }
+    return type.hashCode;
   }
 }
 
