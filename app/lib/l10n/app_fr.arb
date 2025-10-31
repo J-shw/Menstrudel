@@ -140,6 +140,7 @@
     "settingsScreen_pickAColor": "Sélectionner une couleur",
     "settingsScreen_view": "Vue",
     "settingsScreen_birthControl": "Contraception",
+    "settingsScreen_enablePillTracking": "Enable Pill Tracking",
     "settingsScreen_setUpPillRegimen": "Configurer le régime de pilule",
     "settingsScreen_trackYourDailyPillIntake": "Suivi quotidien de la pilule",
     "settingsScreen_dailyPillReminder": "Rappel pour la pilule quotidienne",
@@ -216,31 +217,31 @@
     "settingsScreen_about": "À propos",
     "aboutScreen_version": "Version",
     "aboutScreen_github": "GitHub",
-    "aboutScreen_githubSubtitle": "Source code and issue tracking",
-    "aboutScreen_share": "Share",
-    "aboutScreen_shareSubtitle": "Share the app with friends",
-    "aboutScreen_urlError": "Could not open the link.",
-    "tamponReminderDialog_tamponReminderTitle": "Tampon Reminder",
-    "tamponReminderDialog_tamponReminderMaxDuration": "Max duration is 8 hours.",
-    "reminderCountdownDialog_title": "Reminder Due In",
-    "reminderCountdownDialog_dueAt": "Due at {time}",
+    "aboutScreen_githubSubtitle": "Code source et suivis des erreurs",
+    "aboutScreen_share": "Partager",
+    "aboutScreen_shareSubtitle": "Partager l'appli avec vos proches",
+    "aboutScreen_urlError": "Impossible d'ouvrir le lien.",
+    "tamponReminderDialog_tamponReminderTitle": "Rappel de tampon",
+    "tamponReminderDialog_tamponReminderMaxDuration": "La durée maximale est de 8 heures.",
+    "reminderCountdownDialog_title": "Rappel à prévoir dans",
+    "reminderCountdownDialog_dueAt": "À prévoir à {time}",
     "@reminderCountdownDialog_dueAt": {
         "description": "Indicates the time a reminder is due. The {time} placeholder will be a formatted time string (e.g., '2:30 PM').",
         "placeholders": {
             "time": {}
         }
     },
-    "cycleLengthVarianceWidget_LogAtLeastTwoPeriods": "Need at least two cycles to show variance.",
-    "cycleLengthVarianceWidget_cycleAndPeriodVeriance": "Cycle & Period Variance",
-    "cycleLengthVarianceWidget_averageCycle": "Average Cycle",
-    "cycleLengthVarianceWidget_averagePeriod": "Average Period",
-    "cycleLengthVarianceWidget_period": "Period",
+    "cycleLengthVarianceWidget_LogAtLeastTwoPeriods": "Il faut au moins deux cycles pour observer une variance.",
+    "cycleLengthVarianceWidget_cycleAndPeriodVeriance": "Variabilité du cycle et des périodes",
+    "cycleLengthVarianceWidget_averageCycle": "Cycle Moyen",
+    "cycleLengthVarianceWidget_averagePeriod": "Période Moyenne",
+    "cycleLengthVarianceWidget_period": "Période",
     "cycleLengthVarianceWidget_cycle": "Cycle",
-    "flowIntensityWidget_flowIntensityBreakdown": "Flow Intensity Breakdown",
-    "flowIntensityWidget_noFlowDataLoggedYet": "No flow data logged yet.",
-    "painLevelWidget_noPainDataLoggedYet": "No pain data logged yet.",
-    "painLevelWidget_painLevelBreakdown": "Pain Level Breakdown",
-    "monthlyFlowChartWidget_noDataToDisplay": "No data to display.",
+    "flowIntensityWidget_flowIntensityBreakdown": "Décomposition de l'intensité du flux",
+    "flowIntensityWidget_noFlowDataLoggedYet": "Aucune donnée du flux enregistrée pour le moment.",
+    "painLevelWidget_noPainDataLoggedYet": "Aucune donnée sur la douleur n'a encore été enregistrée.",
+    "painLevelWidget_painLevelBreakdown": "Répartition du niveau de douleur",
+    "monthlyFlowChartWidget_noDataToDisplay": "Aucune donnée à afficher.",
     "monthlyFlowChartWidget_cycleFlowPatterns": "Cycle Flow Patterns",
     "monthlyFlowChartWidget_cycleFlowPatternsDescription": "Each line represents one complete cycle",
     "symptomFrequencyWidget_noSymptomsLoggedYet": "No symptoms logged yet.",
@@ -284,5 +285,14 @@
     "symptomEntrySheet_logYourDay": "Log Your Day",
     "symptomEntrySheet_symptomsOptional": "Symptoms (Optional)",
     "periodDetailsSheet_symptoms": "Symptoms",
-    "periodDetailsSheet_flow": "Flow"
+    "periodDetailsSheet_flow": "Flow",
+    "periodPredictionCircle_days": "{count, plural, =1{Day} other{Days}}",
+    "@periodPredictionCircle_days": {
+        "description": "A label showing the total number of days until period is due.",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    }
 }

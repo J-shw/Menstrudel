@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:menstrudel/services/settings_service.dart';
 
 class LocaleNotifier extends ChangeNotifier {
-  final SettingsService _settingsService = SettingsService();
+  final SettingsService _settingsService;
   Locale? _locale;
 
   Locale? get locale => _locale;
 
-  LocaleNotifier() {
+  LocaleNotifier(this._settingsService) {
     _loadLocale();
   }
 
   Future<void> _loadLocale() async {
-    final languageCode = await _settingsService.getLanguageCode();
+    final languageCode = _settingsService.languageCode;
     
     if (languageCode == 'system') {
       _locale = null;

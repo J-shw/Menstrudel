@@ -12,6 +12,7 @@ import 'package:menstrudel/database/repositories/periods_repository.dart';
 import 'package:menstrudel/models/themes/app_theme_mode_enum.dart';
 import 'package:menstrudel/screens/auth_gate.dart';
 import 'package:menstrudel/notifiers/locale_notifier.dart';
+import 'package:menstrudel/services/settings_service.dart';
 
 final watchService = WatchSyncService();
 final periodsRepository = PeriodsRepository();
@@ -29,6 +30,9 @@ void main() async {
   
   await NotificationService.initialize();
 
+  final settingsService = SettingsService();
+  await settingsService.loadSettings();
+
   watchService.initialize(
     onPeriodLog: periodsRepository.logPeriodFromWatch,
   );
@@ -36,8 +40,19 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => ThemeNotifier()),
-        ChangeNotifierProvider(create: (_) => LocaleNotifier()),
+        ChangeNotifierProvider(
+          create: (_) => settingsService,
+        ),  
+        ChangeNotifierProvider(
+          create: (context) => ThemeNotifier(
+            context.read<SettingsService>(),
+          ),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => LocaleNotifier(
+            context.read<SettingsService>(),
+          ),
+        ),
       ],
       child: const MainApp(),
     ),
@@ -56,7 +71,7 @@ class MainApp extends StatelessWidget {
       builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
         ColorScheme lightColorScheme;
         ColorScheme darkColorScheme;
-
+        
         final bool useDynamicTheme = themeNotifier.isDynamicEnabled;
 
         if (useDynamicTheme && lightDynamic != null && darkDynamic != null) {

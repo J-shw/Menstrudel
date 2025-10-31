@@ -654,6 +654,12 @@ abstract class AppLocalizations {
   /// **'Birth Control'**
   String get settingsScreen_birthControl;
 
+  /// No description provided for @settingsScreen_enablePillTracking.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable Pill Tracking'**
+  String get settingsScreen_enablePillTracking;
+
   /// No description provided for @settingsScreen_setUpPillRegimen.
   ///
   /// In en, this message translates to:
@@ -1304,12 +1310,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Flow'**
   String get periodDetailsSheet_flow;
-
-  /// A label showing the total number of days until period is due.
-  ///
-  /// In en, this message translates to:
-  /// **'{count, plural, =1{Day} other{Days}}'**
-  String periodPredictionCircle_days(int count);
 
   /// A label showing the total number of days until period is due.
   ///

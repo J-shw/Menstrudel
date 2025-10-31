@@ -19,6 +19,7 @@ import 'package:menstrudel/widgets/sheets/period_details_bottom_sheet.dart';
 import 'package:menstrudel/widgets/dialogs/reminder_countdown_dialog.dart';
 
 import 'package:menstrudel/l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 
 class LogsScreen extends StatefulWidget {
@@ -37,7 +38,7 @@ class LogsScreen extends StatefulWidget {
 
 class LogsScreenState extends State<LogsScreen> {
   final periodsRepo = PeriodsRepository();
-  final SettingsService _settingsService = SettingsService();
+  late SettingsService _settingsService;
 
   final _watchSyncService = WatchSyncService();
 
@@ -140,6 +141,7 @@ class LogsScreenState extends State<LogsScreen> {
 	@override
 	void initState() {
 		super.initState();
+    _settingsService = context.read<SettingsService>();
 		_refreshPeriodLogs();
 	}
 
@@ -148,17 +150,16 @@ class LogsScreenState extends State<LogsScreen> {
     final periods = await periodsRepo.readAllPeriods();
     final isReminderSet = await NotificationService.isTamponReminderScheduled();
     final predictionResult = PeriodPredictor.estimateNextPeriod(periods, DateTime.now());
-    final selectedView = await _settingsService.getHistoryView();
+    final selectedView = _settingsService.historyView;
 
     if (predictionResult != null) {
-      final settingsService = SettingsService();
-      final periodNotificationsEnabled = await settingsService.areNotificationsEnabled();
-      final periodNotificationDays = await settingsService.getNotificationDays();
-      final periodNotificationTime = await settingsService.getNotificationTime();
+      final periodNotificationsEnabled = _settingsService.areNotificationsEnabled;
+      final periodNotificationDays = _settingsService.notificationDays;
+      final periodNotificationTime = _settingsService.notificationTime;
 
-      final periodOverdueNotificationsEnabled = await settingsService.areNotificationsEnabled();
-      final periodOverdueNotificationDays = await settingsService.getNotificationDays();
-      final periodOverdueNotificationTime = await settingsService.getNotificationTime();
+      final periodOverdueNotificationsEnabled = _settingsService.areNotificationsEnabled;
+      final periodOverdueNotificationDays = _settingsService.periodOverdueNotificationDays;
+      final periodOverdueNotificationTime = _settingsService.periodOverdueNotificationTime;
 
       if (mounted){
         final l10n = AppLocalizations.of(context)!;

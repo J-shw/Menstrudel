@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:menstrudel/services/settings_service.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:local_auth/local_auth.dart';
+import 'package:provider/provider.dart';
 
 class SecuritySettingsScreen extends StatefulWidget {
   const SecuritySettingsScreen({super.key});
@@ -11,60 +12,47 @@ class SecuritySettingsScreen extends StatefulWidget {
 }
 
 class _SecuritySettingsScreenState extends State<SecuritySettingsScreen> {
-  final SettingsService _settingsService = SettingsService();
   final LocalAuthentication _localAuth = LocalAuthentication();
   
   bool _isLoading = true;
-  bool _isBiometricEnabled = false;
   bool _isDeviceSupported = false;
 
   @override
   void initState() {
     super.initState();
-    _loadSettingsAndCheckSupport();
+    _checkDeviceSupport();
   }
 
-  Future<void> _loadSettingsAndCheckSupport() async {
-    final responses = await Future.wait([
-      _settingsService.areBiometricsEnabled(),
-      _localAuth.isDeviceSupported(),
-    ]);
+  Future<void> _checkDeviceSupport() async {
+    final bool isSupported = await _localAuth.isDeviceSupported();
 
     if (mounted) {
       setState(() {
-        _isBiometricEnabled = responses[0];
-        _isDeviceSupported = responses[1];
+        _isDeviceSupported = isSupported;
         _isLoading = false;
       });
     }
   }
 
   Future<void> _onToggleChanged(bool value) async {
-    if (value) {
-      final bool isSupported = await _localAuth.isDeviceSupported();
-      if (!isSupported) {
-        if (mounted) {
-          final l10n = AppLocalizations.of(context)!;
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(l10n.securityScreen_noBiometricsAvailable),
-              behavior: SnackBarBehavior.floating,
-            ),
-          );
-        }
-        return;
-      }
+    if (value && !_isDeviceSupported) {
+      final l10n = AppLocalizations.of(context)!;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(l10n.securityScreen_noBiometricsAvailable),
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+      return;
     }
-
-    setState(() {
-      _isBiometricEnabled = value;
-    });
-    _settingsService.setBiometricsEnabled(value);
+    context.read<SettingsService>().setBiometricsEnabled(value);
   }
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    final settingsService = context.watch<SettingsService>();
+    final bool isBiometricEnabled = settingsService.areBiometricsEnabled;
     
     return Scaffold(
       appBar: AppBar(
@@ -78,7 +66,7 @@ class _SecuritySettingsScreenState extends State<SecuritySettingsScreen> {
                   title: Text(l10n.securityScreen_enableBiometricLock),
                   subtitle: Text(l10n.securityScreen_enableBiometricLockSubtitle),
                   secondary: const Icon(Icons.fingerprint),
-                  value: _isBiometricEnabled,
+                  value: isBiometricEnabled,
                   onChanged: _isDeviceSupported ? _onToggleChanged : null,
                 ),
               ],

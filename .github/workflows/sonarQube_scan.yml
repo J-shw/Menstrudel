@@ -34,3 +34,20 @@ jobs:
         with:
           args: >
             -Dsonar.flutter.coverage.lcovReportPath=lcov.info
+
+            ${{ github.event.workflow_run.event == 'pull_request' && format('
+              -Dsonar.pullrequest.key={0}
+              -Dsonar.pullrequest.branch={1}
+              -Dsonar.pullrequest.base={2}
+              -Dsonar.pullrequest.headsha={3}
+              ', 
+              github.event.workflow_run.pull_requests[0].number, 
+              github.event.workflow_run.pull_requests[0].head.ref, 
+              github.event.workflow_run.pull_requests[0].base.ref,
+              github.event.workflow_run.head_sha) 
+            }}
+
+            ${{ github.event.workflow_run.event == 'push' && format('
+            -Dsonar.branch.name={0}
+            ', 
+            github.event.workflow_run.head_branch) }}
