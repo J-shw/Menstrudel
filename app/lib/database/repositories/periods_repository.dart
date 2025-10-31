@@ -499,7 +499,7 @@ class Manager {
     await db.transaction((txn) async {
       await txn.delete('period_logs');
       await txn.delete('periods');
-      await db.delete('log_symptoms');
+      await txn.delete('log_symptoms');
     });
   }
 }
