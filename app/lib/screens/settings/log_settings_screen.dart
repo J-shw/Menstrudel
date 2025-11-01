@@ -7,8 +7,8 @@ import 'package:menstrudel/widgets/dialogs/custom_symptom_dialog.dart';
 import 'package:menstrudel/widgets/dialogs/delete_confirmation_dialog.dart';
 import 'package:provider/provider.dart';
 
-class PeriodLogSettingsScreen extends StatelessWidget {
-  PeriodLogSettingsScreen({super.key});
+class LogSettingsScreen extends StatelessWidget {
+  LogSettingsScreen({super.key});
 
   final periodsRepo = PeriodsRepository();
 
@@ -94,7 +94,7 @@ class PeriodLogSettingsScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.settingsScreen_periodPredictionAndReminders),
+        title: Text(l10n.settingsScreen_LoggingScreen),
       ),
       body: ListView(
         children: [
