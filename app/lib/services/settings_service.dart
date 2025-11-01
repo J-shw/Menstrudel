@@ -124,7 +124,7 @@ class SettingsService extends ChangeNotifier {
       return SymptomType.values
           .where(
             (element) =>
-                element != SymptomType.custom && element != SymptomType.other,
+                element != SymptomType.custom,
           )
           .map((e) => Symptom(type: e))
           .toSet();
