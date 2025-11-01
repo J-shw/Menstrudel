@@ -86,6 +86,9 @@ class AppLocalizationsIt extends AppLocalizations {
   String get reset => 'Reset';
 
   @override
+  String get add => 'Add';
+
+  @override
   String get systemDefault => 'System Default';
 
   @override
