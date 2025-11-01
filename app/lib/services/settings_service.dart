@@ -124,12 +124,11 @@ class SettingsService extends ChangeNotifier {
       return SymptomType.values
           .where(
             (element) =>
-        element != SymptomType.custom && element != SymptomType.other,
-      )
-          .map((e) => Symptom.fromDbString(e.toString()))
+                element != SymptomType.custom && element != SymptomType.other,
+          )
+          .map((e) => Symptom(type: e))
           .toSet();
     }
-
     return storedDefaultSymptoms.map((e) => Symptom.fromDbString(e)).toSet();
   }
 
@@ -229,7 +228,7 @@ class SettingsService extends ChangeNotifier {
     notifyListeners();
     await _prefs.setStringList(
       defaultSymptomsKey, 
-      symptoms.map((e) => e.type == SymptomType.custom ? e.customName : e.type.toString()).toList()
+      symptoms.map((e) => e.getDbName()).toList()
     );
   }
 
