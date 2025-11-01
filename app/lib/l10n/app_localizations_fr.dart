@@ -80,7 +80,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get close => 'Fermer';
 
   @override
-  String get systemDefault => 'System Default';
+  String get systemDefault => 'Valeur par défaut du système';
 
   @override
   String get flow => 'Flux /';
@@ -322,7 +322,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get settingsScreen_birthControl => 'Contraception';
 
   @override
-  String get settingsScreen_enablePillTracking => 'Enable Pill Tracking';
+  String get settingsScreen_enablePillTracking =>
+      'Activer le suivi des pilules';
 
   @override
   String get settingsScreen_setUpPillRegimen =>
@@ -594,113 +595,117 @@ class AppLocalizationsFr extends AppLocalizations {
       'Aucune donnée à afficher.';
 
   @override
-  String get monthlyFlowChartWidget_cycleFlowPatterns => 'Cycle Flow Patterns';
+  String get monthlyFlowChartWidget_cycleFlowPatterns =>
+      'Modèles du flux cycliques';
 
   @override
   String get monthlyFlowChartWidget_cycleFlowPatternsDescription =>
-      'Each line represents one complete cycle';
+      'Chaque ligne représente un cycle complet';
 
   @override
   String get symptomFrequencyWidget_noSymptomsLoggedYet =>
-      'No symptoms logged yet.';
+      'Aucun symptôme n\'a encore été enregistré.';
 
   @override
   String get symptomFrequencyWidget_mostCommonSymptoms =>
-      'Most Common Symptoms';
+      'Symptômes les plus courants';
 
   @override
-  String get yearHeatMapWidget_yearlyOverview => 'Yearly Overview';
+  String get yearHeatMapWidget_yearlyOverview => 'Aperçu annuel';
 
   @override
-  String get journalViewWidget_logYourFirstPeriod => 'Log your first period.';
+  String get journalViewWidget_logYourFirstPeriod =>
+      'Enregistrer vos premières règles.';
 
   @override
   String get listViewWidget_noPeriodsLogged =>
-      'No periods logged yet.\nTap the + button to add one.';
+      'Aucun cycle menstruel enregistré pour le moment.\nAppuyez sur le bouton + pour en ajouter une.';
 
   @override
-  String get listViewWidget_confirmDelete => 'Confirm Delete';
+  String get listViewWidget_confirmDelete => 'Confirmer la suppression';
 
   @override
   String get listViewWidget_confirmDeleteDescription =>
-      'Are you sure you want to delete this entry?';
+      'Êtes-vous sûr de vouloir supprimer cette entrée ?';
 
   @override
   String get emptyPillStateWidget_noPillRegimenFound =>
-      'No pill regimen found.';
+      'Aucun traitement de pilule trouvé.';
 
   @override
   String get emptyPillStateWidget_noPillRegimenFoundDescription =>
-      'Set up your pill pack in settings to start tracking.';
+      'Configurez votre plaquette de pilules dans les paramètres pour commencer le suivi.';
 
   @override
   String pillStatus_pillsOfTotal(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'of $count pills',
-      one: 'of 1 pill',
+      other: 'de $count pilules',
+      one: 'd\'une pilule',
     );
     return '$_temp0';
   }
 
   @override
-  String get pillStatus_undo => 'Undo';
+  String get pillStatus_undo => 'Annuler';
 
   @override
-  String get pillStatus_skip => 'Skip';
+  String get pillStatus_skip => 'Sauter';
 
   @override
-  String get pillStatus_markAsTaken => 'Mark As Taken';
+  String get pillStatus_markAsTaken => 'Marquer Comme Prise';
 
   @override
   String pillStatus_packStartInFuture(DateTime date) {
     final intl.DateFormat dateDateFormat = intl.DateFormat.yMMMd(localeName);
     final String dateString = dateDateFormat.format(date);
 
-    return 'Your next pill pack starts on $dateString.';
+    return 'Votre prochaine plaquette de pilules commence le $dateString.';
   }
 
   @override
-  String get regimenSetupWidget_setUpPillRegimen => 'Set Up Pill Regimen';
+  String get regimenSetupWidget_setUpPillRegimen =>
+      'Mettre en place un régime de pilules';
 
   @override
-  String get regimenSetupWidget_packName => 'Pack Name';
+  String get regimenSetupWidget_packName => 'Nom du paquet de pilules';
 
   @override
-  String get regimenSetupWidget_pleaseEnterAName => 'Please enter a name';
+  String get regimenSetupWidget_pleaseEnterAName => 'Veuillez saisir un nom';
 
   @override
-  String get regimenSetupWidget_activePills => 'Active Pills';
+  String get regimenSetupWidget_activePills => 'Pilules actives';
 
   @override
-  String get regimenSetupWidget_enterANumber => 'Enter a number';
+  String get regimenSetupWidget_enterANumber => 'Entrez un nombre';
 
   @override
-  String get regimenSetupWidget_placeboPills => 'Placebo Pills';
+  String get regimenSetupWidget_placeboPills => 'Pilules placebo';
 
   @override
-  String get regimenSetupWidget_firstDayOfThisPack => 'First Day of This Pack';
+  String get regimenSetupWidget_firstDayOfThisPack =>
+      'Premier jour de cette plaquette';
 
   @override
-  String get symptomEntrySheet_logYourDay => 'Log Your Day';
+  String get symptomEntrySheet_logYourDay => 'Enregistrez votre journée';
 
   @override
-  String get symptomEntrySheet_symptomsOptional => 'Symptoms (Optional)';
+  String get symptomEntrySheet_symptomsOptional => 'Symptômes (Optionnel)';
 
   @override
-  String get periodDetailsSheet_symptoms => 'Symptoms';
+  String get periodDetailsSheet_symptoms => 'Symptômes';
 
   @override
-  String get periodDetailsSheet_flow => 'Flow';
+  String get periodDetailsSheet_flow => 'Flux';
 
   @override
   String periodPredictionCircle_days(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'Days',
-      one: 'Day',
+      other: 'Jours',
+      one: 'Jour',
     );
     return '$_temp0';
   }
