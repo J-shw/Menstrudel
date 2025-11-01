@@ -39,7 +39,6 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
   void _loadSymptoms() {
     _defaultSymptoms.addAll(_settingsService.defaultSymptoms);
     _symptoms.addAll(_defaultSymptoms);
-    _symptoms.add(Symptom.addSymptom());
   }
 
   Future<void> _showNewCustomSymptomDialog() async {
@@ -61,10 +60,7 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
         }
 
         setState(() {
-          _symptoms.remove(Symptom.addSymptom());
           _symptoms.add(symptom);
-          _symptoms.add(Symptom.addSymptom());
-
           _selectedSymptoms.add(symptom);
         });
       } else {
@@ -174,17 +170,14 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
                   Wrap(
                     spacing: 8.0,
                     runSpacing: 4.0,
-                    children: _symptoms.map((symptom) {
-                      var isAdd = symptom.type == SymptomType.other;
-                      return FilterChip(
-                        label: Text(symptom.getDisplayName(l10n)),
-                          backgroundColor: isAdd ? colorScheme.onSecondary : null,
-                        selected: _selectedSymptoms.contains(symptom),
-                        onSelected: (bool selected) {
-                          setState(() {
-                            if (isAdd) {
-                              _showNewCustomSymptomDialog();
-                            } else {
+                    children: [
+                      // --- List of Symptom Chips ---
+                      ..._symptoms.map((symptom) {
+                        return FilterChip(
+                          label: Text(symptom.getDisplayName(l10n)),
+                          selected: _selectedSymptoms.contains(symptom),
+                          onSelected: (bool selected) {
+                            setState(() {
                               if (selected) {
                                 _selectedSymptoms.add(symptom);
                               } else {
@@ -193,11 +186,18 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
                                   _symptoms.remove(symptom);
                                 }
                               }
-                            }
-                          });
-                        },
-                      );
-                    }).toList(),
+                            });
+                          },
+                        );
+                      }),
+
+                      ActionChip(
+                        avatar: const Icon(Icons.add, size: 18),
+                        label: Text(l10n.add),
+                        backgroundColor: colorScheme.secondaryContainer,
+                        onPressed: _showNewCustomSymptomDialog,
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 24),
                   // --- Action Buttons ---

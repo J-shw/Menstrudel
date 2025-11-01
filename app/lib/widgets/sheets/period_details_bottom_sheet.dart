@@ -52,7 +52,6 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
     _defaultSymptoms.addAll(_settingsService.defaultSymptoms);
     _symptoms.addAll(_defaultSymptoms);
     _symptoms.addAll(_selectedSymptoms);
-    _symptoms.add(Symptom.addSymptom());
   }
 
   void _handleSave() {
@@ -65,38 +64,59 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
     });
   }
 
-  Future<void> _showNewCustomSymptomDialog() async {
-    final (String name, bool isDefault)? result = await showDialog<(String, bool)>(
+Future<void> _showNewCustomSymptomDialog() async {
+    final (String name, bool isTemporary)? result = await showDialog<(String, bool)>(
       context: context,
       builder: (BuildContext context) {
         return const CustomSymptomDialog();
       },
     );
 
-    if (mounted && result != null && _symptoms.any((element) => element.customName == result.$1) == false) {
+    if (mounted && result != null) {
       var symptom = Symptom.fromDbString(result.$1);
+      final bool isSymptomTemporary = result.$2;
 
-      if (result.$2) {
-        _defaultSymptoms.add(symptom);
-        await _settingsService.addDefaultSymptom(symptom);
+      if (_symptoms.contains(symptom) == false) {
+        if (isSymptomTemporary == false) { // Add to defaults if not temporary
+          _defaultSymptoms.add(symptom);
+          await _settingsService.addDefaultSymptom(symptom);
+        }
+
+        setState(() {
+          _symptoms.add(symptom);
+          _selectedSymptoms.add(symptom);
+        });
+      } else {
+        if (_selectedSymptoms.contains(symptom) == false) {
+          setState(() {
+            _selectedSymptoms.add(symptom);
+          });
+        }
       }
-
-      setState(() {
-        _symptoms.remove(Symptom.addSymptom());
-        _symptoms.add(symptom);
-        _symptoms.add(Symptom.addSymptom());
-
-        _selectedSymptoms.add(symptom);
-      });
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Container(
       height: MediaQuery.of(context).size.height * (_isEditing ? 0.6 : 0.4),
       padding: const EdgeInsets.fromLTRB(24, 8, 24, 32),
-      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [_buildDragHandle(), const SizedBox(height: 12), _buildHeader(context), const Divider(height: 24), _buildFlowSection(context), const SizedBox(height: 16), _buildPainLevelSection(context), const SizedBox(height: 16), _buildSymptomsSection(context)]),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start, 
+        children: [
+          _buildDragHandle(), 
+          const SizedBox(height: 12), 
+          _buildHeader(context), 
+          const Divider(height: 24), 
+          _buildFlowSection(context), 
+          const SizedBox(height: 16), 
+          _buildPainLevelSection(context), 
+          const SizedBox(height: 16), 
+          _buildSymptomsSection(context, colorScheme)
+          ]
+        ),
     );
   }
 
@@ -252,10 +272,9 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
     }
   }
 
-  Widget _buildSymptomsSection(BuildContext context) {
+  Widget _buildSymptomsSection(BuildContext context, ColorScheme colorScheme) {
     final l10n = AppLocalizations.of(context)!;
     final textTheme = Theme.of(context).textTheme;
-    final colorScheme = Theme.of(context).colorScheme;
 
     final header = Row(
       children: [
@@ -303,17 +322,14 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
                 child: Wrap(
                   spacing: 8.0,
                   runSpacing: 4.0,
-                  children: _symptoms.map((symptom) {
-                    var isAdd = symptom.type == SymptomType.other;
-                    return FilterChip(
-                      label: Text(symptom.getDisplayName(l10n)),
-                      backgroundColor: isAdd ? colorScheme.onSecondary : null,
-                      selected: _selectedSymptoms.contains(symptom),
-                      onSelected: (isSelected) {
-                        setState(() {
-                          if (isAdd) {
-                            _showNewCustomSymptomDialog();
-                          } else {
+                  children: [
+                    // --- List of Symptom Chips ---
+                    ..._symptoms.map((symptom) {
+                      return FilterChip(
+                        label: Text(symptom.getDisplayName(l10n)),
+                        selected: _selectedSymptoms.contains(symptom),
+                        onSelected: (isSelected) {
+                          setState(() {
                             if (isSelected) {
                               _selectedSymptoms.add(symptom);
                             } else {
@@ -322,11 +338,18 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
                                 _symptoms.remove(symptom);
                               }
                             }
-                          }
-                        });
-                      },
-                    );
-                  }).toList(),
+                          });
+                        },
+                      );
+                    }),
+
+                    ActionChip(
+                      avatar: const Icon(Icons.add, size: 18),
+                      label: Text(l10n.add),
+                      backgroundColor: colorScheme.secondaryContainer,
+                      onPressed: _showNewCustomSymptomDialog,
+                    ),
+                  ],
                 ),
               ),
             ),
