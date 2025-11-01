@@ -50,21 +50,30 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
       },
     );
 
-    if (result != null && mounted && _symptoms.contains(result.$1) == false) {
+    if (result != null && mounted) {
       var symptom = Symptom.fromDbString(result.$1);
+      final bool isSymptomTemporary = result.$2;
 
-      if (result.$2) {
-        _defaultSymptoms.add(symptom);
-        await _settingsService.addDefaultSymptom(symptom);
+      if (_symptoms.contains(symptom) == false) { // Check if the _symptoms already contains the Symptom
+        if (isSymptomTemporary == false) {
+          _defaultSymptoms.add(symptom);
+          await _settingsService.addDefaultSymptom(symptom);
+        }
+
+        setState(() {
+          _symptoms.remove(Symptom.addSymptom());
+          _symptoms.add(symptom);
+          _symptoms.add(Symptom.addSymptom());
+
+          _selectedSymptoms.add(symptom);
+        });
+      } else {
+        if (_selectedSymptoms.contains(symptom) == false) {
+          setState(() {
+            _selectedSymptoms.add(symptom);
+          });
+        }
       }
-
-      setState(() {
-        _symptoms.remove(Symptom.addSymptom());
-        _symptoms.add(symptom);
-        _symptoms.add(Symptom.addSymptom());
-
-        _selectedSymptoms.add(symptom);
-      });
     }
   }
 
