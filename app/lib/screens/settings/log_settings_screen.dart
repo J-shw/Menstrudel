@@ -124,16 +124,17 @@ class LogSettingsScreen extends StatelessWidget {
                   );
                 }),
                 
-                RawChip(
-                  label: Text("↻"),
-                  backgroundColor: colorScheme.onSecondary,
-                  tapEnabled: true,
+                ActionChip(
+                  avatar: const Icon(Icons.refresh, size: 18),
+                  label: Text(l10n.reset), 
+                  backgroundColor: colorScheme.secondaryContainer,
                   onPressed: () => _refreshSymptoms(context),
                 ),
-                RawChip(
-                  label: Text("+"), 
-                  backgroundColor: colorScheme.onSecondary,
-                  tapEnabled: true,
+
+                ActionChip(
+                  avatar: const Icon(Icons.add, size: 18),
+                  label: Text(l10n.add),
+                  backgroundColor: colorScheme.secondaryContainer,
                   onPressed: () => _showNewCustomSymptomDialog(context),
                 ),
               ],
