@@ -3,7 +3,7 @@ import 'package:menstrudel/l10n/app_localizations.dart';
 
 import 'package:menstrudel/screens/settings/appearance_settings_screen.dart';
 import 'package:menstrudel/screens/settings/birth_control_settings_screen.dart';
-import 'package:menstrudel/screens/settings/period_log_settings_screen.dart';
+import 'package:menstrudel/screens/settings/log_settings_screen.dart';
 import 'package:menstrudel/screens/settings/period_settings_screen.dart';
 import 'package:menstrudel/screens/settings/data_settings_screen.dart';
 import 'package:menstrudel/screens/settings/security_settings_screen.dart';
@@ -52,7 +52,7 @@ class SettingsScreen extends StatelessWidget {
         ),
         _SettingsSectionButton(
           title: l10n.settingsScreen_birthControl,
-          icon: Icons.medical_information,
+          icon: Icons.medical_information_outlined,
           onTap: () {
             Navigator.push(
               context,
@@ -61,12 +61,12 @@ class SettingsScreen extends StatelessWidget {
           },
         ),
         _SettingsSectionButton(
-          title: l10n.settingsScreen_periodLoggingScreen,
-          icon: Icons.water_drop,
+          title: l10n.settingsScreen_LoggingScreen,
+          icon: Icons.book_outlined,
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => PeriodLogSettingsScreen()),
+              MaterialPageRoute(builder: (context) => LogSettingsScreen()),
             );
           },
         ),
