@@ -28,7 +28,7 @@ class _CustomSymptomDialogState extends State<CustomSymptomDialog> {
   }
 
   Future<void> accept() async {
-    var symptom = _nameController.text;
+    var symptom = _nameController.text.trim().toLowerCase();
     if (mounted) {
       Navigator.of(context).pop((symptom, _isTemporary));
     }
