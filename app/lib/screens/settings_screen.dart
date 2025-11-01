@@ -51,16 +51,6 @@ class SettingsScreen extends StatelessWidget {
           },
         ),
         _SettingsSectionButton(
-          title: l10n.settingsScreen_birthControl,
-          icon: Icons.medical_information_outlined,
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const BirthControlSettingsScreen()),
-            );
-          },
-        ),
-        _SettingsSectionButton(
           title: l10n.settingsScreen_LoggingScreen,
           icon: Icons.book_outlined,
           onTap: () {
@@ -77,6 +67,16 @@ class SettingsScreen extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => const PeriodSettingsScreen()),
+            );
+          },
+        ),
+        _SettingsSectionButton(
+          title: l10n.settingsScreen_birthControl,
+          icon: Icons.medical_information_outlined,
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const BirthControlSettingsScreen()),
             );
           },
         ),
