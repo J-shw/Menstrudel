@@ -26,14 +26,6 @@ class Symptom {
     );
   }
 
-  factory Symptom.addSymptom() {
-    return Symptom(type: SymptomType.other, customName: "+");
-  }
-
-  factory Symptom.refreshSymptom() {
-    return Symptom(type: SymptomType.other, customName: "↻");
-  }
-
   @override
   bool operator ==(Object other) {
     if (other is Symptom == false) {
@@ -46,7 +38,7 @@ class Symptom {
       return false;
     }
 
-    if (type == SymptomType.custom || type == SymptomType.other) {
+    if (type == SymptomType.custom) {
       return customName == otherSymptom.customName;
     }
 
@@ -55,7 +47,7 @@ class Symptom {
 
   @override
   int get hashCode {
-    if (type == SymptomType.custom || type == SymptomType.other) {
+    if (type == SymptomType.custom) {
       return type.hashCode ^ customName.hashCode;
     }
     return type.hashCode;
@@ -92,8 +84,6 @@ extension SymptomExtension on Symptom {
         return 'nausea';
       case SymptomType.custom:
         return customName.toLowerCase();
-      case SymptomType.other:
-        return customName;
     }
   }
 
@@ -115,7 +105,7 @@ extension SymptomExtension on Symptom {
         return l10n.builtInSymptom_moodSwings;
       case SymptomType.nausea:
         return l10n.builtInSymptom_nausea;
-      case SymptomType.custom || SymptomType.other:
+      case SymptomType.custom:
         return customName.toCapitalized();
     }
   }
