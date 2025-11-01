@@ -253,7 +253,7 @@
     "listViewWidget_confirmDeleteDescription": "Sei sicura di voler eliminare questa voce?",
     "emptyPillStateWidget_noPillRegimenFound": "Nessun piano pillola trovato.",
     "emptyPillStateWidget_noPillRegimenFoundDescription": "Configura la tua confezione di pillole nelle impostazioni per iniziare il monitoraggio.",
-    "pillStatus_pillsOfTotal": "{count, plural, one {}=1{di 1 pillola} other{di {count} pillole}}",
+    "pillStatus_pillsOfTotal": "{count, plural, =1{di 1 pillola} other{di {count} pillole}}",
     "@pillStatus_pillsOfTotal": {
         "description": "A label showing the total number of pills.",
         "placeholders": {
