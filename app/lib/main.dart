@@ -13,6 +13,8 @@ import 'package:menstrudel/models/themes/app_theme_mode_enum.dart';
 import 'package:menstrudel/screens/auth_gate.dart';
 import 'package:menstrudel/notifiers/locale_notifier.dart';
 import 'package:menstrudel/services/settings_service.dart';
+import 'package:home_widget/home_widget.dart';
+import 'package:menstrudel/services/widget_controller.dart';
 
 final watchService = WatchSyncService();
 final periodsRepository = PeriodsRepository();
@@ -53,14 +55,48 @@ void main() async {
             context.read<SettingsService>(),
           ),
         ),
+        Provider(
+          create: (_) => WidgetController(),
+        ),
       ],
       child: const MainApp(),
     ),
   );
 }
 
-class MainApp extends StatelessWidget {
+class MainApp extends StatefulWidget {
   const MainApp({super.key});
+
+  @override
+  State<MainApp> createState() => _MainAppState();
+}
+class _MainAppState extends State<MainApp> {
+  @override
+  void initState() {
+    super.initState();
+    HomeWidget.initiallyLaunchedFromHomeWidget().then(_handleWidgetLaunch);
+    HomeWidget.widgetClicked.listen(_handleWidgetLaunch);
+  }
+
+  void _handleWidgetLaunch(Uri? uri) {
+    if (uri != null) {
+      if (mounted) {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text('App Launched from Widget'),
+            content: Text('URI: $uri'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: Text('OK'),
+              ),
+            ],
+          ),
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
