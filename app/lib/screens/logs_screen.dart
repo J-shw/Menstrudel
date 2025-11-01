@@ -215,27 +215,18 @@ class LogsScreenState extends State<LogsScreen> {
       final l10n = AppLocalizations.of(context)!;
       final controller = context.read<WidgetController>();
 
-      String widgetTitle;
-      String widgetMessage;
+      String largeText;
+      String smallText;
 
-      if (predictionResult == null) {
-        widgetTitle = l10n.appTitle;
-        widgetMessage = l10n.logScreen_logAtLeastTwoPeriods;
-      } else {
-        String datePart = DateFormat('dd/MM/yyyy').format(predictionResult.estimatedStartDate);
-        if (predictionResult.daysUntilDue > 0) {
-          widgetTitle = l10n.logScreen_nextPeriodEstimate;
-          widgetMessage = datePart;
-        } else if (predictionResult.daysUntilDue == 0) {
-          widgetTitle = l10n.logScreen_periodDueToday;
-          widgetMessage = datePart;
-        } else { // Overdue
-          widgetTitle = l10n.logScreen_periodOverdueBy(-predictionResult.daysUntilDue);
-          widgetMessage = datePart;
-        }
-      }
-      
-      controller.saveAndAndUpdate(widgetTitle, widgetMessage);
+      largeText = '$circleCurrentValue';
+      smallText = l10n.periodPredictionCircle_days(circleCurrentValue);
+
+      controller.saveAndAndUpdateCircle(
+        currentValue: circleCurrentValue,
+        maxValue: circleMaxValue,
+        largeText: largeText,
+        smallText: smallText,
+      );
     }
 
     setState(() {
