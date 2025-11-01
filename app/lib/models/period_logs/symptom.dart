@@ -8,13 +8,21 @@ class Symptom {
   Symptom({required this.type, this.customName = ""});
 
   factory Symptom.fromDbString(String value) {
-    var symptomType = SymptomType.values.firstWhere(
-      (element) => element.toString() == value,
-      orElse: () => SymptomType.custom,
-    );
+    final SymptomType type = switch (value) {
+      'acne' => SymptomType.acne,
+      'back pain' => SymptomType.backPain,
+      'bloating' => SymptomType.bloating,
+      'cramps' => SymptomType.cramps,
+      'fatigue' => SymptomType.fatigue,
+      'headache' => SymptomType.headache,
+      'mood swings' => SymptomType.moodSwings,
+      'nausea' => SymptomType.nausea,
+      _ => SymptomType.custom,
+    };
+
     return Symptom(
-      type: symptomType,
-      customName: symptomType == SymptomType.custom ? value : "",
+      type: type,
+      customName: type == SymptomType.custom ? value : "",
     );
   }
 
@@ -54,34 +62,61 @@ class Symptom {
   }
 }
 
+extension StringCasingExtension on String {
+  String toCapitalized() {
+    if (isEmpty) {
+      return this;
+    }
+    return this[0].toUpperCase() + substring(1);
+  }
+}
+
 extension SymptomExtension on Symptom {
   String getDbName() {
-    if (type == SymptomType.custom) {
-      return customName;
+    switch (type) {
+      case SymptomType.acne:
+        return 'acne';
+      case SymptomType.backPain:
+        return 'back pain';
+      case SymptomType.bloating:
+        return 'bloating';
+      case SymptomType.cramps:
+        return 'cramps';
+      case SymptomType.fatigue:
+        return 'fatigue';
+      case SymptomType.headache:
+        return 'headache';
+      case SymptomType.moodSwings:
+        return 'mood swings';
+      case SymptomType.nausea:
+        return 'nausea';
+      case SymptomType.custom:
+        return customName.toLowerCase();
+      case SymptomType.other:
+        return customName;
     }
-    return type.toString();
   }
 
   String getDisplayName(AppLocalizations l10n) {
     switch (type) {
-      case SymptomType.builtInAcne:
+      case SymptomType.acne:
         return l10n.builtInSymptom_acne;
-      case SymptomType.builtInBackPain:
+      case SymptomType.backPain:
         return l10n.builtInSymptom_backPain;
-      case SymptomType.builtInBloating:
+      case SymptomType.bloating:
         return l10n.builtInSymptom_bloating;
-      case SymptomType.builtInCramps:
+      case SymptomType.cramps:
         return l10n.builtInSymptom_cramps;
-      case SymptomType.builtInFatigue:
+      case SymptomType.fatigue:
         return l10n.builtInSymptom_fatigue;
-      case SymptomType.builtInHeadache:
+      case SymptomType.headache:
         return l10n.builtInSymptom_headache;
-      case SymptomType.builtInMoodSwings:
+      case SymptomType.moodSwings:
         return l10n.builtInSymptom_moodSwings;
-      case SymptomType.builtInNausea:
+      case SymptomType.nausea:
         return l10n.builtInSymptom_nausea;
       case SymptomType.custom || SymptomType.other:
-        return customName;
+        return customName.toCapitalized();
     }
   }
 }
