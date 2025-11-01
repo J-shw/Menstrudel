@@ -7,6 +7,5 @@ enum SymptomType {
   headache,
   moodSwings,
   nausea,
-  custom,
-  other
+  custom
 }
