@@ -1,12 +1,12 @@
 enum SymptomType {
-  builtInAcne,
-  builtInBackPain,
-  builtInBloating,
-  builtInCramps,
-  builtInFatigue,
-  builtInHeadache,
-  builtInMoodSwings,
-  builtInNausea,
+  acne,
+  backPain,
+  bloating,
+  cramps,
+  fatigue,
+  headache,
+  moodSwings,
+  nausea,
   custom,
   other
 }
