@@ -2,11 +2,9 @@ import 'dart:convert';
 
 import 'package:menstrudel/models/flows/flow_enum.dart';
 import 'package:menstrudel/models/period_logs/symptom.dart';
-import 'package:menstrudel/models/period_logs/symptom_type_enum.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
-import 'dart:convert';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import 'package:menstrudel/database/app_database.dart';

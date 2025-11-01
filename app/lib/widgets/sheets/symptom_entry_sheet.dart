@@ -4,7 +4,6 @@ import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/models/flows/flow_enum.dart';
 import 'package:menstrudel/models/period_logs/pain_level_enum.dart';
 import 'package:menstrudel/models/period_logs/symptom.dart';
-import 'package:menstrudel/models/period_logs/symptom_type_enum.dart';
 import 'package:menstrudel/widgets/dialogs/custom_symptom_dialog.dart';
 import 'package:menstrudel/services/settings_service.dart';
 import 'package:provider/provider.dart';
