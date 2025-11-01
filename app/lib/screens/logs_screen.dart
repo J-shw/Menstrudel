@@ -20,6 +20,7 @@ import 'package:menstrudel/widgets/dialogs/reminder_countdown_dialog.dart';
 
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:menstrudel/services/widget_controller.dart';
 
 
 class LogsScreen extends StatefulWidget {
@@ -208,7 +209,34 @@ class LogsScreenState extends State<LogsScreen> {
 
     int daysUntilDueForCircle = predictionResult?.daysUntilDue ?? 0; 
 		int circleMaxValue = predictionResult?.averageCycleLength ?? 28;
-		int circleCurrentValue = daysUntilDueForCircle.clamp(0, circleMaxValue); 
+		int circleCurrentValue = daysUntilDueForCircle.clamp(0, circleMaxValue);
+
+    if (mounted) {
+      final l10n = AppLocalizations.of(context)!;
+      final controller = context.read<WidgetController>();
+
+      String widgetTitle;
+      String widgetMessage;
+
+      if (predictionResult == null) {
+        widgetTitle = l10n.appTitle;
+        widgetMessage = l10n.logScreen_logAtLeastTwoPeriods;
+      } else {
+        String datePart = DateFormat('dd/MM/yyyy').format(predictionResult.estimatedStartDate);
+        if (predictionResult.daysUntilDue > 0) {
+          widgetTitle = l10n.logScreen_nextPeriodEstimate;
+          widgetMessage = datePart;
+        } else if (predictionResult.daysUntilDue == 0) {
+          widgetTitle = l10n.logScreen_periodDueToday;
+          widgetMessage = datePart;
+        } else { // Overdue
+          widgetTitle = l10n.logScreen_periodOverdueBy(-predictionResult.daysUntilDue);
+          widgetMessage = datePart;
+        }
+      }
+      
+      controller.saveAndAndUpdate(widgetTitle, widgetMessage);
+    }
 
     setState(() {
       _isLoading = false;
