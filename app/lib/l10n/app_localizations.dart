@@ -345,7 +345,7 @@ abstract class AppLocalizations {
   /// No description provided for @builtInSymptom_moodSwings.
   ///
   /// In en, this message translates to:
-  /// **'Mood Swings'**
+  /// **'Mood swings'**
   String get builtInSymptom_moodSwings;
 
   /// No description provided for @builtInSymptom_nausea.
@@ -750,11 +750,11 @@ abstract class AppLocalizations {
   /// **'This will reset the default symptoms to the built in symptoms.\n\nExisting period logs will not be updated!'**
   String get settingsScreen_resetDefaultSymptomsDescription;
 
-  /// No description provided for @settingsScreen_periodLoggingScreen.
+  /// No description provided for @settingsScreen_LoggingScreen.
   ///
   /// In en, this message translates to:
-  /// **'Period Logging'**
-  String get settingsScreen_periodLoggingScreen;
+  /// **'Logging'**
+  String get settingsScreen_LoggingScreen;
 
   /// Question whether a symptom should be deleted.
   ///

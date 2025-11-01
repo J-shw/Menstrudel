@@ -137,7 +137,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String get builtInSymptom_headache => 'Headache';
 
   @override
-  String get builtInSymptom_moodSwings => 'Mood Swings';
+  String get builtInSymptom_moodSwings => 'Mood swings';
 
   @override
   String get builtInSymptom_nausea => 'Nausea';
@@ -387,7 +387,7 @@ class AppLocalizationsIt extends AppLocalizations {
       'This will reset the default symptoms to the built in symptoms.\n\nExisting period logs will not be updated!';
 
   @override
-  String get settingsScreen_periodLoggingScreen => 'Period Logging';
+  String get settingsScreen_LoggingScreen => 'Logging';
 
   @override
   String settingsScreen_deleteDefaultSymptomDescription(

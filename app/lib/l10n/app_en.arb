@@ -190,7 +190,7 @@
     },
     "settingsScreen_resetDefaultSymptoms" : "Reset default symptoms?",
     "settingsScreen_resetDefaultSymptomsDescription" : "This will reset the default symptoms to the built in symptoms.\n\nExisting period logs will not be updated!",
-    "settingsScreen_periodLoggingScreen" : "Period Logging",
+    "settingsScreen_LoggingScreen" : "Logging",
     "settingsScreen_deleteDefaultSymptomDescription": "'{symptom}' will no longer be available when logging a period.\n\n{usageCount, plural, zero{There are currently no period logs with this symptom!} one{There is already 1 period log with this symptom!\nThis log will not be changed.} other{There are {usageCount} period logs with this symptom!\nThese logs will not be changed.}}",
     "@settingsScreen_deleteDefaultSymptomDescription": {
         "description": "Question whether a symptom should be deleted.",
