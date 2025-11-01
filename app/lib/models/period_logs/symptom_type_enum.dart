@@ -1,5 +1,3 @@
-import 'package:menstrudel/l10n/app_localizations.dart';
-
 enum SymptomType {
   builtInAcne,
   builtInBackPain,
