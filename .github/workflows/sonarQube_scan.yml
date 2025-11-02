@@ -1,4 +1,4 @@
-name: SonarQube Scan
+name: SonarCloud Scan
 
 on:
   workflow_run:
@@ -7,8 +7,8 @@ on:
       - completed
 
 jobs:
-  sonarqube:
-    name: SonarQube
+  sonarcloud:
+    name: SonarCloud Scan
     runs-on: ubuntu-latest
     
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
@@ -21,33 +21,19 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           run-id: ${{ github.event.workflow_run.id }}
           
-      - name: Checkout PR Code
+      - name: Checkout Code
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.workflow_run.head_sha }}
           fetch-depth: 0
 
-      - name: SonarQube Scan
-        uses: SonarSource/sonarqube-scan-action@v5
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@v2
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
+            -Dsonar.organization=j-shw
+            -Dsonar.projectKey=J-shw_Menstrudel
             -Dsonar.flutter.coverage.lcovReportPath=lcov.info
-
-            ${{ github.event.workflow_run.event == 'pull_request' && format('
-              -Dsonar.pullrequest.key={0}
-              -Dsonar.pullrequest.branch={1}
-              -Dsonar.pullrequest.base={2}
-              -Dsonar.pullrequest.headsha={3}
-              ', 
-              github.event.workflow_run.pull_requests[0].number, 
-              github.event.workflow_run.pull_requests[0].head.ref, 
-              github.event.workflow_run.pull_requests[0].base.ref,
-              github.event.workflow_run.head_sha) 
-            }}
-
-            ${{ github.event.workflow_run.event == 'push' && format('
-            -Dsonar.branch.name={0}
-            ', 
-            github.event.workflow_run.head_branch) }}

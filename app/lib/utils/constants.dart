@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:menstrudel/models/period_logs/symptom.dart';
 import 'package:menstrudel/models/themes/app_theme_mode_enum.dart';
 import 'package:menstrudel/services/settings_service.dart';
 
@@ -39,13 +40,14 @@ const String dynamicColorKey = 'dynamic_color';
 const String themeColorKey = 'theme_color';
 const String themeModeKey = 'theme_mode';
 const String persistentReminderKey = "always_show_reminder_button";
+const String defaultSymptomsKey = "default_symptoms";
 const String languageKey = "language";
 const String pillNavEnabledKey = "pill_nav_enabled";
 
 // Notifications
 const String tamponReminderDateTimeKey = 'tampon_reminder_date_time';
 
-// Shared prefrences default values
+// Shared preferences default values
 
 // Settings
 const bool kDefaultPillNavEnabled = false;
@@ -62,3 +64,4 @@ const PeriodHistoryView kDefaultHistoryView = PeriodHistoryView.journal;
 const bool kDefaultDynamicColorEnabled = false;
 const Color kDefaultThemeColor = seedColor;
 const AppThemeMode kDefaultThemeMode = AppThemeMode.system;
+const Set<Symptom> kDefaultSymptoms = {};

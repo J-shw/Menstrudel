@@ -5,7 +5,6 @@ import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/models/themes/app_theme_mode_enum.dart';
 import 'package:menstrudel/notifiers/theme_notifier.dart';
 import 'package:menstrudel/services/settings_service.dart';
-// 'constants.dart' is no longer needed here
 
 class AppearanceSettingsScreen extends StatelessWidget {
   const AppearanceSettingsScreen({super.key});

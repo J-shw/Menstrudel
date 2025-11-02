@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/database/repositories/periods_repository.dart';
 import 'package:menstrudel/models/period_logs/period_day.dart';
+import 'package:menstrudel/models/period_logs/symptom.dart';
 import 'package:menstrudel/models/periods/period.dart';
 import 'package:menstrudel/models/flows/flow_data.dart';
 
@@ -60,7 +61,7 @@ class _InsightsScreenState extends State<InsightsScreen> {
           final allPeriods = snapshot.data![0] as List<Period>;
           final allLogs = snapshot.data![1] as List<PeriodDay>;
           final allFlows = snapshot.data![2] as List<MonthlyFlowData>;
-          final symptomCounts =  snapshot.data![3] as Map<String, int>;
+          final symptomCounts =  snapshot.data![3] as Map<Symptom, int>;
 
           return ListView(
             padding: const EdgeInsets.all(16.0),
