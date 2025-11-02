@@ -94,13 +94,11 @@ class PeriodService extends ChangeNotifier {
     _updateUiState();
     _buildTimelineItems();
     _processJournalData();
+    _updateWidgetData(l10n, controller);
+    _syncWatchData();
 
-    // Only update if the prediction date actually changed
     if (oldPredictionDate != _predictionResult?.estimatedStartDate) {
-      debugPrint('Prediction date changed, updating data');
-      _updateWidgetData(l10n, controller);
       _schedulePeriodNotifications(l10n);
-      _syncWatchData();
     }
 
     notifyListeners();
