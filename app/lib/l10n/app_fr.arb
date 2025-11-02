@@ -19,6 +19,7 @@
         }
     },
     "delete": "Supprimer",
+    "deleteAnyways": "Delete anyways",
     "clear": "Effacer",
     "save": "Sauvegarder",
     "import": "Importer",
@@ -30,6 +31,8 @@
     "cancel": "Annuler",
     "select": "Sélectionner",
     "close": "Fermer",
+    "reset": "Reset",
+    "add": "Add",
     "systemDefault": "Valeur par défaut du système",
     "flow": "Flux /",
     "navBar_insights": "Statistiques",
@@ -41,13 +44,14 @@
     "flowIntensity_light": "Léger",
     "flowIntensity_moderate": "Modéré",
     "flowIntensity_heavy": "Abondant",
-    "symptom_headache": "Maux de tête",
-    "symptom_fatigue": "Fatigue",
-    "symptom_cramps": "Crampes",
-    "symptom_nausea": "Nausée",
-    "symptom_moodSwings": "Sauts d’humeur",
-    "symptom_bloating": "Ballonnements",
-    "symptom_acne": "Acné",
+    "builtInSymptom_acne": "Acne",
+    "builtInSymptom_backPain": "Back pain",
+    "builtInSymptom_bloating": "Bloating",
+    "builtInSymptom_cramps": "Cramps",
+    "builtInSymptom_fatigue": "Fatigue",
+    "builtInSymptom_headache": "Headache",
+    "builtInSymptom_moodSwings": "Mood swings",
+    "builtInSymptom_nausea": "Nausea",
     "painLevel_title": "Intensité de la douleur",
     "painLevel_none": "Aucune",
     "painLevel_mild": "Légère",
@@ -151,6 +155,32 @@
     "settingsScreen_notificationTime": "Heure de la notification",
     "settingsScreen_overduePeriodReminder": "Alerte de retard de règles",
     "settingsScreen_remindMeAfter": "Me rappeler après",
+    "settingsScreen_defaultSymptoms": "Default Symptoms",
+    "settingsScreen_defaultSymptomsSubtitle": "These are always available when logging new periods.\nTap an existing symptom to delete or '+' to add a new one.",
+    "settingsScreen_deleteDefaultSymptomQuestion": "Delete '{symptom}'?",
+    "@settingsScreen_deleteDefaultSymptomQuestion": {
+        "description": "Question whether a symptom should be deleted.",
+        "placeholders": {
+            "symptom": {
+                "type": "String",
+                "example": "The name of the symptom."
+            }
+        }
+    },
+    "settingsScreen_resetDefaultSymptoms": "Reset default symptoms?",
+    "settingsScreen_resetDefaultSymptomsDescription": "This will reset the default symptoms to the built in symptoms.\n\nExisting period logs will not be updated!",
+    "settingsScreen_LoggingScreen": "Logging",
+    "settingsScreen_deleteDefaultSymptomDescription": "'{symptom}' will no longer be available when logging a period.\n\n{usageCount, plural, zero{There are currently no period logs with this symptom!} one{There is already 1 period log with this symptom!\nThis log will not be changed.} other{There are {usageCount} period logs with this symptom!\nThese logs will not be changed.}}",
+    "@settingsScreen_deleteDefaultSymptomDescription": {
+        "description": "Question whether a symptom should be deleted.",
+        "placeholders": {
+            "symptom": {
+                "type": "String",
+                "example": "The name of the symptom."
+            },
+            "usageCount": {}
+        }
+    },
     "settingsScreen_pillRegimens": "Suivis de pilule",
     "@settingsScreen_pillRegimens": {
         "description": "Header for the section listing all created pill regimens."
@@ -294,5 +324,8 @@
                 "type": "int"
             }
         }
-    }
+    },
+    "customSymptomDialog_newCustomSymptom": "New custom symptom",
+    "customSymptomDialog_enterCustomSymptom": "Please enter a custom symptom",
+    "customSymptomDialog_makeTemporary": "Is temporary symptom"
 }
