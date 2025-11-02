@@ -83,13 +83,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get close => 'Fermer';
 
   @override
-  String get systemDefault => 'Valeur par défaut du système';
-  
-  @override
   String get reset => 'Reset';
 
   @override
   String get add => 'Add';
+
+  @override
+  String get systemDefault => 'Valeur par défaut du système';
 
   @override
   String get flow => 'Flux /';
