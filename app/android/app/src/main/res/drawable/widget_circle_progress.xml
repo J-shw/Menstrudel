@@ -6,7 +6,8 @@
     android:toDegrees="-90">
     <shape
         android:shape="ring"
-        android:thickness="12dp"
-        android:useLevel="true">
+        android:useLevel="true"
+        android:thicknessRatio="15"
+        android:innerRadiusRatio="3.5">
     </shape>
 </rotate>
