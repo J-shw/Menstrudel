@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:collection/collection.dart';
+import 'package:intl/intl.dart';
 import 'package:menstrudel/database/repositories/periods_repository.dart';
 import 'package:menstrudel/models/period_logs/period_day.dart';
 import 'package:menstrudel/models/periods/period.dart';
@@ -130,11 +131,16 @@ class PeriodService extends ChangeNotifier {
     String largeText = '$_circleCurrentValue';
     String smallText = l10n.periodPredictionCircle_days(_circleCurrentValue);
 
+    String dateText = '';
+    if (_predictionResult != null) { 
+      dateText = '${l10n.logScreen_nextPeriodEstimate}:\n ${DateFormat('MMM d').format(_predictionResult!.estimatedStartDate)}';
+    }
     controller.saveAndAndUpdateCircle(
       currentValue: _circleCurrentValue,
       maxValue: _circleMaxValue,
       largeText: largeText,
       smallText: smallText,
+      predictionDate: dateText,
     );
   }
 

@@ -19,6 +19,7 @@ class HomeScreenWidgetProvider : HomeWidgetProvider() {
             val maxValue = widgetData.getInt("widget_max_value", 28)
             val largeText = widgetData.getString("widget_large_text", "$currentValue")
             val smallText = widgetData.getString("widget_small_text", "days")
+            val predictionDate = widgetData.getString("prediction_date", "")
 
             views.setTextViewText(R.id.widget_large_text, largeText)
             views.setTextViewText(R.id.widget_small_text, smallText)
@@ -27,6 +28,7 @@ class HomeScreenWidgetProvider : HomeWidgetProvider() {
             
             views.setProgressBar(R.id.widget_progress_bar_track, maxValue, maxValue, false)
             views.setProgressBar(R.id.widget_progress_bar, maxValue, progress, false)
+            views.setTextViewText(R.id.widget_prediction_date, predictionDate)
 
             val pendingIntent = HomeWidgetLaunchIntent.getActivity(
                 context,

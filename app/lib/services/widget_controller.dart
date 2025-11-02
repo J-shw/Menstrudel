@@ -12,12 +12,14 @@ class WidgetController {
     required int maxValue,
     required String largeText,
     required String smallText,
+    required String predictionDate,
   }) async {
     try {
       await HomeWidget.saveWidgetData<int>('widget_current_value', currentValue);
       await HomeWidget.saveWidgetData<int>('widget_max_value', maxValue);
       await HomeWidget.saveWidgetData<String>('widget_large_text', largeText);
       await HomeWidget.saveWidgetData<String>('widget_small_text', smallText);
+      await HomeWidget.saveWidgetData<String>('prediction_date', predictionDate);
 
       await HomeWidget.updateWidget(
         androidName: _androidWidgetName,
