@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:collection/collection.dart';
 import 'package:menstrudel/database/repositories/periods_repository.dart';
 import 'package:menstrudel/models/period_logs/period_day.dart';
 import 'package:menstrudel/models/periods/period.dart';
@@ -24,22 +25,40 @@ class PeriodService extends ChangeNotifier {
   bool _isLoading = true;
   List<PeriodDay> _periodLogEntries = [];
   List<Period> _periodEntries = [];
+  List<Object> _timelineItems = [];
   PeriodPredictionResult? _predictionResult;
-  PeriodHistoryView _selectedView = PeriodHistoryView.journal;
   int _circleCurrentValue = 0;
   int _circleMaxValue = 28;
   bool _isTamponReminderSet = false;
   bool _isPeriodOngoing = false;
+  Map<DateTime, PeriodDay> _logMap = {};
+  DateTime? _earliestLogDate;
+  DateTime? _latestLogDate;
 
+  /// Whether a background operation is currently in progress.
   bool get isLoading => _isLoading;
+  /// The complete list of all individual period day logs.
   List<PeriodDay> get periodLogEntries => _periodLogEntries;
+  /// The list of calculated [Period] objects, representing entire period cycles.
   List<Period> get periodEntries => _periodEntries;
+  /// The calculated prediction for the next period, if available.
   PeriodPredictionResult? get predictionResult => _predictionResult;
-  PeriodHistoryView get selectedView => _selectedView;
+  /// The current value for the main progress circle (e.g., days until due).
   int get circleCurrentValue => _circleCurrentValue;
+  /// The maximum value for the main progress circle (e.g., average cycle length).
   int get circleMaxValue => _circleMaxValue;
+  /// Whether a tampon reminder notification is currently scheduled.
   bool get isTamponReminderSet => _isTamponReminderSet;
+  /// Whether the user's period is considered to be ongoing today.
   bool get isPeriodOngoing => _isPeriodOngoing;
+  /// A pre-computed list of timeline items for the PeriodListView.
+  List<Object> get timelineItems => _timelineItems;
+  /// A pre-computed map of logs, keyed by their date, for fast calendar lookups.
+  Map<DateTime, PeriodDay> get logMap => _logMap;
+  /// The date of the earliest log on record.
+  DateTime? get earliestLogDate => _earliestLogDate;
+  /// The date of the latest log on record.
+  DateTime? get latestLogDate => _latestLogDate;
 
   /// Loads all initial data and performs calculations.
   /// Should be called once when the screen is first initialised.
@@ -53,6 +72,8 @@ class PeriodService extends ChangeNotifier {
     await _fetchDataFromDb();
     _calculatePrediction();
     _updateUiState();
+    _buildTimelineItems();
+    _processJournalData();
     _updateWidgetData(l10n, controller);
     _schedulePeriodNotifications(l10n);
     _syncWatchData();
@@ -71,6 +92,8 @@ class PeriodService extends ChangeNotifier {
     await _fetchDataFromDb();
     _calculatePrediction();
     _updateUiState();
+    _buildTimelineItems();
+    _processJournalData();
 
     // Only update if the prediction date actually changed
     if (oldPredictionDate != _predictionResult?.estimatedStartDate) {
@@ -88,7 +111,6 @@ class PeriodService extends ChangeNotifier {
     _periodLogEntries = await _periodsRepo.readAllPeriodLogs();
     _periodEntries = await _periodsRepo.readAllPeriods();
     _isTamponReminderSet = await NotificationService.isTamponReminderScheduled();
-    _selectedView = _settingsService.historyView;
   }
 
   /// Calculates the period prediction and ongoing status.
@@ -253,5 +275,68 @@ class PeriodService extends ChangeNotifier {
       _isTamponReminderSet = false;
       notifyListeners();
     }
+  }
+
+  /// Populates the [_timelineItems] list for the list view.
+  void _buildTimelineItems() {
+    final groupedLogs = groupBy(_periodLogEntries, (log) => log.periodId ?? -1);
+
+    final List<Object> timelineEvents = [
+      ..._periodEntries,
+      ...(groupedLogs[-1] ?? []),
+    ];
+
+    final groupedByMonth = groupBy<Object, DateTime>(timelineEvents, (event) {
+      final date = event is Period ? event.startDate : (event as PeriodDay).date;
+      return DateTime(date.year, date.month);
+    });
+
+    final sortedMonths = groupedByMonth.keys.toList()
+      ..sort((a, b) => b.compareTo(a));
+
+    final List<Object> items = [];
+    for (final month in sortedMonths) {
+      items.add(month);
+
+      final eventsInMonth = groupedByMonth[month]!;
+      eventsInMonth.sort((a, b) {
+        final dateA = a is Period ? a.startDate : (a as PeriodDay).date;
+        final dateB = b is Period ? b.startDate : (b as PeriodDay).date;
+        return dateB.compareTo(dateA);
+      });
+
+      for (final event in eventsInMonth) {
+        if (event is Period) {
+          items.add(event);
+          final logsForPeriod = (groupedLogs[event.id] ?? [])
+            ..sort((a, b) => a.date.compareTo(b.date));
+          items.addAll(logsForPeriod);
+        } else if (event is PeriodDay) {
+          items.add(event);
+        }
+      }
+    }
+    _timelineItems = items;
+  }
+
+  /// Populates the map and date boundaries for the Journal view.
+  void _processJournalData() {
+    if (_periodLogEntries.isEmpty) {
+      _logMap = {};
+      _earliestLogDate = null;
+      _latestLogDate = null;
+      return;
+    }
+
+    _logMap = {
+      for (var log in _periodLogEntries) DateUtils.dateOnly(log.date): log
+    };
+    
+    _earliestLogDate = _periodLogEntries
+        .reduce((a, b) => a.date.isBefore(b.date) ? a : b)
+        .date;
+    _latestLogDate = _periodLogEntries
+        .reduce((a, b) => a.date.isAfter(b.date) ? a : b)
+        .date;
   }
 }
