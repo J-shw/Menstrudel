@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:menstrudel/models/period_logs/period_day.dart';
+import 'package:menstrudel/models/period_logs/symptom.dart';
 import 'package:menstrudel/models/periods/period.dart';
 import 'package:collection/collection.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/models/flows/flow_enum.dart';
-import 'package:menstrudel/models/period_logs/symptom_enum.dart';
 
 class PeriodListView extends StatelessWidget {
   final List<PeriodDay> periodLogEntries;
@@ -139,9 +139,6 @@ class PeriodListView extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
     final l10n = AppLocalizations.of(context)!;
-    final symptomMap = {for (var s in Symptom.values) s.name: s};
-    final symptoms =
-        entry.symptoms.map((s) => symptomMap[s]).whereType<Symptom>().toList();
     return InkWell(
       onTap: () => onLogTapped(entry),
       child: Padding(
@@ -177,12 +174,12 @@ class PeriodListView extends StatelessWidget {
                         ),
                       ),
                     ),
-                  if (entry.flow.intValue > 0 && symptoms.isNotEmpty) const SizedBox(height: 6),
-                  if (symptoms.isNotEmpty)
+                  if (entry.flow.intValue > 0 && entry.symptoms.isNotEmpty) const SizedBox(height: 6),
+                  if (entry.symptoms.isNotEmpty)
                     Wrap(
                       spacing: 6.0,
                       runSpacing: 4.0,
-                      children: symptoms.map((symptom) {
+                      children: entry.symptoms.map((symptom) {
                         return Chip(
                           label: Text(symptom.getDisplayName(l10n)),
                           side: BorderSide.none,
