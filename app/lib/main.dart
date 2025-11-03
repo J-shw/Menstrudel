@@ -4,7 +4,7 @@ import 'package:timezone/timezone.dart' as tz;
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:menstrudel/services/notification_service.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
-import 'package:menstrudel/l10n/app_localizations.dart'; 
+import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/notifiers/theme_notifier.dart';
 import 'package:provider/provider.dart';
 import 'package:menstrudel/services/wear_sync_service.dart';
@@ -13,11 +13,14 @@ import 'package:menstrudel/models/themes/app_theme_mode_enum.dart';
 import 'package:menstrudel/screens/auth_gate.dart';
 import 'package:menstrudel/notifiers/locale_notifier.dart';
 import 'package:menstrudel/services/settings_service.dart';
+import 'package:home_widget/home_widget.dart';
+import 'package:menstrudel/services/widget_controller.dart';
+import 'package:menstrudel/services/period_service.dart';
 
 final watchService = WatchSyncService();
 final periodsRepository = PeriodsRepository();
 
-void main() async { 
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   tz_data.initializeTimeZones();
@@ -27,31 +30,27 @@ void main() async {
   } catch (e) {
     tz.setLocalLocation(tz.getLocation('Etc/UTC'));
   }
-  
+
   await NotificationService.initialize();
 
   final settingsService = SettingsService();
   await settingsService.loadSettings();
 
-  watchService.initialize(
-    onPeriodLog: periodsRepository.logPeriodFromWatch,
-  );
+  watchService.initialize(onPeriodLog: periodsRepository.logPeriodFromWatch);
 
   runApp(
     MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (_) => settingsService),
         ChangeNotifierProvider(
-          create: (_) => settingsService,
-        ),  
-        ChangeNotifierProvider(
-          create: (context) => ThemeNotifier(
-            context.read<SettingsService>(),
-          ),
+          create: (context) => ThemeNotifier(context.read<SettingsService>()),
         ),
         ChangeNotifierProvider(
-          create: (context) => LocaleNotifier(
-            context.read<SettingsService>(),
-          ),
+          create: (context) => LocaleNotifier(context.read<SettingsService>()),
+        ),
+        Provider(create: (_) => WidgetController()),
+        ChangeNotifierProvider(
+          create: (context) => PeriodService(context.read<SettingsService>()),
         ),
       ],
       child: const MainApp(),
@@ -59,8 +58,40 @@ void main() async {
   );
 }
 
-class MainApp extends StatelessWidget {
+class MainApp extends StatefulWidget {
   const MainApp({super.key});
+
+  @override
+  State<MainApp> createState() => _MainAppState();
+}
+
+class _MainAppState extends State<MainApp> {
+  @override
+  void initState() {
+    super.initState();
+    HomeWidget.initiallyLaunchedFromHomeWidget().then(_handleWidgetLaunch);
+    HomeWidget.widgetClicked.listen(_handleWidgetLaunch);
+  }
+
+  void _handleWidgetLaunch(Uri? uri) {
+    if (uri != null) {
+      if (mounted) {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text('App Launched from Widget'),
+            content: Text('URI: $uri'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: Text('OK'),
+              ),
+            ],
+          ),
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +102,7 @@ class MainApp extends StatelessWidget {
       builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
         ColorScheme lightColorScheme;
         ColorScheme darkColorScheme;
-        
+
         final bool useDynamicTheme = themeNotifier.isDynamicEnabled;
 
         if (useDynamicTheme && lightDynamic != null && darkDynamic != null) {
@@ -79,7 +110,7 @@ class MainApp extends StatelessWidget {
           darkColorScheme = darkDynamic.harmonized();
         } else {
           final Color seed = themeNotifier.themeColor;
-          
+
           lightColorScheme = ColorScheme.fromSeed(seedColor: seed);
           darkColorScheme = ColorScheme.fromSeed(
             seedColor: seed,
@@ -96,10 +127,7 @@ class MainApp extends StatelessWidget {
           onGenerateTitle: (context) {
             return AppLocalizations.of(context)!.appTitle;
           },
-          theme: ThemeData(
-            useMaterial3: true,
-            colorScheme: lightColorScheme,
-          ),
+          theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme),
           darkTheme: ThemeData(
             useMaterial3: true,
             colorScheme: darkColorScheme,
