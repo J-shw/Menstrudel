@@ -204,7 +204,6 @@ section h2 {
   gap: 1rem;
 
   padding: 4rem 1.5rem;
-  background-color: #ffffff;
 }
 
 #about h2 {
@@ -553,6 +552,16 @@ section h2 {
   }
 
   .hero p {
+    color: #aaa;
+  }
+
+  .privacy-list li strong,
+  #about h2 {
+    color: #e0e0e0;
+  }
+
+  .privacy-list li div,
+  #about p {
     color: #aaa;
   }
 
