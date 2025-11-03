@@ -33,20 +33,22 @@ class PainBreakdownWidget extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
     final l10n = AppLocalizations.of(context)!;
 
-    if (logs.isEmpty) {
-        return Card(child: Padding(padding: const EdgeInsets.all(24.0), child: Center(child: Text(l10n.painLevelWidget_noPainDataLoggedYet))));
+    final logsWithPain = logs.where((log) => log.painLevel != null).toList();
+
+    if (logsWithPain.isEmpty) {
+      return Card(child: Padding(padding: const EdgeInsets.all(24.0), child: Center(child: Text(l10n.painLevelWidget_noPainDataLoggedYet))));
     }
 
     final painCounts = {
       for (var level in PainLevel.values) level: 0
     };
 
-    for (final log in logs) {
-      final level = PainLevel.values[log.painLevel];
+    for (final log in logsWithPain) {
+      final level = PainLevel.values[log.painLevel!];
       painCounts[level] = (painCounts[level] ?? 0) + 1;
     }
 
-    final totalDays = logs.length;
+    final totalDays = logsWithPain.length;
 
     return Card(
       elevation: 0,
