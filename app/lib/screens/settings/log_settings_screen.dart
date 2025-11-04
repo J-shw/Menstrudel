@@ -19,7 +19,7 @@ class LogSettingsScreen extends StatelessWidget {
         await showDialog<(String, bool)>(
           context: context,
           builder: (BuildContext context) {
-            return const CustomSymptomDialog(showTemporarySymptomButton: true);
+            return const CustomSymptomDialog(hideTemporarySwitch: true);
           },
         );
 
