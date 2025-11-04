@@ -28,7 +28,7 @@ class PeriodsRepository {
       final newLog = PeriodDay(
         date: DateTime.now(),
         flow: FlowRate.medium,
-        painLevel: 0,
+        painLevel: null,
       );
 
       await createPeriodLog(newLog);

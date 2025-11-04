@@ -246,6 +246,12 @@ abstract class AppLocalizations {
   /// **'Add'**
   String get add;
 
+  /// No description provided for @notSet.
+  ///
+  /// In en, this message translates to:
+  /// **'Not set'**
+  String get notSet;
+
   /// No description provided for @systemDefault.
   ///
   /// In en, this message translates to:

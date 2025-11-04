@@ -10,7 +10,7 @@ class PeriodDay {
 	DateTime date;
 	List<Symptom> symptoms;
 	FlowRate flow;
-  int painLevel;
+  int? painLevel;
 	int? periodId;
 
 	PeriodDay({
@@ -18,7 +18,7 @@ class PeriodDay {
 		required this.date,
 		this.symptoms = const [],
 		required this.flow,
-    required this.painLevel,
+    this.painLevel,
 		this.periodId,
 	});
 
@@ -41,7 +41,7 @@ class PeriodDay {
 			date: DateTime.parse(map['date'] as String),
 			symptoms: symptoms ?? [],
 			flow: FlowRate.values[map['flow'] as int],
-      painLevel: map['painLevel'] as int,
+      painLevel: map['painLevel'] as int?,
 			periodId: map['period_id'] as int?,
 		);
 	}

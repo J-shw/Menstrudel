@@ -47,15 +47,15 @@ extension FlowExtension on PainLevel {
   Color get color {
     switch (this) {
       case PainLevel.none:
-        return Colors.blue.shade300;
+        return Colors.blue.shade500;
       case PainLevel.mild:
-        return Colors.teal.shade300;
+        return Colors.teal.shade500;
       case PainLevel.moderate:
-        return Colors.amber.shade400;
+        return Colors.amber.shade600;
       case PainLevel.severe:
-        return Colors.red.shade400;
+        return Colors.red.shade600;
       case PainLevel.unbearable:
-        return Colors.purple.shade300;
+        return Colors.purple.shade500;
     }
   }
 }

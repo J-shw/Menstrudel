@@ -26,7 +26,7 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
   bool _isEditing = false;
 
   late FlowRate _editedFlow;
-  late PainLevel _editedPainLevel;
+  late PainLevel? _editedPainLevel;
 
   final Set<Symptom> _defaultSymptoms = {};
   final Set<Symptom> _selectedSymptoms = {};
@@ -42,7 +42,7 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
 
   void _resetEditableState() {
     _editedFlow = widget.log.flow;
-    _editedPainLevel = PainLevel.values[widget.log.painLevel];
+   _editedPainLevel = widget.log.painLevel == null ? null : PainLevel.values[widget.log.painLevel!];
     _selectedSymptoms.clear();
     _selectedSymptoms.addAll(widget.log.symptoms);
   }
@@ -54,7 +54,9 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
   }
 
   void _handleSave() {
-    final updatedLog = widget.log.copyWith(flow: _editedFlow, painLevel: _editedPainLevel.intValue, symptoms: _selectedSymptoms.toList());
+    final updatedLog = widget.log.copyWith(flow: _editedFlow, symptoms: _selectedSymptoms.toList());
+
+    updatedLog.painLevel = _editedPainLevel?.intValue; // Due to painLevel being nullable
 
     widget.onSave(updatedLog);
 
@@ -99,23 +101,23 @@ Future<void> _showNewCustomSymptomDialog() async {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
 
-    return Container(
-      height: MediaQuery.of(context).size.height * (_isEditing ? 0.6 : 0.4),
-      padding: const EdgeInsets.fromLTRB(24, 8, 24, 32),
+    return SingleChildScrollView(
+      padding: EdgeInsets.fromLTRB(24, 8, 24, MediaQuery.of(context).viewInsets.bottom + 32),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start, 
-        children: [
-          _buildDragHandle(), 
-          const SizedBox(height: 12), 
-          _buildHeader(context), 
-          const Divider(height: 24), 
-          _buildFlowSection(context), 
-          const SizedBox(height: 16), 
-          _buildPainLevelSection(context), 
-          const SizedBox(height: 16), 
-          _buildSymptomsSection(context, colorScheme)
-          ]
-        ),
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start, 
+          children: [
+            _buildDragHandle(), 
+            const SizedBox(height: 12), 
+            _buildHeader(context), 
+            const Divider(height: 24), 
+            _buildFlowSection(context), 
+            const SizedBox(height: 16), 
+            _buildPainLevelSection(context), 
+            const SizedBox(height: 16), 
+            _buildSymptomsSection(context, colorScheme)
+            ]
+          ),
     );
   }
 
@@ -233,21 +235,36 @@ Future<void> _showNewCustomSymptomDialog() async {
     final colorScheme = Theme.of(context).colorScheme;
 
     if (!_isEditing) {
-      final painLevel = PainLevel.values[widget.log.painLevel];
+      final int? logPainLevel = widget.log.painLevel;
+      final PainLevel? painLevel = logPainLevel == null ? null : PainLevel.values[logPainLevel];
 
       return Row(
         children: [
-          Icon(painLevel.icon, color: colorScheme.onSurfaceVariant, size: 20),
+          Icon(
+            painLevel?.icon ?? Icons.help_outline,
+            color: painLevel?.color ?? colorScheme.onSurfaceVariant, 
+            size: 20
+          ),
           const SizedBox(width: 12),
           Text('${l10n.painLevel_title}: ', style: textTheme.bodyLarge),
-          Text(painLevel.getDisplayName(l10n), style: textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold)),
+          Text(
+            painLevel == null ? l10n.notSet : painLevel.getDisplayName(l10n),
+            style: textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold)
+          ),
         ],
       );
     } else {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('${l10n.painLevel_title}: ${_editedPainLevel.getDisplayName(l10n)}', style: textTheme.bodyLarge),
+          Text(
+            '${l10n.painLevel_title}: ${
+              _editedPainLevel == null 
+                ? l10n.notSet
+                : _editedPainLevel!.getDisplayName(l10n)
+            }', 
+            style: textTheme.bodyLarge
+          ),
           const SizedBox(height: 8),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -257,10 +274,14 @@ Future<void> _showNewCustomSymptomDialog() async {
               return IconButton(
                 icon: Icon(painLevel.icon),
                 iconSize: 36,
-                color: isSelected ? colorScheme.primary : colorScheme.onSurfaceVariant,
+                color: isSelected ? painLevel.color : colorScheme.onSurfaceVariant,
                 onPressed: () {
                   setState(() {
-                    _editedPainLevel = painLevel;
+                    if (isSelected) {
+                      _editedPainLevel = null;
+                    } else {
+                      _editedPainLevel = painLevel;
+                    }
                   });
                 },
               );
@@ -285,75 +306,76 @@ Future<void> _showNewCustomSymptomDialog() async {
 
     if (!_isEditing) {
       if (_selectedSymptoms.isEmpty) {
-        return const SizedBox.shrink();
-      }
-
-      return Expanded(
-        child: Column(
+        return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             header,
             const SizedBox(height: 8),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Wrap(
-                  spacing: 8.0,
-                  runSpacing: 4.0,
-                  children: _selectedSymptoms.map((symptom) {
-                    return Chip(label: Text(symptom.getDisplayName(l10n)));
-                  }).toList(),
-                ),
+            Padding(
+              padding: const EdgeInsets.only(left: 4.0),
+              child: Text(
+                l10n.notSet,
+                style: textTheme.bodyMedium?.copyWith(fontStyle: FontStyle.italic, color: colorScheme.onSurfaceVariant),
               ),
             ),
           ],
-        ),
+        );
+      }
+
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          header,
+          const SizedBox(height: 8),
+          Wrap(
+            spacing: 8.0,
+            runSpacing: 4.0,
+            children: _selectedSymptoms.map((symptom) {
+              return Chip(label: Text(symptom.getDisplayName(l10n)));
+            }).toList(),
+          ),
+        ],
       );
     } else {
       // --- EDIT MODE ---
-      return Expanded(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            header,
-            const SizedBox(height: 8),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Wrap(
-                  spacing: 8.0,
-                  runSpacing: 4.0,
-                  children: [
-                    // --- List of Symptom Chips ---
-                    ..._symptoms.map((symptom) {
-                      return FilterChip(
-                        label: Text(symptom.getDisplayName(l10n)),
-                        selected: _selectedSymptoms.contains(symptom),
-                        onSelected: (isSelected) {
-                          setState(() {
-                            if (isSelected) {
-                              _selectedSymptoms.add(symptom);
-                            } else {
-                              _selectedSymptoms.remove(symptom);
-                              if (_defaultSymptoms.contains(symptom) == false) {
-                                _symptoms.remove(symptom);
-                              }
-                            }
-                          });
-                        },
-                      );
-                    }),
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          header,
+          const SizedBox(height: 8),
+          Wrap(
+            spacing: 8.0,
+            runSpacing: 4.0,
+            children: [
+              // --- List of Symptom Chips ---
+              ..._symptoms.map((symptom) {
+                return FilterChip(
+                  label: Text(symptom.getDisplayName(l10n)),
+                  selected: _selectedSymptoms.contains(symptom),
+                  onSelected: (isSelected) {
+                    setState(() {
+                      if (isSelected) {
+                        _selectedSymptoms.add(symptom);
+                      } else {
+                        _selectedSymptoms.remove(symptom);
+                        if (_defaultSymptoms.contains(symptom) == false) {
+                          _symptoms.remove(symptom);
+                        }
+                      }
+                    });
+                  },
+                );
+              }),
 
-                    ActionChip(
-                      avatar: const Icon(Icons.add, size: 18),
-                      label: Text(l10n.add),
-                      backgroundColor: colorScheme.secondaryContainer,
-                      onPressed: _showNewCustomSymptomDialog,
-                    ),
-                  ],
-                ),
+              ActionChip(
+                avatar: const Icon(Icons.add, size: 18),
+                label: Text(l10n.add),
+                backgroundColor: colorScheme.secondaryContainer,
+                onPressed: _showNewCustomSymptomDialog,
               ),
-            ),
-          ],
-        ),
+            ],
+          ),
+        ],
       );
     }
   }

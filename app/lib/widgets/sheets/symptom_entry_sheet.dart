@@ -25,7 +25,7 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
   final Set<Symptom> _symptoms = {};
 
   FlowRate _flowSelection = FlowRate.none;
-  PainLevel _painLevel = PainLevel.none;
+  PainLevel? _painLevel;
 
   @override
   void initState() {
@@ -138,7 +138,14 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
                   ),
                   const SizedBox(height: 8),
                   // --- Pain Level ---
-                  Text('${l10n.painLevel_title}: ${_painLevel.getDisplayName(l10n)}', style: Theme.of(context).textTheme.bodySmall),
+                  Text(
+                    '${l10n.painLevel_title}: ${
+                      _painLevel == null 
+                        ? l10n.notSet
+                        : _painLevel!.getDisplayName(l10n)
+                    }', 
+                    style: Theme.of(context).textTheme.bodySmall
+                  ),
                   const SizedBox(height: 8),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -149,16 +156,20 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
                           final bool isSelected = _painLevel == painLevel;
 
                           return IconButton(
-                            icon: Icon(painLevel.icon),
-                            iconSize: 36,
-                            color: isSelected ? Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.onSurfaceVariant,
-                            onPressed: () {
-                              setState(() {
+                          icon: Icon(painLevel.icon),
+                          iconSize: 36,
+                          color: isSelected ? painLevel.color : Theme.of(context).colorScheme.onSurfaceVariant,
+                          onPressed: () {
+                            setState(() {
+                              if (isSelected) {
+                                _painLevel = null;
+                              } else {
                                 _painLevel = painLevel;
-                              });
-                            },
-                          );
-                        }).toList(),
+                              }
+                            });
+                          },
+                        );
+                      }).toList(),
                       ),
                     ],
                   ),
@@ -214,7 +225,7 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
                         child: FilledButton(
                           style: FilledButton.styleFrom(minimumSize: const Size.fromHeight(50)),
                           onPressed: () {
-                            Navigator.of(context).pop({'date': _selectedDate, 'flow': _flowSelection, 'symptoms': _selectedSymptoms.toList(), 'painLevel': _painLevel.intValue});
+                            Navigator.of(context).pop({'date': _selectedDate, 'flow': _flowSelection, 'symptoms': _selectedSymptoms.toList(), 'painLevel': _painLevel?.intValue});
                           },
                           child: Text(l10n.save),
                         ),
