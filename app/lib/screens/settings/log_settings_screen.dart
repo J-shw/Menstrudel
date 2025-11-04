@@ -54,9 +54,7 @@ class LogSettingsScreen extends StatelessWidget {
             symptom.getDisplayName(l10n),
             symptomUsageCount,
           ),
-          confirmButtonText: symptomUsageCount > 0
-              ? l10n.deleteAnyways
-              : l10n.delete,
+          confirmButtonText: l10n.delete,
           onConfirm: () async {
             await settingsService.removeDefaultSymptom(symptom);
           },
@@ -73,8 +71,8 @@ class LogSettingsScreen extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return ConfirmationDialog(
-          title: l10n.settingsScreen_resetDefaultSymptoms,
-          contentText: l10n.settingsScreen_resetDefaultSymptomsDescription,
+          title: l10n.settingsScreen_resetSymptomsList,
+          contentText: l10n.settingsScreen_resetSymptomsListDescription,
           confirmButtonText: l10n.reset,
           onConfirm: () async {
             await settingsService.resetDefaultSymptoms();

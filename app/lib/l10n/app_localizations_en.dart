@@ -47,9 +47,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get delete => 'Delete';
 
   @override
-  String get deleteAnyways => 'Delete anyways';
-
-  @override
   String get clear => 'Clear';
 
   @override
@@ -379,11 +376,11 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get settingsScreen_resetDefaultSymptoms => 'Reset default symptoms?';
+  String get settingsScreen_resetSymptomsList => 'Reset Symptoms List?';
 
   @override
-  String get settingsScreen_resetDefaultSymptomsDescription =>
-      'This will reset the default symptoms to the built in symptoms.\n\nExisting period logs will not be updated!';
+  String get settingsScreen_resetSymptomsListDescription =>
+      'This will remove all your custom symptoms and restore the original built-in list.\n\nYour existing log entries will not be changed.';
 
   @override
   String get settingsScreen_LoggingScreen => 'Logging';

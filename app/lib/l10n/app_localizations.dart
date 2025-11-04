@@ -162,12 +162,6 @@ abstract class AppLocalizations {
   /// **'Delete'**
   String get delete;
 
-  /// No description provided for @deleteAnyways.
-  ///
-  /// In en, this message translates to:
-  /// **'Delete anyways'**
-  String get deleteAnyways;
-
   /// No description provided for @clear.
   ///
   /// In en, this message translates to:
@@ -750,17 +744,17 @@ abstract class AppLocalizations {
   /// **'Delete \'{symptom}\'?'**
   String settingsScreen_deleteDefaultSymptomQuestion(String symptom);
 
-  /// No description provided for @settingsScreen_resetDefaultSymptoms.
+  /// No description provided for @settingsScreen_resetSymptomsList.
   ///
   /// In en, this message translates to:
-  /// **'Reset default symptoms?'**
-  String get settingsScreen_resetDefaultSymptoms;
+  /// **'Reset Symptoms List?'**
+  String get settingsScreen_resetSymptomsList;
 
-  /// No description provided for @settingsScreen_resetDefaultSymptomsDescription.
+  /// No description provided for @settingsScreen_resetSymptomsListDescription.
   ///
   /// In en, this message translates to:
-  /// **'This will reset the default symptoms to the built in symptoms.\n\nExisting period logs will not be updated!'**
-  String get settingsScreen_resetDefaultSymptomsDescription;
+  /// **'This will remove all your custom symptoms and restore the original built-in list.\n\nYour existing log entries will not be changed.'**
+  String get settingsScreen_resetSymptomsListDescription;
 
   /// No description provided for @settingsScreen_LoggingScreen.
   ///
