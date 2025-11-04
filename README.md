@@ -96,7 +96,7 @@ You can view our privacy policy [here](https://menstrudel.app/privacy/).
 | ![Log View](docs/screenshots/android/logs_screen.png) | ![Symptom Entry Dialog](docs/screenshots/android/log_screen.png) | ![Symptom Entry Dialog](docs/screenshots/android/tampon_reminder.png) |
 | Pill Reminder | Quick insights | Settings |
 | ![Screenshot of the pill reminder screen in Menstrudel](docs/screenshots/android/pills_screen.png)  | ![Insights View](docs/screenshots/android/insights_screen.png) | ![Symptom Entry Dialog](docs/screenshots/android/settings_screen.png) | 
-| Wigets |  |  |
+| Widgets |  |  |
 | ![Screenshot of the widgets screen on home screen](docs/screenshots/android/widget_screen.png)  | |  | 
 
 # Wear OS
