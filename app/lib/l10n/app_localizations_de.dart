@@ -80,6 +80,15 @@ class AppLocalizationsDe extends AppLocalizations {
   String get close => 'Schließen';
 
   @override
+  String get reset => 'Reset';
+
+  @override
+  String get add => 'Add';
+
+  @override
+  String get notSet => 'Not set';
+
+  @override
   String get systemDefault => 'System Standard';
 
   @override
@@ -113,25 +122,28 @@ class AppLocalizationsDe extends AppLocalizations {
   String get flowIntensity_heavy => 'Schwer';
 
   @override
-  String get symptom_headache => 'Kopfschmerzen';
+  String get builtInSymptom_acne => 'Acne';
 
   @override
-  String get symptom_fatigue => 'Müdigkeit';
+  String get builtInSymptom_backPain => 'Back pain';
 
   @override
-  String get symptom_cramps => 'Krämpfe';
+  String get builtInSymptom_bloating => 'Bloating';
 
   @override
-  String get symptom_nausea => 'Übelkeit';
+  String get builtInSymptom_cramps => 'Cramps';
 
   @override
-  String get symptom_moodSwings => 'Stimmungsschwankungen';
+  String get builtInSymptom_fatigue => 'Fatigue';
 
   @override
-  String get symptom_bloating => 'Blähungen';
+  String get builtInSymptom_headache => 'Headache';
 
   @override
-  String get symptom_acne => 'Akne';
+  String get builtInSymptom_moodSwings => 'Mood swings';
+
+  @override
+  String get builtInSymptom_nausea => 'Nausea';
 
   @override
   String get painLevel_title => 'Schmerzgrad';
@@ -318,6 +330,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsScreen_birthControl => 'Empfängnisverhütung';
 
   @override
+  String get settingsScreen_enablePillTracking => 'Enable Pill Tracking';
+
+  @override
   String get settingsScreen_setUpPillRegimen => 'Set Up Pill Regimen';
 
   @override
@@ -349,6 +364,45 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get settingsScreen_remindMeAfter => 'Remind Me After';
+
+  @override
+  String get settingsScreen_defaultSymptoms => 'Default Symptoms';
+
+  @override
+  String get settingsScreen_defaultSymptomsSubtitle =>
+      'These are always available when logging new periods.\nTap an existing symptom to delete or \'+\' to add a new one.';
+
+  @override
+  String settingsScreen_deleteDefaultSymptomQuestion(String symptom) {
+    return 'Delete \'$symptom\'?';
+  }
+
+  @override
+  String get settingsScreen_resetSymptomsList => 'Reset Symptoms List?';
+
+  @override
+  String get settingsScreen_resetSymptomsListDescription =>
+      'This will remove all your custom symptoms and restore the original built-in list.\n\nYour existing log entries will not be changed.';
+
+  @override
+  String get settingsScreen_LoggingScreen => 'Logging';
+
+  @override
+  String settingsScreen_deleteDefaultSymptomDescription(
+    String symptom,
+    num usageCount,
+  ) {
+    String _temp0 = intl.Intl.pluralLogic(
+      usageCount,
+      locale: localeName,
+      other:
+          'There are $usageCount period logs with this symptom!\nThese logs will not be changed.',
+      one:
+          'There is already 1 period log with this symptom!\nThis log will not be changed.',
+      zero: 'There are currently no period logs with this symptom!',
+    );
+    return '\'$symptom\' will no longer be available when logging a period.\n\n$_temp0';
+  }
 
   @override
   String get settingsScreen_pillRegimens => 'Pill Regimens';
@@ -676,4 +730,25 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get periodDetailsSheet_flow => 'Flow';
+
+  @override
+  String periodPredictionCircle_days(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Days',
+      one: 'Day',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get customSymptomDialog_newSymptom => 'New Symptom';
+
+  @override
+  String get customSymptomDialog_enterCustomSymptom =>
+      'Please enter a custom symptom';
+
+  @override
+  String get customSymptomDialog_temporarySymptom => 'Temporary Symptom';
 }

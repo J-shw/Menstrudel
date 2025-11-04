@@ -1,4 +1,5 @@
 import 'package:menstrudel/models/flows/flow_enum.dart';
+import 'package:menstrudel/models/period_logs/symptom.dart';
 
 /// Represents a single day's log within a menstrual cycle.
 ///
@@ -7,9 +8,9 @@ import 'package:menstrudel/models/flows/flow_enum.dart';
 class PeriodDay {
 	int? id;
 	DateTime date;
-	List<String> symptoms;
+	List<Symptom> symptoms;
 	FlowRate flow;
-  int painLevel;
+  int? painLevel;
 	int? periodId;
 
 	PeriodDay({
@@ -17,7 +18,7 @@ class PeriodDay {
 		required this.date,
 		this.symptoms = const [],
 		required this.flow,
-    required this.painLevel,
+    this.painLevel,
 		this.periodId,
 	});
 
@@ -33,14 +34,14 @@ class PeriodDay {
 
 	factory PeriodDay.fromMap(
     Map<String, dynamic> map, {
-    List<String>? symptoms,
+    List<Symptom>? symptoms,
   }) {
 		return PeriodDay(
 			id: map['id'] as int?,
 			date: DateTime.parse(map['date'] as String),
 			symptoms: symptoms ?? [],
 			flow: FlowRate.values[map['flow'] as int],
-      painLevel: map['painLevel'] as int,
+      painLevel: map['painLevel'] as int?,
 			periodId: map['period_id'] as int?,
 		);
 	}
@@ -48,7 +49,7 @@ class PeriodDay {
 	PeriodDay copyWith({
 		int? id,
 		DateTime? date,
-		List<String>? symptoms,
+		List<Symptom>? symptoms,
 		FlowRate? flow,
     int? painLevel,
 		int? periodId,

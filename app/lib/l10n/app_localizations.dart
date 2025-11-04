@@ -228,6 +228,24 @@ abstract class AppLocalizations {
   /// **'Close'**
   String get close;
 
+  /// No description provided for @reset.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset'**
+  String get reset;
+
+  /// No description provided for @add.
+  ///
+  /// In en, this message translates to:
+  /// **'Add'**
+  String get add;
+
+  /// No description provided for @notSet.
+  ///
+  /// In en, this message translates to:
+  /// **'Not set'**
+  String get notSet;
+
   /// No description provided for @systemDefault.
   ///
   /// In en, this message translates to:
@@ -294,47 +312,53 @@ abstract class AppLocalizations {
   /// **'Heavy'**
   String get flowIntensity_heavy;
 
-  /// No description provided for @symptom_headache.
-  ///
-  /// In en, this message translates to:
-  /// **'Headache'**
-  String get symptom_headache;
-
-  /// No description provided for @symptom_fatigue.
-  ///
-  /// In en, this message translates to:
-  /// **'Fatigue'**
-  String get symptom_fatigue;
-
-  /// No description provided for @symptom_cramps.
-  ///
-  /// In en, this message translates to:
-  /// **'Cramps'**
-  String get symptom_cramps;
-
-  /// No description provided for @symptom_nausea.
-  ///
-  /// In en, this message translates to:
-  /// **'Nausea'**
-  String get symptom_nausea;
-
-  /// No description provided for @symptom_moodSwings.
-  ///
-  /// In en, this message translates to:
-  /// **'Mood Swings'**
-  String get symptom_moodSwings;
-
-  /// No description provided for @symptom_bloating.
-  ///
-  /// In en, this message translates to:
-  /// **'Bloating'**
-  String get symptom_bloating;
-
-  /// No description provided for @symptom_acne.
+  /// No description provided for @builtInSymptom_acne.
   ///
   /// In en, this message translates to:
   /// **'Acne'**
-  String get symptom_acne;
+  String get builtInSymptom_acne;
+
+  /// No description provided for @builtInSymptom_backPain.
+  ///
+  /// In en, this message translates to:
+  /// **'Back pain'**
+  String get builtInSymptom_backPain;
+
+  /// No description provided for @builtInSymptom_bloating.
+  ///
+  /// In en, this message translates to:
+  /// **'Bloating'**
+  String get builtInSymptom_bloating;
+
+  /// No description provided for @builtInSymptom_cramps.
+  ///
+  /// In en, this message translates to:
+  /// **'Cramps'**
+  String get builtInSymptom_cramps;
+
+  /// No description provided for @builtInSymptom_fatigue.
+  ///
+  /// In en, this message translates to:
+  /// **'Fatigue'**
+  String get builtInSymptom_fatigue;
+
+  /// No description provided for @builtInSymptom_headache.
+  ///
+  /// In en, this message translates to:
+  /// **'Headache'**
+  String get builtInSymptom_headache;
+
+  /// No description provided for @builtInSymptom_moodSwings.
+  ///
+  /// In en, this message translates to:
+  /// **'Mood swings'**
+  String get builtInSymptom_moodSwings;
+
+  /// No description provided for @builtInSymptom_nausea.
+  ///
+  /// In en, this message translates to:
+  /// **'Nausea'**
+  String get builtInSymptom_nausea;
 
   /// No description provided for @painLevel_title.
   ///
@@ -636,6 +660,12 @@ abstract class AppLocalizations {
   /// **'Birth Control'**
   String get settingsScreen_birthControl;
 
+  /// No description provided for @settingsScreen_enablePillTracking.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable Pill Tracking'**
+  String get settingsScreen_enablePillTracking;
+
   /// No description provided for @settingsScreen_setUpPillRegimen.
   ///
   /// In en, this message translates to:
@@ -695,6 +725,51 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Remind Me After'**
   String get settingsScreen_remindMeAfter;
+
+  /// No description provided for @settingsScreen_defaultSymptoms.
+  ///
+  /// In en, this message translates to:
+  /// **'Default Symptoms'**
+  String get settingsScreen_defaultSymptoms;
+
+  /// No description provided for @settingsScreen_defaultSymptomsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'These are always available when logging new periods.\nTap an existing symptom to delete or \'+\' to add a new one.'**
+  String get settingsScreen_defaultSymptomsSubtitle;
+
+  /// Question whether a symptom should be deleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete \'{symptom}\'?'**
+  String settingsScreen_deleteDefaultSymptomQuestion(String symptom);
+
+  /// No description provided for @settingsScreen_resetSymptomsList.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset Symptoms List?'**
+  String get settingsScreen_resetSymptomsList;
+
+  /// No description provided for @settingsScreen_resetSymptomsListDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'This will remove all your custom symptoms and restore the original built-in list.\n\nYour existing log entries will not be changed.'**
+  String get settingsScreen_resetSymptomsListDescription;
+
+  /// No description provided for @settingsScreen_LoggingScreen.
+  ///
+  /// In en, this message translates to:
+  /// **'Logging'**
+  String get settingsScreen_LoggingScreen;
+
+  /// Question whether a symptom should be deleted.
+  ///
+  /// In en, this message translates to:
+  /// **'\'{symptom}\' will no longer be available when logging a period.\n\n{usageCount, plural, zero{There are currently no period logs with this symptom!} one{There is already 1 period log with this symptom!\nThis log will not be changed.} other{There are {usageCount} period logs with this symptom!\nThese logs will not be changed.}}'**
+  String settingsScreen_deleteDefaultSymptomDescription(
+    String symptom,
+    num usageCount,
+  );
 
   /// Header for the section listing all created pill regimens.
   ///
@@ -1241,6 +1316,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Flow'**
   String get periodDetailsSheet_flow;
+
+  /// A label showing the total number of days until period is due.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{Day} other{Days}}'**
+  String periodPredictionCircle_days(int count);
+
+  /// No description provided for @customSymptomDialog_newSymptom.
+  ///
+  /// In en, this message translates to:
+  /// **'New Symptom'**
+  String get customSymptomDialog_newSymptom;
+
+  /// No description provided for @customSymptomDialog_enterCustomSymptom.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a custom symptom'**
+  String get customSymptomDialog_enterCustomSymptom;
+
+  /// No description provided for @customSymptomDialog_temporarySymptom.
+  ///
+  /// In en, this message translates to:
+  /// **'Temporary Symptom'**
+  String get customSymptomDialog_temporarySymptom;
 }
 
 class _AppLocalizationsDelegate

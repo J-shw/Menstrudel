@@ -1,4 +1,4 @@
-name: SonarQube Scan
+name: SonarCloud Scan
 
 on:
   workflow_run:
@@ -7,8 +7,8 @@ on:
       - completed
 
 jobs:
-  sonarqube:
-    name: SonarQube
+  sonarcloud:
+    name: SonarCloud Scan
     runs-on: ubuntu-latest
     
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
@@ -21,16 +21,50 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           run-id: ${{ github.event.workflow_run.id }}
           
-      - name: Checkout PR Code
+      - name: Checkout Code
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.workflow_run.head_sha }}
           fetch-depth: 0
 
-      - name: SonarQube Scan
-        uses: SonarSource/sonarqube-scan-action@v5
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      - name: Set up Java
+        uses: actions/setup-java@v4
         with:
-          args: >
-            -Dsonar.flutter.coverage.lcovReportPath=lcov.info
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Download and set up SonarScanner
+        env:
+          SONAR_SCANNER_VERSION: 5.0.1.3006 
+        run: |
+          sudo apt-get install -y unzip
+          curl --create-dirs -sSLo $HOME/.sonar/sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-${SONAR_SCANNER_VERSION}-linux.zip
+          unzip -o $HOME/.sonar/sonar-scanner.zip -d $HOME/.sonar/
+          rm $HOME/.sonar/sonar-scanner.zip
+          echo "$HOME/.sonar/sonar-scanner-${SONAR_SCANNER_VERSION}-linux/bin" >> $GITHUB_PATH
+
+      - name: Run SonarCloud Scan
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          sonar-scanner \
+            -Dsonar.organization=j-shw \
+            -Dsonar.projectKey=J-shw_Menstrudel \
+            -Dsonar.flutter.coverage.lcovReportPath=lcov.info \
+            ${{ github.event.workflow_run.event == 'pull_request' && format('
+              -Dsonar.pullrequest.key={0}
+              -Dsonar.pullrequest.branch={1}
+              -Dsonar.pullrequest.base={2}
+              -Dsonar.pullrequest.headsha={3}
+              ', 
+              github.event.workflow_run.pull_requests[0].number, 
+              github.event.workflow_run.pull_requests[0].head.ref, 
+              github.event.workflow_run.pull_requests[0].base.ref,
+              github.event.workflow_run.head_sha) 
+            }}
+            ${{ github.event.workflow_run.event == 'push' && format('
+              -Dsonar.branch.name={0}
+              ', 
+              github.event.workflow_run.head_branch) 
+            }}

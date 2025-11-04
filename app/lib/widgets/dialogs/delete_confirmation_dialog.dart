@@ -25,31 +25,47 @@ class ConfirmationDialog extends StatelessWidget {
 
     return AlertDialog.adaptive(
       title: Text(title, textAlign: TextAlign.center),
-      content: SingleChildScrollView(
-        child: Text(
-          contentText,
-          textAlign: TextAlign.center,
-          style: theme.textTheme.bodyLarge,
+      content: SizedBox(
+        width: double.maxFinite,
+        child: ListView(
+          shrinkWrap: true,
+          children: [
+            Text(
+              contentText,
+              textAlign: TextAlign.center,
+              style: theme.textTheme.bodyLarge,
+            ),
+            const SizedBox(height: 24),
+
+            Row(
+              children: [
+                Expanded(
+                  child: FilledButton.tonal(
+                    style: FilledButton.styleFrom(minimumSize: const Size.fromHeight(50)),
+                    onPressed: () => Navigator.of(context).pop(),
+                    child: Text(l10n.cancel),
+                  ),
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: FilledButton(
+                    style: FilledButton.styleFrom(
+                      minimumSize: const Size.fromHeight(50),
+                      backgroundColor: isDestructive ? colorScheme.error : null,
+                      foregroundColor: isDestructive ? colorScheme.onError : null,
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      onConfirm();
+                    },
+                    child: Text(confirmButtonText),
+                  ),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
-      actionsAlignment: MainAxisAlignment.center,
-      actions: <Widget>[
-        TextButton(
-          child: Text(l10n.cancel),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-        ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: isDestructive ? colorScheme.error : colorScheme.primary,
-            foregroundColor: isDestructive ? colorScheme.onError : colorScheme.onPrimary,
-          ),
-          onPressed: () {
-            Navigator.of(context).pop();
-            onConfirm();
-          },
-          child: Text(confirmButtonText),
-        ),
-      ],
     );
   }
 }

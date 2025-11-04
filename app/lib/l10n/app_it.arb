@@ -19,6 +19,7 @@
         }
     },
     "delete": "Elimina",
+    "deleteAnyways": "Delete anyways",
     "clear": "Cancella",
     "save": "Salva",
     "import": "Importa",
@@ -30,6 +31,9 @@
     "cancel": "Annulla",
     "select": "Seleziona",
     "close": "Chiudi",
+    "reset": "Reset",
+    "add": "Add",
+    "notSet": "Not set",
     "systemDefault": "System Default",
     "flow": "Flusso",
     "navBar_insights": "Statistiche",
@@ -41,13 +45,14 @@
     "flowIntensity_light": "Leggero",
     "flowIntensity_moderate": "Medio",
     "flowIntensity_heavy": "Abbondante",
-    "symptom_headache": "Mal di testa",
-    "symptom_fatigue": "Stanchezza",
-    "symptom_cramps": "Crampi",
-    "symptom_nausea": "Nausea",
-    "symptom_moodSwings": "Sbalzi d'umore",
-    "symptom_bloating": "Gonfiore",
-    "symptom_acne": "Acne",
+    "builtInSymptom_acne": "Acne",
+    "builtInSymptom_backPain": "Back pain",
+    "builtInSymptom_bloating": "Bloating",
+    "builtInSymptom_cramps": "Cramps",
+    "builtInSymptom_fatigue": "Fatigue",
+    "builtInSymptom_headache": "Headache",
+    "builtInSymptom_moodSwings": "Mood swings",
+    "builtInSymptom_nausea": "Nausea",
     "painLevel_title": "Intensità del dolore",
     "painLevel_none": "Assente",
     "painLevel_mild": "Leggero",
@@ -140,6 +145,7 @@
     "settingsScreen_pickAColor": "Scegli un colore",
     "settingsScreen_view": "Visualizza",
     "settingsScreen_birthControl": "Contraccezione",
+    "settingsScreen_enablePillTracking": "Enable Pill Tracking",
     "settingsScreen_setUpPillRegimen": "Crea piano pillola",
     "settingsScreen_trackYourDailyPillIntake": "Monitoraggio pillola giornaliero",
     "settingsScreen_dailyPillReminder": "Promemoria pillola giornaliero",
@@ -150,6 +156,32 @@
     "settingsScreen_notificationTime": "Orario notifica",
     "settingsScreen_overduePeriodReminder": "Promemoria ciclo in ritardo",
     "settingsScreen_remindMeAfter": "Avvisami dopo",
+    "settingsScreen_defaultSymptoms": "Default Symptoms",
+    "settingsScreen_defaultSymptomsSubtitle": "These are always available when logging new periods.\nTap an existing symptom to delete or '+' to add a new one.",
+    "settingsScreen_deleteDefaultSymptomQuestion": "Delete '{symptom}'?",
+    "@settingsScreen_deleteDefaultSymptomQuestion": {
+        "description": "Question whether a symptom should be deleted.",
+        "placeholders": {
+            "symptom": {
+                "type": "String",
+                "example": "The name of the symptom."
+            }
+        }
+    },
+    "settingsScreen_resetDefaultSymptoms": "Reset default symptoms?",
+    "settingsScreen_resetDefaultSymptomsDescription": "This will reset the default symptoms to the built in symptoms.\n\nExisting period logs will not be updated!",
+    "settingsScreen_LoggingScreen": "Logging",
+    "settingsScreen_deleteDefaultSymptomDescription": "'{symptom}' will no longer be available when logging a period.\n\n{usageCount, plural, zero{There are currently no period logs with this symptom!} one{There is already 1 period log with this symptom!\nThis log will not be changed.} other{There are {usageCount} period logs with this symptom!\nThese logs will not be changed.}}",
+    "@settingsScreen_deleteDefaultSymptomDescription": {
+        "description": "Question whether a symptom should be deleted.",
+        "placeholders": {
+            "symptom": {
+                "type": "String",
+                "example": "The name of the symptom."
+            },
+            "usageCount": {}
+        }
+    },
     "settingsScreen_pillRegimens": "Piani pillola",
     "@settingsScreen_pillRegimens": {
         "description": "Header for the section listing all created pill regimens."
@@ -252,7 +284,7 @@
     "listViewWidget_confirmDeleteDescription": "Sei sicura di voler eliminare questa voce?",
     "emptyPillStateWidget_noPillRegimenFound": "Nessun piano pillola trovato.",
     "emptyPillStateWidget_noPillRegimenFoundDescription": "Configura la tua confezione di pillole nelle impostazioni per iniziare il monitoraggio.",
-    "pillStatus_pillsOfTotal": "{count, plural, one {}=1{di 1 pillola} other{di {count} pillole}}",
+    "pillStatus_pillsOfTotal": "{count, plural, =1{di 1 pillola} other{di {count} pillole}}",
     "@pillStatus_pillsOfTotal": {
         "description": "A label showing the total number of pills.",
         "placeholders": {
@@ -284,5 +316,17 @@
     "symptomEntrySheet_logYourDay": "Inserisci i dati giornalieri",
     "symptomEntrySheet_symptomsOptional": "Sintomi (facoltativo)",
     "periodDetailsSheet_symptoms": "Sintomi",
-    "periodDetailsSheet_flow": "Flusso"
+    "periodDetailsSheet_flow": "Flusso",
+    "periodPredictionCircle_days": "{count, plural, =1{Giorno} other{Giorni}}",
+    "@periodPredictionCircle_days": {
+        "description": "A label showing the total number of days until period is due.",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "customSymptomDialog_newCustomSymptom": "New custom symptom",
+    "customSymptomDialog_enterCustomSymptom": "Please enter a custom symptom",
+    "customSymptomDialog_makeTemporary": "Is temporary symptom"
 }

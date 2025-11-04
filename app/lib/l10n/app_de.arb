@@ -19,6 +19,7 @@
         }
     },
     "delete": "Löschen",
+    "deleteAnyways": "Delete anyways",
     "clear": "Löschen",
     "save": "Speichern",
     "import": "Importieren",
@@ -30,6 +31,9 @@
     "cancel": "Abbrechen",
     "select": "Auswählen",
     "close": "Schließen",
+    "reset": "Reset",
+    "add": "Add",
+    "notSet": "Not set",
     "systemDefault": "System Standard",
     "flow": "Flow",
     "navBar_insights": "Einblicke",
@@ -41,13 +45,14 @@
     "flowIntensity_light": "Hell",
     "flowIntensity_moderate": "Mäßig",
     "flowIntensity_heavy": "Schwer",
-    "symptom_headache": "Kopfschmerzen",
-    "symptom_fatigue": "Müdigkeit",
-    "symptom_cramps": "Krämpfe",
-    "symptom_nausea": "Übelkeit",
-    "symptom_moodSwings": "Stimmungsschwankungen",
-    "symptom_bloating": "Blähungen",
-    "symptom_acne": "Akne",
+    "builtInSymptom_acne": "Acne",
+    "builtInSymptom_backPain": "Back pain",
+    "builtInSymptom_bloating": "Bloating",
+    "builtInSymptom_cramps": "Cramps",
+    "builtInSymptom_fatigue": "Fatigue",
+    "builtInSymptom_headache": "Headache",
+    "builtInSymptom_moodSwings": "Mood swings",
+    "builtInSymptom_nausea": "Nausea",
     "painLevel_title": "Schmerzgrad",
     "painLevel_none": "Keine",
     "painLevel_mild": "Mild",
@@ -140,6 +145,7 @@
     "settingsScreen_pickAColor": "Eine Farbe auswählen",
     "settingsScreen_view": "Ansicht",
     "settingsScreen_birthControl": "Empfängnisverhütung",
+    "settingsScreen_enablePillTracking": "Enable Pill Tracking",
     "settingsScreen_setUpPillRegimen": "Set Up Pill Regimen",
     "settingsScreen_trackYourDailyPillIntake": "Track Your Daily Pill Intake",
     "settingsScreen_dailyPillReminder": "Daily Pill Reminder",
@@ -150,6 +156,32 @@
     "settingsScreen_notificationTime": "Benachrichtigungszeit",
     "settingsScreen_overduePeriodReminder": "Overdue Period Reminder",
     "settingsScreen_remindMeAfter": "Remind Me After",
+    "settingsScreen_defaultSymptoms": "Default Symptoms",
+    "settingsScreen_defaultSymptomsSubtitle": "These are always available when logging new periods.\nTap an existing symptom to delete or '+' to add a new one.",
+    "settingsScreen_deleteDefaultSymptomQuestion": "Delete '{symptom}'?",
+    "@settingsScreen_deleteDefaultSymptomQuestion": {
+        "description": "Question whether a symptom should be deleted.",
+        "placeholders": {
+            "symptom": {
+                "type": "String",
+                "example": "The name of the symptom."
+            }
+        }
+    },
+    "settingsScreen_resetDefaultSymptoms": "Reset default symptoms?",
+    "settingsScreen_resetDefaultSymptomsDescription": "This will reset the default symptoms to the built in symptoms.\n\nExisting period logs will not be updated!",
+    "settingsScreen_LoggingScreen": "Logging",
+    "settingsScreen_deleteDefaultSymptomDescription": "'{symptom}' will no longer be available when logging a period.\n\n{usageCount, plural, zero{There are currently no period logs with this symptom!} one{There is already 1 period log with this symptom!\nThis log will not be changed.} other{There are {usageCount} period logs with this symptom!\nThese logs will not be changed.}}",
+    "@settingsScreen_deleteDefaultSymptomDescription": {
+        "description": "Question whether a symptom should be deleted.",
+        "placeholders": {
+            "symptom": {
+                "type": "String",
+                "example": "The name of the symptom."
+            },
+            "usageCount": {}
+        }
+    },
     "settingsScreen_pillRegimens": "Pill Regimens",
     "@settingsScreen_pillRegimens": {
         "description": "Header for the section listing all created pill regimens."
@@ -284,5 +316,17 @@
     "symptomEntrySheet_logYourDay": "Log Your Day",
     "symptomEntrySheet_symptomsOptional": "Symptome (optional)",
     "periodDetailsSheet_symptoms": "Symptome",
-    "periodDetailsSheet_flow": "Flow"
+    "periodDetailsSheet_flow": "Flow",
+    "periodPredictionCircle_days": "{count, plural, =1{Day} other{Days}}",
+    "@periodPredictionCircle_days": {
+        "description": "A label showing the total number of days until period is due.",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "customSymptomDialog_newCustomSymptom": "New custom symptom",
+    "customSymptomDialog_enterCustomSymptom": "Please enter a custom symptom",
+    "customSymptomDialog_makeTemporary": "Is temporary symptom"
 }

@@ -1,24 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/models/period_logs/period_day.dart';
-import 'package:menstrudel/models/period_prediction_result.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/models/flows/flow_enum.dart';
+import 'package:menstrudel/services/period_service.dart';
+import 'package:provider/provider.dart';
 
 class PeriodJournalView extends StatefulWidget {
-  final List<PeriodDay> periodLogEntries;
-  final bool isLoading;
+final Function(DateTime) onLogRequested;
   final Function(PeriodDay) onLogTapped;
-  final PeriodPredictionResult? predictionResult;
-  final Function(DateTime) onLogRequested;
 
   const PeriodJournalView({
     super.key,
-    required this.periodLogEntries,
-    required this.isLoading,
-    required this.onLogTapped,
-    this.predictionResult,
     required this.onLogRequested,
+    required this.onLogTapped,
   });
 
   @override
@@ -28,49 +23,37 @@ class PeriodJournalView extends StatefulWidget {
 class _PeriodJournalViewState extends State<PeriodJournalView> {
   late DateTime _focusedDay;
   DateTime? _selectedDay;
-  Map<DateTime, PeriodDay> _logMap = {};
 
   @override
   void initState() {
     super.initState();
     _focusedDay = DateTime.now();
-    _processEntries();
-  }
-
-  @override
-  void didUpdateWidget(covariant PeriodJournalView oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (widget.periodLogEntries != oldWidget.periodLogEntries) {
-      _processEntries();
-    }
-  }
-
-  void _processEntries() {
-    _logMap = {
-      for (var log in widget.periodLogEntries) DateUtils.dateOnly(log.date): log
-    };
   }
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    final periodService = context.watch<PeriodService>();
+    final predictionResult = periodService.predictionResult;
+    final isLoading = periodService.isLoading;
+    final logMap = periodService.logMap;
+    final earliestLogDate = periodService.earliestLogDate;
+    final latestLogDate = periodService.latestLogDate;
 
-    if (widget.isLoading) {
+    if (isLoading) {
       return const Expanded(child: Center(child: CircularProgressIndicator()));
     }
-    if (widget.periodLogEntries.isEmpty) {
+    if (earliestLogDate == null) {
       return Expanded(child: Center(child: Text(l10n.journalViewWidget_logYourFirstPeriod)));
     }
 
     final colorScheme = Theme.of(context).colorScheme;
 
-    final earliestLogDate = widget.periodLogEntries.reduce((a, b) => a.date.isBefore(b.date) ? a : b).date;
-    final latestLogDate = widget.periodLogEntries.reduce((a, b) => a.date.isAfter(b.date) ? a : b).date;
-
+    final latestLogDateForBoundary = latestLogDate ?? DateTime.now();
     final focusedDateOnly = DateUtils.dateOnly(_focusedDay);
-
-    final calendarBoundary = focusedDateOnly.isAfter(latestLogDate) ? focusedDateOnly : latestLogDate;
-
+    final calendarBoundary = focusedDateOnly.isAfter(latestLogDateForBoundary) 
+        ? focusedDateOnly 
+        : latestLogDateForBoundary;
 
     return Expanded(
       child: Column(
@@ -114,12 +97,7 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
               enabledDayPredicate: (day) {
                 final today = DateUtils.dateOnly(DateTime.now());
                 final currentDay = DateUtils.dateOnly(day);
-
-                if (!currentDay.isAfter(today)) {
-                  return true;
-                }
-
-                return false;
+                return !currentDay.isAfter(today);
               },
 
               onDaySelected: (selectedDay, focusedDay) {
@@ -128,7 +106,7 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
                   _focusedDay = focusedDay;
                 });
 
-                final logForSelectedDay = _logMap[DateUtils.dateOnly(selectedDay)];
+                final logForSelectedDay = logMap[DateUtils.dateOnly(selectedDay)];
 
                 if (logForSelectedDay != null) {
                   widget.onLogTapped(logForSelectedDay);
@@ -143,7 +121,7 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
               },
               calendarBuilders: CalendarBuilders(
                 prioritizedBuilder: (context, day, focusedDay) {
-                  final log = _logMap[DateUtils.dateOnly(day)];
+                  final log = logMap[DateUtils.dateOnly(day)];
                   if (log != null) {
                     return Container(
                       margin: const EdgeInsets.all(4.0),
@@ -161,8 +139,8 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
                     );
                   }
 
-                  final startDate = widget.predictionResult?.estimatedStartDate;
-                  final endDate = widget.predictionResult?.estimatedEndDate;
+                  final startDate = predictionResult?.estimatedStartDate;
+                  final endDate = predictionResult?.estimatedEndDate;
                   bool isPredictedDay = false;
 
                   if (startDate != null && endDate != null) {

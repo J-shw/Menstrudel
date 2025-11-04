@@ -28,7 +28,7 @@ class AppDatabase {
 
       _database = await openDatabase(
         path,
-        version: 7,
+        version: 8,
         onCreate: _createDB,
         onUpgrade: _upgradeDB,
       );
@@ -52,7 +52,7 @@ class AppDatabase {
           id INTEGER PRIMARY KEY AUTOINCREMENT,
           date TEXT NOT NULL,
           flow INTEGER NOT NULL,
-          painLevel INTEGER NOT NULL,
+          painLevel INTEGER,
           period_id INTEGER,
           FOREIGN KEY (period_id) REFERENCES periods(id) ON DELETE SET NULL
       )
@@ -102,6 +102,35 @@ class AppDatabase {
       await migrateSymptomsToNewSymptomTable(db);
       
       await db.execute('ALTER TABLE period_logs DROP COLUMN symptoms');
+    }
+    if (oldVersion < 8) { 
+      await db.transaction((txn) async {
+
+        await txn.execute( 
+        ''' 
+        CREATE TABLE period_logs_new ( 
+            id INTEGER PRIMARY KEY AUTOINCREMENT, 
+            date TEXT NOT NULL, 
+            flow INTEGER NOT NULL, 
+            painLevel INTEGER, 
+            period_id INTEGER, 
+            FOREIGN KEY (period_id) REFERENCES periods(id) ON DELETE SET NULL 
+          ) 
+         ''' 
+        );
+
+        await txn.execute(
+          '''
+          INSERT INTO period_logs_new (id, date, flow, painLevel, period_id)
+          SELECT id, date, flow, painLevel, period_id
+          FROM period_logs
+          '''
+        );
+
+        await txn.execute('DROP TABLE period_logs');
+
+        await txn.execute('ALTER TABLE period_logs_new RENAME TO period_logs');
+      });
     }
 
   }
