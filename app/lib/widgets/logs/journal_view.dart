@@ -34,7 +34,6 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final periodService = context.watch<PeriodService>();
-    final periodLogEntries = periodService.periodLogEntries;
     final predictionResult = periodService.predictionResult;
     final isLoading = periodService.isLoading;
     final logMap = periodService.logMap;
