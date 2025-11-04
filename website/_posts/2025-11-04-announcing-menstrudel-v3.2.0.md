@@ -17,10 +17,30 @@ We're excited to release version **3.2.0** of Menstrudel. This update includes s
 
 ### What's New
 * **Custom Symptoms** Thanks to the hard work of a new contributor, we now have custom symptoms! There are default ones provided, but users can now create and log their own symptoms. Go to settings > Logging
-* **Hide Pill Screen** You can now hide the pill screen from the navbar! Go to settings > Birth control and enable/disable 'Enable Pill Tracking'.
 * **Android Widget** We have our first widget! It's only for Android at the moment, and shows the estimated date of your next period.
+* **Hide Pill Screen** You can now hide the pill screen from the navbar! Go to settings > Birth control and enable/disable 'Enable Pill Tracking'.
 * **Pain Level Now Optional** Thanks to user feedback, pain level is optional and not selected by default when logging. (We also added some more colour to the indicators 🌈)
 * **More Translations** Thanks to the community, the app now has better translation support!
+
+
+<h3 style="text-align: center;">Custom Symptoms </h3>
+![Custom Symptoms GIF](/assets/images/blog/2025-11-04-announcing-menstrudel-v3.2.0/custom-symptom.gif)
+
+Thats right, you can now log any and every symptom you want! This has been one of our most requested features since starting. We know symptoms are unique and affect everyone differently, so this feature gives you the freedom to log them all.
+
+<h3 style="text-align: center;">Introducing Android Widgets!</h3>
+![New Android Wdiget Image](/assets/images/blog/2025-11-04-announcing-menstrudel-v3.2.0/widget.png)
+
+We're excited to release our first widget, **starting with Android**! It shows the estimated start date of your next period using the same circular progress bar you know from the app.
+
+This is just the beginning, and we plan to improve it and add more options based on your feedback.
+
+<h3 style="text-align: center;">Hide the Pill Screen</h3>
+![Hiding Pill Screen GIF](/assets/images/blog/2025-11-04-announcing-menstrudel-v3.2.0/pill-screen.gif)
+
+We know not all of our users need pill tracking. If you don't use this feature, you can now remove it from the navigation bar completely.
+
+Just go to **Settings > Birth Control** and disable the 'Enable Pill Tracking' toggle. 
 
 ---
 
