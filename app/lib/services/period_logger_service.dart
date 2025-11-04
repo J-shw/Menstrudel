@@ -31,7 +31,7 @@ class PeriodLoggerService {
         date: date,
         symptoms: result['symptoms'] ?? [],
         flow: result['flow'] ?? FlowRate.none,
-        painLevel: result['painLevel'] ?? 0,
+        painLevel: result['painLevel'],
       );
 
       try {

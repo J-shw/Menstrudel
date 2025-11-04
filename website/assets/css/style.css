@@ -465,6 +465,7 @@ section h2 {
 
 .post-content img {
   max-width: 100%;
+  max-height: 500px;
   height: auto;
   display: block;
   margin: 1rem auto;
