@@ -1341,11 +1341,11 @@ abstract class AppLocalizations {
   /// **'Enter a custom symptom'**
   String get customSymptomDialog_enterCustomSymptom;
 
-  /// No description provided for @customSymptomDialog_makeTemporary.
+  /// No description provided for @customSymptomDialog_temporarySymptom.
   ///
   /// In en, this message translates to:
-  /// **'Is temporary symptom'**
-  String get customSymptomDialog_makeTemporary;
+  /// **'Temporary Symptom'**
+  String get customSymptomDialog_temporarySymptom;
 }
 
 class _AppLocalizationsDelegate

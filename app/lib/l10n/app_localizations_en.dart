@@ -742,5 +742,5 @@ class AppLocalizationsEn extends AppLocalizations {
   String get customSymptomDialog_enterCustomSymptom => 'Enter a custom symptom';
 
   @override
-  String get customSymptomDialog_makeTemporary => 'Is temporary symptom';
+  String get customSymptomDialog_temporarySymptom => 'Temporary Symptom';
 }

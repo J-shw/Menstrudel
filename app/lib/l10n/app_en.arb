@@ -372,5 +372,5 @@
     },
     "customSymptomDialog_newSymptom": "New Symptom",
     "customSymptomDialog_enterCustomSymptom": "Enter a custom symptom",
-    "customSymptomDialog_makeTemporary": "Is temporary symptom"
+    "customSymptomDialog_temporarySymptom": "Temporary Symptom"
 }
