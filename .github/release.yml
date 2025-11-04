@@ -1,3 +1,11 @@
+template: |
+  ## What's Changed
+
+  $CHANGES
+
+  ---
+  **Read the full announcement:** [Read our blog](https://menstrudel.app/blog/)
+
 changelog:
   exclude:
     labels:
