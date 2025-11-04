@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 
 class CustomSymptomDialog extends StatefulWidget {
-  final bool showTemporarySymptomButton;
+  final bool hideTemporarySwitch;
 
   const CustomSymptomDialog({
     super.key,
-    this.showTemporarySymptomButton = false,
+    this.hideTemporarySwitch = false,
   });
 
   @override
@@ -57,12 +57,12 @@ class _CustomSymptomDialogState extends State<CustomSymptomDialog> {
                 maxLength: 60,
                 maxLines: 1,
               ),
-              if (!widget.showTemporarySymptomButton)
+              if (!widget.hideTemporarySwitch)
                 Padding(
-                  padding: const EdgeInsets.only(top: 16.0),
+                  padding: const EdgeInsets.only(top: 8.0),
                   child: SwitchListTile(
-                    subtitle: Text(l10n.customSymptomDialog_makeTemporary),
-                    secondary: const Icon(Icons.fact_check),
+                    title: Text(l10n.customSymptomDialog_temporarySymptom), 
+                    secondary: const Icon(Icons.event_note),
                     value: _isTemporary,
                     onChanged: (value) {
                       setState(() {
