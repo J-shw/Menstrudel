@@ -33,6 +33,7 @@
     "close": "Fermer",
     "reset": "Reset",
     "add": "Add",
+    "notSet": "Not set",
     "systemDefault": "Valeur par défaut du système",
     "flow": "Flux /",
     "navBar_insights": "Statistiques",
