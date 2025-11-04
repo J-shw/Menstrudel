@@ -1338,7 +1338,7 @@ abstract class AppLocalizations {
   /// No description provided for @customSymptomDialog_enterCustomSymptom.
   ///
   /// In en, this message translates to:
-  /// **'Please enter a custom symptom'**
+  /// **'Enter a custom symptom'**
   String get customSymptomDialog_enterCustomSymptom;
 
   /// No description provided for @customSymptomDialog_makeTemporary.
