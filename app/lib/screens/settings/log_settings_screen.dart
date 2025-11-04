@@ -73,8 +73,8 @@ class LogSettingsScreen extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return ConfirmationDialog(
-          title: l10n.settingsScreen_resetDefaultSymptoms,
-          contentText: l10n.settingsScreen_resetDefaultSymptomsDescription,
+          title: l10n.settingsScreen_resetSymptomsList,
+          contentText: l10n.settingsScreen_resetSymptomsListDescription,
           confirmButtonText: l10n.reset,
           onConfirm: () async {
             await settingsService.resetDefaultSymptoms();
