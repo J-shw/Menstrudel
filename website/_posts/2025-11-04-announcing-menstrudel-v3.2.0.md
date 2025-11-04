@@ -16,10 +16,14 @@ We're excited to release version **3.2.0** of Menstrudel. This update includes s
 
 
 ### What's New
-* **Custom Symptoms** Thanks to the hard work of a new contributor, we now have custom symptoms! There are default ones provided, but users can now create and log their own symptoms. Go to settings > Logging
+* **Custom Symptoms** Thanks to the hard work of a new contributor, we now have custom symptoms! There are default ones provided, but users can now create and log their own symptoms. You can manage your custom list under Settings > Logging.
+
 * **Android Widget** We have our first widget! It's only for Android at the moment, and shows the estimated date of your next period.
+
 * **Hide Pill Screen** You can now hide the pill screen from the navbar! Go to settings > Birth control and enable/disable 'Enable Pill Tracking'.
+
 * **Pain Level Now Optional** Thanks to user feedback, pain level is optional and not selected by default when logging. (We also added some more colour to the indicators 🌈)
+
 * **More Translations** Thanks to the community, the app now has better translation support!
 
 
