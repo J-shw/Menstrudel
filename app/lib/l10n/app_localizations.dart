@@ -1329,11 +1329,11 @@ abstract class AppLocalizations {
   /// **'{count, plural, =1{Day} other{Days}}'**
   String periodPredictionCircle_days(int count);
 
-  /// No description provided for @customSymptomDialog_newCustomSymptom.
+  /// No description provided for @customSymptomDialog_newSymptom.
   ///
   /// In en, this message translates to:
-  /// **'New custom symptom'**
-  String get customSymptomDialog_newCustomSymptom;
+  /// **'New Symptom'**
+  String get customSymptomDialog_newSymptom;
 
   /// No description provided for @customSymptomDialog_enterCustomSymptom.
   ///

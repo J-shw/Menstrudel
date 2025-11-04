@@ -751,7 +751,7 @@ class AppLocalizationsIt extends AppLocalizations {
   }
 
   @override
-  String get customSymptomDialog_newCustomSymptom => 'New custom symptom';
+  String get customSymptomDialog_newSymptom => 'New Symptom';
 
   @override
   String get customSymptomDialog_enterCustomSymptom =>
