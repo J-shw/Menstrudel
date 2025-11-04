@@ -48,6 +48,7 @@ Just go to **Settings > Birth Control** and disable the 'Enable Pill Tracking' t
 * Improved general app performance
 * Corrected wording of 'days' on period prediction screen
 * Fixed some database related issues
+* Cleaned up some UI elements
 
 ## Get Involved
 
