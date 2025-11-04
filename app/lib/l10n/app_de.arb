@@ -33,6 +33,7 @@
     "close": "Schließen",
     "reset": "Reset",
     "add": "Add",
+    "notSet": "Not set",
     "systemDefault": "System Standard",
     "flow": "Flow",
     "navBar_insights": "Einblicke",
