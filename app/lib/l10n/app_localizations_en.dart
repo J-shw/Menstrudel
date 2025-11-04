@@ -47,9 +47,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get delete => 'Delete';
 
   @override
-  String get deleteAnyways => 'Delete anyways';
-
-  @override
   String get clear => 'Clear';
 
   @override

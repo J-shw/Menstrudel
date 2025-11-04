@@ -162,12 +162,6 @@ abstract class AppLocalizations {
   /// **'Delete'**
   String get delete;
 
-  /// No description provided for @deleteAnyways.
-  ///
-  /// In en, this message translates to:
-  /// **'Delete anyways'**
-  String get deleteAnyways;
-
   /// No description provided for @clear.
   ///
   /// In en, this message translates to:

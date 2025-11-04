@@ -47,9 +47,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String get delete => 'Supprimer';
 
   @override
-  String get deleteAnyways => 'Delete anyways';
-
-  @override
   String get clear => 'Effacer';
 
   @override
