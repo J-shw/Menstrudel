@@ -22,12 +22,12 @@ Before building, or after any native plugin is added/updated, you must install t
     flutter pub get
     ```
 
-1.  Navigate to the `ios` directory:
+2.  Navigate to the `ios` directory:
     ```sh
     cd ios
     ```
 
-2.  Run the pod installer:
+3.  Run the pod installer:
     ```sh
     pod install
     ```
