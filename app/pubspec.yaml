@@ -39,7 +39,18 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^6.0.0
   sqflite_common_ffi: 2.3.6
+  flutter_launcher_icons: ^0.14.4
 
 flutter:
   uses-material-design: true
   generate: true
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  
+  adaptive_icon_background: "#ffffff"
+  adaptive_icon_foreground: "assets/icon/menstrudel.png"
+  adaptive_icon_monochrome: "assets/icon/menstrudel_monochrome.png"
+  
+  image_path: "assets/icon/menstrudel_monochrome.png"
