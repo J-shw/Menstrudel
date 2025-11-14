@@ -27,18 +27,8 @@ flutter:
 flutter_native_splash:
   color: "#000000"
 
-  image: assets/splash_icon.jpg
+  image: assets/icon/menstrudel.png
 
   android_12:
     color: "#000000"
-    image: assets/splash_icon.jpg
-
-flutter_launcher_icons:
-  android: true
-  ios: true
-  
-  adaptive_icon_background: "#ffffff"
-  adaptive_icon_foreground: "assets/icon/menstrudel.png"
-  adaptive_icon_monochrome: "assets/icon/menstrudel_monochrome.png"
-  
-  image_path: "assets/icon/menstrudel_monochrome.png"
+    image: assets/icon/menstrudel.png
