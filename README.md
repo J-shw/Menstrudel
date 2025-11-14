@@ -6,7 +6,7 @@
 
 <div align="center">
 
-  <img src="icon/menstrudel.jpg" alt="Menstrudel App Icon" style="border-radius: 25%; width: 120px;">
+  <img src="icon/menstrudel_circle.jpg" alt="Menstrudel App Icon" style="width: 120px;">
 
   # Menstrudel
 
