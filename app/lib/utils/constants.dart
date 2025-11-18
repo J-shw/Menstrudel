@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:menstrudel/models/period_logs/symptom.dart';
 import 'package:menstrudel/models/themes/app_theme_mode_enum.dart';
 import 'package:menstrudel/services/settings_service.dart';
+import 'package:menstrudel/models/birth_control/larcs/larc_types_enum.dart';
 
 /// The base app seed colour.
 const seedColor = Color(0xFF60A5FA);
@@ -44,6 +45,7 @@ const String defaultSymptomsKey = "default_symptoms";
 const String languageKey = "language";
 const String pillNavEnabledKey = "pill_nav_enabled";
 const String larcNavEnabledKey = "larc_nav_enabled";
+const String larcTypeKey = "larc_type";
 
 // Notifications
 const String tamponReminderDateTimeKey = 'tampon_reminder_date_time';
@@ -53,6 +55,7 @@ const String tamponReminderDateTimeKey = 'tampon_reminder_date_time';
 // Settings
 const bool kDefaultPillNavEnabled = false;
 const bool kDefaultLarcNavEnabled = false;
+const String kDefaultLarcType = 'injection';
 const String kDefaultLanguageCode = 'system';
 const bool kDefaultAlwaysShowReminderButton = false;
 const bool kDefaultBiometricsEnabled = false;
