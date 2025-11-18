@@ -89,6 +89,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get notSet => 'Not set';
 
   @override
+  String get note => 'Note';
+
+  @override
   String get systemDefault => 'System Standard';
 
   @override
