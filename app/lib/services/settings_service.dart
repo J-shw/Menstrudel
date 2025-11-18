@@ -13,7 +13,7 @@ class SettingsService extends ChangeNotifier {
 
   bool _pillNavEnabled = kDefaultPillNavEnabled;
   bool _isLarcNavEnabled = kDefaultLarcNavEnabled;
-  String _larcType = kDefaultLarcType;
+  LarcTypes _larcType = kDefaultLarcType;
   String _languageCode = kDefaultLanguageCode;
   bool _alwaysShowReminderButton = kDefaultAlwaysShowReminderButton;
   bool _biometricsEnabled = kDefaultBiometricsEnabled;
@@ -34,7 +34,7 @@ class SettingsService extends ChangeNotifier {
   /// LARCs (Long-Acting Reversible Contraceptives) navigation enabled
   bool get isLarcNavEnabled => _isLarcNavEnabled;
   /// LARC type selected
-  String get larcType => _larcType;
+  LarcTypes get larcType => _larcType;
   /// The selected language code for the app (e.g., 'en', 'es', or 'system').
   String get languageCode => _languageCode;
   /// Whether the tampon reminder FAB is persistently shown on the Logs screen.
@@ -69,7 +69,7 @@ class SettingsService extends ChangeNotifier {
     _prefs = await SharedPreferences.getInstance();
 
     _pillNavEnabled = _prefs.getBool(pillNavEnabledKey) ?? false;
-    _isLarcNavEnabled = _prefs.getBool(pillNavEnabledKey) ?? false;
+    _isLarcNavEnabled = _prefs.getBool(larcNavEnabledKey) ?? false;
     _languageCode = _prefs.getString(languageKey) ?? 'system';
     _alwaysShowReminderButton = _prefs.getBool(persistentReminderKey) ?? false;
     _biometricsEnabled = _prefs.getBool(biometricEnabledKey) ?? false;
@@ -87,6 +87,16 @@ class SettingsService extends ChangeNotifier {
     _themeMode = _loadThemeMode();
 
     _defaultSymptoms = _loadDefaultSymptoms();
+
+    try {
+      final String? larcTypeString = _prefs.getString(larcTypeKey);
+      _larcType = LarcTypes.values.firstWhere(
+        (e) => e.name == larcTypeString,
+      );
+    } catch (e) {
+      debugPrint('Corrupt saved LARC type. Resetting to default.');
+      _larcType = kDefaultLarcType;
+    }
 
     notifyListeners();
   }
@@ -154,9 +164,9 @@ class SettingsService extends ChangeNotifier {
   }
 
   Future<void> setLarcType(LarcTypes type) async {
-    _larcType = type.name;
+    _larcType = type;
     notifyListeners();
-    await _prefs.setString(larcTypeKey, _larcType);
+    await _prefs.setString(larcTypeKey, type.name);
   }
 
   Future<void> setLanguageCode(String code) async {
