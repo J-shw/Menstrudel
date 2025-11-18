@@ -159,6 +159,7 @@ class _BirthControlSettingsScreenState extends State<BirthControlSettingsScreen>
               children: [
                 SwitchListTile(
                   title: Text(l10n.settingsScreen_enablePillTracking),
+                  subtitle: Text(l10n.settingsScreen_pillDescription),
                   value: pillEnabled,
                   onChanged: (bool value) {
                     context.read<SettingsService>().setPillNavEnabled(value);
@@ -265,7 +266,8 @@ class _BirthControlSettingsScreenState extends State<BirthControlSettingsScreen>
                 ],
                 
                 SwitchListTile(
-                  title: const Text("LARCs"),
+                  title: Text(l10n.settingsScreen_enableLarcTracking),
+                  subtitle: Text(l10n.settingsScreen_larcDescription),
                   value: larcEnabled,
                   onChanged: (bool value) {
                     context.read<SettingsService>().setLarcNavEnabled(value);
