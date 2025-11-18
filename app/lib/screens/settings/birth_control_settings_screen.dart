@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/database/repositories/pills_repository.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
+import 'package:menstrudel/models/birth_control/larcs/larc_types_enum.dart';
 import 'package:menstrudel/models/birth_control/pills/pill_regimen.dart';
 import 'package:menstrudel/models/birth_control/pills/pill_reminder.dart';
 import 'package:menstrudel/services/notification_service.dart';
@@ -275,11 +276,22 @@ class _BirthControlSettingsScreenState extends State<BirthControlSettingsScreen>
                 ),
                 const Divider(),
                 if (larcEnabled) ...[
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Text(
-                      "LARC settings will go here.",
-                      style: Theme.of(context).textTheme.bodyMedium,
+                  ListTile(
+                    leading: const Icon(Icons.type_specimen_outlined),
+                    title: Text(l10n.settingsScreen_larcType),
+                    trailing: DropdownButton<LarcTypes>(
+                      value: settingsService.larcType,
+                      items: LarcTypes.values.map((type) {
+                        return DropdownMenuItem<LarcTypes>(
+                          value: type,
+                          child: Text(type.getDisplayName(l10n)),
+                        );
+                      }).toList(),
+                      onChanged: (LarcTypes? selectedType) {
+                        if (selectedType != null) {
+                          context.read<SettingsService>().setLarcType(selectedType);
+                        }
+                      },
                     ),
                   ),
                 ]
