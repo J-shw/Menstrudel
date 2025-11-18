@@ -170,7 +170,8 @@ class AppDatabase {
       CREATE TABLE larc_logs (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         date TEXT NOT NULL,
-        type TEXT NOT NULL
+        type TEXT NOT NULL,
+        note TEXT
       )
       ''');
   }
