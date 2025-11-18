@@ -43,6 +43,7 @@ const String persistentReminderKey = "always_show_reminder_button";
 const String defaultSymptomsKey = "default_symptoms";
 const String languageKey = "language";
 const String pillNavEnabledKey = "pill_nav_enabled";
+const String larcNavEnabledKey = "larc_nav_enabled";
 
 // Notifications
 const String tamponReminderDateTimeKey = 'tampon_reminder_date_time';
@@ -51,6 +52,7 @@ const String tamponReminderDateTimeKey = 'tampon_reminder_date_time';
 
 // Settings
 const bool kDefaultPillNavEnabled = false;
+const bool kDefaultLarcNavEnabled = false;
 const String kDefaultLanguageCode = 'system';
 const bool kDefaultAlwaysShowReminderButton = false;
 const bool kDefaultBiometricsEnabled = false;
