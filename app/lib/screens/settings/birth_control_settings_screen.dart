@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/database/repositories/pills_repository.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
-import 'package:menstrudel/models/pills/pill_regimen.dart';
-import 'package:menstrudel/models/pills/pill_reminder.dart';
+import 'package:menstrudel/models/birth_control/pills/pill_regimen.dart';
+import 'package:menstrudel/models/birth_control/pills/pill_reminder.dart';
 import 'package:menstrudel/services/notification_service.dart';
 import 'package:menstrudel/widgets/dialogs/delete_confirmation_dialog.dart';
 import 'package:menstrudel/widgets/settings/regimen_setup_dialog.dart';
@@ -145,7 +145,8 @@ class _BirthControlSettingsScreenState extends State<BirthControlSettingsScreen>
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final settingsService = context.watch<SettingsService>();
-    final bool pillNavEnabled = settingsService.isPillNavEnabled;
+    final bool pillEnabled = settingsService.isPillNavEnabled;
+    final bool larcEnabled = settingsService.isLarcNavEnabled;
     final bool showReminderSettings = _activeRegimen != null && !_isLoading; 
 
     return Scaffold(
@@ -158,13 +159,13 @@ class _BirthControlSettingsScreenState extends State<BirthControlSettingsScreen>
               children: [
                 SwitchListTile(
                   title: Text(l10n.settingsScreen_enablePillTracking),
-                  value: pillNavEnabled,
+                  value: pillEnabled,
                   onChanged: (bool value) {
                     context.read<SettingsService>().setPillNavEnabled(value);
                   },
                 ),
                 const Divider(),
-                if (pillNavEnabled) ...[
+                if (pillEnabled) ...[
                   Padding(
                     padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
                     child: Text(
@@ -262,6 +263,24 @@ class _BirthControlSettingsScreenState extends State<BirthControlSettingsScreen>
                       ),
                   ],
                 ],
+                
+                SwitchListTile(
+                  title: const Text("LARCs"),
+                  value: larcEnabled,
+                  onChanged: (bool value) {
+                    context.read<SettingsService>().setLarcNavEnabled(value);
+                  },
+                ),
+                const Divider(),
+                if (larcEnabled) ...[
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Text(
+                      "LARC settings will go here.",
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                  ),
+                ]
               ],
             ),
     );
