@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:menstrudel/models/birth_control/larcs/larc_types_enum.dart';
 import 'package:menstrudel/models/period_logs/symptom.dart';
 import 'package:menstrudel/models/period_logs/symptom_type_enum.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -11,6 +12,8 @@ class SettingsService extends ChangeNotifier {
   late SharedPreferences _prefs;
 
   bool _pillNavEnabled = kDefaultPillNavEnabled;
+  bool _isLarcNavEnabled = kDefaultLarcNavEnabled;
+  String _larcType = kDefaultLarcType;
   String _languageCode = kDefaultLanguageCode;
   bool _alwaysShowReminderButton = kDefaultAlwaysShowReminderButton;
   bool _biometricsEnabled = kDefaultBiometricsEnabled;
@@ -28,6 +31,10 @@ class SettingsService extends ChangeNotifier {
 
   /// Whether the 'Pill' tab is visible in the main navigation bar.
   bool get isPillNavEnabled => _pillNavEnabled;
+  /// LARCs (Long-Acting Reversible Contraceptives) navigation enabled
+  bool get isLarcNavEnabled => _isLarcNavEnabled;
+  /// LARC type selected
+  String get larcType => _larcType;
   /// The selected language code for the app (e.g., 'en', 'es', or 'system').
   String get languageCode => _languageCode;
   /// Whether the tampon reminder FAB is persistently shown on the Logs screen.
@@ -62,20 +69,17 @@ class SettingsService extends ChangeNotifier {
     _prefs = await SharedPreferences.getInstance();
 
     _pillNavEnabled = _prefs.getBool(pillNavEnabledKey) ?? false;
+    _isLarcNavEnabled = _prefs.getBool(pillNavEnabledKey) ?? false;
     _languageCode = _prefs.getString(languageKey) ?? 'system';
-    _alwaysShowReminderButton =
-        _prefs.getBool(persistentReminderKey) ?? false;
+    _alwaysShowReminderButton = _prefs.getBool(persistentReminderKey) ?? false;
     _biometricsEnabled = _prefs.getBool(biometricEnabledKey) ?? false;
     _notificationsEnabled = _prefs.getBool(notificationsEnabledKey) ?? true;
     _notificationDays = _prefs.getInt(notificationDaysKey) ?? 1;
     _notificationTime = _loadTimeOfDay(notificationTimeKey, 9, 0);
 
-    _periodOverdueNotificationsEnabled =
-        _prefs.getBool(periodOverdueNotificationsEnabledKey) ?? true;
-    _periodOverdueNotificationDays =
-        _prefs.getInt(periodOverdueNotificationDaysKey) ?? 1;
-    _periodOverdueNotificationTime =
-        _loadTimeOfDay(periodOverdueNotificationTimeKey, 9, 0);
+    _periodOverdueNotificationsEnabled = _prefs.getBool(periodOverdueNotificationsEnabledKey) ?? true;
+    _periodOverdueNotificationDays = _prefs.getInt(periodOverdueNotificationDaysKey) ?? 1;
+    _periodOverdueNotificationTime = _loadTimeOfDay(periodOverdueNotificationTimeKey, 9, 0);
 
     _historyView = _loadHistoryView();
     _dynamicColorEnabled = _prefs.getBool(dynamicColorKey) ?? false;
@@ -141,6 +145,18 @@ class SettingsService extends ChangeNotifier {
     _pillNavEnabled = isEnabled;
     notifyListeners();
     await _prefs.setBool(pillNavEnabledKey, isEnabled);
+  }
+  
+  Future<void> setLarcNavEnabled(bool isEnabled) async {
+    _isLarcNavEnabled = isEnabled;
+    notifyListeners();
+    await _prefs.setBool(larcNavEnabledKey, isEnabled);
+  }
+
+  Future<void> setLarcType(LarcTypes type) async {
+    _larcType = type.name;
+    notifyListeners();
+    await _prefs.setString(larcTypeKey, _larcType);
   }
 
   Future<void> setLanguageCode(String code) async {
