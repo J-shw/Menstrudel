@@ -28,7 +28,7 @@ class AppDatabase {
 
       _database = await openDatabase(
         path,
-        version: 8,
+        version: 9,
         onCreate: _createDB,
         onUpgrade: _upgradeDB,
       );
@@ -36,40 +36,12 @@ class AppDatabase {
     }
 
   Future _createDB(Database db, int version) async {
-    await db.execute(
-      '''
-        CREATE TABLE periods (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            start_date INTEGER NOT NULL,
-            end_date INTEGER NOT NULL,
-            total_days INTEGER NOT NULL
-        )
-      '''
-    );
-    await db.execute(
-      '''
-      CREATE TABLE period_logs (
-          id INTEGER PRIMARY KEY AUTOINCREMENT,
-          date TEXT NOT NULL,
-          flow INTEGER NOT NULL,
-          painLevel INTEGER,
-          period_id INTEGER,
-          FOREIGN KEY (period_id) REFERENCES periods(id) ON DELETE SET NULL
-      )
-      '''
-    );
-    await db.execute(
-      '''
-      CREATE TABLE log_symptoms (
-        log_id_fk INTEGER,
-        symptom TEXT NOT NULL,
-        PRIMARY KEY (log_id_fk, symptom),
-        FOREIGN KEY (log_id_fk) REFERENCES period_logs (id) ON DELETE CASCADE
-      )
-      '''
-    );
-    
+
+    await _createPeriodTables(db);  
+  
     await _createPillTables(db);
+
+    await _createLarcTables(db);
   }
 
   Future _upgradeDB(Database db, int oldVersion, int newVersion) async {
@@ -132,8 +104,46 @@ class AppDatabase {
         await txn.execute('ALTER TABLE period_logs_new RENAME TO period_logs');
       });
     }
+    if (oldVersion < 9) {
+      _createLarcTables(db);
+    }
 
   }
+
+    Future<void> _createPeriodTables(Database db) async {
+      await db.execute(
+      '''
+        CREATE TABLE periods (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            start_date INTEGER NOT NULL,
+            end_date INTEGER NOT NULL,
+            total_days INTEGER NOT NULL
+        )
+      '''
+      );
+      await db.execute(
+        '''
+        CREATE TABLE period_logs (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            date TEXT NOT NULL,
+            flow INTEGER NOT NULL,
+            painLevel INTEGER,
+            period_id INTEGER,
+            FOREIGN KEY (period_id) REFERENCES periods(id) ON DELETE SET NULL
+        )
+        '''
+      );
+      await db.execute(
+        '''
+        CREATE TABLE log_symptoms (
+          log_id_fk INTEGER,
+          symptom TEXT NOT NULL,
+          PRIMARY KEY (log_id_fk, symptom),
+          FOREIGN KEY (log_id_fk) REFERENCES period_logs (id) ON DELETE CASCADE
+        )
+        '''
+      );
+    }
 
   Future<void> _createPillTables(Database db) async {
     await db.execute(
@@ -174,6 +184,17 @@ class AppDatabase {
     );
   }
 
+  Future<void> _createLarcTables(Database db) async {
+    await db.execute(
+      '''
+      CREATE TABLE larc_logs (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        date TEXT NOT NULL,
+        type TEXT NOT NULL,
+      )
+      '''
+    );
+  }
   Future<void> _migrateSymptoms(Database db) async {
     const symptomMigrationMap = {
       'Headache': 'headache',
