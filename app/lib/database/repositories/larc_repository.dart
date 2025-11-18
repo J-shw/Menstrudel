@@ -8,4 +8,10 @@ class LarcRepository {
     final db = await dbProvider.database;
     await db.insert('larc_logs', entry.toMap());
   }
+
+  Future<List<LarcLogEntry>> getAllLogs() async {
+    final db = await dbProvider.database;
+    final maps = await db.query('larc_logs', orderBy: 'date DESC');
+    return maps.map((map) => LarcLogEntry.fromMap(map)).toList();
+  }
 }
