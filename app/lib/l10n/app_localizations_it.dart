@@ -164,6 +164,21 @@ class AppLocalizationsIt extends AppLocalizations {
   String get pain_unbearable => 'Insopportabile';
 
   @override
+  String get larcType_iud => 'IUD';
+
+  @override
+  String get larcType_implant => 'Implant';
+
+  @override
+  String get larcType_injection => 'Injection';
+
+  @override
+  String get larcType_ring => 'Ring';
+
+  @override
+  String get larcType_patch => 'Patch';
+
+  @override
   String get notification_periodTitle => 'Ciclo in arrivo';
 
   @override
@@ -380,6 +395,9 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get settingsScreen_larcDescription =>
       'Track long-acting reversible contraceptives (LARCs).';
+
+  @override
+  String get settingsScreen_larcType => 'LARC Type';
 
   @override
   String get settingsScreen_LoggingScreen => 'Logging';

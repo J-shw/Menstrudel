@@ -396,6 +396,36 @@ abstract class AppLocalizations {
   /// **'Unbearable'**
   String get pain_unbearable;
 
+  /// No description provided for @larcType_iud.
+  ///
+  /// In en, this message translates to:
+  /// **'IUD'**
+  String get larcType_iud;
+
+  /// No description provided for @larcType_implant.
+  ///
+  /// In en, this message translates to:
+  /// **'Implant'**
+  String get larcType_implant;
+
+  /// No description provided for @larcType_injection.
+  ///
+  /// In en, this message translates to:
+  /// **'Injection'**
+  String get larcType_injection;
+
+  /// No description provided for @larcType_ring.
+  ///
+  /// In en, this message translates to:
+  /// **'Ring'**
+  String get larcType_ring;
+
+  /// No description provided for @larcType_patch.
+  ///
+  /// In en, this message translates to:
+  /// **'Patch'**
+  String get larcType_patch;
+
   /// Title for the upcoming period notification.
   ///
   /// In en, this message translates to:
@@ -743,6 +773,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Track long-acting reversible contraceptives (LARCs).'**
   String get settingsScreen_larcDescription;
+
+  /// No description provided for @settingsScreen_larcType.
+  ///
+  /// In en, this message translates to:
+  /// **'LARC Type'**
+  String get settingsScreen_larcType;
 
   /// No description provided for @settingsScreen_LoggingScreen.
   ///

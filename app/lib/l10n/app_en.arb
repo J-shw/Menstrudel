@@ -72,6 +72,12 @@
     "painLevel_severe": "Severe",
     "pain_unbearable": "Unbearable",
 
+    "larcType_iud": "IUD",
+    "larcType_implant": "Implant",
+    "larcType_injection": "Injection",
+    "larcType_ring": "Ring",
+    "larcType_patch": "Patch",
+
     "notification_periodTitle": "Period Approaching",
     "@notification_periodTitle": {
         "description": "Title for the upcoming period notification."
@@ -180,6 +186,7 @@
     "settingsScreen_remindMeAfter": "Remind Me After",
     "settingsScreen_enableLarcTracking": "Enable LARC Tracking",
     "settingsScreen_larcDescription": "Track long-acting reversible contraceptives (LARCs).",
+    "settingsScreen_larcType": "LARC Type",
 
     "settingsScreen_LoggingScreen" : "Logging",
     "settingsScreen_defaultSymptoms": "Default Symptoms",
