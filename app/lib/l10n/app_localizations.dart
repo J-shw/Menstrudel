@@ -276,6 +276,12 @@ abstract class AppLocalizations {
   /// **'Pill'**
   String get navBar_pill;
 
+  /// No description provided for @navBar_larc.
+  ///
+  /// In en, this message translates to:
+  /// **'LARC'**
+  String get navBar_larc;
+
   /// No description provided for @navBar_settings.
   ///
   /// In en, this message translates to:
@@ -485,6 +491,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Pills'**
   String get mainScreen_pillsPageTitle;
+
+  /// No description provided for @mainScreen_LarcsPageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'LARCs'**
+  String get mainScreen_LarcsPageTitle;
 
   /// No description provided for @mainScreen_settingsPageTitle.
   ///

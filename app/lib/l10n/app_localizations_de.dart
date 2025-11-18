@@ -104,6 +104,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get navBar_pill => 'Pille';
 
   @override
+  String get navBar_larc => 'LARC';
+
+  @override
   String get navBar_settings => 'Einstellungen';
 
   @override
@@ -225,6 +228,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get mainScreen_pillsPageTitle => 'Pille';
+
+  @override
+  String get mainScreen_LarcsPageTitle => 'LARCs';
 
   @override
   String get mainScreen_settingsPageTitle => 'Einstellungen';

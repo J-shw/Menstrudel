@@ -48,6 +48,7 @@
     "navBar_insights": "Insights",
     "navBar_logs": "Logs",
     "navBar_pill": "Pill",
+    "navBar_larc": "LARC",
     "navBar_settings": "Settings",
 
     "flowIntensity_none": "None",
@@ -123,6 +124,7 @@
 
     "mainScreen_insightsPageTitle": "Your Insights",
     "mainScreen_pillsPageTitle": "Pills",
+    "mainScreen_LarcsPageTitle": "LARCs",
     "mainScreen_settingsPageTitle": "Settings",
 
     "mainScreen_tooltipSetReminder": "Tampon reminder",
