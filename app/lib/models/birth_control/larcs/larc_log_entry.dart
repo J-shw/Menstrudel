@@ -4,11 +4,13 @@ class LarcLogEntry {
   int? id;
   final DateTime date;
   final LarcTypes type;
+  final String? note;
 
   LarcLogEntry({
     this.id,
     required this.date,
     required this.type,
+    this.note,
   });
 
   Map<String, dynamic> toMap() {
@@ -16,6 +18,7 @@ class LarcLogEntry {
       'id': id,
       'date': date.toIso8601String(),
       'type': type.name,
+      'note': note,
     };
   }
 
@@ -24,6 +27,7 @@ class LarcLogEntry {
       id: map['id'] as int,
       date: DateTime.parse(map['date'] as String),
       type: LarcTypes.values.firstWhere((e) => e.name == map['type']),
+      note: map['note'],
     );
   }
 }
