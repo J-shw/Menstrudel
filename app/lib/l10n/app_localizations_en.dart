@@ -331,6 +331,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsScreen_enablePillTracking => 'Enable Pill Tracking';
 
   @override
+  String get settingsScreen_pillDescription =>
+      'Track your daily pill intake and get reminders.';
+
+  @override
   String get settingsScreen_setUpPillRegimen => 'Set Up Pill Regimen';
 
   @override
@@ -364,6 +368,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsScreen_remindMeAfter => 'Remind Me After';
 
   @override
+  String get settingsScreen_enableLarcTracking => 'Enable LARC Tracking';
+
+  @override
+  String get settingsScreen_larcDescription =>
+      'Track long-acting reversible contraceptives (LARCs).';
+
+  @override
+  String get settingsScreen_LoggingScreen => 'Logging';
+
+  @override
   String get settingsScreen_defaultSymptoms => 'Default Symptoms';
 
   @override
@@ -381,9 +395,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get settingsScreen_resetSymptomsListDescription =>
       'This will remove all your custom symptoms and restore the original built-in list.\n\nYour existing log entries will not be changed.';
-
-  @override
-  String get settingsScreen_LoggingScreen => 'Logging';
 
   @override
   String settingsScreen_deleteDefaultSymptomDescription(

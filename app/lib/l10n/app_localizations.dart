@@ -666,6 +666,12 @@ abstract class AppLocalizations {
   /// **'Enable Pill Tracking'**
   String get settingsScreen_enablePillTracking;
 
+  /// No description provided for @settingsScreen_pillDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Track your daily pill intake and get reminders.'**
+  String get settingsScreen_pillDescription;
+
   /// No description provided for @settingsScreen_setUpPillRegimen.
   ///
   /// In en, this message translates to:
@@ -726,6 +732,24 @@ abstract class AppLocalizations {
   /// **'Remind Me After'**
   String get settingsScreen_remindMeAfter;
 
+  /// No description provided for @settingsScreen_enableLarcTracking.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable LARC Tracking'**
+  String get settingsScreen_enableLarcTracking;
+
+  /// No description provided for @settingsScreen_larcDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Track long-acting reversible contraceptives (LARCs).'**
+  String get settingsScreen_larcDescription;
+
+  /// No description provided for @settingsScreen_LoggingScreen.
+  ///
+  /// In en, this message translates to:
+  /// **'Logging'**
+  String get settingsScreen_LoggingScreen;
+
   /// No description provided for @settingsScreen_defaultSymptoms.
   ///
   /// In en, this message translates to:
@@ -755,12 +779,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'This will remove all your custom symptoms and restore the original built-in list.\n\nYour existing log entries will not be changed.'**
   String get settingsScreen_resetSymptomsListDescription;
-
-  /// No description provided for @settingsScreen_LoggingScreen.
-  ///
-  /// In en, this message translates to:
-  /// **'Logging'**
-  String get settingsScreen_LoggingScreen;
 
   /// Question whether a symptom should be deleted.
   ///

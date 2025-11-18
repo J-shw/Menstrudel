@@ -167,6 +167,7 @@
 
     "settingsScreen_birthControl": "Birth Control",
     "settingsScreen_enablePillTracking": "Enable Pill Tracking",
+    "settingsScreen_pillDescription": "Track your daily pill intake and get reminders.",
     "settingsScreen_setUpPillRegimen": "Set Up Pill Regimen",
     "settingsScreen_trackYourDailyPillIntake": "Track Your Daily Pill Intake",
     "settingsScreen_dailyPillReminder": "Daily Pill Reminder",
@@ -177,6 +178,10 @@
     "settingsScreen_notificationTime": "Notification Time",
     "settingsScreen_overduePeriodReminder": "Overdue Period Reminder",
     "settingsScreen_remindMeAfter": "Remind Me After",
+    "settingsScreen_enableLarcTracking": "Enable LARC Tracking",
+    "settingsScreen_larcDescription": "Track long-acting reversible contraceptives (LARCs).",
+
+    "settingsScreen_LoggingScreen" : "Logging",
     "settingsScreen_defaultSymptoms": "Default Symptoms",
     "settingsScreen_defaultSymptomsSubtitle": "These are always available when logging new periods.\nTap an existing symptom to delete or '+' to add a new one.",
     "settingsScreen_deleteDefaultSymptomQuestion": "Delete '{symptom}'?",
@@ -191,7 +196,6 @@
     },
     "settingsScreen_resetSymptomsList" : "Reset Symptoms List?",
     "settingsScreen_resetSymptomsListDescription" : "This will remove all your custom symptoms and restore the original built-in list.\n\nYour existing log entries will not be changed.",
-    "settingsScreen_LoggingScreen" : "Logging",
     "settingsScreen_deleteDefaultSymptomDescription": "'{symptom}' will no longer be available when logging a period.\n\n{usageCount, plural, zero{There are currently no period logs with this symptom!} one{There is already 1 period log with this symptom!\nThis log will not be changed.} other{There are {usageCount} period logs with this symptom!\nThese logs will not be changed.}}",
     "@settingsScreen_deleteDefaultSymptomDescription": {
         "description": "Question whether a symptom should be deleted.",
