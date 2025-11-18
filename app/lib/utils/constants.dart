@@ -55,7 +55,7 @@ const String tamponReminderDateTimeKey = 'tampon_reminder_date_time';
 // Settings
 const bool kDefaultPillNavEnabled = false;
 const bool kDefaultLarcNavEnabled = false;
-const String kDefaultLarcType = 'injection';
+const LarcTypes kDefaultLarcType = LarcTypes.injection;
 const String kDefaultLanguageCode = 'system';
 const bool kDefaultAlwaysShowReminderButton = false;
 const bool kDefaultBiometricsEnabled = false;
