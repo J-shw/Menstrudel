@@ -76,13 +76,14 @@ class _BirthControlSettingsScreenState extends State<BirthControlSettingsScreen>
 
     await pillsRepo.savePillReminder(reminder);
 
-    await NotificationService.schedulePillReminder(
-      reminderTime: _pillNotificationTime,
-      isEnabled: _pillNotificationsEnabled,
-      title: l10n.notification_pillTitle,
-      body: l10n.notification_pillBody,
-    );
-
+    if(_pillNotificationsEnabled) {
+      await NotificationService.schedulePillReminder(
+        reminderTime: _pillNotificationTime,
+        isEnabled: _pillNotificationsEnabled,
+        title: l10n.notification_pillTitle,
+        body: l10n.notification_pillBody,
+      );
+    }
     _loadSettings();
   }
 
@@ -144,7 +145,8 @@ class _BirthControlSettingsScreenState extends State<BirthControlSettingsScreen>
     await _loadSettings();
   }
 
-    Future<void> _selectLarcReminderTime() async {
+  Future<void> _selectLarcReminderTime() async {
+    final settingsService = context.read<SettingsService>();
     final TimeOfDay? pickedTime = await showTimePicker(
       context: context,
       initialTime: _larcNotificationTime,
@@ -154,7 +156,7 @@ class _BirthControlSettingsScreenState extends State<BirthControlSettingsScreen>
       setState(() {
         _larcNotificationTime = pickedTime;
       });
-      await savePillReminderSettings();
+      await settingsService.setLarcReminderTime(pickedTime);
     }
   }
 
@@ -166,6 +168,8 @@ class _BirthControlSettingsScreenState extends State<BirthControlSettingsScreen>
     final bool larcEnabled = settingsService.isLarcNavEnabled;
     final bool showReminderSettings = _activeRegimen != null && !_isLoading; 
     final LarcTypes activeLarcType = settingsService.larcType;
+
+    const Widget shortDivider = Padding(padding: EdgeInsets.symmetric(horizontal: 24), child: Divider());
 
     return Scaffold(
       appBar: AppBar(
@@ -183,8 +187,8 @@ class _BirthControlSettingsScreenState extends State<BirthControlSettingsScreen>
                     context.read<SettingsService>().setPillNavEnabled(value);
                   },
                 ),
-                const Divider(),
                 if (pillEnabled) ...[
+                  shortDivider,
                   Padding(
                     padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
                     child: Text(
@@ -249,10 +253,9 @@ class _BirthControlSettingsScreenState extends State<BirthControlSettingsScreen>
                     trailing: const Icon(Icons.add_circle, size: 30),
                     onTap: showRegimenSetupDialog,
                   ),
-
-                  const Divider(),
                   
                   if (showReminderSettings) ...[
+                    shortDivider,
                     Padding(
                       padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
                       child: Text(
@@ -282,6 +285,8 @@ class _BirthControlSettingsScreenState extends State<BirthControlSettingsScreen>
                       ),
                   ],
                 ],
+
+                const Divider(),
                 
                 SwitchListTile(
                   title: Text(l10n.settingsScreen_enableLarcTracking),
@@ -291,8 +296,8 @@ class _BirthControlSettingsScreenState extends State<BirthControlSettingsScreen>
                     context.read<SettingsService>().setLarcNavEnabled(value);
                   },
                 ),
-                const Divider(),
                 if (larcEnabled) ...[
+                  shortDivider,
                   ListTile(
                     leading: const Icon(Icons.verified_user_outlined),
                     title: Text(l10n.settingsScreen_larcType),
