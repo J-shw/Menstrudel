@@ -46,6 +46,7 @@ const String languageKey = "language";
 const String pillNavEnabledKey = "pill_nav_enabled";
 const String larcNavEnabledKey = "larc_nav_enabled";
 const String larcTypeKey = "larc_type";
+const String larcDurationsKey = "larc_durations";
 
 // Notifications
 const String tamponReminderDateTimeKey = 'tampon_reminder_date_time';
