@@ -16,6 +16,7 @@ const int periodDueNotificationId = 1;
 const int periodOverdueNotificationId = 4;
 const int tamponReminderId = 2;
 const int pillReminderId = 3;
+const int larcReminderId = 5;
 
 const periodNotificationChannelId = 'period_channel';
 const periodNotificationChannelName = 'Period Predictions';
@@ -25,6 +26,10 @@ const tamponReminderChannelName = 'Tampon Reminders';
 
 const pillReminderChannelId = 'pill_reminder_channel';
 const pillReminderChannelName = 'Pill Reminders';
+
+const larcReminderChannelId = 'larc_reminder_channel';
+const larcReminderChannelName = 'LARC Reminders';
+
 
 // Shared preferences keys
 
@@ -47,6 +52,9 @@ const String pillNavEnabledKey = "pill_nav_enabled";
 const String larcNavEnabledKey = "larc_nav_enabled";
 const String larcTypeKey = "larc_type";
 const String larcDurationsKey = "larc_durations";
+const String larcNotificationsEnanledKey = "larc_notifications_enabled";
+const String larcNotificationDaysKey = 'larc_notification_days';
+const String larcNotificationTimeKey = 'larc_notification_time';
 
 // Notifications
 const String tamponReminderDateTimeKey = 'tampon_reminder_date_time';
@@ -71,3 +79,6 @@ const bool kDefaultDynamicColorEnabled = false;
 const Color kDefaultThemeColor = seedColor;
 const AppThemeMode kDefaultThemeMode = AppThemeMode.system;
 const Set<Symptom> kDefaultSymptoms = {};
+const bool kDefaultLarcNotificationsEnabled = false;
+const int kDefaultLarcReminderDays = 30;
+const TimeOfDay kDefaultLarcReminderTime = TimeOfDay(hour: 9, minute: 0);
