@@ -191,6 +191,12 @@ class AppLocalizationsDe extends AppLocalizations {
   String get larcType_patch => 'Patch';
 
   @override
+  String get error_valueMustbePositive => 'Value must be positive';
+
+  @override
+  String get error_valueCannotBeNull => 'Value cannot be null';
+
+  @override
   String get notification_periodTitle => 'Periode nähert sich';
 
   @override
@@ -433,6 +439,18 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get settingsScreen_larcType => 'LARC Type';
+
+  @override
+  String get settingsScreen_setDuration => 'Set Duration';
+
+  @override
+  String get settingsScreen_larcDuration => 'LARC Replacement Duration';
+
+  @override
+  String get settingsScreen_currentDuration => 'Current Duration';
+
+  @override
+  String get settingsScreen_durationInDays => 'Duration (Days)';
 
   @override
   String get settingsScreen_LoggingScreen => 'Logging';

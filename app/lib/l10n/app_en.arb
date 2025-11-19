@@ -83,6 +83,9 @@
     "larcType_ring": "Ring",
     "larcType_patch": "Patch",
 
+    "error_valueMustbePositive": "Value must be positive",
+    "error_valueCannotBeNull": "Value cannot be null",
+
     "notification_periodTitle": "Period Approaching",
     "@notification_periodTitle": {
         "description": "Title for the upcoming period notification."
@@ -218,6 +221,10 @@
     "settingsScreen_enableLarcTracking": "Enable LARC Tracking",
     "settingsScreen_larcDescription": "Track long-acting reversible contraceptives (LARCs).",
     "settingsScreen_larcType": "LARC Type",
+    "settingsScreen_setDuration": "Set Duration",
+    "settingsScreen_larcDuration": "LARC Replacement Duration",
+    "settingsScreen_currentDuration": "Current Duration",
+    "settingsScreen_durationInDays": "Duration (Days)",
 
     "settingsScreen_LoggingScreen" : "Logging",
     "settingsScreen_defaultSymptoms": "Default Symptoms",

@@ -450,6 +450,18 @@ abstract class AppLocalizations {
   /// **'Patch'**
   String get larcType_patch;
 
+  /// No description provided for @error_valueMustbePositive.
+  ///
+  /// In en, this message translates to:
+  /// **'Value must be positive'**
+  String get error_valueMustbePositive;
+
+  /// No description provided for @error_valueCannotBeNull.
+  ///
+  /// In en, this message translates to:
+  /// **'Value cannot be null'**
+  String get error_valueCannotBeNull;
+
   /// Title for the upcoming period notification.
   ///
   /// In en, this message translates to:
@@ -845,6 +857,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'LARC Type'**
   String get settingsScreen_larcType;
+
+  /// No description provided for @settingsScreen_setDuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Set Duration'**
+  String get settingsScreen_setDuration;
+
+  /// No description provided for @settingsScreen_larcDuration.
+  ///
+  /// In en, this message translates to:
+  /// **'LARC Replacement Duration'**
+  String get settingsScreen_larcDuration;
+
+  /// No description provided for @settingsScreen_currentDuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Current Duration'**
+  String get settingsScreen_currentDuration;
+
+  /// No description provided for @settingsScreen_durationInDays.
+  ///
+  /// In en, this message translates to:
+  /// **'Duration (Days)'**
+  String get settingsScreen_durationInDays;
 
   /// No description provided for @settingsScreen_LoggingScreen.
   ///
