@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:convert';
 import 'package:menstrudel/models/birth_control/larcs/larc_types_enum.dart';
 import 'package:menstrudel/models/period_logs/symptom.dart';
 import 'package:menstrudel/models/period_logs/symptom_type_enum.dart';
@@ -28,6 +29,7 @@ class SettingsService extends ChangeNotifier {
   Color _themeColor = kDefaultThemeColor;
   AppThemeMode _themeMode = kDefaultThemeMode;
   Set<Symptom> _defaultSymptoms = kDefaultSymptoms;
+  Map<LarcTypes, int> _larcDurations = {};
 
   /// Whether the 'Pill' tab is visible in the main navigation bar.
   bool get isPillNavEnabled => _pillNavEnabled;
@@ -64,6 +66,14 @@ class SettingsService extends ChangeNotifier {
   AppThemeMode get themeMode => _themeMode;
   /// The user configured default symptoms
   Set<Symptom> get defaultSymptoms => _defaultSymptoms;
+  /// Retrieves the duration in days for a specific LARC type, which determines its estimated renewal date.
+  int getLarcDurationDays(LarcTypes type) {
+    if (_larcDurations.containsKey(type)) {
+      return _larcDurations[type]!;
+    }
+    return type.defaultDurationDays; 
+  }
+
 
   Future<void> loadSettings() async {
     _prefs = await SharedPreferences.getInstance();
@@ -87,6 +97,18 @@ class SettingsService extends ChangeNotifier {
     _themeMode = _loadThemeMode();
 
     _defaultSymptoms = _loadDefaultSymptoms();
+
+    final String? storedDurationsJson = _prefs.getString(larcDurationsKey);
+    if (storedDurationsJson != null) {
+      final Map<String, dynamic> decodedMap = json.decode(storedDurationsJson);
+      
+      _larcDurations = decodedMap.map((key, value) {
+        final type = LarcTypes.values.firstWhere((e) => e.name == key);
+        return MapEntry(type, value as int);
+      });
+    } else {
+      _larcDurations = {};
+    }
 
     try {
       final String? larcTypeString = _prefs.getString(larcTypeKey);
@@ -159,14 +181,24 @@ class SettingsService extends ChangeNotifier {
   
   Future<void> setLarcNavEnabled(bool isEnabled) async {
     _isLarcNavEnabled = isEnabled;
-    notifyListeners();
     await _prefs.setBool(larcNavEnabledKey, isEnabled);
+    notifyListeners();
   }
 
   Future<void> setLarcType(LarcTypes type) async {
     _larcType = type;
-    notifyListeners();
     await _prefs.setString(larcTypeKey, type.name);
+    notifyListeners();
+  }
+
+  Future<void> setLarcDurationForType(LarcTypes type, int durationDays) async {
+    _larcDurations[type] = durationDays;
+    final Map<String, int> mapForStorage = _larcDurations.map(
+      (key, value) => MapEntry(key.name, value),
+    );
+    final String encodedJson = json.encode(mapForStorage);
+    await _prefs.setString(larcDurationsKey, encodedJson);
+    notifyListeners();
   }
 
   Future<void> setLanguageCode(String code) async {
