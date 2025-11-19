@@ -108,11 +108,23 @@ abstract class AppLocalizations {
   /// **'Menstrudel'**
   String get appTitle;
 
+  /// No description provided for @nextDue.
+  ///
+  /// In en, this message translates to:
+  /// **'Next Due'**
+  String get nextDue;
+
   /// No description provided for @ongoing.
   ///
   /// In en, this message translates to:
   /// **'Ongoing'**
   String get ongoing;
+
+  /// No description provided for @overdue.
+  ///
+  /// In en, this message translates to:
+  /// **'Overdue'**
+  String get overdue;
 
   /// No description provided for @date.
   ///
@@ -599,6 +611,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Pill for today marked as skipped.'**
   String get pillScreen_pillForTodayMarkedAsSkipped;
+
+  /// No description provided for @larcScreen_noLarcRecordsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No LARC records found.'**
+  String get larcScreen_noLarcRecordsFound;
+
+  /// The total LARC history count.
+  ///
+  /// In en, this message translates to:
+  /// **'History ({history})'**
+  String larcScreen_history(int history);
 
   /// No description provided for @settingsScreen_selectHistoryView.
   ///
@@ -1388,6 +1412,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Flow'**
   String get periodDetailsSheet_flow;
+
+  /// No description provided for @larcEntrySheet_logLARCDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Log LARC Details'**
+  String get larcEntrySheet_logLARCDetails;
 
   /// A label showing the total number of days until period is due.
   ///

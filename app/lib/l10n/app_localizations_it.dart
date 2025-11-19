@@ -12,7 +12,13 @@ class AppLocalizationsIt extends AppLocalizations {
   String get appTitle => 'Menstrudel';
 
   @override
+  String get nextDue => 'Next Due';
+
+  @override
   String get ongoing => 'In corso';
+
+  @override
+  String get overdue => 'Overdue';
 
   @override
   String get date => 'Data';
@@ -297,6 +303,14 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get pillScreen_pillForTodayMarkedAsSkipped =>
       'Pillola di oggi segnata come saltata.';
+
+  @override
+  String get larcScreen_noLarcRecordsFound => 'No LARC records found.';
+
+  @override
+  String larcScreen_history(int history) {
+    return 'History ($history)';
+  }
 
   @override
   String get settingsScreen_selectHistoryView => 'Seleziona vista cronologia';
@@ -773,6 +787,9 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get periodDetailsSheet_flow => 'Flusso';
+
+  @override
+  String get larcEntrySheet_logLARCDetails => 'Log LARC Details';
 
   @override
   String periodPredictionCircle_days(int count) {
