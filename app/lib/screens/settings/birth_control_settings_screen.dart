@@ -6,6 +6,7 @@ import 'package:menstrudel/models/birth_control/pills/pill_regimen.dart';
 import 'package:menstrudel/models/birth_control/pills/pill_reminder.dart';
 import 'package:menstrudel/services/notification_service.dart';
 import 'package:menstrudel/widgets/dialogs/delete_confirmation_dialog.dart';
+import 'package:menstrudel/widgets/dialogs/larc_duration_config_dialog.dart';
 import 'package:menstrudel/widgets/settings/regimen_setup_dialog.dart';
 import 'package:menstrudel/services/settings_service.dart';
 import 'package:provider/provider.dart';
@@ -149,6 +150,7 @@ class _BirthControlSettingsScreenState extends State<BirthControlSettingsScreen>
     final bool pillEnabled = settingsService.isPillNavEnabled;
     final bool larcEnabled = settingsService.isLarcNavEnabled;
     final bool showReminderSettings = _activeRegimen != null && !_isLoading; 
+    final LarcTypes activeLarcType = settingsService.larcType;
 
     return Scaffold(
       appBar: AppBar(
@@ -293,6 +295,22 @@ class _BirthControlSettingsScreenState extends State<BirthControlSettingsScreen>
                         }
                       },
                     ),
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.date_range_outlined),
+                    title: Text(l10n.settingsScreen_larcDuration),
+                    subtitle: Text('${l10n.settingsScreen_currentDuration}: ${settingsService.getLarcDurationDays(activeLarcType)} ${l10n.days}'),
+                    trailing: const Icon(Icons.edit_outlined),
+                    onTap: () async {
+                      final result = await showDialog<int>(
+                        context: context,
+                        builder: (ctx) => LarcDurationConfigDialog(larcType: activeLarcType),
+                      );
+
+                      if (result != null && context.mounted) {
+                        await context.read<SettingsService>().setLarcDurationForType(activeLarcType, result);
+                      }
+                    },
                   ),
                 ]
               ],
