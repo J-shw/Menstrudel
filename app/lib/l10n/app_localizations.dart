@@ -975,17 +975,35 @@ abstract class AppLocalizations {
   /// **'Data Management'**
   String get settingsScreen_dataManagement;
 
+  /// No description provided for @settingsScreen_dangerZone.
+  ///
+  /// In en, this message translates to:
+  /// **'Danger Zone'**
+  String get settingsScreen_dangerZone;
+
   /// No description provided for @settingsScreen_clearAllLogs.
   ///
   /// In en, this message translates to:
   /// **'Clear All Logs'**
   String get settingsScreen_clearAllLogs;
 
+  /// No description provided for @settingsScreen_clearAllLogsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Deletes your entire period and symptom history.'**
+  String get settingsScreen_clearAllLogsSubtitle;
+
   /// No description provided for @settingsScreen_clearAllPillData.
   ///
   /// In en, this message translates to:
   /// **'Clear All Pill Data'**
   String get settingsScreen_clearAllPillData;
+
+  /// No description provided for @settingsScreen_clearAllPillDataSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Removes your pill regimen and intake history.'**
+  String get settingsScreen_clearAllPillDataSubtitle;
 
   /// No description provided for @settingsScreen_clearAllPillData_question.
   ///
@@ -996,7 +1014,7 @@ abstract class AppLocalizations {
   /// No description provided for @settingsScreen_deleteAllPillDataDescription.
   ///
   /// In en, this message translates to:
-  /// **'This will permanently delete your pill regimen, reminders, and intake history. This action cannot be undone.'**
+  /// **'This will permanently delete your pill regimen, reminders, and intake history.'**
   String get settingsScreen_deleteAllPillDataDescription;
 
   /// No description provided for @settingsScreen_allPillDataCleared.
@@ -1005,23 +1023,35 @@ abstract class AppLocalizations {
   /// **'All pill data has been cleared.'**
   String get settingsScreen_allPillDataCleared;
 
-  /// No description provided for @settingsScreen_dangerZone.
+  /// No description provided for @settingsScreen_clearAllLarcData.
   ///
   /// In en, this message translates to:
-  /// **'Danger Zone'**
-  String get settingsScreen_dangerZone;
+  /// **'Clear All LARC Data'**
+  String get settingsScreen_clearAllLarcData;
 
-  /// No description provided for @settingsScreen_clearAllLogsSubtitle.
+  /// No description provided for @settingsScreen_clearAllLarcDataSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Deletes your entire period and symptom history.'**
-  String get settingsScreen_clearAllLogsSubtitle;
+  /// **'Removes your LARCs history.'**
+  String get settingsScreen_clearAllLarcDataSubtitle;
 
-  /// No description provided for @settingsScreen_clearAllPillDataSubtitle.
+  /// No description provided for @settingsScreen_clearAllLarcData_question.
   ///
   /// In en, this message translates to:
-  /// **'Removes your pill regimen and intake history.'**
-  String get settingsScreen_clearAllPillDataSubtitle;
+  /// **'Clear All LARC Data?'**
+  String get settingsScreen_clearAllLarcData_question;
+
+  /// No description provided for @settingsScreen_deleteAllLarcDataDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'This will permanently delete your LARC history.'**
+  String get settingsScreen_deleteAllLarcDataDescription;
+
+  /// No description provided for @settingsScreen_allLarcDataCleared.
+  ///
+  /// In en, this message translates to:
+  /// **'All LARC data has been cleared.'**
+  String get settingsScreen_allLarcDataCleared;
 
   /// No description provided for @settingsScreen_exportPeriodData.
   ///
@@ -1034,6 +1064,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Export Pill Data'**
   String get settingsScreen_exportPillData;
+
+  /// No description provided for @settingsScreen_exportLarcsData.
+  ///
+  /// In en, this message translates to:
+  /// **'Export LARCs Data'**
+  String get settingsScreen_exportLarcsData;
 
   /// No description provided for @settingsScreen_exportDataSubtitle.
   ///
@@ -1089,6 +1125,12 @@ abstract class AppLocalizations {
   /// **'Import Pill Data'**
   String get settingsScreen_importPillData;
 
+  /// No description provided for @settingsScreen_importLarcsData.
+  ///
+  /// In en, this message translates to:
+  /// **'Import LARCs Data'**
+  String get settingsScreen_importLarcsData;
+
   /// No description provided for @settingsScreen_importDataSubtitle.
   ///
   /// In en, this message translates to:
@@ -1106,6 +1148,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Are you sure you want to import Pill Data?'**
   String get settingsScreen_importPillData_question;
+
+  /// No description provided for @settingsScreen_importLarcData_question.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to import LARC Data?'**
+  String get settingsScreen_importLarcData_question;
 
   /// No description provided for @settingsScreen_importPeriodDataDescription.
   ///

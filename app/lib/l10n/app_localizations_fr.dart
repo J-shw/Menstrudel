@@ -527,11 +527,22 @@ class AppLocalizationsFr extends AppLocalizations {
   String get settingsScreen_dataManagement => 'Gestion des données';
 
   @override
+  String get settingsScreen_dangerZone => 'Zone Dangereuse';
+
+  @override
   String get settingsScreen_clearAllLogs => 'Effacer tous les historiques';
+
+  @override
+  String get settingsScreen_clearAllLogsSubtitle =>
+      'Supprime l\'intégralité de votre historique de règles et de symptômes.';
 
   @override
   String get settingsScreen_clearAllPillData =>
       'Effacer toutes les données de la pilule';
+
+  @override
+  String get settingsScreen_clearAllPillDataSubtitle =>
+      'Supprime votre régime de pilules et votre historique de prise.';
 
   @override
   String get settingsScreen_clearAllPillData_question =>
@@ -546,15 +557,22 @@ class AppLocalizationsFr extends AppLocalizations {
       'Toutes les données sur les pilules ont été effacé.';
 
   @override
-  String get settingsScreen_dangerZone => 'Zone Dangereuse';
+  String get settingsScreen_clearAllLarcData => 'Clear All LARC Data';
 
   @override
-  String get settingsScreen_clearAllLogsSubtitle =>
-      'Supprime l\'intégralité de votre historique de règles et de symptômes.';
+  String get settingsScreen_clearAllLarcDataSubtitle =>
+      'Removes your LARCs history.';
 
   @override
-  String get settingsScreen_clearAllPillDataSubtitle =>
-      'Supprime votre régime de pilules et votre historique de prise.';
+  String get settingsScreen_clearAllLarcData_question => 'Clear All LARC Data?';
+
+  @override
+  String get settingsScreen_deleteAllLarcDataDescription =>
+      'This will permanently delete your LARC history.';
+
+  @override
+  String get settingsScreen_allLarcDataCleared =>
+      'All LARC data has been cleared.';
 
   @override
   String get settingsScreen_exportPeriodData =>
@@ -562,6 +580,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get settingsScreen_exportPillData => 'Exporter données de vos pilules';
+
+  @override
+  String get settingsScreen_exportLarcsData => 'Export LARCs Data';
 
   @override
   String get settingsScreen_exportDataSubtitle =>
@@ -598,6 +619,9 @@ class AppLocalizationsFr extends AppLocalizations {
       'Importer Les Données Des Pilules';
 
   @override
+  String get settingsScreen_importLarcsData => 'Import LARCs Data';
+
+  @override
   String get settingsScreen_importDataSubtitle =>
       'Écraser les données existantes.';
 
@@ -608,6 +632,10 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get settingsScreen_importPillData_question =>
       'Êtes-vous sûr de vouloir importer les données de la pilule ?';
+
+  @override
+  String get settingsScreen_importLarcData_question =>
+      'Are you sure you want to import LARC Data?';
 
   @override
   String get settingsScreen_importPeriodDataDescription =>

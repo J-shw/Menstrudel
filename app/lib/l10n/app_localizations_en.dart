@@ -517,38 +517,59 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsScreen_dataManagement => 'Data Management';
 
   @override
-  String get settingsScreen_clearAllLogs => 'Clear All Logs';
-
-  @override
-  String get settingsScreen_clearAllPillData => 'Clear All Pill Data';
-
-  @override
-  String get settingsScreen_clearAllPillData_question => 'Clear All Pill Data?';
-
-  @override
-  String get settingsScreen_deleteAllPillDataDescription =>
-      'This will permanently delete your pill regimen, reminders, and intake history. This action cannot be undone.';
-
-  @override
-  String get settingsScreen_allPillDataCleared =>
-      'All pill data has been cleared.';
-
-  @override
   String get settingsScreen_dangerZone => 'Danger Zone';
+
+  @override
+  String get settingsScreen_clearAllLogs => 'Clear All Logs';
 
   @override
   String get settingsScreen_clearAllLogsSubtitle =>
       'Deletes your entire period and symptom history.';
 
   @override
+  String get settingsScreen_clearAllPillData => 'Clear All Pill Data';
+
+  @override
   String get settingsScreen_clearAllPillDataSubtitle =>
       'Removes your pill regimen and intake history.';
+
+  @override
+  String get settingsScreen_clearAllPillData_question => 'Clear All Pill Data?';
+
+  @override
+  String get settingsScreen_deleteAllPillDataDescription =>
+      'This will permanently delete your pill regimen, reminders, and intake history.';
+
+  @override
+  String get settingsScreen_allPillDataCleared =>
+      'All pill data has been cleared.';
+
+  @override
+  String get settingsScreen_clearAllLarcData => 'Clear All LARC Data';
+
+  @override
+  String get settingsScreen_clearAllLarcDataSubtitle =>
+      'Removes your LARCs history.';
+
+  @override
+  String get settingsScreen_clearAllLarcData_question => 'Clear All LARC Data?';
+
+  @override
+  String get settingsScreen_deleteAllLarcDataDescription =>
+      'This will permanently delete your LARC history.';
+
+  @override
+  String get settingsScreen_allLarcDataCleared =>
+      'All LARC data has been cleared.';
 
   @override
   String get settingsScreen_exportPeriodData => 'Export Period Data';
 
   @override
   String get settingsScreen_exportPillData => 'Export Pill Data';
+
+  @override
+  String get settingsScreen_exportLarcsData => 'Export LARCs Data';
 
   @override
   String get settingsScreen_exportDataSubtitle => 'Create a JSON backup file.';
@@ -579,6 +600,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsScreen_importPillData => 'Import Pill Data';
 
   @override
+  String get settingsScreen_importLarcsData => 'Import LARCs Data';
+
+  @override
   String get settingsScreen_importDataSubtitle => 'Overwrites existing data.';
 
   @override
@@ -588,6 +612,10 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get settingsScreen_importPillData_question =>
       'Are you sure you want to import Pill Data?';
+
+  @override
+  String get settingsScreen_importLarcData_question =>
+      'Are you sure you want to import LARC Data?';
 
   @override
   String get settingsScreen_importPeriodDataDescription =>
