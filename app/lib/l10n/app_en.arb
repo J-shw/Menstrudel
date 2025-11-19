@@ -165,11 +165,23 @@
         "placeholders": {
             "history": {
                 "type": "int",
-                "example": "12."
+                "example": "12"
             }
         }
     },
-
+    "larcScreen_activeLarcs": "Active LARCs ({activeCount})",
+    "@larcScreen_activeLarcs": {
+        "description": "The total active LARC count.",
+        "placeholders": {
+            "activeCount": {
+                "type": "int",
+                "example": "2"
+            }
+        }
+    },
+    "larcScreen_activeLarcsDescription": "Currently monitored LARC entries.",
+    "larcScreen_noActiveRecords": "No LARC is currently active. Please log a new entry.",
+    "larcScreen_noHistoryRecords": "No past or overdue LARC records found.",
 
     "settingsScreen_selectHistoryView": "Select History View",
     "settingsScreen_deleteRegimen_question": "Delete Regimen?",

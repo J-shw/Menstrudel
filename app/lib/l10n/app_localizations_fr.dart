@@ -310,6 +310,23 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
+  String larcScreen_activeLarcs(int activeCount) {
+    return 'Active LARCs ($activeCount)';
+  }
+
+  @override
+  String get larcScreen_activeLarcsDescription =>
+      'Currently monitored LARC entries.';
+
+  @override
+  String get larcScreen_noActiveRecords =>
+      'No LARC is currently active. Please log a new entry.';
+
+  @override
+  String get larcScreen_noHistoryRecords =>
+      'No past or overdue LARC records found.';
+
+  @override
   String get settingsScreen_selectHistoryView =>
       'Sélectionner la vue de l\'historique';
 

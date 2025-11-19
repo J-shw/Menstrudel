@@ -624,6 +624,30 @@ abstract class AppLocalizations {
   /// **'History ({history})'**
   String larcScreen_history(int history);
 
+  /// The total active LARC count.
+  ///
+  /// In en, this message translates to:
+  /// **'Active LARCs ({activeCount})'**
+  String larcScreen_activeLarcs(int activeCount);
+
+  /// No description provided for @larcScreen_activeLarcsDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Currently monitored LARC entries.'**
+  String get larcScreen_activeLarcsDescription;
+
+  /// No description provided for @larcScreen_noActiveRecords.
+  ///
+  /// In en, this message translates to:
+  /// **'No LARC is currently active. Please log a new entry.'**
+  String get larcScreen_noActiveRecords;
+
+  /// No description provided for @larcScreen_noHistoryRecords.
+  ///
+  /// In en, this message translates to:
+  /// **'No past or overdue LARC records found.'**
+  String get larcScreen_noHistoryRecords;
+
   /// No description provided for @settingsScreen_selectHistoryView.
   ///
   /// In en, this message translates to:
