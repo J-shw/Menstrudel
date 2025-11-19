@@ -510,6 +510,18 @@ abstract class AppLocalizations {
   /// **'Remember to change your tampon.'**
   String get notification_tamponReminderBody;
 
+  /// Title for the LARC reminder notification.
+  ///
+  /// In en, this message translates to:
+  /// **'LARC Reminder'**
+  String get notification_larcTitle;
+
+  /// The body of the LARC reminder notification, indicating the type of LARC and how many days until renewal.
+  ///
+  /// In en, this message translates to:
+  /// **'{type} is due for renewal in {days} days.'**
+  String notification_larcBody(String type, int days);
+
   /// No description provided for @mainScreen_insightsPageTitle.
   ///
   /// In en, this message translates to:
@@ -869,6 +881,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'LARC Replacement Duration'**
   String get settingsScreen_larcDuration;
+
+  /// No description provided for @settingsScreen_enableLARCReminder.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable LARC Reminder'**
+  String get settingsScreen_enableLARCReminder;
 
   /// No description provided for @settingsScreen_currentDuration.
   ///

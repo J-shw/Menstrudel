@@ -129,6 +129,26 @@
         "description": "Body for the tampon reminder notification."
     },
 
+    "notification_larcTitle": "LARC Reminder",
+    "@notification_larcTitle": {
+        "description": "Title for the LARC reminder notification."
+    },
+    "notification_larcBody": "{type} is due for renewal in {days} days.",
+    "@notification_larcBody": {
+        "description": "The body of the LARC reminder notification, indicating the type of LARC and how many days until renewal.",
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "example": "IUD"
+            },
+            "days": {
+                "type": "int",
+                "example": "30"
+            }
+        }
+    },
+
+
     "mainScreen_insightsPageTitle": "Your Insights",
     "mainScreen_pillsPageTitle": "Pills",
     "mainScreen_LarcsPageTitle": "LARCs",
@@ -223,6 +243,7 @@
     "settingsScreen_larcType": "LARC Type",
     "settingsScreen_setDuration": "Set Duration",
     "settingsScreen_larcDuration": "LARC Replacement Duration",
+    "settingsScreen_enableLARCReminder": "Enable LARC Reminder",
     "settingsScreen_currentDuration": "Current Duration",
     "settingsScreen_durationInDays": "Duration (Days)",
 

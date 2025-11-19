@@ -239,6 +239,14 @@ class AppLocalizationsFr extends AppLocalizations {
       'N\'oubliez pas de changer votre tampon.';
 
   @override
+  String get notification_larcTitle => 'LARC Reminder';
+
+  @override
+  String notification_larcBody(String type, int days) {
+    return '$type is due for renewal in $days days.';
+  }
+
+  @override
   String get mainScreen_insightsPageTitle => 'Votre Aperçu';
 
   @override
@@ -453,6 +461,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get settingsScreen_larcDuration => 'LARC Replacement Duration';
+
+  @override
+  String get settingsScreen_enableLARCReminder => 'Enable LARC Reminder';
 
   @override
   String get settingsScreen_currentDuration => 'Current Duration';
