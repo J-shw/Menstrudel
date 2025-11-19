@@ -99,18 +99,13 @@ Future<void> _updateLarcLog(LarcLogEntry updatedEntry) async {
 }
 
   Map<String, dynamic> _calculateLarcStatus(LarcLogEntry entry) {
-    DateTime nextDueDate;
+    final settingsService = context.read<SettingsService>();
+    final durationDays = settingsService.getLarcDurationDays(entry.type);
 
-    switch (entry.type) {
-      case LarcTypes.injection:
-        nextDueDate = entry.date.add(const Duration(days: 84));
-        break;
-      default:
-        nextDueDate = entry.date.add(const Duration(days: 365)); 
-    }
-    
+    DateTime nextDueDate = entry.date.add(Duration(days: durationDays));
+  
     final isOverdue = nextDueDate.isBefore(DateTime.now());
-    final isActive = !isOverdue; 
+    final isActive = !isOverdue;
 
     return {
       'nextDueDate': nextDueDate,
