@@ -10,7 +10,7 @@ class LarcLogCard extends StatelessWidget {
     required this.l10n,
     required this.injectionDate,
     required this.dueDateString,
-    required this.dueDateColor,
+    required this.isOverdue,
     required this.onTap,
   });
 
@@ -18,12 +18,18 @@ class LarcLogCard extends StatelessWidget {
   final AppLocalizations l10n;
   final String injectionDate;
   final String dueDateString;
-  final Color dueDateColor;
+  final bool isOverdue;
   final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+
+    Color dueDateColor = isOverdue 
+      ? colorScheme.error
+      : colorScheme.tertiary;
+
+    final String dueLabel = isOverdue ? l10n.overdue : l10n.nextDue;
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 8.0),
@@ -35,7 +41,7 @@ class LarcLogCard extends StatelessWidget {
           decoration: BoxDecoration(
             color: colorScheme.surfaceContainerHigh,
             borderRadius: BorderRadius.circular(12.0),
-            border: Border.all(color: colorScheme.outlineVariant.withValues(alpha: 0.5)),
+            border: Border.all(color: colorScheme.outlineVariant.withValues(alpha: 0.5)), 
           ),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -58,14 +64,18 @@ class LarcLogCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Title
-                    Text(
-                      entry.type.getDisplayName(l10n),
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                        color: colorScheme.onSurface,
-                      ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          entry.type.getDisplayName(l10n),
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            color: colorScheme.onSurface,
+                          ),
+                        ),
+                      ],
                     ),
                     const SizedBox(height: 4),
                     // Log Date
@@ -87,7 +97,7 @@ class LarcLogCard extends StatelessWidget {
                         ),
                         const SizedBox(width: 4),
                         Text(
-                          'Next Due: $dueDateString',
+                          '$dueLabel: $dueDateString',
                           style: TextStyle(
                             color: dueDateColor,
                             fontWeight: FontWeight.w600,
