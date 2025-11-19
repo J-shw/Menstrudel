@@ -6,6 +6,8 @@ import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/models/birth_control/larcs/larc_log_entry.dart';
 import 'package:menstrudel/models/birth_control/larcs/larc_types_enum.dart';
 import 'package:menstrudel/services/settings_service.dart';
+import 'package:menstrudel/widgets/larcs/screen/larc_log_card.dart';
+import 'package:menstrudel/widgets/larcs/sheets/edit_larc_bottom_sheet.dart';
 import 'package:menstrudel/widgets/larcs/sheets/log_larc_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 
@@ -51,19 +53,50 @@ class _LarcScreenState extends State<LarcScreen> {
   );
 }
 
-  Future<void> _saveLarcLog({required DateTime date, required String note}) async {
+  Future<void> _saveLarcLog({required DateTime date, required String? note}) async {
     final settingsService = context.read<SettingsService>();
 
     final newEntry = LarcLogEntry(
       id: null,
       date: date,
       type: settingsService.larcType,
+      note: note,
     );
 
     await larcRepo.logLarc(newEntry);
     
     _loadHistory();
   }
+
+  Future<void> _deleteLarcLog(int id) async {
+  await larcRepo.deleteLog(id);
+  _loadHistory();
+}
+
+void _presentEditDeleteSheet(BuildContext context, LarcLogEntry entry) {
+  showModalBottomSheet(
+    context: context,
+    isScrollControlled: true,
+    builder: (ctx) {
+      return EditLarcLogBottomSheet(
+        log: entry,
+        onSave: (updatedEntry) {
+          _updateLarcLog(updatedEntry);
+          Navigator.pop(context);
+        },
+        onDelete: () {
+          _deleteLarcLog(entry.id!);
+          Navigator.pop(context);
+        },
+      );
+    },
+  );
+}
+
+Future<void> _updateLarcLog(LarcLogEntry updatedEntry) async {
+  await larcRepo.updateLog(updatedEntry); 
+  _loadHistory();
+}
 
   @override
   Widget build(BuildContext context) {
@@ -74,8 +107,8 @@ class _LarcScreenState extends State<LarcScreen> {
       body: _buildBody(colorScheme, l10n),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _presentLogSheet(context),
-        backgroundColor: colorScheme.secondaryContainer,
-        child: Icon(Icons.add, color: colorScheme.onSecondaryContainer),
+        backgroundColor: colorScheme.primaryContainer,
+        child: Icon(Icons.add, color: colorScheme.onPrimaryContainer),
       ),
     );
   }
@@ -97,14 +130,17 @@ class _LarcScreenState extends State<LarcScreen> {
             Text(
               'History (${_loggedLarcs.length})', 
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: colorScheme.primary,
+                color: colorScheme.onSurface, 
               ),
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 12),
             if (_loggedLarcs.isEmpty)
-              const Text('No records found.')
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: Text('No records found.', style: TextStyle(color: colorScheme.outline)),
+              )
             else
               ..._loggedLarcs.map((entry) {
                 DateTime nextDueDate;
@@ -120,38 +156,22 @@ class _LarcScreenState extends State<LarcScreen> {
                 
                 final injectionDate = DateFormat('MMM d, yyyy').format(entry.date);
                 dueDateString = DateFormat('MMM d, yyyy').format(nextDueDate);
+                
+                final isOverdue = nextDueDate.isBefore(DateTime.now());
+                
+                Color dueDateColor = isOverdue 
+                    ? colorScheme.error
+                    : colorScheme.tertiary;
 
-                return Card(
-                  margin: const EdgeInsets.symmetric(vertical: 4.0),
-                  elevation: 2,
-                  color: colorScheme.secondaryContainer,
-                  child: ListTile(
-                    leading: Icon(entry.type.getIcon(), color: colorScheme.onSecondaryContainer),
-                    title: Text( 
-                      entry.type.getDisplayName(l10n),
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    subtitle: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('Date: $injectionDate'),
-                        Text(
-                          'Next Due: $dueDateString',
-                          style: TextStyle(
-                            color: nextDueDate.isBefore(DateTime.now())
-                                ? Colors.red
-                                : Colors.green,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ],
-                    ),
-                    onTap: () {
-                      // TODO: Handle tap action
-                    },
-                  ),
+                return LarcLogCard(
+                  entry: entry,
+                  l10n: l10n,
+                  injectionDate: injectionDate,
+                  dueDateString: dueDateString,
+                  dueDateColor: dueDateColor,
+                  onTap: () => _presentEditDeleteSheet(context, entry),
                 );
-              })
+              }),
           ],
         ),
       ),
