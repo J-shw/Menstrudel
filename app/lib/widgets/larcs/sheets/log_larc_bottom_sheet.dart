@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 
-typedef LarcSaveCallback = void Function(DateTime date, String note);
+typedef LarcSaveCallback = void Function(DateTime date, String? note);
 
 class LogLarcBottomSheet extends StatefulWidget {
   final LarcSaveCallback onSave;
@@ -53,8 +53,10 @@ class _LogLarcBottomSheetState extends State<LogLarcBottomSheet> {
   }
 
   void _handleSave() {
-    var note = _noteController.text;
-    widget.onSave(_selectedDate, note);
+    final String? noteToSave = _noteController.text.trim().isEmpty
+    ? null 
+    : _noteController.text.trim();
+    widget.onSave(_selectedDate, noteToSave);
     Navigator.pop(context);
   }
   
