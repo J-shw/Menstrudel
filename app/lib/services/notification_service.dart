@@ -201,6 +201,42 @@ class NotificationService {
     return DateTime.fromMillisecondsSinceEpoch(storedTimestamp);
   }
 
+  // LARC
+
+  static Future<void> scheduleLarcReminder({
+    required DateTime reminderDateTime,
+    required String title,
+    required String body,
+  }) async {
+    final scheduledDate = tz.TZDateTime.from(reminderDateTime, tz.local);
+
+    if (scheduledDate.isBefore(tz.TZDateTime.now(tz.local))) throw PastNotificationException();
+
+    debugPrint('Scheduling LARC reminder');
+
+    const details = fln.NotificationDetails(
+      android: fln.AndroidNotificationDetails(
+        larcReminderChannelId, larcReminderChannelName,
+        importance: fln.Importance.max, priority: fln.Priority.high,
+      ),
+      iOS: fln.DarwinNotificationDetails(presentSound: true, presentBadge: true, presentAlert: true),
+    );
+
+    await _plugin.zonedSchedule(
+        larcReminderId,
+        title,
+        body,
+        scheduledDate,
+        details,
+        androidScheduleMode: fln.AndroidScheduleMode.exactAllowWhileIdle);
+  }
+
+  static Future<void> cancelLarcReminder() async {
+    debugPrint('Canceling LARC reminder');
+    await _plugin.cancel(larcReminderId);
+  }
+
+
   // General
 
   static Future<void> cancelAllNotifications() async {
