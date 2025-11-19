@@ -29,19 +29,19 @@ extension LarcTypeDisplay on LarcTypes {
     }
   }
 
-  /// gets the associated icon (Not sure if needed but have place holder icons for now...)
+  /// gets the associated icon
   IconData getIcon(){
     switch (this) { 
       case LarcTypes.iud:
-        return Icons.input; 
+        return Icons.device_thermostat_rounded; 
       case LarcTypes.implant:
-        return Icons.arrow_back_rounded;
+        return Icons.fiber_manual_record_outlined;
       case LarcTypes.injection:
-        return Icons.back_hand;
+        return Icons.medical_services_outlined;
       case LarcTypes.ring:
-        return Icons.ring_volume;
+        return Icons.trip_origin_rounded;
       case LarcTypes.patch:
-        return Icons.pivot_table_chart;
+        return Icons.square_outlined;
     }
   }
 }
