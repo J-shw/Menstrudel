@@ -5,6 +5,7 @@ import 'package:menstrudel/database/repositories/larc_repository.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/models/birth_control/larcs/larc_log_entry.dart';
 import 'package:menstrudel/models/birth_control/larcs/larc_types_enum.dart';
+import 'package:menstrudel/services/notification_service.dart';
 import 'package:menstrudel/services/settings_service.dart';
 import 'package:menstrudel/widgets/larcs/screen/larc_log_card.dart';
 import 'package:menstrudel/widgets/larcs/sheets/edit_larc_bottom_sheet.dart';
@@ -37,6 +38,10 @@ class _LarcScreenState extends State<LarcScreen> {
       _loggedLarcs = loadedEntries;
       _isLoading = false;
     });
+
+    if (mounted) {
+      await setLarcReminders();
+    }
   }
 
   void _presentLogSheet(BuildContext context) {
@@ -114,6 +119,49 @@ Future<void> _updateLarcLog(LarcLogEntry updatedEntry) async {
       'isOverdue': isOverdue,
       'isActive': isActive,
     };
+  }
+
+  Future<void> setLarcReminders() async {
+    final settingsService = context.read<SettingsService>();
+    final l10n = AppLocalizations.of(context)!;
+    final List<Map<String, dynamic>> allStatuses = _loggedLarcs
+        .map((entry) => _calculateLarcStatus(entry)..['entry'] = entry)
+        .toList();
+
+    final activeLarcs = allStatuses.where((status) => status['isActive'] == true).toList();
+    
+    if (activeLarcs.isEmpty) {
+        await NotificationService.cancelLarcReminder();
+        return;
+    }
+
+    activeLarcs.sort((a, b) => a['nextDueDate'].compareTo(b['nextDueDate']));
+    
+    final nextDueStatus = activeLarcs.first;
+    final nextDueDate = nextDueStatus['nextDueDate'] as DateTime;
+    final nextLarcType = (nextDueStatus['entry'] as LarcLogEntry).type;
+    final reminderDaysBefore = settingsService.larcReminderDays;
+    final reminderTime = settingsService.larcReminderTime;
+    final reminderHour = reminderTime.hour;
+    final reminderMinute = reminderTime.minute;
+
+    final nextDueDateAtTime = DateTime(
+        nextDueDate.year, nextDueDate.month, nextDueDate.day,
+        reminderHour, reminderMinute,
+    );
+
+    final finalScheduledTime = nextDueDateAtTime.subtract(
+       Duration(days: reminderDaysBefore)
+    );
+
+    await NotificationService.scheduleLarcReminder(
+        reminderDateTime: finalScheduledTime, 
+        title: l10n.notification_larcTitle, 
+        body: l10n.notification_larcBody(
+            nextLarcType.getDisplayName(l10n), 
+            reminderDaysBefore,
+        ),
+    );
   }
 
   @override
