@@ -11,6 +11,7 @@ import 'package:menstrudel/widgets/larcs/screen/larc_log_card.dart';
 import 'package:menstrudel/widgets/larcs/sheets/edit_larc_bottom_sheet.dart';
 import 'package:menstrudel/widgets/larcs/sheets/log_larc_bottom_sheet.dart';
 import 'package:provider/provider.dart';
+import 'package:timezone/timezone.dart' as tz;
 
 class LarcScreen extends StatefulWidget {
   const LarcScreen({super.key});
@@ -150,9 +151,15 @@ Future<void> _updateLarcLog(LarcLogEntry updatedEntry) async {
         reminderHour, reminderMinute,
     );
 
-    final finalScheduledTime = nextDueDateAtTime.subtract(
-       Duration(days: reminderDaysBefore)
-    );
+    final finalScheduledTime = tz.TZDateTime.from(nextDueDateAtTime, tz.local)
+  .subtract(Duration(days: reminderDaysBefore));
+
+
+    if (finalScheduledTime.isBefore(DateTime.now())) {
+      await NotificationService.cancelLarcReminder();
+      debugPrint('LARC Notification date is in the past. Skipping notification schedule.');
+      return;
+    }
 
     await NotificationService.scheduleLarcReminder(
         reminderDateTime: finalScheduledTime, 
