@@ -127,8 +127,7 @@ Future<void> _updateLarcLog(LarcLogEntry updatedEntry) async {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 16),
-            Text(
-              'History (${_loggedLarcs.length})', 
+            Text(l10n.larcScreen_history(_loggedLarcs.length), 
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -139,7 +138,7 @@ Future<void> _updateLarcLog(LarcLogEntry updatedEntry) async {
             if (_loggedLarcs.isEmpty)
               Padding(
                 padding: const EdgeInsets.only(top: 8.0),
-                child: Text('No records found.', style: TextStyle(color: colorScheme.outline)),
+                child: Text(l10n.larcScreen_noLarcRecordsFound, style: TextStyle(color: colorScheme.outline)),
               )
             else
               ..._loggedLarcs.map((entry) {
@@ -158,17 +157,13 @@ Future<void> _updateLarcLog(LarcLogEntry updatedEntry) async {
                 dueDateString = DateFormat('MMM d, yyyy').format(nextDueDate);
                 
                 final isOverdue = nextDueDate.isBefore(DateTime.now());
-                
-                Color dueDateColor = isOverdue 
-                    ? colorScheme.error
-                    : colorScheme.tertiary;
 
                 return LarcLogCard(
                   entry: entry,
                   l10n: l10n,
                   injectionDate: injectionDate,
                   dueDateString: dueDateString,
-                  dueDateColor: dueDateColor,
+                  isOverdue: isOverdue,
                   onTap: () => _presentEditDeleteSheet(context, entry),
                 );
               }),
