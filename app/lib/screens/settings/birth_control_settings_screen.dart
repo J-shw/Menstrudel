@@ -341,7 +341,7 @@ class _BirthControlSettingsScreenState extends State<BirthControlSettingsScreen>
                     ListTile(
                       title: Text(l10n.settingsScreen_remindMeBefore),
                       trailing: DropdownButton<int>(
-                        value: settingsService.notificationDays,
+                        value: settingsService.larcReminderDays,
                         items: [1, 7, 14].map((int days) {
                           return DropdownMenuItem<int>(
                             value: days,
