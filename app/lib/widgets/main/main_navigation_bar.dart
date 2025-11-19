@@ -41,8 +41,8 @@ class MainNavigationBar extends StatelessWidget {
           ),
         if (settingsService.isLarcNavEnabled)
           NavigationDestination(
-            selectedIcon: Icon(Icons.type_specimen_rounded),
-            icon: Icon(Icons.type_specimen_outlined),
+            selectedIcon: Icon(Icons.verified_user_rounded),
+            icon: Icon(Icons.verified_user_outlined),
             label: l10n.navBar_larc,
           ),
         NavigationDestination(

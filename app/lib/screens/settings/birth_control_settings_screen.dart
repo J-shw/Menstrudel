@@ -279,7 +279,7 @@ class _BirthControlSettingsScreenState extends State<BirthControlSettingsScreen>
                 const Divider(),
                 if (larcEnabled) ...[
                   ListTile(
-                    leading: const Icon(Icons.type_specimen_outlined),
+                    leading: const Icon(Icons.verified_user_outlined),
                     title: Text(l10n.settingsScreen_larcType),
                     trailing: DropdownButton<LarcTypes>(
                       value: settingsService.larcType,
