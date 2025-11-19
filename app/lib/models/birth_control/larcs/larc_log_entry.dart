@@ -22,6 +22,20 @@ class LarcLogEntry {
     };
   }
 
+  LarcLogEntry copyWith({
+		int? id,
+		DateTime? date,
+    LarcTypes? type,
+    String? note,
+	}) {
+		return LarcLogEntry(
+			id: id ?? this.id,
+			date: date ?? this.date,
+      type: type ?? this.type,
+      note: note ?? this.note,
+		);
+	}
+
   static LarcLogEntry fromMap(Map<String, dynamic> map) {
     return LarcLogEntry(
       id: map['id'] as int,
