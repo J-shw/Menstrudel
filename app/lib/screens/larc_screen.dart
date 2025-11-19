@@ -98,6 +98,29 @@ Future<void> _updateLarcLog(LarcLogEntry updatedEntry) async {
   _loadHistory();
 }
 
+  Map<String, dynamic> _calculateLarcStatus(LarcLogEntry entry) {
+    DateTime nextDueDate;
+
+    switch (entry.type) {
+      case LarcTypes.injection:
+        nextDueDate = entry.date.add(const Duration(days: 84));
+        break;
+      default:
+        nextDueDate = entry.date.add(const Duration(days: 365)); 
+    }
+    
+    final isOverdue = nextDueDate.isBefore(DateTime.now());
+    final isActive = !isOverdue; 
+
+    return {
+      'nextDueDate': nextDueDate,
+      'dueDateString': DateFormat('MMM d, yyyy').format(nextDueDate),
+      'injectionDate': DateFormat('MMM d, yyyy').format(entry.date),
+      'isOverdue': isOverdue,
+      'isActive': isActive,
+    };
+  }
+
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
@@ -120,56 +143,77 @@ Future<void> _updateLarcLog(LarcLogEntry updatedEntry) async {
 
     _loggedLarcs.sort((a, b) => b.date.compareTo(a.date));
 
+    final List<Map<String, dynamic>> allStatuses = _loggedLarcs
+        .map((entry) => _calculateLarcStatus(entry)..['entry'] = entry)
+        .toList();
+    
+    final activeLarcs = allStatuses.where((status) => status['isActive'] == true).toList();
+    activeLarcs.sort((a, b) => a['nextDueDate'].compareTo(b['nextDueDate']));
+    
+    final historyLarcs = allStatuses.where((status) => status['isActive'] == false).toList();
+    historyLarcs.sort((a, b) => b['entry'].date.compareTo(a['entry'].date));
+
+
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 16),
-            Text(l10n.larcScreen_history(_loggedLarcs.length), 
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: colorScheme.onSurface, 
-              ),
-            ),
+            _buildHeader(l10n.larcScreen_activeLarcs(activeLarcs.length), colorScheme),
             const SizedBox(height: 12),
-            if (_loggedLarcs.isEmpty)
-              Padding(
-                padding: const EdgeInsets.only(top: 8.0),
-                child: Text(l10n.larcScreen_noLarcRecordsFound, style: TextStyle(color: colorScheme.outline)),
-              )
+            if (activeLarcs.isEmpty)
+              _buildNoRecordsText(l10n.larcScreen_noActiveRecords, colorScheme)
             else
-              ..._loggedLarcs.map((entry) {
-                DateTime nextDueDate;
-                String dueDateString;
-
-                switch (entry.type) {
-                  case LarcTypes.injection:
-                    nextDueDate = entry.date.add(const Duration(days: 84));
-                    break;
-                  default:
-                    nextDueDate = entry.date;
-                }
-                
-                final injectionDate = DateFormat('MMM d, yyyy').format(entry.date);
-                dueDateString = DateFormat('MMM d, yyyy').format(nextDueDate);
-                
-                final isOverdue = nextDueDate.isBefore(DateTime.now());
-
+              ...activeLarcs.map((status) {
                 return LarcLogCard(
-                  entry: entry,
+                  entry: status['entry'],
                   l10n: l10n,
-                  injectionDate: injectionDate,
-                  dueDateString: dueDateString,
-                  isOverdue: isOverdue,
-                  onTap: () => _presentEditDeleteSheet(context, entry),
+                  injectionDate: status['injectionDate'],
+                  dueDateString: status['dueDateString'],
+                  isOverdue: status['isOverdue'],
+                  onTap: () => _presentEditDeleteSheet(context, status['entry']),
+                );
+              }),
+            
+            const SizedBox(height: 32),
+            
+            _buildHeader(l10n.larcScreen_history(historyLarcs.length), colorScheme),
+            const SizedBox(height: 12),
+            if (historyLarcs.isEmpty)
+              _buildNoRecordsText(l10n.larcScreen_noHistoryRecords, colorScheme)
+            else
+              ...historyLarcs.map((status) {
+                return LarcLogCard(
+                  entry: status['entry'],
+                  l10n: l10n,
+                  injectionDate: status['injectionDate'],
+                  dueDateString: status['dueDateString'],
+                  isOverdue: status['isOverdue'],
+                  onTap: () => _presentEditDeleteSheet(context, status['entry']),
                 );
               }),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildHeader(String title, ColorScheme colorScheme) {
+    return Text(
+      title, 
+      style: TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+        color: colorScheme.onSurface, 
+      ),
+    );
+  }
+
+  Widget _buildNoRecordsText(String text, ColorScheme colorScheme) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 8.0),
+      child: Text(text, style: TextStyle(color: colorScheme.outline)),
     );
   }
 }
