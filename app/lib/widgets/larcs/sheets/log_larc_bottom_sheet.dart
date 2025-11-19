@@ -88,7 +88,7 @@ class _LogLarcBottomSheetState extends State<LogLarcBottomSheet> {
             const SizedBox(height: 12),
             
             // --- Title ---
-            Center(child: Text('Log LARC', style: textTheme.titleLarge)),
+            Center(child: Text(l10n.larcEntrySheet_logLARCDetails, style: textTheme.titleLarge)),
             
             // --- Date Picker ---
             const SizedBox(height: 24),
@@ -121,7 +121,7 @@ class _LogLarcBottomSheetState extends State<LogLarcBottomSheet> {
                   child: FilledButton.tonal(
                     style: FilledButton.styleFrom(minimumSize: const Size.fromHeight(50)),
                     onPressed: _handleCancel,
-                    child: const Text('Cancel'),
+                    child: Text(l10n.cancel),
                   ),
                 ),
                 const SizedBox(width: 16),
@@ -129,7 +129,7 @@ class _LogLarcBottomSheetState extends State<LogLarcBottomSheet> {
                   child: FilledButton(
                     style: FilledButton.styleFrom(minimumSize: const Size.fromHeight(50)),
                     onPressed: _handleSave,
-                    child: const Text('Save Log'),
+                    child: Text(l10n.save),
                   ),
                 ),
               ],

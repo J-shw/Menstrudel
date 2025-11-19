@@ -112,7 +112,7 @@ class _EditLarcLogBottomSheetState extends State<EditLarcLogBottomSheet> {
             const SizedBox(height: 12),
             
             // --- Header ---
-            _buildHeader(context, textTheme, colorScheme),
+            _buildHeader(context, textTheme, colorScheme, l10n),
             
             // --- Date Picker ---
             const SizedBox(height: 24),
@@ -144,12 +144,13 @@ class _EditLarcLogBottomSheetState extends State<EditLarcLogBottomSheet> {
     );
   }
   
-  Widget _buildHeader(BuildContext context, TextTheme textTheme, ColorScheme colorScheme) {
+  Widget _buildHeader(BuildContext context, TextTheme textTheme, ColorScheme colorScheme, AppLocalizations l10n) {
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          'LARC Log Details', 
+          l10n.larcEntrySheet_logLARCDetails, 
           style: textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)
         ),
         
