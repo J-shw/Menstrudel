@@ -27,7 +27,6 @@ class _BirthControlSettingsScreenState extends State<BirthControlSettingsScreen>
   PillRegimen? _activeRegimen;
   bool _pillNotificationsEnabled = false;
   TimeOfDay _pillNotificationTime = const TimeOfDay(hour: 21, minute: 0);
-  TimeOfDay _larcNotificationTime = const TimeOfDay(hour: 21, minute: 0);
 
   @override
   void initState() {
@@ -147,16 +146,15 @@ class _BirthControlSettingsScreenState extends State<BirthControlSettingsScreen>
 
   Future<void> _selectLarcReminderTime() async {
     final settingsService = context.read<SettingsService>();
+    final TimeOfDay initialTime = settingsService.larcReminderTime; 
+
     final TimeOfDay? pickedTime = await showTimePicker(
       context: context,
-      initialTime: _larcNotificationTime,
+      initialTime: initialTime,
     );
 
-    if (pickedTime != null && pickedTime != _larcNotificationTime) {
-      setState(() {
-        _larcNotificationTime = pickedTime;
-      });
-      await settingsService.setLarcReminderTime(pickedTime);
+    if (pickedTime != null && pickedTime != initialTime) {
+      await settingsService.setLarcReminderTime(pickedTime); 
     }
   }
 
