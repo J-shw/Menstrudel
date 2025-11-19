@@ -11,6 +11,7 @@ class LarcLogCard extends StatelessWidget {
     required this.injectionDate,
     required this.dueDateString,
     required this.dueDateColor,
+    required this.onTap,
   });
 
   final LarcLogEntry entry;
@@ -18,6 +19,7 @@ class LarcLogCard extends StatelessWidget {
   final String injectionDate;
   final String dueDateString;
   final Color dueDateColor;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +28,7 @@ class LarcLogCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8.0),
       child: InkWell(
-        onTap: () {
-          // TODO: Handle tap action
-        },
+        onTap: onTap,
         borderRadius: BorderRadius.circular(12.0),
         child: Container(
           padding: const EdgeInsets.all(16.0),
