@@ -44,4 +44,20 @@ extension LarcTypeDisplay on LarcTypes {
         return Icons.square_outlined;
     }
   }
+
+  /// The default duration in days for each LARC type
+  int get defaultDurationDays {
+    switch (this) {
+      case LarcTypes.iud:
+        return 1825; 
+      case LarcTypes.implant:
+        return 1095;
+      case LarcTypes.injection:
+        return 84; 
+      case LarcTypes.ring:
+        return 21;
+      case LarcTypes.patch:
+        return 28;
+    }
+  }
 }
