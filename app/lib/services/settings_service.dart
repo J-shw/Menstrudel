@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:menstrudel/models/birth_control/larcs/larc_types_enum.dart';
 import 'package:menstrudel/models/period_logs/symptom.dart';
 import 'package:menstrudel/models/period_logs/symptom_type_enum.dart';
+import 'package:menstrudel/services/notification_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:menstrudel/utils/constants.dart';
 import 'package:menstrudel/models/themes/app_theme_mode_enum.dart';
@@ -30,6 +31,9 @@ class SettingsService extends ChangeNotifier {
   AppThemeMode _themeMode = kDefaultThemeMode;
   Set<Symptom> _defaultSymptoms = kDefaultSymptoms;
   Map<LarcTypes, int> _larcDurations = {};
+  bool _larcNotificationsEnabled = kDefaultLarcNotificationsEnabled;
+  int _larcReminderDays = kDefaultLarcReminderDays;
+  TimeOfDay _larcReminderTime = kDefaultLarcReminderTime;
 
   /// Whether the 'Pill' tab is visible in the main navigation bar.
   bool get isPillNavEnabled => _pillNavEnabled;
@@ -73,7 +77,12 @@ class SettingsService extends ChangeNotifier {
     }
     return type.defaultDurationDays; 
   }
-
+  /// If LARC notifications are enabled
+  bool get larcNotificationsEnabled => _larcNotificationsEnabled;
+  /// The amount of days before LARC renew date notificaiton shuold be sent
+  int get larcReminderDays => _larcReminderDays;
+  /// The time of day the LARC renew notification should be sent
+  TimeOfDay get larcReminderTime => _larcReminderTime;
 
   Future<void> loadSettings() async {
     _prefs = await SharedPreferences.getInstance();
@@ -119,6 +128,9 @@ class SettingsService extends ChangeNotifier {
       debugPrint('Corrupt saved LARC type. Resetting to default.');
       _larcType = kDefaultLarcType;
     }
+    _larcNotificationsEnabled = _prefs.getBool(larcNotificationsEnanledKey) ?? true;
+    _larcReminderDays = _prefs.getInt(larcNotificationDaysKey) ?? 30;
+    _larcReminderTime = _loadTimeOfDay(larcNotificationTimeKey, 9, 0);
 
     notifyListeners();
   }
@@ -201,93 +213,118 @@ class SettingsService extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> setLarcNotificationsEnabled(bool enabled) async {
+    _larcNotificationsEnabled = enabled;
+    await _prefs.setBool(larcNotificationsEnanledKey, enabled);
+    if (!enabled) {
+      await NotificationService.cancelLarcReminder();
+    }
+    notifyListeners();
+  }
+
+  Future<void> setLarcReminderDays(int days) async {
+    _larcReminderDays = days;
+    await _prefs.setInt(larcNotificationDaysKey, days);
+    notifyListeners();
+  }
+
+  Future<void> setLarcReminderTime(TimeOfDay time) async {
+    _larcReminderTime = time;
+    final String formattedTime = '${time.hour}:${time.minute}';
+    await _prefs.setString(larcNotificationTimeKey, formattedTime);
+    notifyListeners();
+  }
+
   Future<void> setLanguageCode(String code) async {
     _languageCode = code;
-    notifyListeners();
     await _prefs.setString(languageKey, code);
+    notifyListeners();
   }
 
   Future<void> setAlwaysShowReminderButtonEnabled(bool isEnabled) async {
     _alwaysShowReminderButton = isEnabled;
-    notifyListeners();
     await _prefs.setBool(persistentReminderKey, isEnabled);
+    notifyListeners();
   }
 
   Future<void> setBiometricsEnabled(bool isEnabled) async {
     _biometricsEnabled = isEnabled;
-    notifyListeners();
     await _prefs.setBool(biometricEnabledKey, isEnabled);
+    notifyListeners();
   }
 
-  Future<void> setNotificationsEnabled(bool isEnabled) async {
-    _notificationsEnabled = isEnabled;
+  Future<void> setNotificationsEnabled(bool enabled) async {
+    _notificationsEnabled = enabled;
+    await _prefs.setBool(notificationsEnabledKey, enabled);
+    if (!enabled) {
+      await NotificationService.cancelPillReminder();
+    }
     notifyListeners();
-    await _prefs.setBool(notificationsEnabledKey, isEnabled);
   }
 
   Future<void> setNotificationDays(int days) async {
     _notificationDays = days;
-    notifyListeners();
     await _prefs.setInt(notificationDaysKey, days);
+    notifyListeners();
   }
 
   Future<void> setNotificationTime(TimeOfDay time) async {
     _notificationTime = time;
-    notifyListeners();
     final String formattedTime = '${time.hour}:${time.minute}';
     await _prefs.setString(notificationTimeKey, formattedTime);
+    notifyListeners();
   }
 
   Future<void> setPeriodOverdueNotificationsEnabled(bool isEnabled) async {
     _periodOverdueNotificationsEnabled = isEnabled;
-    notifyListeners();
     await _prefs.setBool(periodOverdueNotificationsEnabledKey, isEnabled);
+    notifyListeners();
   }
 
   Future<void> setPeriodOverdueNotificationDays(int days) async {
     _periodOverdueNotificationDays = days;
-    notifyListeners();
     await _prefs.setInt(periodOverdueNotificationDaysKey, days);
+    notifyListeners();
   }
 
   Future<void> setPeriodOverdueNotificationTime(TimeOfDay time) async {
     _periodOverdueNotificationTime = time;
-    notifyListeners();
     final String formattedTime = '${time.hour}:${time.minute}';
     await _prefs.setString(periodOverdueNotificationTimeKey, formattedTime);
+    notifyListeners();
   }
 
   Future<void> setHistoryView(PeriodHistoryView view) async {
     _historyView = view;
-    notifyListeners();
     await _prefs.setString(historyViewKey, view.name);
+    notifyListeners();
   }
 
   Future<void> setDynamicColorEnabled(bool isEnabled) async {
     _dynamicColorEnabled = isEnabled;
-    notifyListeners();
     await _prefs.setBool(dynamicColorKey, isEnabled);
+    notifyListeners();
   }
 
   Future<void> setThemeColor(Color color) async {
     _themeColor = color;
-    notifyListeners();
     await _prefs.setInt(themeColorKey, color.toARGB32());
+    notifyListeners();
   }
 
   Future<void> setThemeMode(AppThemeMode theme) async {
     _themeMode = theme;
-    notifyListeners();
     await _prefs.setInt(themeModeKey, theme.index);
+    notifyListeners();
   }
 
   Future<void> setDefaultSymptoms(Set<Symptom> symptoms) async {
     _defaultSymptoms = symptoms;
-    notifyListeners();
     await _prefs.setStringList(
       defaultSymptomsKey, 
       symptoms.map((e) => e.getDbName()).toList()
     );
+    notifyListeners();
   }
 
   Future<void> resetDefaultSymptoms() async {

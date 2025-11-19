@@ -27,6 +27,7 @@ class _BirthControlSettingsScreenState extends State<BirthControlSettingsScreen>
   PillRegimen? _activeRegimen;
   bool _pillNotificationsEnabled = false;
   TimeOfDay _pillNotificationTime = const TimeOfDay(hour: 21, minute: 0);
+  TimeOfDay _larcNotificationTime = const TimeOfDay(hour: 21, minute: 0);
 
   @override
   void initState() {
@@ -141,6 +142,20 @@ class _BirthControlSettingsScreenState extends State<BirthControlSettingsScreen>
     await pillsRepo.setActiveRegimen(regimen.id!);
     await NotificationService.cancelPillReminder();
     await _loadSettings();
+  }
+
+    Future<void> _selectLarcReminderTime() async {
+    final TimeOfDay? pickedTime = await showTimePicker(
+      context: context,
+      initialTime: _larcNotificationTime,
+    );
+
+    if (pickedTime != null && pickedTime != _larcNotificationTime) {
+      setState(() {
+        _larcNotificationTime = pickedTime;
+      });
+      await savePillReminderSettings();
+    }
   }
 
   @override
@@ -312,6 +327,42 @@ class _BirthControlSettingsScreenState extends State<BirthControlSettingsScreen>
                       }
                     },
                   ),
+                  SwitchListTile(
+                    title: Text(l10n.settingsScreen_enableLARCReminder),
+                    value: settingsService.larcNotificationsEnabled,
+                    onChanged: (bool value) {
+                      context.read<SettingsService>().setLarcNotificationsEnabled(value);
+                    },
+                  ),
+                  if (settingsService.larcNotificationsEnabled) ...[
+                    ListTile(
+                      title: Text(l10n.settingsScreen_remindMeBefore),
+                      trailing: DropdownButton<int>(
+                        value: settingsService.notificationDays,
+                        items: [1, 7, 14].map((int days) {
+                          return DropdownMenuItem<int>(
+                            value: days,
+                            child: Text(l10n.dayCount(days)),
+                          );
+                        }).toList(),
+                        onChanged: (int? newDays) {
+                          if (newDays != null) {
+                            context.read<SettingsService>().setLarcReminderDays(newDays);
+                          }
+                        },
+                      ),
+                    ),
+                    
+                    ListTile(
+                      leading: const Icon(Icons.access_time),
+                      title: Text(l10n.settingsScreen_reminderTime),
+                      trailing: Text(
+                        settingsService.larcReminderTime.format(context),
+                        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
+                      onTap: _selectLarcReminderTime,
+                    ),
+                  ],
                 ]
               ],
             ),
