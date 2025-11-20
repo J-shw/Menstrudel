@@ -59,6 +59,10 @@ Take control of your menstrual health with an intuitive, private, and powerful t
 * **Flexible Setup:** Easily customise your specific pill pack, whether it’s a 21/7, 28-day, or any other regimen.
 * **Build Your Streak:** Log your daily intake with a single tap and track your adherence over time.
 
+### LARC Tracking and Reminders 🗓️
+* **Never Miss a Beat:** Log LARC usage, and track renewal dates with notification alerts.
+* **Stay Informed:** Get timely, customisable notifications for upcoming device expiry.
+
 ### Timely & Customizable Reminders ⏰
 * **Period Alerts:** Get a gentle heads-up a few days before your period is due.
 * **Pill Reminders:** Never miss a pill with consistent daily notifications tailored to your schedule.
