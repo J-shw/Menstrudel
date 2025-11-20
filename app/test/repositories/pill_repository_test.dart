@@ -6,9 +6,9 @@ import 'package:menstrudel/models/pills/pill_regimen.dart';
 import 'package:menstrudel/models/pills/pill_reminder.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'package:menstrudel/models/pills/pill_status_enum.dart';
-import 'package:sqlite3/sqlite3.dart';
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
   sqfliteFfiInit();
   databaseFactory = databaseFactoryFfi;
 
