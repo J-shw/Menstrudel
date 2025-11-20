@@ -8,10 +8,9 @@ import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'package:menstrudel/models/pills/pill_status_enum.dart';
 
 void main() {
-  setUpAll(() {
-    sqfliteFfiInit();
-    databaseFactory = databaseFactoryFfi;
-  });
+  sqfliteFfiInit();
+  databaseFactory = databaseFactoryFfi;
+
 
   group('PillsRepository Tests', () {
     late PillsRepository repository;
