@@ -23,9 +23,6 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
         working-directory: app
-      
-      - name: Install sqlite3
-        run: sudo apt-get -y install libsqlite3-0 libsqlite3-dev
 
       - name: Run tests
         run: flutter test
