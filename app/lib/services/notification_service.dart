@@ -19,7 +19,7 @@ class NotificationService {
   static final fln.FlutterLocalNotificationsPlugin _plugin = fln.FlutterLocalNotificationsPlugin();
 
   static Future<void> initialize() async {
-    const androidSettings = fln.AndroidInitializationSettings('@mipmap/ic_launcher');
+    const androidSettings = fln.AndroidInitializationSettings('@drawable/ic_launcher_monochrome');
     const iOSSettings = fln.DarwinInitializationSettings(
       requestAlertPermission: true,
       requestBadgePermission: true,
