@@ -10,10 +10,9 @@ PeriodDay _log(String date, {FlowRate flow = FlowRate.medium}) =>
     PeriodDay(date: DateTime.parse(date), flow: flow, symptoms: [], painLevel: 0);
 
 void main() {
-  setUpAll(() {
-    sqfliteFfiInit();
-    databaseFactory = databaseFactoryFfi;
-  });
+  TestWidgetsFlutterBinding.ensureInitialized();
+  databaseFactory = databaseFactoryFfi;
+  sqfliteFfiInit();
 
   group('PeriodsRepository Tests', () {
     late PeriodsRepository repository;
