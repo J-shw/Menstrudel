@@ -86,13 +86,13 @@ class AppLocalizationsDe extends AppLocalizations {
   String get close => 'Schließen';
 
   @override
-  String get reset => 'Reset';
+  String get reset => 'Zurücksetzen';
 
   @override
-  String get add => 'Add';
+  String get add => 'Hinzufügen';
 
   @override
-  String get notSet => 'Not set';
+  String get notSet => 'Nicht festgelegt';
 
   @override
   String get note => 'Note';
@@ -101,7 +101,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get systemDefault => 'System Standard';
 
   @override
-  String get flow => 'Flow';
+  String get flow => 'Ausfluss';
 
   @override
   String get navBar_insights => 'Einblicke';
@@ -134,28 +134,28 @@ class AppLocalizationsDe extends AppLocalizations {
   String get flowIntensity_heavy => 'Schwer';
 
   @override
-  String get builtInSymptom_acne => 'Acne';
+  String get builtInSymptom_acne => 'Akne';
 
   @override
-  String get builtInSymptom_backPain => 'Back pain';
+  String get builtInSymptom_backPain => 'Rückenschmerzen';
 
   @override
-  String get builtInSymptom_bloating => 'Bloating';
+  String get builtInSymptom_bloating => 'Blähungen';
 
   @override
-  String get builtInSymptom_cramps => 'Cramps';
+  String get builtInSymptom_cramps => 'Krämpfe';
 
   @override
-  String get builtInSymptom_fatigue => 'Fatigue';
+  String get builtInSymptom_fatigue => 'Müdigkeit';
 
   @override
-  String get builtInSymptom_headache => 'Headache';
+  String get builtInSymptom_headache => 'Kopfschmerzen';
 
   @override
-  String get builtInSymptom_moodSwings => 'Mood swings';
+  String get builtInSymptom_moodSwings => 'Stimmungsschwankungen';
 
   @override
-  String get builtInSymptom_nausea => 'Nausea';
+  String get builtInSymptom_nausea => 'Übelkeit';
 
   @override
   String get painLevel_title => 'Schmerzgrad';
@@ -204,8 +204,8 @@ class AppLocalizationsDe extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'Your next period is estimated to start in $count days.',
-      one: 'Your next period is estimated to start in 1 day.',
+      other: 'Deine nächste Periode startet voraussichtlich in $count Tagen.',
+      one: 'Deine nächste Periode startet voraussichtlich in 1 Tag',
     );
     return '$_temp0';
   }
@@ -218,8 +218,8 @@ class AppLocalizationsDe extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'Your next period is overdue by $count days.',
-      one: 'Your next period is overdue by 1 day.',
+      other: 'Deine nächste Periode ist seit $count Tagen überfällig.',
+      one: 'Deine nächste Periode ist seit 1 Tag überfällig.',
     );
     return '$_temp0';
   }
@@ -265,7 +265,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get mainScreen_tooltipCancelReminder => 'Erinnerung abbrechen';
 
   @override
-  String get mainScreen_tooltipLogPeriod => 'Log period';
+  String get mainScreen_tooltipLogPeriod => 'Periode Eintragen';
 
   @override
   String get insightsScreen_errorPrefix => 'Fehler:';
@@ -281,7 +281,7 @@ class AppLocalizationsDe extends AppLocalizations {
       'Protokolliere mindestens zwei Perioden, um den nächsten Zyklus zu schätzen.';
 
   @override
-  String get logScreen_nextPeriodEstimate => 'Next period Est';
+  String get logScreen_nextPeriodEstimate => 'Nächste Periode voraussichtlich';
 
   @override
   String get logScreen_periodDueToday => 'Heute fällige Periode';
@@ -291,14 +291,14 @@ class AppLocalizationsDe extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'Period overdue by $count days',
-      one: 'Period overdue by 1 day',
+      other: 'Periode $count Tage überfällig',
+      one: 'Periode 1 Tag überfällig',
     );
     return '$_temp0';
   }
 
   @override
-  String get logScreen_tamponReminderSetFor => 'Tampon reminder set for';
+  String get logScreen_tamponReminderSetFor => 'Tampon Erinnerung erstellt für';
 
   @override
   String get logScreen_tamponReminderCancelled =>
@@ -342,14 +342,15 @@ class AppLocalizationsDe extends AppLocalizations {
       'No past or overdue LARC records found.';
 
   @override
-  String get settingsScreen_selectHistoryView => 'Select History View';
+  String get settingsScreen_selectHistoryView =>
+      'Vergangenheitsansicht auswählen';
 
   @override
   String get settingsScreen_deleteRegimen_question => 'Kuren löschen?';
 
   @override
   String get settingsScreen_deleteRegimenDescription =>
-      'This will delete your current pill pack settings and all associated pill logs. This cannot be undone.';
+      'Dies wird deine aktuellen Pillenverpackungseinstellungen und alle zugehörigen Pillenaufzeichnungen löschen. Diese Aktion kann nicht rückgängig gemacht werden.';
 
   @override
   String get settingsScreen_allLogsHaveBeenCleared =>
@@ -366,7 +367,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsScreen_appearance => 'Aussehen';
 
   @override
-  String get settingsScreen_historyViewStyle => 'History View Style';
+  String get settingsScreen_historyViewStyle => 'Art der Vergangenheitsansicht';
 
   @override
   String get settingsScreen_appTheme => 'App-Thema';
@@ -399,7 +400,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsScreen_birthControl => 'Empfängnisverhütung';
 
   @override
-  String get settingsScreen_enablePillTracking => 'Enable Pill Tracking';
+  String get settingsScreen_enablePillTracking => 'Pillentracking einschalten';
 
   @override
   String get settingsScreen_pillDescription =>
@@ -410,10 +411,10 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get settingsScreen_trackYourDailyPillIntake =>
-      'Track Your Daily Pill Intake';
+      'Tägliche Pilleneinnahme tracken';
 
   @override
-  String get settingsScreen_dailyPillReminder => 'Daily Pill Reminder';
+  String get settingsScreen_dailyPillReminder => 'Tägliche Pillenerinnerung';
 
   @override
   String get settingsScreen_reminderTime => 'Erinnerungszeit';
@@ -433,10 +434,11 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsScreen_notificationTime => 'Benachrichtigungszeit';
 
   @override
-  String get settingsScreen_overduePeriodReminder => 'Overdue Period Reminder';
+  String get settingsScreen_overduePeriodReminder =>
+      'Erinnerung bei überfälliger Periode';
 
   @override
-  String get settingsScreen_remindMeAfter => 'Remind Me After';
+  String get settingsScreen_remindMeAfter => 'Erinnere mich in';
 
   @override
   String get settingsScreen_enableLarcTracking => 'Enable LARC Tracking';
@@ -467,23 +469,22 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsScreen_LoggingScreen => 'Logging';
 
   @override
-  String get settingsScreen_defaultSymptoms => 'Default Symptoms';
+  String get settingsScreen_defaultSymptoms => 'Standardsymptome';
 
   @override
   String get settingsScreen_defaultSymptomsSubtitle =>
-      'These are always available when logging new periods.\nTap an existing symptom to delete or \'+\' to add a new one.';
+      'Diese sind immer sichtbar, wenn eine neue Periode eingetragen wird. Wähle ein bestehendes Symptom, um es zu löschen oder \'+\' um ein neues hinzuzufügen.';
 
   @override
   String settingsScreen_deleteDefaultSymptomQuestion(String symptom) {
-    return 'Delete \'$symptom\'?';
+    return '\'$symptom\' löschen?';
   }
 
   @override
-  String get settingsScreen_resetSymptomsList => 'Reset Symptoms List?';
+  String get settingsScreen_resetSymptomsList => 'Symptomliste zurücksetzen?';
 
   @override
-  String get settingsScreen_resetSymptomsListDescription =>
-      'This will remove all your custom symptoms and restore the original built-in list.\n\nYour existing log entries will not be changed.';
+  String get settingsScreen_resetSymptomsListDescription => '';
 
   @override
   String settingsScreen_deleteDefaultSymptomDescription(
