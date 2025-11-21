@@ -108,11 +108,23 @@ abstract class AppLocalizations {
   /// **'Menstrudel'**
   String get appTitle;
 
+  /// No description provided for @nextDue.
+  ///
+  /// In en, this message translates to:
+  /// **'Next Due'**
+  String get nextDue;
+
   /// No description provided for @ongoing.
   ///
   /// In en, this message translates to:
   /// **'Ongoing'**
   String get ongoing;
+
+  /// No description provided for @overdue.
+  ///
+  /// In en, this message translates to:
+  /// **'Overdue'**
+  String get overdue;
 
   /// No description provided for @date.
   ///
@@ -246,6 +258,12 @@ abstract class AppLocalizations {
   /// **'Not set'**
   String get notSet;
 
+  /// No description provided for @note.
+  ///
+  /// In en, this message translates to:
+  /// **'Note'**
+  String get note;
+
   /// No description provided for @systemDefault.
   ///
   /// In en, this message translates to:
@@ -275,6 +293,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Pill'**
   String get navBar_pill;
+
+  /// No description provided for @navBar_larc.
+  ///
+  /// In en, this message translates to:
+  /// **'LARC'**
+  String get navBar_larc;
 
   /// No description provided for @navBar_settings.
   ///
@@ -396,6 +420,48 @@ abstract class AppLocalizations {
   /// **'Unbearable'**
   String get pain_unbearable;
 
+  /// No description provided for @larcType_iud.
+  ///
+  /// In en, this message translates to:
+  /// **'IUD'**
+  String get larcType_iud;
+
+  /// No description provided for @larcType_implant.
+  ///
+  /// In en, this message translates to:
+  /// **'Implant'**
+  String get larcType_implant;
+
+  /// No description provided for @larcType_injection.
+  ///
+  /// In en, this message translates to:
+  /// **'Injection'**
+  String get larcType_injection;
+
+  /// No description provided for @larcType_ring.
+  ///
+  /// In en, this message translates to:
+  /// **'Ring'**
+  String get larcType_ring;
+
+  /// No description provided for @larcType_patch.
+  ///
+  /// In en, this message translates to:
+  /// **'Patch'**
+  String get larcType_patch;
+
+  /// No description provided for @error_valueMustbePositive.
+  ///
+  /// In en, this message translates to:
+  /// **'Value must be positive'**
+  String get error_valueMustbePositive;
+
+  /// No description provided for @error_valueCannotBeNull.
+  ///
+  /// In en, this message translates to:
+  /// **'Value cannot be null'**
+  String get error_valueCannotBeNull;
+
   /// Title for the upcoming period notification.
   ///
   /// In en, this message translates to:
@@ -444,6 +510,18 @@ abstract class AppLocalizations {
   /// **'Remember to change your tampon.'**
   String get notification_tamponReminderBody;
 
+  /// Title for the LARC reminder notification.
+  ///
+  /// In en, this message translates to:
+  /// **'LARC Reminder'**
+  String get notification_larcTitle;
+
+  /// The body of the LARC reminder notification, indicating the type of LARC and how many days until renewal.
+  ///
+  /// In en, this message translates to:
+  /// **'{type} is due for renewal in {days} days.'**
+  String notification_larcBody(String type, int days);
+
   /// No description provided for @mainScreen_insightsPageTitle.
   ///
   /// In en, this message translates to:
@@ -455,6 +533,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Pills'**
   String get mainScreen_pillsPageTitle;
+
+  /// No description provided for @mainScreen_LarcsPageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'LARCs'**
+  String get mainScreen_LarcsPageTitle;
 
   /// No description provided for @mainScreen_settingsPageTitle.
   ///
@@ -551,6 +635,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Pill for today marked as skipped.'**
   String get pillScreen_pillForTodayMarkedAsSkipped;
+
+  /// No description provided for @larcScreen_noLarcRecordsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No LARC records found.'**
+  String get larcScreen_noLarcRecordsFound;
+
+  /// The total LARC history count.
+  ///
+  /// In en, this message translates to:
+  /// **'History ({history})'**
+  String larcScreen_history(int history);
+
+  /// The total active LARC count.
+  ///
+  /// In en, this message translates to:
+  /// **'Active LARCs ({activeCount})'**
+  String larcScreen_activeLarcs(int activeCount);
+
+  /// No description provided for @larcScreen_activeLarcsDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Currently monitored LARC entries.'**
+  String get larcScreen_activeLarcsDescription;
+
+  /// No description provided for @larcScreen_noActiveRecords.
+  ///
+  /// In en, this message translates to:
+  /// **'No LARC is currently active. Please log a new entry.'**
+  String get larcScreen_noActiveRecords;
+
+  /// No description provided for @larcScreen_noHistoryRecords.
+  ///
+  /// In en, this message translates to:
+  /// **'No past or overdue LARC records found.'**
+  String get larcScreen_noHistoryRecords;
 
   /// No description provided for @settingsScreen_selectHistoryView.
   ///
@@ -666,6 +786,12 @@ abstract class AppLocalizations {
   /// **'Enable Pill Tracking'**
   String get settingsScreen_enablePillTracking;
 
+  /// No description provided for @settingsScreen_pillDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Track your daily pill intake and get reminders.'**
+  String get settingsScreen_pillDescription;
+
   /// No description provided for @settingsScreen_setUpPillRegimen.
   ///
   /// In en, this message translates to:
@@ -726,6 +852,60 @@ abstract class AppLocalizations {
   /// **'Remind Me After'**
   String get settingsScreen_remindMeAfter;
 
+  /// No description provided for @settingsScreen_enableLarcTracking.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable LARC Tracking'**
+  String get settingsScreen_enableLarcTracking;
+
+  /// No description provided for @settingsScreen_larcDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Track long-acting reversible contraceptives (LARCs).'**
+  String get settingsScreen_larcDescription;
+
+  /// No description provided for @settingsScreen_larcType.
+  ///
+  /// In en, this message translates to:
+  /// **'LARC Type'**
+  String get settingsScreen_larcType;
+
+  /// No description provided for @settingsScreen_setDuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Set Duration'**
+  String get settingsScreen_setDuration;
+
+  /// No description provided for @settingsScreen_larcDuration.
+  ///
+  /// In en, this message translates to:
+  /// **'LARC Replacement Duration'**
+  String get settingsScreen_larcDuration;
+
+  /// No description provided for @settingsScreen_enableLARCReminder.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable LARC Reminder'**
+  String get settingsScreen_enableLARCReminder;
+
+  /// No description provided for @settingsScreen_currentDuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Current Duration'**
+  String get settingsScreen_currentDuration;
+
+  /// No description provided for @settingsScreen_durationInDays.
+  ///
+  /// In en, this message translates to:
+  /// **'Duration (Days)'**
+  String get settingsScreen_durationInDays;
+
+  /// No description provided for @settingsScreen_LoggingScreen.
+  ///
+  /// In en, this message translates to:
+  /// **'Logging'**
+  String get settingsScreen_LoggingScreen;
+
   /// No description provided for @settingsScreen_defaultSymptoms.
   ///
   /// In en, this message translates to:
@@ -755,12 +935,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'This will remove all your custom symptoms and restore the original built-in list.\n\nYour existing log entries will not be changed.'**
   String get settingsScreen_resetSymptomsListDescription;
-
-  /// No description provided for @settingsScreen_LoggingScreen.
-  ///
-  /// In en, this message translates to:
-  /// **'Logging'**
-  String get settingsScreen_LoggingScreen;
 
   /// Question whether a symptom should be deleted.
   ///
@@ -801,17 +975,35 @@ abstract class AppLocalizations {
   /// **'Data Management'**
   String get settingsScreen_dataManagement;
 
+  /// No description provided for @settingsScreen_dangerZone.
+  ///
+  /// In en, this message translates to:
+  /// **'Danger Zone'**
+  String get settingsScreen_dangerZone;
+
   /// No description provided for @settingsScreen_clearAllLogs.
   ///
   /// In en, this message translates to:
   /// **'Clear All Logs'**
   String get settingsScreen_clearAllLogs;
 
+  /// No description provided for @settingsScreen_clearAllLogsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Deletes your entire period and symptom history.'**
+  String get settingsScreen_clearAllLogsSubtitle;
+
   /// No description provided for @settingsScreen_clearAllPillData.
   ///
   /// In en, this message translates to:
   /// **'Clear All Pill Data'**
   String get settingsScreen_clearAllPillData;
+
+  /// No description provided for @settingsScreen_clearAllPillDataSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Removes your pill regimen and intake history.'**
+  String get settingsScreen_clearAllPillDataSubtitle;
 
   /// No description provided for @settingsScreen_clearAllPillData_question.
   ///
@@ -822,7 +1014,7 @@ abstract class AppLocalizations {
   /// No description provided for @settingsScreen_deleteAllPillDataDescription.
   ///
   /// In en, this message translates to:
-  /// **'This will permanently delete your pill regimen, reminders, and intake history. This action cannot be undone.'**
+  /// **'This will permanently delete your pill regimen, reminders, and intake history.'**
   String get settingsScreen_deleteAllPillDataDescription;
 
   /// No description provided for @settingsScreen_allPillDataCleared.
@@ -831,23 +1023,35 @@ abstract class AppLocalizations {
   /// **'All pill data has been cleared.'**
   String get settingsScreen_allPillDataCleared;
 
-  /// No description provided for @settingsScreen_dangerZone.
+  /// No description provided for @settingsScreen_clearAllLarcData.
   ///
   /// In en, this message translates to:
-  /// **'Danger Zone'**
-  String get settingsScreen_dangerZone;
+  /// **'Clear All LARC Data'**
+  String get settingsScreen_clearAllLarcData;
 
-  /// No description provided for @settingsScreen_clearAllLogsSubtitle.
+  /// No description provided for @settingsScreen_clearAllLarcDataSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Deletes your entire period and symptom history.'**
-  String get settingsScreen_clearAllLogsSubtitle;
+  /// **'Removes your LARCs history.'**
+  String get settingsScreen_clearAllLarcDataSubtitle;
 
-  /// No description provided for @settingsScreen_clearAllPillDataSubtitle.
+  /// No description provided for @settingsScreen_clearAllLarcData_question.
   ///
   /// In en, this message translates to:
-  /// **'Removes your pill regimen and intake history.'**
-  String get settingsScreen_clearAllPillDataSubtitle;
+  /// **'Clear All LARC Data?'**
+  String get settingsScreen_clearAllLarcData_question;
+
+  /// No description provided for @settingsScreen_deleteAllLarcDataDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'This will permanently delete your LARC history.'**
+  String get settingsScreen_deleteAllLarcDataDescription;
+
+  /// No description provided for @settingsScreen_allLarcDataCleared.
+  ///
+  /// In en, this message translates to:
+  /// **'All LARC data has been cleared.'**
+  String get settingsScreen_allLarcDataCleared;
 
   /// No description provided for @settingsScreen_exportPeriodData.
   ///
@@ -860,6 +1064,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Export Pill Data'**
   String get settingsScreen_exportPillData;
+
+  /// No description provided for @settingsScreen_exportLarcsData.
+  ///
+  /// In en, this message translates to:
+  /// **'Export LARCs Data'**
+  String get settingsScreen_exportLarcsData;
 
   /// No description provided for @settingsScreen_exportDataSubtitle.
   ///
@@ -915,6 +1125,12 @@ abstract class AppLocalizations {
   /// **'Import Pill Data'**
   String get settingsScreen_importPillData;
 
+  /// No description provided for @settingsScreen_importLarcsData.
+  ///
+  /// In en, this message translates to:
+  /// **'Import LARCs Data'**
+  String get settingsScreen_importLarcsData;
+
   /// No description provided for @settingsScreen_importDataSubtitle.
   ///
   /// In en, this message translates to:
@@ -932,6 +1148,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Are you sure you want to import Pill Data?'**
   String get settingsScreen_importPillData_question;
+
+  /// No description provided for @settingsScreen_importLarcData_question.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to import LARC Data?'**
+  String get settingsScreen_importLarcData_question;
 
   /// No description provided for @settingsScreen_importPeriodDataDescription.
   ///
@@ -1316,6 +1538,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Flow'**
   String get periodDetailsSheet_flow;
+
+  /// No description provided for @larcEntrySheet_logLARCDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Log LARC Details'**
+  String get larcEntrySheet_logLARCDetails;
 
   /// A label showing the total number of days until period is due.
   ///

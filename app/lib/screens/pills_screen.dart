@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/database/repositories/pills_repository.dart';
-import 'package:menstrudel/models/pills/pill_regimen.dart';
-import 'package:menstrudel/models/pills/pill_intake.dart';
+import 'package:menstrudel/models/birth_control/pills/pill_regimen.dart';
+import 'package:menstrudel/models/birth_control/pills/pill_intake.dart';
 import 'package:menstrudel/services/notification_service.dart';
 
 import 'package:menstrudel/widgets/pills/empty_pills_state.dart';
 import 'package:menstrudel/widgets/pills/pill_pack_visualiser.dart';
 import 'package:menstrudel/widgets/pills/pill_status_card.dart';
-import 'package:menstrudel/models/pills/pill_status_enum.dart';
+import 'package:menstrudel/models/birth_control/pills/pill_status_enum.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 
 class PillsScreen extends StatefulWidget {

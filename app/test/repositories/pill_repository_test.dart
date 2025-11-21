@@ -1,11 +1,11 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:menstrudel/database/app_database.dart';
 import 'package:menstrudel/database/repositories/pills_repository.dart';
-import 'package:menstrudel/models/pills/pill_intake.dart';
-import 'package:menstrudel/models/pills/pill_regimen.dart';
-import 'package:menstrudel/models/pills/pill_reminder.dart';
+import 'package:menstrudel/models/birth_control/pills/pill_intake.dart';
+import 'package:menstrudel/models/birth_control/pills/pill_regimen.dart';
+import 'package:menstrudel/models/birth_control/pills/pill_reminder.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
-import 'package:menstrudel/models/pills/pill_status_enum.dart';
+import 'package:menstrudel/models/birth_control/pills/pill_status_enum.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();

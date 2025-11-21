@@ -1,7 +1,7 @@
 import 'package:menstrudel/database/app_database.dart';
-import 'package:menstrudel/models/pills/pill_regimen.dart';
-import 'package:menstrudel/models/pills/pill_intake.dart';
-import 'package:menstrudel/models/pills/pill_reminder.dart';
+import 'package:menstrudel/models/birth_control/pills/pill_regimen.dart';
+import 'package:menstrudel/models/birth_control/pills/pill_intake.dart';
+import 'package:menstrudel/models/birth_control/pills/pill_reminder.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'dart:convert';
 import 'package:sqflite/sqflite.dart';

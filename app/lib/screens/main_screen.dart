@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 import 'package:menstrudel/services/period_service.dart';
 import 'package:menstrudel/services/notification_service.dart';
 import 'package:menstrudel/widgets/dialogs/reminder_countdown_dialog.dart';
+import 'package:menstrudel/screens/larc_screen.dart';
 
 enum FabState {
   logPeriod,
@@ -125,6 +126,7 @@ class _MainScreenState extends State<MainScreen> {
     final settingsService = context.watch<SettingsService>();
 
     final bool isPillNavEnabled = settingsService.isPillNavEnabled;
+    final bool isLarcNavEnabled = settingsService.isLarcNavEnabled;
     final bool isReminderButtonAlwaysVisible =
         settingsService.areAlwaysShowReminderButtonEnabled;
 
@@ -154,6 +156,7 @@ class _MainScreenState extends State<MainScreen> {
         isReminderButtonAlwaysVisible: isReminderButtonAlwaysVisible,
       ),
       if (isPillNavEnabled) const PillsScreen(),
+      if (isLarcNavEnabled) const LarcScreen(),
       const SettingsScreen(),
     ];
 
@@ -162,6 +165,8 @@ class _MainScreenState extends State<MainScreen> {
       null,
       if (isPillNavEnabled)
         TopAppBar(titleText: l10n.mainScreen_pillsPageTitle),
+      if (isLarcNavEnabled)
+        TopAppBar(titleText: l10n.mainScreen_LarcsPageTitle),
       TopAppBar(titleText: l10n.mainScreen_settingsPageTitle),
     ];
 

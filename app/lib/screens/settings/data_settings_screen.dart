@@ -3,6 +3,7 @@ import 'package:menstrudel/database/repositories/periods_repository.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/widgets/dialogs/delete_confirmation_dialog.dart';
 import 'package:menstrudel/database/repositories/pills_repository.dart'; 
+import 'package:menstrudel/database/repositories/larc_repository.dart'; 
 import 'package:menstrudel/services/notification_service.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
@@ -22,6 +23,7 @@ class DataSettingsScreen extends StatefulWidget {
 class _DataSettingsScreenState extends State<DataSettingsScreen> {
   final periodsRepo = PeriodsRepository();
   final pillsRepo = PillsRepository();
+  final larcsRepo = LarcRepository();
   bool _isLoading = false;
 
   Future<void> clearPeriodLogs() async {
@@ -76,6 +78,36 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
           contentText: l10n.settingsScreen_deleteAllPillDataDescription,
           confirmButtonText: l10n.clear,
           onConfirm: clearPillData,
+        );
+      },
+    );
+  }
+
+   Future<void> clearLarcData() async {
+    setState(() { _isLoading = true; });
+    
+    await larcsRepo.manager.clearAllData();
+    await NotificationService.cancelLarcReminder();
+
+    if (!mounted) return;
+
+    final l10n = AppLocalizations.of(context)!;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(l10n.settingsScreen_allLarcDataCleared)),
+    );
+    setState(() { _isLoading = false; });
+  }
+  
+  Future<void> showClearLarcDataDialog() async {
+    final l10n = AppLocalizations.of(context)!;
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return ConfirmationDialog(
+          title: l10n.settingsScreen_clearAllLarcData_question,
+          contentText: l10n.settingsScreen_deleteAllLarcDataDescription,
+          confirmButtonText: l10n.clear,
+          onConfirm: clearLarcData,
         );
       },
     );
@@ -199,7 +231,66 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
     }
   }
 
-  Future<void> _importData(String filePath, {required bool isPillData}) async {
+  Future<void> exportLarcsData() async {
+    setState(() { _isLoading = true; });
+
+    final l10n = AppLocalizations.of(context)!;
+    String filePath = '';
+
+
+    try {
+      final jsonData = await larcsRepo.manager.exportDataAsJson();
+      
+      if (jsonData.isEmpty) {
+        throw Exception(l10n.settingsScreen_noDataToExport);
+      }
+
+      final Directory directory = await getApplicationDocumentsDirectory();
+      final timestamp = DateFormat('yyyyMMdd_HHmmss').format(DateTime.now());
+      final fileName = 'menstrudel_larc_data_$timestamp.json';
+      final exportFile = File('${directory.path}/$fileName');
+
+      await exportFile.writeAsString(jsonData);
+      filePath = exportFile.path;
+
+      if(!mounted){return;}
+
+      final RenderBox box = context.findRenderObject() as RenderBox;
+
+      final params = ShareParams(
+        files: [XFile(filePath)],
+        sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size,
+      );
+
+      final result = await SharePlus.instance.share(params);
+      if (result.status == ShareResultStatus.success && mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(l10n.settingsScreen_exportSuccessful)),
+        );
+      }
+
+    } catch (e) {
+      debugPrint('Export failed: $e');
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(l10n.settingsScreen_exportFailed)),
+        );
+      }
+    } finally {
+      if (mounted){
+        setState(() { _isLoading = false; });
+        if (filePath.isNotEmpty) {
+          try {
+            await File(filePath).delete();
+          } catch (e) {
+            debugPrint('Failed to delete temporary file: $e');
+          }
+        }
+      }
+    }
+  }
+
+  Future<void> _importData(String filePath, {bool isPillData = false, bool isLarcData = false}) async {
     setState(() { _isLoading = true; });
 
     final l10n = AppLocalizations.of(context)!;
@@ -210,7 +301,9 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
 
       if (isPillData) {
         await pillsRepo.manager.importDataFromJson(jsonString, l10n);
-      } else {
+      } else if (isLarcData) {
+        await larcsRepo.manager.importDataFromJson(jsonString);
+      } else{
         await periodsRepo.manager.importDataFromJson(jsonString);
       }
 
@@ -263,7 +356,7 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
               title: l10n.settingsScreen_importPeriodData_question,
               contentText: l10n.settingsScreen_importPeriodDataDescription,
               confirmButtonText: l10n.import,
-              onConfirm: () => _importData(filePath, isPillData: false),
+              onConfirm: () => _importData(filePath, isPillData: false, isLarcData: false),
             );
           },
         );
@@ -315,7 +408,7 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
               title: l10n.settingsScreen_importPillData_question,
               contentText: l10n.settingsScreen_importPillDataDescription,
               confirmButtonText: l10n.import,
-              onConfirm: () => _importData(filePath, isPillData: true),
+              onConfirm: () => _importData(filePath, isPillData: true, isLarcData: false),
             );
           },
         );
@@ -341,7 +434,55 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
     }
   }
 
+  Future<void> importLarcData() async {
+    final l10n = AppLocalizations.of(context)!;
+    try{
+      final result = await FilePicker.platform.pickFiles(
+        type: FileType.custom,
+        allowedExtensions: ['json'],
+      ).timeout(
+        const Duration(seconds: 30),
+        onTimeout: () {
+          throw TimeoutException('File picking timed out.');
+        },
+      );
 
+      if (result != null && result.files.single.path != null) {
+        final filePath = result.files.single.path!;
+        
+        if (!mounted) return;
+        return showDialog<void>(
+          context: context,
+          builder: (BuildContext context) {
+            return ConfirmationDialog(
+              title: l10n.settingsScreen_importLarcData_question,
+              contentText: l10n.settingsScreen_importPeriodDataDescription,
+              confirmButtonText: l10n.import,
+              onConfirm: () => _importData(filePath, isPillData: false, isLarcData: true),
+            );
+          },
+        );
+      }
+    }on PlatformException catch (e) {
+    debugPrint("File picker platform error: $e");
+    if (mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(l10n.settingsScreen_importErrorPlatform(e.message ?? 'An unknown error occurred.')),
+        ),
+      );
+    }
+  } catch (e) {
+    debugPrint("General file picker error: $e");
+    if (mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(l10n.settingsScreen_importErrorGeneral),
+        ),
+      );
+    }
+  }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -405,6 +546,19 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
                           trailing: Icon(Icons.chevron_right, color: colorScheme.onErrorContainer),
                           onTap: showClearPillDataDialog,
                         ),
+
+                        ListTile(
+                          title: Text(
+                            l10n.settingsScreen_clearAllLarcData,
+                            style: theme.textTheme.titleMedium?.copyWith(color: colorScheme.onErrorContainer),
+                          ),
+                          subtitle: Text(
+                            l10n.settingsScreen_clearAllLarcDataSubtitle,
+                            style: theme.textTheme.bodyMedium?.copyWith(color: colorScheme.onErrorContainer.withValues(alpha: 0.8)),
+                          ),
+                          trailing: Icon(Icons.chevron_right, color: colorScheme.onErrorContainer),
+                          onTap: showClearLarcDataDialog,
+                        ),
                       ],
                     ),
                   ),
@@ -455,6 +609,19 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
                           trailing: const Icon(Icons.chevron_right),
                           onTap: exportPillData,
                         ),
+
+                        ListTile(
+                          title: Text(
+                            l10n.settingsScreen_exportLarcsData,
+                            style: theme.textTheme.titleMedium,
+                          ),
+                          subtitle: Text(
+                            l10n.settingsScreen_exportDataSubtitle,
+                            style: theme.textTheme.bodyMedium,
+                          ),
+                          trailing: const Icon(Icons.chevron_right),
+                          onTap: exportLarcsData,
+                        ),
                       ],
                     ),
                   ),
@@ -504,6 +671,19 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
                           ),
                           trailing: const Icon(Icons.chevron_right),
                           onTap: importPillData,
+                        ),
+
+                        ListTile(
+                          title: Text(
+                            l10n.settingsScreen_importLarcsData,
+                            style: theme.textTheme.titleMedium,
+                          ),
+                          subtitle: Text(
+                            l10n.settingsScreen_importDataSubtitle,
+                            style: theme.textTheme.bodyMedium,
+                          ),
+                          trailing: const Icon(Icons.chevron_right),
+                          onTap: importLarcData,
                         ),
                       ],
                     ),
