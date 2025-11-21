@@ -264,7 +264,7 @@
     "settingsScreen_clearAllPillData": "Elimina tutti i dati della pillola",
     "settingsScreen_clearAllPillDataSubtitle": "Rimuove il tuo piano pillola e la cronologia delle assunzioni.",
     "settingsScreen_clearAllPillData_question": "Eliminare tutti i dati della pillola?",
-    "settingsScreen_deleteAllPillDataDescription": "This will permanently delete your pill regimen, reminders, and intake history.",
+    "settingsScreen_deleteAllPillDataDescription": "Questo eliminerà definitivamente il tuo piano pillola, i promemoria e la cronologia delle assunzioni. Questa azione non può essere annullata.",
     "settingsScreen_allPillDataCleared": "Tutti i dati della pillola sono stati eliminati.",
     "settingsScreen_clearAllLarcData": "Clear All LARC Data",
     "settingsScreen_clearAllLarcDataSubtitle": "Removes your LARCs history.",
