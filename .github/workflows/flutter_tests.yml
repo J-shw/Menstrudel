@@ -19,6 +19,9 @@ jobs:
         with:
           channel: 'stable'
           cache: true
+          
+      - name: Clean Dart tool cache
+        run: rm -rf app/.dart_tool
 
       - name: Install dependencies
         run: flutter pub get
