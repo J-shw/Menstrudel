@@ -7,7 +7,7 @@ image: /assets/images/blog/new-release.png
 ---
 
 ![New release image](/assets/images/blog/new-release.png)
-We're excited to release version **3.3.0** of Menstrudel. We have a new app logo, LARC tracking and some general bug fixes.
+We're excited to release version **3.3.0** of Menstrudel. This update brings a **fresh new look**, **Long-Acting Reversible Contraception (LARC) tracking**, and several fixes.
 
 ## Get the Menstrudel App
 
@@ -16,37 +16,31 @@ We're excited to release version **3.3.0** of Menstrudel. We have a new app logo
 
 
 ### What's New
-* **New Logo** That's right, we have a new logo! We are trying to make a bit more of a brand for ourselves. To better get users and contributers onboard.
+* **New Logo** That's right, we have a new logo! We are trying to make a bit more of a brand for ourselves.
 
 * **LARC Tracking** LARCs or Long-Acting Reversible Contraception can now be logged and have reminders set for when they need to be renewed.
 
 * **More Translations** Thanks to the community, the app now has better translation support!
 
+<h3 style="text-align: center;">New Logo</h3>
+![New Logo](/assets/images/favicon.png)
 
-<h3 style="text-align: center;">Custom Symptoms </h3>
-![Custom Symptoms GIF](/assets/images/blog/2025-11-04-announcing-menstrudel-v3.2.0/custom-symptom.gif)
+Check out our new look! We think this logo is more modern and adds personality to the app. Based on user feedback, we came up with this design and hope you love it as much as we do!
 
-Thats right, you can now log any and every symptom you want! This has been one of our most requested features since starting. We know symptoms are unique and affect everyone differently, so this feature gives you the freedom to log them all.
+<h3 style="text-align: center;">LARC Tracking</h3>
+![enable LARC tracking](/assets/images/blog/2025-11-22-announcing-menstrudel-v3.3.0/enable-larc.gif)
 
-<h3 style="text-align: center;">Introducing Android Widgets!</h3>
-![New Android Wdiget Image](/assets/images/blog/2025-11-04-announcing-menstrudel-v3.2.0/widget.png)
+We are expanding our birth control tracking! You can now log **Long-Acting Reversible Contraception (LARCs)**—highly effective methods like IUDs and implants that last for years—and set renewal reminders.
 
-We're excited to release our first widget, **starting with Android**! It shows the estimated start date of your next period using the same circular progress bar you know from the app.
+![Logging a LARC](/assets/images/blog/2025-22-04-announcing-menstrudel-v3.3.0/logging-larc.gif)
 
-This is just the beginning, and we plan to improve it and add more options based on your feedback.
-
-<h3 style="text-align: center;">Hide the Pill Screen</h3>
-![Hiding Pill Screen GIF](/assets/images/blog/2025-11-04-announcing-menstrudel-v3.2.0/pill-screen.gif)
-
-We know not all of our users need pill tracking. If you don't use this feature, you can now remove it from the navigation bar completely.
-
-Just go to **Settings > Birth Control** and disable the 'Enable Pill Tracking' toggle. 
+Logging LARC usage is simple and quick. If notifications are enabled, you'll get a reminder for renewal.
 
 ---
 
 ### Bug Fixes
 * Improved general app performance
-* Corrected wording of 'days' on period prediction screen
+* Fixed some notifiation related issues
 * Fixed some database related issues
 * Cleaned up some UI elements
 
