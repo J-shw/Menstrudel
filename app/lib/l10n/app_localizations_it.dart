@@ -12,7 +12,13 @@ class AppLocalizationsIt extends AppLocalizations {
   String get appTitle => 'Menstrudel';
 
   @override
+  String get nextDue => 'Next Due';
+
+  @override
   String get ongoing => 'In corso';
+
+  @override
+  String get overdue => 'Overdue';
 
   @override
   String get date => 'Data';
@@ -89,6 +95,9 @@ class AppLocalizationsIt extends AppLocalizations {
   String get notSet => 'Not set';
 
   @override
+  String get note => 'Note';
+
+  @override
   String get systemDefault => 'System Default';
 
   @override
@@ -102,6 +111,9 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get navBar_pill => 'Pillola';
+
+  @override
+  String get navBar_larc => 'LARC';
 
   @override
   String get navBar_settings => 'Impostazioni';
@@ -164,6 +176,27 @@ class AppLocalizationsIt extends AppLocalizations {
   String get pain_unbearable => 'Insopportabile';
 
   @override
+  String get larcType_iud => 'IUD';
+
+  @override
+  String get larcType_implant => 'Implant';
+
+  @override
+  String get larcType_injection => 'Injection';
+
+  @override
+  String get larcType_ring => 'Ring';
+
+  @override
+  String get larcType_patch => 'Patch';
+
+  @override
+  String get error_valueMustbePositive => 'Value must be positive';
+
+  @override
+  String get error_valueCannotBeNull => 'Value cannot be null';
+
+  @override
   String get notification_periodTitle => 'Ciclo in arrivo';
 
   @override
@@ -206,10 +239,21 @@ class AppLocalizationsIt extends AppLocalizations {
       'Ricordati di cambiare l\'assorbente.';
 
   @override
+  String get notification_larcTitle => 'LARC Reminder';
+
+  @override
+  String notification_larcBody(String type, int days) {
+    return '$type is due for renewal in $days days.';
+  }
+
+  @override
   String get mainScreen_insightsPageTitle => 'Le tue statistiche';
 
   @override
   String get mainScreen_pillsPageTitle => 'Pillole';
+
+  @override
+  String get mainScreen_LarcsPageTitle => 'LARCs';
 
   @override
   String get mainScreen_settingsPageTitle => 'Impostazioni';
@@ -275,6 +319,31 @@ class AppLocalizationsIt extends AppLocalizations {
       'Pillola di oggi segnata come saltata.';
 
   @override
+  String get larcScreen_noLarcRecordsFound => 'No LARC records found.';
+
+  @override
+  String larcScreen_history(int history) {
+    return 'History ($history)';
+  }
+
+  @override
+  String larcScreen_activeLarcs(int activeCount) {
+    return 'Active LARCs ($activeCount)';
+  }
+
+  @override
+  String get larcScreen_activeLarcsDescription =>
+      'Currently monitored LARC entries.';
+
+  @override
+  String get larcScreen_noActiveRecords =>
+      'No LARC is currently active. Please log a new entry.';
+
+  @override
+  String get larcScreen_noHistoryRecords =>
+      'No past or overdue LARC records found.';
+
+  @override
   String get settingsScreen_selectHistoryView => 'Seleziona vista cronologia';
 
   @override
@@ -336,6 +405,10 @@ class AppLocalizationsIt extends AppLocalizations {
   String get settingsScreen_enablePillTracking => 'Enable Pill Tracking';
 
   @override
+  String get settingsScreen_pillDescription =>
+      'Track your daily pill intake and get reminders.';
+
+  @override
   String get settingsScreen_setUpPillRegimen => 'Crea piano pillola';
 
   @override
@@ -371,6 +444,34 @@ class AppLocalizationsIt extends AppLocalizations {
   String get settingsScreen_remindMeAfter => 'Avvisami dopo';
 
   @override
+  String get settingsScreen_enableLarcTracking => 'Enable LARC Tracking';
+
+  @override
+  String get settingsScreen_larcDescription =>
+      'Track long-acting reversible contraceptives (LARCs).';
+
+  @override
+  String get settingsScreen_larcType => 'LARC Type';
+
+  @override
+  String get settingsScreen_setDuration => 'Set Duration';
+
+  @override
+  String get settingsScreen_larcDuration => 'LARC Replacement Duration';
+
+  @override
+  String get settingsScreen_enableLARCReminder => 'Enable LARC Reminder';
+
+  @override
+  String get settingsScreen_currentDuration => 'Current Duration';
+
+  @override
+  String get settingsScreen_durationInDays => 'Duration (Days)';
+
+  @override
+  String get settingsScreen_LoggingScreen => 'Logging';
+
+  @override
   String get settingsScreen_defaultSymptoms => 'Default Symptoms';
 
   @override
@@ -388,9 +489,6 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get settingsScreen_resetSymptomsListDescription =>
       'This will remove all your custom symptoms and restore the original built-in list.\n\nYour existing log entries will not be changed.';
-
-  @override
-  String get settingsScreen_LoggingScreen => 'Logging';
 
   @override
   String settingsScreen_deleteDefaultSymptomDescription(
@@ -426,11 +524,22 @@ class AppLocalizationsIt extends AppLocalizations {
   String get settingsScreen_dataManagement => 'Gestione dati';
 
   @override
+  String get settingsScreen_dangerZone => 'Azioni irreversibili';
+
+  @override
   String get settingsScreen_clearAllLogs => 'Elimina tutti i dati';
+
+  @override
+  String get settingsScreen_clearAllLogsSubtitle =>
+      'Elimina l\'intera cronologia del ciclo e dei sintomi.';
 
   @override
   String get settingsScreen_clearAllPillData =>
       'Elimina tutti i dati della pillola';
+
+  @override
+  String get settingsScreen_clearAllPillDataSubtitle =>
+      'Rimuove il tuo piano pillola e la cronologia delle assunzioni.';
 
   @override
   String get settingsScreen_clearAllPillData_question =>
@@ -445,21 +554,31 @@ class AppLocalizationsIt extends AppLocalizations {
       'Tutti i dati della pillola sono stati eliminati.';
 
   @override
-  String get settingsScreen_dangerZone => 'Azioni irreversibili';
+  String get settingsScreen_clearAllLarcData => 'Clear All LARC Data';
 
   @override
-  String get settingsScreen_clearAllLogsSubtitle =>
-      'Elimina l\'intera cronologia del ciclo e dei sintomi.';
+  String get settingsScreen_clearAllLarcDataSubtitle =>
+      'Removes your LARCs history.';
 
   @override
-  String get settingsScreen_clearAllPillDataSubtitle =>
-      'Rimuove il tuo piano pillola e la cronologia delle assunzioni.';
+  String get settingsScreen_clearAllLarcData_question => 'Clear All LARC Data?';
+
+  @override
+  String get settingsScreen_deleteAllLarcDataDescription =>
+      'This will permanently delete your LARC history.';
+
+  @override
+  String get settingsScreen_allLarcDataCleared =>
+      'All LARC data has been cleared.';
 
   @override
   String get settingsScreen_exportPeriodData => 'Esporta dati ciclo';
 
   @override
   String get settingsScreen_exportPillData => 'Esporta dati pillola';
+
+  @override
+  String get settingsScreen_exportLarcsData => 'Export LARCs Data';
 
   @override
   String get settingsScreen_exportDataSubtitle => 'Crea un backup JSON.';
@@ -490,6 +609,9 @@ class AppLocalizationsIt extends AppLocalizations {
   String get settingsScreen_importPillData => 'Importa dati pillola';
 
   @override
+  String get settingsScreen_importLarcsData => 'Import LARCs Data';
+
+  @override
   String get settingsScreen_importDataSubtitle =>
       'Sovrascrive i dati esistenti.';
 
@@ -500,6 +622,10 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get settingsScreen_importPillData_question =>
       'Importare i dati della pillola?';
+
+  @override
+  String get settingsScreen_importLarcData_question =>
+      'Are you sure you want to import LARC Data?';
 
   @override
   String get settingsScreen_importPeriodDataDescription =>
@@ -735,6 +861,9 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get periodDetailsSheet_flow => 'Flusso';
+
+  @override
+  String get larcEntrySheet_logLARCDetails => 'Log LARC Details';
 
   @override
   String periodPredictionCircle_days(int count) {
