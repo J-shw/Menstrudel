@@ -39,6 +39,12 @@ class MainNavigationBar extends StatelessWidget {
             icon: Icon(Icons.medication_outlined),
             label: l10n.navBar_pill,
           ),
+        if (settingsService.isLarcNavEnabled)
+          NavigationDestination(
+            selectedIcon: Icon(Icons.verified_user_rounded),
+            icon: Icon(Icons.verified_user_outlined),
+            label: l10n.navBar_larc,
+          ),
         NavigationDestination(
           selectedIcon: Icon(Icons.settings),
           icon: Icon(Icons.settings_outlined),

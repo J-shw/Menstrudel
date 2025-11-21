@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/database/repositories/pills_repository.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
-import 'package:menstrudel/models/pills/pill_regimen.dart';
-import 'package:menstrudel/models/pills/pill_reminder.dart';
+import 'package:menstrudel/models/birth_control/larcs/larc_types_enum.dart';
+import 'package:menstrudel/models/birth_control/pills/pill_regimen.dart';
+import 'package:menstrudel/models/birth_control/pills/pill_reminder.dart';
 import 'package:menstrudel/services/notification_service.dart';
 import 'package:menstrudel/widgets/dialogs/delete_confirmation_dialog.dart';
+import 'package:menstrudel/widgets/dialogs/larc_duration_config_dialog.dart';
 import 'package:menstrudel/widgets/settings/regimen_setup_dialog.dart';
 import 'package:menstrudel/services/settings_service.dart';
 import 'package:provider/provider.dart';
@@ -73,13 +75,14 @@ class _BirthControlSettingsScreenState extends State<BirthControlSettingsScreen>
 
     await pillsRepo.savePillReminder(reminder);
 
-    await NotificationService.schedulePillReminder(
-      reminderTime: _pillNotificationTime,
-      isEnabled: _pillNotificationsEnabled,
-      title: l10n.notification_pillTitle,
-      body: l10n.notification_pillBody,
-    );
-
+    if(_pillNotificationsEnabled) {
+      await NotificationService.schedulePillReminder(
+        reminderTime: _pillNotificationTime,
+        isEnabled: _pillNotificationsEnabled,
+        title: l10n.notification_pillTitle,
+        body: l10n.notification_pillBody,
+      );
+    }
     _loadSettings();
   }
 
@@ -141,12 +144,30 @@ class _BirthControlSettingsScreenState extends State<BirthControlSettingsScreen>
     await _loadSettings();
   }
 
+  Future<void> _selectLarcReminderTime() async {
+    final settingsService = context.read<SettingsService>();
+    final TimeOfDay initialTime = settingsService.larcReminderTime; 
+
+    final TimeOfDay? pickedTime = await showTimePicker(
+      context: context,
+      initialTime: initialTime,
+    );
+
+    if (pickedTime != null && pickedTime != initialTime) {
+      await settingsService.setLarcReminderTime(pickedTime); 
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final settingsService = context.watch<SettingsService>();
-    final bool pillNavEnabled = settingsService.isPillNavEnabled;
+    final bool pillEnabled = settingsService.isPillNavEnabled;
+    final bool larcEnabled = settingsService.isLarcNavEnabled;
     final bool showReminderSettings = _activeRegimen != null && !_isLoading; 
+    final LarcTypes activeLarcType = settingsService.larcType;
+
+    const Widget shortDivider = Padding(padding: EdgeInsets.symmetric(horizontal: 24), child: Divider());
 
     return Scaffold(
       appBar: AppBar(
@@ -158,13 +179,14 @@ class _BirthControlSettingsScreenState extends State<BirthControlSettingsScreen>
               children: [
                 SwitchListTile(
                   title: Text(l10n.settingsScreen_enablePillTracking),
-                  value: pillNavEnabled,
+                  subtitle: Text(l10n.settingsScreen_pillDescription),
+                  value: pillEnabled,
                   onChanged: (bool value) {
                     context.read<SettingsService>().setPillNavEnabled(value);
                   },
                 ),
-                const Divider(),
-                if (pillNavEnabled) ...[
+                if (pillEnabled) ...[
+                  shortDivider,
                   Padding(
                     padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
                     child: Text(
@@ -229,10 +251,9 @@ class _BirthControlSettingsScreenState extends State<BirthControlSettingsScreen>
                     trailing: const Icon(Icons.add_circle, size: 30),
                     onTap: showRegimenSetupDialog,
                   ),
-
-                  const Divider(),
                   
                   if (showReminderSettings) ...[
+                    shortDivider,
                     Padding(
                       padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
                       child: Text(
@@ -262,6 +283,90 @@ class _BirthControlSettingsScreenState extends State<BirthControlSettingsScreen>
                       ),
                   ],
                 ],
+
+                const Divider(),
+                
+                SwitchListTile(
+                  title: Text(l10n.settingsScreen_enableLarcTracking),
+                  subtitle: Text(l10n.settingsScreen_larcDescription),
+                  value: larcEnabled,
+                  onChanged: (bool value) {
+                    context.read<SettingsService>().setLarcNavEnabled(value);
+                  },
+                ),
+                if (larcEnabled) ...[
+                  shortDivider,
+                  ListTile(
+                    leading: const Icon(Icons.verified_user_outlined),
+                    title: Text(l10n.settingsScreen_larcType),
+                    trailing: DropdownButton<LarcTypes>(
+                      value: settingsService.larcType,
+                      items: LarcTypes.values.map((type) {
+                        return DropdownMenuItem<LarcTypes>(
+                          value: type,
+                          child: Text(type.getDisplayName(l10n)),
+                        );
+                      }).toList(),
+                      onChanged: (LarcTypes? selectedType) {
+                        if (selectedType != null) {
+                          context.read<SettingsService>().setLarcType(selectedType);
+                        }
+                      },
+                    ),
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.date_range_outlined),
+                    title: Text(l10n.settingsScreen_larcDuration),
+                    subtitle: Text('${l10n.settingsScreen_currentDuration}: ${settingsService.getLarcDurationDays(activeLarcType)} ${l10n.days}'),
+                    trailing: const Icon(Icons.edit_outlined),
+                    onTap: () async {
+                      final result = await showDialog<int>(
+                        context: context,
+                        builder: (ctx) => LarcDurationConfigDialog(larcType: activeLarcType),
+                      );
+
+                      if (result != null && context.mounted) {
+                        await context.read<SettingsService>().setLarcDurationForType(activeLarcType, result);
+                      }
+                    },
+                  ),
+                  SwitchListTile(
+                    title: Text(l10n.settingsScreen_enableLARCReminder),
+                    value: settingsService.larcNotificationsEnabled,
+                    onChanged: (bool value) {
+                      context.read<SettingsService>().setLarcNotificationsEnabled(value);
+                    },
+                  ),
+                  if (settingsService.larcNotificationsEnabled) ...[
+                    ListTile(
+                      title: Text(l10n.settingsScreen_remindMeBefore),
+                      trailing: DropdownButton<int>(
+                        value: settingsService.larcReminderDays,
+                        items: [1, 7, 14].map((int days) {
+                          return DropdownMenuItem<int>(
+                            value: days,
+                            child: Text(l10n.dayCount(days)),
+                          );
+                        }).toList(),
+                        onChanged: (int? newDays) {
+                          if (newDays != null) {
+                            context.read<SettingsService>().setLarcReminderDays(newDays);
+                          }
+                        },
+                      ),
+                    ),
+                    
+                    ListTile(
+                      leading: const Icon(Icons.access_time),
+                      title: Text(l10n.settingsScreen_reminderTime),
+                      trailing: Text(
+                        settingsService.larcReminderTime.format(context),
+                        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
+                      onTap: _selectLarcReminderTime,
+                    ),
+                  ],
+                ]
               ],
             ),
     );

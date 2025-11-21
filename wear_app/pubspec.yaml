@@ -2,7 +2,7 @@ name: menstrudel
 description: "Your private, offline, menstrual cycle tracker."
 publish_to: 'none'
 
-version: 1.0.1+1004
+version: 1.1.0+1005
 
 environment:
   sdk: ^3.8.1
@@ -14,12 +14,13 @@ dependencies:
   wear_plus: ^1.2.3
   shared_preferences: ^2.5.3
   watch_connectivity: ^0.2.3
-  flutter_native_splash: ^2.4.6
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
+  flutter_launcher_icons: ^0.14.4
+  flutter_native_splash: ^2.4.6
 
 flutter:
   uses-material-design: true
@@ -27,8 +28,17 @@ flutter:
 flutter_native_splash:
   color: "#000000"
 
-  image: assets/splash_icon.jpg
+  image: assets/icon/menstrudel.png
 
   android_12:
     color: "#000000"
-    image: assets/splash_icon.jpg
+    image: assets/icon/menstrudel.png
+
+flutter_launcher_icons:
+  android: true
+  
+  adaptive_icon_background: "#ffffff"
+  adaptive_icon_foreground: "assets/icon/menstrudel.png"
+  adaptive_icon_monochrome: "assets/icon/menstrudel_monochrome.png"
+  
+  image_path: "assets/icon/menstrudel_monochrome.png"

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:menstrudel/models/period_logs/symptom.dart';
 import 'package:menstrudel/models/themes/app_theme_mode_enum.dart';
 import 'package:menstrudel/services/settings_service.dart';
+import 'package:menstrudel/models/birth_control/larcs/larc_types_enum.dart';
 
 /// The base app seed colour.
 const seedColor = Color(0xFF60A5FA);
@@ -15,6 +16,7 @@ const int periodDueNotificationId = 1;
 const int periodOverdueNotificationId = 4;
 const int tamponReminderId = 2;
 const int pillReminderId = 3;
+const int larcReminderId = 5;
 
 const periodNotificationChannelId = 'period_channel';
 const periodNotificationChannelName = 'Period Predictions';
@@ -24,6 +26,10 @@ const tamponReminderChannelName = 'Tampon Reminders';
 
 const pillReminderChannelId = 'pill_reminder_channel';
 const pillReminderChannelName = 'Pill Reminders';
+
+const larcReminderChannelId = 'larc_reminder_channel';
+const larcReminderChannelName = 'LARC Reminders';
+
 
 // Shared preferences keys
 
@@ -43,6 +49,12 @@ const String persistentReminderKey = "always_show_reminder_button";
 const String defaultSymptomsKey = "default_symptoms";
 const String languageKey = "language";
 const String pillNavEnabledKey = "pill_nav_enabled";
+const String larcNavEnabledKey = "larc_nav_enabled";
+const String larcTypeKey = "larc_type";
+const String larcDurationsKey = "larc_durations";
+const String larcNotificationsEnanledKey = "larc_notifications_enabled";
+const String larcNotificationDaysKey = 'larc_notification_days';
+const String larcNotificationTimeKey = 'larc_notification_time';
 
 // Notifications
 const String tamponReminderDateTimeKey = 'tampon_reminder_date_time';
@@ -51,6 +63,8 @@ const String tamponReminderDateTimeKey = 'tampon_reminder_date_time';
 
 // Settings
 const bool kDefaultPillNavEnabled = false;
+const bool kDefaultLarcNavEnabled = false;
+const LarcTypes kDefaultLarcType = LarcTypes.injection;
 const String kDefaultLanguageCode = 'system';
 const bool kDefaultAlwaysShowReminderButton = false;
 const bool kDefaultBiometricsEnabled = false;
@@ -65,3 +79,6 @@ const bool kDefaultDynamicColorEnabled = false;
 const Color kDefaultThemeColor = seedColor;
 const AppThemeMode kDefaultThemeMode = AppThemeMode.system;
 const Set<Symptom> kDefaultSymptoms = {};
+const bool kDefaultLarcNotificationsEnabled = false;
+const int kDefaultLarcReminderDays = 30;
+const TimeOfDay kDefaultLarcReminderTime = TimeOfDay(hour: 9, minute: 0);

@@ -17,12 +17,17 @@ All commands assume you are running them from within the `/app` directory.
 
 Before building, or after any native plugin is added/updated, you must install the iOS dependencies using CocoaPods.
 
-1.  Navigate to the `ios` directory:
+1. Get the flutter packages
+    ```sh
+    flutter pub get
+    ```
+
+2.  Navigate to the `ios` directory:
     ```sh
     cd ios
     ```
 
-2.  Run the pod installer:
+3.  Run the pod installer:
     ```sh
     pod install
     ```

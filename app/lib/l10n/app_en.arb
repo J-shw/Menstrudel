@@ -2,7 +2,9 @@
     "@@locale": "en",
     "appTitle": "Menstrudel",
 
+    "nextDue": "Next Due",
     "ongoing": "Ongoing",
+    "overdue": "Overdue",
 
     "date": "Date",
     "time": "Time",
@@ -41,6 +43,8 @@
     "add": "Add",
     "notSet": "Not set",
 
+    "note": "Note",
+
     "systemDefault": "System Default",
 
     "flow": "Flow",
@@ -48,6 +52,7 @@
     "navBar_insights": "Insights",
     "navBar_logs": "Logs",
     "navBar_pill": "Pill",
+    "navBar_larc": "LARC",
     "navBar_settings": "Settings",
 
     "flowIntensity_none": "None",
@@ -71,6 +76,15 @@
     "painLevel_moderate": "Moderate",
     "painLevel_severe": "Severe",
     "pain_unbearable": "Unbearable",
+
+    "larcType_iud": "IUD",
+    "larcType_implant": "Implant",
+    "larcType_injection": "Injection",
+    "larcType_ring": "Ring",
+    "larcType_patch": "Patch",
+
+    "error_valueMustbePositive": "Value must be positive",
+    "error_valueCannotBeNull": "Value cannot be null",
 
     "notification_periodTitle": "Period Approaching",
     "@notification_periodTitle": {
@@ -115,8 +129,29 @@
         "description": "Body for the tampon reminder notification."
     },
 
+    "notification_larcTitle": "LARC Reminder",
+    "@notification_larcTitle": {
+        "description": "Title for the LARC reminder notification."
+    },
+    "notification_larcBody": "{type} is due for renewal in {days} days.",
+    "@notification_larcBody": {
+        "description": "The body of the LARC reminder notification, indicating the type of LARC and how many days until renewal.",
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "example": "IUD"
+            },
+            "days": {
+                "type": "int",
+                "example": "30"
+            }
+        }
+    },
+
+
     "mainScreen_insightsPageTitle": "Your Insights",
     "mainScreen_pillsPageTitle": "Pills",
+    "mainScreen_LarcsPageTitle": "LARCs",
     "mainScreen_settingsPageTitle": "Settings",
 
     "mainScreen_tooltipSetReminder": "Tampon reminder",
@@ -146,6 +181,31 @@
     "pillScreen_pillForTodayMarkedAsTaken": "Pill for today marked as taken.",
     "pillScreen_pillForTodayMarkedAsSkipped": "Pill for today marked as skipped.",
 
+    "larcScreen_noLarcRecordsFound": "No LARC records found.",
+    "larcScreen_history": "History ({history})",
+    "@larcScreen_history": {
+        "description": "The total LARC history count.",
+        "placeholders": {
+            "history": {
+                "type": "int",
+                "example": "12"
+            }
+        }
+    },
+    "larcScreen_activeLarcs": "Active LARCs ({activeCount})",
+    "@larcScreen_activeLarcs": {
+        "description": "The total active LARC count.",
+        "placeholders": {
+            "activeCount": {
+                "type": "int",
+                "example": "2"
+            }
+        }
+    },
+    "larcScreen_activeLarcsDescription": "Currently monitored LARC entries.",
+    "larcScreen_noActiveRecords": "No LARC is currently active. Please log a new entry.",
+    "larcScreen_noHistoryRecords": "No past or overdue LARC records found.",
+
     "settingsScreen_selectHistoryView": "Select History View",
     "settingsScreen_deleteRegimen_question": "Delete Regimen?",
     "settingsScreen_deleteRegimenDescription": "This will delete your current pill pack settings and all associated pill logs. This cannot be undone.",
@@ -167,6 +227,7 @@
 
     "settingsScreen_birthControl": "Birth Control",
     "settingsScreen_enablePillTracking": "Enable Pill Tracking",
+    "settingsScreen_pillDescription": "Track your daily pill intake and get reminders.",
     "settingsScreen_setUpPillRegimen": "Set Up Pill Regimen",
     "settingsScreen_trackYourDailyPillIntake": "Track Your Daily Pill Intake",
     "settingsScreen_dailyPillReminder": "Daily Pill Reminder",
@@ -177,6 +238,16 @@
     "settingsScreen_notificationTime": "Notification Time",
     "settingsScreen_overduePeriodReminder": "Overdue Period Reminder",
     "settingsScreen_remindMeAfter": "Remind Me After",
+    "settingsScreen_enableLarcTracking": "Enable LARC Tracking",
+    "settingsScreen_larcDescription": "Track long-acting reversible contraceptives (LARCs).",
+    "settingsScreen_larcType": "LARC Type",
+    "settingsScreen_setDuration": "Set Duration",
+    "settingsScreen_larcDuration": "LARC Replacement Duration",
+    "settingsScreen_enableLARCReminder": "Enable LARC Reminder",
+    "settingsScreen_currentDuration": "Current Duration",
+    "settingsScreen_durationInDays": "Duration (Days)",
+
+    "settingsScreen_LoggingScreen" : "Logging",
     "settingsScreen_defaultSymptoms": "Default Symptoms",
     "settingsScreen_defaultSymptomsSubtitle": "These are always available when logging new periods.\nTap an existing symptom to delete or '+' to add a new one.",
     "settingsScreen_deleteDefaultSymptomQuestion": "Delete '{symptom}'?",
@@ -191,7 +262,6 @@
     },
     "settingsScreen_resetSymptomsList" : "Reset Symptoms List?",
     "settingsScreen_resetSymptomsListDescription" : "This will remove all your custom symptoms and restore the original built-in list.\n\nYour existing log entries will not be changed.",
-    "settingsScreen_LoggingScreen" : "Logging",
     "settingsScreen_deleteDefaultSymptomDescription": "'{symptom}' will no longer be available when logging a period.\n\n{usageCount, plural, zero{There are currently no period logs with this symptom!} one{There is already 1 period log with this symptom!\nThis log will not be changed.} other{There are {usageCount} period logs with this symptom!\nThese logs will not be changed.}}",
     "@settingsScreen_deleteDefaultSymptomDescription": {
         "description": "Question whether a symptom should be deleted.",
@@ -220,16 +290,22 @@
     "settingsScreen_pack": "Pack",
 
     "settingsScreen_dataManagement": "Data Management",
-    "settingsScreen_clearAllLogs": "Clear All Logs",
-    "settingsScreen_clearAllPillData": "Clear All Pill Data",
-    "settingsScreen_clearAllPillData_question": "Clear All Pill Data?",
-    "settingsScreen_deleteAllPillDataDescription": "This will permanently delete your pill regimen, reminders, and intake history. This action cannot be undone.",
-    "settingsScreen_allPillDataCleared": "All pill data has been cleared.",
     "settingsScreen_dangerZone": "Danger Zone",
+    "settingsScreen_clearAllLogs": "Clear All Logs",
     "settingsScreen_clearAllLogsSubtitle": "Deletes your entire period and symptom history.",
+    "settingsScreen_clearAllPillData": "Clear All Pill Data",
     "settingsScreen_clearAllPillDataSubtitle": "Removes your pill regimen and intake history.",
+    "settingsScreen_clearAllPillData_question": "Clear All Pill Data?",
+    "settingsScreen_deleteAllPillDataDescription": "This will permanently delete your pill regimen, reminders, and intake history.",
+    "settingsScreen_allPillDataCleared": "All pill data has been cleared.",
+    "settingsScreen_clearAllLarcData": "Clear All LARC Data",
+    "settingsScreen_clearAllLarcDataSubtitle": "Removes your LARCs history.",
+    "settingsScreen_clearAllLarcData_question": "Clear All LARC Data?",
+    "settingsScreen_deleteAllLarcDataDescription": "This will permanently delete your LARC history.",
+    "settingsScreen_allLarcDataCleared": "All LARC data has been cleared.",
     "settingsScreen_exportPeriodData": "Export Period Data",
     "settingsScreen_exportPillData": "Export Pill Data",
+    "settingsScreen_exportLarcsData": "Export LARCs Data",
     "settingsScreen_exportDataSubtitle": "Create a JSON backup file.",
     "settingsScreen_exportSuccessful": "Data exported successfully.",
     "settingsScreen_exportFailed": "Export failed. Please try again.",
@@ -239,9 +315,11 @@
     "settingsScreen_importDataTitle": "Import Data",
     "settingsScreen_importPeriodData": "Import Period Data",
     "settingsScreen_importPillData": "Import Pill Data",
+    "settingsScreen_importLarcsData": "Import LARCs Data",
     "settingsScreen_importDataSubtitle": "Overwrites existing data.",
     "settingsScreen_importPeriodData_question": "Are you sure you want to import Period Data?",
     "settingsScreen_importPillData_question": "Are you sure you want to import Pill Data?",
+    "settingsScreen_importLarcData_question": "Are you sure you want to import LARC Data?",
     "settingsScreen_importPeriodDataDescription": "Importing data will permanently overwrite all your existing period logs and period settings. This cannot be undone.",
     "settingsScreen_importPillDataDescription": "Importing data will permanently overwrite all your existing pill history. This cannot be undone.",
     "settingsScreen_importSuccessful": "Data imported successfully!",
@@ -359,6 +437,8 @@
 
     "periodDetailsSheet_symptoms": "Symptoms",
     "periodDetailsSheet_flow": "Flow",
+
+    "larcEntrySheet_logLARCDetails": "Log LARC Details",
 
     "periodPredictionCircle_days": "{count, plural, =1{Day} other{Days}}",
     "@periodPredictionCircle_days": {
