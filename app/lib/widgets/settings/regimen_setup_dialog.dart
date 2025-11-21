@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:menstrudel/models/pills/pill_regimen.dart';
+import 'package:menstrudel/models/birth_control/pills/pill_regimen.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 
 class RegimenSetupDialog extends StatefulWidget {

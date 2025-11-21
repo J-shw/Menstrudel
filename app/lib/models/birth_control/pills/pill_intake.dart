@@ -1,4 +1,4 @@
-import 'package:menstrudel/models/pills/pill_status_enum.dart';
+import 'package:menstrudel/models/birth_control/pills/pill_status_enum.dart';
 
 class PillIntake {
   final int? id;

@@ -60,6 +60,10 @@ Take control of your menstrual health with an intuitive, private, and powerful t
 * **Flexible Setup:** Easily customise your specific pill pack, whether it’s a 21/7, 28-day, or any other regimen.
 * **Build Your Streak:** Log your daily intake with a single tap and track your adherence over time.
 
+### LARC Tracking and Reminders 🗓️
+* **Never Miss a Beat:** Log LARC usage, and track renewal dates with notification alerts.
+* **Stay Informed:** Get timely, customisable notifications for upcoming device expiry.
+
 ### Timely & Customizable Reminders ⏰
 * **Period Alerts:** Get a gentle heads-up a few days before your period is due.
 * **Pill Reminders:** Never miss a pill with consistent daily notifications tailored to your schedule.
@@ -97,8 +101,8 @@ You can view our privacy policy [here](https://menstrudel.app/privacy/).
 | ![Log View](docs/screenshots/android/logs_screen.png) | ![Symptom Entry Dialog](docs/screenshots/android/log_screen.png) | ![Symptom Entry Dialog](docs/screenshots/android/tampon_reminder.png) |
 | Pill Reminder | Quick insights | Settings |
 | ![Screenshot of the pill reminder screen in Menstrudel](docs/screenshots/android/pills_screen.png)  | ![Insights View](docs/screenshots/android/insights_screen.png) | ![Symptom Entry Dialog](docs/screenshots/android/settings_screen.png) | 
-| Widgets |  |  |
-| ![Screenshot of the widgets screen on home screen](docs/screenshots/android/widget_screen.png)  | |  | 
+| LARC Tracking | Widgets |  |
+| ![Screenshot of the LARC tracking screen](docs/screenshots/android/larc_screen.png) | ![Screenshot of the widgets screen on home screen](docs/screenshots/android/widget_screen.png) |   | 
 
 # Wear OS
 
