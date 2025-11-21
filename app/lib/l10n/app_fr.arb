@@ -264,7 +264,7 @@
     "settingsScreen_clearAllPillData": "Effacer toutes les données de la pilule",
     "settingsScreen_clearAllPillDataSubtitle": "Supprime votre régime de pilules et votre historique de prise.",
     "settingsScreen_clearAllPillData_question": "Effacer toutes les données de la pilule ?",
-    "settingsScreen_deleteAllPillDataDescription": "This will permanently delete your pill regimen, reminders, and intake history.",
+    "settingsScreen_deleteAllPillDataDescription": "Cela supprimera définitivement votre prise de pilules, vos rappels et votre historique de prise. Cette action est irréversible.",
     "settingsScreen_allPillDataCleared": "Toutes les données sur les pilules ont été effacé.",
     "settingsScreen_clearAllLarcData": "Clear All LARC Data",
     "settingsScreen_clearAllLarcDataSubtitle": "Removes your LARCs history.",
