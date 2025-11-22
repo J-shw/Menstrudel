@@ -376,10 +376,10 @@
             }
         }
     },
-    "regimenSetupWidget_setUpPillRegimen": "Set Up Pill Regimen",
+    "regimenSetupWidget_setUpPillRegimen": "Pilleneinnahme festlegen",
     "regimenSetupWidget_packName": "Verpackungsname",
     "regimenSetupWidget_pleaseEnterAName": "Bitte einen Namen eingeben",
-    "regimenSetupWidget_activePills": "Active Pills",
+    "regimenSetupWidget_activePills": "Aktive Pillen",
     "regimenSetupWidget_enterANumber": "Eine Zahl eingeben",
     "regimenSetupWidget_placeboPills": "Placebo-Pillen",
     "regimenSetupWidget_firstDayOfThisPack": "First Day of This Pack",
@@ -388,7 +388,7 @@
     "periodDetailsSheet_symptoms": "Symptome",
     "periodDetailsSheet_flow": "Ausfluss",
     "larcEntrySheet_logLARCDetails": "LARC-Details protokollieren",
-    "periodPredictionCircle_days": "{count, plural, =1{Day} other{Days}}",
+    "periodPredictionCircle_days": "{count, plural, =1{Tag} other{Tage}}",
     "@periodPredictionCircle_days": {
         "description": "A label showing the total number of days until period is due.",
         "placeholders": {
