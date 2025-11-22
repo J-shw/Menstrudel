@@ -18,7 +18,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get ongoing => 'Fortlaufend';
 
   @override
-  String get overdue => 'Overdue';
+  String get overdue => 'Überfällig';
 
   @override
   String get date => 'Datum';
@@ -95,7 +95,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get notSet => 'Nicht festgelegt';
 
   @override
-  String get note => 'Note';
+  String get note => 'Hinweis';
 
   @override
   String get systemDefault => 'System Standard';
@@ -179,10 +179,10 @@ class AppLocalizationsDe extends AppLocalizations {
   String get larcType_iud => 'IUD';
 
   @override
-  String get larcType_implant => 'Implant';
+  String get larcType_implant => 'Implantat';
 
   @override
-  String get larcType_injection => 'Injection';
+  String get larcType_injection => 'Injektion';
 
   @override
   String get larcType_ring => 'Ring';
@@ -191,10 +191,10 @@ class AppLocalizationsDe extends AppLocalizations {
   String get larcType_patch => 'Patch';
 
   @override
-  String get error_valueMustbePositive => 'Value must be positive';
+  String get error_valueMustbePositive => 'Der Wert muss positiv sein';
 
   @override
-  String get error_valueCannotBeNull => 'Value cannot be null';
+  String get error_valueCannotBeNull => 'Der Wert darf nicht null sein';
 
   @override
   String get notification_periodTitle => 'Periode nähert sich';
@@ -239,11 +239,11 @@ class AppLocalizationsDe extends AppLocalizations {
       'Denk daran, Deinen Tampon zu wechseln.';
 
   @override
-  String get notification_larcTitle => 'LARC Reminder';
+  String get notification_larcTitle => 'LARC-Erinnerung';
 
   @override
   String notification_larcBody(String type, int days) {
-    return '$type is due for renewal in $days days.';
+    return '$type muss in $days Tagen erneuert werden.';
   }
 
   @override
@@ -253,7 +253,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get mainScreen_pillsPageTitle => 'Pille';
 
   @override
-  String get mainScreen_LarcsPageTitle => 'LARCs';
+  String get mainScreen_LarcsPageTitle => 'LARC';
 
   @override
   String get mainScreen_settingsPageTitle => 'Einstellungen';
@@ -317,7 +317,7 @@ class AppLocalizationsDe extends AppLocalizations {
       'Pille für heute als ausgelassen markiert.';
 
   @override
-  String get larcScreen_noLarcRecordsFound => 'No LARC records found.';
+  String get larcScreen_noLarcRecordsFound => 'Keine LARC-Datensätze gefunden.';
 
   @override
   String larcScreen_history(int history) {
@@ -326,20 +326,20 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String larcScreen_activeLarcs(int activeCount) {
-    return 'Active LARCs ($activeCount)';
+    return 'Aktive LARC ($activeCount)';
   }
 
   @override
   String get larcScreen_activeLarcsDescription =>
-      'Currently monitored LARC entries.';
+      'Derzeit überwachte LARC-Einträge.';
 
   @override
   String get larcScreen_noActiveRecords =>
-      'No LARC is currently active. Please log a new entry.';
+      'Derzeit ist kein LARC aktiv. Bitte einen neuen Eintrag vornehmen.';
 
   @override
   String get larcScreen_noHistoryRecords =>
-      'No past or overdue LARC records found.';
+      'Es wurden keine früheren oder überfälligen LARC-Datensätze gefunden.';
 
   @override
   String get settingsScreen_selectHistoryView =>
@@ -404,7 +404,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get settingsScreen_pillDescription =>
-      'Track your daily pill intake and get reminders.';
+      'Erfasse Deine tägliche Einnahme von Tabletten und erhalte Erinnerungen.';
 
   @override
   String get settingsScreen_setUpPillRegimen => 'Set Up Pill Regimen';
@@ -441,32 +441,32 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsScreen_remindMeAfter => 'Erinnere mich in';
 
   @override
-  String get settingsScreen_enableLarcTracking => 'Enable LARC Tracking';
+  String get settingsScreen_enableLarcTracking => 'LARC-Verfolgung aktivieren';
 
   @override
   String get settingsScreen_larcDescription =>
-      'Track long-acting reversible contraceptives (LARCs).';
+      'Erfassung langwirksamer reversibler Verhütungsmittel (LARCs).';
 
   @override
-  String get settingsScreen_larcType => 'LARC Type';
+  String get settingsScreen_larcType => 'LARC Typ';
 
   @override
-  String get settingsScreen_setDuration => 'Set Duration';
+  String get settingsScreen_setDuration => 'Dauer festlegen';
 
   @override
-  String get settingsScreen_larcDuration => 'LARC Replacement Duration';
+  String get settingsScreen_larcDuration => 'Dauer des LARC-Ersatzes';
 
   @override
-  String get settingsScreen_enableLARCReminder => 'Enable LARC Reminder';
+  String get settingsScreen_enableLARCReminder => 'LARC-Erinnerung aktivieren';
 
   @override
-  String get settingsScreen_currentDuration => 'Current Duration';
+  String get settingsScreen_currentDuration => 'Aktuelle Dauer';
 
   @override
-  String get settingsScreen_durationInDays => 'Duration (Days)';
+  String get settingsScreen_durationInDays => 'Dauer (Tage)';
 
   @override
-  String get settingsScreen_LoggingScreen => 'Logging';
+  String get settingsScreen_LoggingScreen => 'Protokollieren';
 
   @override
   String get settingsScreen_defaultSymptoms => 'Standardsymptome';
@@ -495,12 +495,12 @@ class AppLocalizationsDe extends AppLocalizations {
       usageCount,
       locale: localeName,
       other:
-          'There are $usageCount period logs with this symptom!\nThese logs will not be changed.',
+          'Es gibt $usageCount Periodenprotokolle mit diesem Symptom!\nDiese Protokolle werden nicht geändert.',
       one:
-          'There is already 1 period log with this symptom!\nThis log will not be changed.',
-      zero: 'There are currently no period logs with this symptom!',
+          'Es gibt bereits 1 Periodenprotokoll mit diesem Symptom!\nDieses Protokoll wird nicht geänder.',
+      zero: 'Derzeit gibt es keine Periodenprotokolle mit diesem Symptom!',
     );
-    return '\'$symptom\' will no longer be available when logging a period.\n\n$_temp0';
+    return '\'$symptom\' ist beim Protokollieren eines Zeitraums nicht mehr verfügbar.\n\n$_temp0';
   }
 
   @override
@@ -517,7 +517,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsScreen_pack => 'Pack';
 
   @override
-  String get settingsScreen_dataManagement => 'Data Management';
+  String get settingsScreen_dataManagement => 'Datenverwaltung';
 
   @override
   String get settingsScreen_dangerZone => 'Gefahrenbereich';
@@ -527,7 +527,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get settingsScreen_clearAllLogsSubtitle =>
-      'Deletes your entire period and symptom history.';
+      'Löscht den gesamten Verlauf deiner Periode und Symptome.';
 
   @override
   String get settingsScreen_clearAllPillData => 'Clear All Pill Data';
@@ -548,18 +548,19 @@ class AppLocalizationsDe extends AppLocalizations {
       'All pill data has been cleared.';
 
   @override
-  String get settingsScreen_clearAllLarcData => 'Clear All LARC Data';
+  String get settingsScreen_clearAllLarcData => 'Alle LARC-Daten löschen';
 
   @override
   String get settingsScreen_clearAllLarcDataSubtitle =>
-      'Removes your LARCs history.';
+      'Löscht deinen LARC-Verlauf.';
 
   @override
-  String get settingsScreen_clearAllLarcData_question => 'Clear All LARC Data?';
+  String get settingsScreen_clearAllLarcData_question =>
+      'Alle LARC-Daten löschen?';
 
   @override
   String get settingsScreen_deleteAllLarcDataDescription =>
-      'This will permanently delete your LARC history.';
+      'Dadurch wird Dein LARC-Verlauf dauerhaft gelöscht.';
 
   @override
   String get settingsScreen_allLarcDataCleared =>
@@ -572,7 +573,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsScreen_exportPillData => 'Periodendaten exportieren';
 
   @override
-  String get settingsScreen_exportLarcsData => 'Export LARCs Data';
+  String get settingsScreen_exportLarcsData => 'LARCs-Daten exportieren';
 
   @override
   String get settingsScreen_exportDataSubtitle =>
@@ -606,7 +607,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsScreen_importPillData => 'Periodendaten importieren';
 
   @override
-  String get settingsScreen_importLarcsData => 'Import LARCs Data';
+  String get settingsScreen_importLarcsData => 'LARCs-Daten importieren';
 
   @override
   String get settingsScreen_importDataSubtitle => 'Overwrites existing data.';
@@ -677,7 +678,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get preferencesScreen_tamponReminderButtonSubtitle =>
-      'Makes the tampon reminder button permanently visible on the main screen.';
+      'Macht die Tampon-Erinnerungstaste dauerhaft auf dem Hauptbildschirm sichtbar.';
 
   @override
   String get settingsScreen_about => 'Über';
@@ -689,7 +690,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get aboutScreen_github => 'GitHub';
 
   @override
-  String get aboutScreen_githubSubtitle => 'Source code and issue tracking';
+  String get aboutScreen_githubSubtitle => 'Quellcode und Fehlerverfolgung';
 
   @override
   String get aboutScreen_share => 'Teilen';
@@ -701,11 +702,11 @@ class AppLocalizationsDe extends AppLocalizations {
   String get aboutScreen_urlError => 'Der Link konnte nicht geöffnet werden.';
 
   @override
-  String get tamponReminderDialog_tamponReminderTitle => 'Tampon Reminder';
+  String get tamponReminderDialog_tamponReminderTitle => 'Tampon-Erinnerung';
 
   @override
   String get tamponReminderDialog_tamponReminderMaxDuration =>
-      'Max duration is 8 hours.';
+      'Die maximale Dauer beträgt 8 Stunden.';
 
   @override
   String get reminderCountdownDialog_title => 'Erinnerung Fällig am';
@@ -739,18 +740,19 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get flowIntensityWidget_flowIntensityBreakdown =>
-      'Flow Intensity Breakdown';
+      'Aufschlüsselung der Abflussintensität';
 
   @override
   String get flowIntensityWidget_noFlowDataLoggedYet =>
-      'No flow data logged yet.';
+      'Es wurden noch keine Schmerzdaten erfasst.';
 
   @override
   String get painLevelWidget_noPainDataLoggedYet =>
       'Es wurden noch keine Schmerzdaten erfasst.';
 
   @override
-  String get painLevelWidget_painLevelBreakdown => 'Pain Level Breakdown';
+  String get painLevelWidget_painLevelBreakdown =>
+      'Schmerzgrad-Aufschlüsselung';
 
   @override
   String get monthlyFlowChartWidget_noDataToDisplay =>
@@ -847,7 +849,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get regimenSetupWidget_firstDayOfThisPack => 'First Day of This Pack';
 
   @override
-  String get symptomEntrySheet_logYourDay => 'Log Your Day';
+  String get symptomEntrySheet_logYourDay => 'Protokolliere Deinen Tag';
 
   @override
   String get symptomEntrySheet_symptomsOptional => 'Symptome (optional)';
@@ -856,10 +858,10 @@ class AppLocalizationsDe extends AppLocalizations {
   String get periodDetailsSheet_symptoms => 'Symptome';
 
   @override
-  String get periodDetailsSheet_flow => 'Flow';
+  String get periodDetailsSheet_flow => 'Ausfluss';
 
   @override
-  String get larcEntrySheet_logLARCDetails => 'Log LARC Details';
+  String get larcEntrySheet_logLARCDetails => 'LARC-Details protokollieren';
 
   @override
   String periodPredictionCircle_days(int count) {
@@ -873,12 +875,12 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
-  String get customSymptomDialog_newSymptom => 'New Symptom';
+  String get customSymptomDialog_newSymptom => 'Neues Symptom';
 
   @override
   String get customSymptomDialog_enterCustomSymptom =>
       'Please enter a custom symptom';
 
   @override
-  String get customSymptomDialog_temporarySymptom => 'Temporary Symptom';
+  String get customSymptomDialog_temporarySymptom => 'Vorübergehendes Symptom';
 }
