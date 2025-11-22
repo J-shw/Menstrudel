@@ -111,7 +111,7 @@
     "@notification_tamponReminderBody": {
         "description": "Body for the tampon reminder notification."
     },
-    "notification_larcTitle": "LARC Reminder",
+    "notification_larcTitle": "LARC-Erinnerung",
     "@notification_larcTitle": {
         "description": "Title for the LARC reminder notification."
     },
@@ -131,7 +131,7 @@
     },
     "mainScreen_insightsPageTitle": "Deine Erkenntnisse",
     "mainScreen_pillsPageTitle": "Pille",
-    "mainScreen_LarcsPageTitle": "LARCs",
+    "mainScreen_LarcsPageTitle": "LARC",
     "mainScreen_settingsPageTitle": "Einstellungen",
     "mainScreen_tooltipSetReminder": "Tampon-Erinnerung",
     "mainScreen_tooltipCancelReminder": "Erinnerung abbrechen",
@@ -156,7 +156,7 @@
     "logScreen_couldNotCancelReminder": "Erinnerung konnte nicht abgebrochen werden",
     "pillScreen_pillForTodayMarkedAsTaken": "Pille für heute als eingenommen markiert.",
     "pillScreen_pillForTodayMarkedAsSkipped": "Pille für heute als ausgelassen markiert.",
-    "larcScreen_noLarcRecordsFound": "No LARC records found.",
+    "larcScreen_noLarcRecordsFound": "Keine LARC-Datensätze gefunden.",
     "larcScreen_history": "History ({history})",
     "@larcScreen_history": {
         "description": "The total LARC history count.",
@@ -167,7 +167,7 @@
             }
         }
     },
-    "larcScreen_activeLarcs": "Active LARCs ({activeCount})",
+    "larcScreen_activeLarcs": "Aktive LARC ({activeCount})",
     "@larcScreen_activeLarcs": {
         "description": "The total active LARC count.",
         "placeholders": {
@@ -177,9 +177,9 @@
             }
         }
     },
-    "larcScreen_activeLarcsDescription": "Currently monitored LARC entries.",
-    "larcScreen_noActiveRecords": "No LARC is currently active. Please log a new entry.",
-    "larcScreen_noHistoryRecords": "No past or overdue LARC records found.",
+    "larcScreen_activeLarcsDescription": "Derzeit überwachte LARC-Einträge.",
+    "larcScreen_noActiveRecords": "Derzeit ist kein LARC aktiv. Bitte einen neuen Eintrag vornehmen.",
+    "larcScreen_noHistoryRecords": "Es wurden keine früheren oder überfälligen LARC-Datensätze gefunden.",
     "settingsScreen_selectHistoryView": "Vergangenheitsansicht auswählen",
     "settingsScreen_deleteRegimen_question": "Kuren löschen?",
     "settingsScreen_deleteRegimenDescription": "Dies wird deine aktuellen Pillenverpackungseinstellungen und alle zugehörigen Pillenaufzeichnungen löschen. Diese Aktion kann nicht rückgängig gemacht werden.",
@@ -210,7 +210,7 @@
     "settingsScreen_notificationTime": "Benachrichtigungszeit",
     "settingsScreen_overduePeriodReminder": "Erinnerung bei überfälliger Periode",
     "settingsScreen_remindMeAfter": "Erinnere mich in",
-    "settingsScreen_enableLarcTracking": "Enable LARC Tracking",
+    "settingsScreen_enableLarcTracking": "LARC-Verfolgung aktivieren",
     "settingsScreen_larcDescription": "Erfassung langwirksamer reversibler Verhütungsmittel (LARCs).",
     "settingsScreen_larcType": "LARC Typ",
     "settingsScreen_setDuration": "Dauer festlegen",
@@ -233,7 +233,7 @@
     },
     "settingsScreen_resetSymptomsList": "Symptomliste zurücksetzen?",
     "settingsScreen_resetSymptomsListDescription": "",
-    "settingsScreen_deleteDefaultSymptomDescription": "'{symptom}' will no longer be available when logging a period.\n\n{usageCount, plural, zero{There are currently no period logs with this symptom!} one{There is already 1 period log with this symptom!\nThis log will not be changed.} other{There are {usageCount} period logs with this symptom!\nThese logs will not be changed.}}",
+    "settingsScreen_deleteDefaultSymptomDescription": "'{symptom}' ist beim Protokollieren eines Zeitraums nicht mehr verfügbar.\n\n{usageCount, plural, zero{Derzeit gibt es keine Periodenprotokolle mit diesem Symptom!} one{Es gibt bereits 1 Periodenprotokoll mit diesem Symptom!\nDieses Protokoll wird nicht geänder.} other{Es gibt {usageCount} Periodenprotokolle mit diesem Symptom!\nDiese Protokolle werden nicht geändert.}}",
     "@settingsScreen_deleteDefaultSymptomDescription": {
         "description": "Question whether a symptom should be deleted.",
         "placeholders": {
@@ -257,23 +257,23 @@
         "description": "Header for the daily reminder settings section."
     },
     "settingsScreen_pack": "Pack",
-    "settingsScreen_dataManagement": "Data Management",
+    "settingsScreen_dataManagement": "Datenverwaltung",
     "settingsScreen_dangerZone": "Gefahrenbereich",
     "settingsScreen_clearAllLogs": "Alle Protokolle löschen",
-    "settingsScreen_clearAllLogsSubtitle": "Deletes your entire period and symptom history.",
+    "settingsScreen_clearAllLogsSubtitle": "Löscht den gesamten Verlauf deiner Periode und Symptome.",
     "settingsScreen_clearAllPillData": "Clear All Pill Data",
     "settingsScreen_clearAllPillDataSubtitle": "Removes your pill regimen and intake history.",
     "settingsScreen_clearAllPillData_question": "Clear All Pill Data?",
     "settingsScreen_deleteAllPillDataDescription": "This will permanently delete your pill regimen, reminders, and intake history. This action cannot be undone.",
     "settingsScreen_allPillDataCleared": "All pill data has been cleared.",
-    "settingsScreen_clearAllLarcData": "Clear All LARC Data",
-    "settingsScreen_clearAllLarcDataSubtitle": "Removes your LARCs history.",
-    "settingsScreen_clearAllLarcData_question": "Clear All LARC Data?",
-    "settingsScreen_deleteAllLarcDataDescription": "This will permanently delete your LARC history.",
+    "settingsScreen_clearAllLarcData": "Alle LARC-Daten löschen",
+    "settingsScreen_clearAllLarcDataSubtitle": "Löscht deinen LARC-Verlauf.",
+    "settingsScreen_clearAllLarcData_question": "Alle LARC-Daten löschen?",
+    "settingsScreen_deleteAllLarcDataDescription": "Dadurch wird Dein LARC-Verlauf dauerhaft gelöscht.",
     "settingsScreen_allLarcDataCleared": "All LARC data has been cleared.",
     "settingsScreen_exportPeriodData": "Periodendaten exportieren",
     "settingsScreen_exportPillData": "Periodendaten exportieren",
-    "settingsScreen_exportLarcsData": "Export LARCs Data",
+    "settingsScreen_exportLarcsData": "LARCs-Daten exportieren",
     "settingsScreen_exportDataSubtitle": "Erstelle eine JSON Backup Datei.",
     "settingsScreen_exportSuccessful": "Daten erfolgreich exportiert.",
     "settingsScreen_exportFailed": "Export fehlgeschlagen. Bitte versuche es erneut.",
@@ -283,7 +283,7 @@
     "settingsScreen_importDataTitle": "Daten importieren",
     "settingsScreen_importPeriodData": "Periodendaten importieren",
     "settingsScreen_importPillData": "Periodendaten importieren",
-    "settingsScreen_importLarcsData": "Import LARCs Data",
+    "settingsScreen_importLarcsData": "LARCs-Daten importieren",
     "settingsScreen_importDataSubtitle": "Overwrites existing data.",
     "settingsScreen_importPeriodData_question": "Are you sure you want to import Period Data?",
     "settingsScreen_importPillData_question": "Are you sure you want to import Pill Data?",
@@ -314,16 +314,16 @@
     "settingsScreen_preferences": "Einstellungen",
     "preferencesScreen_language": "Sprache",
     "preferencesScreen_tamponReminderButton": "Always Show Reminder Button",
-    "preferencesScreen_tamponReminderButtonSubtitle": "Makes the tampon reminder button permanently visible on the main screen.",
+    "preferencesScreen_tamponReminderButtonSubtitle": "Macht die Tampon-Erinnerungstaste dauerhaft auf dem Hauptbildschirm sichtbar.",
     "settingsScreen_about": "Über",
     "aboutScreen_version": "Version",
     "aboutScreen_github": "GitHub",
-    "aboutScreen_githubSubtitle": "Source code and issue tracking",
+    "aboutScreen_githubSubtitle": "Quellcode und Fehlerverfolgung",
     "aboutScreen_share": "Teilen",
     "aboutScreen_shareSubtitle": "Teile die App mit Freunden",
     "aboutScreen_urlError": "Der Link konnte nicht geöffnet werden.",
-    "tamponReminderDialog_tamponReminderTitle": "Tampon Reminder",
-    "tamponReminderDialog_tamponReminderMaxDuration": "Max duration is 8 hours.",
+    "tamponReminderDialog_tamponReminderTitle": "Tampon-Erinnerung",
+    "tamponReminderDialog_tamponReminderMaxDuration": "Die maximale Dauer beträgt 8 Stunden.",
     "reminderCountdownDialog_title": "Erinnerung Fällig am",
     "reminderCountdownDialog_dueAt": "Fällig um {time}",
     "@reminderCountdownDialog_dueAt": {
@@ -338,10 +338,10 @@
     "cycleLengthVarianceWidget_averagePeriod": "Durchschnittliche Periode",
     "cycleLengthVarianceWidget_period": "Periode",
     "cycleLengthVarianceWidget_cycle": "Zyklus",
-    "flowIntensityWidget_flowIntensityBreakdown": "Flow Intensity Breakdown",
-    "flowIntensityWidget_noFlowDataLoggedYet": "No flow data logged yet.",
+    "flowIntensityWidget_flowIntensityBreakdown": "Aufschlüsselung der Abflussintensität",
+    "flowIntensityWidget_noFlowDataLoggedYet": "Es wurden noch keine Schmerzdaten erfasst.",
     "painLevelWidget_noPainDataLoggedYet": "Es wurden noch keine Schmerzdaten erfasst.",
-    "painLevelWidget_painLevelBreakdown": "Pain Level Breakdown",
+    "painLevelWidget_painLevelBreakdown": "Schmerzgrad-Aufschlüsselung",
     "monthlyFlowChartWidget_noDataToDisplay": "Keine Daten zum Anzeigen.",
     "monthlyFlowChartWidget_cycleFlowPatterns": "Zyklusverlaufsmuster",
     "monthlyFlowChartWidget_cycleFlowPatternsDescription": "Jede Linie stellt einen vollständigen Zyklus dar",
@@ -383,11 +383,11 @@
     "regimenSetupWidget_enterANumber": "Eine Zahl eingeben",
     "regimenSetupWidget_placeboPills": "Placebo-Pillen",
     "regimenSetupWidget_firstDayOfThisPack": "First Day of This Pack",
-    "symptomEntrySheet_logYourDay": "Log Your Day",
+    "symptomEntrySheet_logYourDay": "Protokolliere Deinen Tag",
     "symptomEntrySheet_symptomsOptional": "Symptome (optional)",
     "periodDetailsSheet_symptoms": "Symptome",
-    "periodDetailsSheet_flow": "Flow",
-    "larcEntrySheet_logLARCDetails": "Log LARC Details",
+    "periodDetailsSheet_flow": "Ausfluss",
+    "larcEntrySheet_logLARCDetails": "LARC-Details protokollieren",
     "periodPredictionCircle_days": "{count, plural, =1{Day} other{Days}}",
     "@periodPredictionCircle_days": {
         "description": "A label showing the total number of days until period is due.",
@@ -397,7 +397,7 @@
             }
         }
     },
-    "customSymptomDialog_newSymptom": "New Symptom",
+    "customSymptomDialog_newSymptom": "Neues Symptom",
     "customSymptomDialog_enterCustomSymptom": "Please enter a custom symptom",
-    "customSymptomDialog_temporarySymptom": "Temporary Symptom"
+    "customSymptomDialog_temporarySymptom": "Vorübergehendes Symptom"
 }
