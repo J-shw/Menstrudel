@@ -550,7 +550,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get settingsScreen_deleteAllPillDataDescription =>
-      'This will permanently delete your pill regimen, reminders, and intake history.';
+      'Cela supprimera définitivement votre prise de pilules, vos rappels et votre historique de prise. Cette action est irréversible.';
 
   @override
   String get settingsScreen_allPillDataCleared =>
