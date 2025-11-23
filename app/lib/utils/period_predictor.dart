@@ -13,7 +13,7 @@ class PeriodPredictor {
   static const int _defaultCycleLength = 28;
 
   /// The minimum number of periods logged needed to calculate a prediction.
-  static const int minPeriodsLogged = 2;
+  static const int _minPeriodsLogged = 2;
 
   /// Calculates a list of valid cycle lengths (in days) from the start date of
   /// one period to the start date of the next.
@@ -21,9 +21,9 @@ class PeriodPredictor {
   /// A cycle length is only considered valid if it falls within the range
   /// [minValidCycleLength] and [maxValidCycleLength] (defined in `constants.dart`).
   ///
-  /// Returns an empty list if there are fewer than `minPeriodsLogged` or no valid cycles.
+  /// Returns an empty list if there are fewer than `_minPeriodsLogged` or no valid cycles.
   static List<int> _getValidCycleLengths(List<Period> periods) {
-    if (periods.length < minPeriodsLogged) {
+    if (periods.length < _minPeriodsLogged) {
       return [];
     }
 
@@ -69,7 +69,7 @@ class PeriodPredictor {
     List<Period> entries,
     DateTime now,
   ) {
-    if (entries.length < minPeriodsLogged) {
+    if (entries.length < _minPeriodsLogged) {
       return null;
     }
 
@@ -132,7 +132,7 @@ class PeriodPredictor {
   /// Returns a [CycleStats] object, or `null` if there are not enough periods
   /// or no valid cycle data.
   static CycleStats? getCycleStats(List<Period> periods) {
-    if (periods.length < minPeriodsLogged) {
+    if (periods.length < _minPeriodsLogged) {
       return null;
     }
 
@@ -164,9 +164,9 @@ class PeriodPredictor {
   /// Generates a list of monthly cycle data containing the cycle length for each
   /// recorded cycle end month.
   ///
-  /// Returns an empty list if there are fewer than `minPeriodsLogged` or no valid cycle data.
+  /// Returns an empty list if there are fewer than `_minPeriodsLogged` or no valid cycle data.
   static List<MonthlyCycleData> getMonthlyCycleData(List<Period> periods) {
-    if (periods.length < minPeriodsLogged) {
+    if (periods.length < _minPeriodsLogged) {
       return [];
     }
 
@@ -198,9 +198,9 @@ class PeriodPredictor {
   /// Statistics include average, shortest, and longest period durations, and the total
   /// number of periods recorded.
   ///
-  /// Returns a [PeriodStats] object, or `null` if there are fewer than `minPeriodsLogged` periods.
+  /// Returns a [PeriodStats] object, or `null` if there are fewer than `_minPeriodsLogged` periods.
   static PeriodStats? getPeriodData(List<Period> entries) {
-    if (entries.length < minPeriodsLogged) {
+    if (entries.length < _minPeriodsLogged) {
       return null;
     }
 
