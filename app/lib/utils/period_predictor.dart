@@ -6,14 +6,14 @@ import 'package:menstrudel/models/cycles/monthly_cycle_data.dart';
 import 'package:menstrudel/utils/constants.dart';
 import 'dart:math';
 
-/// The minimum number of periods logged needed to calculate a prediction.
-const int minPeriodsLogged = 2;
-
 /// A utility class for calculating cycle statistics and predicting the next period
 /// based on a list of recorded [Period] entries.
 class PeriodPredictor {
   /// The default cycle length (in days) used if calculation fails.
   static const int _defaultCycleLength = 28;
+
+  /// The minimum number of periods logged needed to calculate a prediction.
+  static const int minPeriodsLogged = 2;
 
   /// Calculates a list of valid cycle lengths (in days) from the start date of
   /// one period to the start date of the next.
