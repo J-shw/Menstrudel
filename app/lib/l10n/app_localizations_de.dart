@@ -12,7 +12,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get appTitle => 'Menstrudel';
 
   @override
-  String get nextDue => 'Next Due';
+  String get nextDue => 'Nächster Fälligkeitstermin';
 
   @override
   String get ongoing => 'Fortlaufend';
@@ -176,7 +176,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get pain_unbearable => 'Unerträglich';
 
   @override
-  String get larcType_iud => 'IUD';
+  String get larcType_iud => 'Spirale';
 
   @override
   String get larcType_implant => 'Implantat';
@@ -321,7 +321,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String larcScreen_history(int history) {
-    return 'History ($history)';
+    return 'Verlauf ($history)';
   }
 
   @override
@@ -537,7 +537,8 @@ class AppLocalizationsDe extends AppLocalizations {
       'Removes your pill regimen and intake history.';
 
   @override
-  String get settingsScreen_clearAllPillData_question => 'Clear All Pill Data?';
+  String get settingsScreen_clearAllPillData_question =>
+      'Alle Pillen-Daten löschen?';
 
   @override
   String get settingsScreen_deleteAllPillDataDescription =>
@@ -545,7 +546,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get settingsScreen_allPillDataCleared =>
-      'All pill data has been cleared.';
+      'Alle Pille-Daten wurden gelöscht.';
 
   @override
   String get settingsScreen_clearAllLarcData => 'Alle LARC-Daten löschen';
@@ -564,7 +565,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get settingsScreen_allLarcDataCleared =>
-      'All LARC data has been cleared.';
+      'Alle LARC-Daten wurden gelöscht.';
 
   @override
   String get settingsScreen_exportPeriodData => 'Periodendaten exportieren';
@@ -610,27 +611,28 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsScreen_importLarcsData => 'LARCs-Daten importieren';
 
   @override
-  String get settingsScreen_importDataSubtitle => 'Overwrites existing data.';
+  String get settingsScreen_importDataSubtitle =>
+      'Überschreibt vorhandene Daten.';
 
   @override
   String get settingsScreen_importPeriodData_question =>
-      'Are you sure you want to import Period Data?';
+      'Bist du sicher, dass du die Periodendaten importieren möchtest?';
 
   @override
   String get settingsScreen_importPillData_question =>
-      'Are you sure you want to import Pill Data?';
+      'Willst du wirklich die Pille-Daten importieren?';
 
   @override
   String get settingsScreen_importLarcData_question =>
-      'Are you sure you want to import LARC Data?';
+      'Willst du wirklich die Pille-Daten importieren?';
 
   @override
   String get settingsScreen_importPeriodDataDescription =>
-      'Importing data will permanently overwrite all your existing period logs and period settings. This cannot be undone.';
+      'Durch den Import von Daten werden alle bisherigen Periodenprotokolle und Periodeneinstellungen dauerhaft überschrieben. Dieser Vorgang kann nicht rückgängig gemacht werden.';
 
   @override
   String get settingsScreen_importPillDataDescription =>
-      'Importing data will permanently overwrite all your existing pill history. This cannot be undone.';
+      'Durch den Import von Daten werden alle bisherigen Pillen-Daten dauerhaft überschrieben. Dieser Vorgang kann nicht rückgängig gemacht werden.';
 
   @override
   String get settingsScreen_importSuccessful => 'Daten erfolgreich importiert!';
@@ -656,7 +658,8 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsScreen_security => 'Sicherheit';
 
   @override
-  String get securityScreen_enableBiometricLock => 'Enable Biometric Lock';
+  String get securityScreen_enableBiometricLock =>
+      'Biometrische Sperre aktivieren';
 
   @override
   String get securityScreen_enableBiometricLockSubtitle =>
@@ -788,7 +791,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get listViewWidget_confirmDeleteDescription =>
-      'Are you sure you want to delete this entry?';
+      'Willst du diesen Eintrag wirklich löschen?';
 
   @override
   String get emptyPillStateWidget_noPillRegimenFound =>
@@ -796,7 +799,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get emptyPillStateWidget_noPillRegimenFoundDescription =>
-      'Set up your pill pack in settings to start tracking.';
+      'Um mit der Nachverfolgung zu beginnen, kannst du deine Pillenpackung in den Einstellungen einrichten.';
 
   @override
   String pillStatus_pillsOfTotal(int count) {
@@ -823,11 +826,11 @@ class AppLocalizationsDe extends AppLocalizations {
     final intl.DateFormat dateDateFormat = intl.DateFormat.yMMMd(localeName);
     final String dateString = dateDateFormat.format(date);
 
-    return 'Your next pill pack starts on $dateString.';
+    return 'Deine nächste Pillenpackung beginnt am $dateString.';
   }
 
   @override
-  String get regimenSetupWidget_setUpPillRegimen => 'Set Up Pill Regimen';
+  String get regimenSetupWidget_setUpPillRegimen => 'Pilleneinnahme festlegen';
 
   @override
   String get regimenSetupWidget_packName => 'Verpackungsname';
@@ -837,7 +840,7 @@ class AppLocalizationsDe extends AppLocalizations {
       'Bitte einen Namen eingeben';
 
   @override
-  String get regimenSetupWidget_activePills => 'Active Pills';
+  String get regimenSetupWidget_activePills => 'Aktive Pillen';
 
   @override
   String get regimenSetupWidget_enterANumber => 'Eine Zahl eingeben';
@@ -868,8 +871,8 @@ class AppLocalizationsDe extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'Days',
-      one: 'Day',
+      other: 'Tage',
+      one: 'Tag',
     );
     return '$_temp0';
   }
