@@ -37,7 +37,7 @@ jobs:
 
       - name: Build iOS IPA
         working-directory: ./app
-        run: flutter build ipa --release
+        run: flutter build ipa
 
       - name: Get version from Git tag
         id: get_version
