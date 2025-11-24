@@ -83,6 +83,11 @@
     "larcType_ring": "Ring",
     "larcType_patch": "Patch",
 
+    "sanitaryProduct_tampon": "Tampon",
+    "sanitaryProduct_pad": "Pad",
+    "sanitaryProduct_menstrualCup": "Menstrual Cup",
+    "sanitaryProduct_periodUnderwear": "Period Underwear",
+
     "error_valueMustbePositive": "Value must be positive",
     "error_valueCannotBeNull": "Value cannot be null",
 

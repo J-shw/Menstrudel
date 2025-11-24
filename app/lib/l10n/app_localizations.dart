@@ -450,6 +450,30 @@ abstract class AppLocalizations {
   /// **'Patch'**
   String get larcType_patch;
 
+  /// No description provided for @sanitaryProduct_tampon.
+  ///
+  /// In en, this message translates to:
+  /// **'Tampon'**
+  String get sanitaryProduct_tampon;
+
+  /// No description provided for @sanitaryProduct_pad.
+  ///
+  /// In en, this message translates to:
+  /// **'Pad'**
+  String get sanitaryProduct_pad;
+
+  /// No description provided for @sanitaryProduct_menstrualCup.
+  ///
+  /// In en, this message translates to:
+  /// **'Menstrual Cup'**
+  String get sanitaryProduct_menstrualCup;
+
+  /// No description provided for @sanitaryProduct_periodUnderwear.
+  ///
+  /// In en, this message translates to:
+  /// **'Period Underwear'**
+  String get sanitaryProduct_periodUnderwear;
+
   /// No description provided for @error_valueMustbePositive.
   ///
   /// In en, this message translates to:

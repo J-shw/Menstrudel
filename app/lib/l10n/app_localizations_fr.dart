@@ -191,6 +191,18 @@ class AppLocalizationsFr extends AppLocalizations {
   String get larcType_patch => 'Patch';
 
   @override
+  String get sanitaryProduct_tampon => 'Tampon';
+
+  @override
+  String get sanitaryProduct_pad => 'Pad';
+
+  @override
+  String get sanitaryProduct_menstrualCup => 'Menstrual Cup';
+
+  @override
+  String get sanitaryProduct_periodUnderwear => 'Period Underwear';
+
+  @override
   String get error_valueMustbePositive => 'Value must be positive';
 
   @override
