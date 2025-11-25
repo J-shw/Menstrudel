@@ -124,7 +124,39 @@ class PeriodPredictor {
     );
   }
 
-  /// Calculates and returns key statistics about the user's menstrual cycles.
+  /// Generates a list of monthly cycle data containing the cycle length for each
+  /// recorded cycle end month.
+  ///
+  /// Returns an empty list if there are fewer than `_minPeriodsLogged` or no valid cycle data.
+  static List<MonthlyCycleData> getMonthlyCycleData(List<Period> periods) {
+    if (periods.length < _minPeriodsLogged) {
+      return [];
+    }
+
+    final sortedPeriods = List<Period>.from(periods)
+      ..sort((a, b) => a.startDate.compareTo(b.startDate));
+
+    final List<MonthlyCycleData> monthlyData = [];
+    for (int i = 0; i < sortedPeriods.length - 1; i++) {
+      int days = sortedPeriods[i + 1].startDate
+          .difference(sortedPeriods[i].startDate)
+          .inDays;
+
+      if (days >= minValidCycleLength && days <= maxValidCycleLength) {
+        final DateTime cycleEndDate = sortedPeriods[i + 1].startDate;
+        monthlyData.add(
+          MonthlyCycleData(
+            year: cycleEndDate.year,
+            month: cycleEndDate.month,
+            cycleLength: days,
+          ),
+        );
+      }
+    }
+    return monthlyData;
+  }
+
+  /// Calculates and returns statistics about the user's menstrual cycles.
   ///
   /// Statistics include average, shortest, and longest cycle lengths, and the total
   /// number of valid cycles recorded.
@@ -161,45 +193,13 @@ class PeriodPredictor {
     );
   }
 
-  /// Generates a list of monthly cycle data containing the cycle length for each
-  /// recorded cycle end month.
-  ///
-  /// Returns an empty list if there are fewer than `_minPeriodsLogged` or no valid cycle data.
-  static List<MonthlyCycleData> getMonthlyCycleData(List<Period> periods) {
-    if (periods.length < _minPeriodsLogged) {
-      return [];
-    }
-
-    final sortedPeriods = List<Period>.from(periods)
-      ..sort((a, b) => a.startDate.compareTo(b.startDate));
-
-    final List<MonthlyCycleData> monthlyData = [];
-    for (int i = 0; i < sortedPeriods.length - 1; i++) {
-      int days = sortedPeriods[i + 1].startDate
-          .difference(sortedPeriods[i].startDate)
-          .inDays;
-
-      if (days >= minValidCycleLength && days <= maxValidCycleLength) {
-        final DateTime cycleEndDate = sortedPeriods[i + 1].startDate;
-        monthlyData.add(
-          MonthlyCycleData(
-            year: cycleEndDate.year,
-            month: cycleEndDate.month,
-            cycleLength: days,
-          ),
-        );
-      }
-    }
-    return monthlyData;
-  }
-
   /// Calculates and returns statistics about the duration of the user's periods.
   ///
   /// Statistics include average, shortest, and longest period durations, and the total
   /// number of periods recorded.
   ///
   /// Returns a [PeriodStats] object, or `null` if there are fewer than `_minPeriodsLogged` periods.
-  static PeriodStats? getPeriodData(List<Period> entries) {
+  static PeriodStats? getPeriodStats(List<Period> entries) {
     if (entries.length < _minPeriodsLogged) {
       return null;
     }
