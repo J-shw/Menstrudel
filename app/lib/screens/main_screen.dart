@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/screens/logs_screen.dart';
+import 'package:menstrudel/screens/sanitary_screen.dart';
 import 'package:menstrudel/screens/settings_screen.dart';
 import 'package:menstrudel/screens/insights_screen.dart';
 import 'package:menstrudel/screens/pills_screen.dart';
@@ -10,7 +11,6 @@ import 'package:menstrudel/services/settings_service.dart';
 import 'package:provider/provider.dart';
 import 'package:menstrudel/services/period_service.dart';
 import 'package:menstrudel/services/notification_service.dart';
-import 'package:menstrudel/widgets/dialogs/reminder_countdown_dialog.dart';
 import 'package:menstrudel/screens/larc_screen.dart';
 
 enum FabState {
@@ -129,7 +129,8 @@ class _MainScreenState extends State<MainScreen> {
     final bool isLarcNavEnabled = settingsService.isLarcNavEnabled;
     final bool isReminderButtonAlwaysVisible =
         settingsService.areAlwaysShowReminderButtonEnabled;
-
+      
+    /// Define pages on enabled features
     final List<Widget> pages = <Widget>[
       const InsightsScreen(),
       LogsScreen(
@@ -155,14 +156,17 @@ class _MainScreenState extends State<MainScreen> {
         },
         isReminderButtonAlwaysVisible: isReminderButtonAlwaysVisible,
       ),
+      const SanitaryScreen(),
       if (isPillNavEnabled) const PillsScreen(),
       if (isLarcNavEnabled) const LarcScreen(),
       const SettingsScreen(),
     ];
 
+    /// Define app bars based on enabled features
     final List<PreferredSizeWidget?> appBars = [
       TopAppBar(titleText: l10n.mainScreen_insightsPageTitle),
       null,
+      TopAppBar(titleText: l10n.mainScreen_sanitaryPageTitle),
       if (isPillNavEnabled)
         TopAppBar(titleText: l10n.mainScreen_pillsPageTitle),
       if (isLarcNavEnabled)
