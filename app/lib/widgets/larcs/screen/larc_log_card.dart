@@ -31,18 +31,15 @@ class LarcLogCard extends StatelessWidget {
 
     final String dueLabel = isOverdue ? l10n.overdue : l10n.nextDue;
 
-    return Padding(
+    return Card(
+      elevation: 0,
+      child: Padding(
       padding: const EdgeInsets.only(bottom: 8.0),
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(12.0),
         child: Container(
           padding: const EdgeInsets.all(16.0),
-          decoration: BoxDecoration(
-            color: colorScheme.surfaceContainerHigh,
-            borderRadius: BorderRadius.circular(12.0),
-            border: Border.all(color: colorScheme.outlineVariant.withValues(alpha: 0.5)), 
-          ),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -121,6 +118,7 @@ class LarcLogCard extends StatelessWidget {
             ],
           ),
         ),
+      ),
       ),
     );
   }
