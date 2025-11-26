@@ -14,15 +14,15 @@ const int maxValidCycleLength = 130;
 
 const int periodDueNotificationId = 1;
 const int periodOverdueNotificationId = 4;
-const int tamponReminderId = 2;
+const int sanitaryProductsID = 2;
 const int pillReminderId = 3;
 const int larcReminderId = 5;
 
 const periodNotificationChannelId = 'period_channel';
 const periodNotificationChannelName = 'Period Predictions';
 
-const tamponReminderChannelId = 'tampon_reminder_channel';
-const tamponReminderChannelName = 'Tampon Reminders';
+const sanitaryProductChannelId = 'sanitary_products_reminder_channel';
+const sanitaryProductChannelName = 'Sanitary Products Reminders';
 
 const pillReminderChannelId = 'pill_reminder_channel';
 const pillReminderChannelName = 'Pill Reminders';
@@ -50,6 +50,7 @@ const String defaultSymptomsKey = "default_symptoms";
 const String languageKey = "language";
 const String pillNavEnabledKey = "pill_nav_enabled";
 const String larcNavEnabledKey = "larc_nav_enabled";
+const String sanitaryNavEnabledKey = "sanitary_nav_enabled";
 const String larcTypeKey = "larc_type";
 const String larcDurationsKey = "larc_durations";
 const String larcNotificationsEnanledKey = "larc_notifications_enabled";
@@ -64,6 +65,7 @@ const String tamponReminderDateTimeKey = 'tampon_reminder_date_time';
 // Settings
 const bool kDefaultPillNavEnabled = false;
 const bool kDefaultLarcNavEnabled = false;
+const bool kDefaultSanitaryNavEnabled = true;
 const LarcTypes kDefaultLarcType = LarcTypes.injection;
 const String kDefaultLanguageCode = 'system';
 const bool kDefaultAlwaysShowReminderButton = false;
