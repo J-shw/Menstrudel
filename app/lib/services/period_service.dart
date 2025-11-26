@@ -14,7 +14,6 @@ import 'package:menstrudel/services/period_logger_service.dart';
 import 'package:menstrudel/services/wear_sync_service.dart';
 import 'package:menstrudel/services/widget_controller.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
-import 'package:menstrudel/widgets/dialogs/tampon_reminder_dialog.dart';
 
 class PeriodService extends ChangeNotifier {
   final SettingsService _settingsService;
