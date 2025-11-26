@@ -14,7 +14,8 @@ class SettingsService extends ChangeNotifier {
   late SharedPreferences _prefs;
 
   bool _pillNavEnabled = kDefaultPillNavEnabled;
-  bool _isLarcNavEnabled = kDefaultLarcNavEnabled;
+  bool _larcNavEnabled = kDefaultLarcNavEnabled;
+  bool _sanitaryNavEnabled = kDefaultSanitaryNavEnabled;
   LarcTypes _larcType = kDefaultLarcType;
   String _languageCode = kDefaultLanguageCode;
   bool _alwaysShowReminderButton = kDefaultAlwaysShowReminderButton;
@@ -38,7 +39,9 @@ class SettingsService extends ChangeNotifier {
   /// Whether the 'Pill' tab is visible in the main navigation bar.
   bool get isPillNavEnabled => _pillNavEnabled;
   /// LARCs (Long-Acting Reversible Contraceptives) navigation enabled
-  bool get isLarcNavEnabled => _isLarcNavEnabled;
+  bool get isLarcNavEnabled => _larcNavEnabled;
+  /// Sanitary Products navigation enabled
+  bool get isSanitaryNavEnabled => _sanitaryNavEnabled;
   /// LARC type selected
   LarcTypes get larcType => _larcType;
   /// The selected language code for the app (e.g., 'en', 'es', or 'system').
@@ -88,7 +91,8 @@ class SettingsService extends ChangeNotifier {
     _prefs = await SharedPreferences.getInstance();
 
     _pillNavEnabled = _prefs.getBool(pillNavEnabledKey) ?? false;
-    _isLarcNavEnabled = _prefs.getBool(larcNavEnabledKey) ?? false;
+    _larcNavEnabled = _prefs.getBool(larcNavEnabledKey) ?? false;
+    _sanitaryNavEnabled = _prefs.getBool(sanitaryNavEnabledKey) ?? true;
     _languageCode = _prefs.getString(languageKey) ?? 'system';
     _alwaysShowReminderButton = _prefs.getBool(persistentReminderKey) ?? false;
     _biometricsEnabled = _prefs.getBool(biometricEnabledKey) ?? false;
@@ -192,7 +196,7 @@ class SettingsService extends ChangeNotifier {
   }
   
   Future<void> setLarcNavEnabled(bool isEnabled) async {
-    _isLarcNavEnabled = isEnabled;
+    _larcNavEnabled = isEnabled;
     await _prefs.setBool(larcNavEnabledKey, isEnabled);
     notifyListeners();
   }
