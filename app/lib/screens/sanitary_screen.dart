@@ -6,12 +6,9 @@ import 'package:menstrudel/models/sanitary_products/sanitary_products_entry.dart
 import 'package:menstrudel/models/sanitary_products/sanitary_products_enum.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/services/notification_service.dart';
-import 'package:menstrudel/services/settings_service.dart';
 import 'package:menstrudel/widgets/sanitary_products/sheets/edit_sanitary_product_bottom_sheet.dart';
 import 'package:menstrudel/widgets/sanitary_products/sheets/log_sanitary_product_bottom_sheet.dart';
 import 'package:menstrudel/widgets/sanitary_products/screen/sanitary_product_log_card.dart';
-import 'package:provider/provider.dart';
-import 'package:timezone/timezone.dart' as tz;
 
 class SanitaryScreen extends StatefulWidget {
   const SanitaryScreen({super.key});
@@ -24,42 +21,100 @@ class _SanitaryScreenState extends State<SanitaryScreen> {
   List<SanitaryProductsEntry> _loggedSanitaryProducts = [];
   bool _isLoading = true;
   final repo = SanitaryProductRepository();
+  Timer? _uiTimer;
 
   @override
   void initState() {
     super.initState();
     _loadHistory();
+    _uiTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (mounted) setState(() {});
+    });
+  }
+
+  @override
+  void dispose() {
+    _uiTimer?.cancel();
+    super.dispose();
   }
 
   Future<void> _loadHistory() async {
     setState(() { _isLoading = true; });
 
     final loadedEntries = await repo.getAllLogs();
+    
+    loadedEntries.sort((a, b) => b.date.compareTo(a.date));
+
     setState(() {
       _loggedSanitaryProducts = loadedEntries;
       _isLoading = false;
     });
+    if (!mounted) return;
 
-    if (mounted) {
-      await setLarcReminders();
+    if (loadedEntries.isNotEmpty) {
+      final latestEntry = loadedEntries.first;
+      final now = DateTime.now();
+      final dueDateTime = latestEntry.date.add(
+        Duration(hours: latestEntry.type.defaultDurationHours)
+      );
+
+      if (dueDateTime.isAfter(now)) {
+        final l10n = AppLocalizations.of(context)!;
+        await _scheduleNotifications(l10n, dueDateTime, latestEntry.type);
+      } else {
+        await NotificationService.cancelSanitaryProductReminder(); 
+      }
     }
   }
 
-  void _presentLogSheet(BuildContext context) {
-  showModalBottomSheet(
-    context: context,
-    isScrollControlled: true,
-    builder: (ctx) {
-      return LogLarcBottomSheet(
-        onSave: (date, note) {
-          _saveLog(date: date, note: note, type: SanitaryProducts.tampon);
-        },
-      );
-    },
-  );
-}
+  Future<void> _scheduleNotifications(AppLocalizations l10n, DateTime reminderDateTime, SanitaryProducts type) async {
+     await NotificationService.cancelSanitaryProductReminder();
+     
+     final activeEntry = _getActiveEntry();
+     if (activeEntry != null) {
+       final endTime = activeEntry.date.add(Duration(hours: activeEntry.type.defaultDurationHours));
+       if (endTime.isAfter(DateTime.now())) {
+          await NotificationService.scheduleSanitaryProductReminder(
+            reminderDateTime: reminderDateTime,
+            title: l10n.notification_tamponReminderTitle,
+            body: l10n.notification_tamponReminderBody,
+          );
+       }
+     }
+  }
 
-  Future<void> _saveLog({required DateTime date, required String? note, required SanitaryProducts type}) async {
+  SanitaryProductsEntry? _getActiveEntry() {
+    if (_loggedSanitaryProducts.isEmpty) return null;
+    final latest = _loggedSanitaryProducts.first;
+    final endTime = latest.date.add(Duration(hours: latest.type.defaultDurationHours));
+    
+    if (endTime.isAfter(DateTime.now())) {
+      return latest;
+    }
+    return null;
+  }
+
+  void _presentLogSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (ctx) {
+        return LogSanitaryProductBottomSheet(
+          onSave: (time, note, type) {
+            _saveLog(time: time, note: note, type: type);
+          },
+        );
+      },
+    );
+  }
+
+  Future<void> _saveLog({required TimeOfDay time, required String? note, required SanitaryProducts type}) async {
+    final now = DateTime.now();
+    var date = DateTime(now.year, now.month, now.day, time.hour, time.minute);
+    
+    if (date.isAfter(now)) {
+      date = date.subtract(const Duration(days: 1));
+    }
 
     final newEntry = SanitaryProductsEntry(
       id: null,
@@ -69,82 +124,37 @@ class _SanitaryScreenState extends State<SanitaryScreen> {
     );
 
     await repo.logSanitaryProduct(newEntry);
-    
     _loadHistory();
   }
 
-  Future<void> _deleteLarcLog(int id) async {
-  await repo.deleteLog(id);
-  _loadHistory();
-}
+  Future<void> _deleteLog(int id) async {
+    await repo.deleteLog(id);
+    _loadHistory();
+  }
 
-void _presentEditDeleteSheet(BuildContext context, SanitaryProductsEntry entry) {
-  showModalBottomSheet(
-    context: context,
-    isScrollControlled: true,
-    builder: (ctx) {
-      return EditLarcLogBottomSheet(
-        log: entry,
-        onSave: (updatedEntry) {
-          _updateLarcLog(updatedEntry);
-          Navigator.pop(context);
-        },
-        onDelete: () {
-          _deleteLarcLog(entry.id!);
-          Navigator.pop(context);
-        },
-      );
-    },
-  );
-}
-
-Future<void> _updateLarcLog(SanitaryProductsEntry updatedEntry) async {
-  await repo.updateLog(updatedEntry); 
-  _loadHistory();
-}
-
-  Future<void> setLarcReminders() async {
-    final settingsService = context.read<SettingsService>();
-    final l10n = AppLocalizations.of(context)!;
-    
-    if (activeLarcs.isEmpty) {
-        await NotificationService.cancelLarcReminder();
-        return;
-    }
-
-    activeLarcs.sort((a, b) => a['nextDueDate'].compareTo(b['nextDueDate']));
-    
-    final nextDueStatus = activeLarcs.first;
-    final nextDueDate = nextDueStatus['nextDueDate'] as DateTime;
-    final nextLarcType = (nextDueStatus['entry'] as LarcLogEntry).type;
-    final reminderDaysBefore = settingsService.larcReminderDays;
-    final reminderTime = settingsService.larcReminderTime;
-    final reminderHour = reminderTime.hour;
-    final reminderMinute = reminderTime.minute;
-
-    final nextDueDateAtTime = DateTime(
-        nextDueDate.year, nextDueDate.month, nextDueDate.day,
-        reminderHour, reminderMinute,
+  void _presentEditDeleteSheet(BuildContext context, SanitaryProductsEntry entry) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (ctx) {
+        return EditSanitaryProductBottomSheet(
+          log: entry,
+          onSave: (updatedEntry) {
+            _updateLog(updatedEntry);
+            Navigator.pop(context);
+          },
+          onDelete: () {
+            _deleteLog(entry.id!);
+            Navigator.pop(context);
+          },
+        );
+      },
     );
+  }
 
-    final finalScheduledTime = tz.TZDateTime.from(nextDueDateAtTime, tz.local)
-  .subtract(Duration(days: reminderDaysBefore));
-
-
-    if (finalScheduledTime.isBefore(DateTime.now())) {
-      await NotificationService.cancelLarcReminder();
-      debugPrint('LARC Notification date is in the past. Skipping notification schedule.');
-      return;
-    }
-
-    await NotificationService.scheduleLarcReminder(
-        reminderDateTime: finalScheduledTime, 
-        title: l10n.notification_larcTitle, 
-        body: l10n.notification_larcBody(
-            nextLarcType.getDisplayName(l10n), 
-            reminderDaysBefore,
-        ),
-    );
+  Future<void> _updateLog(SanitaryProductsEntry updatedEntry) async {
+    await repo.updateLog(updatedEntry); 
+    _loadHistory();
   }
 
   @override
@@ -167,79 +177,134 @@ Future<void> _updateLarcLog(SanitaryProductsEntry updatedEntry) async {
       return const Center(child: CircularProgressIndicator());
     }
 
-    _loggedSanitaryProducts.sort((a, b) => b.date.compareTo(a.date));
-
-    final List<Map<String, dynamic>> allStatuses = _loggedSanitaryProducts
-        .map((entry) => _calculateLarcStatus(entry)..['entry'] = entry)
-        .toList();
+    final activeEntry = _getActiveEntry();
     
-    final activeLarcs = allStatuses.where((status) => status['isActive'] == true).toList();
-    activeLarcs.sort((a, b) => a['nextDueDate'].compareTo(b['nextDueDate']));
-    
-    final historyLarcs = allStatuses.where((status) => status['isActive'] == false).toList();
-    historyLarcs.sort((a, b) => b['entry'].date.compareTo(a['entry'].date));
+    return SafeArea(
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // --- Countdown Section ---
+              if (activeEntry != null) ...[
+                _buildCountdownCard(context, activeEntry, l10n),
+                const SizedBox(height: 24),
+              ],
 
+              // --- History Section ---
+              Text(
+                l10n.sanitaryProductsScreen_history(_loggedSanitaryProducts.length),
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: colorScheme.onSurface, 
+                ),
+              ),
+              const SizedBox(height: 12),
+              
+              if (_loggedSanitaryProducts.isEmpty)
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(32.0),
+                    child: Text(l10n.sanitaryProductsScreen_noHistoryRecords, style: TextStyle(color: colorScheme.outline)),
+                  ),
+                )
+              else
+                ..._loggedSanitaryProducts.map((entry) {
+                  final dateStr = DateFormat('MMM d, h:mm a').format(entry.date);
 
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildHeader(l10n.larcScreen_activeLarcs(activeLarcs.length), colorScheme),
-            const SizedBox(height: 12),
-            if (activeLarcs.isEmpty)
-              _buildNoRecordsText(l10n.larcScreen_noActiveRecords, colorScheme)
-            else
-              ...activeLarcs.map((status) {
-                return LarcLogCard(
-                  entry: status['entry'],
-                  l10n: l10n,
-                  injectionDate: status['injectionDate'],
-                  dueDateString: status['dueDateString'],
-                  isOverdue: status['isOverdue'],
-                  onTap: () => _presentEditDeleteSheet(context, status['entry']),
-                );
-              }),
-            
-            const SizedBox(height: 32),
-            
-            _buildHeader(l10n.larcScreen_history(historyLarcs.length), colorScheme),
-            const SizedBox(height: 12),
-            if (historyLarcs.isEmpty)
-              _buildNoRecordsText(l10n.larcScreen_noHistoryRecords, colorScheme)
-            else
-              ...historyLarcs.map((status) {
-                return LarcLogCard(
-                  entry: status['entry'],
-                  l10n: l10n,
-                  injectionDate: status['injectionDate'],
-                  dueDateString: status['dueDateString'],
-                  isOverdue: status['isOverdue'],
-                  onTap: () => _presentEditDeleteSheet(context, status['entry']),
-                );
-              }),
-          ],
+                  return SanitaryProductsLogCard(
+                    entry: entry,
+                    l10n: l10n,
+                    logDate: dateStr,
+                    onTap: () => _presentEditDeleteSheet(context, entry),
+                  );
+                }),
+                
+              // Space for FAB
+              const SizedBox(height: 80),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Widget _buildHeader(String title, ColorScheme colorScheme) {
-    return Text(
-      title, 
-      style: TextStyle(
-        fontSize: 20,
-        fontWeight: FontWeight.bold,
-        color: colorScheme.onSurface, 
-      ),
-    );
-  }
+  Widget _buildCountdownCard(BuildContext context, SanitaryProductsEntry entry, AppLocalizations l10n) {
+    final theme = Theme.of(context);
+    final endTime = entry.date.add(Duration(hours: entry.type.defaultDurationHours));
+    final remaining = endTime.difference(DateTime.now());
+    
+    // Don't show negative if something weird happens, though _getActiveEntry filters this
+    final displayDuration = remaining.isNegative ? Duration.zero : remaining;
+    
+    final hours = displayDuration.inHours.toString().padLeft(2, '0');
+    final minutes = displayDuration.inMinutes.remainder(60).toString().padLeft(2, '0');
+    final seconds = displayDuration.inSeconds.remainder(60).toString().padLeft(2, '0');
 
-  Widget _buildNoRecordsText(String text, ColorScheme colorScheme) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 8.0),
-      child: Text(text, style: TextStyle(color: colorScheme.outline)),
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [theme.colorScheme.primaryContainer, theme.colorScheme.surface],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(24),
+        boxShadow: [
+          BoxShadow(
+            color: theme.colorScheme.shadow.withOpacity(0.1),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          )
+        ],
+      ),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(entry.type.getIcon(), color: theme.colorScheme.primary),
+              const SizedBox(width: 8),
+              Text(
+                "Active ${entry.type.getDisplayName(l10n)}",
+                style: theme.textTheme.titleMedium?.copyWith(
+                  color: theme.colorScheme.primary,
+                  fontWeight: FontWeight.bold
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          Text(
+            "$hours:$minutes:$seconds",
+            style: theme.textTheme.displayMedium?.copyWith(
+              fontWeight: FontWeight.bold,
+              fontFamily: 'monospace', // Monospace prevents jittering as numbers change
+              color: theme.colorScheme.onSurface,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            "Change due at ${DateFormat.jm().format(endTime)}",
+            style: theme.textTheme.bodyMedium?.copyWith(
+              color: theme.colorScheme.onSurfaceVariant
+            ),
+          ),
+          const SizedBox(height: 20),
+          FilledButton.icon(
+            onPressed: () => _deleteLog(entry.id!),
+            icon: const Icon(Icons.close),
+            label: Text(l10n.cancel),
+            style: FilledButton.styleFrom(
+              backgroundColor: theme.colorScheme.errorContainer,
+              foregroundColor: theme.colorScheme.onErrorContainer,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
