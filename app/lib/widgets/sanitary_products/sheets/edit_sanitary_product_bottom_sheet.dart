@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
-import 'package:menstrudel/models/birth_control/larcs/larc_log_entry.dart';
+import 'package:menstrudel/models/sanitary_products/sanitary_products_entry.dart';
+import 'package:menstrudel/models/sanitary_products/sanitary_products_enum.dart';
 
-typedef LarcUpdateCallback = void Function(LarcLogEntry updatedEntry);
+typedef SanitaryUpdateCallback = void Function(SanitaryProductsEntry updatedEntry);
 
-class EditLarcLogBottomSheet extends StatefulWidget {
-  final LarcLogEntry log;
-  final LarcUpdateCallback onSave;
+class EditSanitaryProductBottomSheet extends StatefulWidget {
+  final SanitaryProductsEntry log;
+  final SanitaryUpdateCallback onSave;
   final VoidCallback onDelete;
 
-  const EditLarcLogBottomSheet({
+  const EditSanitaryProductBottomSheet({
     super.key,
     required this.log,
     required this.onSave,
@@ -18,18 +19,22 @@ class EditLarcLogBottomSheet extends StatefulWidget {
   });
 
   @override
-  State<EditLarcLogBottomSheet> createState() => _EditLarcLogBottomSheetState();
+  State<EditSanitaryProductBottomSheet> createState() => _EditSanitaryProductBottomSheetState();
 }
 
-class _EditLarcLogBottomSheetState extends State<EditLarcLogBottomSheet> {
+class _EditSanitaryProductBottomSheetState extends State<EditSanitaryProductBottomSheet> {
   late DateTime _selectedDate;
+  late TimeOfDay _selectedTime;
   late TextEditingController _noteController;
+  late SanitaryProducts _selectedType;
   bool _isEditing = false;
   
   @override
   void initState() {
     super.initState();
     _selectedDate = widget.log.date;
+    _selectedTime = TimeOfDay.fromDateTime(widget.log.date);
+    _selectedType = widget.log.type;
     _noteController = TextEditingController(text: widget.log.note);
   }
 
@@ -44,9 +49,18 @@ class _EditLarcLogBottomSheetState extends State<EditLarcLogBottomSheet> {
         ? null 
         : _noteController.text.trim();
 
+    final newDateTime = DateTime(
+      _selectedDate.year, 
+      _selectedDate.month, 
+      _selectedDate.day,
+      _selectedTime.hour, 
+      _selectedTime.minute
+    );
+
     final updatedEntry = widget.log.copyWith(
-      date: _selectedDate,
+      date: newDateTime,
       note: noteToSave,
+      type: _selectedType,
     );
     widget.onSave(updatedEntry);
 
@@ -58,6 +72,8 @@ class _EditLarcLogBottomSheetState extends State<EditLarcLogBottomSheet> {
   void _resetEditableState() {
     setState(() {
       _selectedDate = widget.log.date;
+      _selectedTime = TimeOfDay.fromDateTime(widget.log.date);
+      _selectedType = widget.log.type;
       _noteController.text = widget.log.note ?? '';
     });
   }
@@ -68,22 +84,22 @@ class _EditLarcLogBottomSheetState extends State<EditLarcLogBottomSheet> {
       initialDate: _selectedDate,
       firstDate: DateTime(2000),
       lastDate: DateTime.now(),
-      builder: (context, child) {
-        return Theme(
-          data: Theme.of(context).copyWith(
-            colorScheme: ColorScheme.light(
-              primary: Theme.of(context).colorScheme.primary,
-              onPrimary: Theme.of(context).colorScheme.onPrimary,
-              onSurface: Theme.of(context).colorScheme.onSurface,
-            ),
-          ),
-          child: child!,
-        );
-      },
     );
     if (pickedDate != null && mounted) {
       setState(() {
         _selectedDate = pickedDate;
+      });
+    }
+  }
+
+  Future<void> _selectTime() async {
+    final pickedTime = await showTimePicker(
+      context: context,
+      initialTime: _selectedTime,
+    );
+    if (pickedTime != null && mounted) {
+      setState(() {
+        _selectedTime = pickedTime;
       });
     }
   }
@@ -113,20 +129,80 @@ class _EditLarcLogBottomSheetState extends State<EditLarcLogBottomSheet> {
             
             // --- Header ---
             _buildHeader(context, textTheme, colorScheme, l10n),
-            
-            // --- Date Picker ---
             const SizedBox(height: 24),
-            Text(l10n.date, style: Theme.of(context).textTheme.bodySmall),
-            const SizedBox(height: 8),
-            FilledButton.tonalIcon(
-              icon: const Icon(Icons.calendar_today, size: 18),
-              label: Text(DateFormat('EEEE, d MMMM yyyy').format(_selectedDate)),
-              style: FilledButton.styleFrom(minimumSize: const Size.fromHeight(50), alignment: Alignment.centerLeft),
-              onPressed: _isEditing ? _selectDate : null,
+
+            // --- Type Display/Edit ---
+             if (_isEditing) ...[
+                Text(l10n.type, style: Theme.of(context).textTheme.bodySmall),
+                const SizedBox(height: 8),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: SanitaryProducts.values.map((type) {
+                      return Padding(
+                        padding: const EdgeInsets.only(right: 8.0),
+                        child: FilterChip(
+                          selected: _selectedType == type,
+                          label: Text(type.getDisplayName(l10n)),
+                          onSelected: (bool selected) {
+                            if (selected) setState(() => _selectedType = type);
+                          },
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                ),
+                const SizedBox(height: 16),
+            ] else ...[
+               Row(
+                 children: [
+                   Icon(_selectedType.getIcon(), color: colorScheme.primary),
+                   const SizedBox(width: 8),
+                   Text(_selectedType.getDisplayName(l10n), style: textTheme.titleMedium),
+                 ],
+               ),
+               const SizedBox(height: 24),
+            ],
+            
+            // --- Date & Time ---
+            Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(l10n.date, style: Theme.of(context).textTheme.bodySmall),
+                      const SizedBox(height: 8),
+                      FilledButton.tonalIcon(
+                        icon: const Icon(Icons.calendar_today, size: 18),
+                        label: Text(DateFormat('EEE, d MMM').format(_selectedDate)),
+                        style: FilledButton.styleFrom(minimumSize: const Size.fromHeight(50), alignment: Alignment.centerLeft),
+                        onPressed: _isEditing ? _selectDate : null,
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(l10n.time, style: Theme.of(context).textTheme.bodySmall),
+                      const SizedBox(height: 8),
+                      FilledButton.tonalIcon(
+                        icon: const Icon(Icons.access_time, size: 18),
+                        label: Text(_selectedTime.format(context)),
+                        style: FilledButton.styleFrom(minimumSize: const Size.fromHeight(50), alignment: Alignment.centerLeft),
+                        onPressed: _isEditing ? _selectTime : null,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
 
             // --- Text Note ---
-            const SizedBox(height: 8),
+            const SizedBox(height: 16),
             Text(l10n.note, style: Theme.of(context).textTheme.bodySmall),
             const SizedBox(height: 8),
             TextFormField(
@@ -145,12 +221,11 @@ class _EditLarcLogBottomSheetState extends State<EditLarcLogBottomSheet> {
   }
   
   Widget _buildHeader(BuildContext context, TextTheme textTheme, ColorScheme colorScheme, AppLocalizations l10n) {
-
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          l10n.larcEntrySheet_logLARCDetails, 
+          l10n.sanitaryEntrySheet_logSanitaryProduct,
           style: textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)
         ),
         
