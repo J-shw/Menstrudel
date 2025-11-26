@@ -276,6 +276,12 @@ abstract class AppLocalizations {
   /// **'Flow'**
   String get flow;
 
+  /// No description provided for @type.
+  ///
+  /// In en, this message translates to:
+  /// **'Type'**
+  String get type;
+
   /// No description provided for @navBar_insights.
   ///
   /// In en, this message translates to:
@@ -287,6 +293,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Logs'**
   String get navBar_logs;
+
+  /// No description provided for @navBar_sanitary.
+  ///
+  /// In en, this message translates to:
+  /// **'Sanitary'**
+  String get navBar_sanitary;
 
   /// No description provided for @navBar_pill.
   ///
@@ -552,6 +564,12 @@ abstract class AppLocalizations {
   /// **'Your Insights'**
   String get mainScreen_insightsPageTitle;
 
+  /// No description provided for @mainScreen_sanitaryPageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sanitary Products'**
+  String get mainScreen_sanitaryPageTitle;
+
   /// No description provided for @mainScreen_pillsPageTitle.
   ///
   /// In en, this message translates to:
@@ -695,6 +713,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No past or overdue LARC records found.'**
   String get larcScreen_noHistoryRecords;
+
+  /// No description provided for @sanitaryProductsScreen_noSanitaryProductRecordsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No sanitary product records found.'**
+  String get sanitaryProductsScreen_noSanitaryProductRecordsFound;
+
+  /// The total sanitary product history count.
+  ///
+  /// In en, this message translates to:
+  /// **'History ({history})'**
+  String sanitaryProductsScreen_history(int history);
+
+  /// No description provided for @sanitaryProductsScreen_noHistoryRecords.
+  ///
+  /// In en, this message translates to:
+  /// **'No past sanitary product records found.'**
+  String get sanitaryProductsScreen_noHistoryRecords;
 
   /// No description provided for @settingsScreen_selectHistoryView.
   ///
@@ -1568,6 +1604,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Log LARC Details'**
   String get larcEntrySheet_logLARCDetails;
+
+  /// No description provided for @sanitaryEntrySheet_logSanitaryProduct.
+  ///
+  /// In en, this message translates to:
+  /// **'Log Sanitary Product'**
+  String get sanitaryEntrySheet_logSanitaryProduct;
 
   /// A label showing the total number of days until period is due.
   ///

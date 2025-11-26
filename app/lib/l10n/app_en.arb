@@ -49,8 +49,11 @@
 
     "flow": "Flow",
 
+    "type": "Type",
+
     "navBar_insights": "Insights",
     "navBar_logs": "Logs",
+    "navBar_sanitary": "Sanitary",
     "navBar_pill": "Pill",
     "navBar_larc": "LARC",
     "navBar_settings": "Settings",
@@ -155,6 +158,7 @@
 
 
     "mainScreen_insightsPageTitle": "Your Insights",
+    "mainScreen_sanitaryPageTitle": "Sanitary Products",
     "mainScreen_pillsPageTitle": "Pills",
     "mainScreen_LarcsPageTitle": "LARCs",
     "mainScreen_settingsPageTitle": "Settings",
@@ -210,6 +214,19 @@
     "larcScreen_activeLarcsDescription": "Currently monitored LARC entries.",
     "larcScreen_noActiveRecords": "No LARC is currently active. Please log a new entry.",
     "larcScreen_noHistoryRecords": "No past or overdue LARC records found.",
+
+    "sanitaryProductsScreen_noSanitaryProductRecordsFound": "No sanitary product records found.",
+    "sanitaryProductsScreen_history": "History ({history})",
+    "@sanitaryProductsScreen_history": {
+        "description": "The total sanitary product history count.",
+        "placeholders": {
+            "history": {
+                "type": "int",
+                "example": "5"
+            }
+        }
+    },
+    "sanitaryProductsScreen_noHistoryRecords": "No past sanitary product records found.",
 
     "settingsScreen_selectHistoryView": "Select History View",
     "settingsScreen_deleteRegimen_question": "Delete Regimen?",
@@ -444,6 +461,8 @@
     "periodDetailsSheet_flow": "Flow",
 
     "larcEntrySheet_logLARCDetails": "Log LARC Details",
+
+    "sanitaryEntrySheet_logSanitaryProduct": "Log Sanitary Product",
 
     "periodPredictionCircle_days": "{count, plural, =1{Day} other{Days}}",
     "@periodPredictionCircle_days": {

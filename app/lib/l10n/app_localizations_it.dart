@@ -104,10 +104,16 @@ class AppLocalizationsIt extends AppLocalizations {
   String get flow => 'Flusso';
 
   @override
+  String get type => 'Type';
+
+  @override
   String get navBar_insights => 'Statistiche';
 
   @override
   String get navBar_logs => 'Calendario';
+
+  @override
+  String get navBar_sanitary => 'Sanitary';
 
   @override
   String get navBar_pill => 'Pillola';
@@ -262,6 +268,9 @@ class AppLocalizationsIt extends AppLocalizations {
   String get mainScreen_insightsPageTitle => 'Le tue statistiche';
 
   @override
+  String get mainScreen_sanitaryPageTitle => 'Sanitary Products';
+
+  @override
   String get mainScreen_pillsPageTitle => 'Pillole';
 
   @override
@@ -354,6 +363,19 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get larcScreen_noHistoryRecords =>
       'No past or overdue LARC records found.';
+
+  @override
+  String get sanitaryProductsScreen_noSanitaryProductRecordsFound =>
+      'No sanitary product records found.';
+
+  @override
+  String sanitaryProductsScreen_history(int history) {
+    return 'History ($history)';
+  }
+
+  @override
+  String get sanitaryProductsScreen_noHistoryRecords =>
+      'No past sanitary product records found.';
 
   @override
   String get settingsScreen_selectHistoryView => 'Seleziona vista cronologia';
@@ -876,6 +898,9 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get larcEntrySheet_logLARCDetails => 'Log LARC Details';
+
+  @override
+  String get sanitaryEntrySheet_logSanitaryProduct => 'Log Sanitary Product';
 
   @override
   String periodPredictionCircle_days(int count) {
