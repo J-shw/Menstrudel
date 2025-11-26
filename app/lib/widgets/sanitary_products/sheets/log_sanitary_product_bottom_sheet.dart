@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/models/sanitary_products/sanitary_products_enum.dart';
 
@@ -19,10 +18,10 @@ class LogSanitaryProductBottomSheet extends StatefulWidget {
 
 class _LogSanitaryProductBottomSheetState extends State<LogSanitaryProductBottomSheet> {
   final _noteController = TextEditingController();
-  TimeOfDay _selectedTime = TimeOfDay.now();
-  final SanitaryProducts _type = SanitaryProducts.tampon;
+  TimeOfDay _startTime = TimeOfDay.now();
+  SanitaryProducts _selectedType = SanitaryProducts.tampon;
 
-    @override
+  @override
   void dispose() {
     _noteController.dispose();
     super.dispose();
@@ -31,7 +30,7 @@ class _LogSanitaryProductBottomSheetState extends State<LogSanitaryProductBottom
   Future<void> _selectTime() async {
     final pickedTime = await showTimePicker(
       context: context,
-      initialTime: _selectedTime,
+      initialTime: _startTime,
       builder: (context, child) {
         return Theme(
           data: Theme.of(context).copyWith(
@@ -47,28 +46,37 @@ class _LogSanitaryProductBottomSheetState extends State<LogSanitaryProductBottom
     );
     if (pickedTime != null) {
       setState(() {
-        _selectedTime = pickedTime;
+        _startTime = pickedTime;
       });
     }
   }
 
   void _handleSave() {
     final String? noteToSave = _noteController.text.trim().isEmpty
-    ? null 
-    : _noteController.text.trim();
-    widget.onSave(_selectedTime, noteToSave, _type);
+        ? null
+        : _noteController.text.trim();
+    
+    widget.onSave(_startTime, noteToSave, _selectedType);
     Navigator.pop(context);
   }
-  
+
   void _handleCancel() {
-    Navigator.pop(context); 
+    Navigator.pop(context);
   }
 
+  DateTime _getEstimatedEndTime() {
+    final now = DateTime.now();
+    final startDateTime = DateTime(now.year, now.month, now.day, _startTime.hour, _startTime.minute);
+    return startDateTime.add(Duration(hours: _selectedType.defaultDurationHours));
+  }
 
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
     final l10n = AppLocalizations.of(context)!;
+    final endTime = TimeOfDay.fromDateTime(_getEstimatedEndTime());
+    final durationText = '${_selectedType.defaultDurationHours}h';
 
     return Padding(
       padding: EdgeInsets.only(top: 20, left: 16, right: 16, bottom: MediaQuery.of(context).viewInsets.bottom + 32),
@@ -86,31 +94,101 @@ class _LogSanitaryProductBottomSheetState extends State<LogSanitaryProductBottom
               ),
             ),
             const SizedBox(height: 12),
-            
+
             // --- Title ---
-            Center(child: Text(l10n.larcEntrySheet_logLARCDetails, style: textTheme.titleLarge)),
+            Center(child: Text(l10n.sanitaryEntrySheet_logSanitaryProduct, style: textTheme.titleLarge)),
             
-            // --- Date Picker ---
             const SizedBox(height: 24),
-            Text(l10n.date, style: Theme.of(context).textTheme.bodySmall),
+
+            // --- Type Selector ---
+            Text(l10n.type, style: textTheme.bodySmall),
             const SizedBox(height: 8),
-            FilledButton.tonalIcon(
-              icon: const Icon(Icons.calendar_today, size: 18),
-              label: Text(_selectedTime.format(context)),
-              style: FilledButton.styleFrom(minimumSize: const Size.fromHeight(50), alignment: Alignment.centerLeft),
-              onPressed: _selectTime,
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: SanitaryProducts.values.map((type) {
+                  final isSelected = _selectedType == type;
+                  return Padding(
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: FilterChip(
+                      selected: isSelected,
+                      label: Text(type.getDisplayName(l10n)),
+                      onSelected: (bool selected) {
+                        if (selected) {
+                          setState(() {
+                            _selectedType = type;
+                          });
+                        }
+                      },
+                    ),
+                  );
+                }).toList(),
+              ),
+            ),
+
+            // --- Date/Time Selection Display ---
+            const SizedBox(height: 24),
+            Text(l10n.time, style: textTheme.bodySmall),
+            const SizedBox(height: 8),
+            
+            Row(
+              children: [
+                Expanded(
+                  child: InkWell(
+                    onTap: _selectTime,
+                    borderRadius: BorderRadius.circular(12),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(l10n.start, style: textTheme.labelMedium?.copyWith(color: colorScheme.secondary)),
+                          const SizedBox(height: 4),
+                          Text(_startTime.format(context), style: textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold)),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                  child: Column(
+                    children: [
+                      Icon(Icons.arrow_forward, color: colorScheme.outline),
+                      const SizedBox(height: 4),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                        child: Text(durationText, style: textTheme.labelSmall?.copyWith(color: colorScheme.onPrimaryContainer, fontWeight: FontWeight.bold)),
+                      )
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(l10n.end, style: textTheme.labelMedium?.copyWith(color: colorScheme.secondary)),
+                        const SizedBox(height: 4),
+                        Text(endTime.format(context), style: textTheme.headlineSmall?.copyWith(color: colorScheme.onSurfaceVariant)),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
 
             // --- Text Note ---
-            const SizedBox(height: 8),
-            Text(l10n.note, style: Theme.of(context).textTheme.bodySmall),
+            const SizedBox(height: 24),
+            Text(l10n.note, style: textTheme.bodySmall),
             const SizedBox(height: 8),
             TextFormField(
-                controller: _noteController,
-                autofocus: false,
-                maxLength: 500,
-                maxLines: 3,
-              ),
+              controller: _noteController,
+              autofocus: false,
+              maxLength: 500,
+              maxLines: 3,
+            ),
 
             const SizedBox(height: 24),
 
