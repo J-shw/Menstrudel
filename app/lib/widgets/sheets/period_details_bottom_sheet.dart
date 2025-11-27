@@ -141,7 +141,7 @@ Future<void> _showNewCustomSymptomDialog() async {
       children: [
         Expanded( 
           child: Text(
-            DateFormat('EEEE, MMMM d').format(widget.log.date), 
+            DateFormat('EE, MMMM d').format(widget.log.date), 
             style: textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
             maxLines: 1, 
             overflow: TextOverflow.ellipsis,
