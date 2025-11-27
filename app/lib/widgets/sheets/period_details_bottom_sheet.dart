@@ -139,7 +139,14 @@ Future<void> _showNewCustomSymptomDialog() async {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(DateFormat('EEEE, MMMM d').format(widget.log.date), style: textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
+        Expanded( 
+          child: Text(
+            DateFormat('EEEE, MMMM d').format(widget.log.date), 
+            style: textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+            maxLines: 1, 
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
         if (_isEditing)
           Row(
             children: [
