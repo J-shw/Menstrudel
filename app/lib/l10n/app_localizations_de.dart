@@ -530,11 +530,11 @@ class AppLocalizationsDe extends AppLocalizations {
       'Löscht den gesamten Verlauf deiner Periode und Symptome.';
 
   @override
-  String get settingsScreen_clearAllPillData => 'Clear All Pill Data';
+  String get settingsScreen_clearAllPillData => 'Alle Pillen-Daten löschen';
 
   @override
   String get settingsScreen_clearAllPillDataSubtitle =>
-      'Removes your pill regimen and intake history.';
+      'Löscht Deine Pilleneinnahme und die Einnahmeübersicht.';
 
   @override
   String get settingsScreen_clearAllPillData_question =>
