@@ -32,8 +32,8 @@ class _EditSanitaryProductBottomSheetState extends State<EditSanitaryProductBott
   @override
   void initState() {
     super.initState();
-    _selectedDate = widget.log.date;
-    _selectedTime = TimeOfDay.fromDateTime(widget.log.date);
+    _selectedDate = widget.log.logTime;
+    _selectedTime = TimeOfDay.fromDateTime(widget.log.logTime);
     _selectedType = widget.log.type;
     _noteController = TextEditingController(text: widget.log.note);
   }
@@ -49,7 +49,7 @@ class _EditSanitaryProductBottomSheetState extends State<EditSanitaryProductBott
         ? null 
         : _noteController.text.trim();
 
-    final newDateTime = DateTime(
+    final newLogTime = DateTime(
       _selectedDate.year, 
       _selectedDate.month, 
       _selectedDate.day,
@@ -58,7 +58,7 @@ class _EditSanitaryProductBottomSheetState extends State<EditSanitaryProductBott
     );
 
     final updatedEntry = widget.log.copyWith(
-      date: newDateTime,
+      logTime: newLogTime,
       note: noteToSave,
       type: _selectedType,
     );
@@ -71,8 +71,8 @@ class _EditSanitaryProductBottomSheetState extends State<EditSanitaryProductBott
 
   void _resetEditableState() {
     setState(() {
-      _selectedDate = widget.log.date;
-      _selectedTime = TimeOfDay.fromDateTime(widget.log.date);
+      _selectedDate = widget.log.logTime;
+      _selectedTime = TimeOfDay.fromDateTime(widget.log.logTime);
       _selectedType = widget.log.type;
       _noteController.text = widget.log.note ?? '';
     });
