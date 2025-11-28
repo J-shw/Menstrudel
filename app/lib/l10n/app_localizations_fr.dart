@@ -250,19 +250,20 @@ class AppLocalizationsFr extends AppLocalizations {
       'N’oubliez pas de prendre votre pilule aujourd’hui.';
 
   @override
-  String get notification_tamponReminderTitle => 'Rappel de tampon';
-
-  @override
-  String get notification_tamponReminderBody =>
-      'N\'oubliez pas de changer votre tampon.';
-
-  @override
   String get notification_larcTitle => 'LARC Reminder';
 
   @override
   String notification_larcBody(String type, int days) {
     return '$type is due for renewal in $days days.';
   }
+
+  @override
+  String get notification_SanitaryProductReminderTitle =>
+      'Sanitary Product Reminder';
+
+  @override
+  String get notification_SanitaryProductReminderBody =>
+      'Remember to change your product.';
 
   @override
   String get mainScreen_insightsPageTitle => 'Votre Aperçu';
@@ -733,21 +734,6 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get aboutScreen_urlError => 'Impossible d\'ouvrir le lien.';
-
-  @override
-  String get tamponReminderDialog_tamponReminderTitle => 'Rappel de tampon';
-
-  @override
-  String get tamponReminderDialog_tamponReminderMaxDuration =>
-      'La durée maximale est de 8 heures.';
-
-  @override
-  String get reminderCountdownDialog_title => 'Rappel à prévoir dans';
-
-  @override
-  String reminderCountdownDialog_dueAt(Object time) {
-    return 'À prévoir à $time';
-  }
 
   @override
   String get cycleLengthVarianceWidget_LogAtLeastTwoPeriods =>

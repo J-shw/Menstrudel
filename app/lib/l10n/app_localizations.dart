@@ -534,18 +534,6 @@ abstract class AppLocalizations {
   /// **'Don\'t forget to take your pill for today.'**
   String get notification_pillBody;
 
-  /// Title for the tampon reminder notification.
-  ///
-  /// In en, this message translates to:
-  /// **'Tampon Reminder'**
-  String get notification_tamponReminderTitle;
-
-  /// Body for the tampon reminder notification.
-  ///
-  /// In en, this message translates to:
-  /// **'Remember to change your tampon.'**
-  String get notification_tamponReminderBody;
-
   /// Title for the LARC reminder notification.
   ///
   /// In en, this message translates to:
@@ -557,6 +545,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{type} is due for renewal in {days} days.'**
   String notification_larcBody(String type, int days);
+
+  /// No description provided for @notification_SanitaryProductReminderTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sanitary Product Reminder'**
+  String get notification_SanitaryProductReminderTitle;
+
+  /// No description provided for @notification_SanitaryProductReminderBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Remember to change your product.'**
+  String get notification_SanitaryProductReminderBody;
 
   /// No description provided for @mainScreen_insightsPageTitle.
   ///
@@ -1316,30 +1316,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Could not open the link.'**
   String get aboutScreen_urlError;
-
-  /// No description provided for @tamponReminderDialog_tamponReminderTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Tampon Reminder'**
-  String get tamponReminderDialog_tamponReminderTitle;
-
-  /// No description provided for @tamponReminderDialog_tamponReminderMaxDuration.
-  ///
-  /// In en, this message translates to:
-  /// **'Max duration is 8 hours.'**
-  String get tamponReminderDialog_tamponReminderMaxDuration;
-
-  /// No description provided for @reminderCountdownDialog_title.
-  ///
-  /// In en, this message translates to:
-  /// **'Reminder Due In'**
-  String get reminderCountdownDialog_title;
-
-  /// Indicates the time a reminder is due. The {time} placeholder will be a formatted time string (e.g., '2:30 PM').
-  ///
-  /// In en, this message translates to:
-  /// **'Due at {time}'**
-  String reminderCountdownDialog_dueAt(Object time);
 
   /// No description provided for @cycleLengthVarianceWidget_LogAtLeastTwoPeriods.
   ///

@@ -128,14 +128,6 @@
     "@notification_pillBody": {
         "description": "Body for the daily pill reminder notification."
     },
-    "notification_tamponReminderTitle": "Tampon Reminder",
-    "@notification_tamponReminderTitle": {
-        "description": "Title for the tampon reminder notification."
-    },
-    "notification_tamponReminderBody": "Remember to change your tampon.",
-    "@notification_tamponReminderBody": {
-        "description": "Body for the tampon reminder notification."
-    },
 
     "notification_larcTitle": "LARC Reminder",
     "@notification_larcTitle": {
@@ -155,6 +147,9 @@
             }
         }
     },
+
+    "notification_SanitaryProductReminderTitle": "Sanitary Product Reminder",
+    "notification_SanitaryProductReminderBody": "Remember to change your product.",
 
 
     "mainScreen_insightsPageTitle": "Your Insights",
@@ -374,18 +369,6 @@
     "aboutScreen_share": "Share",
     "aboutScreen_shareSubtitle": "Share the app with friends",
     "aboutScreen_urlError": "Could not open the link.",
-
-    "tamponReminderDialog_tamponReminderTitle": "Tampon Reminder",
-    "tamponReminderDialog_tamponReminderMaxDuration": "Max duration is 8 hours.",
-
-    "reminderCountdownDialog_title": "Reminder Due In",
-    "reminderCountdownDialog_dueAt": "Due at {time}",
-    "@reminderCountdownDialog_dueAt": {
-        "description": "Indicates the time a reminder is due. The {time} placeholder will be a formatted time string (e.g., '2:30 PM').",
-        "placeholders": {
-            "time": {}
-        }
-    },
 
     "cycleLengthVarianceWidget_LogAtLeastTwoPeriods": "Need at least two cycles to show variance.",
     "cycleLengthVarianceWidget_cycleAndPeriodVeriance": "Cycle & Period Variance",

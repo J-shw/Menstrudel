@@ -250,19 +250,20 @@ class AppLocalizationsEn extends AppLocalizations {
       'Don\'t forget to take your pill for today.';
 
   @override
-  String get notification_tamponReminderTitle => 'Tampon Reminder';
-
-  @override
-  String get notification_tamponReminderBody =>
-      'Remember to change your tampon.';
-
-  @override
   String get notification_larcTitle => 'LARC Reminder';
 
   @override
   String notification_larcBody(String type, int days) {
     return '$type is due for renewal in $days days.';
   }
+
+  @override
+  String get notification_SanitaryProductReminderTitle =>
+      'Sanitary Product Reminder';
+
+  @override
+  String get notification_SanitaryProductReminderBody =>
+      'Remember to change your product.';
 
   @override
   String get mainScreen_insightsPageTitle => 'Your Insights';
@@ -712,21 +713,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get aboutScreen_urlError => 'Could not open the link.';
-
-  @override
-  String get tamponReminderDialog_tamponReminderTitle => 'Tampon Reminder';
-
-  @override
-  String get tamponReminderDialog_tamponReminderMaxDuration =>
-      'Max duration is 8 hours.';
-
-  @override
-  String get reminderCountdownDialog_title => 'Reminder Due In';
-
-  @override
-  String reminderCountdownDialog_dueAt(Object time) {
-    return 'Due at $time';
-  }
 
   @override
   String get cycleLengthVarianceWidget_LogAtLeastTwoPeriods =>
