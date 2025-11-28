@@ -2,13 +2,15 @@ import 'package:menstrudel/models/sanitary_products/sanitary_products_enum.dart'
 
 class SanitaryProductsEntry {
   int? id;
-  final DateTime date;
+  final DateTime logTime;
+  final DateTime reminderTime;
   final SanitaryProducts type;
   final String? note;
 
   SanitaryProductsEntry({
     this.id,
-    required this.date,
+    required this.logTime,
+    required this.reminderTime,
     required this.type,
     this.note,
   });
@@ -16,7 +18,8 @@ class SanitaryProductsEntry {
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'date': date.toIso8601String(),
+      'logTime': logTime.toIso8601String(),
+      'reminderTime': reminderTime.toIso8601String(),
       'type': type.name,
       'note': note,
     };
@@ -24,13 +27,15 @@ class SanitaryProductsEntry {
 
   SanitaryProductsEntry copyWith({
 		int? id,
-		DateTime? date,
+		DateTime? logTime,
+    DateTime? reminderTime,
     SanitaryProducts? type,
     String? note,
 	}) {
 		return SanitaryProductsEntry(
 			id: id ?? this.id,
-			date: date ?? this.date,
+			logTime: logTime ?? this.logTime,
+      reminderTime: reminderTime ?? this.reminderTime,
       type: type ?? this.type,
       note: note ?? this.note,
 		);
@@ -39,7 +44,8 @@ class SanitaryProductsEntry {
   static SanitaryProductsEntry fromMap(Map<String, dynamic> map) {
     return SanitaryProductsEntry(
       id: map['id'] as int,
-      date: DateTime.parse(map['date'] as String),
+      logTime: DateTime.parse(map['logTime'] as String),
+      reminderTime: DateTime.parse(map['reminderTime'] as String),
       type: SanitaryProducts.values.firstWhere((e) => e.name == map['type']),
       note: map['note'],
     );
