@@ -18,7 +18,6 @@ class SettingsService extends ChangeNotifier {
   bool _sanitaryNavEnabled = kDefaultSanitaryNavEnabled;
   LarcTypes _larcType = kDefaultLarcType;
   String _languageCode = kDefaultLanguageCode;
-  bool _alwaysShowReminderButton = kDefaultAlwaysShowReminderButton;
   bool _biometricsEnabled = kDefaultBiometricsEnabled;
   bool _notificationsEnabled = kDefaultNotificationsEnabled;
   int _notificationDays = kDefaultNotificationDays;
@@ -46,8 +45,6 @@ class SettingsService extends ChangeNotifier {
   LarcTypes get larcType => _larcType;
   /// The selected language code for the app (e.g., 'en', 'es', or 'system').
   String get languageCode => _languageCode;
-  /// Whether the tampon reminder FAB is persistently shown on the Logs screen.
-  bool get areAlwaysShowReminderButtonEnabled => _alwaysShowReminderButton;
   /// Whether the app requires biometric authentication (e.g., fingerprint, face) on startup.
   bool get areBiometricsEnabled => _biometricsEnabled;
   /// Whether notifications for the *upcoming* period (due) are enabled.
@@ -94,7 +91,6 @@ class SettingsService extends ChangeNotifier {
     _larcNavEnabled = _prefs.getBool(larcNavEnabledKey) ?? false;
     _sanitaryNavEnabled = _prefs.getBool(sanitaryNavEnabledKey) ?? true;
     _languageCode = _prefs.getString(languageKey) ?? 'system';
-    _alwaysShowReminderButton = _prefs.getBool(persistentReminderKey) ?? false;
     _biometricsEnabled = _prefs.getBool(biometricEnabledKey) ?? false;
     _notificationsEnabled = _prefs.getBool(notificationsEnabledKey) ?? true;
     _notificationDays = _prefs.getInt(notificationDaysKey) ?? 1;
@@ -194,6 +190,12 @@ class SettingsService extends ChangeNotifier {
     notifyListeners();
     await _prefs.setBool(pillNavEnabledKey, isEnabled);
   }
+
+    Future<void> setSanitaryNavEnabled(bool isEnabled) async {
+    _sanitaryNavEnabled = isEnabled;
+    await _prefs.setBool(sanitaryNavEnabledKey, isEnabled);
+    notifyListeners();
+  }
   
   Future<void> setLarcNavEnabled(bool isEnabled) async {
     _larcNavEnabled = isEnabled;
@@ -242,12 +244,6 @@ class SettingsService extends ChangeNotifier {
   Future<void> setLanguageCode(String code) async {
     _languageCode = code;
     await _prefs.setString(languageKey, code);
-    notifyListeners();
-  }
-
-  Future<void> setAlwaysShowReminderButtonEnabled(bool isEnabled) async {
-    _alwaysShowReminderButton = isEnabled;
-    await _prefs.setBool(persistentReminderKey, isEnabled);
     notifyListeners();
   }
 
