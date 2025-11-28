@@ -280,12 +280,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String get mainScreen_settingsPageTitle => 'Paramètres';
 
   @override
-  String get mainScreen_tooltipSetReminder => 'Rappel de tampon';
-
-  @override
-  String get mainScreen_tooltipCancelReminder => 'Annuler le rappel';
-
-  @override
   String get mainScreen_tooltipLogPeriod => 'Historique des règles';
 
   @override
@@ -317,16 +311,6 @@ class AppLocalizationsFr extends AppLocalizations {
     );
     return '$_temp0';
   }
-
-  @override
-  String get logScreen_tamponReminderSetFor => 'Rappel de tampon réglé pour';
-
-  @override
-  String get logScreen_tamponReminderCancelled => 'Rappel de tampon annulé.';
-
-  @override
-  String get logScreen_couldNotCancelReminder =>
-      'Impossible d’annuler le rappel';
 
   @override
   String get pillScreen_pillForTodayMarkedAsTaken =>
@@ -722,12 +706,12 @@ class AppLocalizationsFr extends AppLocalizations {
   String get preferencesScreen_language => 'Langue';
 
   @override
-  String get preferencesScreen_tamponReminderButton =>
-      'Toujours afficher le bouton de rappel';
+  String get preferencesScreen_enableSanitaryProductsScreen =>
+      'Enable Sanitary Products Screen';
 
   @override
-  String get preferencesScreen_tamponReminderButtonSubtitle =>
-      'Rend le bouton de rappel du tampon visible en permanence sur l\'écran principal.';
+  String get preferencesScreen_enableSanitaryProductsScreenSubtitle =>
+      'Show the Sanitary Products tab on the main navigation bar.';
 
   @override
   String get settingsScreen_about => 'À propos';

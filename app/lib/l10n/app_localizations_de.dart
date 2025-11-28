@@ -280,12 +280,6 @@ class AppLocalizationsDe extends AppLocalizations {
   String get mainScreen_settingsPageTitle => 'Einstellungen';
 
   @override
-  String get mainScreen_tooltipSetReminder => 'Tampon-Erinnerung';
-
-  @override
-  String get mainScreen_tooltipCancelReminder => 'Erinnerung abbrechen';
-
-  @override
   String get mainScreen_tooltipLogPeriod => 'Periode Eintragen';
 
   @override
@@ -317,17 +311,6 @@ class AppLocalizationsDe extends AppLocalizations {
     );
     return '$_temp0';
   }
-
-  @override
-  String get logScreen_tamponReminderSetFor => 'Tampon Erinnerung erstellt für';
-
-  @override
-  String get logScreen_tamponReminderCancelled =>
-      'Tampon-Erinnerung abgebrochen.';
-
-  @override
-  String get logScreen_couldNotCancelReminder =>
-      'Erinnerung konnte nicht abgebrochen werden';
 
   @override
   String get pillScreen_pillForTodayMarkedAsTaken =>
@@ -710,12 +693,12 @@ class AppLocalizationsDe extends AppLocalizations {
   String get preferencesScreen_language => 'Sprache';
 
   @override
-  String get preferencesScreen_tamponReminderButton =>
-      'Always Show Reminder Button';
+  String get preferencesScreen_enableSanitaryProductsScreen =>
+      'Enable Sanitary Products Screen';
 
   @override
-  String get preferencesScreen_tamponReminderButtonSubtitle =>
-      'Macht die Tampon-Erinnerungstaste dauerhaft auf dem Hauptbildschirm sichtbar.';
+  String get preferencesScreen_enableSanitaryProductsScreenSubtitle =>
+      'Show the Sanitary Products tab on the main navigation bar.';
 
   @override
   String get settingsScreen_about => 'Über';

@@ -163,8 +163,6 @@
     "mainScreen_LarcsPageTitle": "LARCs",
     "mainScreen_settingsPageTitle": "Settings",
 
-    "mainScreen_tooltipSetReminder": "Tampon reminder",
-    "mainScreen_tooltipCancelReminder": "Cancel reminder",
     "mainScreen_tooltipLogPeriod": "Log period",
 
     "insightsScreen_errorPrefix": "Error:",
@@ -183,9 +181,6 @@
             }
         }
     },
-    "logScreen_tamponReminderSetFor": "Tampon reminder set for",
-    "logScreen_tamponReminderCancelled": "Tampon reminder cancelled.",
-    "logScreen_couldNotCancelReminder": "Could not cancel reminder",
 
     "pillScreen_pillForTodayMarkedAsTaken": "Pill for today marked as taken.",
     "pillScreen_pillForTodayMarkedAsSkipped": "Pill for today marked as skipped.",
@@ -369,8 +364,8 @@
 
     "settingsScreen_preferences": "Preferences",
     "preferencesScreen_language": "Language",
-    "preferencesScreen_tamponReminderButton": "Always Show Reminder Button",
-    "preferencesScreen_tamponReminderButtonSubtitle": "Makes the tampon reminder button permanently visible on the main screen.",
+    "preferencesScreen_enableSanitaryProductsScreen": "Enable Sanitary Products Screen",
+    "preferencesScreen_enableSanitaryProductsScreenSubtitle": "Show the Sanitary Products tab on the main navigation bar.",
 
     "settingsScreen_about": "About",
     "aboutScreen_version": "Version",

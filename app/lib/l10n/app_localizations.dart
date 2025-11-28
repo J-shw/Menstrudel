@@ -588,18 +588,6 @@ abstract class AppLocalizations {
   /// **'Settings'**
   String get mainScreen_settingsPageTitle;
 
-  /// No description provided for @mainScreen_tooltipSetReminder.
-  ///
-  /// In en, this message translates to:
-  /// **'Tampon reminder'**
-  String get mainScreen_tooltipSetReminder;
-
-  /// No description provided for @mainScreen_tooltipCancelReminder.
-  ///
-  /// In en, this message translates to:
-  /// **'Cancel reminder'**
-  String get mainScreen_tooltipCancelReminder;
-
   /// No description provided for @mainScreen_tooltipLogPeriod.
   ///
   /// In en, this message translates to:
@@ -647,24 +635,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{count, plural, =1{Period overdue by 1 day} other{Period overdue by {count} days}}'**
   String logScreen_periodOverdueBy(int count);
-
-  /// No description provided for @logScreen_tamponReminderSetFor.
-  ///
-  /// In en, this message translates to:
-  /// **'Tampon reminder set for'**
-  String get logScreen_tamponReminderSetFor;
-
-  /// No description provided for @logScreen_tamponReminderCancelled.
-  ///
-  /// In en, this message translates to:
-  /// **'Tampon reminder cancelled.'**
-  String get logScreen_tamponReminderCancelled;
-
-  /// No description provided for @logScreen_couldNotCancelReminder.
-  ///
-  /// In en, this message translates to:
-  /// **'Could not cancel reminder'**
-  String get logScreen_couldNotCancelReminder;
 
   /// No description provided for @pillScreen_pillForTodayMarkedAsTaken.
   ///
@@ -1293,17 +1263,17 @@ abstract class AppLocalizations {
   /// **'Language'**
   String get preferencesScreen_language;
 
-  /// No description provided for @preferencesScreen_tamponReminderButton.
+  /// No description provided for @preferencesScreen_enableSanitaryProductsScreen.
   ///
   /// In en, this message translates to:
-  /// **'Always Show Reminder Button'**
-  String get preferencesScreen_tamponReminderButton;
+  /// **'Enable Sanitary Products Screen'**
+  String get preferencesScreen_enableSanitaryProductsScreen;
 
-  /// No description provided for @preferencesScreen_tamponReminderButtonSubtitle.
+  /// No description provided for @preferencesScreen_enableSanitaryProductsScreenSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Makes the tampon reminder button permanently visible on the main screen.'**
-  String get preferencesScreen_tamponReminderButtonSubtitle;
+  /// **'Show the Sanitary Products tab on the main navigation bar.'**
+  String get preferencesScreen_enableSanitaryProductsScreenSubtitle;
 
   /// No description provided for @settingsScreen_about.
   ///

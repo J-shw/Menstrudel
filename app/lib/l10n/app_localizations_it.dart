@@ -280,12 +280,6 @@ class AppLocalizationsIt extends AppLocalizations {
   String get mainScreen_settingsPageTitle => 'Impostazioni';
 
   @override
-  String get mainScreen_tooltipSetReminder => 'Promemoria assorbente';
-
-  @override
-  String get mainScreen_tooltipCancelReminder => 'Elimina promemoria';
-
-  @override
   String get mainScreen_tooltipLogPeriod => 'Registra ciclo';
 
   @override
@@ -318,18 +312,6 @@ class AppLocalizationsIt extends AppLocalizations {
     );
     return '$_temp0';
   }
-
-  @override
-  String get logScreen_tamponReminderSetFor =>
-      'Promemoria assorbente impostato per';
-
-  @override
-  String get logScreen_tamponReminderCancelled =>
-      'Promemoria assorbente eliminato';
-
-  @override
-  String get logScreen_couldNotCancelReminder =>
-      'Impossibile cancellare il promemoria';
 
   @override
   String get pillScreen_pillForTodayMarkedAsTaken =>
@@ -709,12 +691,12 @@ class AppLocalizationsIt extends AppLocalizations {
   String get preferencesScreen_language => 'Language';
 
   @override
-  String get preferencesScreen_tamponReminderButton =>
-      'Mostra sempre il pulsante promemoria';
+  String get preferencesScreen_enableSanitaryProductsScreen =>
+      'Enable Sanitary Products Screen';
 
   @override
-  String get preferencesScreen_tamponReminderButtonSubtitle =>
-      'Rende il pulsante promemoria assorbente sempre visibile nella schermata principale.';
+  String get preferencesScreen_enableSanitaryProductsScreenSubtitle =>
+      'Show the Sanitary Products tab on the main navigation bar.';
 
   @override
   String get settingsScreen_about => 'Informazioni';
