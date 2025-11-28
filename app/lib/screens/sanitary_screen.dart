@@ -20,6 +20,7 @@ class SanitaryScreen extends StatefulWidget {
 
 class _SanitaryScreenState extends State<SanitaryScreen> {
   List<SanitaryProductsEntry> _loggedSanitaryProducts = [];
+  SanitaryProductsEntry? _activeEntry;
   bool _isLoading = true;
   final repo = SanitaryProductRepository();
   Timer? _uiTimer;
@@ -43,37 +44,31 @@ class _SanitaryScreenState extends State<SanitaryScreen> {
     setState(() { _isLoading = true; });
 
     final loadedEntries = await repo.getAllLogs();
+    final activeEntry = await repo.getActiveEntry();
+
     
-    loadedEntries.sort((a, b) => b.date.compareTo(a.date));
+    loadedEntries.sort((a, b) => b.logTime.compareTo(a.logTime));
 
     setState(() {
       _loggedSanitaryProducts = loadedEntries;
+      _activeEntry = activeEntry;
       _isLoading = false;
     });
     if (!mounted) return;
-
-    if (loadedEntries.isNotEmpty) {
-      final latestEntry = loadedEntries.first;
-      final now = DateTime.now();
-      final dueDateTime = latestEntry.date.add(
-        Duration(hours: latestEntry.type.defaultDurationHours)
-      );
-
-      if (dueDateTime.isAfter(now)) {
-        final l10n = AppLocalizations.of(context)!;
-        await _scheduleNotifications(l10n, dueDateTime, latestEntry.type);
-      } else {
-        await NotificationService.cancelSanitaryProductReminder(); 
-      }
+    if (activeEntry != null) {
+      final l10n = AppLocalizations.of(context)!;
+      await _scheduleNotifications(l10n, activeEntry.reminderTime, activeEntry.type);
+    } else {
+      await NotificationService.cancelSanitaryProductReminder(); 
     }
+    
   }
 
   Future<void> _scheduleNotifications(AppLocalizations l10n, DateTime reminderDateTime, SanitaryProducts type) async {
      await NotificationService.cancelSanitaryProductReminder();
-     
-     final activeEntry = _getActiveEntry();
+     final activeEntry = _activeEntry;
      if (activeEntry != null) {
-       final endTime = activeEntry.date.add(Duration(hours: activeEntry.type.defaultDurationHours));
+       final endTime = activeEntry.reminderTime;
        if (endTime.isAfter(DateTime.now())) {
           await NotificationService.scheduleSanitaryProductReminder(
             reminderDateTime: reminderDateTime,
@@ -84,42 +79,26 @@ class _SanitaryScreenState extends State<SanitaryScreen> {
      }
   }
 
-  SanitaryProductsEntry? _getActiveEntry() {
-    if (_loggedSanitaryProducts.isEmpty) return null;
-    final latest = _loggedSanitaryProducts.first;
-    final endTime = latest.date.add(Duration(hours: latest.type.defaultDurationHours));
-    
-    if (endTime.isAfter(DateTime.now())) {
-      return latest;
-    }
-    return null;
-  }
-
   void _presentLogSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       builder: (ctx) {
         return LogSanitaryProductBottomSheet(
-          onSave: (time, note, type) {
-            _saveLog(time: time, note: note, type: type);
+          onSave: (logTime, note, type, reminderEndTime) {
+            _saveLog(logTime: logTime, note: note, type: type, reminderEndTime: reminderEndTime);
           },
         );
       },
     );
   }
 
-  Future<void> _saveLog({required TimeOfDay time, required String? note, required SanitaryProducts type}) async {
-    final now = DateTime.now();
-    var date = DateTime(now.year, now.month, now.day, time.hour, time.minute);
-    
-    if (date.isAfter(now)) {
-      date = date.subtract(const Duration(days: 1));
-    }
+  Future<void> _saveLog({required DateTime logTime, required String? note, required SanitaryProducts type, required DateTime reminderEndTime}) async {
 
     final newEntry = SanitaryProductsEntry(
       id: null,
-      date: date,
+      logTime: logTime,
+      reminderTime: reminderEndTime,
       type: type,
       note: note,
     );
@@ -178,7 +157,8 @@ class _SanitaryScreenState extends State<SanitaryScreen> {
       return const Center(child: CircularProgressIndicator());
     }
 
-    final activeEntry = _getActiveEntry();
+    final activeEntry = _activeEntry;
+    
     
     return SafeArea(
       child: SingleChildScrollView(
@@ -219,7 +199,7 @@ class _SanitaryScreenState extends State<SanitaryScreen> {
                 )
               else
                 ..._loggedSanitaryProducts.map((entry) {
-                  final dateStr = DateFormat('MMM d, h:mm a').format(entry.date);
+                  final dateStr = DateFormat('MMM d, h:mm a').format(entry.logTime);
 
                   return SanitaryProductsLogCard(
                     entry: entry,
