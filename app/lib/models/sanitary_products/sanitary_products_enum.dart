@@ -39,17 +39,18 @@ extension LarcTypeDisplay on SanitaryProducts {
     }
   }
 
-  /// The default duration in hours for each sanitary product type
-  int get defaultDurationHours {
+  /// The max duration in hours for each sanitary product type
+  /// These values are from general medical guidelines.
+  int get maxDurationHours {
     switch (this) {
       case SanitaryProducts.tampon:
-        return 6;
+        return 8;
       case SanitaryProducts.pad:
-        return 10;
+        return 8;
       case SanitaryProducts.menstrualCup:
         return 12;
       case SanitaryProducts.periodUnderwear:
-        return 8;
+        return 12;
     }
   }
 }
