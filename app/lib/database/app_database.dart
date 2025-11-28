@@ -185,7 +185,8 @@ class AppDatabase {
     await db.execute('''
       CREATE TABLE sanitary_product_logs (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        date TEXT NOT NULL,
+        logTime TEXT NOT NULL,
+        reminderTime TEXT NOT NULL,
         type TEXT NOT NULL,
         note TEXT
       )
