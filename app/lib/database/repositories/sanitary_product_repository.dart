@@ -19,13 +19,30 @@ class SanitaryProductRepository {
 
   Future<List<SanitaryProductsEntry>> getAllLogs() async {
     final db = await dbProvider.database;
-    final maps = await db.query('sanitary_product_logs', orderBy: 'date DESC');
+    final maps = await db.query('sanitary_product_logs', orderBy: 'logTime DESC');
     return maps.map((map) => SanitaryProductsEntry.fromMap(map)).toList();
   }
 
   Future<SanitaryProductsEntry?> getLogById(int id) async {
     final db = await dbProvider.database;
     final maps = await db.query('sanitary_product_logs', where: 'id = ?', whereArgs: [id]);
+    return maps.isNotEmpty ? SanitaryProductsEntry.fromMap(maps.first) : null;
+  }
+
+  /// Returns the currently active sanitary product entry, if any.
+  /// An active entry is one where the reminder time is in the future.
+  Future<SanitaryProductsEntry?> getActiveEntry() async {
+    final db = await dbProvider.database;
+    final nowString = DateTime.now().toIso8601String();
+    
+    final List<Map<String, dynamic>> maps = await db.query(
+      'sanitary_product_logs',
+      where: 'reminderTime > ?', 
+      whereArgs: [nowString],
+      orderBy: 'logTime DESC', 
+      limit: 1,
+    );
+
     return maps.isNotEmpty ? SanitaryProductsEntry.fromMap(maps.first) : null;
   }
 
