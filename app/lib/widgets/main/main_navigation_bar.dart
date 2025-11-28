@@ -33,11 +33,12 @@ class MainNavigationBar extends StatelessWidget {
           icon: Icon(Icons.book_outlined),
           label: l10n.navBar_logs,
         ),
-        NavigationDestination(
-          selectedIcon: Icon(Icons.wc_rounded),
-          icon: Icon(Icons.wc_outlined),
-          label: l10n.navBar_sanitary,
-        ),
+        if (settingsService.isSanitaryNavEnabled)
+          NavigationDestination(
+            selectedIcon: Icon(Icons.wc_rounded),
+            icon: Icon(Icons.wc_outlined),
+            label: l10n.navBar_sanitary,
+          ),
         if (settingsService.isPillNavEnabled)
           NavigationDestination(
             selectedIcon: Icon(Icons.medication_rounded),
