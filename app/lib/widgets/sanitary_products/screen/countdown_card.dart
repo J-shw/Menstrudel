@@ -19,7 +19,7 @@ class CountdownCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final endTime = entry.date.add(Duration(hours: entry.type.defaultDurationHours));
+    final endTime = entry.reminderTime;
     final remaining = endTime.difference(DateTime.now());
     final displayDuration = remaining.isNegative ? Duration.zero : remaining;
     
