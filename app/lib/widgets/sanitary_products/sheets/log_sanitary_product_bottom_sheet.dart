@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/models/sanitary_products/sanitary_products_enum.dart';
 
-typedef SanitaryProductSaveCallback = void Function(TimeOfDay time, String? note, SanitaryProducts type);
+typedef SanitaryProductSaveCallback = void Function(
+  DateTime logTime,
+  String? note,
+  SanitaryProducts type,
+  DateTime reminderEndTime,
+);
 
 class LogSanitaryProductBottomSheet extends StatefulWidget {
   final SanitaryProductSaveCallback onSave;
@@ -20,6 +25,13 @@ class _LogSanitaryProductBottomSheetState extends State<LogSanitaryProductBottom
   final _noteController = TextEditingController();
   TimeOfDay _startTime = TimeOfDay.now();
   SanitaryProducts _selectedType = SanitaryProducts.tampon;
+  double _reminderHours = 4.0; 
+
+  @override
+  void initState() {
+    super.initState();
+    _reminderHours = _selectedType.maxDurationHours.toDouble();
+  }
 
   @override
   void dispose() {
@@ -31,18 +43,6 @@ class _LogSanitaryProductBottomSheetState extends State<LogSanitaryProductBottom
     final pickedTime = await showTimePicker(
       context: context,
       initialTime: _startTime,
-      builder: (context, child) {
-        return Theme(
-          data: Theme.of(context).copyWith(
-            colorScheme: ColorScheme.light(
-              primary: Theme.of(context).colorScheme.primary,
-              onPrimary: Theme.of(context).colorScheme.onPrimary,
-              onSurface: Theme.of(context).colorScheme.onSurface,
-            ),
-          ),
-          child: child!,
-        );
-      },
     );
     if (pickedTime != null) {
       setState(() {
@@ -56,157 +56,198 @@ class _LogSanitaryProductBottomSheetState extends State<LogSanitaryProductBottom
         ? null
         : _noteController.text.trim();
     
-    widget.onSave(_startTime, noteToSave, _selectedType);
+    final startTime = _getStartDateTime();
+    final reminderEndTime = _getReminderEndTime();
+    
+    widget.onSave(startTime, noteToSave, _selectedType, reminderEndTime);
     Navigator.pop(context);
   }
 
-  void _handleCancel() {
-    Navigator.pop(context);
-  }
-
-  DateTime _getEstimatedEndTime() {
+  DateTime _getStartDateTime() {
     final now = DateTime.now();
-    final startDateTime = DateTime(now.year, now.month, now.day, _startTime.hour, _startTime.minute);
-    return startDateTime.add(Duration(hours: _selectedType.defaultDurationHours));
+    return DateTime(now.year, now.month, now.day, _startTime.hour, _startTime.minute);
+  }
+
+  DateTime _getReminderEndTime() {
+    return _getStartDateTime().add(Duration(hours: _reminderHours.round()));
   }
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
-    final colorScheme = Theme.of(context).colorScheme;
+    final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context)!;
-    final endTime = TimeOfDay.fromDateTime(_getEstimatedEndTime());
-    final durationText = '${_selectedType.defaultDurationHours}h';
+    final endTime = TimeOfDay.fromDateTime(_getReminderEndTime());
 
     return Padding(
-      padding: EdgeInsets.only(top: 20, left: 16, right: 16, bottom: MediaQuery.of(context).viewInsets.bottom + 32),
+      padding: EdgeInsets.only(
+        top: 16, 
+        left: 20, 
+        right: 20, 
+        bottom: MediaQuery.of(context).viewInsets.bottom + 20
+      ),
       child: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             // --- Drag Handle ---
             Center(
               child: Container(
-                width: 40,
+                width: 32,
                 height: 4,
-                decoration: BoxDecoration(color: Theme.of(context).dividerColor, borderRadius: BorderRadius.circular(2)),
+                decoration: BoxDecoration(
+                  color: theme.colorScheme.outlineVariant,
+                  borderRadius: BorderRadius.circular(2),
+                ),
               ),
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: 20),
 
-            // --- Title ---
-            Center(child: Text(l10n.sanitaryEntrySheet_logSanitaryProduct, style: textTheme.titleLarge)),
-            
+            // --- Header ---
+            Text(
+              l10n.sanitaryEntrySheet_logSanitaryProduct, 
+              style: theme.textTheme.headlineSmall,
+              textAlign: TextAlign.center,
+            ),
             const SizedBox(height: 24),
 
-            // --- Type Selector ---
-            Text(l10n.type, style: textTheme.bodySmall),
+            // --- Type Selection ---
+            Text(l10n.type, style: Theme.of(context).textTheme.bodySmall),
             const SizedBox(height: 8),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: SanitaryProducts.values.map((type) {
-                  final isSelected = _selectedType == type;
-                  return Padding(
-                    padding: const EdgeInsets.only(right: 8.0),
-                    child: FilterChip(
-                      selected: isSelected,
-                      label: Text(type.getDisplayName(l10n)),
-                      onSelected: (bool selected) {
-                        if (selected) {
-                          setState(() {
-                            _selectedType = type;
-                          });
+            Wrap(
+              spacing: 8,
+              children: SanitaryProducts.values.map((type) {
+                return ChoiceChip(
+                  label: Text(type.getDisplayName(l10n)),
+                  selected: _selectedType == type,
+                  onSelected: (bool selected) {
+                    if (selected) {
+                      setState(() {
+                        _selectedType = type;
+                        if (_reminderHours > type.maxDurationHours) {
+                          _reminderHours = type.maxDurationHours.toDouble();
                         }
-                      },
-                    ),
-                  );
-                }).toList(),
-              ),
+                      });
+                    }
+                  },
+                );
+              }).toList(),
             ),
 
-            // --- Date/Time Selection Display ---
-            const SizedBox(height: 24),
-            Text(l10n.time, style: textTheme.bodySmall),
             const SizedBox(height: 8),
-            
-            Row(
-              children: [
-                Expanded(
-                  child: InkWell(
-                    onTap: _selectTime,
-                    borderRadius: BorderRadius.circular(12),
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+            Text(l10n.time, style: Theme.of(context).textTheme.bodySmall),
+            const SizedBox(height: 8),
+
+            // --- Time and Duration Logic ---
+            Container(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      InkWell(
+                        onTap: _selectTime,
+                        borderRadius: BorderRadius.circular(8),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(l10n.start, style: theme.textTheme.bodySmall),
+                            Row(
+                              children: [
+                                Text(
+                                  _startTime.format(context), 
+                                  style: theme.textTheme.titleLarge?.copyWith(
+                                    color: theme.colorScheme.primary,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Icon(Icons.arrow_drop_down, color: theme.colorScheme.primary),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      
+                      const Icon(Icons.arrow_forward, color: Colors.grey),
+
+                      // End Time
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          Text(l10n.start, style: textTheme.labelMedium?.copyWith(color: colorScheme.secondary)),
-                          const SizedBox(height: 4),
-                          Text(_startTime.format(context), style: textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold)),
+                          Text(l10n.end, style: theme.textTheme.bodySmall),
+                          Text(
+                            endTime.format(context),
+                            style: theme.textTheme.titleLarge?.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ],
                       ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                  child: Column(
-                    children: [
-                      Icon(Icons.arrow_forward, color: colorScheme.outline),
-                      const SizedBox(height: 4),
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                        child: Text(durationText, style: textTheme.labelSmall?.copyWith(color: colorScheme.onPrimaryContainer, fontWeight: FontWeight.bold)),
-                      )
                     ],
                   ),
-                ),
-                Expanded(
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(l10n.end, style: textTheme.labelMedium?.copyWith(color: colorScheme.secondary)),
-                        const SizedBox(height: 4),
-                        Text(endTime.format(context), style: textTheme.headlineSmall?.copyWith(color: colorScheme.onSurfaceVariant)),
-                      ],
-                    ),
+                  
+                  const Divider(height: 30),
+
+                  // Duration Slider
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(l10n.sanitaryEntrySheet_setReminderDuration, style: theme.textTheme.bodyMedium),
+                      Text(
+                        '${_reminderHours.round()} ${l10n.hours}',
+                        style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+                      ),
+                    ],
                   ),
-                ),
-              ],
+                  Slider(
+                    year2023: false,
+                    value: _reminderHours,
+                    min: 1,
+                    max: _selectedType.maxDurationHours.toDouble(),
+                    divisions: _selectedType.maxDurationHours - 1,
+                    label: '${_reminderHours.round()} h',
+                    onChanged: (double value) {
+                      setState(() {
+                        _reminderHours = value;
+                      });
+                    },
+                  ),
+                ],
+              ),
             ),
 
-            // --- Text Note ---
-            const SizedBox(height: 24),
-            Text(l10n.note, style: textTheme.bodySmall),
             const SizedBox(height: 8),
-            TextFormField(
+            Text(l10n.note, style: Theme.of(context).textTheme.bodySmall),
+            const SizedBox(height: 8),
+            // --- Notes ---
+            TextField(
               controller: _noteController,
-              autofocus: false,
               maxLength: 500,
-              maxLines: 3,
+              maxLines: 1,
             ),
 
             const SizedBox(height: 24),
 
-            // --- Action Buttons ---
+            // --- Buttons ---
             Row(
               children: [
                 Expanded(
-                  child: FilledButton.tonal(
-                    style: FilledButton.styleFrom(minimumSize: const Size.fromHeight(50)),
-                    onPressed: _handleCancel,
+                  child: TextButton(
+                    onPressed: () => Navigator.pop(context),
+                    style: TextButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                    ),
                     child: Text(l10n.cancel),
                   ),
                 ),
                 const SizedBox(width: 16),
                 Expanded(
                   child: FilledButton(
-                    style: FilledButton.styleFrom(minimumSize: const Size.fromHeight(50)),
                     onPressed: _handleSave,
+                    style: FilledButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                    ),
                     child: Text(l10n.save),
                   ),
                 ),
