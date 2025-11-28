@@ -191,7 +191,7 @@ class SettingsService extends ChangeNotifier {
     await _prefs.setBool(pillNavEnabledKey, isEnabled);
   }
 
-    Future<void> setSanitaryNavEnabled(bool isEnabled) async {
+  Future<void> setSanitaryNavEnabled(bool isEnabled) async {
     _sanitaryNavEnabled = isEnabled;
     await _prefs.setBool(sanitaryNavEnabledKey, isEnabled);
     notifyListeners();
