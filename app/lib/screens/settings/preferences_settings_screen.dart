@@ -39,13 +39,13 @@ class PreferencesSettingsScreen extends StatelessWidget {
             ),
           ),
           SwitchListTile(
-            title: Text(l10n.preferencesScreen_tamponReminderButton),
+            title: Text(l10n.preferencesScreen_enableSanitaryProductsScreen),
             subtitle:
-                Text(l10n.preferencesScreen_tamponReminderButtonSubtitle),
+                Text(l10n.preferencesScreen_enableSanitaryProductsScreenSubtitle),
             secondary: const Icon(Icons.notifications_active_outlined),
-            value: settingsService.areAlwaysShowReminderButtonEnabled,
+            value: settingsService.isSanitaryNavEnabled,
             onChanged: (bool value) {
-              context.read<SettingsService>().setAlwaysShowReminderButtonEnabled(value);
+              context.read<SettingsService>().setSanitaryNavEnabled(value);
             },
           ),
         ],
