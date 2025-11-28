@@ -162,6 +162,12 @@ abstract class AppLocalizations {
   /// **'Days'**
   String get days;
 
+  /// No description provided for @hours.
+  ///
+  /// In en, this message translates to:
+  /// **'Hours'**
+  String get hours;
+
   /// A message that displays a count of days, handling singular and plural forms.
   ///
   /// In en, this message translates to:
@@ -1556,6 +1562,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Log Sanitary Product'**
   String get sanitaryEntrySheet_logSanitaryProduct;
+
+  /// No description provided for @sanitaryEntrySheet_setReminderDuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Set Reminder Duration'**
+  String get sanitaryEntrySheet_setReminderDuration;
+
+  /// Label showing the maximum duration for the selected sanitary product type.
+  ///
+  /// In en, this message translates to:
+  /// **'Max Duration: {hours} hours'**
+  String sanitaryEntrySheet_maxDuration(int hours);
 
   /// A label showing the total number of days until period is due.
   ///

@@ -39,6 +39,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get days => 'Jours';
 
   @override
+  String get hours => 'Hours';
+
+  @override
   String dayCount(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
@@ -885,6 +888,14 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get sanitaryEntrySheet_logSanitaryProduct => 'Log Sanitary Product';
+
+  @override
+  String get sanitaryEntrySheet_setReminderDuration => 'Set Reminder Duration';
+
+  @override
+  String sanitaryEntrySheet_maxDuration(int hours) {
+    return 'Max Duration: $hours hours';
+  }
 
   @override
   String periodPredictionCircle_days(int count) {

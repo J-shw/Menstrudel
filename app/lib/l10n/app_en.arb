@@ -15,6 +15,8 @@
     "day": "Day",
     "days": "Days",
 
+    "hours": "Hours",
+
     "dayCount": "{count, plural, one{{count} Day} other{{count} Days}}",
     "@dayCount": {
         "description": "A message that displays a count of days, handling singular and plural forms.",
@@ -441,6 +443,16 @@
     "larcEntrySheet_logLARCDetails": "Log LARC Details",
 
     "sanitaryEntrySheet_logSanitaryProduct": "Log Sanitary Product",
+    "sanitaryEntrySheet_setReminderDuration": "Set Reminder Duration",
+    "sanitaryEntrySheet_maxDuration": "Max Duration: {hours} hours",
+    "@sanitaryEntrySheet_maxDuration": {
+        "description": "Label showing the maximum duration for the selected sanitary product type.",
+        "placeholders": {
+            "hours": {
+                "type": "int"
+            }
+        }
+    },
 
     "periodPredictionCircle_days": "{count, plural, =1{Day} other{Days}}",
     "@periodPredictionCircle_days": {
