@@ -76,8 +76,8 @@ class _SanitaryScreenState extends State<SanitaryScreen> {
        if (endTime.isAfter(DateTime.now())) {
           await NotificationService.scheduleSanitaryProductReminder(
             reminderDateTime: reminderDateTime,
-            title: l10n.notification_tamponReminderTitle,
-            body: l10n.notification_tamponReminderBody,
+            title: l10n.notification_SanitaryProductReminderTitle,
+            body: l10n.notification_SanitaryProductReminderBody,
           );
        }
      }
