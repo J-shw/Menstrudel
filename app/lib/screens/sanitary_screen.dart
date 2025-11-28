@@ -9,6 +9,7 @@ import 'package:menstrudel/services/notification_service.dart';
 import 'package:menstrudel/widgets/sanitary_products/sheets/edit_sanitary_product_bottom_sheet.dart';
 import 'package:menstrudel/widgets/sanitary_products/sheets/log_sanitary_product_bottom_sheet.dart';
 import 'package:menstrudel/widgets/sanitary_products/screen/sanitary_product_log_card.dart';
+import 'package:menstrudel/widgets/sanitary_products/screen/countdown_card.dart'; 
 
 class SanitaryScreen extends StatefulWidget {
   const SanitaryScreen({super.key});
@@ -188,7 +189,13 @@ class _SanitaryScreenState extends State<SanitaryScreen> {
             children: [
               // --- Countdown Section ---
               if (activeEntry != null) ...[
-                _buildCountdownCard(context, activeEntry, l10n),
+                CountdownCard(
+                  entry: activeEntry,
+                  l10n: l10n,
+                  onCancel: () async {
+                    await _deleteLog(activeEntry.id!);
+                  },
+                ),
                 const SizedBox(height: 24),
               ],
 
@@ -227,83 +234,6 @@ class _SanitaryScreenState extends State<SanitaryScreen> {
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildCountdownCard(BuildContext context, SanitaryProductsEntry entry, AppLocalizations l10n) {
-    final theme = Theme.of(context);
-    final endTime = entry.date.add(Duration(hours: entry.type.defaultDurationHours));
-    final remaining = endTime.difference(DateTime.now());
-    
-    // Don't show negative if something weird happens, though _getActiveEntry filters this
-    final displayDuration = remaining.isNegative ? Duration.zero : remaining;
-    
-    final hours = displayDuration.inHours.toString().padLeft(2, '0');
-    final minutes = displayDuration.inMinutes.remainder(60).toString().padLeft(2, '0');
-    final seconds = displayDuration.inSeconds.remainder(60).toString().padLeft(2, '0');
-
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(24),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [theme.colorScheme.primaryContainer, theme.colorScheme.surface],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-        borderRadius: BorderRadius.circular(24),
-        boxShadow: [
-          BoxShadow(
-            color: theme.colorScheme.shadow.withOpacity(0.1),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          )
-        ],
-      ),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(entry.type.getIcon(), color: theme.colorScheme.primary),
-              const SizedBox(width: 8),
-              Text(
-                "Active ${entry.type.getDisplayName(l10n)}",
-                style: theme.textTheme.titleMedium?.copyWith(
-                  color: theme.colorScheme.primary,
-                  fontWeight: FontWeight.bold
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 16),
-          Text(
-            "$hours:$minutes:$seconds",
-            style: theme.textTheme.displayMedium?.copyWith(
-              fontWeight: FontWeight.bold,
-              fontFamily: 'monospace', // Monospace prevents jittering as numbers change
-              color: theme.colorScheme.onSurface,
-            ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            "Change due at ${DateFormat.jm().format(endTime)}",
-            style: theme.textTheme.bodyMedium?.copyWith(
-              color: theme.colorScheme.onSurfaceVariant
-            ),
-          ),
-          const SizedBox(height: 20),
-          FilledButton.icon(
-            onPressed: () => _deleteLog(entry.id!),
-            icon: const Icon(Icons.close),
-            label: Text(l10n.cancel),
-            style: FilledButton.styleFrom(
-              backgroundColor: theme.colorScheme.errorContainer,
-              foregroundColor: theme.colorScheme.onErrorContainer,
-            ),
-          ),
-        ],
       ),
     );
   }
