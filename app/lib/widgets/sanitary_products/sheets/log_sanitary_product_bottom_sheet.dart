@@ -83,7 +83,7 @@ class _LogSanitaryProductBottomSheetState extends State<LogSanitaryProductBottom
         top: 16, 
         left: 20, 
         right: 20, 
-        bottom: MediaQuery.of(context).viewInsets.bottom + 20
+        bottom: MediaQuery.of(context).viewInsets.bottom + 32
       ),
       child: SingleChildScrollView(
         child: Column(
@@ -233,21 +233,17 @@ class _LogSanitaryProductBottomSheetState extends State<LogSanitaryProductBottom
             Row(
               children: [
                 Expanded(
-                  child: TextButton(
+                  child: FilledButton.tonal(
+                    style: FilledButton.styleFrom(minimumSize: const Size.fromHeight(50)),
                     onPressed: () => Navigator.pop(context),
-                    style: TextButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                    ),
                     child: Text(l10n.cancel),
                   ),
                 ),
                 const SizedBox(width: 16),
                 Expanded(
                   child: FilledButton(
+                    style: FilledButton.styleFrom(minimumSize: const Size.fromHeight(50)),
                     onPressed: _handleSave,
-                    style: FilledButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                    ),
                     child: Text(l10n.save),
                   ),
                 ),
