@@ -29,13 +29,13 @@ extension LarcTypeDisplay on SanitaryProducts {
   IconData getIcon(){
     switch (this) { 
       case SanitaryProducts.tampon:
-        return Icons.circle;
+        return Icons.fiber_manual_record;
       case SanitaryProducts.pad:
-        return Icons.square;
+        return Icons.crop_din;
       case SanitaryProducts.menstrualCup:
-        return Icons.change_circle;
+        return Icons.filter_vintage;
       case SanitaryProducts.periodUnderwear:
-        return Icons.check_box;
+        return Icons.checkroom;
     }
   }
 
