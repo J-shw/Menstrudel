@@ -187,6 +187,7 @@ class AppDatabase {
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         logTime TEXT NOT NULL,
         reminderTime TEXT NOT NULL,
+        removedTime TEXT,
         type TEXT NOT NULL,
         note TEXT
       )
