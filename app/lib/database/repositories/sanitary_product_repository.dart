@@ -5,40 +5,39 @@ import 'package:menstrudel/models/sanitary_products/sanitary_products_entry.dart
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:sqflite/sqflite.dart';
 
+const String dbName = 'sanitary_product_logs';
+
 class SanitaryProductRepository {
   final dbProvider = AppDatabase.instance;
-
   final Manager manager;
 
   SanitaryProductRepository() : manager = Manager(AppDatabase.instance);
   
   Future<void> logSanitaryProduct(SanitaryProductsEntry entry) async {
     final db = await dbProvider.database;
-    await db.insert('sanitary_product_logs', entry.toMap());
+    await db.insert(dbName, entry.toMap());
   }
 
   Future<List<SanitaryProductsEntry>> getAllLogs() async {
     final db = await dbProvider.database;
-    final maps = await db.query('sanitary_product_logs', orderBy: 'logTime DESC');
+    final maps = await db.query(dbName, orderBy: 'logTime DESC');
     return maps.map((map) => SanitaryProductsEntry.fromMap(map)).toList();
   }
 
   Future<SanitaryProductsEntry?> getLogById(int id) async {
     final db = await dbProvider.database;
-    final maps = await db.query('sanitary_product_logs', where: 'id = ?', whereArgs: [id]);
+    final maps = await db.query(dbName, where: 'id = ?', whereArgs: [id]);
     return maps.isNotEmpty ? SanitaryProductsEntry.fromMap(maps.first) : null;
   }
 
   /// Returns the currently active sanitary product entry, if any.
-  /// An active entry is one where the reminder time is in the future.
+  /// An active entry is one where the removedTime is null.
   Future<SanitaryProductsEntry?> getActiveEntry() async {
     final db = await dbProvider.database;
-    final nowString = DateTime.now().toIso8601String();
     
     final List<Map<String, dynamic>> maps = await db.query(
-      'sanitary_product_logs',
-      where: 'reminderTime > ?', 
-      whereArgs: [nowString],
+      dbName,
+      where: 'removedTime IS NULL', 
       orderBy: 'logTime DESC', 
       limit: 1,
     );
@@ -46,14 +45,25 @@ class SanitaryProductRepository {
     return maps.isNotEmpty ? SanitaryProductsEntry.fromMap(maps.first) : null;
   }
 
+  /// Marks the sanitary product entry as removed by setting the removedTime. 
+  Future<void> markEntryAsRemoved(int id, DateTime removedTime) async {
+    final db = await dbProvider.database;
+    await db.update(
+      dbName, 
+      {'removedTime': removedTime.toIso8601String()}, 
+      where: 'id = ?', 
+      whereArgs: [id]
+    );
+  }
+
   Future<void> updateLog(SanitaryProductsEntry entry) async {
     final db = await dbProvider.database;
-    await db.update('sanitary_product_logs', entry.toMap(), where: 'id = ?', whereArgs: [entry.id]);
+    await db.update(dbName, entry.toMap(), where: 'id = ?', whereArgs: [entry.id]);
   }
 
   Future<void> deleteLog(int id) async {
     final db = await dbProvider.database;
-    await db.delete('sanitary_product_logs', where: 'id = ?', whereArgs: [id]);
+    await db.delete(dbName, where: 'id = ?', whereArgs: [id]);
   }
 }
 
@@ -66,13 +76,13 @@ class Manager {
   Future<String> exportDataAsJson() async {
     final db = await dbProvider.database;
 
-    final sanitaryProductsLogs = await db.query('sanitary_product_logs');
+    final sanitaryProductsLogs = await db.query(dbName);
     
     final packageInfo = await PackageInfo.fromPlatform();
     final dbVersion = await db.getVersion();
 
     final exportData = {
-      'sanitary_product_logs': sanitaryProductsLogs,
+      dbName: sanitaryProductsLogs,
       'exported_at': DateTime.now().toIso8601String(),
       'app_version': packageInfo.version,
       'db_version': dbVersion,
@@ -91,7 +101,7 @@ class Manager {
     try {
       final Map<String, dynamic> importData = jsonDecode(jsonString);
 
-      if (!importData.containsKey('sanitary_product_logs'))
+      if (!importData.containsKey(dbName))
       {
         throw const FormatException('Invalid import file: Missing required sanitary products data sections.');
       }
@@ -105,9 +115,9 @@ class Manager {
 
       await db.transaction((txn) async {
         
-        await txn.delete('sanitary_product_logs');
+        await txn.delete(dbName);
 
-        final List sanitaryProductsLogsRaw = importData['sanitary_product_logs'] as List;
+        final List sanitaryProductsLogsRaw = importData[dbName] as List;
         for (final Map<String, dynamic> logRaw
             in sanitaryProductsLogsRaw.cast<Map<String, dynamic>>()) {
           final Map<String, dynamic> logToInsert = Map.from(logRaw);
@@ -115,7 +125,7 @@ class Manager {
           logToInsert.remove('id');
           
           await txn.insert(
-            'sanitary_product_logs',
+            dbName,
             logToInsert,
             conflictAlgorithm: ConflictAlgorithm.replace,
           );
@@ -132,7 +142,7 @@ class Manager {
   Future<void> clearAllData() async {
     final db = await dbProvider.database;
     await db.transaction((txn) async {
-      await txn.delete('sanitary_product_logs');
+      await txn.delete(dbName);
     });
   }
 }
