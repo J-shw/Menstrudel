@@ -10,11 +10,13 @@ class CountdownCard extends StatelessWidget {
     required this.entry,
     required this.l10n,
     required this.onCancel,
+    required this.onRemove,
   });
 
   final SanitaryProductsEntry entry;
   final AppLocalizations l10n;
   final VoidCallback onCancel;
+  final VoidCallback onRemove;
 
   @override
   Widget build(BuildContext context) {
@@ -63,15 +65,30 @@ class CountdownCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 20),
-          FilledButton.icon(
-            onPressed: onCancel,
-            icon: const Icon(Icons.close),
-            label: Text(l10n.cancel),
-            style: FilledButton.styleFrom(
-              backgroundColor: theme.colorScheme.errorContainer,
-              foregroundColor: theme.colorScheme.onErrorContainer,
-            ),
-          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Expanded(
+                child: FilledButton.icon(
+                onPressed: onCancel,
+                icon: const Icon(Icons.close),
+                label: Text(l10n.cancel),
+                style: FilledButton.styleFrom(
+                  backgroundColor: theme.colorScheme.errorContainer,
+                  foregroundColor: theme.colorScheme.onErrorContainer,
+                ),
+              ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: FilledButton.icon(
+                onPressed: onRemove,
+                icon: const Icon(Icons.check),
+                label: const Text("Remove"),
+              ),
+              ),
+            ],
+          )
         ],
       ),
     );
