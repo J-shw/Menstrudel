@@ -453,6 +453,8 @@
             }
         }
     },
+    "sanitaryEntrySheet_futureLogTimeError": "Log time cannot be in the future.",
+    "sanitaryEntrySheet_pastReminderTimeError": "Reminder end time cannot be in the past.",
 
     "periodPredictionCircle_days": "{count, plural, =1{Day} other{Days}}",
     "@periodPredictionCircle_days": {

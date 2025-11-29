@@ -1575,6 +1575,18 @@ abstract class AppLocalizations {
   /// **'Max Duration: {hours} hours'**
   String sanitaryEntrySheet_maxDuration(int hours);
 
+  /// No description provided for @sanitaryEntrySheet_futureLogTimeError.
+  ///
+  /// In en, this message translates to:
+  /// **'Log time cannot be in the future.'**
+  String get sanitaryEntrySheet_futureLogTimeError;
+
+  /// No description provided for @sanitaryEntrySheet_pastReminderTimeError.
+  ///
+  /// In en, this message translates to:
+  /// **'Reminder end time cannot be in the past.'**
+  String get sanitaryEntrySheet_pastReminderTimeError;
+
   /// A label showing the total number of days until period is due.
   ///
   /// In en, this message translates to:

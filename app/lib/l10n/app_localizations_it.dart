@@ -881,6 +881,14 @@ class AppLocalizationsIt extends AppLocalizations {
   }
 
   @override
+  String get sanitaryEntrySheet_futureLogTimeError =>
+      'Log time cannot be in the future.';
+
+  @override
+  String get sanitaryEntrySheet_pastReminderTimeError =>
+      'Reminder end time cannot be in the past.';
+
+  @override
   String periodPredictionCircle_days(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
