@@ -599,6 +599,26 @@ class AppLocalizationsEn extends AppLocalizations {
       'All LARC data has been cleared.';
 
   @override
+  String get settingsScreen_clearAllSanitaryData =>
+      'Clear All Sanitary Products Data';
+
+  @override
+  String get settingsScreen_clearAllSanitaryDataSubtitle =>
+      'Removes your sanitary products history.';
+
+  @override
+  String get settingsScreen_clearAllSanitaryData_question =>
+      'Clear All Sanitary Products Data?';
+
+  @override
+  String get settingsScreen_deleteAllSanitaryDataDescription =>
+      'This will permanently delete your sanitary products history.';
+
+  @override
+  String get settingsScreen_allSanitaryDataCleared =>
+      'All sanitary products data has been cleared.';
+
+  @override
   String get settingsScreen_exportPeriodData => 'Export Period Data';
 
   @override

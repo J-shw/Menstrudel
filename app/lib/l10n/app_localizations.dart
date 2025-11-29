@@ -1107,6 +1107,36 @@ abstract class AppLocalizations {
   /// **'All LARC data has been cleared.'**
   String get settingsScreen_allLarcDataCleared;
 
+  /// No description provided for @settingsScreen_clearAllSanitaryData.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear All Sanitary Products Data'**
+  String get settingsScreen_clearAllSanitaryData;
+
+  /// No description provided for @settingsScreen_clearAllSanitaryDataSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Removes your sanitary products history.'**
+  String get settingsScreen_clearAllSanitaryDataSubtitle;
+
+  /// No description provided for @settingsScreen_clearAllSanitaryData_question.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear All Sanitary Products Data?'**
+  String get settingsScreen_clearAllSanitaryData_question;
+
+  /// No description provided for @settingsScreen_deleteAllSanitaryDataDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'This will permanently delete your sanitary products history.'**
+  String get settingsScreen_deleteAllSanitaryDataDescription;
+
+  /// No description provided for @settingsScreen_allSanitaryDataCleared.
+  ///
+  /// In en, this message translates to:
+  /// **'All sanitary products data has been cleared.'**
+  String get settingsScreen_allSanitaryDataCleared;
+
   /// No description provided for @settingsScreen_exportPeriodData.
   ///
   /// In en, this message translates to:
