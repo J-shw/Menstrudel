@@ -25,7 +25,8 @@ class _LogSanitaryProductBottomSheetState extends State<LogSanitaryProductBottom
   final _noteController = TextEditingController();
   TimeOfDay _startTime = TimeOfDay.now();
   SanitaryProducts _selectedType = SanitaryProducts.tampon;
-  double _reminderHours = 4.0; 
+  double _reminderHours = 4.0;
+  String? _errorMessage;
 
   @override
   void initState() {
@@ -51,13 +52,32 @@ class _LogSanitaryProductBottomSheetState extends State<LogSanitaryProductBottom
     }
   }
 
-  void _handleSave() {
+  void _handleSave(AppLocalizations l10n) {
+    setState(() {
+      _errorMessage = null;
+    });
+
+    final startTime = _getStartDateTime();
+    final reminderEndTime = _getReminderEndTime();
+    final now = DateTime.now();
+    
+    if (startTime.isAfter(now)) {
+      setState(() {
+        _errorMessage = l10n.sanitaryEntrySheet_futureLogTimeError;
+      });
+      return;
+    }
+    
+    if (reminderEndTime.isBefore(now)) {
+      setState(() {
+        _errorMessage = l10n.sanitaryEntrySheet_pastReminderTimeError;
+      });
+      return; 
+    }
+    
     final String? noteToSave = _noteController.text.trim().isEmpty
         ? null
         : _noteController.text.trim();
-    
-    final startTime = _getStartDateTime();
-    final reminderEndTime = _getReminderEndTime();
     
     widget.onSave(startTime, noteToSave, _selectedType, reminderEndTime);
     Navigator.pop(context);
@@ -102,6 +122,30 @@ class _LogSanitaryProductBottomSheetState extends State<LogSanitaryProductBottom
               ),
             ),
             const SizedBox(height: 20),
+            if (_errorMessage != null) 
+              Container(
+                padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                margin: const EdgeInsets.only(bottom: 20),
+                decoration: BoxDecoration(
+                  color: theme.colorScheme.errorContainer,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Row(
+                  children: [
+                    Icon(Icons.warning_rounded, color: theme.colorScheme.onErrorContainer),
+                    const SizedBox(width: 10),
+                    Flexible(
+                      child: Text(
+                        _errorMessage!,
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                          color: theme.colorScheme.onErrorContainer,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
 
             // --- Header ---
             Text(
@@ -243,7 +287,9 @@ class _LogSanitaryProductBottomSheetState extends State<LogSanitaryProductBottom
                 Expanded(
                   child: FilledButton(
                     style: FilledButton.styleFrom(minimumSize: const Size.fromHeight(50)),
-                    onPressed: _handleSave,
+                    onPressed: () {
+                      _handleSave(l10n);
+                    },
                     child: Text(l10n.save),
                   ),
                 ),
