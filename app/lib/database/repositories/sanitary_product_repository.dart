@@ -30,6 +30,17 @@ class SanitaryProductRepository {
     return maps.isNotEmpty ? SanitaryProductsEntry.fromMap(maps.first) : null;
   }
 
+  /// Returns all inactive sanitary product entries (those with removedTime not null).
+  Future<List<SanitaryProductsEntry>> getInactiveLogs() async {
+    final db = await dbProvider.database;
+    final maps = await db.query(
+      dbName,
+      where: 'removedTime IS NOT NULL',
+      orderBy: 'logTime DESC',
+    );
+    return maps.map((map) => SanitaryProductsEntry.fromMap(map)).toList();
+  }
+
   /// Returns the currently active sanitary product entry, if any.
   /// An active entry is one where the removedTime is null.
   Future<SanitaryProductsEntry?> getActiveEntry() async {
