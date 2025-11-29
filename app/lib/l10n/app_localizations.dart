@@ -264,6 +264,12 @@ abstract class AppLocalizations {
   /// **'Not set'**
   String get notSet;
 
+  /// No description provided for @removed.
+  ///
+  /// In en, this message translates to:
+  /// **'Removed'**
+  String get removed;
+
   /// No description provided for @note.
   ///
   /// In en, this message translates to:
@@ -708,6 +714,18 @@ abstract class AppLocalizations {
   /// **'No past sanitary product records found.'**
   String get sanitaryProductsScreen_noHistoryRecords;
 
+  /// Label showing the type of active sanitary product.
+  ///
+  /// In en, this message translates to:
+  /// **'Active {activeType}'**
+  String sanitaryProductsScreen_activeProduct(String activeType);
+
+  /// Label showing the time when the sanitary product needs to be changed.
+  ///
+  /// In en, this message translates to:
+  /// **'Change Due At {time}'**
+  String sanitaryProductsScreen_changeDueAt(String time);
+
   /// No description provided for @settingsScreen_selectHistoryView.
   ///
   /// In en, this message translates to:
@@ -1107,6 +1125,12 @@ abstract class AppLocalizations {
   /// **'Export LARCs Data'**
   String get settingsScreen_exportLarcsData;
 
+  /// No description provided for @settingsScreen_exportSanitaryData.
+  ///
+  /// In en, this message translates to:
+  /// **'Export Sanitary Products Data'**
+  String get settingsScreen_exportSanitaryData;
+
   /// No description provided for @settingsScreen_exportDataSubtitle.
   ///
   /// In en, this message translates to:
@@ -1167,6 +1191,12 @@ abstract class AppLocalizations {
   /// **'Import LARCs Data'**
   String get settingsScreen_importLarcsData;
 
+  /// No description provided for @settingsScreen_importSanitaryData.
+  ///
+  /// In en, this message translates to:
+  /// **'Import Sanitary Products Data'**
+  String get settingsScreen_importSanitaryData;
+
   /// No description provided for @settingsScreen_importDataSubtitle.
   ///
   /// In en, this message translates to:
@@ -1191,6 +1221,12 @@ abstract class AppLocalizations {
   /// **'Are you sure you want to import LARC Data?'**
   String get settingsScreen_importLarcData_question;
 
+  /// No description provided for @settingsScreen_importSanitaryData_question.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to import Sanitary Products Data?'**
+  String get settingsScreen_importSanitaryData_question;
+
   /// No description provided for @settingsScreen_importPeriodDataDescription.
   ///
   /// In en, this message translates to:
@@ -1202,6 +1238,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Importing data will permanently overwrite all your existing pill history. This cannot be undone.'**
   String get settingsScreen_importPillDataDescription;
+
+  /// No description provided for @settingsScreen_importLarcDataDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Importing data will permanently overwrite all your existing LARC history. This cannot be undone.'**
+  String get settingsScreen_importLarcDataDescription;
+
+  /// No description provided for @settingsScreen_importSanitaryDataDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Importing data will permanently overwrite all your existing sanitary product history. This cannot be undone.'**
+  String get settingsScreen_importSanitaryDataDescription;
 
   /// No description provided for @settingsScreen_importSuccessful.
   ///

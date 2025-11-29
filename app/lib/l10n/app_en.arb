@@ -44,6 +44,7 @@
     "reset": "Reset",
     "add": "Add",
     "notSet": "Not set",
+    "removed": "Removed",
 
     "note": "Note",
 
@@ -219,6 +220,26 @@
         }
     },
     "sanitaryProductsScreen_noHistoryRecords": "No past sanitary product records found.",
+    "sanitaryProductsScreen_activeProduct": "Active {activeType}",
+    "@sanitaryProductsScreen_activeProduct": {
+        "description": "Label showing the type of active sanitary product.",
+        "placeholders": {
+            "activeType": {
+                "type": "String",
+                "example": "Tampon"
+            }
+        }
+    },
+    "sanitaryProductsScreen_changeDueAt": "Change Due At {time}",
+    "@sanitaryProductsScreen_changeDueAt": {
+        "description": "Label showing the time when the sanitary product needs to be changed.",
+        "placeholders": {
+            "time": {
+                "type": "String",
+                "example": "3:30 PM"
+            }
+        }
+    },
 
     "settingsScreen_selectHistoryView": "Select History View",
     "settingsScreen_deleteRegimen_question": "Delete Regimen?",
@@ -320,6 +341,7 @@
     "settingsScreen_exportPeriodData": "Export Period Data",
     "settingsScreen_exportPillData": "Export Pill Data",
     "settingsScreen_exportLarcsData": "Export LARCs Data",
+    "settingsScreen_exportSanitaryData": "Export Sanitary Products Data",
     "settingsScreen_exportDataSubtitle": "Create a JSON backup file.",
     "settingsScreen_exportSuccessful": "Data exported successfully.",
     "settingsScreen_exportFailed": "Export failed. Please try again.",
@@ -330,12 +352,16 @@
     "settingsScreen_importPeriodData": "Import Period Data",
     "settingsScreen_importPillData": "Import Pill Data",
     "settingsScreen_importLarcsData": "Import LARCs Data",
+    "settingsScreen_importSanitaryData": "Import Sanitary Products Data",
     "settingsScreen_importDataSubtitle": "Overwrites existing data.",
     "settingsScreen_importPeriodData_question": "Are you sure you want to import Period Data?",
     "settingsScreen_importPillData_question": "Are you sure you want to import Pill Data?",
     "settingsScreen_importLarcData_question": "Are you sure you want to import LARC Data?",
+    "settingsScreen_importSanitaryData_question": "Are you sure you want to import Sanitary Products Data?",
     "settingsScreen_importPeriodDataDescription": "Importing data will permanently overwrite all your existing period logs and period settings. This cannot be undone.",
     "settingsScreen_importPillDataDescription": "Importing data will permanently overwrite all your existing pill history. This cannot be undone.",
+    "settingsScreen_importLarcDataDescription": "Importing data will permanently overwrite all your existing LARC history. This cannot be undone.",
+    "settingsScreen_importSanitaryDataDescription": "Importing data will permanently overwrite all your existing sanitary product history. This cannot be undone.",
     "settingsScreen_importSuccessful": "Data imported successfully!",
     "settingsScreen_importFailed": "Failed to import data. Please try again.",
     "settingsScreen_importInvalidFile": "Invalid file format or data structure.",

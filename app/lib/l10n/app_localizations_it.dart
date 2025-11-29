@@ -98,6 +98,9 @@ class AppLocalizationsIt extends AppLocalizations {
   String get notSet => 'Not set';
 
   @override
+  String get removed => 'Removed';
+
+  @override
   String get note => 'Note';
 
   @override
@@ -364,6 +367,16 @@ class AppLocalizationsIt extends AppLocalizations {
       'No past sanitary product records found.';
 
   @override
+  String sanitaryProductsScreen_activeProduct(String activeType) {
+    return 'Active $activeType';
+  }
+
+  @override
+  String sanitaryProductsScreen_changeDueAt(String time) {
+    return 'Change Due At $time';
+  }
+
+  @override
   String get settingsScreen_selectHistoryView => 'Seleziona vista cronologia';
 
   @override
@@ -601,6 +614,10 @@ class AppLocalizationsIt extends AppLocalizations {
   String get settingsScreen_exportLarcsData => 'Export LARCs Data';
 
   @override
+  String get settingsScreen_exportSanitaryData =>
+      'Export Sanitary Products Data';
+
+  @override
   String get settingsScreen_exportDataSubtitle => 'Crea un backup JSON.';
 
   @override
@@ -632,6 +649,10 @@ class AppLocalizationsIt extends AppLocalizations {
   String get settingsScreen_importLarcsData => 'Import LARCs Data';
 
   @override
+  String get settingsScreen_importSanitaryData =>
+      'Import Sanitary Products Data';
+
+  @override
   String get settingsScreen_importDataSubtitle =>
       'Sovrascrive i dati esistenti.';
 
@@ -648,12 +669,24 @@ class AppLocalizationsIt extends AppLocalizations {
       'Are you sure you want to import LARC Data?';
 
   @override
+  String get settingsScreen_importSanitaryData_question =>
+      'Are you sure you want to import Sanitary Products Data?';
+
+  @override
   String get settingsScreen_importPeriodDataDescription =>
       'L\'importazione dei dati sovrascriverà definitivamente tutta la tua cronologia e le impostazioni del ciclo. Questa operazione non può essere annullata.';
 
   @override
   String get settingsScreen_importPillDataDescription =>
       'L\'importazione dei dati sovrascriverà definitivamente tutta la tua cronologia pillola. Questa operazione non può essere annullata.';
+
+  @override
+  String get settingsScreen_importLarcDataDescription =>
+      'Importing data will permanently overwrite all your existing LARC history. This cannot be undone.';
+
+  @override
+  String get settingsScreen_importSanitaryDataDescription =>
+      'Importing data will permanently overwrite all your existing sanitary product history. This cannot be undone.';
 
   @override
   String get settingsScreen_importSuccessful => 'Dati importati con successo';

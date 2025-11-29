@@ -98,6 +98,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get notSet => 'Nicht festgelegt';
 
   @override
+  String get removed => 'Removed';
+
+  @override
   String get note => 'Hinweis';
 
   @override
@@ -363,6 +366,16 @@ class AppLocalizationsDe extends AppLocalizations {
       'No past sanitary product records found.';
 
   @override
+  String sanitaryProductsScreen_activeProduct(String activeType) {
+    return 'Active $activeType';
+  }
+
+  @override
+  String sanitaryProductsScreen_changeDueAt(String time) {
+    return 'Change Due At $time';
+  }
+
+  @override
   String get settingsScreen_selectHistoryView =>
       'Vergangenheitsansicht auswählen';
 
@@ -598,6 +611,10 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsScreen_exportLarcsData => 'LARCs-Daten exportieren';
 
   @override
+  String get settingsScreen_exportSanitaryData =>
+      'Export Sanitary Products Data';
+
+  @override
   String get settingsScreen_exportDataSubtitle =>
       'Erstelle eine JSON Backup Datei.';
 
@@ -632,6 +649,10 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsScreen_importLarcsData => 'LARCs-Daten importieren';
 
   @override
+  String get settingsScreen_importSanitaryData =>
+      'Import Sanitary Products Data';
+
+  @override
   String get settingsScreen_importDataSubtitle =>
       'Überschreibt vorhandene Daten.';
 
@@ -648,12 +669,24 @@ class AppLocalizationsDe extends AppLocalizations {
       'Willst du wirklich die Pille-Daten importieren?';
 
   @override
+  String get settingsScreen_importSanitaryData_question =>
+      'Are you sure you want to import Sanitary Products Data?';
+
+  @override
   String get settingsScreen_importPeriodDataDescription =>
       'Durch den Import von Daten werden alle bisherigen Periodenprotokolle und Periodeneinstellungen dauerhaft überschrieben. Dieser Vorgang kann nicht rückgängig gemacht werden.';
 
   @override
   String get settingsScreen_importPillDataDescription =>
       'Durch den Import von Daten werden alle bisherigen Pillen-Daten dauerhaft überschrieben. Dieser Vorgang kann nicht rückgängig gemacht werden.';
+
+  @override
+  String get settingsScreen_importLarcDataDescription =>
+      'Importing data will permanently overwrite all your existing LARC history. This cannot be undone.';
+
+  @override
+  String get settingsScreen_importSanitaryDataDescription =>
+      'Importing data will permanently overwrite all your existing sanitary product history. This cannot be undone.';
 
   @override
   String get settingsScreen_importSuccessful => 'Daten erfolgreich importiert!';
