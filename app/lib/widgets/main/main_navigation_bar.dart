@@ -35,8 +35,8 @@ class MainNavigationBar extends StatelessWidget {
         ),
         if (settingsService.isSanitaryNavEnabled)
           NavigationDestination(
-            selectedIcon: Icon(Icons.wc_rounded),
-            icon: Icon(Icons.wc_outlined),
+            selectedIcon: Icon(Icons.water_drop_rounded),
+            icon: Icon(Icons.water_drop_outlined),
             label: l10n.navBar_sanitary,
           ),
         if (settingsService.isPillNavEnabled)
