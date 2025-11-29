@@ -244,7 +244,7 @@
             "usageCount": {}
         }
     },
-    "settingsScreen_pillRegimens": "Pill Regimens",
+    "settingsScreen_pillRegimens": "Pille-Regeln",
     "@settingsScreen_pillRegimens": {
         "description": "Header for the section listing all created pill regimens."
     },
@@ -256,7 +256,7 @@
     "@settingsScreen_activeRegimenReminder": {
         "description": "Header for the daily reminder settings section."
     },
-    "settingsScreen_pack": "Pack",
+    "settingsScreen_pack": "Packung",
     "settingsScreen_dataManagement": "Datenverwaltung",
     "settingsScreen_dangerZone": "Gefahrenbereich",
     "settingsScreen_clearAllLogs": "Alle Protokolle löschen",
@@ -313,7 +313,7 @@
     "securityScreen_noBiometricsAvailable": "Es wurde kein Passcode, Fingerabdruck oder Face ID gefunden. Bitte lege einen in den Einstellungen des Geräts fest.",
     "settingsScreen_preferences": "Einstellungen",
     "preferencesScreen_language": "Sprache",
-    "preferencesScreen_tamponReminderButton": "Always Show Reminder Button",
+    "preferencesScreen_tamponReminderButton": "Zeige immer die Erinnerungstaste",
     "preferencesScreen_tamponReminderButtonSubtitle": "Macht die Tampon-Erinnerungstaste dauerhaft auf dem Hauptbildschirm sichtbar.",
     "settingsScreen_about": "Über",
     "aboutScreen_version": "Version",
@@ -352,9 +352,9 @@
     "listViewWidget_noPeriodsLogged": "Es wurden noch keine Perioden protokolliert.\nDrücke auf die Schaltfläche „+“, um eine hinzuzufügen.",
     "listViewWidget_confirmDelete": "Löschen bestätigen",
     "listViewWidget_confirmDeleteDescription": "Willst du diesen Eintrag wirklich löschen?",
-    "emptyPillStateWidget_noPillRegimenFound": "No pill regimen found.",
+    "emptyPillStateWidget_noPillRegimenFound": "Keine Pilleneinnahme gefunden.",
     "emptyPillStateWidget_noPillRegimenFoundDescription": "Um mit der Nachverfolgung zu beginnen, kannst du deine Pillenpackung in den Einstellungen einrichten.",
-    "pillStatus_pillsOfTotal": "{count, plural, =1{of 1 pill} other{of {count} pills}}",
+    "pillStatus_pillsOfTotal": "{count, plural, =1{von 1 Pille} other{von {count} Pillen}}",
     "@pillStatus_pillsOfTotal": {
         "description": "A label showing the total number of pills.",
         "placeholders": {
