@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:menstrudel/database/repositories/periods_repository.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/widgets/dialogs/delete_confirmation_dialog.dart';
-import 'package:menstrudel/database/repositories/pills_repository.dart'; 
-import 'package:menstrudel/database/repositories/larc_repository.dart'; 
+import 'package:menstrudel/database/repositories/pills_repository.dart';
+import 'package:menstrudel/database/repositories/larc_repository.dart';
+import 'package:menstrudel/database/repositories/sanitary_product_repository.dart';
 import 'package:menstrudel/services/notification_service.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
@@ -24,10 +25,13 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
   final periodsRepo = PeriodsRepository();
   final pillsRepo = PillsRepository();
   final larcsRepo = LarcRepository();
+  final sanitaryRepo = SanitaryProductRepository();
   bool _isLoading = false;
 
   Future<void> clearPeriodLogs() async {
-    setState(() { _isLoading = true; });
+    setState(() {
+      _isLoading = true;
+    });
     await periodsRepo.manager.clearAllData();
     if (!mounted) return;
 
@@ -35,7 +39,9 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text(l10n.settingsScreen_allLogsHaveBeenCleared)),
     );
-    setState(() { _isLoading = false; });
+    setState(() {
+      _isLoading = false;
+    });
   }
 
   Future<void> showClearPeriodLogsDialog() async {
@@ -54,8 +60,10 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
   }
 
   Future<void> clearPillData() async {
-    setState(() { _isLoading = true; });
-    
+    setState(() {
+      _isLoading = true;
+    });
+
     await pillsRepo.manager.clearAllData();
     await NotificationService.cancelPillReminder();
 
@@ -65,9 +73,11 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text(l10n.settingsScreen_allPillDataCleared)),
     );
-    setState(() { _isLoading = false; });
+    setState(() {
+      _isLoading = false;
+    });
   }
-  
+
   Future<void> showClearPillDataDialog() async {
     final l10n = AppLocalizations.of(context)!;
     return showDialog<void>(
@@ -83,9 +93,11 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
     );
   }
 
-   Future<void> clearLarcData() async {
-    setState(() { _isLoading = true; });
-    
+  Future<void> clearLarcData() async {
+    setState(() {
+      _isLoading = true;
+    });
+
     await larcsRepo.manager.clearAllData();
     await NotificationService.cancelLarcReminder();
 
@@ -95,9 +107,30 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text(l10n.settingsScreen_allLarcDataCleared)),
     );
-    setState(() { _isLoading = false; });
+    setState(() {
+      _isLoading = false;
+    });
   }
-  
+
+  Future<void> clearSanitaryData() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    await sanitaryRepo.manager.clearAllData();
+    await NotificationService.cancelSanitaryProductReminder();
+
+    if (!mounted) return;
+
+    final l10n = AppLocalizations.of(context)!;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(l10n.settingsScreen_allSanitaryDataCleared)),
+    );
+    setState(() {
+      _isLoading = false;
+    });
+  }
+
   Future<void> showClearLarcDataDialog() async {
     final l10n = AppLocalizations.of(context)!;
     return showDialog<void>(
@@ -113,16 +146,32 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
     );
   }
 
+  Future<void> showClearSanitaryDataDialog() async {
+    final l10n = AppLocalizations.of(context)!;
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return ConfirmationDialog(
+          title: l10n.settingsScreen_clearAllSanitaryData_question,
+          contentText: l10n.settingsScreen_deleteAllSanitaryDataDescription,
+          confirmButtonText: l10n.clear,
+          onConfirm: clearSanitaryData,
+        );
+      },
+    );
+  }
+
   Future<void> exportPeriodData() async {
-    setState(() { _isLoading = true; });
+    setState(() {
+      _isLoading = true;
+    });
 
     final l10n = AppLocalizations.of(context)!;
     String filePath = '';
 
-
     try {
       final jsonData = await periodsRepo.manager.exportDataAsJson();
-      
+
       if (jsonData.isEmpty) {
         throw Exception(l10n.settingsScreen_noDataToExport);
       }
@@ -135,7 +184,9 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
       await exportFile.writeAsString(jsonData);
       filePath = exportFile.path;
 
-      if(!mounted){return;}
+      if (!mounted) {
+        return;
+      }
 
       final RenderBox box = context.findRenderObject() as RenderBox;
 
@@ -150,7 +201,6 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
           SnackBar(content: Text(l10n.settingsScreen_exportSuccessful)),
         );
       }
-
     } catch (e) {
       debugPrint('Export failed: $e');
       if (mounted) {
@@ -159,8 +209,10 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
         );
       }
     } finally {
-      if (mounted){
-        setState(() { _isLoading = false; });
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
         if (filePath.isNotEmpty) {
           try {
             await File(filePath).delete();
@@ -173,15 +225,16 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
   }
 
   Future<void> exportPillData() async {
-    setState(() { _isLoading = true; });
+    setState(() {
+      _isLoading = true;
+    });
 
     final l10n = AppLocalizations.of(context)!;
     String filePath = '';
 
-
     try {
       final jsonData = await pillsRepo.manager.exportDataAsJson();
-      
+
       if (jsonData.isEmpty) {
         throw Exception(l10n.settingsScreen_noDataToExport);
       }
@@ -194,7 +247,9 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
       await exportFile.writeAsString(jsonData);
       filePath = exportFile.path;
 
-      if(!mounted){return;}
+      if (!mounted) {
+        return;
+      }
 
       final RenderBox box = context.findRenderObject() as RenderBox;
 
@@ -209,7 +264,6 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
           SnackBar(content: Text(l10n.settingsScreen_exportSuccessful)),
         );
       }
-
     } catch (e) {
       debugPrint('Export failed: $e');
       if (mounted) {
@@ -218,8 +272,10 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
         );
       }
     } finally {
-      if (mounted){
-        setState(() { _isLoading = false; });
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
         if (filePath.isNotEmpty) {
           try {
             await File(filePath).delete();
@@ -232,15 +288,16 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
   }
 
   Future<void> exportLarcsData() async {
-    setState(() { _isLoading = true; });
+    setState(() {
+      _isLoading = true;
+    });
 
     final l10n = AppLocalizations.of(context)!;
     String filePath = '';
 
-
     try {
       final jsonData = await larcsRepo.manager.exportDataAsJson();
-      
+
       if (jsonData.isEmpty) {
         throw Exception(l10n.settingsScreen_noDataToExport);
       }
@@ -253,7 +310,9 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
       await exportFile.writeAsString(jsonData);
       filePath = exportFile.path;
 
-      if(!mounted){return;}
+      if (!mounted) {
+        return;
+      }
 
       final RenderBox box = context.findRenderObject() as RenderBox;
 
@@ -268,7 +327,6 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
           SnackBar(content: Text(l10n.settingsScreen_exportSuccessful)),
         );
       }
-
     } catch (e) {
       debugPrint('Export failed: $e');
       if (mounted) {
@@ -277,8 +335,10 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
         );
       }
     } finally {
-      if (mounted){
-        setState(() { _isLoading = false; });
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
         if (filePath.isNotEmpty) {
           try {
             await File(filePath).delete();
@@ -290,8 +350,78 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
     }
   }
 
-  Future<void> _importData(String filePath, {bool isPillData = false, bool isLarcData = false}) async {
-    setState(() { _isLoading = true; });
+  Future<void> exportSanitaryData() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    final l10n = AppLocalizations.of(context)!;
+    String filePath = '';
+
+    try {
+      final jsonData = await sanitaryRepo.manager.exportDataAsJson();
+
+      if (jsonData.isEmpty) {
+        throw Exception(l10n.settingsScreen_noDataToExport);
+      }
+
+      final Directory directory = await getApplicationDocumentsDirectory();
+      final timestamp = DateFormat('yyyyMMdd_HHmmss').format(DateTime.now());
+      final fileName = 'menstrudel_sanitary_products_data_$timestamp.json';
+      final exportFile = File('${directory.path}/$fileName');
+
+      await exportFile.writeAsString(jsonData);
+      filePath = exportFile.path;
+
+      if (!mounted) {
+        return;
+      }
+
+      final RenderBox box = context.findRenderObject() as RenderBox;
+
+      final params = ShareParams(
+        files: [XFile(filePath)],
+        sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size,
+      );
+
+      final result = await SharePlus.instance.share(params);
+      if (result.status == ShareResultStatus.success && mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(l10n.settingsScreen_exportSuccessful)),
+        );
+      }
+    } catch (e) {
+      debugPrint('Export failed: $e');
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(l10n.settingsScreen_exportFailed)),
+        );
+      }
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+        if (filePath.isNotEmpty) {
+          try {
+            await File(filePath).delete();
+          } catch (e) {
+            debugPrint('Failed to delete temporary file: $e');
+          }
+        }
+      }
+    }
+  }
+
+  Future<void> _importData(
+    String filePath, {
+    bool isPillData = false,
+    bool isLarcData = false,
+    bool isSanitaryData = false,
+  }) async {
+    setState(() {
+      _isLoading = true;
+    });
 
     final l10n = AppLocalizations.of(context)!;
 
@@ -303,7 +433,9 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
         await pillsRepo.manager.importDataFromJson(jsonString, l10n);
       } else if (isLarcData) {
         await larcsRepo.manager.importDataFromJson(jsonString);
-      } else{
+      } else if (isSanitaryData) {
+        await sanitaryRepo.manager.importDataFromJson(jsonString);
+      } else {
         await periodsRepo.manager.importDataFromJson(jsonString);
       }
 
@@ -327,27 +459,28 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
       }
     } finally {
       if (mounted) {
-        setState(() { _isLoading = false; });
+        setState(() {
+          _isLoading = false;
+        });
       }
     }
   }
 
   Future<void> importPeriodData() async {
     final l10n = AppLocalizations.of(context)!;
-    try{
-      final result = await FilePicker.platform.pickFiles(
-        type: FileType.custom,
-        allowedExtensions: ['json'],
-      ).timeout(
-        const Duration(seconds: 30),
-        onTimeout: () {
-          throw TimeoutException('File picking timed out.');
-        },
-      );
+    try {
+      final result = await FilePicker.platform
+          .pickFiles(type: FileType.custom, allowedExtensions: ['json'])
+          .timeout(
+            const Duration(seconds: 30),
+            onTimeout: () {
+              throw TimeoutException('File picking timed out.');
+            },
+          );
 
       if (result != null && result.files.single.path != null) {
         final filePath = result.files.single.path!;
-        
+
         if (!mounted) return;
         return showDialog<void>(
           context: context,
@@ -356,59 +489,8 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
               title: l10n.settingsScreen_importPeriodData_question,
               contentText: l10n.settingsScreen_importPeriodDataDescription,
               confirmButtonText: l10n.import,
-              onConfirm: () => _importData(filePath, isPillData: false, isLarcData: false),
-            );
-          },
-        );
-      }
-    }on PlatformException catch (e) {
-    debugPrint("File picker platform error: $e");
-    if (mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(l10n.settingsScreen_importErrorPlatform(e.message ?? 'An unknown error occurred.')),
-        ),
-      );
-    }
-  } catch (e) {
-    debugPrint("General file picker error: $e");
-    if (mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(l10n.settingsScreen_importErrorGeneral),
-        ),
-      );
-    }
-  }
-  }
-
-  Future<void> importPillData() async {
-    final l10n = AppLocalizations.of(context)!;
-    try {
-
-      
-      final result = await FilePicker.platform.pickFiles(
-        type: FileType.custom,
-        allowedExtensions: ['json'],
-      ).timeout(
-        const Duration(seconds: 30),
-        onTimeout: () {
-          throw TimeoutException('File picking timed out.');
-        },
-      );
-
-      if (result != null && result.files.single.path != null) {
-        final filePath = result.files.single.path!;
-        
-        if (!mounted) return;
-        return showDialog<void>(
-          context: context,
-          builder: (BuildContext context) {
-            return ConfirmationDialog(
-              title: l10n.settingsScreen_importPillData_question,
-              contentText: l10n.settingsScreen_importPillDataDescription,
-              confirmButtonText: l10n.import,
-              onConfirm: () => _importData(filePath, isPillData: true, isLarcData: false),
+              onConfirm: () =>
+                  _importData(filePath, isPillData: false, isLarcData: false),
             );
           },
         );
@@ -418,7 +500,11 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(l10n.settingsScreen_importErrorPlatform(e.message ?? 'An unknown error occurred.')),
+            content: Text(
+              l10n.settingsScreen_importErrorPlatform(
+                e.message ?? 'An unknown error occurred.',
+              ),
+            ),
           ),
         );
       }
@@ -426,9 +512,59 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
       debugPrint("General file picker error: $e");
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(l10n.settingsScreen_importErrorGeneral)),
+        );
+      }
+    }
+  }
+
+  Future<void> importPillData() async {
+    final l10n = AppLocalizations.of(context)!;
+    try {
+      final result = await FilePicker.platform
+          .pickFiles(type: FileType.custom, allowedExtensions: ['json'])
+          .timeout(
+            const Duration(seconds: 30),
+            onTimeout: () {
+              throw TimeoutException('File picking timed out.');
+            },
+          );
+
+      if (result != null && result.files.single.path != null) {
+        final filePath = result.files.single.path!;
+
+        if (!mounted) return;
+        return showDialog<void>(
+          context: context,
+          builder: (BuildContext context) {
+            return ConfirmationDialog(
+              title: l10n.settingsScreen_importPillData_question,
+              contentText: l10n.settingsScreen_importPillDataDescription,
+              confirmButtonText: l10n.import,
+              onConfirm: () =>
+                  _importData(filePath, isPillData: true, isLarcData: false),
+            );
+          },
+        );
+      }
+    } on PlatformException catch (e) {
+      debugPrint("File picker platform error: $e");
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(l10n.settingsScreen_importErrorGeneral),
+            content: Text(
+              l10n.settingsScreen_importErrorPlatform(
+                e.message ?? 'An unknown error occurred.',
+              ),
+            ),
           ),
+        );
+      }
+    } catch (e) {
+      debugPrint("General file picker error: $e");
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(l10n.settingsScreen_importErrorGeneral)),
         );
       }
     }
@@ -436,52 +572,110 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
 
   Future<void> importLarcData() async {
     final l10n = AppLocalizations.of(context)!;
-    try{
-      final result = await FilePicker.platform.pickFiles(
-        type: FileType.custom,
-        allowedExtensions: ['json'],
-      ).timeout(
-        const Duration(seconds: 30),
-        onTimeout: () {
-          throw TimeoutException('File picking timed out.');
-        },
-      );
+    try {
+      final result = await FilePicker.platform
+          .pickFiles(type: FileType.custom, allowedExtensions: ['json'])
+          .timeout(
+            const Duration(seconds: 30),
+            onTimeout: () {
+              throw TimeoutException('File picking timed out.');
+            },
+          );
 
       if (result != null && result.files.single.path != null) {
         final filePath = result.files.single.path!;
-        
+
         if (!mounted) return;
         return showDialog<void>(
           context: context,
           builder: (BuildContext context) {
             return ConfirmationDialog(
               title: l10n.settingsScreen_importLarcData_question,
-              contentText: l10n.settingsScreen_importPeriodDataDescription,
+              contentText: l10n.settingsScreen_importLarcDataDescription,
               confirmButtonText: l10n.import,
-              onConfirm: () => _importData(filePath, isPillData: false, isLarcData: true),
+              onConfirm: () =>
+                  _importData(filePath, isPillData: false, isLarcData: true),
             );
           },
         );
       }
-    }on PlatformException catch (e) {
-    debugPrint("File picker platform error: $e");
-    if (mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(l10n.settingsScreen_importErrorPlatform(e.message ?? 'An unknown error occurred.')),
-        ),
-      );
-    }
-  } catch (e) {
-    debugPrint("General file picker error: $e");
-    if (mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(l10n.settingsScreen_importErrorGeneral),
-        ),
-      );
+    } on PlatformException catch (e) {
+      debugPrint("File picker platform error: $e");
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              l10n.settingsScreen_importErrorPlatform(
+                e.message ?? 'An unknown error occurred.',
+              ),
+            ),
+          ),
+        );
+      }
+    } catch (e) {
+      debugPrint("General file picker error: $e");
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(l10n.settingsScreen_importErrorGeneral)),
+        );
+      }
     }
   }
+
+  Future<void> importSanitaryData() async {
+    final l10n = AppLocalizations.of(context)!;
+    try {
+      final result = await FilePicker.platform
+          .pickFiles(type: FileType.custom, allowedExtensions: ['json'])
+          .timeout(
+            const Duration(seconds: 30),
+            onTimeout: () {
+              throw TimeoutException('File picking timed out.');
+            },
+          );
+
+      if (result != null && result.files.single.path != null) {
+        final filePath = result.files.single.path!;
+
+        if (!mounted) return;
+        return showDialog<void>(
+          context: context,
+          builder: (BuildContext context) {
+            return ConfirmationDialog(
+              title: l10n.settingsScreen_importSanitaryData_question,
+              contentText: l10n.settingsScreen_importSanitaryDataDescription,
+              confirmButtonText: l10n.import,
+              onConfirm: () => _importData(
+                filePath,
+                isPillData: false,
+                isLarcData: false,
+                isSanitaryData: true,
+              ),
+            );
+          },
+        );
+      }
+    } on PlatformException catch (e) {
+      debugPrint("File picker platform error: $e");
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              l10n.settingsScreen_importErrorPlatform(
+                e.message ?? 'An unknown error occurred.',
+              ),
+            ),
+          ),
+        );
+      }
+    } catch (e) {
+      debugPrint("General file picker error: $e");
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(l10n.settingsScreen_importErrorGeneral)),
+        );
+      }
+    }
   }
 
   @override
@@ -491,9 +685,7 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
     final colorScheme = theme.colorScheme;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(l10n.settingsScreen_dataManagement),
-      ),
+      appBar: AppBar(title: Text(l10n.settingsScreen_dataManagement)),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
           : SingleChildScrollView(
@@ -504,12 +696,17 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
                   Card(
                     elevation: 0,
                     color: colorScheme.errorContainer,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         ListTile(
-                          leading: Icon(Icons.warning_amber_rounded, color: colorScheme.error),
+                          leading: Icon(
+                            Icons.warning_amber_rounded,
+                            color: colorScheme.error,
+                          ),
                           title: Text(
                             l10n.settingsScreen_dangerZone,
                             style: theme.textTheme.titleMedium?.copyWith(
@@ -518,61 +715,120 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
                             ),
                           ),
                         ),
-                        
-                        Divider(height: 1, color: colorScheme.onErrorContainer.withValues(alpha: 0.3)),
+
+                        Divider(
+                          height: 1,
+                          color: colorScheme.onErrorContainer.withValues(
+                            alpha: 0.3,
+                          ),
+                        ),
 
                         ListTile(
                           title: Text(
                             l10n.settingsScreen_clearAllLogs,
-                            style: theme.textTheme.titleMedium?.copyWith(color: colorScheme.onErrorContainer),
+                            style: theme.textTheme.titleMedium?.copyWith(
+                              color: colorScheme.onErrorContainer,
+                            ),
                           ),
                           subtitle: Text(
                             l10n.settingsScreen_clearAllLogsSubtitle,
-                            style: theme.textTheme.bodyMedium?.copyWith(color: colorScheme.onErrorContainer.withValues(alpha: 0.8)),
+                            style: theme.textTheme.bodyMedium?.copyWith(
+                              color: colorScheme.onErrorContainer.withValues(
+                                alpha: 0.8,
+                              ),
+                            ),
                           ),
-                          trailing: Icon(Icons.chevron_right, color: colorScheme.onErrorContainer),
+                          trailing: Icon(
+                            Icons.chevron_right,
+                            color: colorScheme.onErrorContainer,
+                          ),
                           onTap: showClearPeriodLogsDialog,
                         ),
 
                         ListTile(
                           title: Text(
                             l10n.settingsScreen_clearAllPillData,
-                            style: theme.textTheme.titleMedium?.copyWith(color: colorScheme.onErrorContainer),
+                            style: theme.textTheme.titleMedium?.copyWith(
+                              color: colorScheme.onErrorContainer,
+                            ),
                           ),
                           subtitle: Text(
                             l10n.settingsScreen_clearAllPillDataSubtitle,
-                            style: theme.textTheme.bodyMedium?.copyWith(color: colorScheme.onErrorContainer.withValues(alpha: 0.8)),
+                            style: theme.textTheme.bodyMedium?.copyWith(
+                              color: colorScheme.onErrorContainer.withValues(
+                                alpha: 0.8,
+                              ),
+                            ),
                           ),
-                          trailing: Icon(Icons.chevron_right, color: colorScheme.onErrorContainer),
+                          trailing: Icon(
+                            Icons.chevron_right,
+                            color: colorScheme.onErrorContainer,
+                          ),
                           onTap: showClearPillDataDialog,
                         ),
 
                         ListTile(
                           title: Text(
                             l10n.settingsScreen_clearAllLarcData,
-                            style: theme.textTheme.titleMedium?.copyWith(color: colorScheme.onErrorContainer),
+                            style: theme.textTheme.titleMedium?.copyWith(
+                              color: colorScheme.onErrorContainer,
+                            ),
                           ),
                           subtitle: Text(
                             l10n.settingsScreen_clearAllLarcDataSubtitle,
-                            style: theme.textTheme.bodyMedium?.copyWith(color: colorScheme.onErrorContainer.withValues(alpha: 0.8)),
+                            style: theme.textTheme.bodyMedium?.copyWith(
+                              color: colorScheme.onErrorContainer.withValues(
+                                alpha: 0.8,
+                              ),
+                            ),
                           ),
-                          trailing: Icon(Icons.chevron_right, color: colorScheme.onErrorContainer),
+                          trailing: Icon(
+                            Icons.chevron_right,
+                            color: colorScheme.onErrorContainer,
+                          ),
                           onTap: showClearLarcDataDialog,
+                        ),
+
+                        ListTile(
+                          title: Text(
+                            l10n.settingsScreen_clearAllSanitaryData,
+                            style: theme.textTheme.titleMedium?.copyWith(
+                              color: colorScheme.onErrorContainer,
+                            ),
+                          ),
+                          subtitle: Text(
+                            l10n.settingsScreen_clearAllSanitaryDataSubtitle,
+                            style: theme.textTheme.bodyMedium?.copyWith(
+                              color: colorScheme.onErrorContainer.withValues(
+                                alpha: 0.8,
+                              ),
+                            ),
+                          ),
+                          trailing: Icon(
+                            Icons.chevron_right,
+                            color: colorScheme.onErrorContainer,
+                          ),
+                          onTap: showClearSanitaryDataDialog,
                         ),
                       ],
                     ),
                   ),
-                  
+
                   const SizedBox(height: 24),
-                  
+
                   Card(
                     elevation: 1,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         ListTile(
-                          leading: Icon(Icons.download_rounded, color: colorScheme.primary),
+                          leading: Icon(
+                            Icons.download_rounded,
+                            color: colorScheme.primary,
+                          ),
                           title: Text(
                             l10n.settingsScreen_exportDataTitle,
                             style: theme.textTheme.titleMedium?.copyWith(
@@ -581,8 +837,13 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
                             ),
                           ),
                         ),
-                        
-                        Divider(height: 1, color: colorScheme.onErrorContainer.withValues(alpha: 0.3)),
+
+                        Divider(
+                          height: 1,
+                          color: colorScheme.onErrorContainer.withValues(
+                            alpha: 0.3,
+                          ),
+                        ),
 
                         ListTile(
                           title: Text(
@@ -622,6 +883,19 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
                           trailing: const Icon(Icons.chevron_right),
                           onTap: exportLarcsData,
                         ),
+
+                        ListTile(
+                          title: Text(
+                            l10n.settingsScreen_exportSanitaryData,
+                            style: theme.textTheme.titleMedium,
+                          ),
+                          subtitle: Text(
+                            l10n.settingsScreen_exportDataSubtitle,
+                            style: theme.textTheme.bodyMedium,
+                          ),
+                          trailing: const Icon(Icons.chevron_right),
+                          onTap: exportSanitaryData,
+                        ),
                       ],
                     ),
                   ),
@@ -630,12 +904,17 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
 
                   Card(
                     elevation: 1,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         ListTile(
-                          leading: Icon(Icons.upload_rounded, color: colorScheme.primary),
+                          leading: Icon(
+                            Icons.upload_rounded,
+                            color: colorScheme.primary,
+                          ),
                           title: Text(
                             l10n.settingsScreen_importDataTitle,
                             style: theme.textTheme.titleMedium?.copyWith(
@@ -645,7 +924,12 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
                           ),
                         ),
 
-                        Divider(height: 1, color: colorScheme.onErrorContainer.withValues(alpha: 0.3)),
+                        Divider(
+                          height: 1,
+                          color: colorScheme.onErrorContainer.withValues(
+                            alpha: 0.3,
+                          ),
+                        ),
 
                         ListTile(
                           title: Text(
@@ -659,7 +943,7 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
                           trailing: const Icon(Icons.chevron_right),
                           onTap: importPeriodData,
                         ),
-                        
+
                         ListTile(
                           title: Text(
                             l10n.settingsScreen_importPillData,
@@ -685,12 +969,25 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
                           trailing: const Icon(Icons.chevron_right),
                           onTap: importLarcData,
                         ),
+
+                        ListTile(
+                          title: Text(
+                            l10n.settingsScreen_importSanitaryData,
+                            style: theme.textTheme.titleMedium,
+                          ),
+                          subtitle: Text(
+                            l10n.settingsScreen_importDataSubtitle,
+                            style: theme.textTheme.bodyMedium,
+                          ),
+                          trailing: const Icon(Icons.chevron_right),
+                          onTap: importSanitaryData,
+                        ),
                       ],
                     ),
                   ),
                 ],
               ),
-          )
+            ),
     );
   }
 }
