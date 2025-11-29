@@ -40,7 +40,7 @@ class CountdownCard extends StatelessWidget {
               Icon(entry.type.getIcon(), color: theme.colorScheme.primary),
               const SizedBox(width: 8),
               Text(
-                "Active ${entry.type.getDisplayName(l10n)}",
+                l10n.sanitaryProductsScreen_activeProduct(entry.type.getDisplayName(l10n)),
                 style: theme.textTheme.titleMedium?.copyWith(
                   color: theme.colorScheme.primary,
                   fontWeight: FontWeight.bold
@@ -58,8 +58,7 @@ class CountdownCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8),
-          Text(
-            "Change due at ${DateFormat.jm().format(endTime)}",
+          Text(l10n.sanitaryProductsScreen_changeDueAt(DateFormat.jm().format(endTime)),
             style: theme.textTheme.bodyMedium?.copyWith(
               color: theme.colorScheme.onSurfaceVariant
             ),
@@ -84,7 +83,7 @@ class CountdownCard extends StatelessWidget {
                 child: FilledButton.icon(
                 onPressed: onRemove,
                 icon: const Icon(Icons.check),
-                label: const Text("Remove"),
+                label: Text(l10n.removed),
               ),
               ),
             ],
