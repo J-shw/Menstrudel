@@ -43,11 +43,9 @@ class _SanitaryScreenState extends State<SanitaryScreen> {
   Future<void> _loadHistory() async {
     setState(() { _isLoading = true; });
 
-    final loadedEntries = await repo.getAllLogs();
+    final loadedEntries = await repo.getInactiveLogs();
     final activeEntry = await repo.getActiveEntry();
 
-    
-    loadedEntries.sort((a, b) => b.logTime.compareTo(a.logTime));
 
     setState(() {
       _loggedSanitaryProducts = loadedEntries;
@@ -174,6 +172,10 @@ class _SanitaryScreenState extends State<SanitaryScreen> {
                   l10n: l10n,
                   onCancel: () async {
                     await _deleteLog(activeEntry.id!);
+                  },
+                  onRemove: () async {
+                    await repo.markEntryAsRemoved(activeEntry.id!, DateTime.now());
+                    _loadHistory();
                   },
                 ),
                 const SizedBox(height: 24),
