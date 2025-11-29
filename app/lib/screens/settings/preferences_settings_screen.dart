@@ -42,7 +42,7 @@ class PreferencesSettingsScreen extends StatelessWidget {
             title: Text(l10n.preferencesScreen_enableSanitaryProductsScreen),
             subtitle:
                 Text(l10n.preferencesScreen_enableSanitaryProductsScreenSubtitle),
-            secondary: const Icon(Icons.notifications_active_outlined),
+            secondary: const Icon(Icons.water_drop_outlined),
             value: settingsService.isSanitaryNavEnabled,
             onChanged: (bool value) {
               context.read<SettingsService>().setSanitaryNavEnabled(value);
