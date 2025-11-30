@@ -10,6 +10,7 @@
     "end": "Fin",
     "day": "Jour",
     "days": "Jours",
+    "hours": "Hours",
     "dayCount": "{count, plural, one{{count} Jour} other{{count} Jours}}",
     "@dayCount": {
         "description": "A message that displays a count of days, handling singular and plural forms.",
@@ -35,11 +36,14 @@
     "reset": "Reset",
     "add": "Add",
     "notSet": "Not set",
+    "removed": "Removed",
     "note": "Note",
     "systemDefault": "Valeur par défaut du système",
     "flow": "Flux /",
+    "type": "Type",
     "navBar_insights": "Statistiques",
     "navBar_logs": "Historique",
+    "navBar_sanitary": "Sanitary",
     "navBar_pill": "Pilule",
     "navBar_larc": "LARC",
     "navBar_settings": "Paramètres",
@@ -67,6 +71,10 @@
     "larcType_injection": "Injection",
     "larcType_ring": "Ring",
     "larcType_patch": "Patch",
+    "sanitaryProduct_tampon": "Tampon",
+    "sanitaryProduct_pad": "Pad",
+    "sanitaryProduct_menstrualCup": "Menstrual Cup",
+    "sanitaryProduct_periodUnderwear": "Period Underwear",
     "error_valueMustbePositive": "Value must be positive",
     "error_valueCannotBeNull": "Value cannot be null",
     "notification_periodTitle": "Règles imminentes",
@@ -103,14 +111,6 @@
     "@notification_pillBody": {
         "description": "Body for the daily pill reminder notification."
     },
-    "notification_tamponReminderTitle": "Rappel de tampon",
-    "@notification_tamponReminderTitle": {
-        "description": "Title for the tampon reminder notification."
-    },
-    "notification_tamponReminderBody": "N'oubliez pas de changer votre tampon.",
-    "@notification_tamponReminderBody": {
-        "description": "Body for the tampon reminder notification."
-    },
     "notification_larcTitle": "LARC Reminder",
     "@notification_larcTitle": {
         "description": "Title for the LARC reminder notification."
@@ -129,12 +129,13 @@
             }
         }
     },
+    "notification_SanitaryProductReminderTitle": "Sanitary Product Reminder",
+    "notification_SanitaryProductReminderBody": "Remember to change your product.",
     "mainScreen_insightsPageTitle": "Votre Aperçu",
+    "mainScreen_sanitaryPageTitle": "Sanitary Products",
     "mainScreen_pillsPageTitle": "Pilules",
     "mainScreen_LarcsPageTitle": "LARCs",
     "mainScreen_settingsPageTitle": "Paramètres",
-    "mainScreen_tooltipSetReminder": "Rappel de tampon",
-    "mainScreen_tooltipCancelReminder": "Annuler le rappel",
     "mainScreen_tooltipLogPeriod": "Historique des règles",
     "insightsScreen_errorPrefix": "Erreur :",
     "insightsScreen_noDataAvailable": "Aucune donnée disponible.",
@@ -151,9 +152,6 @@
             }
         }
     },
-    "logScreen_tamponReminderSetFor": "Rappel de tampon réglé pour",
-    "logScreen_tamponReminderCancelled": "Rappel de tampon annulé.",
-    "logScreen_couldNotCancelReminder": "Impossible d’annuler le rappel",
     "pillScreen_pillForTodayMarkedAsTaken": "Pilule du jour marquée comme prise.",
     "pillScreen_pillForTodayMarkedAsSkipped": "Pilule du jour marquée comme sautée.",
     "larcScreen_noLarcRecordsFound": "No LARC records found.",
@@ -180,6 +178,38 @@
     "larcScreen_activeLarcsDescription": "Currently monitored LARC entries.",
     "larcScreen_noActiveRecords": "No LARC is currently active. Please log a new entry.",
     "larcScreen_noHistoryRecords": "No past or overdue LARC records found.",
+    "sanitaryProductsScreen_noSanitaryProductRecordsFound": "No sanitary product records found.",
+    "sanitaryProductsScreen_history": "History ({history})",
+    "@sanitaryProductsScreen_history": {
+        "description": "The total sanitary product history count.",
+        "placeholders": {
+            "history": {
+                "type": "int",
+                "example": "5"
+            }
+        }
+    },
+    "sanitaryProductsScreen_noHistoryRecords": "No past sanitary product records found.",
+    "sanitaryProductsScreen_activeProduct": "Active {activeType}",
+    "@sanitaryProductsScreen_activeProduct": {
+        "description": "Label showing the type of active sanitary product.",
+        "placeholders": {
+            "activeType": {
+                "type": "String",
+                "example": "Tampon"
+            }
+        }
+    },
+    "sanitaryProductsScreen_changeDueAt": "Change Due At {time}",
+    "@sanitaryProductsScreen_changeDueAt": {
+        "description": "Label showing the time when the sanitary product needs to be changed.",
+        "placeholders": {
+            "time": {
+                "type": "String",
+                "example": "3:30 PM"
+            }
+        }
+    },
     "settingsScreen_selectHistoryView": "Sélectionner la vue de l'historique",
     "settingsScreen_deleteRegimen_question": "Supprimer le traitement ?",
     "settingsScreen_deleteRegimenDescription": "Cela supprimera les réglages de votre plaquette actuelle ainsi que tous les journaux de pilules associés. Cette action est irréversible.",
@@ -271,9 +301,15 @@
     "settingsScreen_clearAllLarcData_question": "Clear All LARC Data?",
     "settingsScreen_deleteAllLarcDataDescription": "This will permanently delete your LARC history.",
     "settingsScreen_allLarcDataCleared": "All LARC data has been cleared.",
+    "settingsScreen_clearAllSanitaryData": "Clear All Sanitary Products Data",
+    "settingsScreen_clearAllSanitaryDataSubtitle": "Removes your sanitary products history.",
+    "settingsScreen_clearAllSanitaryData_question": "Clear All Sanitary Products Data?",
+    "settingsScreen_deleteAllSanitaryDataDescription": "This will permanently delete your sanitary products history.",
+    "settingsScreen_allSanitaryDataCleared": "All sanitary products data has been cleared.",
     "settingsScreen_exportPeriodData": "Exporter les donnés de vos périodes",
     "settingsScreen_exportPillData": "Exporter données de vos pilules",
     "settingsScreen_exportLarcsData": "Export LARCs Data",
+    "settingsScreen_exportSanitaryData": "Export Sanitary Products Data",
     "settingsScreen_exportDataSubtitle": "Créer un fichier de sauvegarde JSON.",
     "settingsScreen_exportSuccessful": "Données exportées avec succès.",
     "settingsScreen_exportFailed": "L'exportation a échoué. Veuillez réessayer.",
@@ -284,12 +320,16 @@
     "settingsScreen_importPeriodData": "Importer Les Données Des Périodes",
     "settingsScreen_importPillData": "Importer Les Données Des Pilules",
     "settingsScreen_importLarcsData": "Import LARCs Data",
+    "settingsScreen_importSanitaryData": "Import Sanitary Products Data",
     "settingsScreen_importDataSubtitle": "Écraser les données existantes.",
     "settingsScreen_importPeriodData_question": "Êtes-vous sûr de vouloir importer des données de période ?",
     "settingsScreen_importPillData_question": "Êtes-vous sûr de vouloir importer les données de la pilule ?",
     "settingsScreen_importLarcData_question": "Are you sure you want to import LARC Data?",
+    "settingsScreen_importSanitaryData_question": "Are you sure you want to import Sanitary Products Data?",
     "settingsScreen_importPeriodDataDescription": "L'importation de données écrasera définitivement tout votre historique et paramètres de règles existants. Cette opération est irréversible.",
     "settingsScreen_importPillDataDescription": "L'importation de données écrasera définitivement tout votre historique de pilules. Cette opération est irréversible.",
+    "settingsScreen_importLarcDataDescription": "Importing data will permanently overwrite all your existing LARC history. This cannot be undone.",
+    "settingsScreen_importSanitaryDataDescription": "Importing data will permanently overwrite all your existing sanitary product history. This cannot be undone.",
     "settingsScreen_importSuccessful": "Données importées avec succès !",
     "settingsScreen_importFailed": "Échec de l'importation des données. Veuillez réessayer.",
     "settingsScreen_importInvalidFile": "Format de fichier ou structure de données non valide.",
@@ -313,8 +353,8 @@
     "securityScreen_noBiometricsAvailable": "Aucun code d'accès, empreinte digitale ou Face ID n'a été trouvé. Veuillez en configurer un dans les paramètres de votre appareil.",
     "settingsScreen_preferences": "Préférences",
     "preferencesScreen_language": "Langue",
-    "preferencesScreen_tamponReminderButton": "Toujours afficher le bouton de rappel",
-    "preferencesScreen_tamponReminderButtonSubtitle": "Rend le bouton de rappel du tampon visible en permanence sur l'écran principal.",
+    "preferencesScreen_enableSanitaryProductsScreen": "Enable Sanitary Products Screen",
+    "preferencesScreen_enableSanitaryProductsScreenSubtitle": "Show the Sanitary Products tab on the main navigation bar.",
     "settingsScreen_about": "À propos",
     "aboutScreen_version": "Version",
     "aboutScreen_github": "GitHub",
@@ -322,16 +362,6 @@
     "aboutScreen_share": "Partager",
     "aboutScreen_shareSubtitle": "Partager l'appli avec vos proches",
     "aboutScreen_urlError": "Impossible d'ouvrir le lien.",
-    "tamponReminderDialog_tamponReminderTitle": "Rappel de tampon",
-    "tamponReminderDialog_tamponReminderMaxDuration": "La durée maximale est de 8 heures.",
-    "reminderCountdownDialog_title": "Rappel à prévoir dans",
-    "reminderCountdownDialog_dueAt": "À prévoir à {time}",
-    "@reminderCountdownDialog_dueAt": {
-        "description": "Indicates the time a reminder is due. The {time} placeholder will be a formatted time string (e.g., '2:30 PM').",
-        "placeholders": {
-            "time": {}
-        }
-    },
     "cycleLengthVarianceWidget_LogAtLeastTwoPeriods": "Il faut au moins deux cycles pour observer une variance.",
     "cycleLengthVarianceWidget_cycleAndPeriodVeriance": "Variabilité du cycle et des périodes",
     "cycleLengthVarianceWidget_averageCycle": "Cycle Moyen",
@@ -388,6 +418,19 @@
     "periodDetailsSheet_symptoms": "Symptômes",
     "periodDetailsSheet_flow": "Flux",
     "larcEntrySheet_logLARCDetails": "Log LARC Details",
+    "sanitaryEntrySheet_logSanitaryProduct": "Log Sanitary Product",
+    "sanitaryEntrySheet_setReminderDuration": "Set Reminder Duration",
+    "sanitaryEntrySheet_maxDuration": "Max Duration: {hours} hours",
+    "@sanitaryEntrySheet_maxDuration": {
+        "description": "Label showing the maximum duration for the selected sanitary product type.",
+        "placeholders": {
+            "hours": {
+                "type": "int"
+            }
+        }
+    },
+    "sanitaryEntrySheet_futureLogTimeError": "Log time cannot be in the future.",
+    "sanitaryEntrySheet_pastReminderTimeError": "Reminder end time cannot be in the past.",
     "periodPredictionCircle_days": "{count, plural, =1{Jour} other{Jours}}",
     "@periodPredictionCircle_days": {
         "description": "A label showing the total number of days until period is due.",
