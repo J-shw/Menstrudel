@@ -14,7 +14,6 @@ import 'package:menstrudel/services/period_logger_service.dart';
 import 'package:menstrudel/services/wear_sync_service.dart';
 import 'package:menstrudel/services/widget_controller.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
-import 'package:menstrudel/widgets/dialogs/tampon_reminder_dialog.dart';
 
 class PeriodService extends ChangeNotifier {
   final SettingsService _settingsService;
@@ -30,7 +29,6 @@ class PeriodService extends ChangeNotifier {
   PeriodPredictionResult? _predictionResult;
   int _circleCurrentValue = 0;
   int _circleMaxValue = 28;
-  bool _isTamponReminderSet = false;
   bool _isPeriodOngoing = false;
   Map<DateTime, PeriodDay> _logMap = {};
   DateTime? _earliestLogDate;
@@ -48,8 +46,6 @@ class PeriodService extends ChangeNotifier {
   int get circleCurrentValue => _circleCurrentValue;
   /// The maximum value for the main progress circle (e.g., average cycle length).
   int get circleMaxValue => _circleMaxValue;
-  /// Whether a tampon reminder notification is currently scheduled.
-  bool get isTamponReminderSet => _isTamponReminderSet;
   /// Whether the user's period is considered to be ongoing today.
   bool get isPeriodOngoing => _isPeriodOngoing;
   /// A pre-computed list of timeline items for the PeriodListView.
@@ -109,7 +105,6 @@ class PeriodService extends ChangeNotifier {
   Future<void> _fetchDataFromDb() async {
     _periodLogEntries = await _periodsRepo.readAllPeriodLogs();
     _periodEntries = await _periodsRepo.readAllPeriods();
-    _isTamponReminderSet = await NotificationService.isTamponReminderScheduled();
   }
 
   /// Calculates the period prediction and ongoing status.
@@ -225,58 +220,6 @@ class PeriodService extends ChangeNotifier {
     if(context.mounted){
       await _refreshData(context);
       _isLoading = false;
-      notifyListeners();
-    }
-  }
-
-  /// Shows the dialog and schedules a tampon reminder.
-  Future<void> handleTamponReminder(BuildContext context) async {
-    final l10n = AppLocalizations.of(context)!;
-
-    final reminderDateTime = await showDialog<DateTime>(
-      context: context,
-      builder: (BuildContext context) => const TimeSelectionDialog(),
-    );
-
-    if (reminderDateTime == null) return;
-
-    await NotificationService.scheduleTamponReminder(
-      reminderDateTime: reminderDateTime,
-      title: l10n.notification_tamponReminderTitle,
-      body: l10n.notification_tamponReminderBody,
-    );
-    
-    await NotificationService.setTamponReminderScheduledTime(reminderDateTime);
-
-    if (context.mounted) {
-      final formattedTime = TimeOfDay.fromDateTime(reminderDateTime).format(context);
-      ScaffoldMessenger.of(context)
-        ..hideCurrentSnackBar()
-        ..showSnackBar(SnackBar(content: Text('${l10n.logScreen_tamponReminderSetFor} $formattedTime')));
-        
-      _isTamponReminderSet = true;
-      notifyListeners();
-    }
-  }
-
-  /// Cancels an active tampon reminder.
-  Future<void> handleCancelReminder(BuildContext context) async {
-    final l10n = AppLocalizations.of(context)!;
-    try {
-      await NotificationService.cancelTamponReminder();
-      if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(l10n.logScreen_tamponReminderCancelled)),
-        );
-      }
-    } catch (e) {
-      if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('${l10n.logScreen_couldNotCancelReminder}: $e'), backgroundColor: Colors.red),
-        );
-      }
-    } finally {
-      _isTamponReminderSet = false;
       notifyListeners();
     }
   }

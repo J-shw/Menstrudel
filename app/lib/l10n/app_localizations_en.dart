@@ -39,6 +39,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get days => 'Days';
 
   @override
+  String get hours => 'Hours';
+
+  @override
   String dayCount(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
@@ -95,6 +98,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get notSet => 'Not set';
 
   @override
+  String get removed => 'Removed';
+
+  @override
   String get note => 'Note';
 
   @override
@@ -104,10 +110,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get flow => 'Flow';
 
   @override
+  String get type => 'Type';
+
+  @override
   String get navBar_insights => 'Insights';
 
   @override
   String get navBar_logs => 'Logs';
+
+  @override
+  String get navBar_sanitary => 'Sanitary';
 
   @override
   String get navBar_pill => 'Pill';
@@ -191,6 +203,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get larcType_patch => 'Patch';
 
   @override
+  String get sanitaryProduct_tampon => 'Tampon';
+
+  @override
+  String get sanitaryProduct_pad => 'Pad';
+
+  @override
+  String get sanitaryProduct_menstrualCup => 'Menstrual Cup';
+
+  @override
+  String get sanitaryProduct_periodUnderwear => 'Period Underwear';
+
+  @override
   String get error_valueMustbePositive => 'Value must be positive';
 
   @override
@@ -232,13 +256,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'Don\'t forget to take your pill for today.';
 
   @override
-  String get notification_tamponReminderTitle => 'Tampon Reminder';
-
-  @override
-  String get notification_tamponReminderBody =>
-      'Remember to change your tampon.';
-
-  @override
   String get notification_larcTitle => 'LARC Reminder';
 
   @override
@@ -247,7 +264,18 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get notification_SanitaryProductReminderTitle =>
+      'Sanitary Product Reminder';
+
+  @override
+  String get notification_SanitaryProductReminderBody =>
+      'Remember to change your product.';
+
+  @override
   String get mainScreen_insightsPageTitle => 'Your Insights';
+
+  @override
+  String get mainScreen_sanitaryPageTitle => 'Sanitary Products';
 
   @override
   String get mainScreen_pillsPageTitle => 'Pills';
@@ -257,12 +285,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get mainScreen_settingsPageTitle => 'Settings';
-
-  @override
-  String get mainScreen_tooltipSetReminder => 'Tampon reminder';
-
-  @override
-  String get mainScreen_tooltipCancelReminder => 'Cancel reminder';
 
   @override
   String get mainScreen_tooltipLogPeriod => 'Log period';
@@ -298,15 +320,6 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get logScreen_tamponReminderSetFor => 'Tampon reminder set for';
-
-  @override
-  String get logScreen_tamponReminderCancelled => 'Tampon reminder cancelled.';
-
-  @override
-  String get logScreen_couldNotCancelReminder => 'Could not cancel reminder';
-
-  @override
   String get pillScreen_pillForTodayMarkedAsTaken =>
       'Pill for today marked as taken.';
 
@@ -338,6 +351,29 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get larcScreen_noHistoryRecords =>
       'No past or overdue LARC records found.';
+
+  @override
+  String get sanitaryProductsScreen_noSanitaryProductRecordsFound =>
+      'No sanitary product records found.';
+
+  @override
+  String sanitaryProductsScreen_history(int history) {
+    return 'History ($history)';
+  }
+
+  @override
+  String get sanitaryProductsScreen_noHistoryRecords =>
+      'No past sanitary product records found.';
+
+  @override
+  String sanitaryProductsScreen_activeProduct(String activeType) {
+    return 'Active $activeType';
+  }
+
+  @override
+  String sanitaryProductsScreen_changeDueAt(String time) {
+    return 'Change Due At $time';
+  }
 
   @override
   String get settingsScreen_selectHistoryView => 'Select History View';
@@ -563,6 +599,26 @@ class AppLocalizationsEn extends AppLocalizations {
       'All LARC data has been cleared.';
 
   @override
+  String get settingsScreen_clearAllSanitaryData =>
+      'Clear All Sanitary Products Data';
+
+  @override
+  String get settingsScreen_clearAllSanitaryDataSubtitle =>
+      'Removes your sanitary products history.';
+
+  @override
+  String get settingsScreen_clearAllSanitaryData_question =>
+      'Clear All Sanitary Products Data?';
+
+  @override
+  String get settingsScreen_deleteAllSanitaryDataDescription =>
+      'This will permanently delete your sanitary products history.';
+
+  @override
+  String get settingsScreen_allSanitaryDataCleared =>
+      'All sanitary products data has been cleared.';
+
+  @override
   String get settingsScreen_exportPeriodData => 'Export Period Data';
 
   @override
@@ -570,6 +626,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get settingsScreen_exportLarcsData => 'Export LARCs Data';
+
+  @override
+  String get settingsScreen_exportSanitaryData =>
+      'Export Sanitary Products Data';
 
   @override
   String get settingsScreen_exportDataSubtitle => 'Create a JSON backup file.';
@@ -603,6 +663,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsScreen_importLarcsData => 'Import LARCs Data';
 
   @override
+  String get settingsScreen_importSanitaryData =>
+      'Import Sanitary Products Data';
+
+  @override
   String get settingsScreen_importDataSubtitle => 'Overwrites existing data.';
 
   @override
@@ -618,12 +682,24 @@ class AppLocalizationsEn extends AppLocalizations {
       'Are you sure you want to import LARC Data?';
 
   @override
+  String get settingsScreen_importSanitaryData_question =>
+      'Are you sure you want to import Sanitary Products Data?';
+
+  @override
   String get settingsScreen_importPeriodDataDescription =>
       'Importing data will permanently overwrite all your existing period logs and period settings. This cannot be undone.';
 
   @override
   String get settingsScreen_importPillDataDescription =>
       'Importing data will permanently overwrite all your existing pill history. This cannot be undone.';
+
+  @override
+  String get settingsScreen_importLarcDataDescription =>
+      'Importing data will permanently overwrite all your existing LARC history. This cannot be undone.';
+
+  @override
+  String get settingsScreen_importSanitaryDataDescription =>
+      'Importing data will permanently overwrite all your existing sanitary product history. This cannot be undone.';
 
   @override
   String get settingsScreen_importSuccessful => 'Data imported successfully!';
@@ -666,12 +742,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get preferencesScreen_language => 'Language';
 
   @override
-  String get preferencesScreen_tamponReminderButton =>
-      'Always Show Reminder Button';
+  String get preferencesScreen_enableSanitaryProductsScreen =>
+      'Enable Sanitary Products Screen';
 
   @override
-  String get preferencesScreen_tamponReminderButtonSubtitle =>
-      'Makes the tampon reminder button permanently visible on the main screen.';
+  String get preferencesScreen_enableSanitaryProductsScreenSubtitle =>
+      'Show the Sanitary Products tab on the main navigation bar.';
 
   @override
   String get settingsScreen_about => 'About';
@@ -693,21 +769,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get aboutScreen_urlError => 'Could not open the link.';
-
-  @override
-  String get tamponReminderDialog_tamponReminderTitle => 'Tampon Reminder';
-
-  @override
-  String get tamponReminderDialog_tamponReminderMaxDuration =>
-      'Max duration is 8 hours.';
-
-  @override
-  String get reminderCountdownDialog_title => 'Reminder Due In';
-
-  @override
-  String reminderCountdownDialog_dueAt(Object time) {
-    return 'Due at $time';
-  }
 
   @override
   String get cycleLengthVarianceWidget_LogAtLeastTwoPeriods =>
@@ -849,6 +910,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get larcEntrySheet_logLARCDetails => 'Log LARC Details';
+
+  @override
+  String get sanitaryEntrySheet_logSanitaryProduct => 'Log Sanitary Product';
+
+  @override
+  String get sanitaryEntrySheet_setReminderDuration => 'Set Reminder Duration';
+
+  @override
+  String sanitaryEntrySheet_maxDuration(int hours) {
+    return 'Max Duration: $hours hours';
+  }
+
+  @override
+  String get sanitaryEntrySheet_futureLogTimeError =>
+      'Log time cannot be in the future.';
+
+  @override
+  String get sanitaryEntrySheet_pastReminderTimeError =>
+      'Reminder end time cannot be in the past.';
 
   @override
   String periodPredictionCircle_days(int count) {

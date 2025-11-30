@@ -1,33 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
-import 'package:menstrudel/models/birth_control/larcs/larc_log_entry.dart';
-import 'package:menstrudel/models/birth_control/larcs/larc_types_enum.dart';
+import 'package:menstrudel/models/sanitary_products/sanitary_products_entry.dart';
+import 'package:menstrudel/models/sanitary_products/sanitary_products_enum.dart';
 
-class LarcLogCard extends StatelessWidget {
-  const LarcLogCard({
+class SanitaryProductsLogCard extends StatelessWidget {
+  const SanitaryProductsLogCard({
     super.key,
     required this.entry,
     required this.l10n,
-    required this.injectionDate,
-    required this.dueDateString,
-    required this.isOverdue,
+    required this.logDate,
     required this.onTap,
   });
 
-  final LarcLogEntry entry;
+  final SanitaryProductsEntry entry;
   final AppLocalizations l10n;
-  final String injectionDate;
-  final String dueDateString;
-  final bool isOverdue;
+  final String logDate;
   final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-
-    Color dueDateColor = isOverdue ? colorScheme.error : colorScheme.tertiary;
-
-    final String dueLabel = isOverdue ? l10n.overdue : l10n.nextDue;
 
     return Card(
       elevation: 0,
@@ -73,33 +65,13 @@ class LarcLogCard extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(height: 4),
-                      // Log Date
+
                       Text(
-                        'Log Date: $injectionDate',
+                        'Log Date: $logDate',
                         style: TextStyle(
                           fontSize: 14,
                           color: colorScheme.onSurfaceVariant,
                         ),
-                      ),
-                      const SizedBox(height: 4),
-                      // Next Due Date
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.calendar_today,
-                            size: 14,
-                            color: dueDateColor,
-                          ),
-                          const SizedBox(width: 4),
-                          Text(
-                            '$dueLabel: $dueDateString',
-                            style: TextStyle(
-                              color: dueDateColor,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 14,
-                            ),
-                          ),
-                        ],
                       ),
                     ],
                   ),

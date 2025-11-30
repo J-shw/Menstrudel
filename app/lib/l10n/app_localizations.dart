@@ -162,6 +162,12 @@ abstract class AppLocalizations {
   /// **'Days'**
   String get days;
 
+  /// No description provided for @hours.
+  ///
+  /// In en, this message translates to:
+  /// **'Hours'**
+  String get hours;
+
   /// A message that displays a count of days, handling singular and plural forms.
   ///
   /// In en, this message translates to:
@@ -258,6 +264,12 @@ abstract class AppLocalizations {
   /// **'Not set'**
   String get notSet;
 
+  /// No description provided for @removed.
+  ///
+  /// In en, this message translates to:
+  /// **'Removed'**
+  String get removed;
+
   /// No description provided for @note.
   ///
   /// In en, this message translates to:
@@ -276,6 +288,12 @@ abstract class AppLocalizations {
   /// **'Flow'**
   String get flow;
 
+  /// No description provided for @type.
+  ///
+  /// In en, this message translates to:
+  /// **'Type'**
+  String get type;
+
   /// No description provided for @navBar_insights.
   ///
   /// In en, this message translates to:
@@ -287,6 +305,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Logs'**
   String get navBar_logs;
+
+  /// No description provided for @navBar_sanitary.
+  ///
+  /// In en, this message translates to:
+  /// **'Sanitary'**
+  String get navBar_sanitary;
 
   /// No description provided for @navBar_pill.
   ///
@@ -450,6 +474,30 @@ abstract class AppLocalizations {
   /// **'Patch'**
   String get larcType_patch;
 
+  /// No description provided for @sanitaryProduct_tampon.
+  ///
+  /// In en, this message translates to:
+  /// **'Tampon'**
+  String get sanitaryProduct_tampon;
+
+  /// No description provided for @sanitaryProduct_pad.
+  ///
+  /// In en, this message translates to:
+  /// **'Pad'**
+  String get sanitaryProduct_pad;
+
+  /// No description provided for @sanitaryProduct_menstrualCup.
+  ///
+  /// In en, this message translates to:
+  /// **'Menstrual Cup'**
+  String get sanitaryProduct_menstrualCup;
+
+  /// No description provided for @sanitaryProduct_periodUnderwear.
+  ///
+  /// In en, this message translates to:
+  /// **'Period Underwear'**
+  String get sanitaryProduct_periodUnderwear;
+
   /// No description provided for @error_valueMustbePositive.
   ///
   /// In en, this message translates to:
@@ -498,18 +546,6 @@ abstract class AppLocalizations {
   /// **'Don\'t forget to take your pill for today.'**
   String get notification_pillBody;
 
-  /// Title for the tampon reminder notification.
-  ///
-  /// In en, this message translates to:
-  /// **'Tampon Reminder'**
-  String get notification_tamponReminderTitle;
-
-  /// Body for the tampon reminder notification.
-  ///
-  /// In en, this message translates to:
-  /// **'Remember to change your tampon.'**
-  String get notification_tamponReminderBody;
-
   /// Title for the LARC reminder notification.
   ///
   /// In en, this message translates to:
@@ -522,11 +558,29 @@ abstract class AppLocalizations {
   /// **'{type} is due for renewal in {days} days.'**
   String notification_larcBody(String type, int days);
 
+  /// No description provided for @notification_SanitaryProductReminderTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sanitary Product Reminder'**
+  String get notification_SanitaryProductReminderTitle;
+
+  /// No description provided for @notification_SanitaryProductReminderBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Remember to change your product.'**
+  String get notification_SanitaryProductReminderBody;
+
   /// No description provided for @mainScreen_insightsPageTitle.
   ///
   /// In en, this message translates to:
   /// **'Your Insights'**
   String get mainScreen_insightsPageTitle;
+
+  /// No description provided for @mainScreen_sanitaryPageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sanitary Products'**
+  String get mainScreen_sanitaryPageTitle;
 
   /// No description provided for @mainScreen_pillsPageTitle.
   ///
@@ -545,18 +599,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Settings'**
   String get mainScreen_settingsPageTitle;
-
-  /// No description provided for @mainScreen_tooltipSetReminder.
-  ///
-  /// In en, this message translates to:
-  /// **'Tampon reminder'**
-  String get mainScreen_tooltipSetReminder;
-
-  /// No description provided for @mainScreen_tooltipCancelReminder.
-  ///
-  /// In en, this message translates to:
-  /// **'Cancel reminder'**
-  String get mainScreen_tooltipCancelReminder;
 
   /// No description provided for @mainScreen_tooltipLogPeriod.
   ///
@@ -606,24 +648,6 @@ abstract class AppLocalizations {
   /// **'{count, plural, =1{Period overdue by 1 day} other{Period overdue by {count} days}}'**
   String logScreen_periodOverdueBy(int count);
 
-  /// No description provided for @logScreen_tamponReminderSetFor.
-  ///
-  /// In en, this message translates to:
-  /// **'Tampon reminder set for'**
-  String get logScreen_tamponReminderSetFor;
-
-  /// No description provided for @logScreen_tamponReminderCancelled.
-  ///
-  /// In en, this message translates to:
-  /// **'Tampon reminder cancelled.'**
-  String get logScreen_tamponReminderCancelled;
-
-  /// No description provided for @logScreen_couldNotCancelReminder.
-  ///
-  /// In en, this message translates to:
-  /// **'Could not cancel reminder'**
-  String get logScreen_couldNotCancelReminder;
-
   /// No description provided for @pillScreen_pillForTodayMarkedAsTaken.
   ///
   /// In en, this message translates to:
@@ -671,6 +695,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No past or overdue LARC records found.'**
   String get larcScreen_noHistoryRecords;
+
+  /// No description provided for @sanitaryProductsScreen_noSanitaryProductRecordsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No sanitary product records found.'**
+  String get sanitaryProductsScreen_noSanitaryProductRecordsFound;
+
+  /// The total sanitary product history count.
+  ///
+  /// In en, this message translates to:
+  /// **'History ({history})'**
+  String sanitaryProductsScreen_history(int history);
+
+  /// No description provided for @sanitaryProductsScreen_noHistoryRecords.
+  ///
+  /// In en, this message translates to:
+  /// **'No past sanitary product records found.'**
+  String get sanitaryProductsScreen_noHistoryRecords;
+
+  /// Label showing the type of active sanitary product.
+  ///
+  /// In en, this message translates to:
+  /// **'Active {activeType}'**
+  String sanitaryProductsScreen_activeProduct(String activeType);
+
+  /// Label showing the time when the sanitary product needs to be changed.
+  ///
+  /// In en, this message translates to:
+  /// **'Change Due At {time}'**
+  String sanitaryProductsScreen_changeDueAt(String time);
 
   /// No description provided for @settingsScreen_selectHistoryView.
   ///
@@ -1053,6 +1107,36 @@ abstract class AppLocalizations {
   /// **'All LARC data has been cleared.'**
   String get settingsScreen_allLarcDataCleared;
 
+  /// No description provided for @settingsScreen_clearAllSanitaryData.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear All Sanitary Products Data'**
+  String get settingsScreen_clearAllSanitaryData;
+
+  /// No description provided for @settingsScreen_clearAllSanitaryDataSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Removes your sanitary products history.'**
+  String get settingsScreen_clearAllSanitaryDataSubtitle;
+
+  /// No description provided for @settingsScreen_clearAllSanitaryData_question.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear All Sanitary Products Data?'**
+  String get settingsScreen_clearAllSanitaryData_question;
+
+  /// No description provided for @settingsScreen_deleteAllSanitaryDataDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'This will permanently delete your sanitary products history.'**
+  String get settingsScreen_deleteAllSanitaryDataDescription;
+
+  /// No description provided for @settingsScreen_allSanitaryDataCleared.
+  ///
+  /// In en, this message translates to:
+  /// **'All sanitary products data has been cleared.'**
+  String get settingsScreen_allSanitaryDataCleared;
+
   /// No description provided for @settingsScreen_exportPeriodData.
   ///
   /// In en, this message translates to:
@@ -1070,6 +1154,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Export LARCs Data'**
   String get settingsScreen_exportLarcsData;
+
+  /// No description provided for @settingsScreen_exportSanitaryData.
+  ///
+  /// In en, this message translates to:
+  /// **'Export Sanitary Products Data'**
+  String get settingsScreen_exportSanitaryData;
 
   /// No description provided for @settingsScreen_exportDataSubtitle.
   ///
@@ -1131,6 +1221,12 @@ abstract class AppLocalizations {
   /// **'Import LARCs Data'**
   String get settingsScreen_importLarcsData;
 
+  /// No description provided for @settingsScreen_importSanitaryData.
+  ///
+  /// In en, this message translates to:
+  /// **'Import Sanitary Products Data'**
+  String get settingsScreen_importSanitaryData;
+
   /// No description provided for @settingsScreen_importDataSubtitle.
   ///
   /// In en, this message translates to:
@@ -1155,6 +1251,12 @@ abstract class AppLocalizations {
   /// **'Are you sure you want to import LARC Data?'**
   String get settingsScreen_importLarcData_question;
 
+  /// No description provided for @settingsScreen_importSanitaryData_question.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to import Sanitary Products Data?'**
+  String get settingsScreen_importSanitaryData_question;
+
   /// No description provided for @settingsScreen_importPeriodDataDescription.
   ///
   /// In en, this message translates to:
@@ -1166,6 +1268,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Importing data will permanently overwrite all your existing pill history. This cannot be undone.'**
   String get settingsScreen_importPillDataDescription;
+
+  /// No description provided for @settingsScreen_importLarcDataDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Importing data will permanently overwrite all your existing LARC history. This cannot be undone.'**
+  String get settingsScreen_importLarcDataDescription;
+
+  /// No description provided for @settingsScreen_importSanitaryDataDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Importing data will permanently overwrite all your existing sanitary product history. This cannot be undone.'**
+  String get settingsScreen_importSanitaryDataDescription;
 
   /// No description provided for @settingsScreen_importSuccessful.
   ///
@@ -1233,17 +1347,17 @@ abstract class AppLocalizations {
   /// **'Language'**
   String get preferencesScreen_language;
 
-  /// No description provided for @preferencesScreen_tamponReminderButton.
+  /// No description provided for @preferencesScreen_enableSanitaryProductsScreen.
   ///
   /// In en, this message translates to:
-  /// **'Always Show Reminder Button'**
-  String get preferencesScreen_tamponReminderButton;
+  /// **'Enable Sanitary Products Screen'**
+  String get preferencesScreen_enableSanitaryProductsScreen;
 
-  /// No description provided for @preferencesScreen_tamponReminderButtonSubtitle.
+  /// No description provided for @preferencesScreen_enableSanitaryProductsScreenSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Makes the tampon reminder button permanently visible on the main screen.'**
-  String get preferencesScreen_tamponReminderButtonSubtitle;
+  /// **'Show the Sanitary Products tab on the main navigation bar.'**
+  String get preferencesScreen_enableSanitaryProductsScreenSubtitle;
 
   /// No description provided for @settingsScreen_about.
   ///
@@ -1286,30 +1400,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Could not open the link.'**
   String get aboutScreen_urlError;
-
-  /// No description provided for @tamponReminderDialog_tamponReminderTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Tampon Reminder'**
-  String get tamponReminderDialog_tamponReminderTitle;
-
-  /// No description provided for @tamponReminderDialog_tamponReminderMaxDuration.
-  ///
-  /// In en, this message translates to:
-  /// **'Max duration is 8 hours.'**
-  String get tamponReminderDialog_tamponReminderMaxDuration;
-
-  /// No description provided for @reminderCountdownDialog_title.
-  ///
-  /// In en, this message translates to:
-  /// **'Reminder Due In'**
-  String get reminderCountdownDialog_title;
-
-  /// Indicates the time a reminder is due. The {time} placeholder will be a formatted time string (e.g., '2:30 PM').
-  ///
-  /// In en, this message translates to:
-  /// **'Due at {time}'**
-  String reminderCountdownDialog_dueAt(Object time);
 
   /// No description provided for @cycleLengthVarianceWidget_LogAtLeastTwoPeriods.
   ///
@@ -1544,6 +1634,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Log LARC Details'**
   String get larcEntrySheet_logLARCDetails;
+
+  /// No description provided for @sanitaryEntrySheet_logSanitaryProduct.
+  ///
+  /// In en, this message translates to:
+  /// **'Log Sanitary Product'**
+  String get sanitaryEntrySheet_logSanitaryProduct;
+
+  /// No description provided for @sanitaryEntrySheet_setReminderDuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Set Reminder Duration'**
+  String get sanitaryEntrySheet_setReminderDuration;
+
+  /// Label showing the maximum duration for the selected sanitary product type.
+  ///
+  /// In en, this message translates to:
+  /// **'Max Duration: {hours} hours'**
+  String sanitaryEntrySheet_maxDuration(int hours);
+
+  /// No description provided for @sanitaryEntrySheet_futureLogTimeError.
+  ///
+  /// In en, this message translates to:
+  /// **'Log time cannot be in the future.'**
+  String get sanitaryEntrySheet_futureLogTimeError;
+
+  /// No description provided for @sanitaryEntrySheet_pastReminderTimeError.
+  ///
+  /// In en, this message translates to:
+  /// **'Reminder end time cannot be in the past.'**
+  String get sanitaryEntrySheet_pastReminderTimeError;
 
   /// A label showing the total number of days until period is due.
   ///
