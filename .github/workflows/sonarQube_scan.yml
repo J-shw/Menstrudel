@@ -45,26 +45,36 @@ jobs:
 
       - name: Run SonarCloud Scan
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
         run: |
-          sonar-scanner \
+          SONAR_ARGS="\
             -Dsonar.organization=j-shw \
             -Dsonar.projectKey=J-shw_Menstrudel \
-            -Dsonar.flutter.coverage.lcovReportPath=lcov.info \
-            ${{ github.event.workflow_run.event == 'pull_request' && format('
-              -Dsonar.pullrequest.key={0}
-              -Dsonar.pullrequest.branch={1}
-              -Dsonar.pullrequest.base={2}
-              -Dsonar.pullrequest.headsha={3}
-              ', 
-              github.event.workflow_run.pull_requests[0].number, 
-              github.event.workflow_run.pull_requests[0].head.ref, 
-              github.event.workflow_run.pull_requests[0].base.ref,
-              github.event.workflow_run.head_sha) 
-            }}
-            ${{ github.event.workflow_run.event == 'push' && format('
-              -Dsonar.branch.name={0}
-              ', 
-              github.event.workflow_run.head_branch) 
-            }}
+            -Dsonar.flutter.coverage.lcovReportPath=lcov.info"
+            
+          if [[ -n "${{ github.event.workflow_run.pull_requests[0].number }}" ]]; then
+            
+            # PR Arguments
+            PR_NUMBER="${{ github.event.workflow_run.pull_requests[0].number }}"
+            PR_HEAD_REF="${{ github.event.workflow_run.pull_requests[0].head.ref }}"
+            PR_BASE_REF="${{ github.event.workflow_run.pull_requests[0].base.ref }}"
+            PR_HEAD_SHA="${{ github.event.workflow_run.head_sha }}"
+            
+            SONAR_ARGS="$SONAR_ARGS \
+              -Dsonar.pullrequest.key=$PR_NUMBER \
+              -Dsonar.pullrequest.branch=$PR_HEAD_REF \
+              -Dsonar.pullrequest.base=$PR_BASE_REF \
+              -Dsonar.pullrequest.headsha=$PR_HEAD_SHA"
+              
+          else
+            
+            # Branch/Push Arguments
+            BRANCH_NAME="${{ github.event.workflow_run.head_branch }}"
+            
+            SONAR_ARGS="$SONAR_ARGS \
+              -Dsonar.branch.name=$BRANCH_NAME"
+          fi
+          
+          echo "Running sonar-scanner with arguments: $SONAR_ARGS"
+          sonar-scanner $SONAR_ARGS
