@@ -126,6 +126,12 @@ abstract class AppLocalizations {
   /// **'Overdue'**
   String get overdue;
 
+  /// No description provided for @total.
+  ///
+  /// In en, this message translates to:
+  /// **'Total'**
+  String get total;
+
   /// No description provided for @shortest.
   ///
   /// In en, this message translates to:

@@ -21,6 +21,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get overdue => 'Overdue';
 
   @override
+  String get total => 'Total';
+
+  @override
   String get shortest => 'Shortest';
 
   @override
