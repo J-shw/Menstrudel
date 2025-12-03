@@ -4,6 +4,7 @@ import 'package:menstrudel/models/periods/period.dart';
 import 'package:menstrudel/models/cycles/cycle_stats.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/utils/period_predictor.dart';
+import 'package:menstrudel/widgets/insights/stat_chip.dart';
 
 class CycleLengthVarianceWidget extends StatelessWidget {
   final List<Period> periods;
@@ -43,9 +44,40 @@ class CycleLengthVarianceWidget extends StatelessWidget {
               style: textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 4),
-            Text(
-              '${l10n.cycleLengthVarianceWidget_averageCycle}: ${l10n.dayCount(cycleStats.averageCycleLength)} • ${l10n.shortest}: ${l10n.dayCount(cycleStats.shortestCycleLength!)} • ${l10n.longest}: ${l10n.dayCount(cycleStats.longestCycleLength!)}',
-              style: textTheme.bodyMedium?.copyWith(color: colorScheme.onSurfaceVariant),
+            SizedBox(
+              height: 120.0,
+              child: GridView.count(
+                crossAxisCount: 2,
+                childAspectRatio:
+                    3.0,
+                mainAxisSpacing: 8.0,
+                crossAxisSpacing: 8.0,
+                physics:
+                    const NeverScrollableScrollPhysics(),
+
+                children: [
+                  StatChip(
+                    label: l10n.cycleLengthVarianceWidget_averageCycle,
+                    value: l10n.dayCount(cycleStats.averageCycleLength),
+                    color: colorScheme.primary,
+                  ),
+                  StatChip(
+                    label: l10n.shortest,
+                    value: l10n.dayCount(cycleStats.shortestCycleLength!),
+                    color: colorScheme.secondary,
+                  ),
+                  StatChip(
+                    label: l10n.longest,
+                    value: l10n.dayCount(cycleStats.longestCycleLength!),
+                    color: colorScheme.secondary,
+                  ),
+                  StatChip(
+                    label: l10n.total,
+                    value: cycleStats.cycleLengths.length.toString(),
+                    color: colorScheme.secondary,
+                  ),
+                ],
+              ),
             ),
             const SizedBox(height: 24),
             AspectRatio(

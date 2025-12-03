@@ -4,6 +4,7 @@ import 'package:menstrudel/models/periods/period.dart';
 import 'package:menstrudel/models/periods/period_stats.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/utils/period_predictor.dart';
+import 'package:menstrudel/widgets/insights/stat_chip.dart';
 
 class PeriodDurationWidget extends StatelessWidget {
   final List<Period> periods;
@@ -15,16 +16,15 @@ class PeriodDurationWidget extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
     final l10n = AppLocalizations.of(context)!;
-    final PeriodStats? periodStats = PeriodPredictor.getPeriodStats(periods); 
+    final PeriodStats? periodStats = PeriodPredictor.getPeriodStats(periods);
     final List<Period> reversedPeriods = periods.reversed.toList();
-
 
     if (periodStats == null) {
       return Card(
         child: Padding(
           padding: const EdgeInsets.all(24.0),
           child: Center(
-            child: Text(l10n.periodDurationWidget_logAtLeastTwoPeriods), 
+            child: Text(l10n.periodDurationWidget_logAtLeastTwoPeriods),
           ),
         ),
       );
@@ -38,13 +38,46 @@ class PeriodDurationWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              l10n.periodDurationWidget_title, 
-              style: textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+              l10n.periodDurationWidget_title,
+              style: textTheme.titleLarge?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
             ),
             const SizedBox(height: 4),
-            Text(
-              '${l10n.periodDurationWidget_averagePeriod}: ${l10n.dayCount(periodStats.averageLength)} • ${l10n.shortest}: ${l10n.dayCount(periodStats.shortestLength!)} • ${l10n.longest}: ${l10n.dayCount(periodStats.longestLength!)}',
-              style: textTheme.bodyMedium?.copyWith(color: colorScheme.onSurfaceVariant),
+            SizedBox(
+              height: 120.0,
+              child: GridView.count(
+                crossAxisCount: 2,
+                childAspectRatio:
+                    3.0,
+                mainAxisSpacing: 8.0,
+                crossAxisSpacing: 8.0,
+                physics:
+                    const NeverScrollableScrollPhysics(),
+
+                children: [
+                  StatChip(
+                    label: l10n.periodDurationWidget_averagePeriod,
+                    value: l10n.dayCount(periodStats.averageLength),
+                    color: colorScheme.primary,
+                  ),
+                  StatChip(
+                    label: l10n.shortest,
+                    value: l10n.dayCount(periodStats.shortestLength!),
+                    color: colorScheme.secondary,
+                  ),
+                  StatChip(
+                    label: l10n.longest,
+                    value: l10n.dayCount(periodStats.longestLength!),
+                    color: colorScheme.secondary,
+                  ),
+                  StatChip(
+                    label: l10n.total,
+                    value: periodStats.numberofPeriods.toString(),
+                    color: colorScheme.secondary,
+                  ),
+                ],
+              ),
             ),
             const SizedBox(height: 24),
             AspectRatio(
@@ -56,19 +89,24 @@ class PeriodDurationWidget extends StatelessWidget {
                   gridData: FlGridData(
                     show: true,
                     drawVerticalLine: false,
-                    horizontalInterval: 2, 
-                    getDrawingHorizontalLine: (value) => FlLine(color: colorScheme.onSurface.withValues(alpha: 0.1), strokeWidth: 1),
+                    horizontalInterval: 2,
+                    getDrawingHorizontalLine: (value) => FlLine(
+                      color: colorScheme.onSurface.withValues(alpha: 0.1),
+                      strokeWidth: 1,
+                    ),
                   ),
                   barTouchData: BarTouchData(
                     touchTooltipData: BarTouchTooltipData(
                       getTooltipColor: (_) => colorScheme.secondary,
-                      tooltipBorder: BorderSide(color: colorScheme.onSecondary.withValues(alpha: 0.2)),
+                      tooltipBorder: BorderSide(
+                        color: colorScheme.onSecondary.withValues(alpha: 0.2),
+                      ),
                       getTooltipItem: (group, groupIndex, rod, rodIndex) {
                         final period = reversedPeriods[groupIndex];
                         final String month = period.monthLabel;
-                        
+
                         if (rod.toY == 0) return null;
-                        
+
                         return BarTooltipItem(
                           '$month\n${l10n.periodDurationWidget_period}: ${l10n.dayCount(rod.toY.toInt())}',
                           TextStyle(
@@ -80,39 +118,56 @@ class PeriodDurationWidget extends StatelessWidget {
                     ),
                   ),
                   barGroups: List.generate(reversedPeriods.length, (index) {
-                    final double duration = reversedPeriods[index].totalDays.toDouble();
+                    final double duration = reversedPeriods[index].totalDays
+                        .toDouble();
                     return BarChartGroupData(
                       x: index,
                       barRods: [
                         BarChartRodData(
                           toY: duration,
-                          color: colorScheme.primary.withValues(alpha: 0.8), 
-                          width: 24, 
+                          color: colorScheme.primary.withValues(alpha: 0.8),
+                          width: 24,
                           borderRadius: BorderRadius.circular(4),
                         ),
                       ],
                     );
                   }),
                   titlesData: FlTitlesData(
-                    topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                    rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                    leftTitles: AxisTitles(sideTitles: SideTitles(showTitles: true, reservedSize: 28, interval: 2)),
+                    topTitles: const AxisTitles(
+                      sideTitles: SideTitles(showTitles: false),
+                    ),
+                    rightTitles: const AxisTitles(
+                      sideTitles: SideTitles(showTitles: false),
+                    ),
+                    leftTitles: AxisTitles(
+                      sideTitles: SideTitles(
+                        showTitles: true,
+                        reservedSize: 28,
+                        interval: 2,
+                      ),
+                    ),
                     bottomTitles: AxisTitles(
                       sideTitles: SideTitles(
                         showTitles: true,
                         reservedSize: 30,
                         getTitlesWidget: (value, meta) {
                           final index = value.toInt();
-                          if (index >= reversedPeriods.length) return const SizedBox.shrink();
+                          if (index >= reversedPeriods.length)
+                            return const SizedBox.shrink();
                           return Padding(
                             padding: const EdgeInsets.only(top: 8.0),
-                            child: Text(reversedPeriods[index].monthLabel, style: textTheme.bodySmall),
+                            child: Text(
+                              reversedPeriods[index].monthLabel,
+                              style: textTheme.bodySmall,
+                            ),
                           );
                         },
                       ),
                     ),
                   ),
-                  maxY: periodStats.longestLength != null ? (periodStats.longestLength! + 2).toDouble() : null,
+                  maxY: periodStats.longestLength != null
+                      ? (periodStats.longestLength! + 2).toDouble()
+                      : null,
                 ),
               ),
             ),
