@@ -152,8 +152,9 @@ class PeriodDurationWidget extends StatelessWidget {
                         reservedSize: 30,
                         getTitlesWidget: (value, meta) {
                           final index = value.toInt();
-                          if (index >= reversedPeriods.length)
+                          if (index >= reversedPeriods.length){
                             return const SizedBox.shrink();
+                          }
                           return Padding(
                             padding: const EdgeInsets.only(top: 8.0),
                             child: Text(
@@ -166,7 +167,7 @@ class PeriodDurationWidget extends StatelessWidget {
                     ),
                   ),
                   maxY: periodStats.longestLength != null
-                      ? (periodStats.longestLength! + 2).toDouble()
+                      ? ((periodStats.longestLength! + 2) / 2).round() * 2.0
                       : null,
                 ),
               ),
