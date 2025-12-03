@@ -26,7 +26,7 @@ class PeriodDurationWidget extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(24.0),
           child: Center(
-            child: Text(l10n.periodDurationWidget_LogAtLeastTwoPeriods), 
+            child: Text(l10n.periodDurationWidget_logAtLeastTwoPeriods), 
           ),
         ),
       );
@@ -45,7 +45,7 @@ class PeriodDurationWidget extends StatelessWidget {
             ),
             const SizedBox(height: 4),
             Text(
-              '${l10n.periodDurationWidget_averagePeriod}: ${l10n.dayCount(periodStats.averageLength)} • ${l10n.periodDurationWidget_shortest}: ${l10n.dayCount(periodStats.shortestLength!)} • ${l10n.periodDurationWidget_longest}: ${l10n.dayCount(periodStats.longestLength!)}',
+              '${l10n.periodDurationWidget_averagePeriod}: ${l10n.dayCount(periodStats.averageLength)} • ${l10n.shortest}: ${l10n.dayCount(periodStats.shortestLength!)} • ${l10n.longest}: ${l10n.dayCount(periodStats.longestLength!)}',
               style: textTheme.bodyMedium?.copyWith(color: colorScheme.onSurfaceVariant),
             ),
             const SizedBox(height: 24),
