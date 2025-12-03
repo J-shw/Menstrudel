@@ -801,21 +801,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String get aboutScreen_urlError => 'Impossible d\'ouvrir le lien.';
 
   @override
-  String get tamponReminderDialog_tamponReminderTitle => 'Rappel de tampon';
-
-  @override
-  String get tamponReminderDialog_tamponReminderMaxDuration =>
-      'La durée maximale est de 8 heures.';
-
-  @override
-  String get reminderCountdownDialog_title => 'Rappel à prévoir dans';
-
-  @override
-  String reminderCountdownDialog_dueAt(Object time) {
-    return 'À prévoir à $time';
-  }
-
-  @override
   String get cycleLengthVarianceWidget_logAtLeastTwoPeriods =>
       'Need at least two cycles to show variance.';
 

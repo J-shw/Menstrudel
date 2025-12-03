@@ -1419,30 +1419,6 @@ abstract class AppLocalizations {
   /// **'Could not open the link.'**
   String get aboutScreen_urlError;
 
-  /// No description provided for @tamponReminderDialog_tamponReminderTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Tampon Reminder'**
-  String get tamponReminderDialog_tamponReminderTitle;
-
-  /// No description provided for @tamponReminderDialog_tamponReminderMaxDuration.
-  ///
-  /// In en, this message translates to:
-  /// **'Max duration is 8 hours.'**
-  String get tamponReminderDialog_tamponReminderMaxDuration;
-
-  /// No description provided for @reminderCountdownDialog_title.
-  ///
-  /// In en, this message translates to:
-  /// **'Reminder Due In'**
-  String get reminderCountdownDialog_title;
-
-  /// Indicates the time a reminder is due. The {time} placeholder will be a formatted time string (e.g., '2:30 PM').
-  ///
-  /// In en, this message translates to:
-  /// **'Due at {time}'**
-  String reminderCountdownDialog_dueAt(Object time);
-
   /// No description provided for @cycleLengthVarianceWidget_logAtLeastTwoPeriods.
   ///
   /// In en, this message translates to:

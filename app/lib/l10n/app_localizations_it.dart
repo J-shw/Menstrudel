@@ -787,22 +787,6 @@ class AppLocalizationsIt extends AppLocalizations {
   String get aboutScreen_urlError => 'Impossibile aprire il link.';
 
   @override
-  String get tamponReminderDialog_tamponReminderTitle =>
-      'Promemoria assorbente';
-
-  @override
-  String get tamponReminderDialog_tamponReminderMaxDuration =>
-      'La durata massima è 8 ore.';
-
-  @override
-  String get reminderCountdownDialog_title => 'Promemoria tra';
-
-  @override
-  String reminderCountdownDialog_dueAt(Object time) {
-    return 'Scade alle $time';
-  }
-
-  @override
   String get cycleLengthVarianceWidget_logAtLeastTwoPeriods =>
       'Need at least two cycles to show variance.';
 
