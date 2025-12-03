@@ -52,9 +52,7 @@ class CycleLengthVarianceWidget extends StatelessWidget {
                     3.0,
                 mainAxisSpacing: 8.0,
                 crossAxisSpacing: 8.0,
-                physics:
-                    const NeverScrollableScrollPhysics(),
-
+                physics: const NeverScrollableScrollPhysics(),
                 children: [
                   StatChip(
                     label: l10n.cycleLengthVarianceWidget_averageCycle,
