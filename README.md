@@ -20,6 +20,8 @@
     </a>
   </p>
 
+  [![Discord](https://img.shields.io/discord/1429146104448155668?color=7389D8&label=&logo=discord&logoColor=ffffff)](https://discord.gg/jWrH9DvACS)
+
   <div>
     <a href="https://play.google.com/store/apps/details?id=com.whitticase.menstrudel"><img src="icon/stores/playstore-en.svg" alt="Play Store" width="120"></a>
     <a href="https://apps.apple.com/us/app/menstrudel/id6751970511"><img src="icon/stores/appstore-en.svg" alt="App Store" width="120"></a>
@@ -67,7 +69,7 @@ Take control of your menstrual health with an intuitive, private, and powerful t
 ### Timely & Customizable Reminders ⏰
 * **Period Alerts:** Get a gentle heads-up a few days before your period is due.
 * **Pill Reminders:** Never miss a pill with consistent daily notifications tailored to your schedule.
-* **Hygiene Reminders:** For your health and safety, set discreet reminders to change your tampon.
+* **Hygiene Reminders:** For your health and safety, set discreet reminders to change your sanitary product.
 
 ### Absolute Privacy & Security 🔒
 * **Your Data, Your Device:** All your sensitive health information is stored securely and exclusively on your phone using SQLite.
@@ -96,9 +98,9 @@ You can view our privacy policy [here](https://menstrudel.app/privacy/).
 
 # App Screenshots
 
-| Your daily logs |  Quick symptom entry | Tampon reminder |
+| Your daily logs |  Quick symptom entry | Sanitary product reminders |
 | :---: | :---: | :---: |
-| ![Log View](docs/screenshots/android/logs_screen.png) | ![Symptom Entry Dialog](docs/screenshots/android/log_screen.png) | ![Symptom Entry Dialog](docs/screenshots/android/tampon_reminder.png) |
+| ![Log View](docs/screenshots/android/logs_screen.png) | ![Symptom Entry Dialog](docs/screenshots/android/log_screen.png) | ![Symptom Entry Dialog](docs/screenshots/android/sanitary_screen.png) |
 | Pill Reminder | Quick insights | Settings |
 | ![Screenshot of the pill reminder screen in Menstrudel](docs/screenshots/android/pills_screen.png)  | ![Insights View](docs/screenshots/android/insights_screen.png) | ![Symptom Entry Dialog](docs/screenshots/android/settings_screen.png) | 
 | LARC Tracking | Widgets |  |

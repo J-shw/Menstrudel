@@ -150,7 +150,7 @@ class NotificationService {
 
   // Tampon Reminders
 
-  static Future<void> scheduleTamponReminder({
+  static Future<void> scheduleSanitaryProductReminder({
     required DateTime reminderDateTime,
     required String title,
     required String body,
@@ -159,14 +159,14 @@ class NotificationService {
 
     const details = fln.NotificationDetails(
       android: fln.AndroidNotificationDetails(
-        tamponReminderChannelId, tamponReminderChannelName,
+        sanitaryProductChannelId, sanitaryProductChannelName,
         importance: fln.Importance.max, priority: fln.Priority.high,
       ),
       iOS: fln.DarwinNotificationDetails(presentSound: true, presentBadge: true, presentAlert: true),
     );
 
     await _plugin.zonedSchedule(
-        tamponReminderId,
+        sanitaryProductsID,
         title,
         body,
         scheduledDate,
@@ -174,23 +174,23 @@ class NotificationService {
         androidScheduleMode: fln.AndroidScheduleMode.exactAllowWhileIdle);
   }
 
-  static Future<void> cancelTamponReminder() async {
-    await _plugin.cancel(tamponReminderId);
+  static Future<void> cancelSanitaryProductReminder() async {
+    await _plugin.cancel(sanitaryProductsID);
   }
 
-  static Future<bool> isTamponReminderScheduled() async {
+  static Future<bool> isSanitaryProductReminderScheduled() async {
     final pendingRequests = await _plugin.pendingNotificationRequests();
-    return pendingRequests.any((request) => request.id == tamponReminderId);
+    return pendingRequests.any((request) => request.id == sanitaryProductsID);
   }
 
   /// Saves the date and time for when the tampon reminder is scheduled
-  static Future<void> setTamponReminderScheduledTime(DateTime scheduledDateTime) async {
+  static Future<void> setSanitaryProductReminderScheduledTime(DateTime scheduledDateTime) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setInt(tamponReminderDateTimeKey, scheduledDateTime.millisecondsSinceEpoch);
   }
 
   /// Gets the date and time for when the tampon reminder is scheduled
-  static Future<DateTime?> getTamponReminderScheduledTime() async {
+  static Future<DateTime?> getSanitaryProductReminderScheduledTime() async {
     final prefs = await SharedPreferences.getInstance();
     final storedTimestamp = prefs.getInt(tamponReminderDateTimeKey);
 
