@@ -16,9 +16,7 @@ class PeriodDurationWidget extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
     final l10n = AppLocalizations.of(context)!;
     final PeriodStats? periodStats = PeriodPredictor.getPeriodStats(periods); 
-    final List<Period> reversedPeriods = List.from(periods)
-        ..sort((a, b) => a.startDate.compareTo(b.startDate))
-        ..reversed.toList();
+    final List<Period> reversedPeriods = periods.reversed.toList();
 
 
     if (periodStats == null) {
@@ -58,7 +56,7 @@ class PeriodDurationWidget extends StatelessWidget {
                   gridData: FlGridData(
                     show: true,
                     drawVerticalLine: false,
-                    horizontalInterval: 1, 
+                    horizontalInterval: 2, 
                     getDrawingHorizontalLine: (value) => FlLine(color: colorScheme.onSurface.withValues(alpha: 0.1), strokeWidth: 1),
                   ),
                   barTouchData: BarTouchData(
@@ -98,7 +96,7 @@ class PeriodDurationWidget extends StatelessWidget {
                   titlesData: FlTitlesData(
                     topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
                     rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                    leftTitles: AxisTitles(sideTitles: SideTitles(showTitles: true, reservedSize: 28, interval: 1)),
+                    leftTitles: AxisTitles(sideTitles: SideTitles(showTitles: true, reservedSize: 28, interval: 2)),
                     bottomTitles: AxisTitles(
                       sideTitles: SideTitles(
                         showTitles: true,

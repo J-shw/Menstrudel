@@ -16,10 +16,6 @@ class CycleLengthVarianceWidget extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
     final l10n = AppLocalizations.of(context)!;
     final CycleStats? cycleStats = PeriodPredictor.getCycleStats(periods); 
-    final List<Period> periodsWithCycleLength = periods
-        .where((p) => periods.indexWhere((period) => period.startDate == p.startDate) > 0)
-        .toList()
-        ..sort((a, b) => a.startDate.compareTo(b.startDate));
         
     if (cycleStats == null || cycleStats.cycleLengths.isEmpty) {
       return Card(
@@ -33,7 +29,7 @@ class CycleLengthVarianceWidget extends StatelessWidget {
     }
 
     final List<int> reversedCycleLengths = cycleStats.cycleLengths.reversed.toList();
-    final List<Period> reversedPeriods = periodsWithCycleLength.reversed.toList();
+    final List<Period> reversedPeriods = periods.reversed.toList();
 
     return Card(
       elevation: 0,
@@ -117,7 +113,8 @@ class CycleLengthVarianceWidget extends StatelessWidget {
                       ),
                     ),
                   ),
-                  maxY: cycleStats.longestCycleLength != null ? (cycleStats.longestCycleLength! + 5).toDouble() : null,
+                  maxY: cycleStats.longestCycleLength != null ? ((cycleStats.longestCycleLength! + 5) / 5).round() * 5.0 : null,
+                  minY: 10,
                 ),
               ),
             ),
