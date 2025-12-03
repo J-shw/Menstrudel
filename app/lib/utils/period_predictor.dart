@@ -190,6 +190,7 @@ class PeriodPredictor {
       shortestCycleLength: shortestCycle,
       longestCycleLength: longestCycle,
       numberOfCycles: validCycleLengths.length,
+      cycleLengths: validCycleLengths,
     );
   }
 

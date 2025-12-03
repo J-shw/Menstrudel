@@ -6,6 +6,10 @@
     "ongoing": "Ongoing",
     "overdue": "Overdue",
 
+    "total": "Total",
+    "shortest": "Shortest",
+    "longest": "Longest",
+
     "date": "Date",
     "time": "Time",
 
@@ -370,12 +374,15 @@
         }
     },
 
-    "cycleLengthVarianceWidget_LogAtLeastTwoPeriods": "Need at least two cycles to show variance.",
-    "cycleLengthVarianceWidget_cycleAndPeriodVeriance": "Cycle & Period Variance",
-    "cycleLengthVarianceWidget_averageCycle": "Average Cycle",
-    "cycleLengthVarianceWidget_averagePeriod": "Average Period",
-    "cycleLengthVarianceWidget_period": "Period",
+    "cycleLengthVarianceWidget_logAtLeastTwoPeriods": "Need at least two cycles to show variance.",
+    "cycleLengthVarianceWidget_title": "Cycle Length Variance",
+    "cycleLengthVarianceWidget_averageCycle": "Avg. Cycle",
     "cycleLengthVarianceWidget_cycle": "Cycle",
+
+    "periodDurationWidget_logAtLeastTwoPeriods": "Log at least two periods to see period statistics.",
+    "periodDurationWidget_title": "Period Duration Variance",
+    "periodDurationWidget_averagePeriod": "Avg. Period",
+    "periodDurationWidget_period": "Period",
 
     "flowIntensityWidget_flowIntensityBreakdown": "Flow Intensity Breakdown",
     "flowIntensityWidget_noFlowDataLoggedYet": "No flow data logged yet.",

@@ -126,6 +126,24 @@ abstract class AppLocalizations {
   /// **'Overdue'**
   String get overdue;
 
+  /// No description provided for @total.
+  ///
+  /// In en, this message translates to:
+  /// **'Total'**
+  String get total;
+
+  /// No description provided for @shortest.
+  ///
+  /// In en, this message translates to:
+  /// **'Shortest'**
+  String get shortest;
+
+  /// No description provided for @longest.
+  ///
+  /// In en, this message translates to:
+  /// **'Longest'**
+  String get longest;
+
   /// No description provided for @date.
   ///
   /// In en, this message translates to:
@@ -1311,41 +1329,53 @@ abstract class AppLocalizations {
   /// **'Due at {time}'**
   String reminderCountdownDialog_dueAt(Object time);
 
-  /// No description provided for @cycleLengthVarianceWidget_LogAtLeastTwoPeriods.
+  /// No description provided for @cycleLengthVarianceWidget_logAtLeastTwoPeriods.
   ///
   /// In en, this message translates to:
   /// **'Need at least two cycles to show variance.'**
-  String get cycleLengthVarianceWidget_LogAtLeastTwoPeriods;
+  String get cycleLengthVarianceWidget_logAtLeastTwoPeriods;
 
-  /// No description provided for @cycleLengthVarianceWidget_cycleAndPeriodVeriance.
+  /// No description provided for @cycleLengthVarianceWidget_title.
   ///
   /// In en, this message translates to:
-  /// **'Cycle & Period Variance'**
-  String get cycleLengthVarianceWidget_cycleAndPeriodVeriance;
+  /// **'Cycle Length Variance'**
+  String get cycleLengthVarianceWidget_title;
 
   /// No description provided for @cycleLengthVarianceWidget_averageCycle.
   ///
   /// In en, this message translates to:
-  /// **'Average Cycle'**
+  /// **'Avg. Cycle'**
   String get cycleLengthVarianceWidget_averageCycle;
-
-  /// No description provided for @cycleLengthVarianceWidget_averagePeriod.
-  ///
-  /// In en, this message translates to:
-  /// **'Average Period'**
-  String get cycleLengthVarianceWidget_averagePeriod;
-
-  /// No description provided for @cycleLengthVarianceWidget_period.
-  ///
-  /// In en, this message translates to:
-  /// **'Period'**
-  String get cycleLengthVarianceWidget_period;
 
   /// No description provided for @cycleLengthVarianceWidget_cycle.
   ///
   /// In en, this message translates to:
   /// **'Cycle'**
   String get cycleLengthVarianceWidget_cycle;
+
+  /// No description provided for @periodDurationWidget_logAtLeastTwoPeriods.
+  ///
+  /// In en, this message translates to:
+  /// **'Log at least two periods to see period statistics.'**
+  String get periodDurationWidget_logAtLeastTwoPeriods;
+
+  /// No description provided for @periodDurationWidget_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Period Duration Variance'**
+  String get periodDurationWidget_title;
+
+  /// No description provided for @periodDurationWidget_averagePeriod.
+  ///
+  /// In en, this message translates to:
+  /// **'Avg. Period'**
+  String get periodDurationWidget_averagePeriod;
+
+  /// No description provided for @periodDurationWidget_period.
+  ///
+  /// In en, this message translates to:
+  /// **'Period'**
+  String get periodDurationWidget_period;
 
   /// No description provided for @flowIntensityWidget_flowIntensityBreakdown.
   ///
