@@ -21,6 +21,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get overdue => 'Overdue';
 
   @override
+  String get total => 'Total';
+
+  @override
+  String get shortest => 'Shortest';
+
+  @override
+  String get longest => 'Longest';
+
+  @override
   String get date => 'Date';
 
   @override
@@ -771,24 +780,30 @@ class AppLocalizationsEn extends AppLocalizations {
   String get aboutScreen_urlError => 'Could not open the link.';
 
   @override
-  String get cycleLengthVarianceWidget_LogAtLeastTwoPeriods =>
+  String get cycleLengthVarianceWidget_logAtLeastTwoPeriods =>
       'Need at least two cycles to show variance.';
 
   @override
-  String get cycleLengthVarianceWidget_cycleAndPeriodVeriance =>
-      'Cycle & Period Variance';
+  String get cycleLengthVarianceWidget_title => 'Cycle Length Variance';
 
   @override
-  String get cycleLengthVarianceWidget_averageCycle => 'Average Cycle';
-
-  @override
-  String get cycleLengthVarianceWidget_averagePeriod => 'Average Period';
-
-  @override
-  String get cycleLengthVarianceWidget_period => 'Period';
+  String get cycleLengthVarianceWidget_averageCycle => 'Avg. Cycle';
 
   @override
   String get cycleLengthVarianceWidget_cycle => 'Cycle';
+
+  @override
+  String get periodDurationWidget_logAtLeastTwoPeriods =>
+      'Log at least two periods to see period statistics.';
+
+  @override
+  String get periodDurationWidget_title => 'Period Duration Variance';
+
+  @override
+  String get periodDurationWidget_averagePeriod => 'Avg. Period';
+
+  @override
+  String get periodDurationWidget_period => 'Period';
 
   @override
   String get flowIntensityWidget_flowIntensityBreakdown =>

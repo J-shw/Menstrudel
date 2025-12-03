@@ -3,16 +3,13 @@ class CycleStats {
   final int? shortestCycleLength;
   final int? longestCycleLength;
   final int numberOfCycles;
+  final List<int> cycleLengths;
 
   CycleStats({
     required this.averageCycleLength,
     this.shortestCycleLength,
     this.longestCycleLength,
     required this.numberOfCycles,
+    required this.cycleLengths,
   });
-
-  @override
-  String toString() {
-    return 'CycleStats(Avg: $averageCycleLength, Shortest: $shortestCycleLength, Longest: $longestCycleLength, Cycles: $numberOfCycles)';
-  }
 }

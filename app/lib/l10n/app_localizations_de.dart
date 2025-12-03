@@ -21,6 +21,15 @@ class AppLocalizationsDe extends AppLocalizations {
   String get overdue => 'Überfällig';
 
   @override
+  String get total => 'Total';
+
+  @override
+  String get shortest => 'Shortest';
+
+  @override
+  String get longest => 'Longest';
+
+  @override
   String get date => 'Datum';
 
   @override
@@ -538,7 +547,7 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
-  String get settingsScreen_pillRegimens => 'Pill Regimens';
+  String get settingsScreen_pillRegimens => 'Pille-Regeln';
 
   @override
   String get settingsScreen_makeActive => 'Als aktiv festlegen';
@@ -548,7 +557,7 @@ class AppLocalizationsDe extends AppLocalizations {
       'Einstellungen für aktive Kurerinnerungen';
 
   @override
-  String get settingsScreen_pack => 'Pack';
+  String get settingsScreen_pack => 'Packung';
 
   @override
   String get settingsScreen_dataManagement => 'Datenverwaltung';
@@ -779,26 +788,31 @@ class AppLocalizationsDe extends AppLocalizations {
   String get aboutScreen_urlError => 'Der Link konnte nicht geöffnet werden.';
 
   @override
-  String get cycleLengthVarianceWidget_LogAtLeastTwoPeriods =>
-      'Es sind mindestens zwei Zyklen erforderlich, um Abweichungen zu zeigen.';
+  String get cycleLengthVarianceWidget_logAtLeastTwoPeriods =>
+      'Need at least two cycles to show variance.';
 
   @override
-  String get cycleLengthVarianceWidget_cycleAndPeriodVeriance =>
-      'Zyklus- und Periodenabweichung';
+  String get cycleLengthVarianceWidget_title => 'Cycle Length Variance';
 
   @override
   String get cycleLengthVarianceWidget_averageCycle =>
       'Durchschnittlicher Zyklus';
 
   @override
-  String get cycleLengthVarianceWidget_averagePeriod =>
-      'Durchschnittliche Periode';
-
-  @override
-  String get cycleLengthVarianceWidget_period => 'Periode';
-
-  @override
   String get cycleLengthVarianceWidget_cycle => 'Zyklus';
+
+  @override
+  String get periodDurationWidget_logAtLeastTwoPeriods =>
+      'Log at least two periods to see period statistics.';
+
+  @override
+  String get periodDurationWidget_title => 'Period Duration Variance';
+
+  @override
+  String get periodDurationWidget_averagePeriod => 'Avg. Period';
+
+  @override
+  String get periodDurationWidget_period => 'Period';
 
   @override
   String get flowIntensityWidget_flowIntensityBreakdown =>
@@ -854,7 +868,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get emptyPillStateWidget_noPillRegimenFound =>
-      'No pill regimen found.';
+      'Keine Pilleneinnahme gefunden.';
 
   @override
   String get emptyPillStateWidget_noPillRegimenFoundDescription =>
@@ -865,8 +879,8 @@ class AppLocalizationsDe extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'of $count pills',
-      one: 'of 1 pill',
+      other: 'von $count Pillen',
+      one: 'von 1 Pille',
     );
     return '$_temp0';
   }
@@ -908,7 +922,8 @@ class AppLocalizationsDe extends AppLocalizations {
   String get regimenSetupWidget_placeboPills => 'Placebo-Pillen';
 
   @override
-  String get regimenSetupWidget_firstDayOfThisPack => 'First Day of This Pack';
+  String get regimenSetupWidget_firstDayOfThisPack =>
+      'Erster Tag dieser Packung';
 
   @override
   String get symptomEntrySheet_logYourDay => 'Protokolliere Deinen Tag';
