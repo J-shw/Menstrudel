@@ -181,7 +181,7 @@ class AppDatabase {
       ''');
   }
 
-    Future<void> _createSanitaryProductTables(Database db) async {
+  Future<void> _createSanitaryProductTables(Database db) async {
     await db.execute('''
       CREATE TABLE sanitary_product_logs (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
