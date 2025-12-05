@@ -193,7 +193,7 @@
         }
     },
     "sanitaryProductsScreen_noHistoryRecords": "No past sanitary product records found.",
-    "sanitaryProductsScreen_activeProduct": "Active {activeType}",
+    "sanitaryProductsScreen_activeProduct": "Actif{activeType}",
     "@sanitaryProductsScreen_activeProduct": {
         "description": "Label showing the type of active sanitary product.",
         "placeholders": {
