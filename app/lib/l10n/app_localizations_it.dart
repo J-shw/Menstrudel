@@ -818,10 +818,10 @@ class AppLocalizationsIt extends AppLocalizations {
   String get aboutScreen_urlError => 'Impossibile aprire il link.';
 
   @override
-  String get logSummaryWidget_totalLoggedDays => 'Total Logged Days';
+  String get logSummaryWidget_loggedDays => 'Logged Days';
 
   @override
-  String get logSummaryWidget_loggingSpan => 'Tracking History';
+  String get logSummaryWidget_trackingHistory => 'Tracking History';
 
   @override
   String get cycleLengthVarianceWidget_logAtLeastTwoPeriods =>

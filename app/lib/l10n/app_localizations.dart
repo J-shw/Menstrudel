@@ -1449,17 +1449,17 @@ abstract class AppLocalizations {
   /// **'Could not open the link.'**
   String get aboutScreen_urlError;
 
-  /// No description provided for @logSummaryWidget_totalLoggedDays.
+  /// No description provided for @logSummaryWidget_loggedDays.
   ///
   /// In en, this message translates to:
-  /// **'Total Logged Days'**
-  String get logSummaryWidget_totalLoggedDays;
+  /// **'Logged Days'**
+  String get logSummaryWidget_loggedDays;
 
-  /// No description provided for @logSummaryWidget_loggingSpan.
+  /// No description provided for @logSummaryWidget_trackingHistory.
   ///
   /// In en, this message translates to:
   /// **'Tracking History'**
-  String get logSummaryWidget_loggingSpan;
+  String get logSummaryWidget_trackingHistory;
 
   /// No description provided for @cycleLengthVarianceWidget_logAtLeastTwoPeriods.
   ///
