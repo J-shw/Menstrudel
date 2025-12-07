@@ -10,6 +10,7 @@ import 'package:menstrudel/widgets/insights/cycle_length_variance.dart';
 import 'package:menstrudel/widgets/insights/period_duration.dart';
 import 'package:menstrudel/widgets/insights/flow_intensity.dart';
 import 'package:menstrudel/widgets/insights/pain_intensity.dart';
+import 'package:menstrudel/widgets/insights/log_summary_widget.dart';
 import 'package:menstrudel/widgets/insights/year_heat_map.dart';
 import 'package:menstrudel/widgets/insights/monthly_flow.dart';
 
@@ -70,6 +71,40 @@ class _InsightsScreenState extends State<InsightsScreen> {
     ]);
   }
 
+  String _formatLoggingSpan(List<PeriodDay> allLogs, AppLocalizations l10n) {
+    if (allLogs.isEmpty) {
+      return l10n.dayCount(0);
+    }
+
+    allLogs.sort((a, b) => (a.date).compareTo(b.date));
+    final DateTime firstDate = allLogs.first.date;
+    final DateTime lastDate = allLogs.last.date;
+    final int totalDays = lastDate.difference(firstDate).inDays;
+
+    if (totalDays == 0) {
+      return l10n.dayCount(1);
+    }
+
+    final int years = totalDays ~/ 365;
+    final int remainingDaysAfterYears = totalDays % 365;
+    final int months = remainingDaysAfterYears ~/ 30;
+
+    List<String> parts = [];
+    
+    if (years > 0) {
+      parts.add(l10n.yearCount(years));
+    } 
+    if (months > 0) {
+      parts.add(l10n.monthCount(months));
+    }
+
+    if (parts.isEmpty) {
+      return l10n.dayCount(totalDays); 
+    }
+
+    return parts.join(', ');
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
@@ -93,6 +128,8 @@ class _InsightsScreenState extends State<InsightsScreen> {
           final allFlows = snapshot.data![2] as List<MonthlyFlowData>;
           final symptomCounts = snapshot.data![3] as Map<Symptom, int>;
 
+          final String loggingSpan = _formatLoggingSpan(allLogs, l10n);
+
           final List<Widget> cycleAndPeriodCarouselItems = [
             CycleLengthVarianceWidget(periods: allPeriods),
             PeriodDurationWidget(periods: allPeriods),
@@ -106,6 +143,14 @@ class _InsightsScreenState extends State<InsightsScreen> {
           return ListView(
             padding: EdgeInsets.zero,
             children: [
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: LogSummaryWidget(
+                  totalLoggedDays: allLogs.length,
+                  loggingSpan: loggingSpan,
+                ),
+              ),
+              
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: SymptomFrequencyWidget(symptomCounts: symptomCounts),

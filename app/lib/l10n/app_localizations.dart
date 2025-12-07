@@ -192,6 +192,24 @@ abstract class AppLocalizations {
   /// **'{count, plural, one{{count} Day} other{{count} Days}}'**
   String dayCount(int count);
 
+  /// A message that displays a count of months, handling singular and plural forms.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, one{{count} Month} other{{count} Months}}'**
+  String monthCount(int count);
+
+  /// A message that displays a count of years, handling singular and plural forms.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, one{{count} Year} other{{count} Years}}'**
+  String yearCount(int count);
+
+  /// No description provided for @edit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get edit;
+
   /// No description provided for @delete.
   ///
   /// In en, this message translates to:
@@ -1430,6 +1448,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Could not open the link.'**
   String get aboutScreen_urlError;
+
+  /// No description provided for @logSummaryWidget_loggedDays.
+  ///
+  /// In en, this message translates to:
+  /// **'Logged Days'**
+  String get logSummaryWidget_loggedDays;
+
+  /// No description provided for @logSummaryWidget_trackingHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'Tracking History'**
+  String get logSummaryWidget_trackingHistory;
 
   /// No description provided for @cycleLengthVarianceWidget_logAtLeastTwoPeriods.
   ///

@@ -62,6 +62,31 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
+  String monthCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Months',
+      one: '$count Month',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String yearCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Years',
+      one: '$count Year',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get edit => 'Edit';
+
+  @override
   String get delete => 'Supprimer';
 
   @override
@@ -805,6 +830,12 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get aboutScreen_urlError => 'Impossible d\'ouvrir le lien.';
+
+  @override
+  String get logSummaryWidget_loggedDays => 'Logged Days';
+
+  @override
+  String get logSummaryWidget_trackingHistory => 'Tracking History';
 
   @override
   String get cycleLengthVarianceWidget_logAtLeastTwoPeriods =>
