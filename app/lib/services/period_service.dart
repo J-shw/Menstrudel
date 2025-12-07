@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:collection/collection.dart';
 import 'package:intl/intl.dart';
 import 'package:menstrudel/database/repositories/periods_repository.dart';
-import 'package:menstrudel/models/period_logs/period_day.dart';
+import 'package:menstrudel/models/period_logs/log_day.dart';
 import 'package:menstrudel/models/periods/period.dart';
 import 'package:menstrudel/models/period_prediction_result.dart';
 import 'package:menstrudel/utils/constants.dart';
@@ -14,7 +14,6 @@ import 'package:menstrudel/services/period_logger_service.dart';
 import 'package:menstrudel/services/wear_sync_service.dart';
 import 'package:menstrudel/services/widget_controller.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
-import 'package:menstrudel/widgets/dialogs/tampon_reminder_dialog.dart';
 
 class PeriodService extends ChangeNotifier {
   final SettingsService _settingsService;
@@ -24,22 +23,21 @@ class PeriodService extends ChangeNotifier {
   PeriodService(this._settingsService);
 
   bool _isLoading = true;
-  List<PeriodDay> _periodLogEntries = [];
+  List<LogDay> _periodLogEntries = [];
   List<Period> _periodEntries = [];
   List<Object> _timelineItems = [];
   PeriodPredictionResult? _predictionResult;
   int _circleCurrentValue = 0;
   int _circleMaxValue = 28;
-  bool _isTamponReminderSet = false;
   bool _isPeriodOngoing = false;
-  Map<DateTime, PeriodDay> _logMap = {};
+  Map<DateTime, LogDay> _logMap = {};
   DateTime? _earliestLogDate;
   DateTime? _latestLogDate;
 
   /// Whether a background operation is currently in progress.
   bool get isLoading => _isLoading;
   /// The complete list of all individual period day logs.
-  List<PeriodDay> get periodLogEntries => _periodLogEntries;
+  List<LogDay> get periodLogEntries => _periodLogEntries;
   /// The list of calculated [Period] objects, representing entire period cycles.
   List<Period> get periodEntries => _periodEntries;
   /// The calculated prediction for the next period, if available.
@@ -48,14 +46,12 @@ class PeriodService extends ChangeNotifier {
   int get circleCurrentValue => _circleCurrentValue;
   /// The maximum value for the main progress circle (e.g., average cycle length).
   int get circleMaxValue => _circleMaxValue;
-  /// Whether a tampon reminder notification is currently scheduled.
-  bool get isTamponReminderSet => _isTamponReminderSet;
   /// Whether the user's period is considered to be ongoing today.
   bool get isPeriodOngoing => _isPeriodOngoing;
   /// A pre-computed list of timeline items for the PeriodListView.
   List<Object> get timelineItems => _timelineItems;
   /// A pre-computed map of logs, keyed by their date, for fast calendar lookups.
-  Map<DateTime, PeriodDay> get logMap => _logMap;
+  Map<DateTime, LogDay> get logMap => _logMap;
   /// The date of the earliest log on record.
   DateTime? get earliestLogDate => _earliestLogDate;
   /// The date of the latest log on record.
@@ -109,7 +105,6 @@ class PeriodService extends ChangeNotifier {
   Future<void> _fetchDataFromDb() async {
     _periodLogEntries = await _periodsRepo.readAllPeriodLogs();
     _periodEntries = await _periodsRepo.readAllPeriods();
-    _isTamponReminderSet = await NotificationService.isTamponReminderScheduled();
   }
 
   /// Calculates the period prediction and ongoing status.
@@ -201,7 +196,7 @@ class PeriodService extends ChangeNotifier {
   }
 
   /// Updates an existing log entry.
-  Future<void> updateExistingLog(BuildContext context, PeriodDay updatedLog) async {
+  Future<void> updateExistingLog(BuildContext context, LogDay updatedLog) async {
     await _periodsRepo.updatePeriodLog(updatedLog);
     
     if (context.mounted) {
@@ -229,58 +224,6 @@ class PeriodService extends ChangeNotifier {
     }
   }
 
-  /// Shows the dialog and schedules a tampon reminder.
-  Future<void> handleTamponReminder(BuildContext context) async {
-    final l10n = AppLocalizations.of(context)!;
-
-    final reminderDateTime = await showDialog<DateTime>(
-      context: context,
-      builder: (BuildContext context) => const TimeSelectionDialog(),
-    );
-
-    if (reminderDateTime == null) return;
-
-    await NotificationService.scheduleTamponReminder(
-      reminderDateTime: reminderDateTime,
-      title: l10n.notification_tamponReminderTitle,
-      body: l10n.notification_tamponReminderBody,
-    );
-    
-    await NotificationService.setTamponReminderScheduledTime(reminderDateTime);
-
-    if (context.mounted) {
-      final formattedTime = TimeOfDay.fromDateTime(reminderDateTime).format(context);
-      ScaffoldMessenger.of(context)
-        ..hideCurrentSnackBar()
-        ..showSnackBar(SnackBar(content: Text('${l10n.logScreen_tamponReminderSetFor} $formattedTime')));
-        
-      _isTamponReminderSet = true;
-      notifyListeners();
-    }
-  }
-
-  /// Cancels an active tampon reminder.
-  Future<void> handleCancelReminder(BuildContext context) async {
-    final l10n = AppLocalizations.of(context)!;
-    try {
-      await NotificationService.cancelTamponReminder();
-      if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(l10n.logScreen_tamponReminderCancelled)),
-        );
-      }
-    } catch (e) {
-      if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('${l10n.logScreen_couldNotCancelReminder}: $e'), backgroundColor: Colors.red),
-        );
-      }
-    } finally {
-      _isTamponReminderSet = false;
-      notifyListeners();
-    }
-  }
-
   /// Populates the [_timelineItems] list for the list view.
   void _buildTimelineItems() {
     final groupedLogs = groupBy(_periodLogEntries, (log) => log.periodId ?? -1);
@@ -291,7 +234,7 @@ class PeriodService extends ChangeNotifier {
     ];
 
     final groupedByMonth = groupBy<Object, DateTime>(timelineEvents, (event) {
-      final date = event is Period ? event.startDate : (event as PeriodDay).date;
+      final date = event is Period ? event.startDate : (event as LogDay).date;
       return DateTime(date.year, date.month);
     });
 
@@ -304,8 +247,8 @@ class PeriodService extends ChangeNotifier {
 
       final eventsInMonth = groupedByMonth[month]!;
       eventsInMonth.sort((a, b) {
-        final dateA = a is Period ? a.startDate : (a as PeriodDay).date;
-        final dateB = b is Period ? b.startDate : (b as PeriodDay).date;
+        final dateA = a is Period ? a.startDate : (a as LogDay).date;
+        final dateB = b is Period ? b.startDate : (b as LogDay).date;
         return dateB.compareTo(dateA);
       });
 
@@ -315,7 +258,7 @@ class PeriodService extends ChangeNotifier {
           final logsForPeriod = (groupedLogs[event.id] ?? [])
             ..sort((a, b) => a.date.compareTo(b.date));
           items.addAll(logsForPeriod);
-        } else if (event is PeriodDay) {
+        } else if (event is LogDay) {
           items.add(event);
         }
       }

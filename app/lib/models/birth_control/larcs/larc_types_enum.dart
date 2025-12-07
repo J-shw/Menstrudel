@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 
 /// An enum of Long-Acting Reversible Contraceptives (LARCs) types.
-/// Currently only injection is supported, but more may be added in the future, so I have added some as placeholders.
 enum LarcTypes {
   iud,
   implant,

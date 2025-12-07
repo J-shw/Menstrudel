@@ -32,7 +32,7 @@ Check out our new look! We think this logo is more modern and adds personality t
 
 We are expanding our birth control tracking! You can now log **Long-Acting Reversible Contraception (LARCs)**—highly effective methods like IUDs and implants that last for years—and set renewal reminders.
 
-![Logging a LARC](/assets/images/blog/2025-22-04-announcing-menstrudel-v3.3.0/logging-larc.gif)
+![Logging a LARC](/assets/images/blog/2025-11-22-announcing-menstrudel-v3.3.0/logging-larc.gif)
 
 Logging LARC usage is simple and quick. If notifications are enabled, you'll get a reminder for renewal.
 
@@ -40,7 +40,7 @@ Logging LARC usage is simple and quick. If notifications are enabled, you'll get
 
 ### Bug Fixes
 * Improved general app performance
-* Fixed some notifiation related issues
+* Fixed some notification related issues
 * Fixed some database related issues
 * Cleaned up some UI elements
 

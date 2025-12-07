@@ -21,10 +21,12 @@ main {
 
 /* --- Navigation Bar --- */
 nav {
-  position: relative;
+  position: sticky;
   background-color: #fff;
   border-bottom: 1px solid #eee;
   padding: 1rem 0;
+  z-index: 100;
+  top: 0;
 }
 
 nav .container {
@@ -77,7 +79,7 @@ nav a:hover {
     display: block;
   }
 
-  .nav-menu {
+.nav-menu {
     display: none;
     position: absolute;
     top: 100%;

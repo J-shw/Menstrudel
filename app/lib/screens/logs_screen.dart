@@ -1,25 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:menstrudel/widgets/basic_progress_circle.dart';
-import 'package:menstrudel/models/period_logs/period_day.dart';
-import 'package:menstrudel/screens/main_screen.dart';
-import 'package:menstrudel/widgets/dialogs/reminder_countdown_dialog.dart';
+import 'package:menstrudel/models/period_logs/log_day.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
-
 import 'package:menstrudel/services/period_service.dart';
-import 'package:menstrudel/services/notification_service.dart';
 import 'package:menstrudel/widgets/logs/dynamic_history_view.dart';
 import 'package:menstrudel/widgets/sheets/period_details_bottom_sheet.dart';
 
 class LogsScreen extends StatefulWidget {
-  final Function(FabState) onFabStateChange;
-  final bool isReminderButtonAlwaysVisible;
 
   const LogsScreen({
     super.key,
-    required this.onFabStateChange,
-    required this.isReminderButtonAlwaysVisible,
   });
 
   @override
@@ -36,30 +28,7 @@ class LogsScreenState extends State<LogsScreen> {
     });
   }
 
-  Future<void> handleTamponReminderCountdown(PeriodService service) async {
-    final dueDate = await NotificationService.getTamponReminderScheduledTime();
-
-    if (dueDate == null) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(AppLocalizations.of(context)!.logScreen_couldNotCancelReminder)),
-        );
-      }
-      return;
-    }
-
-    if (mounted) {
-      showDialog(
-        context: context,
-        builder: (context) => ReminderCountdownDialog(
-          dueDate: dueDate,
-          onDelete: () => service.handleCancelReminder(context),
-        ),
-      );
-    }
-  }
-
-  void _showDetailsBottomSheet(PeriodService service, PeriodDay log) {
+  void _showDetailsBottomSheet(PeriodService service, LogDay log) {
     showModalBottomSheet<void>(
       context: context,
       isScrollControlled: true,
@@ -76,25 +45,10 @@ class LogsScreenState extends State<LogsScreen> {
     );
   }
 
-  /// This method now reads state from PeriodService to determine the FabState
-  void _updateFabState(PeriodService service) {
-    FabState currentState;
-    if (!service.isPeriodOngoing && !widget.isReminderButtonAlwaysVisible) {
-      currentState = FabState.logPeriod;
-    } else {
-      currentState = service.isTamponReminderSet ? FabState.cancelReminder : FabState.setReminder;
-    }
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      widget.onFabStateChange(currentState);
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final periodService = context.watch<PeriodService>();
-
-    _updateFabState(periodService);
 
     String predictionText = '';
     if (periodService.isLoading) {

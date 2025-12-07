@@ -28,7 +28,7 @@ class AppDatabase {
 
     _database = await openDatabase(
       path,
-      version: 9,
+      version: 10,
       onCreate: _createDB,
       onUpgrade: _upgradeDB,
     );
@@ -41,6 +41,8 @@ class AppDatabase {
     await _createPillTables(db);
 
     await _createLarcTables(db);
+
+    await _createSanitaryProductTables(db);
   }
 
   Future _upgradeDB(Database db, int oldVersion, int newVersion) async {
@@ -100,6 +102,9 @@ class AppDatabase {
     }
     if (oldVersion < 9) {
       _createLarcTables(db);
+    }
+    if (oldVersion < 10) {
+      await _createSanitaryProductTables(db);
     }
   }
 
@@ -170,6 +175,19 @@ class AppDatabase {
       CREATE TABLE larc_logs (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         date TEXT NOT NULL,
+        type TEXT NOT NULL,
+        note TEXT
+      )
+      ''');
+  }
+
+  Future<void> _createSanitaryProductTables(Database db) async {
+    await db.execute('''
+      CREATE TABLE sanitary_product_logs (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        logTime TEXT NOT NULL,
+        reminderTime TEXT NOT NULL,
+        removedTime TEXT,
         type TEXT NOT NULL,
         note TEXT
       )

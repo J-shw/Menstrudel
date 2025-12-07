@@ -6,6 +6,10 @@
     "ongoing": "Ongoing",
     "overdue": "Overdue",
 
+    "total": "Total",
+    "shortest": "Shortest",
+    "longest": "Longest",
+
     "date": "Date",
     "time": "Time",
 
@@ -14,6 +18,8 @@
 
     "day": "Day",
     "days": "Days",
+
+    "hours": "Hours",
 
     "dayCount": "{count, plural, one{{count} Day} other{{count} Days}}",
     "@dayCount": {
@@ -25,6 +31,28 @@
             }
         }
     },
+    "monthCount": "{count, plural, one{{count} Month} other{{count} Months}}",
+    "@monthCount": {
+        "description": "A message that displays a count of months, handling singular and plural forms.",
+        "placeholders": {
+            "count": {
+                "type": "int",
+                "example": "2"
+            }
+        }
+    },
+    "yearCount": "{count, plural, one{{count} Year} other{{count} Years}}",
+    "@yearCount": {
+        "description": "A message that displays a count of years, handling singular and plural forms.",
+        "placeholders": {
+            "count": {
+                "type": "int",
+                "example": "3"
+            }
+        }
+    },
+
+    "edit": "Edit",
 
     "delete": "Delete",
     "clear": "Clear",
@@ -42,6 +70,7 @@
     "reset": "Reset",
     "add": "Add",
     "notSet": "Not set",
+    "removed": "Removed",
 
     "note": "Note",
 
@@ -49,8 +78,11 @@
 
     "flow": "Flow",
 
+    "type": "Type",
+
     "navBar_insights": "Insights",
     "navBar_logs": "Logs",
+    "navBar_sanitary": "Sanitary",
     "navBar_pill": "Pill",
     "navBar_larc": "LARC",
     "navBar_settings": "Settings",
@@ -82,6 +114,11 @@
     "larcType_injection": "Injection",
     "larcType_ring": "Ring",
     "larcType_patch": "Patch",
+
+    "sanitaryProduct_tampon": "Tampon",
+    "sanitaryProduct_pad": "Pad",
+    "sanitaryProduct_menstrualCup": "Menstrual Cup",
+    "sanitaryProduct_periodUnderwear": "Period Underwear",
 
     "error_valueMustbePositive": "Value must be positive",
     "error_valueCannotBeNull": "Value cannot be null",
@@ -120,14 +157,6 @@
     "@notification_pillBody": {
         "description": "Body for the daily pill reminder notification."
     },
-    "notification_tamponReminderTitle": "Tampon Reminder",
-    "@notification_tamponReminderTitle": {
-        "description": "Title for the tampon reminder notification."
-    },
-    "notification_tamponReminderBody": "Remember to change your tampon.",
-    "@notification_tamponReminderBody": {
-        "description": "Body for the tampon reminder notification."
-    },
 
     "notification_larcTitle": "LARC Reminder",
     "@notification_larcTitle": {
@@ -148,14 +177,16 @@
         }
     },
 
+    "notification_SanitaryProductReminderTitle": "Sanitary Product Reminder",
+    "notification_SanitaryProductReminderBody": "Remember to change your product.",
+
 
     "mainScreen_insightsPageTitle": "Your Insights",
+    "mainScreen_sanitaryPageTitle": "Sanitary Products",
     "mainScreen_pillsPageTitle": "Pills",
     "mainScreen_LarcsPageTitle": "LARCs",
     "mainScreen_settingsPageTitle": "Settings",
 
-    "mainScreen_tooltipSetReminder": "Tampon reminder",
-    "mainScreen_tooltipCancelReminder": "Cancel reminder",
     "mainScreen_tooltipLogPeriod": "Log period",
 
     "insightsScreen_errorPrefix": "Error:",
@@ -174,9 +205,6 @@
             }
         }
     },
-    "logScreen_tamponReminderSetFor": "Tampon reminder set for",
-    "logScreen_tamponReminderCancelled": "Tampon reminder cancelled.",
-    "logScreen_couldNotCancelReminder": "Could not cancel reminder",
 
     "pillScreen_pillForTodayMarkedAsTaken": "Pill for today marked as taken.",
     "pillScreen_pillForTodayMarkedAsSkipped": "Pill for today marked as skipped.",
@@ -205,6 +233,39 @@
     "larcScreen_activeLarcsDescription": "Currently monitored LARC entries.",
     "larcScreen_noActiveRecords": "No LARC is currently active. Please log a new entry.",
     "larcScreen_noHistoryRecords": "No past or overdue LARC records found.",
+
+    "sanitaryProductsScreen_noSanitaryProductRecordsFound": "No sanitary product records found.",
+    "sanitaryProductsScreen_history": "History ({history})",
+    "@sanitaryProductsScreen_history": {
+        "description": "The total sanitary product history count.",
+        "placeholders": {
+            "history": {
+                "type": "int",
+                "example": "5"
+            }
+        }
+    },
+    "sanitaryProductsScreen_noHistoryRecords": "No past sanitary product records found.",
+    "sanitaryProductsScreen_activeProduct": "Active {activeType}",
+    "@sanitaryProductsScreen_activeProduct": {
+        "description": "Label showing the type of active sanitary product.",
+        "placeholders": {
+            "activeType": {
+                "type": "String",
+                "example": "Tampon"
+            }
+        }
+    },
+    "sanitaryProductsScreen_changeDueAt": "Change Due At {time}",
+    "@sanitaryProductsScreen_changeDueAt": {
+        "description": "Label showing the time when the sanitary product needs to be changed.",
+        "placeholders": {
+            "time": {
+                "type": "String",
+                "example": "3:30 PM"
+            }
+        }
+    },
 
     "settingsScreen_selectHistoryView": "Select History View",
     "settingsScreen_deleteRegimen_question": "Delete Regimen?",
@@ -303,9 +364,15 @@
     "settingsScreen_clearAllLarcData_question": "Clear All LARC Data?",
     "settingsScreen_deleteAllLarcDataDescription": "This will permanently delete your LARC history.",
     "settingsScreen_allLarcDataCleared": "All LARC data has been cleared.",
+    "settingsScreen_clearAllSanitaryData": "Clear All Sanitary Products Data",
+    "settingsScreen_clearAllSanitaryDataSubtitle": "Removes your sanitary products history.",
+    "settingsScreen_clearAllSanitaryData_question": "Clear All Sanitary Products Data?",
+    "settingsScreen_deleteAllSanitaryDataDescription": "This will permanently delete your sanitary products history.",
+    "settingsScreen_allSanitaryDataCleared": "All sanitary products data has been cleared.",
     "settingsScreen_exportPeriodData": "Export Period Data",
     "settingsScreen_exportPillData": "Export Pill Data",
     "settingsScreen_exportLarcsData": "Export LARCs Data",
+    "settingsScreen_exportSanitaryData": "Export Sanitary Products Data",
     "settingsScreen_exportDataSubtitle": "Create a JSON backup file.",
     "settingsScreen_exportSuccessful": "Data exported successfully.",
     "settingsScreen_exportFailed": "Export failed. Please try again.",
@@ -316,12 +383,16 @@
     "settingsScreen_importPeriodData": "Import Period Data",
     "settingsScreen_importPillData": "Import Pill Data",
     "settingsScreen_importLarcsData": "Import LARCs Data",
+    "settingsScreen_importSanitaryData": "Import Sanitary Products Data",
     "settingsScreen_importDataSubtitle": "Overwrites existing data.",
     "settingsScreen_importPeriodData_question": "Are you sure you want to import Period Data?",
     "settingsScreen_importPillData_question": "Are you sure you want to import Pill Data?",
     "settingsScreen_importLarcData_question": "Are you sure you want to import LARC Data?",
+    "settingsScreen_importSanitaryData_question": "Are you sure you want to import Sanitary Products Data?",
     "settingsScreen_importPeriodDataDescription": "Importing data will permanently overwrite all your existing period logs and period settings. This cannot be undone.",
     "settingsScreen_importPillDataDescription": "Importing data will permanently overwrite all your existing pill history. This cannot be undone.",
+    "settingsScreen_importLarcDataDescription": "Importing data will permanently overwrite all your existing LARC history. This cannot be undone.",
+    "settingsScreen_importSanitaryDataDescription": "Importing data will permanently overwrite all your existing sanitary product history. This cannot be undone.",
     "settingsScreen_importSuccessful": "Data imported successfully!",
     "settingsScreen_importFailed": "Failed to import data. Please try again.",
     "settingsScreen_importInvalidFile": "Invalid file format or data structure.",
@@ -347,35 +418,31 @@
 
     "settingsScreen_preferences": "Preferences",
     "preferencesScreen_language": "Language",
-    "preferencesScreen_tamponReminderButton": "Always Show Reminder Button",
-    "preferencesScreen_tamponReminderButtonSubtitle": "Makes the tampon reminder button permanently visible on the main screen.",
+    "preferencesScreen_enableSanitaryProductsScreen": "Enable Sanitary Products Screen",
+    "preferencesScreen_enableSanitaryProductsScreenSubtitle": "Show the Sanitary Products tab on the main navigation bar.",
 
     "settingsScreen_about": "About",
     "aboutScreen_version": "Version",
     "aboutScreen_github": "GitHub",
     "aboutScreen_githubSubtitle": "Source code and issue tracking",
+    "aboutScreen_discord": "Discord",
+    "aboutScreen_discordSubtitle": "Support and community",
     "aboutScreen_share": "Share",
     "aboutScreen_shareSubtitle": "Share the app with friends",
     "aboutScreen_urlError": "Could not open the link.",
 
-    "tamponReminderDialog_tamponReminderTitle": "Tampon Reminder",
-    "tamponReminderDialog_tamponReminderMaxDuration": "Max duration is 8 hours.",
+    "logSummaryWidget_loggedDays": "Logged Days",
+    "logSummaryWidget_trackingHistory": "Tracking History",
 
-    "reminderCountdownDialog_title": "Reminder Due In",
-    "reminderCountdownDialog_dueAt": "Due at {time}",
-    "@reminderCountdownDialog_dueAt": {
-        "description": "Indicates the time a reminder is due. The {time} placeholder will be a formatted time string (e.g., '2:30 PM').",
-        "placeholders": {
-            "time": {}
-        }
-    },
-
-    "cycleLengthVarianceWidget_LogAtLeastTwoPeriods": "Need at least two cycles to show variance.",
-    "cycleLengthVarianceWidget_cycleAndPeriodVeriance": "Cycle & Period Variance",
-    "cycleLengthVarianceWidget_averageCycle": "Average Cycle",
-    "cycleLengthVarianceWidget_averagePeriod": "Average Period",
-    "cycleLengthVarianceWidget_period": "Period",
+    "cycleLengthVarianceWidget_logAtLeastTwoPeriods": "Need at least two cycles to show variance.",
+    "cycleLengthVarianceWidget_title": "Cycle Length Variance",
+    "cycleLengthVarianceWidget_averageCycle": "Avg. Cycle",
     "cycleLengthVarianceWidget_cycle": "Cycle",
+
+    "periodDurationWidget_logAtLeastTwoPeriods": "Log at least two periods to see period statistics.",
+    "periodDurationWidget_title": "Period Duration Variance",
+    "periodDurationWidget_averagePeriod": "Avg. Period",
+    "periodDurationWidget_period": "Period",
 
     "flowIntensityWidget_flowIntensityBreakdown": "Flow Intensity Breakdown",
     "flowIntensityWidget_noFlowDataLoggedYet": "No flow data logged yet.",
@@ -439,6 +506,20 @@
     "periodDetailsSheet_flow": "Flow",
 
     "larcEntrySheet_logLARCDetails": "Log LARC Details",
+
+    "sanitaryEntrySheet_logSanitaryProduct": "Log Sanitary Product",
+    "sanitaryEntrySheet_setReminderDuration": "Set Reminder Duration",
+    "sanitaryEntrySheet_maxDuration": "Max Duration: {hours} hours",
+    "@sanitaryEntrySheet_maxDuration": {
+        "description": "Label showing the maximum duration for the selected sanitary product type.",
+        "placeholders": {
+            "hours": {
+                "type": "int"
+            }
+        }
+    },
+    "sanitaryEntrySheet_futureLogTimeError": "Log time cannot be in the future.",
+    "sanitaryEntrySheet_pastReminderTimeError": "Reminder end time cannot be in the past.",
 
     "periodPredictionCircle_days": "{count, plural, =1{Day} other{Days}}",
     "@periodPredictionCircle_days": {

@@ -197,7 +197,8 @@ class _PillsScreenState extends State<PillsScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             PillStatusCard(
-              currentPillNumberInCycle: _selectedPillNumber,
+              currentPillNumberInCycle: _currentPillNumberInCycle,
+              
               totalPills: _activeRegimen!.activePills + _activeRegimen!.placeboPills,
               isSelectedPillTaken: _isSelectedPillTaken,
               packStartDate: _activeRegimen!.startDate,
