@@ -771,6 +771,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get aboutScreen_githubSubtitle => 'Source code and issue tracking';
 
   @override
+  String get aboutScreen_discord => 'Discord';
+
+  @override
+  String get aboutScreen_discordSubtitle => 'Support and community';
+
+  @override
   String get aboutScreen_share => 'Share';
 
   @override

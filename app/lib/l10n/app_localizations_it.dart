@@ -778,6 +778,12 @@ class AppLocalizationsIt extends AppLocalizations {
       'Codice sorgente e segnalazione errori';
 
   @override
+  String get aboutScreen_discord => 'Discord';
+
+  @override
+  String get aboutScreen_discordSubtitle => 'Support and community';
+
+  @override
   String get aboutScreen_share => 'Condividi';
 
   @override

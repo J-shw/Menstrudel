@@ -403,6 +403,8 @@
     "aboutScreen_version": "Version",
     "aboutScreen_github": "GitHub",
     "aboutScreen_githubSubtitle": "Source code and issue tracking",
+    "aboutScreen_discord": "Discord",
+    "aboutScreen_discordSubtitle": "Support and community",
     "aboutScreen_share": "Share",
     "aboutScreen_shareSubtitle": "Share the app with friends",
     "aboutScreen_urlError": "Could not open the link.",

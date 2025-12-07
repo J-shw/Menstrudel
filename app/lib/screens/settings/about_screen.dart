@@ -84,6 +84,18 @@ class _AboutScreenState extends State<AboutScreen> {
               const Divider(height: 1, indent: 16, endIndent: 16),
 
               ListTile(
+                leading: const Icon(Icons.discord),
+                title: Text(l10n.aboutScreen_discord),
+                subtitle: Text(l10n.aboutScreen_discordSubtitle),
+                trailing: const Icon(Icons.chevron_right),
+                onTap: () {
+                  _launchUrl('https://discord.gg/H95kG7zPWB', l10n);
+                },
+              ),
+
+              const Divider(height: 1, indent: 16, endIndent: 16),
+
+              ListTile(
                 leading: const Icon(Icons.share_rounded),
                 title: Text(l10n.aboutScreen_share),
                 subtitle: Text(l10n.aboutScreen_shareSubtitle),
