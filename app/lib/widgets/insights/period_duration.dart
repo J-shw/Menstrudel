@@ -44,40 +44,38 @@ class PeriodDurationWidget extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 4),
-            SizedBox(
-              height: 120.0,
-              child: GridView.count(
-                crossAxisCount: 2,
-                childAspectRatio:
-                    3.5,
-                mainAxisSpacing: 8.0,
-                crossAxisSpacing: 8.0,
-                physics:
-                    const NeverScrollableScrollPhysics(),
+            GridView.count(
+              shrinkWrap: true,
+              crossAxisCount: 2,
+              childAspectRatio:
+                  3.5,
+              mainAxisSpacing: 8.0,
+              crossAxisSpacing: 8.0,
+              physics:
+                  const NeverScrollableScrollPhysics(),
 
-                children: [
-                  StatChip(
-                    label: l10n.periodDurationWidget_averagePeriod,
-                    value: l10n.dayCount(periodStats.averageLength),
-                    color: colorScheme.primary,
-                  ),
-                  StatChip(
-                    label: l10n.shortest,
-                    value: l10n.dayCount(periodStats.shortestLength!),
-                    color: colorScheme.secondary,
-                  ),
-                  StatChip(
-                    label: l10n.longest,
-                    value: l10n.dayCount(periodStats.longestLength!),
-                    color: colorScheme.secondary,
-                  ),
-                  StatChip(
-                    label: l10n.total,
-                    value: periodStats.numberofPeriods.toString(),
-                    color: colorScheme.secondary,
-                  ),
-                ],
-              ),
+              children: [
+                StatChip(
+                  label: l10n.periodDurationWidget_averagePeriod,
+                  value: l10n.dayCount(periodStats.averageLength),
+                  color: colorScheme.primary,
+                ),
+                StatChip(
+                  label: l10n.shortest,
+                  value: l10n.dayCount(periodStats.shortestLength!),
+                  color: colorScheme.secondary,
+                ),
+                StatChip(
+                  label: l10n.longest,
+                  value: l10n.dayCount(periodStats.longestLength!),
+                  color: colorScheme.secondary,
+                ),
+                StatChip(
+                  label: l10n.total,
+                  value: periodStats.numberofPeriods.toString(),
+                  color: colorScheme.secondary,
+                ),
+              ],
             ),
             const SizedBox(height: 24),
             AspectRatio(
