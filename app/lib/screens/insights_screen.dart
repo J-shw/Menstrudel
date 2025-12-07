@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/database/repositories/periods_repository.dart';
-import 'package:menstrudel/models/period_logs/period_day.dart';
+import 'package:menstrudel/models/period_logs/log_day.dart';
 import 'package:menstrudel/models/period_logs/symptom.dart';
 import 'package:menstrudel/models/periods/period.dart';
 import 'package:menstrudel/models/flows/flow_data.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/models/flows/flow_enum.dart';
 import 'package:menstrudel/widgets/sheets/symptom_entry_sheet.dart';
-import 'package:menstrudel/models/period_logs/period_day.dart';
+import 'package:menstrudel/models/period_logs/log_day.dart';
 import 'package:menstrudel/database/repositories/periods_repository.dart';
 import 'package:menstrudel/utils/exceptions.dart';
 
