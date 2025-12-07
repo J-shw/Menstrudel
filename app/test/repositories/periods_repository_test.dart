@@ -6,8 +6,8 @@ import 'package:menstrudel/database/repositories/periods_repository.dart';
 import 'package:menstrudel/utils/exceptions.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
-PeriodDay _log(String date, {FlowRate flow = FlowRate.medium}) =>
-    PeriodDay(date: DateTime.parse(date), flow: flow, symptoms: [], painLevel: 0);
+LogDay _log(String date, {FlowRate flow = FlowRate.medium}) =>
+    LogDay(date: DateTime.parse(date), flow: flow, symptoms: [], painLevel: 0);
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -184,7 +184,7 @@ void main() {
 
       test('createPeriodLog should throw FutureDateException for a future date', () async {
         final tomorrow = DateTime.now().add(const Duration(days: 1));
-        final futureLog = PeriodDay(date: tomorrow, flow: FlowRate.medium, painLevel: 0, symptoms: []);
+        final futureLog = LogDay(date: tomorrow, flow: FlowRate.medium, painLevel: 0, symptoms: []);
         final futureCall = repository.createPeriodLog(futureLog);
         expect(futureCall, throwsA(isA<FutureDateException>()));
       });

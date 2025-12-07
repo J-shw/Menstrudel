@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 
 class DynamicHistoryView extends StatelessWidget {
 final Function(DateTime) onLogRequested;
-  final Function(PeriodDay) onLogTapped;
+  final Function(LogDay) onLogTapped;
 
   const DynamicHistoryView({
     super.key,

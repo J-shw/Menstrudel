@@ -10,9 +10,9 @@ import 'package:menstrudel/widgets/dialogs/custom_symptom_dialog.dart';
 import 'package:provider/provider.dart';
 
 class PeriodDetailsBottomSheet extends StatefulWidget {
-  final PeriodDay log;
+  final LogDay log;
   final VoidCallback onDelete;
-  final void Function(PeriodDay) onSave;
+  final void Function(LogDay) onSave;
 
   const PeriodDetailsBottomSheet({super.key, required this.log, required this.onDelete, required this.onSave});
 

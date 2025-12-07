@@ -4,7 +4,7 @@ import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/models/flows/flow_enum.dart';
 
 class FlowBreakdownWidget extends StatelessWidget {
-  final List<PeriodDay> logs;
+  final List<LogDay> logs;
   const FlowBreakdownWidget({super.key, required this.logs});
 
   Widget _buildBar(BuildContext context, {required String label, required int count, required int total, required Color color}) {

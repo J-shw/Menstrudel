@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 
 class PeriodJournalView extends StatefulWidget {
 final Function(DateTime) onLogRequested;
-  final Function(PeriodDay) onLogTapped;
+  final Function(LogDay) onLogTapped;
 
   const PeriodJournalView({
     super.key,

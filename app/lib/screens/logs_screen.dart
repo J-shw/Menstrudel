@@ -28,7 +28,7 @@ class LogsScreenState extends State<LogsScreen> {
     });
   }
 
-  void _showDetailsBottomSheet(PeriodService service, PeriodDay log) {
+  void _showDetailsBottomSheet(PeriodService service, LogDay log) {
     showModalBottomSheet<void>(
       context: context,
       isScrollControlled: true,

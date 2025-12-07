@@ -9,7 +9,7 @@ import 'package:menstrudel/services/period_service.dart';
 import 'package:provider/provider.dart';
 
 class PeriodListView extends StatelessWidget {
-  final Function(PeriodDay) onLogTapped;
+  final Function(LogDay) onLogTapped;
 
   const PeriodListView({
     super.key,
@@ -51,7 +51,7 @@ class PeriodListView extends StatelessWidget {
             return _buildMonthHeader(item, context);
           } else if (item is Period) {
             return _buildPeriodHeader(item, context);
-          } else if (item is PeriodDay) {
+          } else if (item is LogDay) {
             return _buildPeriodLog(item, context);
           }
           return const SizedBox.shrink();
@@ -93,7 +93,7 @@ class PeriodListView extends StatelessWidget {
     );
   }
 
-  Widget _buildPeriodLog(PeriodDay entry, BuildContext context) {
+  Widget _buildPeriodLog(LogDay entry, BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
     final l10n = AppLocalizations.of(context)!;
