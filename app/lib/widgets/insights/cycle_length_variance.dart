@@ -49,7 +49,7 @@ class CycleLengthVarianceWidget extends StatelessWidget {
               child: GridView.count(
                 crossAxisCount: 2,
                 childAspectRatio:
-                    3.0,
+                    3.5,
                 mainAxisSpacing: 8.0,
                 crossAxisSpacing: 8.0,
                 physics: const NeverScrollableScrollPhysics(),
