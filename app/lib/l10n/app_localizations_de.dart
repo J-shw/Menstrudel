@@ -21,13 +21,13 @@ class AppLocalizationsDe extends AppLocalizations {
   String get overdue => 'Überfällig';
 
   @override
-  String get total => 'Total';
+  String get total => 'Gesamt';
 
   @override
-  String get shortest => 'Shortest';
+  String get shortest => 'Kürzeste';
 
   @override
-  String get longest => 'Longest';
+  String get longest => 'Längste';
 
   @override
   String get date => 'Datum';
@@ -48,7 +48,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get days => 'Tage';
 
   @override
-  String get hours => 'Hours';
+  String get hours => 'Stunden';
 
   @override
   String dayCount(int count) {
@@ -107,7 +107,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get notSet => 'Nicht festgelegt';
 
   @override
-  String get removed => 'Removed';
+  String get removed => 'Entfernt';
 
   @override
   String get note => 'Hinweis';
@@ -119,7 +119,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get flow => 'Ausfluss';
 
   @override
-  String get type => 'Type';
+  String get type => 'Typ';
 
   @override
   String get navBar_insights => 'Einblicke';
@@ -128,7 +128,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get navBar_logs => 'Protokolle';
 
   @override
-  String get navBar_sanitary => 'Sanitary';
+  String get navBar_sanitary => 'Hygiene';
 
   @override
   String get navBar_pill => 'Pille';
@@ -215,13 +215,13 @@ class AppLocalizationsDe extends AppLocalizations {
   String get sanitaryProduct_tampon => 'Tampon';
 
   @override
-  String get sanitaryProduct_pad => 'Pad';
+  String get sanitaryProduct_pad => 'Polster';
 
   @override
-  String get sanitaryProduct_menstrualCup => 'Menstrual Cup';
+  String get sanitaryProduct_menstrualCup => 'Menstruationstasse';
 
   @override
-  String get sanitaryProduct_periodUnderwear => 'Period Underwear';
+  String get sanitaryProduct_periodUnderwear => 'Periodenunterwäsche';
 
   @override
   String get error_valueMustbePositive => 'Der Wert muss positiv sein';
@@ -274,17 +274,17 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get notification_SanitaryProductReminderTitle =>
-      'Sanitary Product Reminder';
+      'Erinnerung an Hygieneartikel';
 
   @override
   String get notification_SanitaryProductReminderBody =>
-      'Remember to change your product.';
+      'Denke daran, Dein Produkt zu wechseln.';
 
   @override
   String get mainScreen_insightsPageTitle => 'Deine Erkenntnisse';
 
   @override
-  String get mainScreen_sanitaryPageTitle => 'Sanitary Products';
+  String get mainScreen_sanitaryPageTitle => 'Hygieneartikel';
 
   @override
   String get mainScreen_pillsPageTitle => 'Pille';
@@ -363,25 +363,25 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get sanitaryProductsScreen_noSanitaryProductRecordsFound =>
-      'No sanitary product records found.';
+      'Keine Einträge zu Hygieneartikeln gefunden.';
 
   @override
   String sanitaryProductsScreen_history(int history) {
-    return 'History ($history)';
+    return 'Verlauf ($history)';
   }
 
   @override
   String get sanitaryProductsScreen_noHistoryRecords =>
-      'No past sanitary product records found.';
+      'Es wurden keine früheren Aufzeichnungen zu Hygieneartikeln gefunden.';
 
   @override
   String sanitaryProductsScreen_activeProduct(String activeType) {
-    return 'Active $activeType';
+    return 'Aktiv $activeType';
   }
 
   @override
   String sanitaryProductsScreen_changeDueAt(String time) {
-    return 'Change Due At $time';
+    return 'Änderung fällig um $time';
   }
 
   @override
@@ -612,23 +612,23 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get settingsScreen_clearAllSanitaryData =>
-      'Clear All Sanitary Products Data';
+      'Alle Daten zu Hygieneartikeln löschen';
 
   @override
   String get settingsScreen_clearAllSanitaryDataSubtitle =>
-      'Removes your sanitary products history.';
+      'Löscht deinen Verlauf für Hygieneartikel.';
 
   @override
   String get settingsScreen_clearAllSanitaryData_question =>
-      'Clear All Sanitary Products Data?';
+      'Alle Daten zu Hygieneartikeln löschen?';
 
   @override
   String get settingsScreen_deleteAllSanitaryDataDescription =>
-      'This will permanently delete your sanitary products history.';
+      'Dadurch wird Dein Hygieneartikelverlauf dauerhaft gelöscht.';
 
   @override
   String get settingsScreen_allSanitaryDataCleared =>
-      'All sanitary products data has been cleared.';
+      'Alle Daten zu Hygieneartikeln wurden gelöscht.';
 
   @override
   String get settingsScreen_exportPeriodData => 'Periodendaten exportieren';
@@ -641,7 +641,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get settingsScreen_exportSanitaryData =>
-      'Export Sanitary Products Data';
+      'Daten zu Hygieneartikeln exportieren';
 
   @override
   String get settingsScreen_exportDataSubtitle =>
@@ -679,7 +679,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get settingsScreen_importSanitaryData =>
-      'Import Sanitary Products Data';
+      'Daten zu Hygieneartikeln importieren';
 
   @override
   String get settingsScreen_importDataSubtitle =>
@@ -699,7 +699,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get settingsScreen_importSanitaryData_question =>
-      'Are you sure you want to import Sanitary Products Data?';
+      'Willst du wirklich Daten zu Hygieneartikeln importieren?';
 
   @override
   String get settingsScreen_importPeriodDataDescription =>
@@ -711,11 +711,11 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get settingsScreen_importLarcDataDescription =>
-      'Importing data will permanently overwrite all your existing LARC history. This cannot be undone.';
+      'Durch den Import von Daten werden alle Ihre bisher gespeicherten LARC-Daten dauerhaft überschrieben. Dieser Vorgang kann nicht rückgängig gemacht werden.';
 
   @override
   String get settingsScreen_importSanitaryDataDescription =>
-      'Importing data will permanently overwrite all your existing sanitary product history. This cannot be undone.';
+      'Durch den Import von Daten werden alle bestehenden Daten zu deinen Hygieneartikeln dauerhaft überschrieben. Dieser Vorgang kann nicht rückgängig gemacht werden.';
 
   @override
   String get settingsScreen_importSuccessful => 'Daten erfolgreich importiert!';
@@ -760,11 +760,11 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get preferencesScreen_enableSanitaryProductsScreen =>
-      'Enable Sanitary Products Screen';
+      'Bildschirm für Hygieneartikel aktivieren';
 
   @override
   String get preferencesScreen_enableSanitaryProductsScreenSubtitle =>
-      'Show the Sanitary Products tab on the main navigation bar.';
+      'Hygieneartikel in der Hauptnavigationsleiste anzeigen.';
 
   @override
   String get settingsScreen_about => 'Über';
@@ -789,10 +789,10 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get cycleLengthVarianceWidget_logAtLeastTwoPeriods =>
-      'Need at least two cycles to show variance.';
+      'Es sind mindestens zwei Zyklen erforderlich, um Abweichungen zu zeigen.';
 
   @override
-  String get cycleLengthVarianceWidget_title => 'Cycle Length Variance';
+  String get cycleLengthVarianceWidget_title => 'Zykluslängenabweichung';
 
   @override
   String get cycleLengthVarianceWidget_averageCycle =>
@@ -803,16 +803,16 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get periodDurationWidget_logAtLeastTwoPeriods =>
-      'Log at least two periods to see period statistics.';
+      'Protokolliere mindestens zwei Perioden, um Periodenstatistiken anzuzeigen.';
 
   @override
-  String get periodDurationWidget_title => 'Period Duration Variance';
+  String get periodDurationWidget_title => 'Periode Dauer Abweichung';
 
   @override
-  String get periodDurationWidget_averagePeriod => 'Avg. Period';
+  String get periodDurationWidget_averagePeriod => 'Durchschnittliche Periode';
 
   @override
-  String get periodDurationWidget_period => 'Period';
+  String get periodDurationWidget_period => 'Periode';
 
   @override
   String get flowIntensityWidget_flowIntensityBreakdown =>
@@ -941,23 +941,24 @@ class AppLocalizationsDe extends AppLocalizations {
   String get larcEntrySheet_logLARCDetails => 'LARC-Details protokollieren';
 
   @override
-  String get sanitaryEntrySheet_logSanitaryProduct => 'Log Sanitary Product';
+  String get sanitaryEntrySheet_logSanitaryProduct => 'Log-Hygieneartikel';
 
   @override
-  String get sanitaryEntrySheet_setReminderDuration => 'Set Reminder Duration';
+  String get sanitaryEntrySheet_setReminderDuration =>
+      'Erinnerungsdauer festlegen';
 
   @override
   String sanitaryEntrySheet_maxDuration(int hours) {
-    return 'Max Duration: $hours hours';
+    return 'Maximale Dauer: $hours Stunden';
   }
 
   @override
   String get sanitaryEntrySheet_futureLogTimeError =>
-      'Log time cannot be in the future.';
+      'Die Protokollzeit darf nicht in der Zukunft liegen.';
 
   @override
   String get sanitaryEntrySheet_pastReminderTimeError =>
-      'Reminder end time cannot be in the past.';
+      'Die Erinnerungsendzeit kann nicht in der Vergangenheit liegen.';
 
   @override
   String periodPredictionCircle_days(int count) {

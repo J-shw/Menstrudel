@@ -376,7 +376,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String sanitaryProductsScreen_activeProduct(String activeType) {
-    return 'Active $activeType';
+    return 'Actif$activeType';
   }
 
   @override
