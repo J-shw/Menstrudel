@@ -99,7 +99,7 @@ class _AboutScreenState extends State<AboutScreen> {
                 subtitle: Text(l10n.aboutScreen_githubSubtitle),
                 trailing: const Icon(Icons.chevron_right),
                 onTap: () {
-                  _launchUrl('https://discord.gg/jWrH9DvACS', l10n);
+                  _launchUrl('https://discord.gg/H95kG7zPWB', l10n);
                 },
               ),
             ],
