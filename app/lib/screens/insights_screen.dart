@@ -25,19 +25,30 @@ class InsightsScreen extends StatefulWidget {
 class _InsightsScreenState extends State<InsightsScreen> {
   late Future<List<dynamic>> _insightsDataFuture;
   final periodsRepo = PeriodsRepository();
-  final PageController _pageController = PageController(viewportFraction: 1.0);
-  int _currentPage = 0;
+  final PageController _cycleAndPeriodCarouselPageController = PageController(viewportFraction: 1.0);
+  final PageController _painAndFlowCarouselPageController = PageController(viewportFraction: 1.0);
+  int _cycleAndPeriodCarouselCurrentPage = 0;
+  int _painAndFlowCarouselCurrentPage = 0;
+
 
   @override
   void initState() {
     super.initState();
     _loadInsightsData();
 
-    _pageController.addListener(() {
-      final page = _pageController.page?.round() ?? 0;
-      if (page != _currentPage) {
+    _cycleAndPeriodCarouselPageController.addListener(() {
+      final page = _cycleAndPeriodCarouselPageController.page?.round() ?? 0;
+      if (page != _cycleAndPeriodCarouselCurrentPage) {
         setState(() {
-          _currentPage = page;
+          _cycleAndPeriodCarouselCurrentPage = page;
+        });
+      }
+    });
+    _painAndFlowCarouselPageController.addListener(() {
+      final page = _painAndFlowCarouselPageController.page?.round() ?? 0;
+      if (page != _painAndFlowCarouselCurrentPage) {
+        setState(() {
+          _painAndFlowCarouselCurrentPage = page;
         });
       }
     });
@@ -45,7 +56,8 @@ class _InsightsScreenState extends State<InsightsScreen> {
 
   @override
   void dispose() {
-    _pageController.dispose();
+    _cycleAndPeriodCarouselPageController.dispose();
+    _painAndFlowCarouselPageController.dispose();
     super.dispose();
   }
 
@@ -61,8 +73,6 @@ class _InsightsScreenState extends State<InsightsScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-
-    const double carouselHeight = 450.0;
 
     return FutureBuilder<List<dynamic>>(
       future: _insightsDataFuture,
@@ -83,9 +93,14 @@ class _InsightsScreenState extends State<InsightsScreen> {
           final allFlows = snapshot.data![2] as List<MonthlyFlowData>;
           final symptomCounts = snapshot.data![3] as Map<Symptom, int>;
 
-          final List<Widget> carouselItems = [
+          final List<Widget> cycleAndPeriodCarouselItems = [
             CycleLengthVarianceWidget(periods: allPeriods),
             PeriodDurationWidget(periods: allPeriods),
+          ];
+          
+          final List<Widget> painAndFlowCarouselItems = [
+            PainBreakdownWidget(logs: allLogs),
+            FlowBreakdownWidget(logs: allLogs),
           ];
 
           return ListView(
@@ -95,21 +110,23 @@ class _InsightsScreenState extends State<InsightsScreen> {
                 padding: const EdgeInsets.all(16.0),
                 child: SymptomFrequencyWidget(symptomCounts: symptomCounts),
               ),
+              
+              // --- First Carousel (Cycles/Periods) ---
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
                 child: Column(
                   children: [
                     SizedBox(
-                      height: carouselHeight,
+                      height: 450.0,
                       child: PageView.builder(
-                        controller: _pageController,
-                        itemCount: carouselItems.length,
+                        controller: _cycleAndPeriodCarouselPageController,
+                        itemCount: cycleAndPeriodCarouselItems.length,
                         itemBuilder: (context, index) {
                           return Padding(
                             padding: const EdgeInsets.symmetric(
                               horizontal: 16.0,
                             ),
-                            child: carouselItems[index],
+                            child: cycleAndPeriodCarouselItems[index],
                           );
                         },
                       ),
@@ -117,8 +134,8 @@ class _InsightsScreenState extends State<InsightsScreen> {
                     const SizedBox(height: 12.0),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: List.generate(carouselItems.length, (index) {
-                        final isSelected = index == _currentPage;
+                      children: List.generate(cycleAndPeriodCarouselItems.length, (index) {
+                        final isSelected = index == _cycleAndPeriodCarouselCurrentPage;
                         return Container(
                           width: isSelected ? 8.0 : 6.0,
                           height: isSelected ? 8.0 : 6.0,
@@ -137,14 +154,51 @@ class _InsightsScreenState extends State<InsightsScreen> {
                   ],
                 ),
               ),
+              
+              // --- Second Carousel (Pain/Flow) ---
               Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: PainBreakdownWidget(logs: allLogs),
+                padding: const EdgeInsets.symmetric(vertical: 16.0),
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 350.0,
+                      child: PageView.builder(
+                        controller: _painAndFlowCarouselPageController,
+                        itemCount: painAndFlowCarouselItems.length,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16.0,
+                            ),
+                            child: painAndFlowCarouselItems[index],
+                          );
+                        },
+                      ),
+                    ),
+                    const SizedBox(height: 12.0),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: List.generate(painAndFlowCarouselItems.length, (index) {
+                        final isSelected = index == _painAndFlowCarouselCurrentPage;
+                        return Container(
+                          width: isSelected ? 8.0 : 6.0,
+                          height: isSelected ? 8.0 : 6.0,
+                          margin: const EdgeInsets.symmetric(horizontal: 4.0),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: isSelected
+                                ? Theme.of(context).colorScheme.primary
+                                : Theme.of(
+                                    context,
+                                  ).colorScheme.onSurface.withValues(alpha: 0.3),
+                          ),
+                        );
+                      }),
+                    ),
+                  ],
+                ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: FlowBreakdownWidget(logs: allLogs),
-              ),
+              
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: FlowPatternsWidget(monthlyFlowData: allFlows),
