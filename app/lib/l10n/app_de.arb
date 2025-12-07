@@ -39,11 +39,11 @@
     "reset": "Zurücksetzen",
     "add": "Hinzufügen",
     "notSet": "Nicht festgelegt",
-    "removed": "Removed",
+    "removed": "Entfernt",
     "note": "Hinweis",
     "systemDefault": "System Standard",
     "flow": "Ausfluss",
-    "type": "Type",
+    "type": "Typ",
     "navBar_insights": "Einblicke",
     "navBar_logs": "Protokolle",
     "navBar_sanitary": "Hygiene",
@@ -75,7 +75,7 @@
     "larcType_ring": "Ring",
     "larcType_patch": "Patch",
     "sanitaryProduct_tampon": "Tampon",
-    "sanitaryProduct_pad": "Pad",
+    "sanitaryProduct_pad": "Polster",
     "sanitaryProduct_menstrualCup": "Menstruationstasse",
     "sanitaryProduct_periodUnderwear": "Periodenunterwäsche",
     "error_valueMustbePositive": "Der Wert muss positiv sein",
@@ -182,7 +182,7 @@
     "larcScreen_noActiveRecords": "Derzeit ist kein LARC aktiv. Bitte einen neuen Eintrag vornehmen.",
     "larcScreen_noHistoryRecords": "Es wurden keine früheren oder überfälligen LARC-Datensätze gefunden.",
     "sanitaryProductsScreen_noSanitaryProductRecordsFound": "Keine Einträge zu Hygieneartikeln gefunden.",
-    "sanitaryProductsScreen_history": "History ({history})",
+    "sanitaryProductsScreen_history": "Verlauf ({history})",
     "@sanitaryProductsScreen_history": {
         "description": "The total sanitary product history count.",
         "placeholders": {
@@ -193,7 +193,7 @@
         }
     },
     "sanitaryProductsScreen_noHistoryRecords": "Es wurden keine früheren Aufzeichnungen zu Hygieneartikeln gefunden.",
-    "sanitaryProductsScreen_activeProduct": "Active {activeType}",
+    "sanitaryProductsScreen_activeProduct": "Aktiv {activeType}",
     "@sanitaryProductsScreen_activeProduct": {
         "description": "Label showing the type of active sanitary product.",
         "placeholders": {
@@ -203,7 +203,7 @@
             }
         }
     },
-    "sanitaryProductsScreen_changeDueAt": "Change Due At {time}",
+    "sanitaryProductsScreen_changeDueAt": "Änderung fällig um {time}",
     "@sanitaryProductsScreen_changeDueAt": {
         "description": "Label showing the time when the sanitary product needs to be changed.",
         "placeholders": {
@@ -331,7 +331,7 @@
     "settingsScreen_importSanitaryData_question": "Willst du wirklich Daten zu Hygieneartikeln importieren?",
     "settingsScreen_importPeriodDataDescription": "Durch den Import von Daten werden alle bisherigen Periodenprotokolle und Periodeneinstellungen dauerhaft überschrieben. Dieser Vorgang kann nicht rückgängig gemacht werden.",
     "settingsScreen_importPillDataDescription": "Durch den Import von Daten werden alle bisherigen Pillen-Daten dauerhaft überschrieben. Dieser Vorgang kann nicht rückgängig gemacht werden.",
-    "settingsScreen_importLarcDataDescription": "Importing data will permanently overwrite all your existing LARC history. This cannot be undone.",
+    "settingsScreen_importLarcDataDescription": "Durch den Import von Daten werden alle Ihre bisher gespeicherten LARC-Daten dauerhaft überschrieben. Dieser Vorgang kann nicht rückgängig gemacht werden.",
     "settingsScreen_importSanitaryDataDescription": "Durch den Import von Daten werden alle bestehenden Daten zu deinen Hygieneartikeln dauerhaft überschrieben. Dieser Vorgang kann nicht rückgängig gemacht werden.",
     "settingsScreen_importSuccessful": "Daten erfolgreich importiert!",
     "settingsScreen_importFailed": "Datenimport fehlgeschlagen. Bitte versuche es erneut.",
@@ -357,7 +357,7 @@
     "settingsScreen_preferences": "Einstellungen",
     "preferencesScreen_language": "Sprache",
     "preferencesScreen_enableSanitaryProductsScreen": "Bildschirm für Hygieneartikel aktivieren",
-    "preferencesScreen_enableSanitaryProductsScreenSubtitle": "Show the Sanitary Products tab on the main navigation bar.",
+    "preferencesScreen_enableSanitaryProductsScreenSubtitle": "Hygieneartikel in der Hauptnavigationsleiste anzeigen.",
     "settingsScreen_about": "Über",
     "aboutScreen_version": "Version",
     "aboutScreen_github": "GitHub",
@@ -365,14 +365,14 @@
     "aboutScreen_share": "Teilen",
     "aboutScreen_shareSubtitle": "Teile die App mit Freunden",
     "aboutScreen_urlError": "Der Link konnte nicht geöffnet werden.",
-    "cycleLengthVarianceWidget_logAtLeastTwoPeriods": "Need at least two cycles to show variance.",
-    "cycleLengthVarianceWidget_title": "Cycle Length Variance",
+    "cycleLengthVarianceWidget_logAtLeastTwoPeriods": "Es sind mindestens zwei Zyklen erforderlich, um Abweichungen zu zeigen.",
+    "cycleLengthVarianceWidget_title": "Zykluslängenabweichung",
     "cycleLengthVarianceWidget_averageCycle": "Durchschnittlicher Zyklus",
     "cycleLengthVarianceWidget_cycle": "Zyklus",
-    "periodDurationWidget_logAtLeastTwoPeriods": "Log at least two periods to see period statistics.",
-    "periodDurationWidget_title": "Period Duration Variance",
-    "periodDurationWidget_averagePeriod": "Avg. Period",
-    "periodDurationWidget_period": "Period",
+    "periodDurationWidget_logAtLeastTwoPeriods": "Protokolliere mindestens zwei Perioden, um Periodenstatistiken anzuzeigen.",
+    "periodDurationWidget_title": "Periode Dauer Abweichung",
+    "periodDurationWidget_averagePeriod": "Durchschnittliche Periode",
+    "periodDurationWidget_period": "Periode",
     "flowIntensityWidget_flowIntensityBreakdown": "Aufschlüsselung der Abflussintensität",
     "flowIntensityWidget_noFlowDataLoggedYet": "Es wurden noch keine Schmerzdaten erfasst.",
     "painLevelWidget_noPainDataLoggedYet": "Es wurden noch keine Schmerzdaten erfasst.",
@@ -423,8 +423,8 @@
     "periodDetailsSheet_symptoms": "Symptome",
     "periodDetailsSheet_flow": "Ausfluss",
     "larcEntrySheet_logLARCDetails": "LARC-Details protokollieren",
-    "sanitaryEntrySheet_logSanitaryProduct": "Log Sanitary Product",
-    "sanitaryEntrySheet_setReminderDuration": "Set Reminder Duration",
+    "sanitaryEntrySheet_logSanitaryProduct": "Log-Hygieneartikel",
+    "sanitaryEntrySheet_setReminderDuration": "Erinnerungsdauer festlegen",
     "sanitaryEntrySheet_maxDuration": "Maximale Dauer: {hours} Stunden",
     "@sanitaryEntrySheet_maxDuration": {
         "description": "Label showing the maximum duration for the selected sanitary product type.",
@@ -435,7 +435,7 @@
         }
     },
     "sanitaryEntrySheet_futureLogTimeError": "Die Protokollzeit darf nicht in der Zukunft liegen.",
-    "sanitaryEntrySheet_pastReminderTimeError": "Reminder end time cannot be in the past.",
+    "sanitaryEntrySheet_pastReminderTimeError": "Die Erinnerungsendzeit kann nicht in der Vergangenheit liegen.",
     "periodPredictionCircle_days": "{count, plural, =1{Tag} other{Tage}}",
     "@periodPredictionCircle_days": {
         "description": "A label showing the total number of days until period is due.",
