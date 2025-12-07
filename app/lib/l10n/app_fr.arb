@@ -24,6 +24,27 @@
             }
         }
     },
+    "monthCount": "{count, plural, one{{count} Month} other{{count} Months}}",
+    "@monthCount": {
+        "description": "A message that displays a count of months, handling singular and plural forms.",
+        "placeholders": {
+            "count": {
+                "type": "int",
+                "example": "2"
+            }
+        }
+    },
+    "yearCount": "{count, plural, one{{count} Year} other{{count} Years}}",
+    "@yearCount": {
+        "description": "A message that displays a count of years, handling singular and plural forms.",
+        "placeholders": {
+            "count": {
+                "type": "int",
+                "example": "3"
+            }
+        }
+    },
+    "edit": "Edit",
     "delete": "Supprimer",
     "clear": "Effacer",
     "save": "Sauvegarder",
@@ -362,9 +383,13 @@
     "aboutScreen_version": "Version",
     "aboutScreen_github": "GitHub",
     "aboutScreen_githubSubtitle": "Code source et suivis des erreurs",
+    "aboutScreen_discord": "Discord",
+    "aboutScreen_discordSubtitle": "Support and community",
     "aboutScreen_share": "Partager",
     "aboutScreen_shareSubtitle": "Partager l'appli avec vos proches",
     "aboutScreen_urlError": "Impossible d'ouvrir le lien.",
+    "logSummaryWidget_loggedDays": "Logged Days",
+    "logSummaryWidget_trackingHistory": "Tracking History",
     "cycleLengthVarianceWidget_logAtLeastTwoPeriods": "Need at least two cycles to show variance.",
     "cycleLengthVarianceWidget_title": "Cycle Length Variance",
     "cycleLengthVarianceWidget_averageCycle": "Cycle Moyen",
