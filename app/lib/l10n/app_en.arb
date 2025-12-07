@@ -31,6 +31,28 @@
             }
         }
     },
+    "monthCount": "{count, plural, one{{count} Month} other{{count} Months}}",
+    "@monthCount": {
+        "description": "A message that displays a count of months, handling singular and plural forms.",
+        "placeholders": {
+            "count": {
+                "type": "int",
+                "example": "2"
+            }
+        }
+    },
+    "yearCount": "{count, plural, one{{count} Year} other{{count} Years}}",
+    "@yearCount": {
+        "description": "A message that displays a count of years, handling singular and plural forms.",
+        "placeholders": {
+            "count": {
+                "type": "int",
+                "example": "3"
+            }
+        }
+    },
+
+    "edit": "Edit",
 
     "delete": "Delete",
     "clear": "Clear",
@@ -408,6 +430,9 @@
     "aboutScreen_share": "Share",
     "aboutScreen_shareSubtitle": "Share the app with friends",
     "aboutScreen_urlError": "Could not open the link.",
+
+    "logSummaryWidget_loggedDays": "Logged Days",
+    "logSummaryWidget_trackingHistory": "Tracking History",
 
     "cycleLengthVarianceWidget_logAtLeastTwoPeriods": "Need at least two cycles to show variance.",
     "cycleLengthVarianceWidget_title": "Cycle Length Variance",
