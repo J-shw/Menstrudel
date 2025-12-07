@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:menstrudel/models/period_logs/period_day.dart';
+import 'package:menstrudel/models/period_logs/log_day.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/models/flows/flow_enum.dart'; 
 
 class YearHeatmapWidget extends StatelessWidget {
-  final List<PeriodDay> logs;
+  final List<LogDay> logs;
   const YearHeatmapWidget({super.key, required this.logs});
 
   @override
@@ -14,7 +14,7 @@ class YearHeatmapWidget extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
     final l10n = AppLocalizations.of(context)!;
 
-    final Map<DateTime, PeriodDay> periodDayEvents = {
+    final Map<DateTime, LogDay> periodDayEvents = {
       for (var log in logs)
         DateTime.utc(log.date.year, log.date.month, log.date.day): log
     };

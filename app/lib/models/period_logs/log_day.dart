@@ -1,11 +1,11 @@
 import 'package:menstrudel/models/flows/flow_enum.dart';
 import 'package:menstrudel/models/period_logs/symptom.dart';
 
-/// Represents a single day's log within a menstrual cycle.
+/// Represents a single day's log.
 ///
 /// This class stores daily observations such as symptoms, flow, and pain level.
-/// Each [PeriodDay] object is associated with a parent [Period] via the [periodId].
-class PeriodDay {
+/// Each [LogDay] object can be associated with a parent [Period] via the [periodId].
+class LogDay {
 	int? id;
 	DateTime date;
 	List<Symptom> symptoms;
@@ -13,7 +13,7 @@ class PeriodDay {
   int? painLevel;
 	int? periodId;
 
-	PeriodDay({
+	LogDay({
 		this.id,
 		required this.date,
 		this.symptoms = const [],
@@ -32,11 +32,11 @@ class PeriodDay {
 		};
 	}
 
-	factory PeriodDay.fromMap(
+	factory LogDay.fromMap(
     Map<String, dynamic> map, {
     List<Symptom>? symptoms,
   }) {
-		return PeriodDay(
+		return LogDay(
 			id: map['id'] as int?,
 			date: DateTime.parse(map['date'] as String),
 			symptoms: symptoms ?? [],
@@ -46,7 +46,7 @@ class PeriodDay {
 		);
 	}
 
-	PeriodDay copyWith({
+	LogDay copyWith({
 		int? id,
 		DateTime? date,
 		List<Symptom>? symptoms,
@@ -54,7 +54,7 @@ class PeriodDay {
     int? painLevel,
 		int? periodId,
 	}) {
-		return PeriodDay(
+		return LogDay(
 			id: id ?? this.id,
 			date: date ?? this.date,
 			symptoms: symptoms ?? this.symptoms,

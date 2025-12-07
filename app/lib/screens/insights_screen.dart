@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/database/repositories/periods_repository.dart';
-import 'package:menstrudel/models/period_logs/period_day.dart';
+import 'package:menstrudel/models/period_logs/log_day.dart';
 import 'package:menstrudel/models/period_logs/symptom.dart';
 import 'package:menstrudel/models/periods/period.dart';
 import 'package:menstrudel/models/flows/flow_data.dart';
@@ -71,7 +71,7 @@ class _InsightsScreenState extends State<InsightsScreen> {
     ]);
   }
 
-  String _formatLoggingSpan(List<PeriodDay> allLogs, AppLocalizations l10n) {
+  String _formatLoggingSpan(List<LogDay> allLogs, AppLocalizations l10n) {
     if (allLogs.isEmpty) {
       return l10n.dayCount(0);
     }
@@ -124,7 +124,7 @@ class _InsightsScreenState extends State<InsightsScreen> {
 
         if (snapshot.hasData) {
           final allPeriods = snapshot.data![0] as List<Period>;
-          final allLogs = snapshot.data![1] as List<PeriodDay>;
+          final allLogs = snapshot.data![1] as List<LogDay>;
           final allFlows = snapshot.data![2] as List<MonthlyFlowData>;
           final symptomCounts = snapshot.data![3] as Map<Symptom, int>;
 

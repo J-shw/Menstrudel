@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
-import 'package:menstrudel/models/period_logs/period_day.dart';
+import 'package:menstrudel/models/period_logs/log_day.dart';
 import 'package:menstrudel/models/flows/flow_enum.dart';
 import 'package:menstrudel/models/period_logs/pain_level_enum.dart';
 import 'package:menstrudel/models/period_logs/symptom.dart';
@@ -10,9 +10,9 @@ import 'package:menstrudel/widgets/dialogs/custom_symptom_dialog.dart';
 import 'package:provider/provider.dart';
 
 class PeriodDetailsBottomSheet extends StatefulWidget {
-  final PeriodDay log;
+  final LogDay log;
   final VoidCallback onDelete;
-  final void Function(PeriodDay) onSave;
+  final void Function(LogDay) onSave;
 
   const PeriodDetailsBottomSheet({super.key, required this.log, required this.onDelete, required this.onSave});
 

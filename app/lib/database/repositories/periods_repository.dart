@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import 'package:menstrudel/database/app_database.dart';
-import 'package:menstrudel/models/period_logs/period_day.dart';
+import 'package:menstrudel/models/period_logs/log_day.dart';
 import 'package:menstrudel/models/periods/period.dart';
 import 'package:menstrudel/models/flows/flow_data.dart';
 import 'package:menstrudel/utils/exceptions.dart';
@@ -25,7 +25,7 @@ class PeriodsRepository {
     debugPrint('Received request from watch! Logging period now...');
 
     try {
-      final newLog = PeriodDay(
+      final newLog = LogDay(
         date: DateTime.now(),
         flow: FlowRate.medium,
         painLevel: null,
@@ -120,7 +120,7 @@ class PeriodsRepository {
 
   // Period logs
 
-  Future<PeriodDay> createPeriodLog(PeriodDay entry) async {
+  Future<LogDay> createPeriodLog(LogDay entry) async {
     final db = await dbProvider.database;
 
     await _validateLogDate(db, entry.date);
@@ -145,7 +145,7 @@ class PeriodsRepository {
     return await readPeriodLog(newLogId);
   }
 
-  Future<List<PeriodDay>> readAllPeriodLogs() async {
+  Future<List<LogDay>> readAllPeriodLogs() async {
     final db = await dbProvider.database;
 
     const orderBy = 'date DESC';
@@ -163,11 +163,11 @@ class PeriodsRepository {
     return logsResult.map((json) {
       final int logId = json['id'] as int;
       final List<Symptom> symptoms = symptomMap[logId] ?? [];
-      return PeriodDay.fromMap(json, symptoms: symptoms);
+      return LogDay.fromMap(json, symptoms: symptoms);
     }).toList();
   }
 
-  Future<PeriodDay> readPeriodLog(int id) async {
+  Future<LogDay> readPeriodLog(int id) async {
     final db = await dbProvider.database;
 
     final result = await db.query(
@@ -189,7 +189,7 @@ class PeriodsRepository {
 
     final List<Symptom> symptoms = symptomsResult.map((row) => Symptom.fromDbString(row['symptom'] as String)).toList();
 
-    return PeriodDay.fromMap(result.first, symptoms: symptoms);
+    return LogDay.fromMap(result.first, symptoms: symptoms);
   }
 
   /// Calculates the usage count for every symptom in the database.
@@ -221,7 +221,7 @@ class PeriodsRepository {
     return result.length == 1 ? result[0]["count"] as int : 0;
   }
 
-  Future<int> updatePeriodLog(PeriodDay entry) async {
+  Future<int> updatePeriodLog(LogDay entry) async {
     final db = await dbProvider.database;
 
     if (entry.id == null) {
@@ -294,13 +294,13 @@ class PeriodsRepository {
       where: 'flow != ?',
       whereArgs: [FlowRate.none.index],
     );
-    final allEntries = allEntryMaps.map((e) => PeriodDay.fromMap(e)).toList();
+    final allEntries = allEntryMaps.map((e) => LogDay.fromMap(e)).toList();
 
     if (allEntries.isEmpty) {
       return;
     }
 
-    List<PeriodDay> currentPeriodLogs = [];
+    List<LogDay> currentPeriodLogs = [];
 
     for (final entry in allEntries) {
       if (currentPeriodLogs.isEmpty ||
@@ -319,7 +319,7 @@ class PeriodsRepository {
   }
 
   /// Creates a Period entry in the DB from logs with at flow rate.
-  Future<void> _createPeriodFromLogs(Database db, List<PeriodDay> logs) async {
+  Future<void> _createPeriodFromLogs(Database db, List<LogDay> logs) async {
     final periodDays = logs.where((log) => log.flow != FlowRate.none).toList();
 
     if (periodDays.isEmpty) {

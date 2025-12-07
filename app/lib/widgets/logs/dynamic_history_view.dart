@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:menstrudel/widgets/logs/list_view.dart';
 import 'package:menstrudel/widgets/logs/journal_view.dart';
 import 'package:menstrudel/services/settings_service.dart';
-import 'package:menstrudel/models/period_logs/period_day.dart';
+import 'package:menstrudel/models/period_logs/log_day.dart';
 import 'package:provider/provider.dart';
 
 class DynamicHistoryView extends StatelessWidget {
 final Function(DateTime) onLogRequested;
-  final Function(PeriodDay) onLogTapped;
+  final Function(LogDay) onLogTapped;
 
   const DynamicHistoryView({
     super.key,

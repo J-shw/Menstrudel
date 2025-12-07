@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:collection/collection.dart';
 import 'package:intl/intl.dart';
 import 'package:menstrudel/database/repositories/periods_repository.dart';
-import 'package:menstrudel/models/period_logs/period_day.dart';
+import 'package:menstrudel/models/period_logs/log_day.dart';
 import 'package:menstrudel/models/periods/period.dart';
 import 'package:menstrudel/models/period_prediction_result.dart';
 import 'package:menstrudel/utils/constants.dart';
@@ -23,21 +23,21 @@ class PeriodService extends ChangeNotifier {
   PeriodService(this._settingsService);
 
   bool _isLoading = true;
-  List<PeriodDay> _periodLogEntries = [];
+  List<LogDay> _periodLogEntries = [];
   List<Period> _periodEntries = [];
   List<Object> _timelineItems = [];
   PeriodPredictionResult? _predictionResult;
   int _circleCurrentValue = 0;
   int _circleMaxValue = 28;
   bool _isPeriodOngoing = false;
-  Map<DateTime, PeriodDay> _logMap = {};
+  Map<DateTime, LogDay> _logMap = {};
   DateTime? _earliestLogDate;
   DateTime? _latestLogDate;
 
   /// Whether a background operation is currently in progress.
   bool get isLoading => _isLoading;
   /// The complete list of all individual period day logs.
-  List<PeriodDay> get periodLogEntries => _periodLogEntries;
+  List<LogDay> get periodLogEntries => _periodLogEntries;
   /// The list of calculated [Period] objects, representing entire period cycles.
   List<Period> get periodEntries => _periodEntries;
   /// The calculated prediction for the next period, if available.
@@ -51,7 +51,7 @@ class PeriodService extends ChangeNotifier {
   /// A pre-computed list of timeline items for the PeriodListView.
   List<Object> get timelineItems => _timelineItems;
   /// A pre-computed map of logs, keyed by their date, for fast calendar lookups.
-  Map<DateTime, PeriodDay> get logMap => _logMap;
+  Map<DateTime, LogDay> get logMap => _logMap;
   /// The date of the earliest log on record.
   DateTime? get earliestLogDate => _earliestLogDate;
   /// The date of the latest log on record.
@@ -196,7 +196,7 @@ class PeriodService extends ChangeNotifier {
   }
 
   /// Updates an existing log entry.
-  Future<void> updateExistingLog(BuildContext context, PeriodDay updatedLog) async {
+  Future<void> updateExistingLog(BuildContext context, LogDay updatedLog) async {
     await _periodsRepo.updatePeriodLog(updatedLog);
     
     if (context.mounted) {
@@ -234,7 +234,7 @@ class PeriodService extends ChangeNotifier {
     ];
 
     final groupedByMonth = groupBy<Object, DateTime>(timelineEvents, (event) {
-      final date = event is Period ? event.startDate : (event as PeriodDay).date;
+      final date = event is Period ? event.startDate : (event as LogDay).date;
       return DateTime(date.year, date.month);
     });
 
@@ -247,8 +247,8 @@ class PeriodService extends ChangeNotifier {
 
       final eventsInMonth = groupedByMonth[month]!;
       eventsInMonth.sort((a, b) {
-        final dateA = a is Period ? a.startDate : (a as PeriodDay).date;
-        final dateB = b is Period ? b.startDate : (b as PeriodDay).date;
+        final dateA = a is Period ? a.startDate : (a as LogDay).date;
+        final dateB = b is Period ? b.startDate : (b as LogDay).date;
         return dateB.compareTo(dateA);
       });
 
@@ -258,7 +258,7 @@ class PeriodService extends ChangeNotifier {
           final logsForPeriod = (groupedLogs[event.id] ?? [])
             ..sort((a, b) => a.date.compareTo(b.date));
           items.addAll(logsForPeriod);
-        } else if (event is PeriodDay) {
+        } else if (event is LogDay) {
           items.add(event);
         }
       }

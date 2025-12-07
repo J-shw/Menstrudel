@@ -8,7 +8,7 @@ These tests verify the most basic behavior of creating, updating, and deleting s
 
 | Test Case Description | Purpose |
 |---|---|
-| `createPeriodLog should add a log and its corresponding period` | Verifies that creating a single log correctly creates both a `PeriodDay` and a `Period` record. |
+| `createPeriodLog should add a log and its corresponding period` | Verifies that creating a single log correctly creates both a `LogDay` and a `Period` record. |
 | `updating a log flow should not affect period structure` | Ensures that updating non-date information (like flow) doesn't incorrectly trigger a period recalculation. |
 | `deleting the only log should remove the period entirely` | Confirms that deleting the last log of a period also deletes the parent `Period` record. |
 
