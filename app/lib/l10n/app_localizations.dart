@@ -1401,6 +1401,18 @@ abstract class AppLocalizations {
   /// **'Source code and issue tracking'**
   String get aboutScreen_githubSubtitle;
 
+  /// No description provided for @aboutScreen_discord.
+  ///
+  /// In en, this message translates to:
+  /// **'Discord'**
+  String get aboutScreen_discord;
+
+  /// No description provided for @aboutScreen_discordSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Support and community'**
+  String get aboutScreen_discordSubtitle;
+
   /// No description provided for @aboutScreen_share.
   ///
   /// In en, this message translates to:
