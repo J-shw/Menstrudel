@@ -594,6 +594,18 @@ abstract class AppLocalizations {
   /// **'{type} is due for renewal in {days} days.'**
   String notification_larcBody(String type, int days);
 
+  /// Title for the logging reminder notification.
+  ///
+  /// In en, this message translates to:
+  /// **'Logging Reminder'**
+  String get notification_loggingReminderTitle;
+
+  /// Body for the logging reminder notification.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to log your flow for today.'**
+  String get notification_loggingReminderBody;
+
   /// No description provided for @notification_SanitaryProductReminderTitle.
   ///
   /// In en, this message translates to:

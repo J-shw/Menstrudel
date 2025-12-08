@@ -298,6 +298,13 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
+  String get notification_loggingReminderTitle => 'Logging Reminder';
+
+  @override
+  String get notification_loggingReminderBody =>
+      'Tap to log your flow for today.';
+
+  @override
   String get notification_SanitaryProductReminderTitle =>
       'Sanitary Product Reminder';
 
