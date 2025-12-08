@@ -996,6 +996,24 @@ abstract class AppLocalizations {
   /// **'Logging'**
   String get settingsScreen_LoggingScreen;
 
+  /// No description provided for @settingsScreen_enableLoggingReminders.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable Logging Reminders'**
+  String get settingsScreen_enableLoggingReminders;
+
+  /// No description provided for @settingsScreen_loggingReminderDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'If you log a day with flow, you will receive a notification the following day to log your status.'**
+  String get settingsScreen_loggingReminderDescription;
+
+  /// No description provided for @settingsScreen_loggingReminderTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Logging Reminder Time'**
+  String get settingsScreen_loggingReminderTime;
+
   /// No description provided for @settingsScreen_defaultSymptoms.
   ///
   /// In en, this message translates to:
