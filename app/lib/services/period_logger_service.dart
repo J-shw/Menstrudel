@@ -58,10 +58,9 @@ class PeriodLoggerService {
           NotificationService.scheduleLoggingReminder(
             scheduledTime: scheduledTime,
             isEnabled: isReminderEnabled,
-            title: l10n.settingsScreen_loggingReminderTitle,
-            body: l10n.settingsScreen_loggingReminderBody,
+            title: l10n.notification_loggingReminderTitle,
+            body: l10n.notification_loggingReminderBody,
           );
-          
         }
       } on DuplicateLogException catch (e) {
         if (!context.mounted) return false;
