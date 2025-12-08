@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:menstrudel/models/flows/flow_enum.dart';
 import 'package:provider/provider.dart';
 import 'package:collection/collection.dart';
 import 'package:intl/intl.dart';
@@ -174,6 +175,34 @@ class PeriodService extends ChangeNotifier {
     }
   }
 
+  /// Schedules a logging reminder from a [LogDay] object.
+  Future<void> scheduleLoggingReminder(BuildContext context, LogDay log) async {
+    if (log.flow == FlowRate.none) {
+      await NotificationService.cancelLoggingReminder(log.date);
+    }else if (log.flow != FlowRate.none && context.mounted) {
+      final settingsService = context.read<SettingsService>();
+      final nextDay = log.date.add(const Duration(days: 1));
+      final reminderTime = settingsService.loggingReminderTime;
+      final bool isReminderEnabled = settingsService.isLoggingReminderNotificationEnabled;
+      final l10n = AppLocalizations.of(context)!;
+
+      final scheduledTime = DateTime(
+        nextDay.year,
+        nextDay.month,
+        nextDay.day,
+        reminderTime.hour,
+        reminderTime.minute,
+      );
+
+      NotificationService.scheduleLoggingReminder(
+        scheduledTime: scheduledTime,
+        isEnabled: isReminderEnabled,
+        title: l10n.notification_loggingReminderTitle,
+        body: l10n.notification_loggingReminderBody,
+      );
+    }
+  }
+
   /// Syncs circle data with the Wear OS watch.
   Future<void> _syncWatchData() async {
     await _watchSyncService.sendCircleData(
@@ -198,7 +227,10 @@ class PeriodService extends ChangeNotifier {
   /// Updates an existing log entry.
   Future<void> updateExistingLog(BuildContext context, LogDay updatedLog) async {
     await _periodsRepo.updatePeriodLog(updatedLog);
-    
+    if(context.mounted){
+      scheduleLoggingReminder(context, updatedLog);
+    }
+
     if (context.mounted) {
       Navigator.of(context).pop();
       _isLoading = true;
@@ -213,7 +245,13 @@ class PeriodService extends ChangeNotifier {
   Future<void> deleteExistingLog(BuildContext context, int? id) async {
     if (id == null) return;
 
+    final logToDelete = _periodLogEntries.firstWhereOrNull((log) => log.id == id);
+
     await _periodsRepo.deletePeriodLog(id);
+
+    if (logToDelete != null && logToDelete.flow != FlowRate.none) {
+      await NotificationService.cancelLoggingReminder(logToDelete.date);
+    }
     
     _isLoading = true;
     notifyListeners();
