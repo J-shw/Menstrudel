@@ -17,7 +17,6 @@ const int periodOverdueNotificationId = 4;
 const int sanitaryProductsID = 2;
 const int pillReminderId = 3;
 const int larcReminderId = 5;
-const int loggingReminderId = 6;
 
 const periodNotificationChannelId = 'period_channel';
 const periodNotificationChannelName = 'Period Predictions';
