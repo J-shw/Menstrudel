@@ -97,7 +97,40 @@ class NotificationService {
       androidScheduleMode: fln.AndroidScheduleMode.exactAllowWhileIdle,
     );
   }
-  
+
+  static Future<void> scheduleLoggingReminder({
+    required DateTime scheduledTime,
+    required bool isEnabled,
+    required String title,
+    required String body,
+  }) async {
+    debugPrint('Scheduling logging reminder');
+    if (!isEnabled) return;
+
+    await _plugin.cancel(loggingReminderId);
+    
+    final tz.TZDateTime scheduledDate = tz.TZDateTime.from(scheduledTime, tz.local);
+
+    const details = fln.NotificationDetails(
+      android: fln.AndroidNotificationDetails(
+        loggingReminderChannelId, loggingReminderChannelName,
+        channelDescription: 'Logging reminders',
+        importance: fln.Importance.max, priority: fln.Priority.high,
+      ),
+      iOS: fln.DarwinNotificationDetails(),
+    );
+
+    await _plugin.zonedSchedule(
+      loggingReminderId,
+      title,
+      body,
+      scheduledDate,
+      details,
+      androidScheduleMode: fln.AndroidScheduleMode.exactAllowWhileIdle,
+      matchDateTimeComponents: fln.DateTimeComponents.time,
+    );
+  }
+
   // Pills
 
   static Future<void> schedulePillReminder({
@@ -148,7 +181,7 @@ class NotificationService {
     return scheduledDate;
   }
 
-  // Tampon Reminders
+  // Sanitary Product Reminders
 
   static Future<void> scheduleSanitaryProductReminder({
     required DateTime reminderDateTime,
