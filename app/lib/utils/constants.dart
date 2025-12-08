@@ -56,6 +56,8 @@ const String larcDurationsKey = "larc_durations";
 const String larcNotificationsEnanledKey = "larc_notifications_enabled";
 const String larcNotificationDaysKey = 'larc_notification_days';
 const String larcNotificationTimeKey = 'larc_notification_time';
+const String loggingReminderKey = 'logging_reminder_notification_enabled';
+const String loggingReminderTimeKey = 'logging_reminder_notification_time';
 
 // Notifications
 const String tamponReminderDateTimeKey = 'tampon_reminder_date_time';
@@ -84,3 +86,5 @@ const Set<Symptom> kDefaultSymptoms = {};
 const bool kDefaultLarcNotificationsEnabled = false;
 const int kDefaultLarcReminderDays = 30;
 const TimeOfDay kDefaultLarcReminderTime = TimeOfDay(hour: 9, minute: 0);
+const bool kDefaultLoggingReminder = false;
+const TimeOfDay kDefaultLoggingReminderTime = TimeOfDay(hour: 9, minute: 0);
