@@ -82,6 +82,18 @@ class LogSettingsScreen extends StatelessWidget {
     );
   }
 
+  Future<void> _selectLoggingReminderTime(BuildContext context) async {
+    final settingsService = context.read<SettingsService>();
+    final TimeOfDay? pickedTime = await showTimePicker(
+      context: context,
+      initialTime: settingsService.periodOverdueNotificationTime,
+    );
+
+    if (pickedTime != null && pickedTime != settingsService.periodOverdueNotificationTime) {
+      await settingsService.setLoggingReminderTime(pickedTime);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
@@ -96,6 +108,28 @@ class LogSettingsScreen extends StatelessWidget {
       ),
       body: ListView(
         children: [
+          SwitchListTile(
+            title: Text(l10n.settingsScreen_enableLoggingReminders),
+            subtitle: Text(l10n.settingsScreen_loggingReminderDescription),
+            value: settingsService.isLoggingReminderNotificationEnabled,
+            onChanged: (bool value) {
+              context.read<SettingsService>().setLoggingReminder(value);
+            },
+          ),
+          if (settingsService.isLoggingReminderNotificationEnabled) ...[
+            ListTile(
+              title: Text(l10n.settingsScreen_loggingReminderTime),
+              trailing: Text(
+                settingsService.loggingReminderTime.format(context),
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              onTap: () => _selectLoggingReminderTime(context),
+            ),
+          ],
+          const Divider(),
           ListTile(
             title: Text(l10n.settingsScreen_defaultSymptoms),
             leading: Icon(
