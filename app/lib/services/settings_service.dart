@@ -25,6 +25,8 @@ class SettingsService extends ChangeNotifier {
   bool _periodOverdueNotificationsEnabled = kDefaultPeriodOverdueNotificationsEnabled;
   int _periodOverdueNotificationDays = kDefaultPeriodOverdueNotificationDays;
   TimeOfDay _periodOverdueNotificationTime = kDefaultPeriodOverdueNotificationTime;
+  bool _loggingReminder = kDefaultLoggingReminder;
+  TimeOfDay _loggingReminderTime = kDefaultLoggingReminderTime;
   PeriodHistoryView _historyView = kDefaultHistoryView;
   bool _dynamicColorEnabled = kDefaultDynamicColorEnabled;
   Color _themeColor = kDefaultThemeColor;
@@ -83,6 +85,10 @@ class SettingsService extends ChangeNotifier {
   int get larcReminderDays => _larcReminderDays;
   /// The time of day the LARC renew notification should be sent
   TimeOfDay get larcReminderTime => _larcReminderTime;
+  /// Whether the logging reminder is enabled
+  bool get isLoggingReminderNotificationEnabled => _loggingReminder;
+  /// The time of day the logging reminder should be sent
+  TimeOfDay get loggingReminderTime => _loggingReminderTime;
 
   Future<void> loadSettings() async {
     _prefs = await SharedPreferences.getInstance();
@@ -99,6 +105,9 @@ class SettingsService extends ChangeNotifier {
     _periodOverdueNotificationsEnabled = _prefs.getBool(periodOverdueNotificationsEnabledKey) ?? true;
     _periodOverdueNotificationDays = _prefs.getInt(periodOverdueNotificationDaysKey) ?? 1;
     _periodOverdueNotificationTime = _loadTimeOfDay(periodOverdueNotificationTimeKey, 9, 0);
+
+    _loggingReminder = _prefs.getBool(loggingReminderKey) ?? false;
+    _loggingReminderTime = _loadTimeOfDay(loggingReminderTimeKey, 9, 0);
 
     _historyView = _loadHistoryView();
     _dynamicColorEnabled = _prefs.getBool(dynamicColorKey) ?? false;
@@ -291,6 +300,19 @@ class SettingsService extends ChangeNotifier {
     _periodOverdueNotificationTime = time;
     final String formattedTime = '${time.hour}:${time.minute}';
     await _prefs.setString(periodOverdueNotificationTimeKey, formattedTime);
+    notifyListeners();
+  }
+
+  Future<void> setLoggingReminder(bool isEnabled) async {
+    _loggingReminder = isEnabled;
+    await _prefs.setBool(loggingReminderKey, isEnabled);
+    notifyListeners();
+  }
+
+  Future<void> setLoggingReminderTime(TimeOfDay time) async {
+    _loggingReminderTime = time;
+    final String formattedTime = '${time.hour}:${time.minute}';
+    await _prefs.setString(loggingReminderTimeKey, formattedTime);
     notifyListeners();
   }
 
