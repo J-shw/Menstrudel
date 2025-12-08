@@ -40,7 +40,7 @@ Logging LARC usage is simple and quick. If notifications are enabled, you'll get
 
 ### Bug Fixes
 * Improved general app performance
-* Fixed some notifiation related issues
+* Fixed some notification related issues
 * Fixed some database related issues
 * Cleaned up some UI elements
 
