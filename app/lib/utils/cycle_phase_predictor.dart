@@ -17,10 +17,17 @@ class CyclePhasePredictor {
   /// 
   /// Returns a [CyclePhaseResult] object
   static CyclePhaseResult getPhaseStatus({
-    required DateTime lastPeriodStartDate,
+    required DateTime? lastPeriodStartDate,
     required int? averageCycleLength,
     required int? averagePeriodDuration
   }) {
+    if (lastPeriodStartDate == null) {
+      return CyclePhaseResult(
+        phase: CyclePhase.unknown,
+        daysInPhase: 0,
+        daysRemainingInPhase: 0,
+      );
+    }
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
     final daysSinceLastPeriodStart = today.difference(lastPeriodStartDate).inDays + 1;
@@ -86,7 +93,7 @@ class CyclePhasePredictor {
       );
     }
 
-    // Fallback: If today is past the predicted cycle length, the next period is late.
+    // Fallback
     return CyclePhaseResult(
       phase: CyclePhase.unknown,
       daysInPhase: daysSinceLastPeriodStart - cycleLength,
