@@ -1,4 +1,5 @@
 
+import 'package:flutter/material.dart';
 import 'package:menstrudel/models/cycle_phase/cycle_phase.dart';
 import 'package:menstrudel/models/cycle_phase/cycle_phase_enum.dart';
 
@@ -18,14 +19,13 @@ class CyclePhasePredictor {
   static CyclePhaseResult getPhaseStatus({
     required DateTime lastPeriodStartDate,
     required int? averageCycleLength,
-    required int? averagePeriodDuration,
-    required DateTime now,
+    required int? averagePeriodDuration
   }) {
+    final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
-    final daysSinceLpStart = today.difference(lastPeriodStartDate).inDays + 1;
+    final daysSinceLastPeriodStart = today.difference(lastPeriodStartDate).inDays + 1;
 
-    // 
-    if (daysSinceLpStart <= 0) {
+    if (daysSinceLastPeriodStart <= 0) {
       return CyclePhaseResult(
         phase: CyclePhase.unknown,
         daysInPhase: 0,
@@ -49,47 +49,47 @@ class CyclePhasePredictor {
     // - - Determine Current Phase - -
 
     // Phase 1: Menstruation
-    if (daysSinceLpStart <= menstruationEndDay) {
+    if (daysSinceLastPeriodStart <= menstruationEndDay) {
       return CyclePhaseResult(
         phase: CyclePhase.menstruation,
-        daysInPhase: daysSinceLpStart,
-        daysRemainingInPhase: menstruationEndDay - daysSinceLpStart,
+        daysInPhase: daysSinceLastPeriodStart,
+        daysRemainingInPhase: menstruationEndDay - daysSinceLastPeriodStart,
       );
     }
     
     // Phase 2: Follicular
     // Runs from Day (Menstruation End Day + 1) up to Day (Ovulation Start Day - 1)
-    if (daysSinceLpStart < ovulationStartDay) {
+    if (daysSinceLastPeriodStart < ovulationStartDay) {
       return CyclePhaseResult(
         phase: CyclePhase.follicular,
-        daysInPhase: daysSinceLpStart - menstruationEndDay,
-        daysRemainingInPhase: ovulationStartDay - daysSinceLpStart,
+        daysInPhase: daysSinceLastPeriodStart - menstruationEndDay,
+        daysRemainingInPhase: ovulationStartDay - daysSinceLastPeriodStart,
       );
     }
     
     // Phase 3: Ovulation
-    if (daysSinceLpStart >= ovulationStartDay && daysSinceLpStart <= ovulationEndDay) {
+    if (daysSinceLastPeriodStart >= ovulationStartDay && daysSinceLastPeriodStart <= ovulationEndDay) {
       return CyclePhaseResult(
         phase: CyclePhase.ovulation,
-        daysInPhase: daysSinceLpStart - ovulationStartDay + 1,
-        daysRemainingInPhase: ovulationEndDay - daysSinceLpStart,
+        daysInPhase: daysSinceLastPeriodStart - ovulationStartDay + 1,
+        daysRemainingInPhase: ovulationEndDay - daysSinceLastPeriodStart,
       );
     }
 
     // Phase 4: Luteal
     // Runs from Day (Ovulation End Day + 1) up to Day (Average Cycle Length)
-    if (daysSinceLpStart <= cycleLength) {
+    if (daysSinceLastPeriodStart <= cycleLength) {
       return CyclePhaseResult(
         phase: CyclePhase.luteal,
-        daysInPhase: daysSinceLpStart - ovulationEndDay,
-        daysRemainingInPhase: cycleLength - daysSinceLpStart,
+        daysInPhase: daysSinceLastPeriodStart - ovulationEndDay,
+        daysRemainingInPhase: cycleLength - daysSinceLastPeriodStart,
       );
     }
 
     // Fallback: If today is past the predicted cycle length, the next period is late.
     return CyclePhaseResult(
       phase: CyclePhase.unknown,
-      daysInPhase: daysSinceLpStart - cycleLength,
+      daysInPhase: daysSinceLastPeriodStart - cycleLength,
       daysRemainingInPhase: 0,
     );
   }
