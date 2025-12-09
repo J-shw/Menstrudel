@@ -298,6 +298,13 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
+  String get notification_loggingReminderTitle => 'Logging Reminder';
+
+  @override
+  String get notification_loggingReminderBody =>
+      'Tap to log your flow for today.';
+
+  @override
   String get notification_SanitaryProductReminderTitle =>
       'Sanitary Product Reminder';
 
@@ -542,6 +549,17 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get settingsScreen_LoggingScreen => 'Logging';
+
+  @override
+  String get settingsScreen_enableLoggingReminders =>
+      'Enable Logging Reminders';
+
+  @override
+  String get settingsScreen_loggingReminderDescription =>
+      'If you log a day with flow, you will receive a notification the following day to log your status.';
+
+  @override
+  String get settingsScreen_loggingReminderTime => 'Logging Reminder Time';
 
   @override
   String get settingsScreen_defaultSymptoms => 'Default Symptoms';
