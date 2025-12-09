@@ -153,6 +153,14 @@
             }
         }
     },
+    "notification_loggingReminderTitle": "Logging Reminder",
+    "@notification_loggingReminderTitle": {
+        "description": "Title for the logging reminder notification."
+    },
+    "notification_loggingReminderBody": "Tap to log your flow for today.",
+    "@notification_loggingReminderBody": {
+        "description": "Body for the logging reminder notification."
+    },
     "notification_SanitaryProductReminderTitle": "Erinnerung an Hygieneartikel",
     "notification_SanitaryProductReminderBody": "Denke daran, Dein Produkt zu wechseln.",
     "mainScreen_insightsPageTitle": "Deine Erkenntnisse",
@@ -273,6 +281,9 @@
     "settingsScreen_currentDuration": "Aktuelle Dauer",
     "settingsScreen_durationInDays": "Dauer (Tage)",
     "settingsScreen_LoggingScreen": "Protokollieren",
+    "settingsScreen_enableLoggingReminders": "Enable Logging Reminders",
+    "settingsScreen_loggingReminderDescription": "If you log a day with flow, you will receive a notification the following day to log your status.",
+    "settingsScreen_loggingReminderTime": "Logging Reminder Time",
     "settingsScreen_defaultSymptoms": "Standardsymptome",
     "settingsScreen_defaultSymptomsSubtitle": "Diese sind immer sichtbar, wenn eine neue Periode eingetragen wird. Wähle ein bestehendes Symptom, um es zu löschen oder '+' um ein neues hinzuzufügen.",
     "settingsScreen_deleteDefaultSymptomQuestion": "'{symptom}' löschen?",
