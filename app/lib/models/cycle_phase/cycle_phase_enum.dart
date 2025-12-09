@@ -2,10 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 
 enum CyclePhase {
+  /// Menstruation phase (On Period)
   menstruation,
+  /// Follicular phase (Pre-Ovulation)
   follicular,
+  /// Ovulation phase (Peak Fertility)
   ovulation,
+  /// Luteal phase (Post-Ovulation)
   luteal,
+  /// Unknown phase
   unknown,
 }
 
