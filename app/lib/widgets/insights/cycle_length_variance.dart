@@ -3,22 +3,26 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:menstrudel/models/periods/period.dart';
 import 'package:menstrudel/models/cycles/cycle_stats.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
-import 'package:menstrudel/utils/period_predictor.dart';
 import 'package:menstrudel/widgets/insights/stat_chip.dart';
 
 class CycleLengthVarianceWidget extends StatelessWidget {
   final List<Period> periods;
+  final CycleStats? cycleStats;
 
-  const CycleLengthVarianceWidget({super.key, required this.periods});
+
+  const CycleLengthVarianceWidget({
+    super.key,
+    required this.periods,
+    this.cycleStats,
+    });
 
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
     final l10n = AppLocalizations.of(context)!;
-    final CycleStats? cycleStats = PeriodPredictor.getCycleStats(periods); 
-        
-    if (cycleStats == null || cycleStats.cycleLengths.isEmpty) {
+ 
+    if (cycleStats == null || cycleStats!.cycleLengths.isEmpty) {
       return Card(
         child: Padding(
           padding: const EdgeInsets.all(24.0),
@@ -29,7 +33,7 @@ class CycleLengthVarianceWidget extends StatelessWidget {
       );
     }
 
-    final List<int> reversedCycleLengths = cycleStats.cycleLengths.reversed.toList();
+    final List<int> reversedCycleLengths = cycleStats!.cycleLengths.reversed.toList();
     final List<Period> reversedPeriods = periods.reversed.toList();
 
     return Card(
@@ -55,22 +59,22 @@ class CycleLengthVarianceWidget extends StatelessWidget {
               children: [
                 StatChip(
                   label: l10n.cycleLengthVarianceWidget_averageCycle,
-                  value: l10n.dayCount(cycleStats.averageCycleLength),
+                  value: l10n.dayCount(cycleStats!.averageCycleLength),
                   color: colorScheme.primary,
                 ),
                 StatChip(
                   label: l10n.shortest,
-                  value: l10n.dayCount(cycleStats.shortestCycleLength!),
+                  value: l10n.dayCount(cycleStats!.shortestCycleLength!),
                   color: colorScheme.secondary,
                 ),
                 StatChip(
                   label: l10n.longest,
-                  value: l10n.dayCount(cycleStats.longestCycleLength!),
+                  value: l10n.dayCount(cycleStats!.longestCycleLength!),
                   color: colorScheme.secondary,
                 ),
                 StatChip(
                   label: l10n.total,
-                  value: cycleStats.cycleLengths.length.toString(),
+                  value: cycleStats!.cycleLengths.length.toString(),
                   color: colorScheme.secondary,
                 ),
               ],
@@ -141,7 +145,7 @@ class CycleLengthVarianceWidget extends StatelessWidget {
                       ),
                     ),
                   ),
-                  maxY: cycleStats.longestCycleLength != null ? ((cycleStats.longestCycleLength! + 5) / 5).round() * 5.0 : null,
+                  maxY: cycleStats!.longestCycleLength != null ? ((cycleStats!.longestCycleLength! + 5) / 5).round() * 5.0 : null,
                   minY: 10,
                 ),
               ),

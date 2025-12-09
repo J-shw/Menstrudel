@@ -3,20 +3,23 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:menstrudel/models/periods/period.dart';
 import 'package:menstrudel/models/periods/period_stats.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
-import 'package:menstrudel/utils/period_predictor.dart';
 import 'package:menstrudel/widgets/insights/stat_chip.dart';
 
 class PeriodDurationWidget extends StatelessWidget {
   final List<Period> periods;
+  final PeriodStats? periodStats;
 
-  const PeriodDurationWidget({super.key, required this.periods});
+  const PeriodDurationWidget({
+    super.key, 
+    required this.periods,
+    this.periodStats,
+    });
 
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
     final l10n = AppLocalizations.of(context)!;
-    final PeriodStats? periodStats = PeriodPredictor.getPeriodStats(periods);
     final List<Period> reversedPeriods = periods.reversed.toList();
 
     if (periodStats == null) {
@@ -57,22 +60,22 @@ class PeriodDurationWidget extends StatelessWidget {
               children: [
                 StatChip(
                   label: l10n.periodDurationWidget_averagePeriod,
-                  value: l10n.dayCount(periodStats.averageLength),
+                  value: l10n.dayCount(periodStats!.averageLength),
                   color: colorScheme.primary,
                 ),
                 StatChip(
                   label: l10n.shortest,
-                  value: l10n.dayCount(periodStats.shortestLength!),
+                  value: l10n.dayCount(periodStats!.shortestLength!),
                   color: colorScheme.secondary,
                 ),
                 StatChip(
                   label: l10n.longest,
-                  value: l10n.dayCount(periodStats.longestLength!),
+                  value: l10n.dayCount(periodStats!.longestLength!),
                   color: colorScheme.secondary,
                 ),
                 StatChip(
                   label: l10n.total,
-                  value: periodStats.numberofPeriods.toString(),
+                  value: periodStats!.numberofPeriods.toString(),
                   color: colorScheme.secondary,
                 ),
               ],
@@ -164,8 +167,8 @@ class PeriodDurationWidget extends StatelessWidget {
                       ),
                     ),
                   ),
-                  maxY: periodStats.longestLength != null
-                      ? ((periodStats.longestLength! + 2) / 2).round() * 2.0
+                  maxY: periodStats!.longestLength != null
+                      ? ((periodStats!.longestLength! + 2) / 2).round() * 2.0
                       : null,
                 ),
               ),
