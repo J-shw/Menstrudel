@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/database/repositories/periods_repository.dart';
+import 'package:menstrudel/models/cycle_phase/cycle_phase.dart';
+import 'package:menstrudel/models/cycles/cycle_stats.dart';
 import 'package:menstrudel/models/period_logs/log_day.dart';
 import 'package:menstrudel/models/period_logs/symptom.dart';
 import 'package:menstrudel/models/periods/period.dart';
 import 'package:menstrudel/models/flows/flow_data.dart';
+import 'package:menstrudel/models/periods/period_stats.dart';
+import 'package:menstrudel/utils/period_predictor.dart';
+import 'package:menstrudel/widgets/insights/phase_state_chip.dart';
 
 import 'package:menstrudel/widgets/insights/symptom_frequency.dart';
 import 'package:menstrudel/widgets/insights/cycle_length_variance.dart';
@@ -13,6 +18,7 @@ import 'package:menstrudel/widgets/insights/pain_intensity.dart';
 import 'package:menstrudel/widgets/insights/log_summary_widget.dart';
 import 'package:menstrudel/widgets/insights/year_heat_map.dart';
 import 'package:menstrudel/widgets/insights/monthly_flow.dart';
+import 'package:menstrudel/utils/cycle_phase_predictor.dart';
 
 import 'package:menstrudel/l10n/app_localizations.dart';
 
@@ -127,12 +133,21 @@ class _InsightsScreenState extends State<InsightsScreen> {
           final allLogs = snapshot.data![1] as List<LogDay>;
           final allFlows = snapshot.data![2] as List<MonthlyFlowData>;
           final symptomCounts = snapshot.data![3] as Map<Symptom, int>;
+          final CycleStats? cycleStats = PeriodPredictor.getCycleStats(allPeriods);
+          final PeriodStats? periodStats = PeriodPredictor.getPeriodStats(allPeriods);
+
+          final CyclePhaseResult phaseResult = CyclePhasePredictor.getPhaseStatus(
+            lastPeriodStartDate: allPeriods.isNotEmpty ? allPeriods.first.startDate : DateTime.now(),
+            averageCycleLength: cycleStats?.averageCycleLength,
+            averagePeriodDuration: periodStats?.averageLength,
+          );
+
 
           final String loggingSpan = _formatLoggingSpan(allLogs, l10n);
 
           final List<Widget> cycleAndPeriodCarouselItems = [
-            CycleLengthVarianceWidget(periods: allPeriods),
-            PeriodDurationWidget(periods: allPeriods),
+            CycleLengthVarianceWidget(periods: allPeriods,  cycleStats: cycleStats),
+            PeriodDurationWidget(periods: allPeriods, periodStats: periodStats),
           ];
           
           final List<Widget> painAndFlowCarouselItems = [
@@ -150,7 +165,14 @@ class _InsightsScreenState extends State<InsightsScreen> {
                   loggingSpan: loggingSpan,
                 ),
               ),
-              
+
+              Padding(padding: const EdgeInsets.all(16.0),
+                child: PhaseStatusWidget(
+                  phaseResult: phaseResult,
+                  l10n: l10n,
+                ),
+              ),
+                    
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: SymptomFrequencyWidget(symptomCounts: symptomCounts),
