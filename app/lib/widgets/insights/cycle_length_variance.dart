@@ -24,6 +24,7 @@ class CycleLengthVarianceWidget extends StatelessWidget {
  
     if (cycleStats == null || cycleStats!.cycleLengths.isEmpty) {
       return Card(
+        elevation: 0,
         child: Padding(
           padding: const EdgeInsets.all(24.0),
           child: Center(

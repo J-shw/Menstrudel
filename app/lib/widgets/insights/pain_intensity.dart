@@ -36,7 +36,7 @@ class PainBreakdownWidget extends StatelessWidget {
     final logsWithPain = logs.where((log) => log.painLevel != null).toList();
 
     if (logsWithPain.isEmpty) {
-      return Card(child: Padding(padding: const EdgeInsets.all(24.0), child: Center(child: Text(l10n.painLevelWidget_noPainDataLoggedYet))));
+      return Card(elevation: 0, child: Padding(padding: const EdgeInsets.all(24.0), child: Center(child: Text(l10n.painLevelWidget_noPainDataLoggedYet))));
     }
 
     final painCounts = {

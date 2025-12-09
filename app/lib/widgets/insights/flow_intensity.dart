@@ -34,7 +34,7 @@ class FlowBreakdownWidget extends StatelessWidget {
     final l10n = AppLocalizations.of(context)!;
 
     if (logs.isEmpty) {
-        return Card(child: Padding(padding: EdgeInsets.all(24.0), child: Center(child: Text(l10n.flowIntensityWidget_noFlowDataLoggedYet))));
+        return Card(elevation: 0,child: Padding(padding: EdgeInsets.all(24.0), child: Center(child: Text(l10n.flowIntensityWidget_noFlowDataLoggedYet))));
     }
 
     final flowCounts = {

@@ -24,6 +24,7 @@ class PeriodDurationWidget extends StatelessWidget {
 
     if (periodStats == null) {
       return Card(
+        elevation: 0,
         child: Padding(
           padding: const EdgeInsets.all(24.0),
           child: Center(

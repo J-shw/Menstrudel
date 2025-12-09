@@ -137,7 +137,7 @@ class _InsightsScreenState extends State<InsightsScreen> {
           final PeriodStats? periodStats = PeriodPredictor.getPeriodStats(allPeriods);
 
           final CyclePhaseResult phaseResult = CyclePhasePredictor.getPhaseStatus(
-            lastPeriodStartDate: allPeriods.isNotEmpty ? allPeriods.first.startDate : DateTime.now(),
+            lastPeriodStartDate: allPeriods.isNotEmpty ? allPeriods.first.startDate : null,
             averageCycleLength: cycleStats?.averageCycleLength,
             averagePeriodDuration: periodStats?.averageLength,
           );
