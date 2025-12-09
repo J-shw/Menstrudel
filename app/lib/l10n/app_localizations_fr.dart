@@ -95,11 +95,6 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String countdown_overdueByDays(Object days) {
-    return 'Overdue by $days days';
-  }
-
-  @override
   String get edit => 'Edit';
 
   @override

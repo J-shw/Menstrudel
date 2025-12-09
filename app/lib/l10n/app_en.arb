@@ -59,13 +59,6 @@
             "days": {}
         }
     },
-    "countdown_overdueByDays": "Overdue by {days} days",
-    "@countdown_overdueByDays": {
-        "description": "A messaged indicating the numnber of days overdue.",
-        "placeholders": {
-            "days": {}
-        }
-    },
 
     "edit": "Edit",
 
