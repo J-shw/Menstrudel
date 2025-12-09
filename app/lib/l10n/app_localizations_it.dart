@@ -249,6 +249,41 @@ class AppLocalizationsIt extends AppLocalizations {
   String get sanitaryProduct_periodUnderwear => 'Period Underwear';
 
   @override
+  String get cyclePhase_menstruation => 'On Period';
+
+  @override
+  String get cyclePhase_follicular => 'Pre-Ovulation';
+
+  @override
+  String get cyclePhase_ovulation => 'Peak Fertility';
+
+  @override
+  String get cyclePhase_luteal => 'Post-Ovulation';
+
+  @override
+  String get cyclePhase_unknown => 'Unknown';
+
+  @override
+  String get cyclePhase_menstruationDescription =>
+      'Your period is active and the uterine lining is being shed.';
+
+  @override
+  String get cyclePhase_follicularDescription =>
+      'Estrogen is rising to prepare the egg; your energy levels may be increasing.';
+
+  @override
+  String get cyclePhase_ovulationDescription =>
+      'An egg has been released. This is your most fertile time.';
+
+  @override
+  String get cyclePhase_lutealDescription =>
+      'Progesterone is dominant. Monitor for PMS symptoms as you approach your next period.';
+
+  @override
+  String get cyclePhase_unknownDescription =>
+      'We need more data to accurately predict your cycle phase.';
+
+  @override
   String get error_valueMustbePositive => 'Value must be positive';
 
   @override

@@ -534,6 +534,66 @@ abstract class AppLocalizations {
   /// **'Period Underwear'**
   String get sanitaryProduct_periodUnderwear;
 
+  /// No description provided for @cyclePhase_menstruation.
+  ///
+  /// In en, this message translates to:
+  /// **'On Period'**
+  String get cyclePhase_menstruation;
+
+  /// No description provided for @cyclePhase_follicular.
+  ///
+  /// In en, this message translates to:
+  /// **'Pre-Ovulation'**
+  String get cyclePhase_follicular;
+
+  /// No description provided for @cyclePhase_ovulation.
+  ///
+  /// In en, this message translates to:
+  /// **'Peak Fertility'**
+  String get cyclePhase_ovulation;
+
+  /// No description provided for @cyclePhase_luteal.
+  ///
+  /// In en, this message translates to:
+  /// **'Post-Ovulation'**
+  String get cyclePhase_luteal;
+
+  /// No description provided for @cyclePhase_unknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown'**
+  String get cyclePhase_unknown;
+
+  /// No description provided for @cyclePhase_menstruationDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Your period is active and the uterine lining is being shed.'**
+  String get cyclePhase_menstruationDescription;
+
+  /// No description provided for @cyclePhase_follicularDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Estrogen is rising to prepare the egg; your energy levels may be increasing.'**
+  String get cyclePhase_follicularDescription;
+
+  /// No description provided for @cyclePhase_ovulationDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'An egg has been released. This is your most fertile time.'**
+  String get cyclePhase_ovulationDescription;
+
+  /// No description provided for @cyclePhase_lutealDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Progesterone is dominant. Monitor for PMS symptoms as you approach your next period.'**
+  String get cyclePhase_lutealDescription;
+
+  /// No description provided for @cyclePhase_unknownDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'We need more data to accurately predict your cycle phase.'**
+  String get cyclePhase_unknownDescription;
+
   /// No description provided for @error_valueMustbePositive.
   ///
   /// In en, this message translates to:
