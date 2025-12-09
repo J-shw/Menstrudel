@@ -84,6 +84,22 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
+  String countdown_daysLeft(num days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$days Days left',
+      one: '$days Day left',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String countdown_overdueByDays(Object days) {
+    return 'Overdue by $days days';
+  }
+
+  @override
   String get edit => 'Edit';
 
   @override

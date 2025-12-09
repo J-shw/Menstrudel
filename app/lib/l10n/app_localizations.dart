@@ -204,6 +204,18 @@ abstract class AppLocalizations {
   /// **'{count, plural, one{{count} Year} other{{count} Years}}'**
   String yearCount(int count);
 
+  /// A countdown message indicating the number of days left.
+  ///
+  /// In en, this message translates to:
+  /// **'{days, plural, one{{days} Day left} other{{days} Days left}}'**
+  String countdown_daysLeft(num days);
+
+  /// A messaged indicating the numnber of days overdue.
+  ///
+  /// In en, this message translates to:
+  /// **'Overdue by {days} days'**
+  String countdown_overdueByDays(Object days);
+
   /// No description provided for @edit.
   ///
   /// In en, this message translates to:

@@ -52,6 +52,21 @@
         }
     },
 
+    "countdown_daysLeft": "{days, plural, one{{days} Day left} other{{days} Days left}}",
+    "@countdown_daysLeft": {
+        "description": "A countdown message indicating the number of days left.",
+        "placeholders": {
+            "days": {}
+        }
+    },
+    "countdown_overdueByDays": "Overdue by {days} days",
+    "@countdown_overdueByDays": {
+        "description": "A messaged indicating the numnber of days overdue.",
+        "placeholders": {
+            "days": {}
+        }
+    },
+
     "edit": "Edit",
 
     "delete": "Delete",
