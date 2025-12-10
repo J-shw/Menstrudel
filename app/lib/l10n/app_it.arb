@@ -153,6 +153,14 @@
             }
         }
     },
+    "notification_loggingReminderTitle": "Logging Reminder",
+    "@notification_loggingReminderTitle": {
+        "description": "Title for the logging reminder notification."
+    },
+    "notification_loggingReminderBody": "Tap to log your flow for today.",
+    "@notification_loggingReminderBody": {
+        "description": "Body for the logging reminder notification."
+    },
     "notification_SanitaryProductReminderTitle": "Sanitary Product Reminder",
     "notification_SanitaryProductReminderBody": "Remember to change your product.",
     "mainScreen_insightsPageTitle": "Le tue statistiche",
@@ -273,6 +281,9 @@
     "settingsScreen_currentDuration": "Current Duration",
     "settingsScreen_durationInDays": "Duration (Days)",
     "settingsScreen_LoggingScreen": "Logging",
+    "settingsScreen_enableLoggingReminders": "Enable Logging Reminders",
+    "settingsScreen_loggingReminderDescription": "If you log a day with flow, you will receive a notification the following day to log your status.",
+    "settingsScreen_loggingReminderTime": "Logging Reminder Time",
     "settingsScreen_defaultSymptoms": "Default Symptoms",
     "settingsScreen_defaultSymptomsSubtitle": "These are always available when logging new periods.\nTap an existing symptom to delete or '+' to add a new one.",
     "settingsScreen_deleteDefaultSymptomQuestion": "Delete '{symptom}'?",
