@@ -32,6 +32,37 @@ class _PillsScreenState extends State<PillsScreen> {
     _loadPillData();
   }
 
+  /// Sets the pill reminder for tomorrow after skipping or taking a pill.
+  Future<void> _setTomorrowsPillReminders() async {
+    if (_activeRegimen == null) return;
+
+    final l10n = AppLocalizations.of(context)!;
+    final pillReminder = await pillsRepo.readReminderForRegimen(_activeRegimen!.id!);
+    bool pillNotificationsEnabled = false;
+    TimeOfDay pillNotificationTime = const TimeOfDay(hour: 9, minute: 0);
+
+    await NotificationService.cancelPillReminder();
+    
+    if (pillReminder != null) {
+      pillNotificationsEnabled = pillReminder.isEnabled;
+      final timeParts = pillReminder.reminderTime.split(':');
+      pillNotificationTime = TimeOfDay(
+        hour: int.parse(timeParts[0]), minute: int.parse(timeParts[1])
+      );
+
+      if(pillNotificationsEnabled) {
+        await NotificationService.schedulePillReminder(
+          reminderTime: pillNotificationTime,
+          isEnabled: pillNotificationsEnabled,
+          title: l10n.notification_pillTitle,
+          body: l10n.notification_pillBody,
+          startingTomorrow: true
+        );
+      }
+    }
+  }
+
+
   Future<void> _loadPillData() async {
     setState(() { _isLoading = true; });
     final regimen = await pillsRepo.readActivePillRegimen();
@@ -87,7 +118,7 @@ class _PillsScreenState extends State<PillsScreen> {
     await pillsRepo.createOrUpdatePillIntake(newIntake);
 
     if (pillNumberToLog == _currentPillNumberInCycle) {
-      await NotificationService.cancelPillReminder();
+      _setTomorrowsPillReminders();
     }
 
     if (!mounted) return;
@@ -107,9 +138,9 @@ class _PillsScreenState extends State<PillsScreen> {
   Future<void> _skipPill() async {
     if (_activeRegimen == null) return;
 
-    final pillNumberToLog = _selectedPillNumber;
+    final selectedPillNumber = _selectedPillNumber;
 
-    final cycleDayOffset = (pillNumberToLog - 1);
+    final cycleDayOffset = (selectedPillNumber - 1);
     final scheduledDate = _activeRegimen!.startDate.add(Duration(days: cycleDayOffset));
 
 
@@ -118,13 +149,13 @@ class _PillsScreenState extends State<PillsScreen> {
       takenAt: DateTime.now(),
       scheduledDate: scheduledDate,
       status: PillIntakeStatus.skipped,
-      pillNumberInCycle: pillNumberToLog,
+      pillNumberInCycle: selectedPillNumber,
     );
 
     await pillsRepo.createOrUpdatePillIntake(newIntake);
 
-    if (pillNumberToLog == _currentPillNumberInCycle) {
-      await NotificationService.cancelPillReminder();
+    if (selectedPillNumber == _currentPillNumberInCycle) {
+      _setTomorrowsPillReminders();
     }
 
     if (!mounted) return;
@@ -155,12 +186,10 @@ class _PillsScreenState extends State<PillsScreen> {
       pillNotificationsEnabled = pillReminder.isEnabled;
       final timeParts = pillReminder.reminderTime.split(':');
       pillNotificationTime = TimeOfDay(
-        hour: int.parse(timeParts[0]), minute: int.parse(timeParts[1]))
-      ;
-    }
-    if(mounted){
-      final l10n = AppLocalizations.of(context)!;
-      if (pillReminder!.isEnabled){
+        hour: int.parse(timeParts[0]), minute: int.parse(timeParts[1])
+      );
+      if(mounted && pillNotificationsEnabled && selectedPillNumber == _currentPillNumberInCycle){
+        final l10n = AppLocalizations.of(context)!;
         await NotificationService.schedulePillReminder(
           reminderTime: pillNotificationTime,
           isEnabled: pillNotificationsEnabled,
