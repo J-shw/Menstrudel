@@ -145,7 +145,6 @@ class NotificationService {
       scheduledDate,
       details,
       androidScheduleMode: fln.AndroidScheduleMode.exactAllowWhileIdle,
-      matchDateTimeComponents: fln.DateTimeComponents.time,
     );
   }
 
