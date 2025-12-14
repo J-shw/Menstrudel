@@ -160,12 +160,14 @@ class _PillsScreenState extends State<PillsScreen> {
     }
     if(mounted){
       final l10n = AppLocalizations.of(context)!;
-      await NotificationService.schedulePillReminder(
-        reminderTime: pillNotificationTime,
-        isEnabled: pillNotificationsEnabled,
-        title: l10n.notification_pillTitle,
-        body: l10n.notification_pillBody,
-      );
+      if (pillReminder!.isEnabled){
+        await NotificationService.schedulePillReminder(
+          reminderTime: pillNotificationTime,
+          isEnabled: pillNotificationsEnabled,
+          title: l10n.notification_pillTitle,
+          body: l10n.notification_pillBody,
+        );
+      }
     }
     _loadPillData();
   }
