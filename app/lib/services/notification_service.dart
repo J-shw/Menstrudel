@@ -1,3 +1,5 @@
+import 'dart:nativewrappers/_internal/vm/lib/ffi_native_type_patch.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart' as fln;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -158,18 +160,23 @@ class NotificationService {
 
   // Pills
 
+  /// This will tell the system to send a notification at this time everyday. 
+  /// The app should then tell this to stop if either:
+  /// - User logs a pill intake
+  /// - User disables the pill reminder
   static Future<void> schedulePillReminder({
     required TimeOfDay reminderTime,
     required bool isEnabled,
     required String title,
-    required String body, 
+    required String body,
+    bool startingTomorrow = false,
   }) async {
     debugPrint('Scheduling pill reminder');
     await _plugin.cancel(pillReminderId);
 
     if (!isEnabled) return;
 
-    final tz.TZDateTime scheduledDate = _nextInstanceOfTime(reminderTime);
+    final tz.TZDateTime scheduledDate = _nextInstanceOfTime(reminderTime, startingTomorrow);
 
     const details = fln.NotificationDetails(
       android: fln.AndroidNotificationDetails(
@@ -196,8 +203,11 @@ class NotificationService {
     await _plugin.cancel(pillReminderId);
   }
 
-  static tz.TZDateTime _nextInstanceOfTime(TimeOfDay time) {
+  static tz.TZDateTime _nextInstanceOfTime(TimeOfDay time, bool startingTomorrow) {
     final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
+    if (startingTomorrow) {
+      now.add(const Duration(days: 1));
+    }
     tz.TZDateTime scheduledDate = tz.TZDateTime(tz.local, now.year, now.month, now.day, time.hour, time.minute);
     
     if (scheduledDate.isBefore(now)) {
