@@ -298,6 +298,13 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
+  String get notification_loggingReminderTitle => 'Logging Reminder';
+
+  @override
+  String get notification_loggingReminderBody =>
+      'Tap to log your flow for today.';
+
+  @override
   String get notification_SanitaryProductReminderTitle =>
       'Erinnerung an Hygieneartikel';
 
@@ -535,6 +542,17 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get settingsScreen_LoggingScreen => 'Protokollieren';
+
+  @override
+  String get settingsScreen_enableLoggingReminders =>
+      'Protokollierung-Erinnerungen aktivieren';
+
+  @override
+  String get settingsScreen_loggingReminderDescription =>
+      'If you log a day with flow, you will receive a notification the following day to log your status.';
+
+  @override
+  String get settingsScreen_loggingReminderTime => 'Logging Reminder Time';
 
   @override
   String get settingsScreen_defaultSymptoms => 'Standardsymptome';
@@ -807,7 +825,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get aboutScreen_discord => 'Discord';
 
   @override
-  String get aboutScreen_discordSubtitle => 'Support and community';
+  String get aboutScreen_discordSubtitle => 'Unterstützung und Community';
 
   @override
   String get aboutScreen_share => 'Teilen';
@@ -819,10 +837,10 @@ class AppLocalizationsDe extends AppLocalizations {
   String get aboutScreen_urlError => 'Der Link konnte nicht geöffnet werden.';
 
   @override
-  String get logSummaryWidget_loggedDays => 'Logged Days';
+  String get logSummaryWidget_loggedDays => 'Erfasste Tage';
 
   @override
-  String get logSummaryWidget_trackingHistory => 'Tracking History';
+  String get logSummaryWidget_trackingHistory => 'Verlauf verfolgen';
 
   @override
   String get cycleLengthVarianceWidget_logAtLeastTwoPeriods =>

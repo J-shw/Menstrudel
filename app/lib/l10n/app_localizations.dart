@@ -594,6 +594,18 @@ abstract class AppLocalizations {
   /// **'{type} is due for renewal in {days} days.'**
   String notification_larcBody(String type, int days);
 
+  /// Title for the logging reminder notification.
+  ///
+  /// In en, this message translates to:
+  /// **'Logging Reminder'**
+  String get notification_loggingReminderTitle;
+
+  /// Body for the logging reminder notification.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to log your flow for today.'**
+  String get notification_loggingReminderBody;
+
   /// No description provided for @notification_SanitaryProductReminderTitle.
   ///
   /// In en, this message translates to:
@@ -995,6 +1007,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Logging'**
   String get settingsScreen_LoggingScreen;
+
+  /// No description provided for @settingsScreen_enableLoggingReminders.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable Logging Reminders'**
+  String get settingsScreen_enableLoggingReminders;
+
+  /// No description provided for @settingsScreen_loggingReminderDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'If you log a day with flow, you will receive a notification the following day to log your status.'**
+  String get settingsScreen_loggingReminderDescription;
+
+  /// No description provided for @settingsScreen_loggingReminderTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Logging Reminder Time'**
+  String get settingsScreen_loggingReminderTime;
 
   /// No description provided for @settingsScreen_defaultSymptoms.
   ///

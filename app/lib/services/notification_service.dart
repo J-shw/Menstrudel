@@ -97,21 +97,89 @@ class NotificationService {
       androidScheduleMode: fln.AndroidScheduleMode.exactAllowWhileIdle,
     );
   }
-  
+
+  // Logging reminders
+
+  static int _generateLoggingReminderIdFromScheduledDate(DateTime scheduledDate) {
+    final logDate = scheduledDate.subtract(const Duration(days: 1));
+    final date = DateUtils.dateOnly(logDate);
+    
+    const int loggingReminderIdStart = 200000;
+    return loggingReminderIdStart + 
+          date.year * 10000 + 
+          date.month * 100 + 
+          date.day;
+  }
+
+  static Future<void> scheduleLoggingReminder({
+    required DateTime scheduledTime,
+    required bool isEnabled,
+    required String title,
+    required String body,
+  }) async {
+    if (!isEnabled) return;
+
+    if (scheduledTime.isBefore(DateTime.now())){
+      debugPrint('Scheduled time is in the past.');
+      return;
+    };
+
+    final int reminderId = _generateLoggingReminderIdFromScheduledDate(scheduledTime);
+    debugPrint('Scheduling logging reminder with ID: $reminderId');
+    
+    final tz.TZDateTime scheduledDate = tz.TZDateTime.from(scheduledTime, tz.local);
+
+    const details = fln.NotificationDetails(
+      android: fln.AndroidNotificationDetails(
+        loggingReminderChannelId, loggingReminderChannelName,
+        channelDescription: 'Logging reminders',
+        importance: fln.Importance.max, priority: fln.Priority.high,
+      ),
+      iOS: fln.DarwinNotificationDetails(),
+    );
+
+    await _plugin.zonedSchedule(
+      reminderId,
+      title,
+      body,
+      scheduledDate,
+      details,
+      androidScheduleMode: fln.AndroidScheduleMode.exactAllowWhileIdle,
+    );
+  }
+
+  static Future<void> cancelLoggingReminder(DateTime logDate) async {
+    final scheduledDate = logDate.add(const Duration(days: 1));
+    final int reminderId = _generateLoggingReminderIdFromScheduledDate(scheduledDate);
+    
+    await _plugin.cancel(reminderId);
+    debugPrint('Canceled logging reminder associated with log date: ${logDate.toIso8601String()} (ID: $reminderId)');
+  }
+
   // Pills
 
+  /// This will tell the system to send a notification at this time everyday. 
+  /// The app should then tell this to stop if either:
+  /// - User logs a pill intake
+  /// - User disables the pill reminder
+  /// startingTomorrow does not work yet :/
   static Future<void> schedulePillReminder({
     required TimeOfDay reminderTime,
     required bool isEnabled,
     required String title,
-    required String body, 
+    required String body,
+    bool startingTomorrow = false,
   }) async {
-    debugPrint('Scheduling pill reminder');
+    if (startingTomorrow){
+      debugPrint('Scheduling pill reminder for tomorrow');
+    }else{
+      debugPrint('Scheduling pill reminder');
+    }
     await _plugin.cancel(pillReminderId);
 
     if (!isEnabled) return;
 
-    final tz.TZDateTime scheduledDate = _nextInstanceOfTime(reminderTime);
+    final tz.TZDateTime scheduledDate = _nextInstanceOfTime(reminderTime, startingTomorrow);
 
     const details = fln.NotificationDetails(
       android: fln.AndroidNotificationDetails(
@@ -138,17 +206,18 @@ class NotificationService {
     await _plugin.cancel(pillReminderId);
   }
 
-  static tz.TZDateTime _nextInstanceOfTime(TimeOfDay time) {
+  static tz.TZDateTime _nextInstanceOfTime(TimeOfDay time, bool startingTomorrow) {
     final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
+
     tz.TZDateTime scheduledDate = tz.TZDateTime(tz.local, now.year, now.month, now.day, time.hour, time.minute);
     
-    if (scheduledDate.isBefore(now)) {
+    if (scheduledDate.isBefore(now) || startingTomorrow) {
       scheduledDate = scheduledDate.add(const Duration(days: 1));
     }
     return scheduledDate;
   }
 
-  // Tampon Reminders
+  // Sanitary Product Reminders
 
   static Future<void> scheduleSanitaryProductReminder({
     required DateTime reminderDateTime,

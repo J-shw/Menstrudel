@@ -319,16 +319,19 @@ class Manager {
           pillNotificationsEnabled = pillReminder.isEnabled;
           final timeParts = pillReminder.reminderTime.split(':');
           pillNotificationTime = TimeOfDay(
-              hour: int.parse(timeParts[0]), minute: int.parse(timeParts[1]));
+            hour: int.parse(timeParts[0]), minute: int.parse(timeParts[1])
+          );
+          
+          if (pillReminder.isEnabled){
+            await NotificationService.schedulePillReminder(
+              reminderTime: pillNotificationTime,
+              isEnabled: pillNotificationsEnabled,
+              title: l10n.notification_pillTitle,
+              body: l10n.notification_pillBody,
+            );
+          }
         }
       }
-      
-      await NotificationService.schedulePillReminder(
-        reminderTime: pillNotificationTime,
-        isEnabled: pillNotificationsEnabled,
-        title: l10n.notification_pillTitle,
-        body: l10n.notification_pillBody,
-      );
       
     } on FormatException catch (_) {
       rethrow;
