@@ -545,7 +545,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get settingsScreen_enableLoggingReminders =>
-      'Enable Logging Reminders';
+      'Protokollierung-Erinnerungen aktivieren';
 
   @override
   String get settingsScreen_loggingReminderDescription =>
@@ -825,7 +825,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get aboutScreen_discord => 'Discord';
 
   @override
-  String get aboutScreen_discordSubtitle => 'Support and community';
+  String get aboutScreen_discordSubtitle => 'Unterstützung und Community';
 
   @override
   String get aboutScreen_share => 'Teilen';
@@ -837,10 +837,10 @@ class AppLocalizationsDe extends AppLocalizations {
   String get aboutScreen_urlError => 'Der Link konnte nicht geöffnet werden.';
 
   @override
-  String get logSummaryWidget_loggedDays => 'Logged Days';
+  String get logSummaryWidget_loggedDays => 'Erfasste Tage';
 
   @override
-  String get logSummaryWidget_trackingHistory => 'Tracking History';
+  String get logSummaryWidget_trackingHistory => 'Verlauf verfolgen';
 
   @override
   String get cycleLengthVarianceWidget_logAtLeastTwoPeriods =>
