@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:sqflite/sqflite.dart';
 
 import 'package:menstrudel/database/app_database.dart';
+import 'package:menstrudel/database/validation/log_validator.dart';
 import 'package:menstrudel/models/period_logs/log_day.dart';
 import 'package:menstrudel/models/period_logs/symptom.dart';
 import 'package:menstrudel/models/flows/flow_enum.dart';
-import 'package:menstrudel/models/flows/flow_data.dart';
 import 'package:menstrudel/utils/exceptions.dart';
 
 class LogsRepository {
@@ -15,7 +14,7 @@ class LogsRepository {
   // Helpers
 
   Future<void> logFromWatch() async {
-    debugPrint('Received request from watch! Logging period now...');
+    debugPrint('Received request from watch! Logging entry now...');
 
     try {
       final newLog = LogDay(
@@ -36,12 +35,10 @@ class LogsRepository {
   // Main methods
 
   Future<LogDay> createLog(LogDay entry) async {
+    final validator = LogValidator(this);
+    await validator.validate(entry.date);
+    
     final db = await dbProvider.database;
-    final today = DateUtils.dateOnly(DateTime.now());
-
-    if (entry.date.isAfter(today)) {
-      throw FutureDateException('Logs cannot be for future dates.');
-    }
 
     int newLogId = -1;
     await db.transaction((txn) async {
@@ -110,5 +107,23 @@ class LogsRepository {
         .toList();
 
     return LogDay.fromMap(result.first, symptoms: symptoms);
+  }
+
+  Future<bool> existsOnDate(DateTime date, {int? excludeId}) async {
+    String where = 'date(date) = date(?)';
+    List<Object?> args = [date.toIso8601String()];
+
+    if (excludeId != null) {
+      where += ' AND id != ?';
+      args.add(excludeId);
+    }
+
+    final result = await db.query(
+      'period_logs',
+      where: where,
+      whereArgs: args,
+      limit: 1,
+    );
+    return result.isNotEmpty;
   }
 }
