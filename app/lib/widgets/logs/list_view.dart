@@ -5,6 +5,7 @@ import 'package:menstrudel/models/period_logs/symptom.dart';
 import 'package:menstrudel/models/periods/period.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/models/flows/flow_enum.dart';
+import 'package:menstrudel/services/log_service.dart';
 import 'package:menstrudel/services/period_service.dart'; 
 import 'package:provider/provider.dart';
 
@@ -20,7 +21,9 @@ class PeriodListView extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final periodService = context.watch<PeriodService>();
-    final periodLogEntries = periodService.periodLogEntries;
+    final logService = context.watch<LogService>();
+    
+    final periodLogEntries = logService.logs;
     final periodEntries = periodService.periodEntries;
     final isLoading = periodService.isLoading;
 
@@ -32,7 +35,7 @@ class PeriodListView extends StatelessWidget {
       return Expanded(
         child: Center(
           child: Text(
-            l10n.listViewWidget_noPeriodsLogged,
+            l10n.listViewWidget_noPeriodsLogged, //TODO: change to 'no records logged' no longer period specific.
             textAlign: TextAlign.center,
             style: const TextStyle(fontSize: 16, color: Colors.grey),
           ),
