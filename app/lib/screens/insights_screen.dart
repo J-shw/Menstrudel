@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:menstrudel/database/repositories/logs_repository.dart';
 import 'package:menstrudel/database/repositories/periods_repository.dart';
 import 'package:menstrudel/models/period_logs/log_day.dart';
 import 'package:menstrudel/models/period_logs/symptom.dart';
@@ -26,6 +27,7 @@ class InsightsScreen extends StatefulWidget {
 class _InsightsScreenState extends State<InsightsScreen> {
   late Future<List<dynamic>> _insightsDataFuture;
   final periodsRepo = PeriodsRepository();
+  final logsRepo = LogsRepository();
   final PageController _cycleAndPeriodCarouselPageController = PageController(viewportFraction: 1.0);
   final PageController _painAndFlowCarouselPageController = PageController(viewportFraction: 1.0);
   int _cycleAndPeriodCarouselCurrentPage = 0;
@@ -65,9 +67,9 @@ class _InsightsScreenState extends State<InsightsScreen> {
   void _loadInsightsData() {
     _insightsDataFuture = Future.wait([
       periodsRepo.readAllPeriods(),
-      periodsRepo.readAllPeriodLogs(),
+      logsRepo.readAllLogs(),
       periodsRepo.getMonthlyPeriodFlows(),
-      periodsRepo.getSymptomFrequency(),
+      logsRepo.getSymptomFrequency(),
     ]);
   }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:menstrudel/database/repositories/logs_repository.dart';
 import 'package:menstrudel/database/repositories/periods_repository.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/models/period_logs/symptom.dart';
@@ -10,7 +11,7 @@ import 'package:provider/provider.dart';
 class LogSettingsScreen extends StatelessWidget {
   LogSettingsScreen({super.key});
 
-  final periodsRepo = PeriodsRepository();
+  final logsRepo = LogsRepository();
 
   Future<void> _showNewCustomSymptomDialog(BuildContext context) async {
     final settingsService = context.read<SettingsService>();
@@ -37,7 +38,7 @@ class LogSettingsScreen extends StatelessWidget {
   Future<void> _removeDefaultSymptom(BuildContext context, Symptom symptom) async {
     final l10n = AppLocalizations.of(context)!;
     final settingsService = context.read<SettingsService>();
-    final symptomUsageCount = await periodsRepo.getSingleSymptomFrequency(
+    final symptomUsageCount = await logsRepo.getSingleSymptomFrequency(
       symptom,
     );
 
