@@ -24,7 +24,6 @@ class PeriodService extends ChangeNotifier {
   PeriodService(this._settingsService);
 
   bool _isLoading = true;
-  List<LogDay> _periodLogEntries = [];
   List<Period> _periodEntries = [];
   List<Object> _timelineItems = [];
   PeriodPredictionResult? _predictionResult;
@@ -91,7 +90,6 @@ class PeriodService extends ChangeNotifier {
 
   /// Fetches all period and log data from the repository.
   Future<void> _fetchDataFromDb() async {
-    _periodLogEntries = await _periodsRepo.readAllPeriodLogs();
     _periodEntries = await _periodsRepo.readAllPeriods();
   }
 
