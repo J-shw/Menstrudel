@@ -60,7 +60,6 @@ class PeriodService extends ChangeNotifier {
     _calculatePrediction();
     _updateUiState();
     _buildTimelineItems();
-    _processJournalData();
     _updateWidgetData(l10n, controller);
     _schedulePeriodNotifications(l10n);
     _syncWatchData();
@@ -80,7 +79,6 @@ class PeriodService extends ChangeNotifier {
     _calculatePrediction();
     _updateUiState();
     _buildTimelineItems();
-    _processJournalData();
     _updateWidgetData(l10n, controller);
     _syncWatchData();
 
