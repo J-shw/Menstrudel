@@ -31,14 +31,9 @@ class PeriodService extends ChangeNotifier {
   int _circleCurrentValue = 0;
   int _circleMaxValue = 28;
   bool _isPeriodOngoing = false;
-  Map<DateTime, LogDay> _logMap = {};
-  DateTime? _earliestLogDate;
-  DateTime? _latestLogDate;
 
   /// Whether a background operation is currently in progress.
   bool get isLoading => _isLoading;
-  /// The complete list of all individual period day logs.
-  List<LogDay> get periodLogEntries => _periodLogEntries;
   /// The list of calculated [Period] objects, representing entire period cycles.
   List<Period> get periodEntries => _periodEntries;
   /// The calculated prediction for the next period, if available.
@@ -51,12 +46,6 @@ class PeriodService extends ChangeNotifier {
   bool get isPeriodOngoing => _isPeriodOngoing;
   /// A pre-computed list of timeline items for the PeriodListView.
   List<Object> get timelineItems => _timelineItems;
-  /// A pre-computed map of logs, keyed by their date, for fast calendar lookups.
-  Map<DateTime, LogDay> get logMap => _logMap;
-  /// The date of the earliest log on record.
-  DateTime? get earliestLogDate => _earliestLogDate;
-  /// The date of the latest log on record.
-  DateTime? get latestLogDate => _latestLogDate;
 
   /// Loads all initial data and performs calculations.
   /// Should be called once when the screen is first initialised.
@@ -302,26 +291,5 @@ class PeriodService extends ChangeNotifier {
       }
     }
     _timelineItems = items;
-  }
-
-  /// Populates the map and date boundaries for the Journal view.
-  void _processJournalData() {
-    if (_periodLogEntries.isEmpty) {
-      _logMap = {};
-      _earliestLogDate = null;
-      _latestLogDate = null;
-      return;
-    }
-
-    _logMap = {
-      for (var log in _periodLogEntries) DateUtils.dateOnly(log.date): log
-    };
-    
-    _earliestLogDate = _periodLogEntries
-        .reduce((a, b) => a.date.isBefore(b.date) ? a : b)
-        .date;
-    _latestLogDate = _periodLogEntries
-        .reduce((a, b) => a.date.isAfter(b.date) ? a : b)
-        .date;
   }
 }
