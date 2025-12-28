@@ -35,7 +35,7 @@ class PeriodListView extends StatelessWidget {
       return Expanded(
         child: Center(
           child: Text(
-            l10n.listViewWidget_noPeriodsLogged, //TODO: change to 'no records logged' no longer period specific.
+            l10n.listViewWidget_noPeriodsLogged, //TODO: change to 'Log your first entry' no longer period specific.
             textAlign: TextAlign.center,
             style: const TextStyle(fontSize: 16, color: Colors.grey),
           ),
