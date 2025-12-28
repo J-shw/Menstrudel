@@ -34,30 +34,52 @@ class LogsRepository {
 
   // Main methods
 
-  Future<LogDay> createLog(LogDay entry) async {
+  /// Updates and inserts a log entry.
+  /// If the entry has an ID, it updates the existing log; otherwise, it creates a new one.
+  /// Validates for duplicate/future dates before performing the operation.
+  /// Throws [DuplicateLogException] if a log already exists for the given date.
+  /// Throws [FutureDateException] if the date is in the future.
+  /// Returns the ID of the inserted or updated log.
+  Future<int> upsertLog(LogDay entry) async {
     final validator = LogValidator(this);
-    await validator.validate(entry.date);
-    
+    await validator.validate(entry.date, idToExclude: entry.id);
+
     final db = await dbProvider.database;
 
-    int newLogId = -1;
-    await db.transaction((txn) async {
-      newLogId = await txn.insert('period_logs', entry.toMap());
+    return await db.transaction((txn) async {
+      int logId;
+
+      if (entry.id != null) {
+        logId = entry.id!;
+        await txn.update(
+          'period_logs',
+          entry.toMap(),
+          where: 'id = ?',
+          whereArgs: [logId],
+        );
+      } else {
+        logId = await txn.insert('period_logs', entry.toMap());
+      }
+
+      await txn.delete(
+        'log_symptoms',
+        where: 'log_id_fk = ?',
+        whereArgs: [logId],
+      );
 
       if (entry.symptoms.isNotEmpty) {
         final batch = txn.batch();
         for (final symptom in entry.symptoms) {
           batch.insert('log_symptoms', {
-            'log_id_fk': newLogId,
+            'log_id_fk': logId,
             'symptom': symptom.getDbName(),
           });
         }
         await batch.commit(noResult: true);
       }
-    });
 
-    await _recalculateAndAssignPeriods(db);
-    return await readLog(newLogId);
+      return logId;
+    });
   }
 
   Future<List<LogDay>> readAllLogs() async {
@@ -109,6 +131,21 @@ class LogsRepository {
     return LogDay.fromMap(result.first, symptoms: symptoms);
   }
 
+  Future<int> deleteLog(int id) async {
+    final db = await dbProvider.database;
+    final int result = await db.delete(
+      'period_logs',
+      where: _whereId,
+      whereArgs: [id],
+    );
+
+    if (result > 0) {
+      await _recalculateAndAssignPeriods(db);
+    }
+
+    return result;
+  }
+
   Future<bool> existsOnDate(DateTime date, {int? excludeId}) async {
     String where = 'date(date) = date(?)';
     List<Object?> args = [date.toIso8601String()];
@@ -125,5 +162,34 @@ class LogsRepository {
       limit: 1,
     );
     return result.isNotEmpty;
+  }
+
+  /// Calculates the usage count for every symptom in the database.
+  Future<Map<Symptom, int>> getSymptomFrequency() async {
+    final db = await dbProvider.database;
+
+    final result = await db.rawQuery(
+      'SELECT symptom, COUNT(symptom) as count FROM log_symptoms GROUP BY symptom',
+    );
+
+    if (result.isEmpty) {
+      return {};
+    }
+    return {
+      for (var row in result)
+        Symptom.fromDbString(row['symptom'] as String): row['count'] as int,
+    };
+  }
+
+  Future<int> getSingleSymptomFrequency(Symptom symptom) async {
+    final db = await dbProvider.database;
+
+    var key = symptom.getDbName();
+
+    final result = await db.rawQuery(
+      'SELECT symptom, COUNT(symptom) as count FROM log_symptoms WHERE symptom LIKE \'$key\' GROUP BY symptom',
+    );
+
+    return result.length == 1 ? result[0]["count"] as int : 0;
   }
 }
