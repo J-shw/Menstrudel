@@ -67,7 +67,8 @@ class PeriodsRepository {
 
   // Other
 
-  Future<void> _recalculateAndAssignPeriods(Database db) async {
+  Future<void> recalculateAndAssignPeriods() async {
+    final db = await dbProvider.database;
     await db.delete('periods');
 
     final allEntryMaps = await db.query(
