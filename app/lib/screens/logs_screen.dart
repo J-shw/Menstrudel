@@ -91,6 +91,7 @@ class LogsScreenState extends State<LogsScreen> {
             context: context,
             log: log,
           ),
+        ),
       ],
     );
   }
