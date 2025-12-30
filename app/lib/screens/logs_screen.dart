@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:menstrudel/models/flows/flow_enum.dart';
+import 'package:menstrudel/controllers/log_ui_controller.dart';
 import 'package:menstrudel/services/log_service.dart';
-import 'package:menstrudel/services/settings_service.dart';
 import 'package:menstrudel/services/widget_controller.dart';
-import 'package:menstrudel/utils/exceptions.dart';
 import 'package:menstrudel/widgets/basic_progress_circle.dart';
-import 'package:menstrudel/models/period_logs/log_day.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
-import 'package:menstrudel/widgets/sheets/symptom_entry_sheet.dart';
 import 'package:provider/provider.dart';
 import 'package:menstrudel/services/period_service.dart';
 import 'package:menstrudel/widgets/logs/dynamic_history_view.dart';
-import 'package:menstrudel/widgets/sheets/period_details_bottom_sheet.dart';
 
 class LogsScreen extends StatefulWidget {
   const LogsScreen({super.key});
@@ -34,127 +29,10 @@ class LogsScreenState extends State<LogsScreen> {
     });
   }
 
-  Future<void> _handleCreateNewLog(DateTime selectedDate) async {
-    final result = await showModalBottomSheet<Map<String, dynamic>>(
-      context: context,
-      isScrollControlled: true,
-      builder: (ctx) => SymptomEntrySheet(selectedDate: selectedDate),
-    );
-
-    if (result == null || !mounted) return;
-
-    final logService = context.read<LogService>();
-    final periodService = context.read<PeriodService>();
-    final l10n = AppLocalizations.of(context)!;
-    final widgetController = context.read<WidgetController>();
-    final settings = context.read<SettingsService>();
-
-    try {
-      final newEntry = LogDay(
-        date: result['date'],
-        symptoms: result['symptoms'] ?? [],
-        flow: result['flow'] ?? FlowRate.none,
-        painLevel: result['painLevel'],
-      );
-
-      await logService.saveLog(newEntry);
-
-      if (mounted) {
-        await periodService.scheduleLoggingReminder(
-          log: newEntry,
-          settings: settings,
-          l10n: l10n,
-        );
-
-        await periodService.refreshData(
-          currentLogs: logService.logs,
-          l10n: l10n,
-          widgetController: widgetController,
-        );
-
-        if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Log saved!')),
-          );
-        }
-      }
-    } on DuplicateLogException catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.message)));
-      }
-    } on FutureDateException catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.message)));
-      }
-    } catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("An unexpected error occurred")));
-      }
-    }
-  }
-
-  void _showEditLogBottomSheet(
-    PeriodService periodService,
-    LogService logService,
-    LogDay log,
-  ) {
-    showModalBottomSheet<void>(
-      context: context,
-      isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-      ),
-      builder: (BuildContext context) {
-        return PeriodDetailsBottomSheet(
-          log: log,
-          onDelete: () async {
-            final l10n = AppLocalizations.of(context)!;
-            final widgetController = context.read<WidgetController>();
-
-            await logService.deleteLog(log.id!);
-
-            if (context.mounted) {
-              await periodService.refreshData(
-                currentLogs: logService.logs,
-                l10n: l10n,
-                widgetController: widgetController,
-              );
-              if (context.mounted) Navigator.pop(context);
-            }
-          },
-          onSave: (updatedLog) async {
-            final l10n = AppLocalizations.of(context)!;
-            final widgetController = context.read<WidgetController>();
-            final settings = context.read<SettingsService>();
-
-            await logService.saveLog(updatedLog);
-
-            if (context.mounted) {
-              await periodService.scheduleLoggingReminder(
-                log: updatedLog,
-                settings: settings,
-                l10n: l10n,
-              );
-
-              await periodService.refreshData(
-                currentLogs: logService.logs,
-                l10n: l10n,
-                widgetController: widgetController,
-              );
-
-              if (context.mounted) Navigator.pop(context);
-            }
-          },
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final periodService = context.watch<PeriodService>();
-    final logService = context.watch<LogService>();
 
     String predictionText = '';
     if (periodService.isLoading) {
@@ -203,9 +81,16 @@ class LogsScreenState extends State<LogsScreen> {
         ),
         const SizedBox(height: 20),
         DynamicHistoryView(
-          onLogRequested: (date) => _handleCreateNewLog,
-          onLogTapped: (log) =>
-              _showEditLogBottomSheet(periodService, logService, log),
+          onLogRequested: (date) {
+            context.read<LogUIController>().handleCreateNewLog(
+                  context: context,
+                  selectedDate: date,
+                );
+          },
+          onLogTapped: (log) => context.read<LogUIController>().handleEditLog(
+            context: context,
+            log: log,
+          ),
         ),
       ],
     );
