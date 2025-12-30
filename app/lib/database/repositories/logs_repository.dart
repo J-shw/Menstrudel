@@ -23,7 +23,7 @@ class LogsRepository {
         painLevel: null,
       );
 
-      await createLog(newLog);
+      await upsertLog(newLog);
       debugPrint('Successfully logged period from the watch.');
     } on DuplicateLogException {
       debugPrint('Watch log ignored: A log for today already exists.');
