@@ -37,7 +37,7 @@ class LogsRepository {
   /// Updates and inserts a log entry.
   /// If the entry has an ID, it updates the existing log; otherwise, it creates a new one.
   /// Validates for duplicate/future dates before performing the operation.
-  /// Throws [DuplicateLogException] if a log already exists for the given date.
+  /// Throws [DuplicateLogException] if a log already exists for the given date - Use [idToExclude] to exclude an ID when updating.
   /// Throws [FutureDateException] if the date is in the future.
   /// Returns the ID of the inserted or updated log.
   Future<int> upsertLog(LogDay entry) async {
