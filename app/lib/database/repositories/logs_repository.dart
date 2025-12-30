@@ -133,17 +133,11 @@ class LogsRepository {
 
   Future<int> deleteLog(int id) async {
     final db = await dbProvider.database;
-    final int result = await db.delete(
+    return await db.delete(
       'period_logs',
-      where: _whereId,
+      where: 'id = ?',
       whereArgs: [id],
     );
-
-    if (result > 0) {
-      await _recalculateAndAssignPeriods(db);
-    }
-
-    return result;
   }
 
   Future<bool> existsOnDate(DateTime date, {int? excludeId}) async {
