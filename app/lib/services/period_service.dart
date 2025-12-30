@@ -46,51 +46,31 @@ class PeriodService extends ChangeNotifier {
   /// A pre-computed list of timeline items for the PeriodListView.
   List<Object> get timelineItems => _timelineItems;
 
-  /// Loads all initial data and performs calculations.
-  /// Should be called once when the screen is first initialised.
-  Future<void> loadInitialData(BuildContext context) async {
+  
+  /// Refreshes all data after a user action
+  Future<void> refreshData({
+    required List<LogDay> currentLogs,
+    required AppLocalizations l10n,
+    required WidgetController widgetController,
+  }) async {
     _isLoading = true;
     notifyListeners();
 
-    final l10n = AppLocalizations.of(context)!;
-    final controller = Provider.of<WidgetController>(context, listen: false);
+    final oldPredictionDate = _predictionResult?.estimatedStartDate;
 
-    await _fetchDataFromDb();
+    await _periodsRepo.recalculateAndAssignPeriods();
+    _periodEntries = await _periodsRepo.readAllPeriods();
+
     _calculatePrediction();
     _updateUiState();
-    _buildTimelineItems();
-    _updateWidgetData(l10n, controller);
-    _schedulePeriodNotifications(l10n);
+    _buildTimelineItems(currentLogs);
+
+    _updateWidgetData(l10n, widgetController);
+    if (oldPredictionDate != _predictionResult?.estimatedStartDate) _schedulePeriodNotifications(l10n);
     _syncWatchData();
 
     _isLoading = false;
     notifyListeners();
-  }
-
-  /// Refreshes all data after a user action (log, delete, etc.)
-  Future<void> _refreshData(BuildContext context) async {
-    final oldPredictionDate = _predictionResult?.estimatedStartDate;
-
-    final l10n = AppLocalizations.of(context)!;
-    final controller = Provider.of<WidgetController>(context, listen: false);
-
-    await _fetchDataFromDb();
-    _calculatePrediction();
-    _updateUiState();
-    _buildTimelineItems();
-    _updateWidgetData(l10n, controller);
-    _syncWatchData();
-
-    if (oldPredictionDate != _predictionResult?.estimatedStartDate) {
-      _schedulePeriodNotifications(l10n);
-    }
-
-    notifyListeners();
-  }
-
-  /// Fetches all period and log data from the repository.
-  Future<void> _fetchDataFromDb() async {
-    _periodEntries = await _periodsRepo.readAllPeriods();
   }
 
   /// Calculates the period prediction and ongoing status.
@@ -161,15 +141,17 @@ class PeriodService extends ChangeNotifier {
   }
 
   /// Schedules a logging reminder from a [LogDay] object.
-  Future<void> scheduleLoggingReminder(BuildContext context, LogDay log) async {
+  Future<void> scheduleLoggingReminder({
+  required LogDay log,
+  required SettingsService settings,
+  required AppLocalizations l10n,
+  }) async {
     if (log.flow == FlowRate.none) {
       await NotificationService.cancelLoggingReminder(log.date);
-    }else if (log.flow != FlowRate.none && context.mounted) {
-      final settingsService = context.read<SettingsService>();
+    }else if (log.flow != FlowRate.none) {
       final nextDay = log.date.add(const Duration(days: 1));
-      final reminderTime = settingsService.loggingReminderTime;
-      final bool isReminderEnabled = settingsService.isLoggingReminderNotificationEnabled;
-      final l10n = AppLocalizations.of(context)!;
+      final reminderTime = settings.loggingReminderTime;
+      final bool isReminderEnabled = settings.isLoggingReminderNotificationEnabled;
 
       final scheduledTime = DateTime(
         nextDay.year,
@@ -231,8 +213,8 @@ class PeriodService extends ChangeNotifier {
   }
 
   /// Populates the [_timelineItems] list for the list view.
-  void _buildTimelineItems() {
-    final groupedLogs = groupBy(_periodLogEntries, (log) => log.periodId ?? -1);
+  void _buildTimelineItems({ required List<LogDay> currentLogs }) {
+    final groupedLogs = groupBy(currentLogs, (log) => log.periodId ?? -1);
 
     final List<Object> timelineEvents = [
       ..._periodEntries,
