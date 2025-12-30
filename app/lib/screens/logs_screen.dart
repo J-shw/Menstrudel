@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:menstrudel/controllers/log_ui_controller.dart';
 import 'package:menstrudel/models/flows/flow_enum.dart';
 import 'package:menstrudel/services/log_service.dart';
 import 'package:menstrudel/services/settings_service.dart';
@@ -32,65 +33,6 @@ class LogsScreenState extends State<LogsScreen> {
             widgetController: context.read<WidgetController>(),
           );
     });
-  }
-
-  Future<void> _handleCreateNewLog(DateTime selectedDate) async {
-    final result = await showModalBottomSheet<Map<String, dynamic>>(
-      context: context,
-      isScrollControlled: true,
-      builder: (ctx) => SymptomEntrySheet(selectedDate: selectedDate),
-    );
-
-    if (result == null || !mounted) return;
-
-    final logService = context.read<LogService>();
-    final periodService = context.read<PeriodService>();
-    final l10n = AppLocalizations.of(context)!;
-    final widgetController = context.read<WidgetController>();
-    final settings = context.read<SettingsService>();
-
-    try {
-      final newEntry = LogDay(
-        date: result['date'],
-        symptoms: result['symptoms'] ?? [],
-        flow: result['flow'] ?? FlowRate.none,
-        painLevel: result['painLevel'],
-      );
-
-      await logService.saveLog(newEntry);
-
-      if (mounted) {
-        await periodService.scheduleLoggingReminder(
-          log: newEntry,
-          settings: settings,
-          l10n: l10n,
-        );
-
-        await periodService.refreshData(
-          currentLogs: logService.logs,
-          l10n: l10n,
-          widgetController: widgetController,
-        );
-
-        if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Log saved!')),
-          );
-        }
-      }
-    } on DuplicateLogException catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.message)));
-      }
-    } on FutureDateException catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.message)));
-      }
-    } catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("An unexpected error occurred")));
-      }
-    }
   }
 
   void _showEditLogBottomSheet(
@@ -203,7 +145,12 @@ class LogsScreenState extends State<LogsScreen> {
         ),
         const SizedBox(height: 20),
         DynamicHistoryView(
-          onLogRequested: (date) => _handleCreateNewLog,
+          onLogRequested: (date) {
+            context.read<LogUIController>().handleCreateNewLog(
+                  context: context,
+                  selectedDate: date,
+                );
+          },
           onLogTapped: (log) =>
               _showEditLogBottomSheet(periodService, logService, log),
         ),
