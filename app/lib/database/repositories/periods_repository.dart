@@ -1,10 +1,8 @@
 import 'dart:convert';
 
 import 'package:menstrudel/models/flows/flow_enum.dart';
-import 'package:menstrudel/models/period_logs/symptom.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:intl/intl.dart';
-import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import 'package:menstrudel/database/app_database.dart';
@@ -19,7 +17,6 @@ class PeriodsRepository {
   final Manager manager;
 
   PeriodsRepository() : manager = Manager(AppDatabase.instance);
-  // Periods
 
   Future<Period> createPeriod(Period entry) async {
     final db = await dbProvider.database;
@@ -65,8 +62,7 @@ class PeriodsRepository {
     return await db.delete('periods', where: _whereId, whereArgs: [id]);
   }
 
-  // Other
-
+  /// Recalculates periods based on existing period logs and assigns them accordingly.
   Future<void> recalculateAndAssignPeriods() async {
     final db = await dbProvider.database;
     await db.delete('periods');
@@ -200,6 +196,7 @@ class Manager {
   /// Imports periods, log_symptoms and period_logs data from a JSON string.
   /// Throws an exception if the JSON format is invalid or the database version is incompatible.
   Future<void> importDataFromJson(String jsonString) async {
+    //TODO: Needs to be refactored with new log/period split - But for now works.
     final db = await dbProvider.database;
 
     try {
