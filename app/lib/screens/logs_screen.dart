@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:menstrudel/services/log_service.dart';
 import 'package:menstrudel/widgets/basic_progress_circle.dart';
 import 'package:menstrudel/models/period_logs/log_day.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
@@ -28,27 +29,43 @@ class LogsScreenState extends State<LogsScreen> {
     });
   }
 
-  void _showDetailsBottomSheet(PeriodService service, LogDay log) {
+  /// Shows the bottom sheet for viewing and editing log details.
+  void _showEditLogBottomSheet(PeriodService periodService, LogService logService, LogDay log) {
     showModalBottomSheet<void>(
-      context: context,
-      isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-      ),
-      builder: (context) {
-        return PeriodDetailsBottomSheet(
-          log: log,
-          onDelete: () => service.deleteExistingLog(context, log.id),
-          onSave: (updatedLog) => service.updateExistingLog(context, updatedLog),
-        );
-      },
-    );
+    context: context,
+    isScrollControlled: true,
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+    ),
+    builder: (context) {
+      return PeriodDetailsBottomSheet(
+        log: log,
+        onDelete: () async {
+          await logService.deleteLog(log.id!);
+          if (context.mounted) {
+            await periodService.refreshData(context, logService.logs);
+            if (context.mounted) Navigator.pop(context);
+          }
+        },
+        onSave: (updatedLog) async {
+          await logService.saveLog(updatedLog);
+
+          if (context.mounted) {
+            await periodService.scheduleLoggingReminder(context, updatedLog);
+            await periodService.refreshData(context, logService.logs);
+            if (context.mounted) Navigator.pop(context);
+          }
+        },
+      );
+    },
+  );
   }
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final periodService = context.watch<PeriodService>();
+    final logService = context.watch<LogService>();
 
     String predictionText = '';
     if (periodService.isLoading) {
@@ -94,7 +111,7 @@ class LogsScreenState extends State<LogsScreen> {
         const SizedBox(height: 20),
         DynamicHistoryView(
           onLogRequested: (date) => periodService.createNewLog(context, date),
-          onLogTapped: (log) => _showDetailsBottomSheet(periodService, log),
+          onLogTapped: (log) => _showEditLogBottomSheet(periodService, logService, log),
         ),
       ],
     );
