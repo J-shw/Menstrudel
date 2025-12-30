@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:menstrudel/controllers/log_ui_controller.dart';
 import 'package:menstrudel/database/repositories/logs_repository.dart';
 import 'package:timezone/data/latest.dart' as tz_data;
 import 'package:timezone/timezone.dart' as tz;
@@ -52,6 +53,7 @@ void main() async {
         ChangeNotifierProvider(
           create: (context) => PeriodService(context.read<SettingsService>()),
         ),
+        ChangeNotifierProvider(create: (_) => LogUIController()),
       ],
       child: const MainApp(),
     ),
