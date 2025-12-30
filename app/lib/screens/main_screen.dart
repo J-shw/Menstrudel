@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:menstrudel/controllers/log_ui_controller.dart';
 import 'package:menstrudel/screens/logs_screen.dart';
 import 'package:menstrudel/screens/sanitary_screen.dart';
 import 'package:menstrudel/screens/settings_screen.dart';
@@ -9,7 +10,6 @@ import 'package:menstrudel/widgets/main/app_bar.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/services/settings_service.dart';
 import 'package:provider/provider.dart';
-import 'package:menstrudel/services/period_service.dart';
 import 'package:menstrudel/screens/larc_screen.dart';
 
 enum FabState {
@@ -34,13 +34,17 @@ class _MainScreenState extends State<MainScreen> {
     });
   }
 
-  Widget _buildLogPeriodFab(BuildContext context) {
+  Widget _buildLogDayFab(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return FloatingActionButton(
       key: const ValueKey('log_fab'),
-      tooltip: l10n.mainScreen_tooltipLogPeriod,
-      onPressed: () =>
-          context.read<PeriodService>().createNewLog(context, DateTime.now()),
+      tooltip: l10n.mainScreen_tooltipLogPeriod, //TODO: Change to log day (No longer just periods)
+      onPressed: () {
+        context.read<LogUIController>().handleCreateNewLog(
+              context: context,
+              selectedDate: DateTime.now(),
+            );
+      },
       child: const Icon(Icons.add),
     );
   }
@@ -97,7 +101,7 @@ class _MainScreenState extends State<MainScreen> {
                   child: child,
                 );
               },
-              child: _buildLogPeriodFab(context),
+              child: _buildLogDayFab(context),
             )
           : null,
     );

@@ -1,10 +1,8 @@
 import 'dart:convert';
 
 import 'package:menstrudel/models/flows/flow_enum.dart';
-import 'package:menstrudel/models/period_logs/symptom.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:intl/intl.dart';
-import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import 'package:menstrudel/database/app_database.dart';
@@ -19,7 +17,6 @@ class PeriodsRepository {
   final Manager manager;
 
   PeriodsRepository() : manager = Manager(AppDatabase.instance);
-  // Periods
 
   Future<Period> createPeriod(Period entry) async {
     final db = await dbProvider.database;
@@ -65,100 +62,9 @@ class PeriodsRepository {
     return await db.delete('periods', where: _whereId, whereArgs: [id]);
   }
 
-  /// Calculates the usage count for every symptom in the database.
-  Future<Map<Symptom, int>> getSymptomFrequency() async {
+  /// Recalculates periods based on existing period logs and assigns them accordingly.
+  Future<void> recalculateAndAssignPeriods() async {
     final db = await dbProvider.database;
-
-    final result = await db.rawQuery(
-      'SELECT symptom, COUNT(symptom) as count FROM log_symptoms GROUP BY symptom',
-    );
-
-    if (result.isEmpty) {
-      return {};
-    }
-    return {
-      for (var row in result)
-        Symptom.fromDbString(row['symptom'] as String): row['count'] as int,
-    };
-  }
-
-  Future<int> getSingleSymptomFrequency(Symptom symptom) async {
-    final db = await dbProvider.database;
-
-    var key = symptom.getDbName();
-
-    final result = await db.rawQuery(
-      'SELECT symptom, COUNT(symptom) as count FROM log_symptoms WHERE symptom LIKE \'$key\' GROUP BY symptom',
-    );
-
-    return result.length == 1 ? result[0]["count"] as int : 0;
-  }
-
-  Future<int> updatePeriodLog(LogDay entry) async {
-    final db = await dbProvider.database;
-
-    if (entry.id == null) {
-      debugPrint('Error: updatePeriodLog called with null ID');
-      return 0;
-    }
-
-    await _validateLogDate(db, entry.date, idToExclude: entry.id);
-
-    int result = 0;
-
-    await db.transaction((txn) async {
-      result = await txn.update(
-        'period_logs',
-        entry.toMap(),
-        where: _whereId,
-        whereArgs: [entry.id],
-      );
-
-      if (result > 0) {
-        await txn.delete(
-          'log_symptoms',
-          where: 'log_id_fk = ?',
-          whereArgs: [entry.id],
-        );
-
-        if (entry.symptoms.isNotEmpty) {
-          final batch = txn.batch();
-          for (final symptom in entry.symptoms) {
-            batch.insert('log_symptoms', {
-              'log_id_fk': entry.id,
-              'symptom': symptom.getDbName(),
-            });
-          }
-          await batch.commit(noResult: true);
-        }
-      }
-    });
-
-    if (result > 0) {
-      await _recalculateAndAssignPeriods(db);
-    }
-
-    return result;
-  }
-
-  Future<int> deletePeriodLog(int id) async {
-    final db = await dbProvider.database;
-    final int result = await db.delete(
-      'period_logs',
-      where: _whereId,
-      whereArgs: [id],
-    );
-
-    if (result > 0) {
-      await _recalculateAndAssignPeriods(db);
-    }
-
-    return result;
-  }
-
-  // Other
-
-  Future<void> _recalculateAndAssignPeriods(Database db) async {
     await db.delete('periods');
 
     final allEntryMaps = await db.query(
@@ -290,6 +196,7 @@ class Manager {
   /// Imports periods, log_symptoms and period_logs data from a JSON string.
   /// Throws an exception if the JSON format is invalid or the database version is incompatible.
   Future<void> importDataFromJson(String jsonString) async {
+    //TODO: Needs to be refactored with new log/period split - But for now works.
     final db = await dbProvider.database;
 
     try {
