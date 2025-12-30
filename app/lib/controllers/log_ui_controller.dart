@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:menstrudel/widgets/sheets/period_details_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 import 'package:menstrudel/models/period_logs/log_day.dart';
 import 'package:menstrudel/models/flows/flow_enum.dart';
@@ -68,6 +69,67 @@ class LogUIController extends ChangeNotifier {
     } catch (e) {
       if (context.mounted) _showError(context, "An unexpected error occurred"); //TODO: localisation 'unexpectedErrorMessage'
     }
+  }
+
+  /// Orchestrates editing or deleting an existing log.
+  Future<void> handleEditLog({
+    required BuildContext context,
+    required LogDay log,
+  }) async {
+    await showModalBottomSheet<void>(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      ),
+      builder: (sheetContext) {
+        return PeriodDetailsBottomSheet(
+          log: log,
+          onDelete: () async {
+            final logService = context.read<LogService>();
+            final periodService = context.read<PeriodService>();
+            final l10n = AppLocalizations.of(context)!;
+            final widgetController = context.read<WidgetController>();
+
+            await logService.deleteLog(log.id!);
+
+            if (context.mounted) {
+              await periodService.refreshData(
+                currentLogs: logService.logs,
+                l10n: l10n,
+                widgetController: widgetController,
+              );
+              if (context.mounted) Navigator.pop(sheetContext);
+            }
+          },
+          onSave: (updatedLog) async {
+            final logService = context.read<LogService>();
+            final periodService = context.read<PeriodService>();
+            final l10n = AppLocalizations.of(context)!;
+            final widgetController = context.read<WidgetController>();
+            final settings = context.read<SettingsService>();
+
+            await logService.saveLog(updatedLog);
+
+            if (context.mounted) {
+              await periodService.scheduleLoggingReminder(
+                log: updatedLog,
+                settings: settings,
+                l10n: l10n,
+              );
+
+              await periodService.refreshData(
+                currentLogs: logService.logs,
+                l10n: l10n,
+                widgetController: widgetController,
+              );
+
+              if (context.mounted) Navigator.pop(sheetContext);
+            }
+          },
+        );
+      },
+    );
   }
 
   void _showError(BuildContext context, String message) {
