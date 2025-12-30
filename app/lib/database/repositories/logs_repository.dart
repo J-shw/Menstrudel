@@ -141,6 +141,8 @@ class LogsRepository {
   }
 
   Future<bool> existsOnDate(DateTime date, {int? excludeId}) async {
+    final db = await dbProvider.database;
+    
     String where = 'date(date) = date(?)';
     List<Object?> args = [date.toIso8601String()];
 
