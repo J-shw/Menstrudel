@@ -209,23 +209,6 @@ class PeriodService extends ChangeNotifier {
     }
   }
 
-  /// Updates an existing log entry.
-  Future<void> updateExistingLog(BuildContext context, LogDay updatedLog) async {
-    await _periodsRepo.updatePeriodLog(updatedLog);
-    if(context.mounted){
-      scheduleLoggingReminder(context, updatedLog);
-    }
-
-    if (context.mounted) {
-      Navigator.of(context).pop();
-      _isLoading = true;
-      notifyListeners();
-      await _refreshData(context);
-      _isLoading = false;
-      notifyListeners();
-    }
-  }
-
   /// Deletes a log entry.
   Future<void> deleteExistingLog(BuildContext context, int? id) async {
     if (id == null) return;
