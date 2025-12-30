@@ -61,7 +61,7 @@ class PeriodService extends ChangeNotifier {
 
     _calculatePrediction();
     _updateUiState();
-    _buildTimelineItems(currentLogs);
+    _buildTimelineItems(currentLogs: currentLogs);
 
     _updateWidgetData(l10n, widgetController);
     if (oldPredictionDate != _predictionResult?.estimatedStartDate) _schedulePeriodNotifications(l10n);
