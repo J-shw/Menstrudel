@@ -58,9 +58,10 @@ class LogService extends ChangeNotifier {
         .date;
   }
 
-  Future<void> saveLog(LogDay log) async {
-    await _logRepo.upsertLog(log);
+  Future<int> saveLog(LogDay log) async {
+    final id = await _logRepo.upsertLog(log);
     await loadLogs();
+    return id;
   }
 
   Future<void> deleteLog(int id) async {
