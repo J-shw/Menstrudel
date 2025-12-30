@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/database/repositories/logs_repository.dart';
-import 'package:menstrudel/database/repositories/periods_repository.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/models/period_logs/symptom.dart';
 import 'package:menstrudel/services/settings_service.dart';
