@@ -10,7 +10,6 @@ import 'package:menstrudel/widgets/main/app_bar.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/services/settings_service.dart';
 import 'package:provider/provider.dart';
-import 'package:menstrudel/services/period_service.dart';
 import 'package:menstrudel/screens/larc_screen.dart';
 
 enum FabState {
