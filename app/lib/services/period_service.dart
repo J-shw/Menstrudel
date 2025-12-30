@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/models/flows/flow_enum.dart';
-import 'package:provider/provider.dart';
 import 'package:collection/collection.dart';
 import 'package:intl/intl.dart';
 import 'package:menstrudel/database/repositories/periods_repository.dart';
@@ -11,7 +10,6 @@ import 'package:menstrudel/utils/constants.dart';
 import 'package:menstrudel/utils/period_predictor.dart';
 import 'package:menstrudel/services/notification_service.dart';
 import 'package:menstrudel/services/settings_service.dart';
-import 'package:menstrudel/services/period_logger_service.dart';
 import 'package:menstrudel/services/wear_sync_service.dart';
 import 'package:menstrudel/services/widget_controller.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
@@ -176,40 +174,6 @@ class PeriodService extends ChangeNotifier {
       circleMaxValue: _circleMaxValue,
       circleCurrentValue: _circleCurrentValue,
     );
-  }
-
-  /// Creates a new log entry.
-  Future<void> createNewLog(BuildContext context, DateTime selectedDate) async {
-    final bool wasLogSuccessful = await PeriodLoggerService.showAndLogPeriod(context, selectedDate);
-
-    if (wasLogSuccessful && context.mounted) {
-      _isLoading = true;
-      notifyListeners();
-      await _refreshData(context);
-      _isLoading = false;
-      notifyListeners();
-    }
-  }
-
-  /// Deletes a log entry.
-  Future<void> deleteExistingLog(BuildContext context, int? id) async {
-    if (id == null) return;
-
-    final logToDelete = _periodLogEntries.firstWhereOrNull((log) => log.id == id);
-
-    await _periodsRepo.deletePeriodLog(id);
-
-    if (logToDelete != null && logToDelete.flow != FlowRate.none) {
-      await NotificationService.cancelLoggingReminder(logToDelete.date);
-    }
-    
-    _isLoading = true;
-    notifyListeners();
-    if(context.mounted){
-      await _refreshData(context);
-      _isLoading = false;
-      notifyListeners();
-    }
   }
 
   /// Populates the [_timelineItems] list for the list view.
