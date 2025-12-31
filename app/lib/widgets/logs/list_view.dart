@@ -22,12 +22,15 @@ class PeriodListView extends StatelessWidget {
     final l10n = AppLocalizations.of(context)!;
     final periodService = context.watch<PeriodService>();
     final logService = context.watch<LogService>();
+
+    final isPeriodSerivceLoading = periodService.isLoading;
+    final isLogServiceLoading = logService.isLoading;
     
     final periodLogEntries = logService.logs;
     final periodEntries = periodService.periodEntries;
-    final isLoading = periodService.isLoading;
 
-    if (isLoading) {
+
+    if (isPeriodSerivceLoading || isLogServiceLoading) {
       return const Expanded(child: Center(child: CircularProgressIndicator()));
     }
 
