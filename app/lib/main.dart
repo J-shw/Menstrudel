@@ -37,7 +37,7 @@ void main() async {
   final settingsService = SettingsService();
   await settingsService.loadSettings();
 
-  watchService.initialize(onPeriodLog: LogsRepository.logFromWatch);
+  watchService.initialize(onPeriodLog: logsRepository.logFromWatch);
 
   runApp(
     MultiProvider(
