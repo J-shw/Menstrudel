@@ -1,48 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:menstrudel/controllers/log_ui_controller.dart';
+import 'package:menstrudel/services/log_service.dart';
+import 'package:menstrudel/services/widget_controller.dart';
 import 'package:menstrudel/widgets/basic_progress_circle.dart';
-import 'package:menstrudel/models/period_logs/log_day.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:menstrudel/services/period_service.dart';
 import 'package:menstrudel/widgets/logs/dynamic_history_view.dart';
-import 'package:menstrudel/widgets/sheets/period_details_bottom_sheet.dart';
 
 class LogsScreen extends StatefulWidget {
-
-  const LogsScreen({
-    super.key,
-  });
+  const LogsScreen({super.key});
 
   @override
   State<LogsScreen> createState() => LogsScreenState();
 }
 
 class LogsScreenState extends State<LogsScreen> {
-  
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<PeriodService>().loadInitialData(context);
+      context.read<PeriodService>().refreshData(
+            currentLogs: context.read<LogService>().logs,
+            l10n: AppLocalizations.of(context)!,
+            widgetController: context.read<WidgetController>(),
+          );
     });
-  }
-
-  void _showDetailsBottomSheet(PeriodService service, LogDay log) {
-    showModalBottomSheet<void>(
-      context: context,
-      isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-      ),
-      builder: (context) {
-        return PeriodDetailsBottomSheet(
-          log: log,
-          onDelete: () => service.deleteExistingLog(context, log.id),
-          onSave: (updatedLog) => service.updateExistingLog(context, updatedLog),
-        );
-      },
-    );
   }
 
   @override
@@ -57,16 +41,20 @@ class LogsScreenState extends State<LogsScreen> {
       predictionText = l10n.logScreen_logAtLeastTwoPeriods;
     } else {
       final prediction = periodService.predictionResult!;
-      String datePart = DateFormat('dd/MM/yyyy').format(prediction.estimatedStartDate);
+      String datePart = DateFormat(
+        'dd/MM/yyyy',
+      ).format(prediction.estimatedStartDate);
       if (prediction.daysUntilDue > 0) {
         predictionText = '${l10n.logScreen_nextPeriodEstimate}: $datePart';
       } else if (prediction.daysUntilDue == 0) {
         predictionText = '${l10n.logScreen_periodDueToday} $datePart';
-      } else { // overdue
-        predictionText = '${l10n.logScreen_periodOverdueBy(-prediction.daysUntilDue)}: $datePart';
+      } else {
+        // overdue
+        predictionText =
+            '${l10n.logScreen_periodOverdueBy(-prediction.daysUntilDue)}: $datePart';
       }
     }
-    
+
     return Column(
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.start,
@@ -93,8 +81,16 @@ class LogsScreenState extends State<LogsScreen> {
         ),
         const SizedBox(height: 20),
         DynamicHistoryView(
-          onLogRequested: (date) => periodService.createNewLog(context, date),
-          onLogTapped: (log) => _showDetailsBottomSheet(periodService, log),
+          onLogRequested: (date) {
+            context.read<LogUIController>().handleCreateNewLog(
+                  context: context,
+                  selectedDate: date,
+                );
+          },
+          onLogTapped: (log) => context.read<LogUIController>().handleEditLog(
+            context: context,
+            log: log,
+          ),
         ),
       ],
     );

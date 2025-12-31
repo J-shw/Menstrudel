@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:menstrudel/controllers/log_ui_controller.dart';
+import 'package:menstrudel/database/repositories/logs_repository.dart';
 import 'package:timezone/data/latest.dart' as tz_data;
 import 'package:timezone/timezone.dart' as tz;
 import 'package:dynamic_color/dynamic_color.dart';
@@ -8,7 +10,6 @@ import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/notifiers/theme_notifier.dart';
 import 'package:provider/provider.dart';
 import 'package:menstrudel/services/wear_sync_service.dart';
-import 'package:menstrudel/database/repositories/periods_repository.dart';
 import 'package:menstrudel/models/themes/app_theme_mode_enum.dart';
 import 'package:menstrudel/screens/auth_gate.dart';
 import 'package:menstrudel/notifiers/locale_notifier.dart';
@@ -18,7 +19,7 @@ import 'package:menstrudel/services/widget_controller.dart';
 import 'package:menstrudel/services/period_service.dart';
 
 final watchService = WatchSyncService();
-final periodsRepository = PeriodsRepository();
+final logsRepository = LogsRepository();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,7 +37,7 @@ void main() async {
   final settingsService = SettingsService();
   await settingsService.loadSettings();
 
-  watchService.initialize(onPeriodLog: periodsRepository.logPeriodFromWatch);
+  watchService.initialize(onPeriodLog: logsRepository.logFromWatch);
 
   runApp(
     MultiProvider(
@@ -52,6 +53,7 @@ void main() async {
         ChangeNotifierProvider(
           create: (context) => PeriodService(context.read<SettingsService>()),
         ),
+        ChangeNotifierProvider(create: (_) => LogUIController()),
       ],
       child: const MainApp(),
     ),
