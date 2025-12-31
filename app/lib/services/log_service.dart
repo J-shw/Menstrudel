@@ -5,7 +5,9 @@ import 'package:menstrudel/models/period_logs/log_day.dart';
 class LogService extends ChangeNotifier {
   final LogsRepository _logRepo;
   
-  LogService(this._logRepo);
+  LogService(this._logRepo) {
+    loadLogs();
+  }
 
   List<LogDay> _logs = [];
   Map<DateTime, LogDay> _logMap = {};
