@@ -93,6 +93,11 @@ class LogUIController extends ChangeNotifier {
 
             Navigator.pop(sheetContext);
 
+            if (log.id == null) {
+              _showError(context, "Cannot delete unsaved log"); //TODO: localisation 'cannotDeleteUnsavedLogMessage'
+              return;
+            }
+
             await logService.deleteLog(log.id!);
 
             await periodService.refreshData(
