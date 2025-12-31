@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/controllers/log_ui_controller.dart';
+import 'package:menstrudel/database/repositories/periods_repository.dart';
 import 'package:menstrudel/database/repositories/logs_repository.dart';
 import 'package:timezone/data/latest.dart' as tz_data;
 import 'package:timezone/timezone.dart' as tz;
@@ -17,6 +18,7 @@ import 'package:menstrudel/services/settings_service.dart';
 import 'package:home_widget/home_widget.dart';
 import 'package:menstrudel/services/widget_controller.dart';
 import 'package:menstrudel/services/period_service.dart';
+import 'package:menstrudel/services/log_service.dart';
 
 final watchService = WatchSyncService();
 final logsRepository = LogsRepository();
@@ -43,6 +45,8 @@ void main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => settingsService),
+        Provider(create: (_) => LogsRepository()),
+        Provider(create: (_) => PeriodsRepository()),
         ChangeNotifierProvider(
           create: (context) => ThemeNotifier(context.read<SettingsService>()),
         ),
@@ -51,7 +55,13 @@ void main() async {
         ),
         Provider(create: (_) => WidgetController()),
         ChangeNotifierProvider(
-          create: (context) => PeriodService(context.read<SettingsService>()),
+          create: (context) => LogService(context.read<LogsRepository>()),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => PeriodService(
+            context.read<SettingsService>(),
+            context.read<PeriodsRepository>(),
+          ),
         ),
         ChangeNotifierProvider(create: (_) => LogUIController()),
       ],
