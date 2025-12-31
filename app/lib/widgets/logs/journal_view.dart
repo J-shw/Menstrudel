@@ -37,14 +37,16 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
     final periodService = context.watch<PeriodService>();
     final logService = context.watch<LogService>();
 
+    final isPeriodSerivceLoading = periodService.isLoading;
+    final isLogServiceLoading = logService.isLoading;
+
     final predictionResult = periodService.predictionResult;
-    final isLoading = periodService.isLoading;
     
     final logMap = logService.logMap;
     final earliestLogDate = logService.earliestLogDate;
     final latestLogDate = logService.latestLogDate;
 
-    if (isLoading) {
+    if (isPeriodSerivceLoading || isLogServiceLoading) {
       return const Expanded(child: Center(child: CircularProgressIndicator()));
     }
     if (earliestLogDate == null) {
