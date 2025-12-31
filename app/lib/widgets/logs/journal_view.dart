@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/models/period_logs/log_day.dart';
+import 'package:menstrudel/services/log_service.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/models/flows/flow_enum.dart';
@@ -34,17 +35,20 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final periodService = context.watch<PeriodService>();
+    final logService = context.watch<LogService>();
+
     final predictionResult = periodService.predictionResult;
     final isLoading = periodService.isLoading;
-    final logMap = periodService.logMap;
-    final earliestLogDate = periodService.earliestLogDate;
-    final latestLogDate = periodService.latestLogDate;
+    
+    final logMap = logService.logMap;
+    final earliestLogDate = logService.earliestLogDate;
+    final latestLogDate = logService.latestLogDate;
 
     if (isLoading) {
       return const Expanded(child: Center(child: CircularProgressIndicator()));
     }
     if (earliestLogDate == null) {
-      return Expanded(child: Center(child: Text(l10n.journalViewWidget_logYourFirstPeriod)));
+      return Expanded(child: Center(child: Text(l10n.journalViewWidget_logYourFirstPeriod))); //TODO: change to 'Log your first entry' no longer period specific.
     }
 
     final colorScheme = Theme.of(context).colorScheme;

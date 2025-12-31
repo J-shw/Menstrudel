@@ -153,6 +153,14 @@
             }
         }
     },
+    "notification_loggingReminderTitle": "Logging Reminder",
+    "@notification_loggingReminderTitle": {
+        "description": "Title for the logging reminder notification."
+    },
+    "notification_loggingReminderBody": "Tap to log your flow for today.",
+    "@notification_loggingReminderBody": {
+        "description": "Body for the logging reminder notification."
+    },
     "notification_SanitaryProductReminderTitle": "Erinnerung an Hygieneartikel",
     "notification_SanitaryProductReminderBody": "Denke daran, Dein Produkt zu wechseln.",
     "mainScreen_insightsPageTitle": "Deine Erkenntnisse",
@@ -273,6 +281,9 @@
     "settingsScreen_currentDuration": "Aktuelle Dauer",
     "settingsScreen_durationInDays": "Dauer (Tage)",
     "settingsScreen_LoggingScreen": "Protokollieren",
+    "settingsScreen_enableLoggingReminders": "Protokollierung-Erinnerungen aktivieren",
+    "settingsScreen_loggingReminderDescription": "If you log a day with flow, you will receive a notification the following day to log your status.",
+    "settingsScreen_loggingReminderTime": "Logging Reminder Time",
     "settingsScreen_defaultSymptoms": "Standardsymptome",
     "settingsScreen_defaultSymptomsSubtitle": "Diese sind immer sichtbar, wenn eine neue Periode eingetragen wird. Wähle ein bestehendes Symptom, um es zu löschen oder '+' um ein neues hinzuzufügen.",
     "settingsScreen_deleteDefaultSymptomQuestion": "'{symptom}' löschen?",
@@ -384,12 +395,12 @@
     "aboutScreen_github": "GitHub",
     "aboutScreen_githubSubtitle": "Quellcode und Fehlerverfolgung",
     "aboutScreen_discord": "Discord",
-    "aboutScreen_discordSubtitle": "Support and community",
+    "aboutScreen_discordSubtitle": "Unterstützung und Community",
     "aboutScreen_share": "Teilen",
     "aboutScreen_shareSubtitle": "Teile die App mit Freunden",
     "aboutScreen_urlError": "Der Link konnte nicht geöffnet werden.",
-    "logSummaryWidget_loggedDays": "Logged Days",
-    "logSummaryWidget_trackingHistory": "Tracking History",
+    "logSummaryWidget_loggedDays": "Erfasste Tage",
+    "logSummaryWidget_trackingHistory": "Verlauf verfolgen",
     "cycleLengthVarianceWidget_logAtLeastTwoPeriods": "Es sind mindestens zwei Zyklen erforderlich, um Abweichungen zu zeigen.",
     "cycleLengthVarianceWidget_title": "Zykluslängenabweichung",
     "cycleLengthVarianceWidget_averageCycle": "Durchschnittlicher Zyklus",

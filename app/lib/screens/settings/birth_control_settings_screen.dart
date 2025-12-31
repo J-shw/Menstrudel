@@ -82,6 +82,8 @@ class _BirthControlSettingsScreenState extends State<BirthControlSettingsScreen>
         title: l10n.notification_pillTitle,
         body: l10n.notification_pillBody,
       );
+    }else{
+      await NotificationService.cancelPillReminder();
     }
     _loadSettings();
   }

@@ -8,7 +8,7 @@ import 'package:menstrudel/models/period_logs/symptom.dart';
 import 'package:menstrudel/services/settings_service.dart';
 import 'package:menstrudel/widgets/dialogs/custom_symptom_dialog.dart';
 import 'package:provider/provider.dart';
-
+// TODO: Rename this file to log_edit_bottom_sheet.dart since it handles both viewing and editing
 class PeriodDetailsBottomSheet extends StatefulWidget {
   final LogDay log;
   final VoidCallback onDelete;
