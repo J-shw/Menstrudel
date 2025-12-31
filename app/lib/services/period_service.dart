@@ -16,10 +16,10 @@ import 'package:menstrudel/l10n/app_localizations.dart';
 
 class PeriodService extends ChangeNotifier {
   final SettingsService _settingsService;
-  final _periodsRepo = PeriodsRepository();
+  final PeriodsRepository _periodsRepo;
   final _watchSyncService = WatchSyncService();
 
-  PeriodService(this._settingsService);
+  PeriodService(this._settingsService, this._periodsRepo);
 
   bool _isLoading = true;
   List<Period> _periodEntries = [];
