@@ -91,16 +91,15 @@ class LogUIController extends ChangeNotifier {
             final l10n = AppLocalizations.of(context)!;
             final widgetController = context.read<WidgetController>();
 
+            Navigator.pop(sheetContext);
+
             await logService.deleteLog(log.id!);
 
-            if (context.mounted) {
-              await periodService.refreshData(
-                currentLogs: logService.logs,
-                l10n: l10n,
-                widgetController: widgetController,
-              );
-              if (context.mounted) Navigator.pop(sheetContext);
-            }
+            await periodService.refreshData(
+              currentLogs: logService.logs,
+              l10n: l10n,
+              widgetController: widgetController,
+            );
           },
           onSave: (updatedLog) async {
             final logService = context.read<LogService>();
