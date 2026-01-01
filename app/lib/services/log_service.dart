@@ -30,7 +30,9 @@ class LogService extends ChangeNotifier {
   /// Loads all logs for the views.
   Future<void> loadLogs() async {
     if (_isLoading) return;
-    
+
+    debugPrint('LogService: Starting loadLogs.');
+
     _isLoading = true;
     notifyListeners();
 
@@ -54,10 +56,11 @@ class LogService extends ChangeNotifier {
       for (var log in _logs) DateUtils.dateOnly(log.date): log
     };
     
-    _earliestLogDate = _logs
+    _earliestLogDate = _logs.isEmpty ? null : _logs
         .reduce((a, b) => a.date.isBefore(b.date) ? a : b)
         .date;
-    _latestLogDate = _logs
+        
+    _latestLogDate = _logs.isEmpty ? null : _logs
         .reduce((a, b) => a.date.isAfter(b.date) ? a : b)
         .date;
   }
