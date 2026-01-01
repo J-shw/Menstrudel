@@ -31,18 +31,6 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 1;
 
-    @override
-  void initState() {
-    super.initState();
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<PeriodService>().refreshData(
-            currentLogs: context.read<LogService>().logs,
-            l10n: AppLocalizations.of(context)!,
-            widgetController: context.read<WidgetController>(),
-          );
-    });
-  }
-
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
