@@ -14,7 +14,7 @@ class LogService extends ChangeNotifier {
   DateTime? _earliestLogDate;
   DateTime? _latestLogDate;
   bool _isLoading = false;
-
+  bool _hasLoadedOnce = false;
 
   /// The complete list of all individual period day logs.
   List<LogDay> get logs => _logs;
@@ -26,6 +26,8 @@ class LogService extends ChangeNotifier {
   DateTime? get latestLogDate => _latestLogDate;
   /// Whether a background operation is currently in progress.
   bool get isLoading => _isLoading;
+  /// Whether logs have been loaded at least once since startup.
+  bool get hasLoadedOnce => _hasLoadedOnce;
 
   /// Loads all logs for the views.
   Future<void> loadLogs() async {
@@ -40,6 +42,8 @@ class LogService extends ChangeNotifier {
     _processJournalData();
 
     _isLoading = false;
+    _hasLoadedOnce = true;
+    
     notifyListeners();
   }
 
