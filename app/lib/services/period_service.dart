@@ -44,38 +44,50 @@ class PeriodService extends ChangeNotifier {
   /// A pre-computed list of timeline items for the PeriodListView.
   List<Object> get timelineItems => _timelineItems;
 
-  
-  /// Refreshes all data after a user action
+  /// Refreshes all period-related data, predictions, notifications, and widgets.
   Future<void> refreshData({
     required List<LogDay> currentLogs,
     required AppLocalizations l10n,
     required WidgetController widgetController,
   }) async {
+    if (_isLoading && _periodEntries.isNotEmpty) return;
+
     _isLoading = true;
-    notifyListeners();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      notifyListeners();
+    });
 
     final oldPredictionDate = _predictionResult?.estimatedStartDate;
 
-    await _periodsRepo.recalculateAndAssignPeriods();
-    _periodEntries = await _periodsRepo.readAllPeriods();
+    try {
+      await _periodsRepo.recalculateAndAssignPeriods();
+      _periodEntries = await _periodsRepo.readAllPeriods();
 
-    _calculatePrediction();
-    _updateUiState();
-    _buildTimelineItems(currentLogs: currentLogs);
+      _calculatePrediction();
+      _updateUiState();
+      _buildTimelineItems(currentLogs: currentLogs);
 
-    _updateWidgetData(l10n, widgetController);
-    if (oldPredictionDate != _predictionResult?.estimatedStartDate) _schedulePeriodNotifications(l10n);
-    _syncWatchData();
-
-    _isLoading = false;
-    notifyListeners();
+      _updateWidgetData(l10n, widgetController);
+      
+      if (oldPredictionDate != _predictionResult?.estimatedStartDate) {
+        _schedulePeriodNotifications(l10n);
+      }
+      
+      _syncWatchData();
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
   }
 
   /// Calculates the period prediction and ongoing status.
   void _calculatePrediction() {
     _predictionResult = PeriodPredictor.estimateNextPeriod(_periodEntries, DateTime.now());
-    _isPeriodOngoing = _periodEntries.isNotEmpty &&
-        DateUtils.isSameDay(_periodEntries.first.endDate, DateTime.now());
+    
+    final lastPeriod = _periodEntries.firstOrNull; 
+    _isPeriodOngoing = lastPeriod != null &&
+        DateUtils.isSameDay(lastPeriod.endDate, DateTime.now());
   }
 
   /// Updates the circle and FAB state variables.
