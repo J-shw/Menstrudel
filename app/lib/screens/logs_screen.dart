@@ -20,13 +20,6 @@ class LogsScreenState extends State<LogsScreen> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<PeriodService>().refreshData(
-            currentLogs: context.read<LogService>().logs,
-            l10n: AppLocalizations.of(context)!,
-            widgetController: context.read<WidgetController>(),
-          );
-    });
   }
 
   @override
