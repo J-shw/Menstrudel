@@ -5,15 +5,12 @@ import 'package:menstrudel/screens/sanitary_screen.dart';
 import 'package:menstrudel/screens/settings_screen.dart';
 import 'package:menstrudel/screens/insights_screen.dart';
 import 'package:menstrudel/screens/pills_screen.dart';
-import 'package:menstrudel/services/period_service.dart';
 import 'package:menstrudel/widgets/main/main_navigation_bar.dart';
 import 'package:menstrudel/widgets/main/app_bar.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/services/settings_service.dart';
 import 'package:provider/provider.dart';
 import 'package:menstrudel/screens/larc_screen.dart';
-import 'package:menstrudel/services/log_service.dart';
-import 'package:menstrudel/services/widget_controller.dart';
 
 enum FabState {
   logPeriod,
