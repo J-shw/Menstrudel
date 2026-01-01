@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/controllers/log_ui_controller.dart';
+import 'package:menstrudel/coordinators/data_refresh_coordinator.dart';
+import 'package:menstrudel/database/repositories/periods_repository.dart';
 import 'package:menstrudel/database/repositories/logs_repository.dart';
 import 'package:timezone/data/latest.dart' as tz_data;
 import 'package:timezone/timezone.dart' as tz;
@@ -17,6 +19,7 @@ import 'package:menstrudel/services/settings_service.dart';
 import 'package:home_widget/home_widget.dart';
 import 'package:menstrudel/services/widget_controller.dart';
 import 'package:menstrudel/services/period_service.dart';
+import 'package:menstrudel/services/log_service.dart';
 
 final watchService = WatchSyncService();
 final logsRepository = LogsRepository();
@@ -42,22 +45,46 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
+        // --- Core services ---
         ChangeNotifierProvider(create: (_) => settingsService),
+        Provider(create: (_) => LogsRepository()),
+        Provider(create: (_) => PeriodsRepository()),
+
+        // --- UI state ---
         ChangeNotifierProvider(
           create: (context) => ThemeNotifier(context.read<SettingsService>()),
         ),
         ChangeNotifierProvider(
           create: (context) => LocaleNotifier(context.read<SettingsService>()),
         ),
+
+        // --- Integrations ---
         Provider(create: (_) => WidgetController()),
+
+        // --- Domain services ---
         ChangeNotifierProvider(
-          create: (context) => PeriodService(context.read<SettingsService>()),
+          create: (context) => LogService(context.read<LogsRepository>()),
         ),
+        ChangeNotifierProvider(
+          create: (context) => PeriodService(
+            context.read<SettingsService>(),
+            context.read<PeriodsRepository>(),
+          ),
+        ),
+        Provider(
+          create: (context) => DataRefreshCoordinator(
+            logService: context.read<LogService>(),
+            periodService: context.read<PeriodService>(),
+            widgetController: context.read<WidgetController>(),
+          ),
+        ),
+
         ChangeNotifierProvider(create: (_) => LogUIController()),
       ],
       child: const MainApp(),
     ),
   );
+
 }
 
 class MainApp extends StatefulWidget {
@@ -122,12 +149,20 @@ class _MainAppState extends State<MainApp> {
 
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-
           locale: localeNotifier.locale,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
           onGenerateTitle: (context) {
             return AppLocalizations.of(context)!.appTitle;
+          },
+          builder: (context, child) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              final l10n = AppLocalizations.of(context);
+              if (l10n != null) {
+                context.read<DataRefreshCoordinator>().registerL10n(l10n);
+              }
+            });
+            return child!;
           },
           theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme),
           darkTheme: ThemeData(

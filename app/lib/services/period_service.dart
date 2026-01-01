@@ -16,10 +16,10 @@ import 'package:menstrudel/l10n/app_localizations.dart';
 
 class PeriodService extends ChangeNotifier {
   final SettingsService _settingsService;
-  final _periodsRepo = PeriodsRepository();
+  final PeriodsRepository _periodsRepo;
   final _watchSyncService = WatchSyncService();
 
-  PeriodService(this._settingsService);
+  PeriodService(this._settingsService, this._periodsRepo);
 
   bool _isLoading = true;
   List<Period> _periodEntries = [];
@@ -44,38 +44,52 @@ class PeriodService extends ChangeNotifier {
   /// A pre-computed list of timeline items for the PeriodListView.
   List<Object> get timelineItems => _timelineItems;
 
-  
-  /// Refreshes all data after a user action
+  /// Refreshes all period-related data, predictions, notifications, and widgets.
   Future<void> refreshData({
     required List<LogDay> currentLogs,
-    required AppLocalizations l10n,
+    AppLocalizations? l10n,
     required WidgetController widgetController,
   }) async {
+
+    debugPrint('PeriodService: Starting data refresh.');
+
+    if (_isLoading && _periodEntries.isNotEmpty) return;
+
     _isLoading = true;
+
     notifyListeners();
 
     final oldPredictionDate = _predictionResult?.estimatedStartDate;
 
-    await _periodsRepo.recalculateAndAssignPeriods();
-    _periodEntries = await _periodsRepo.readAllPeriods();
+    try {
+      await _periodsRepo.recalculateAndAssignPeriods(currentLogs);
+      _periodEntries = await _periodsRepo.readAllPeriods();
 
-    _calculatePrediction();
-    _updateUiState();
-    _buildTimelineItems(currentLogs: currentLogs);
+      _calculatePrediction();
+      _updateUiState();
+      _buildTimelineItems(currentLogs: currentLogs);
 
-    _updateWidgetData(l10n, widgetController);
-    if (oldPredictionDate != _predictionResult?.estimatedStartDate) _schedulePeriodNotifications(l10n);
-    _syncWatchData();
-
-    _isLoading = false;
-    notifyListeners();
+      if (l10n != null) {
+        _updateWidgetData(l10n, widgetController);
+        if (oldPredictionDate != _predictionResult?.estimatedStartDate) {
+          _schedulePeriodNotifications(l10n);
+        }
+      }
+      
+      _syncWatchData();
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
   }
 
   /// Calculates the period prediction and ongoing status.
   void _calculatePrediction() {
     _predictionResult = PeriodPredictor.estimateNextPeriod(_periodEntries, DateTime.now());
-    _isPeriodOngoing = _periodEntries.isNotEmpty &&
-        DateUtils.isSameDay(_periodEntries.first.endDate, DateTime.now());
+    
+    final lastPeriod = _periodEntries.firstOrNull; 
+    _isPeriodOngoing = lastPeriod != null &&
+        DateUtils.isSameDay(lastPeriod.endDate, DateTime.now());
   }
 
   /// Updates the circle and FAB state variables.

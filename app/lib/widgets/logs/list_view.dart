@@ -22,18 +22,26 @@ class PeriodListView extends StatelessWidget {
     final l10n = AppLocalizations.of(context)!;
     final periodService = context.watch<PeriodService>();
     final logService = context.watch<LogService>();
+
+    final isPeriodServiceLoading = periodService.isLoading;
+    final isLogServiceLoading = logService.isLoading;
     
     final periodLogEntries = logService.logs;
     final periodEntries = periodService.periodEntries;
-    final isLoading = periodService.isLoading;
 
-    if (isLoading) {
-      return const Expanded(child: Center(child: CircularProgressIndicator()));
+    if (isPeriodServiceLoading || isLogServiceLoading) {
+      return const Center(
+        child: Padding(
+          padding: EdgeInsets.all(32.0),
+          child: CircularProgressIndicator(),
+        ),
+      );
     }
 
     if (periodEntries.isEmpty && periodLogEntries.isEmpty) {
-      return Expanded(
-        child: Center(
+      return Center(
+        child: Padding(
+          padding: const EdgeInsets.all(32.0),
           child: Text(
             l10n.listViewWidget_noPeriodsLogged, //TODO: change to 'Log your first entry' no longer period specific.
             textAlign: TextAlign.center,

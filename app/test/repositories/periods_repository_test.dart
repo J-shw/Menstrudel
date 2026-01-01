@@ -34,8 +34,10 @@ void main() {
       test('consecutive logs should be assigned to the same period', () async {
         await logsRepo.upsertLog(_log('2025-09-01'));
         await logsRepo.upsertLog(_log('2025-09-02'));
+
+        final allLogs = await logsRepo.readAllLogs();
         
-        await periodsRepo.recalculateAndAssignPeriods();
+        await periodsRepo.recalculateAndAssignPeriods(allLogs);
 
         final periods = await periodsRepo.readAllPeriods();
         expect(periods.length, 1);
@@ -46,7 +48,9 @@ void main() {
         await logsRepo.upsertLog(_log('2025-09-01'));
         await logsRepo.upsertLog(_log('2025-09-03')); // 1 day gap (Sep 2)
 
-        await periodsRepo.recalculateAndAssignPeriods();
+        final allLogs = await logsRepo.readAllLogs();
+
+        await periodsRepo.recalculateAndAssignPeriods(allLogs);
 
         final periods = await periodsRepo.readAllPeriods();
         expect(periods.length, 2);
@@ -55,11 +59,13 @@ void main() {
       test('bridging a gap should merge two periods into one', () async {
         await logsRepo.upsertLog(_log('2025-09-01'));
         await logsRepo.upsertLog(_log('2025-09-03'));
-        await periodsRepo.recalculateAndAssignPeriods();
+        final allLogs_1 = await logsRepo.readAllLogs();
+        await periodsRepo.recalculateAndAssignPeriods(allLogs_1);
         expect((await periodsRepo.readAllPeriods()).length, 2);
 
         await logsRepo.upsertLog(_log('2025-09-02'));
-        await periodsRepo.recalculateAndAssignPeriods();
+        final allLogs_2 = await logsRepo.readAllLogs();
+        await periodsRepo.recalculateAndAssignPeriods(allLogs_2);
 
         final periods = await periodsRepo.readAllPeriods();
         expect(periods.length, 1);
@@ -72,7 +78,8 @@ void main() {
         await logsRepo.upsertLog(_log('2025-09-03'));
 
         await logsRepo.deleteLog(midId);
-        await periodsRepo.recalculateAndAssignPeriods();
+        final allLogs = await logsRepo.readAllLogs();
+        await periodsRepo.recalculateAndAssignPeriods(allLogs);
 
         final periods = await periodsRepo.readAllPeriods();
         expect(periods.length, 2);
@@ -83,7 +90,8 @@ void main() {
         await logsRepo.upsertLog(_log('2025-09-02', flow: FlowRate.none));
         await logsRepo.upsertLog(_log('2025-09-03'));
 
-        await periodsRepo.recalculateAndAssignPeriods();
+        final allLogs = await logsRepo.readAllLogs();
+        await periodsRepo.recalculateAndAssignPeriods(allLogs);
 
         final periods = await periodsRepo.readAllPeriods();
         expect(periods.length, 2); // Split by the "none" flow log
@@ -94,7 +102,9 @@ void main() {
       test('readLastPeriod should return the newest cycle', () async {
         await logsRepo.upsertLog(_log('2025-01-01'));
         await logsRepo.upsertLog(_log('2025-03-01'));
-        await periodsRepo.recalculateAndAssignPeriods();
+
+        final allLogs = await logsRepo.readAllLogs();
+        await periodsRepo.recalculateAndAssignPeriods(allLogs);
 
         final last = await periodsRepo.readLastPeriod();
         expect(last?.startDate, DateTime.parse('2025-03-01'));
@@ -103,7 +113,9 @@ void main() {
       test('readAllPeriods should return periods in descending order', () async {
         await logsRepo.upsertLog(_log('2025-01-01'));
         await logsRepo.upsertLog(_log('2025-05-01'));
-        await periodsRepo.recalculateAndAssignPeriods();
+
+        final allLogs = await logsRepo.readAllLogs();
+        await periodsRepo.recalculateAndAssignPeriods(allLogs);
 
         final all = await periodsRepo.readAllPeriods();
         expect(all[0].startDate, DateTime.parse('2025-05-01'));

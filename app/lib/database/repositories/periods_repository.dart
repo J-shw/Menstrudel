@@ -63,17 +63,14 @@ class PeriodsRepository {
   }
 
   /// Recalculates periods based on existing period logs and assigns them accordingly.
-  Future<void> recalculateAndAssignPeriods() async {
+  Future<void> recalculateAndAssignPeriods(List<LogDay> logs) async {
     final db = await dbProvider.database;
     await db.delete('periods');
 
-    final allEntryMaps = await db.query(
-      'period_logs',
-      orderBy: 'date ASC',
-      where: 'flow != ?',
-      whereArgs: [FlowRate.none.index],
-    );
-    final allEntries = allEntryMaps.map((e) => LogDay.fromMap(e)).toList();
+    final allEntries = logs
+        .where((log) => log.flow != FlowRate.none)
+        .toList()
+      ..sort((a, b) => a.date.compareTo(b.date));
 
     if (allEntries.isEmpty) {
       return;

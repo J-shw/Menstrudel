@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:menstrudel/controllers/log_ui_controller.dart';
-import 'package:menstrudel/services/log_service.dart';
-import 'package:menstrudel/services/widget_controller.dart';
 import 'package:menstrudel/widgets/basic_progress_circle.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
@@ -20,13 +18,6 @@ class LogsScreenState extends State<LogsScreen> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<PeriodService>().refreshData(
-            currentLogs: context.read<LogService>().logs,
-            l10n: AppLocalizations.of(context)!,
-            widgetController: context.read<WidgetController>(),
-          );
-    });
   }
 
   @override
