@@ -87,9 +87,6 @@ class LogUIController extends ChangeNotifier {
           log: log,
           onDelete: () async {
             final logService = context.read<LogService>();
-            final periodService = context.read<PeriodService>();
-            final l10n = AppLocalizations.of(context)!;
-            final widgetController = context.read<WidgetController>();
 
             Navigator.pop(sheetContext);
 
@@ -104,7 +101,6 @@ class LogUIController extends ChangeNotifier {
             final logService = context.read<LogService>();
             final periodService = context.read<PeriodService>();
             final l10n = AppLocalizations.of(context)!;
-            final widgetController = context.read<WidgetController>();
             final settings = context.read<SettingsService>();
 
             await logService.saveLog(updatedLog);
