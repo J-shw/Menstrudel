@@ -8,7 +8,6 @@ import 'package:menstrudel/utils/exceptions.dart';
 import 'package:menstrudel/services/log_service.dart';
 import 'package:menstrudel/services/period_service.dart';
 import 'package:menstrudel/services/settings_service.dart';
-import 'package:menstrudel/services/widget_controller.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/widgets/sheets/symptom_entry_sheet.dart';
 
@@ -96,8 +95,6 @@ class LogUIController extends ChangeNotifier {
             await logService.deleteLog(log.id!);
 
             coordinator.onLogsChanged(l10n);
-
-            if (sheetContext.mounted) Navigator.pop(sheetContext);
           },
 
           onSave: (updatedLog) async {
