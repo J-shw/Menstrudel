@@ -31,16 +31,22 @@ class PeriodService extends ChangeNotifier {
 
   /// Whether a background operation is currently in progress.
   bool get isLoading => _isLoading;
+
   /// The list of calculated [Period] objects, representing entire period cycles.
   List<Period> get periodEntries => _periodEntries;
+
   /// The calculated prediction for the next period, if available.
   PeriodPredictionResult? get predictionResult => _predictionResult;
+
   /// The current value for the main progress circle (e.g., days until due).
   int get circleCurrentValue => _circleCurrentValue;
+
   /// The maximum value for the main progress circle (e.g., average cycle length).
   int get circleMaxValue => _circleMaxValue;
+
   /// Whether the user's period is considered to be ongoing today.
   bool get isPeriodOngoing => _isPeriodOngoing;
+
   /// A pre-computed list of timeline items for the PeriodListView.
   List<Object> get timelineItems => _timelineItems;
 
@@ -50,7 +56,6 @@ class PeriodService extends ChangeNotifier {
     AppLocalizations? l10n,
     required WidgetController widgetController,
   }) async {
-
     debugPrint('PeriodService: Starting data refresh.');
 
     if (_isLoading && _periodEntries.isNotEmpty) return;
@@ -75,7 +80,7 @@ class PeriodService extends ChangeNotifier {
           _schedulePeriodNotifications(l10n);
         }
       }
-      
+
       _syncWatchData();
     } finally {
       _isLoading = false;
@@ -85,10 +90,14 @@ class PeriodService extends ChangeNotifier {
 
   /// Calculates the period prediction and ongoing status.
   void _calculatePrediction() {
-    _predictionResult = PeriodPredictor.estimateNextPeriod(_periodEntries, DateTime.now());
-    
-    final lastPeriod = _periodEntries.firstOrNull; 
-    _isPeriodOngoing = lastPeriod != null &&
+    _predictionResult = PeriodPredictor.estimateNextPeriod(
+      _periodEntries,
+      DateTime.now(),
+    );
+
+    final lastPeriod = _periodEntries.firstOrNull;
+    _isPeriodOngoing =
+        lastPeriod != null &&
         DateUtils.isSameDay(lastPeriod.endDate, DateTime.now());
   }
 
@@ -105,8 +114,9 @@ class PeriodService extends ChangeNotifier {
     String smallText = l10n.periodPredictionCircle_days(_circleCurrentValue);
 
     String dateText = '';
-    if (_predictionResult != null) { 
-      dateText = '${l10n.logScreen_nextPeriodEstimate}:\n ${DateFormat('MMM d').format(_predictionResult!.estimatedStartDate)}';
+    if (_predictionResult != null) {
+      dateText =
+          '${l10n.logScreen_nextPeriodEstimate}:\n ${DateFormat('MMM d').format(_predictionResult!.estimatedStartDate)}';
     }
     controller.saveAndAndUpdateCircle(
       currentValue: _circleCurrentValue,
@@ -144,7 +154,9 @@ class PeriodService extends ChangeNotifier {
         daysAfter: _settingsService.periodOverdueNotificationDays,
         notificationTime: _settingsService.periodOverdueNotificationTime,
         title: l10n.notification_periodOverdueTitle,
-        body: l10n.notification_periodOverdueBody(_settingsService.periodOverdueNotificationDays),
+        body: l10n.notification_periodOverdueBody(
+          _settingsService.periodOverdueNotificationDays,
+        ),
         notificationID: periodOverdueNotificationId,
       );
     } catch (e) {
@@ -154,16 +166,17 @@ class PeriodService extends ChangeNotifier {
 
   /// Schedules a logging reminder from a [LogDay] object.
   Future<void> scheduleLoggingReminder({
-  required LogDay log,
-  required SettingsService settings,
-  required AppLocalizations l10n,
+    required LogDay log,
+    required SettingsService settings,
+    required AppLocalizations l10n,
   }) async {
     if (log.flow == FlowRate.none) {
       await NotificationService.cancelLoggingReminder(log.date);
-    }else if (log.flow != FlowRate.none) {
+    } else if (log.flow != FlowRate.none) {
       final nextDay = log.date.add(const Duration(days: 1));
       final reminderTime = settings.loggingReminderTime;
-      final bool isReminderEnabled = settings.isLoggingReminderNotificationEnabled;
+      final bool isReminderEnabled =
+          settings.isLoggingReminderNotificationEnabled;
 
       final scheduledTime = DateTime(
         nextDay.year,
@@ -191,15 +204,15 @@ class PeriodService extends ChangeNotifier {
   }
 
   /// Populates the [_timelineItems] list for the list view.
-  void _buildTimelineItems({ required List<LogDay> currentLogs }) {
+  void _buildTimelineItems({required List<LogDay> currentLogs}) {
     final groupedLogs = groupBy(currentLogs, (log) => log.periodId ?? -1);
 
-    final List<Object> timelineEvents = [
+    final List<Object> topLevelEvents = [
       ..._periodEntries,
       ...(groupedLogs[-1] ?? []),
     ];
 
-    final groupedByMonth = groupBy<Object, DateTime>(timelineEvents, (event) {
+    final groupedByMonth = groupBy<Object, DateTime>(topLevelEvents, (event) {
       final date = event is Period ? event.startDate : (event as LogDay).date;
       return DateTime(date.year, date.month);
     });
@@ -222,9 +235,9 @@ class PeriodService extends ChangeNotifier {
         if (event is Period) {
           items.add(event);
           final logsForPeriod = (groupedLogs[event.id] ?? [])
-            ..sort((a, b) => a.date.compareTo(b.date));
+            ..sort((a, b) => b.date.compareTo(a.date));
           items.addAll(logsForPeriod);
-        } else if (event is LogDay) {
+        } else {
           items.add(event);
         }
       }
