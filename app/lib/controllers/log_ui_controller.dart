@@ -99,12 +99,6 @@ class LogUIController extends ChangeNotifier {
             }
 
             await logService.deleteLog(log.id!);
-
-            await periodService.refreshData(
-              currentLogs: logService.logs,
-              l10n: l10n,
-              widgetController: widgetController,
-            );
           },
           onSave: (updatedLog) async {
             final logService = context.read<LogService>();
@@ -120,12 +114,6 @@ class LogUIController extends ChangeNotifier {
                 log: updatedLog,
                 settings: settings,
                 l10n: l10n,
-              );
-
-              await periodService.refreshData(
-                currentLogs: logService.logs,
-                l10n: l10n,
-                widgetController: widgetController,
               );
 
               if (context.mounted) Navigator.pop(sheetContext);
