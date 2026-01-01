@@ -5,12 +5,15 @@ import 'package:menstrudel/screens/sanitary_screen.dart';
 import 'package:menstrudel/screens/settings_screen.dart';
 import 'package:menstrudel/screens/insights_screen.dart';
 import 'package:menstrudel/screens/pills_screen.dart';
+import 'package:menstrudel/services/period_service.dart';
 import 'package:menstrudel/widgets/main/main_navigation_bar.dart';
 import 'package:menstrudel/widgets/main/app_bar.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/services/settings_service.dart';
 import 'package:provider/provider.dart';
 import 'package:menstrudel/screens/larc_screen.dart';
+import 'package:menstrudel/services/log_service.dart';
+import 'package:menstrudel/services/widget_controller.dart';
 
 enum FabState {
   logPeriod,
@@ -27,6 +30,18 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 1;
+
+    @override
+  void initState() {
+    super.initState();
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<PeriodService>().refreshData(
+            currentLogs: context.read<LogService>().logs,
+            l10n: AppLocalizations.of(context)!,
+            widgetController: context.read<WidgetController>(),
+          );
+    });
+  }
 
   void _onItemTapped(int index) {
     setState(() {
