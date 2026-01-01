@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/controllers/log_ui_controller.dart';
+import 'package:menstrudel/coordinators/data_refresh_coordinator.dart';
 import 'package:menstrudel/database/repositories/periods_repository.dart';
 import 'package:menstrudel/database/repositories/logs_repository.dart';
 import 'package:timezone/data/latest.dart' as tz_data;
@@ -44,50 +45,46 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
+        // --- Core services ---
         ChangeNotifierProvider(create: (_) => settingsService),
         Provider(create: (_) => LogsRepository()),
         Provider(create: (_) => PeriodsRepository()),
+
+        // --- UI state ---
         ChangeNotifierProvider(
           create: (context) => ThemeNotifier(context.read<SettingsService>()),
         ),
         ChangeNotifierProvider(
           create: (context) => LocaleNotifier(context.read<SettingsService>()),
         ),
+
+        // --- Integrations ---
         Provider(create: (_) => WidgetController()),
+
+        // --- Domain services ---
         ChangeNotifierProvider(
           create: (context) => LogService(context.read<LogsRepository>()),
         ),
-        ChangeNotifierProxyProvider<LogService, PeriodService>(
+        ChangeNotifierProvider(
           create: (context) => PeriodService(
             context.read<SettingsService>(),
             context.read<PeriodsRepository>(),
           ),
-          update: (context, logService, periodService) {
-            if (periodService == null) return periodService!;
-
-            if (!logService.isLoading) {
-
-              final l10n = AppLocalizations.of(context);
-              final widgetController = context.read<WidgetController>();
-
-              Future.microtask(() {
-                if (context.mounted) {
-                  periodService.refreshData(
-                    currentLogs: logService.logs,
-                    l10n: l10n,
-                    widgetController: widgetController,
-                  );
-                }
-              });
-            }
-            return periodService;
-          },
         ),
+        Provider(
+          create: (context) => DataRefreshCoordinator(
+            logService: context.read<LogService>(),
+            periodService: context.read<PeriodService>(),
+            widgetController: context.read<WidgetController>(),
+          ),
+        ),
+
         ChangeNotifierProvider(create: (_) => LogUIController()),
       ],
       child: const MainApp(),
     ),
   );
+
 }
 
 class MainApp extends StatefulWidget {
@@ -152,12 +149,20 @@ class _MainAppState extends State<MainApp> {
 
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-
           locale: localeNotifier.locale,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
           onGenerateTitle: (context) {
             return AppLocalizations.of(context)!.appTitle;
+          },
+          builder: (context, child) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              final l10n = AppLocalizations.of(context);
+              if (l10n != null) {
+                context.read<DataRefreshCoordinator>().registerL10n(l10n);
+              }
+            });
+            return child!;
           },
           theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme),
           darkTheme: ThemeData(
