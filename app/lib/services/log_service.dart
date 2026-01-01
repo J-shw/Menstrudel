@@ -47,6 +47,16 @@ class LogService extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// Updates the period ID references for logs based on the provided [mapping].
+  Future<void> updateLogPeriodReferences(Map<int, int> mapping) async {
+    await _logRepo.updateLogPeriodIds(mapping);
+    for (var log in logs) {
+      log.periodId = mapping[log.id] ?? -1;
+    }
+
+    notifyListeners();
+  }
+
   /// Populates the map and date boundaries for the Journal view.
   void _processJournalData() {
     if (_logs.isEmpty) {
