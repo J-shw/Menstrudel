@@ -57,11 +57,33 @@ void main() async {
         ChangeNotifierProvider(
           create: (context) => LogService(context.read<LogsRepository>()),
         ),
-        ChangeNotifierProvider(
+        ChangeNotifierProxyProvider<LogService, PeriodService>(
           create: (context) => PeriodService(
             context.read<SettingsService>(),
             context.read<PeriodsRepository>(),
           ),
+          update: (context, logService, periodService) {
+            if (periodService == null){
+              return PeriodService(
+                context.read<SettingsService>(),
+                context.read<PeriodsRepository>(),
+              );
+            }
+            final l10n = AppLocalizations.of(context);
+
+            if (!logService.isLoading && l10n != null) {
+              Future.microtask(() {
+                if (context.mounted) {
+                  periodService.refreshData(
+                    currentLogs: logService.logs,
+                    l10n: l10n,
+                    widgetController: context.read<WidgetController>(),
+                  );
+                }
+              });
+            }
+            return periodService;
+          },
         ),
         ChangeNotifierProvider(create: (_) => LogUIController()),
       ],
