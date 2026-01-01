@@ -62,7 +62,7 @@ class PeriodService extends ChangeNotifier {
     final oldPredictionDate = _predictionResult?.estimatedStartDate;
 
     try {
-      await _periodsRepo.recalculateAndAssignPeriods();
+      await _periodsRepo.recalculateAndAssignPeriods(currentLogs);
       _periodEntries = await _periodsRepo.readAllPeriods();
 
       _calculatePrediction();
