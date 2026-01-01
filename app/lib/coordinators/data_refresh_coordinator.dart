@@ -42,8 +42,13 @@ class DataRefreshCoordinator {
     );
   }
 
-  void onLogsChanged(AppLocalizations l10n) {
-    _l10n = l10n;
+  void onLogsChanged(AppLocalizations l10n) async {
+    final updates = await periodService.recalculatePeriods(
+      logService.logs,
+    );
+
+    await logService.updateLogPeriodReferences(updates);
+
     periodService.refreshData(
       currentLogs: logService.logs,
       l10n: l10n,

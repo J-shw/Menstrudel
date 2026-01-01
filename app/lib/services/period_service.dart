@@ -67,7 +67,6 @@ class PeriodService extends ChangeNotifier {
     final oldPredictionDate = _predictionResult?.estimatedStartDate;
 
     try {
-      await _periodsRepo.recalculateAndAssignPeriods(currentLogs);
       _periodEntries = await _periodsRepo.readAllPeriods();
 
       _calculatePrediction();
@@ -99,6 +98,12 @@ class PeriodService extends ChangeNotifier {
     _isPeriodOngoing =
         lastPeriod != null &&
         DateUtils.isSameDay(lastPeriod.endDate, DateTime.now());
+  }
+
+  /// Recalculates periods based on the provided [logs] and returns a mapping of log IDs to period IDs.
+  Future<Map<int, int>> recalculatePeriods(List<LogDay> logs) async {
+    final mapping = await _periodsRepo.recalculateAndAssignPeriods(logs);    
+    return mapping;
   }
 
   /// Updates the circle and FAB state variables.
