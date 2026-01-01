@@ -205,40 +205,40 @@ class PeriodService extends ChangeNotifier {
 
   /// Populates the [_timelineItems] list for the list view.
   void _buildTimelineItems({required List<LogDay> currentLogs}) {
-    final groupedLogs = groupBy(currentLogs, (log) => log.periodId ?? -1);
+    final logsByPeriod = groupBy(currentLogs, (log) => log.periodId);
 
-    final List<Object> topLevelEvents = [
+    final List<Object> standaloneEvents = [
       ..._periodEntries,
-      ...(groupedLogs[-1] ?? []),
+      ...currentLogs.where((log) => log.periodId == null || log.periodId == -1),
     ];
 
-    final groupedByMonth = groupBy<Object, DateTime>(topLevelEvents, (event) {
+    final groupedByMonth = groupBy<Object, DateTime>(standaloneEvents, (event) {
       final date = event is Period ? event.startDate : (event as LogDay).date;
       return DateTime(date.year, date.month);
     });
 
     final sortedMonths = groupedByMonth.keys.toList()
       ..sort((a, b) => b.compareTo(a));
-
     final List<Object> items = [];
+
     for (final month in sortedMonths) {
       items.add(month);
 
-      final eventsInMonth = groupedByMonth[month]!;
-      eventsInMonth.sort((a, b) {
-        final dateA = a is Period ? a.startDate : (a as LogDay).date;
-        final dateB = b is Period ? b.startDate : (b as LogDay).date;
-        return dateB.compareTo(dateA);
-      });
+      final monthEvents = groupedByMonth[month]!
+        ..sort((a, b) {
+          final dateA = a is Period ? a.startDate : (a as LogDay).date;
+          final dateB = b is Period ? b.startDate : (b as LogDay).date;
+          return dateB.compareTo(dateA);
+        });
 
-      for (final event in eventsInMonth) {
+      for (final event in monthEvents) {
+        items.add(event);
+
         if (event is Period) {
-          items.add(event);
-          final logsForPeriod = (groupedLogs[event.id] ?? [])
+          final childLogs = (logsByPeriod[event.id] ?? [])
             ..sort((a, b) => b.date.compareTo(a.date));
-          items.addAll(logsForPeriod);
-        } else {
-          items.add(event);
+
+          items.addAll(childLogs);
         }
       }
     }
