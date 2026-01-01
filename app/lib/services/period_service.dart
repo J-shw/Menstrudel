@@ -47,16 +47,17 @@ class PeriodService extends ChangeNotifier {
   /// Refreshes all period-related data, predictions, notifications, and widgets.
   Future<void> refreshData({
     required List<LogDay> currentLogs,
-    required AppLocalizations l10n,
+    AppLocalizations? l10n,
     required WidgetController widgetController,
   }) async {
+
+    debugPrint('PeriodService: Starting data refresh.');
+
     if (_isLoading && _periodEntries.isNotEmpty) return;
 
     _isLoading = true;
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      notifyListeners();
-    });
+    notifyListeners();
 
     final oldPredictionDate = _predictionResult?.estimatedStartDate;
 
@@ -68,10 +69,11 @@ class PeriodService extends ChangeNotifier {
       _updateUiState();
       _buildTimelineItems(currentLogs: currentLogs);
 
-      _updateWidgetData(l10n, widgetController);
-      
-      if (oldPredictionDate != _predictionResult?.estimatedStartDate) {
-        _schedulePeriodNotifications(l10n);
+      if (l10n != null) {
+        _updateWidgetData(l10n, widgetController);
+        if (oldPredictionDate != _predictionResult?.estimatedStartDate) {
+          _schedulePeriodNotifications(l10n);
+        }
       }
       
       _syncWatchData();
