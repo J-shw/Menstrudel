@@ -63,21 +63,19 @@ void main() async {
             context.read<PeriodsRepository>(),
           ),
           update: (context, logService, periodService) {
-            if (periodService == null){
-              return PeriodService(
-                context.read<SettingsService>(),
-                context.read<PeriodsRepository>(),
-              );
-            }
-            final l10n = AppLocalizations.of(context);
+            if (periodService == null) return periodService!;
 
-            if (!logService.isLoading && l10n != null) {
+            if (!logService.isLoading) {
+
+              final l10n = AppLocalizations.of(context);
+              final widgetController = context.read<WidgetController>();
+
               Future.microtask(() {
                 if (context.mounted) {
                   periodService.refreshData(
                     currentLogs: logService.logs,
                     l10n: l10n,
-                    widgetController: context.read<WidgetController>(),
+                    widgetController: widgetController,
                   );
                 }
               });
