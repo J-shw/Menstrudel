@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:menstrudel/coordinators/data_refresh_coordinator.dart';
 import 'package:menstrudel/widgets/sheets/period_details_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 import 'package:menstrudel/models/period_logs/log_day.dart';
@@ -22,16 +23,15 @@ class LogUIController extends ChangeNotifier {
     final result = await showModalBottomSheet<Map<String, dynamic>>(
       context: context,
       isScrollControlled: true,
-      builder: (ctx) => SymptomEntrySheet(selectedDate: selectedDate),
+      builder: (_) => SymptomEntrySheet(selectedDate: selectedDate),
     );
 
-    if (result == null) return;
-    if (!context.mounted) return;
+    if (result == null || !context.mounted) return;
 
     final logService = context.read<LogService>();
     final periodService = context.read<PeriodService>();
+    final coordinator = context.read<DataRefreshCoordinator>();
     final settings = context.read<SettingsService>();
-    final widgetController = context.read<WidgetController>();
     final l10n = AppLocalizations.of(context)!;
 
     try {
@@ -44,30 +44,27 @@ class LogUIController extends ChangeNotifier {
 
       await logService.saveLog(newEntry);
 
+      if (!context.mounted) return;
+
+      await periodService.scheduleLoggingReminder(
+        log: newEntry,
+        settings: settings,
+        l10n: l10n,
+      );
+
+      coordinator.onLogsChanged(l10n);
+
       if (context.mounted) {
-        await periodService.scheduleLoggingReminder(
-          log: newEntry,
-          settings: settings,
-          l10n: l10n,
-        );
-
-        await periodService.refreshData(
-          currentLogs: logService.logs,
-          l10n: l10n,
-          widgetController: widgetController,
-        );
-
-        if (context.mounted) {
-          _showSuccess(context, 'Log saved!'); //TODO: localisation 'logSavedSuccessMessage'
-        }
-
+        _showSuccess(context, 'Log saved!'); //TODO: localisation 'logSavedSuccessMessage'
       }
     } on DuplicateLogException catch (e) {
       if (context.mounted) _showError(context, e.message);
     } on FutureDateException catch (e) {
       if (context.mounted) _showError(context, e.message);
-    } catch (e) {
-      if (context.mounted) _showError(context, "An unexpected error occurred"); //TODO: localisation 'unexpectedErrorMessage'
+    } catch (_) {
+      if (context.mounted) {
+        _showError(context, 'An unexpected error occurred'); //TODO: localisation 'unexpectedErrorMessage'
+      }
     }
   }
 
@@ -85,35 +82,44 @@ class LogUIController extends ChangeNotifier {
       builder: (sheetContext) {
         return PeriodDetailsBottomSheet(
           log: log,
+
           onDelete: () async {
             final logService = context.read<LogService>();
-
-            Navigator.pop(sheetContext);
+            final coordinator = context.read<DataRefreshCoordinator>();
+            final l10n = AppLocalizations.of(context)!;
 
             if (log.id == null) {
-              _showError(context, "Cannot delete unsaved log"); //TODO: localisation 'cannotDeleteUnsavedLogMessage'
+              _showError(context, 'Cannot delete unsaved log'); //TODO: localisation 'cannotDeleteUnsavedLogMessage'
               return;
             }
 
             await logService.deleteLog(log.id!);
+
+            coordinator.onLogsChanged(l10n);
+
+            if (sheetContext.mounted) Navigator.pop(sheetContext);
           },
+
           onSave: (updatedLog) async {
             final logService = context.read<LogService>();
             final periodService = context.read<PeriodService>();
-            final l10n = AppLocalizations.of(context)!;
+            final coordinator = context.read<DataRefreshCoordinator>();
             final settings = context.read<SettingsService>();
+            final l10n = AppLocalizations.of(context)!;
 
             await logService.saveLog(updatedLog);
 
-            if (context.mounted) {
-              await periodService.scheduleLoggingReminder(
-                log: updatedLog,
-                settings: settings,
-                l10n: l10n,
-              );
+            if (!context.mounted) return;
 
-              if (context.mounted) Navigator.pop(sheetContext);
-            }
+            await periodService.scheduleLoggingReminder(
+              log: updatedLog,
+              settings: settings,
+              l10n: l10n,
+            );
+
+            coordinator.onLogsChanged(l10n);
+
+            if (sheetContext.mounted) Navigator.pop(sheetContext);
           },
         );
       },
