@@ -29,6 +29,8 @@ class LogService extends ChangeNotifier {
 
   /// Loads all logs for the views.
   Future<void> loadLogs() async {
+    if (_isLoading) return;
+    
     _isLoading = true;
     notifyListeners();
 
