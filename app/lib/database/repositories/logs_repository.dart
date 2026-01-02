@@ -131,6 +131,24 @@ class LogsRepository {
     return LogDay.fromMap(result.first, symptoms: symptoms);
   }
 
+  Future<void> updateLogPeriodIds(Map<int, int> mapping) async {
+    final db = await dbProvider.database;
+    final batch = db.batch();
+
+    batch.update('period_logs', {'period_id': -1});
+
+    mapping.forEach((logId, periodId) {
+      batch.update(
+        'period_logs',
+        {'period_id': periodId},
+        where: 'id = ?',
+        whereArgs: [logId],
+      );
+    });
+
+    await batch.commit(noResult: true);
+  }
+
   Future<int> deleteLog(int id) async {
     final db = await dbProvider.database;
     return await db.delete(
