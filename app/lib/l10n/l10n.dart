@@ -7,6 +7,7 @@ class L10n {
     'fr': 'Français',
     'de': 'Deutsch',
     'it': 'Italiano',
+    'cs': 'Čeština',
   };
 
 static Map<String, String> getLanguageOptions(AppLocalizations l10n) {
