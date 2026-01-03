@@ -1,0 +1,487 @@
+{
+    "@@locale": "cs",
+    "appTitle": "Menstrundel",
+    "nextDue": "další termín",
+    "ongoing": "probíhající",
+    "overdue": "zpožděný",
+    "total": "celkově",
+    "shortest": "nejkratší",
+    "longest": "nejdelší",
+    "date": "datum",
+    "time": "čas",
+    "start": "začátek",
+    "end": "konec",
+    "day": "den",
+    "days": "dny",
+    "hours": "hodiny",
+    "dayCount": "{count, plural, one{{count} Day} other{{count} Days}}",
+    "@dayCount": {
+        "description": "A message that displays a count of days, handling singular and plural forms.",
+        "placeholders": {
+            "count": {
+                "type": "int",
+                "example": "5"
+            }
+        }
+    },
+    "monthCount": "{count, plural, one{{count} Month} other{{count} Months}}",
+    "@monthCount": {
+        "description": "A message that displays a count of months, handling singular and plural forms.",
+        "placeholders": {
+            "count": {
+                "type": "int",
+                "example": "2"
+            }
+        }
+    },
+    "yearCount": "{count, plural, one{{count} Year} other{{count} Years}}",
+    "@yearCount": {
+        "description": "A message that displays a count of years, handling singular and plural forms.",
+        "placeholders": {
+            "count": {
+                "type": "int",
+                "example": "3"
+            }
+        }
+    },
+    "edit": "upravit",
+    "delete": "smazat",
+    "clear": "vyčistit",
+    "save": "uložit",
+    "import": "importovat",
+    "ok": "ok",
+    "confirm": "potvrdit",
+    "set": "nastavit",
+    "yes": "ano",
+    "no": "ne",
+    "cancel": "zrušit",
+    "select": "vybrat",
+    "close": "zavřít",
+    "reset": "restartovat",
+    "add": "přidat",
+    "notSet": "nenastavené",
+    "removed": "smazáno",
+    "note": "poznámka",
+    "systemDefault": "podle systému",
+    "flow": "tok",
+    "type": "typ",
+    "navBar_insights": "Statistiky",
+    "navBar_logs": "Záznamy",
+    "navBar_sanitary": "Pomůcky",
+    "navBar_pill": "Pilulky",
+    "navBar_larc": "DPRA",
+    "navBar_settings": "Nastavení",
+    "flowIntensity_none": "žádná",
+    "flowIntensity_spotting": "špinění",
+    "flowIntensity_light": "lehké",
+    "flowIntensity_moderate": "střední",
+    "flowIntensity_heavy": "vysoké",
+    "builtInSymptom_acne": "akné",
+    "builtInSymptom_backPain": "Bolest zad",
+    "builtInSymptom_bloating": "Nadýmání",
+    "builtInSymptom_cramps": "Bolesti",
+    "builtInSymptom_fatigue": "Závratě",
+    "builtInSymptom_headache": "Bolest hlavy",
+    "builtInSymptom_moodSwings": "Změny nálad",
+    "builtInSymptom_nausea": "Nevolnost",
+    "painLevel_title": "Intenzita bolesti",
+    "painLevel_none": "žádný",
+    "painLevel_mild": "lehký",
+    "painLevel_moderate": "střední",
+    "painLevel_severe": "bolestivý",
+    "pain_unbearable": "nesnesitelné",
+    "larcType_iud": "nitroděložní tělísko",
+    "larcType_implant": "implantát",
+    "larcType_injection": "injekce",
+    "larcType_ring": "vaginální kroužek",
+    "larcType_patch": "náplast",
+    "sanitaryProduct_tampon": "tampon",
+    "sanitaryProduct_pad": "vložka",
+    "sanitaryProduct_menstrualCup": "menstruační kalíšek",
+    "sanitaryProduct_periodUnderwear": "menstruační kalhotky",
+    "error_valueMustbePositive": "hodnota musí být kladná",
+    "error_valueCannotBeNull": "hodnota nesmí být prázdná",
+    "notification_periodTitle": "blížící se menstruace",
+    "@notification_periodTitle": {
+        "description": "Title for the upcoming period notification."
+    },
+    "notification_periodBody": "{count, plural, =1{Your next period is estimated to start in 1 day.} other{Your next period is estimated to start in {count} days.}}",
+    "@notification_periodBody": {
+        "description": "Body for the upcoming period notification.",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "notification_periodOverdueTitle": "opožděná menstruace",
+    "@notification_periodOverdueTitle": {
+        "description": "Title for the overdue period notification."
+    },
+    "notification_periodOverdueBody": "{count, plural, =1{Your next period is overdue by 1 day.} other{Your next period is overdue by {count} days.}}",
+    "@notification_periodOverdueBody": {
+        "description": "Body for the overdue period notification.",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "notification_pillTitle": "připomenutí pilulky",
+    "@notification_pillTitle": {
+        "description": "Title for the daily pill reminder notification."
+    },
+    "notification_pillBody": "Nezapomeňte si dnes vzít pilulky!",
+    "@notification_pillBody": {
+        "description": "Body for the daily pill reminder notification."
+    },
+    "notification_larcTitle": "Upomínka DPRA",
+    "@notification_larcTitle": {
+        "description": "Title for the LARC reminder notification."
+    },
+    "notification_larcBody": ".",
+    "@notification_larcBody": {
+        "description": "The body of the LARC reminder notification, indicating the type of LARC and how many days until renewal.",
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "example": "IUD"
+            },
+            "days": {
+                "type": "int",
+                "example": "30"
+            }
+        }
+    },
+    "notification_loggingReminderTitle": "Logging Reminder",
+    "@notification_loggingReminderTitle": {
+        "description": "Title for the logging reminder notification."
+    },
+    "notification_loggingReminderBody": "Tap to log your flow for today.",
+    "@notification_loggingReminderBody": {
+        "description": "Body for the logging reminder notification."
+    },
+    "notification_SanitaryProductReminderTitle": "Sanitary Product Reminder",
+    "notification_SanitaryProductReminderBody": "Remember to change your product.",
+    "mainScreen_insightsPageTitle": "Your Insights",
+    "mainScreen_sanitaryPageTitle": "Sanitary Products",
+    "mainScreen_pillsPageTitle": "Pills",
+    "mainScreen_LarcsPageTitle": "LARCs",
+    "mainScreen_settingsPageTitle": "Settings",
+    "mainScreen_tooltipLogPeriod": "Log period",
+    "insightsScreen_errorPrefix": "Error:",
+    "insightsScreen_noDataAvailable": "No data available.",
+    "logsScreen_calculatingPrediction": "Calculating prediction...",
+    "logScreen_logAtLeastTwoPeriods": "Log at least two periods to estimate next cycle.",
+    "logScreen_nextPeriodEstimate": "Next period Est",
+    "logScreen_periodDueToday": "Period due today",
+    "logScreen_periodOverdueBy": "{count, plural, =1{Period overdue by 1 day} other{Period overdue by {count} days}}",
+    "@logScreen_periodOverdueBy": {
+        "description": "A label showing the total number of days period is overdue.",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "pillScreen_pillForTodayMarkedAsTaken": "Pill for today marked as taken.",
+    "pillScreen_pillForTodayMarkedAsSkipped": "Pill for today marked as skipped.",
+    "larcScreen_noLarcRecordsFound": "No LARC records found.",
+    "larcScreen_history": "History ({history})",
+    "@larcScreen_history": {
+        "description": "The total LARC history count.",
+        "placeholders": {
+            "history": {
+                "type": "int",
+                "example": "12"
+            }
+        }
+    },
+    "larcScreen_activeLarcs": "Active LARCs ({activeCount})",
+    "@larcScreen_activeLarcs": {
+        "description": "The total active LARC count.",
+        "placeholders": {
+            "activeCount": {
+                "type": "int",
+                "example": "2"
+            }
+        }
+    },
+    "larcScreen_activeLarcsDescription": "Currently monitored LARC entries.",
+    "larcScreen_noActiveRecords": "No LARC is currently active. Please log a new entry.",
+    "larcScreen_noHistoryRecords": "No past or overdue LARC records found.",
+    "sanitaryProductsScreen_noSanitaryProductRecordsFound": "No sanitary product records found.",
+    "sanitaryProductsScreen_history": "History ({history})",
+    "@sanitaryProductsScreen_history": {
+        "description": "The total sanitary product history count.",
+        "placeholders": {
+            "history": {
+                "type": "int",
+                "example": "5"
+            }
+        }
+    },
+    "sanitaryProductsScreen_noHistoryRecords": "No past sanitary product records found.",
+    "sanitaryProductsScreen_activeProduct": "Active {activeType}",
+    "@sanitaryProductsScreen_activeProduct": {
+        "description": "Label showing the type of active sanitary product.",
+        "placeholders": {
+            "activeType": {
+                "type": "String",
+                "example": "Tampon"
+            }
+        }
+    },
+    "sanitaryProductsScreen_changeDueAt": "Change Due At {time}",
+    "@sanitaryProductsScreen_changeDueAt": {
+        "description": "Label showing the time when the sanitary product needs to be changed.",
+        "placeholders": {
+            "time": {
+                "type": "String",
+                "example": "3:30 PM"
+            }
+        }
+    },
+    "settingsScreen_selectHistoryView": "Select History View",
+    "settingsScreen_deleteRegimen_question": "Delete Regimen?",
+    "settingsScreen_deleteRegimenDescription": "This will delete your current pill pack settings and all associated pill logs. This cannot be undone.",
+    "settingsScreen_allLogsHaveBeenCleared": "All logs have been cleared.",
+    "settingsScreen_clearAllLogs_question": "Clear All Logs?",
+    "settingsScreen_deleteAllLogsDescription": "This will permanently delete all your period logs. Your app settings will not be affected.",
+    "settingsScreen_appearance": "Appearance",
+    "settingsScreen_historyViewStyle": "History View Style",
+    "settingsScreen_appTheme": "App Theme",
+    "settingsScreen_themeLight": "Light",
+    "settingsScreen_themeDark": "Dark",
+    "settingsScreen_themeSystem": "System",
+    "settingsScreen_dynamicTheme": "Dynamic Theme",
+    "settingsScreen_useWallpaperColors": "Use Wallpaper Colors",
+    "settingsScreen_themeColor": "Theme Color",
+    "settingsScreen_pickAColor": "Pick a Color",
+    "settingsScreen_view": "View",
+    "settingsScreen_birthControl": "Birth Control",
+    "settingsScreen_enablePillTracking": "Enable Pill Tracking",
+    "settingsScreen_pillDescription": "Track your daily pill intake and get reminders.",
+    "settingsScreen_setUpPillRegimen": "Set Up Pill Regimen",
+    "settingsScreen_trackYourDailyPillIntake": "Track Your Daily Pill Intake",
+    "settingsScreen_dailyPillReminder": "Daily Pill Reminder",
+    "settingsScreen_reminderTime": "Reminder Time",
+    "settingsScreen_periodPredictionAndReminders": "Period Prediction & Reminders",
+    "settingsScreen_upcomingPeriodReminder": "Upcoming Period Reminder",
+    "settingsScreen_remindMeBefore": "Remind Me Before",
+    "settingsScreen_notificationTime": "Notification Time",
+    "settingsScreen_overduePeriodReminder": "Overdue Period Reminder",
+    "settingsScreen_remindMeAfter": "Remind Me After",
+    "settingsScreen_enableLarcTracking": "Enable LARC Tracking",
+    "settingsScreen_larcDescription": "Track long-acting reversible contraceptives (LARCs).",
+    "settingsScreen_larcType": "LARC Type",
+    "settingsScreen_setDuration": "Set Duration",
+    "settingsScreen_larcDuration": "LARC Replacement Duration",
+    "settingsScreen_enableLARCReminder": "Enable LARC Reminder",
+    "settingsScreen_currentDuration": "Current Duration",
+    "settingsScreen_durationInDays": "Duration (Days)",
+    "settingsScreen_LoggingScreen": "Logging",
+    "settingsScreen_enableLoggingReminders": "Enable Logging Reminders",
+    "settingsScreen_loggingReminderDescription": "If you log a day with flow, you will receive a notification the following day to log your status.",
+    "settingsScreen_loggingReminderTime": "Logging Reminder Time",
+    "settingsScreen_defaultSymptoms": "Default Symptoms",
+    "settingsScreen_defaultSymptomsSubtitle": "These are always available when logging new periods.\nTap an existing symptom to delete or '+' to add a new one.",
+    "settingsScreen_deleteDefaultSymptomQuestion": "Delete '{symptom}'?",
+    "@settingsScreen_deleteDefaultSymptomQuestion": {
+        "description": "Question whether a symptom should be deleted.",
+        "placeholders": {
+            "symptom": {
+                "type": "String",
+                "example": "The name of the symptom."
+            }
+        }
+    },
+    "settingsScreen_resetSymptomsList": "Reset Symptoms List?",
+    "settingsScreen_resetSymptomsListDescription": "This will remove all your custom symptoms and restore the original built-in list.\n\nYour existing log entries will not be changed.",
+    "settingsScreen_deleteDefaultSymptomDescription": "'{symptom}' will no longer be available when logging a period.\n\n{usageCount, plural, zero{There are currently no period logs with this symptom!} one{There is already 1 period log with this symptom!\nThis log will not be changed.} other{There are {usageCount} period logs with this symptom!\nThese logs will not be changed.}}",
+    "@settingsScreen_deleteDefaultSymptomDescription": {
+        "description": "Question whether a symptom should be deleted.",
+        "placeholders": {
+            "symptom": {
+                "type": "String",
+                "example": "The name of the symptom."
+            },
+            "usageCount": {}
+        }
+    },
+    "settingsScreen_pillRegimens": "Pill Regimens",
+    "@settingsScreen_pillRegimens": {
+        "description": "Header for the section listing all created pill regimens."
+    },
+    "settingsScreen_makeActive": "Set as Active",
+    "@settingsScreen_makeActive": {
+        "description": "Button to select a regimen and set it as the one currently being tracked."
+    },
+    "settingsScreen_activeRegimenReminder": "Active Regimen Reminder Settings",
+    "@settingsScreen_activeRegimenReminder": {
+        "description": "Header for the daily reminder settings section."
+    },
+    "settingsScreen_pack": "Pack",
+    "settingsScreen_dataManagement": "Data Management",
+    "settingsScreen_dangerZone": "Danger Zone",
+    "settingsScreen_clearAllLogs": "Clear All Logs",
+    "settingsScreen_clearAllLogsSubtitle": "Deletes your entire period and symptom history.",
+    "settingsScreen_clearAllPillData": "Clear All Pill Data",
+    "settingsScreen_clearAllPillDataSubtitle": "Removes your pill regimen and intake history.",
+    "settingsScreen_clearAllPillData_question": "Clear All Pill Data?",
+    "settingsScreen_deleteAllPillDataDescription": "This will permanently delete your pill regimen, reminders, and intake history.",
+    "settingsScreen_allPillDataCleared": "All pill data has been cleared.",
+    "settingsScreen_clearAllLarcData": "Clear All LARC Data",
+    "settingsScreen_clearAllLarcDataSubtitle": "Removes your LARCs history.",
+    "settingsScreen_clearAllLarcData_question": "Clear All LARC Data?",
+    "settingsScreen_deleteAllLarcDataDescription": "This will permanently delete your LARC history.",
+    "settingsScreen_allLarcDataCleared": "All LARC data has been cleared.",
+    "settingsScreen_clearAllSanitaryData": "Clear All Sanitary Products Data",
+    "settingsScreen_clearAllSanitaryDataSubtitle": "Removes your sanitary products history.",
+    "settingsScreen_clearAllSanitaryData_question": "Clear All Sanitary Products Data?",
+    "settingsScreen_deleteAllSanitaryDataDescription": "This will permanently delete your sanitary products history.",
+    "settingsScreen_allSanitaryDataCleared": "All sanitary products data has been cleared.",
+    "settingsScreen_exportPeriodData": "Export Period Data",
+    "settingsScreen_exportPillData": "Export Pill Data",
+    "settingsScreen_exportLarcsData": "Export LARCs Data",
+    "settingsScreen_exportSanitaryData": "Export Sanitary Products Data",
+    "settingsScreen_exportDataSubtitle": "Create a JSON backup file.",
+    "settingsScreen_exportSuccessful": "Data exported successfully.",
+    "settingsScreen_exportFailed": "Export failed. Please try again.",
+    "settingsScreen_noDataToExport": "No data found to export.",
+    "settingsScreen_exportDataMessage": "Here is my MenstruDel data export.",
+    "settingsScreen_exportDataTitle": "Export Data",
+    "settingsScreen_importDataTitle": "Import Data",
+    "settingsScreen_importPeriodData": "Import Period Data",
+    "settingsScreen_importPillData": "Import Pill Data",
+    "settingsScreen_importLarcsData": "Import LARCs Data",
+    "settingsScreen_importSanitaryData": "Import Sanitary Products Data",
+    "settingsScreen_importDataSubtitle": "Overwrites existing data.",
+    "settingsScreen_importPeriodData_question": "Are you sure you want to import Period Data?",
+    "settingsScreen_importPillData_question": "Are you sure you want to import Pill Data?",
+    "settingsScreen_importLarcData_question": "Are you sure you want to import LARC Data?",
+    "settingsScreen_importSanitaryData_question": "Are you sure you want to import Sanitary Products Data?",
+    "settingsScreen_importPeriodDataDescription": "Importing data will permanently overwrite all your existing period logs and period settings. This cannot be undone.",
+    "settingsScreen_importPillDataDescription": "Importing data will permanently overwrite all your existing pill history. This cannot be undone.",
+    "settingsScreen_importLarcDataDescription": "Importing data will permanently overwrite all your existing LARC history. This cannot be undone.",
+    "settingsScreen_importSanitaryDataDescription": "Importing data will permanently overwrite all your existing sanitary product history. This cannot be undone.",
+    "settingsScreen_importSuccessful": "Data imported successfully!",
+    "settingsScreen_importFailed": "Failed to import data. Please try again.",
+    "settingsScreen_importInvalidFile": "Invalid file format or data structure.",
+    "settingsScreen_importErrorGeneral": "Failed to import data. Please ensure the file is saved locally.",
+    "@settingsScreen_importErrorGeneral": {
+        "description": "General message when file import fails for unknown reasons."
+    },
+    "settingsScreen_importErrorPlatform": "Import failed: {message}. Please ensure the file is saved on the device and try again.",
+    "@settingsScreen_importErrorPlatform": {
+        "description": "Error when the native file picker fails, includes the specific error message.",
+        "placeholders": {
+            "message": {
+                "type": "String",
+                "example": "Unknown path or network access required."
+            }
+        }
+    },
+    "settingsScreen_security": "Security",
+    "securityScreen_enableBiometricLock": "Enable Biometric Lock",
+    "securityScreen_enableBiometricLockSubtitle": "Require fingerprint or face ID to open the app.",
+    "securityScreen_noBiometricsAvailable": "No passcode, fingerprint, or face ID found. Please set one up in your device's settings.",
+    "settingsScreen_preferences": "Preferences",
+    "preferencesScreen_language": "Language",
+    "preferencesScreen_enableSanitaryProductsScreen": "Enable Sanitary Products Screen",
+    "preferencesScreen_enableSanitaryProductsScreenSubtitle": "Show the Sanitary Products tab on the main navigation bar.",
+    "settingsScreen_about": "About",
+    "aboutScreen_version": "Version",
+    "aboutScreen_github": "GitHub",
+    "aboutScreen_githubSubtitle": "Source code and issue tracking",
+    "aboutScreen_discord": "Discord",
+    "aboutScreen_discordSubtitle": "Support and community",
+    "aboutScreen_share": "Share",
+    "aboutScreen_shareSubtitle": "Share the app with friends",
+    "aboutScreen_urlError": "Could not open the link.",
+    "logSummaryWidget_loggedDays": "Logged Days",
+    "logSummaryWidget_trackingHistory": "Tracking History",
+    "cycleLengthVarianceWidget_logAtLeastTwoPeriods": "Need at least two cycles to show variance.",
+    "cycleLengthVarianceWidget_title": "Cycle Length Variance",
+    "cycleLengthVarianceWidget_averageCycle": "Avg. Cycle",
+    "cycleLengthVarianceWidget_cycle": "Cycle",
+    "periodDurationWidget_logAtLeastTwoPeriods": "Log at least two periods to see period statistics.",
+    "periodDurationWidget_title": "Period Duration Variance",
+    "periodDurationWidget_averagePeriod": "Avg. Period",
+    "periodDurationWidget_period": "Period",
+    "flowIntensityWidget_flowIntensityBreakdown": "Flow Intensity Breakdown",
+    "flowIntensityWidget_noFlowDataLoggedYet": "No flow data logged yet.",
+    "painLevelWidget_noPainDataLoggedYet": "No pain data logged yet.",
+    "painLevelWidget_painLevelBreakdown": "Pain Level Breakdown",
+    "monthlyFlowChartWidget_noDataToDisplay": "No data to display.",
+    "monthlyFlowChartWidget_cycleFlowPatterns": "Cycle Flow Patterns",
+    "monthlyFlowChartWidget_cycleFlowPatternsDescription": "Each line represents one complete cycle",
+    "symptomFrequencyWidget_noSymptomsLoggedYet": "No symptoms logged yet.",
+    "symptomFrequencyWidget_mostCommonSymptoms": "Most Common Symptoms",
+    "yearHeatMapWidget_yearlyOverview": "Yearly Overview",
+    "journalViewWidget_logYourFirstPeriod": "Log your first period.",
+    "listViewWidget_noPeriodsLogged": "No periods logged yet.\nTap the + button to add one.",
+    "listViewWidget_confirmDelete": "Confirm Delete",
+    "listViewWidget_confirmDeleteDescription": "Are you sure you want to delete this entry?",
+    "emptyPillStateWidget_noPillRegimenFound": "No pill regimen found.",
+    "emptyPillStateWidget_noPillRegimenFoundDescription": "Set up your pill pack in settings to start tracking.",
+    "pillStatus_pillsOfTotal": "{count, plural, =1{of 1 pill} other{of {count} pills}}",
+    "@pillStatus_pillsOfTotal": {
+        "description": "A label showing the total number of pills.",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "pillStatus_undo": "Undo",
+    "pillStatus_skip": "Skip",
+    "pillStatus_markAsTaken": "Mark As Taken",
+    "pillStatus_packStartInFuture": "Your next pill pack starts on {date}.",
+    "@pillStatus_packStartInFuture": {
+        "description": "Message shown when the pill pack start date is in the future.",
+        "placeholders": {
+            "date": {
+                "type": "DateTime",
+                "format": "yMMMd"
+            }
+        }
+    },
+    "regimenSetupWidget_setUpPillRegimen": "Set Up Pill Regimen",
+    "regimenSetupWidget_packName": "Pack Name",
+    "regimenSetupWidget_pleaseEnterAName": "Please enter a name",
+    "regimenSetupWidget_activePills": "Active Pills",
+    "regimenSetupWidget_enterANumber": "Enter a number",
+    "regimenSetupWidget_placeboPills": "Placebo Pills",
+    "regimenSetupWidget_firstDayOfThisPack": "First Day of This Pack",
+    "symptomEntrySheet_logYourDay": "Log Your Day",
+    "symptomEntrySheet_symptomsOptional": "Symptoms (Optional)",
+    "periodDetailsSheet_symptoms": "Symptoms",
+    "periodDetailsSheet_flow": "Flow",
+    "larcEntrySheet_logLARCDetails": "Log LARC Details",
+    "sanitaryEntrySheet_logSanitaryProduct": "Log Sanitary Product",
+    "sanitaryEntrySheet_setReminderDuration": "Set Reminder Duration",
+    "sanitaryEntrySheet_maxDuration": "Max Duration: {hours} hours",
+    "@sanitaryEntrySheet_maxDuration": {
+        "description": "Label showing the maximum duration for the selected sanitary product type.",
+        "placeholders": {
+            "hours": {
+                "type": "int"
+            }
+        }
+    },
+    "sanitaryEntrySheet_futureLogTimeError": "Log time cannot be in the future.",
+    "sanitaryEntrySheet_pastReminderTimeError": "Reminder end time cannot be in the past.",
+    "periodPredictionCircle_days": "{count, plural, =1{Day} other{Days}}",
+    "@periodPredictionCircle_days": {
+        "description": "A label showing the total number of days until period is due.",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "customSymptomDialog_newSymptom": "New Symptom",
+    "customSymptomDialog_enterCustomSymptom": "Enter a custom symptom",
+    "customSymptomDialog_temporarySymptom": "Temporary Symptom"
+}
