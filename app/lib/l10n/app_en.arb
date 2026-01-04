@@ -120,6 +120,12 @@
     "sanitaryProduct_menstrualCup": "Menstrual Cup",
     "sanitaryProduct_periodUnderwear": "Period Underwear",
 
+    "sexProtection_none": "None",
+    "sexProtection_barrier": "Barrier",
+    "sexProtection_hormonal": "Hormonal",
+    "sexProtection_natural": "Natural",
+    "sexProtection_permanent": "Permanent",
+
     "error_valueMustbePositive": "Value must be positive",
     "error_valueCannotBeNull": "Value cannot be null",
 
