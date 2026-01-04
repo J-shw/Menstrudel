@@ -22,6 +22,7 @@ extension SexParticipationTypeExtension on SexParticipationType {
         return 'other';
     }
   }
+
   String getDisplayName(AppLocalizations l10n) {
     switch (this) {
       case SexParticipationType.solo:
@@ -34,9 +35,10 @@ extension SexParticipationTypeExtension on SexParticipationType {
         return l10n.other;
     }
   }
+
   /// gets the associated icon
-  IconData getIcon(){
-    switch (this) { 
+  IconData getIcon() {
+    switch (this) {
       case SexParticipationType.solo:
         return Icons.person;
       case SexParticipationType.partner:

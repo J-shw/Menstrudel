@@ -16,6 +16,21 @@ enum SexProtectionType {
 }
 
 extension SexProtectionTypeExtension on SexProtectionType {
+  String getDbName() {
+    switch (this) {
+      case SexProtectionType.none:
+        return 'none';
+      case SexProtectionType.barrier:
+        return 'barrier';
+      case SexProtectionType.hormonal:
+        return 'hormonal';
+      case SexProtectionType.natural:
+        return 'natural';
+      case SexProtectionType.permanent:
+        return 'permanent';
+    }
+  }
+
   String getDisplayName(AppLocalizations l10n) {
     switch (this) {
       case SexProtectionType.none:
@@ -30,12 +45,10 @@ extension SexProtectionTypeExtension on SexProtectionType {
         return l10n.sexProtection_permanent;
     }
   }
-  int get intValue {
-    return index;
-  }
+
   /// gets the associated icon
-  IconData getIcon(){
-    switch (this) { 
+  IconData getIcon() {
+    switch (this) {
       case SexProtectionType.none:
         return Icons.close_rounded;
       case SexProtectionType.barrier:

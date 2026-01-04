@@ -13,6 +13,21 @@ enum SexType {
 }
 
 extension SexTypeExtension on SexType {
+  String getDbName() {
+    switch (this) {
+      case SexType.vaginal:
+        return 'vaginal';
+      case SexType.anal:
+        return 'anal';
+      case SexType.oral:
+        return 'oral';
+      case SexType.manual:
+        return 'manual';
+      case SexType.other:
+        return 'other';
+    }
+  }
+
   String getDisplayName(AppLocalizations l10n) {
     switch (this) {
       case SexType.vaginal:
@@ -27,14 +42,12 @@ extension SexTypeExtension on SexType {
         return l10n.other;
     }
   }
-  int get intValue {
-    return index;
-  }
+
   /// gets the associated icon
   /// I'm not sure these are the best icons but they will do for now...
   // TODO: revisit icon choices later
-  IconData getIcon(){
-    switch (this) { 
+  IconData getIcon() {
+    switch (this) {
       case SexType.vaginal:
         return Icons.favorite;
       case SexType.anal:
