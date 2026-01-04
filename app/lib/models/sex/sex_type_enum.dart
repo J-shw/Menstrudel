@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 
 /// Enum representing different types of sex.
-enum SexType {
+enum SexTypes {
   vaginal('vaginal'),
   anal('anal'),
   oral('oral'),
@@ -14,24 +14,24 @@ enum SexType {
   /// The string identifier used for database storage.
   final String dbName;
 
-  const SexType(this.dbName);
+  const SexTypes(this.dbName);
 
-  /// Converts a database string back into a [SexType].
-  static SexType fromDbName(String value) {
-    return SexType.values.firstWhere(
+  /// Converts a database string back into a [SexTypes].
+  static SexTypes fromDbName(String value) {
+    return SexTypes.values.firstWhere(
       (e) => e.dbName == value,
-      orElse: () => SexType.other,
+      orElse: () => SexTypes.other,
     );
   }
 
   /// Returns the localised string for the UI.
   String getDisplayName(AppLocalizations l10n) {
     return switch (this) {
-      SexType.vaginal => l10n.sexType_vaginal,
-      SexType.anal => l10n.sexType_anal,
-      SexType.oral => l10n.sexType_oral,
-      SexType.manual => l10n.sexType_manual,
-      SexType.other => l10n.other,
+      SexTypes.vaginal => l10n.sexType_vaginal,
+      SexTypes.anal => l10n.sexType_anal,
+      SexTypes.oral => l10n.sexType_oral,
+      SexTypes.manual => l10n.sexType_manual,
+      SexTypes.other => l10n.other,
     };
   }
 
@@ -40,11 +40,11 @@ enum SexType {
   // TODO: revisit icon choices later
   IconData get icon {
     return switch (this) {
-      SexType.vaginal => Icons.favorite,
-      SexType.anal => Icons.air,
-      SexType.oral => Icons.auto_awesome,
-      SexType.manual => Icons.front_hand,
-      SexType.other => Icons.extension,
+      SexTypes.vaginal => Icons.favorite,
+      SexTypes.anal => Icons.air,
+      SexTypes.oral => Icons.auto_awesome,
+      SexTypes.manual => Icons.front_hand,
+      SexTypes.other => Icons.extension,
     };
   }
 }
