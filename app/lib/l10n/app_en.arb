@@ -133,6 +133,10 @@
     "sexType_oral": "Oral",
     "sexType_manual": "Manual",
 
+    "sexParticipation_solo": "Solo",
+    "sexParticipation_partner": "Partner",
+    "sexParticipation_group": "Group",
+
     "error_valueMustbePositive": "Value must be positive",
     "error_valueCannotBeNull": "Value cannot be null",
 

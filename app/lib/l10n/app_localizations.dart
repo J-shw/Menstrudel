@@ -596,6 +596,24 @@ abstract class AppLocalizations {
   /// **'Manual'**
   String get sexType_manual;
 
+  /// No description provided for @sexParticipation_solo.
+  ///
+  /// In en, this message translates to:
+  /// **'Solo'**
+  String get sexParticipation_solo;
+
+  /// No description provided for @sexParticipation_partner.
+  ///
+  /// In en, this message translates to:
+  /// **'Partner'**
+  String get sexParticipation_partner;
+
+  /// No description provided for @sexParticipation_group.
+  ///
+  /// In en, this message translates to:
+  /// **'Group'**
+  String get sexParticipation_group;
+
   /// No description provided for @error_valueMustbePositive.
   ///
   /// In en, this message translates to:

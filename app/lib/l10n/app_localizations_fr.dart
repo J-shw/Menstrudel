@@ -279,6 +279,15 @@ class AppLocalizationsFr extends AppLocalizations {
   String get sexType_manual => 'Manual';
 
   @override
+  String get sexParticipation_solo => 'Solo';
+
+  @override
+  String get sexParticipation_partner => 'Partner';
+
+  @override
+  String get sexParticipation_group => 'Group';
+
+  @override
   String get error_valueMustbePositive => 'Value must be positive';
 
   @override
