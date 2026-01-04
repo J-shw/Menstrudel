@@ -135,8 +135,9 @@ class DatabaseMigrator {
       CREATE TABLE sexual_activity_logs (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         date TEXT NOT NULL,
-        type TEXT NOT NULL,
-        protection_used INTEGER NOT NULL,
+        sex_type TEXT,
+        participation_type TEXT,
+        protection_used INTEGER,
         protection_type TEXT,
         note TEXT
       )
