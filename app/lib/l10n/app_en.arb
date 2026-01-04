@@ -80,6 +80,8 @@
 
     "type": "Type",
 
+    "other": "Other",
+
     "navBar_insights": "Insights",
     "navBar_logs": "Logs",
     "navBar_sanitary": "Sanitary",
@@ -125,6 +127,11 @@
     "sexProtection_hormonal": "Hormonal",
     "sexProtection_natural": "Natural",
     "sexProtection_permanent": "Permanent",
+
+    "sexType_vaginal": "Vaginal",
+    "sexType_anal": "Anal",
+    "sexType_oral": "Oral",
+    "sexType_manual": "Manual",
 
     "error_valueMustbePositive": "Value must be positive",
     "error_valueCannotBeNull": "Value cannot be null",

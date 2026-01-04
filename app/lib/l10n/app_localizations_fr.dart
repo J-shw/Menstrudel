@@ -147,6 +147,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get type => 'Type';
 
   @override
+  String get other => 'Other';
+
+  @override
   String get navBar_insights => 'Statistiques';
 
   @override
@@ -247,6 +250,33 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get sanitaryProduct_periodUnderwear => 'Period Underwear';
+
+  @override
+  String get sexProtection_none => 'None';
+
+  @override
+  String get sexProtection_barrier => 'Barrier';
+
+  @override
+  String get sexProtection_hormonal => 'Hormonal';
+
+  @override
+  String get sexProtection_natural => 'Natural';
+
+  @override
+  String get sexProtection_permanent => 'Permanent';
+
+  @override
+  String get sexType_vaginal => 'Vaginal';
+
+  @override
+  String get sexType_anal => 'Anal';
+
+  @override
+  String get sexType_oral => 'Oral';
+
+  @override
+  String get sexType_manual => 'Manual';
 
   @override
   String get error_valueMustbePositive => 'Value must be positive';

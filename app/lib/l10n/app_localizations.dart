@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
+import 'app_localizations_cs.dart';
 import 'app_localizations_de.dart';
 import 'app_localizations_en.dart';
 import 'app_localizations_fr.dart';
@@ -96,6 +97,7 @@ abstract class AppLocalizations {
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
+    Locale('cs'),
     Locale('de'),
     Locale('en'),
     Locale('fr'),
@@ -330,6 +332,12 @@ abstract class AppLocalizations {
   /// **'Type'**
   String get type;
 
+  /// No description provided for @other.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get other;
+
   /// No description provided for @navBar_insights.
   ///
   /// In en, this message translates to:
@@ -533,6 +541,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Period Underwear'**
   String get sanitaryProduct_periodUnderwear;
+
+  /// No description provided for @sexProtection_none.
+  ///
+  /// In en, this message translates to:
+  /// **'None'**
+  String get sexProtection_none;
+
+  /// No description provided for @sexProtection_barrier.
+  ///
+  /// In en, this message translates to:
+  /// **'Barrier'**
+  String get sexProtection_barrier;
+
+  /// No description provided for @sexProtection_hormonal.
+  ///
+  /// In en, this message translates to:
+  /// **'Hormonal'**
+  String get sexProtection_hormonal;
+
+  /// No description provided for @sexProtection_natural.
+  ///
+  /// In en, this message translates to:
+  /// **'Natural'**
+  String get sexProtection_natural;
+
+  /// No description provided for @sexProtection_permanent.
+  ///
+  /// In en, this message translates to:
+  /// **'Permanent'**
+  String get sexProtection_permanent;
+
+  /// No description provided for @sexType_vaginal.
+  ///
+  /// In en, this message translates to:
+  /// **'Vaginal'**
+  String get sexType_vaginal;
+
+  /// No description provided for @sexType_anal.
+  ///
+  /// In en, this message translates to:
+  /// **'Anal'**
+  String get sexType_anal;
+
+  /// No description provided for @sexType_oral.
+  ///
+  /// In en, this message translates to:
+  /// **'Oral'**
+  String get sexType_oral;
+
+  /// No description provided for @sexType_manual.
+  ///
+  /// In en, this message translates to:
+  /// **'Manual'**
+  String get sexType_manual;
 
   /// No description provided for @error_valueMustbePositive.
   ///
@@ -1803,7 +1865,7 @@ class _AppLocalizationsDelegate
 
   @override
   bool isSupported(Locale locale) =>
-      <String>['de', 'en', 'fr', 'it'].contains(locale.languageCode);
+      <String>['cs', 'de', 'en', 'fr', 'it'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
@@ -1812,6 +1874,8 @@ class _AppLocalizationsDelegate
 AppLocalizations lookupAppLocalizations(Locale locale) {
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
+    case 'cs':
+      return AppLocalizationsCs();
     case 'de':
       return AppLocalizationsDe();
     case 'en':
