@@ -3,50 +3,40 @@ import 'package:menstrudel/l10n/app_localizations.dart';
 
 /// Enum representing different levels of sexual participation types.
 enum SexParticipationType {
-  solo,
-  partner,
-  group,
-  other,
-}
+  solo('solo'),
+  partner('partner'),
+  group('group'),
+  other('other');
 
-extension SexParticipationTypeExtension on SexParticipationType {
-  String getDbName() {
-    switch (this) {
-      case SexParticipationType.solo:
-        return 'solo';
-      case SexParticipationType.partner:
-        return 'partner';
-      case SexParticipationType.group:
-        return 'group';
-      case SexParticipationType.other:
-        return 'other';
-    }
+  /// The string identifier used for database storage.
+  final String dbName;
+
+  const SexParticipationType(this.dbName);
+
+  /// Converts a database string back into a [SexParticipationType].
+  static SexParticipationType fromDbName(String value) {
+    return SexParticipationType.values.firstWhere(
+      (e) => e.dbName == value,
+      orElse: () => SexParticipationType.other,
+    );
   }
 
+  /// Returns the localised string for the UI.
   String getDisplayName(AppLocalizations l10n) {
-    switch (this) {
-      case SexParticipationType.solo:
-        return l10n.sexParticipation_solo;
-      case SexParticipationType.partner:
-        return l10n.sexParticipation_partner;
-      case SexParticipationType.group:
-        return l10n.sexParticipation_group;
-      case SexParticipationType.other:
-        return l10n.other;
-    }
+    return switch (this) {
+      SexParticipationType.solo => l10n.sexParticipation_solo,
+      SexParticipationType.partner => l10n.sexParticipation_partner,
+      SexParticipationType.group => l10n.sexParticipation_group,
+      SexParticipationType.other => l10n.other,
+    };
   }
 
-  /// gets the associated icon
-  IconData getIcon() {
-    switch (this) {
-      case SexParticipationType.solo:
-        return Icons.person;
-      case SexParticipationType.partner:
-        return Icons.people;
-      case SexParticipationType.group:
-        return Icons.group_add_rounded;
-      case SexParticipationType.other:
-        return Icons.extension;
-    }
+  IconData get icon {
+    return switch (this) {
+      SexParticipationType.solo => Icons.person,
+      SexParticipationType.partner => Icons.people,
+      SexParticipationType.group => Icons.group_add_rounded,
+      SexParticipationType.other => Icons.extension,
+    };
   }
 }
