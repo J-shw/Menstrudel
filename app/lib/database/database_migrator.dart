@@ -134,7 +134,7 @@ class DatabaseMigrator {
     await db.execute('''
       CREATE TABLE sexual_activity_logs (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        date TEXT NOT NULL,
+        date_time TEXT NOT NULL,
         sex_type TEXT,
         participation_type TEXT,
         protection_used INTEGER,
