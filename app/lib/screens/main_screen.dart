@@ -5,6 +5,7 @@ import 'package:menstrudel/screens/sanitary_screen.dart';
 import 'package:menstrudel/screens/settings_screen.dart';
 import 'package:menstrudel/screens/insights_screen.dart';
 import 'package:menstrudel/screens/pills_screen.dart';
+import 'package:menstrudel/screens/sex_screen.dart';
 import 'package:menstrudel/widgets/main/main_navigation_bar.dart';
 import 'package:menstrudel/widgets/main/app_bar.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
@@ -57,12 +58,14 @@ class _MainScreenState extends State<MainScreen> {
     final bool isPillNavEnabled = settingsService.isPillNavEnabled;
     final bool isLarcNavEnabled = settingsService.isLarcNavEnabled;
     final bool isSanitaryNavEnabled = settingsService.isSanitaryNavEnabled;
+    final bool isSexActivityNavEnabled = settingsService.isSexActivityNavEnabled;
       
     /// Define pages on enabled features
     final List<Widget> pages = <Widget>[
       const InsightsScreen(),
       const LogsScreen(),
       if (isSanitaryNavEnabled) const SanitaryScreen(),
+      if (isSexActivityNavEnabled) const SexScreen(),
       if (isPillNavEnabled) const PillsScreen(),
       if (isLarcNavEnabled) const LarcScreen(),
       const SettingsScreen(),
@@ -72,7 +75,10 @@ class _MainScreenState extends State<MainScreen> {
     final List<PreferredSizeWidget?> appBars = [
       TopAppBar(titleText: l10n.mainScreen_insightsPageTitle),
       null,
-      TopAppBar(titleText: l10n.mainScreen_sanitaryPageTitle),
+      if (isSanitaryNavEnabled)
+        TopAppBar(titleText: l10n.mainScreen_sanitaryPageTitle),
+      if (isSexActivityNavEnabled)
+        TopAppBar(titleText: l10n.mainSceen_sexActivityPageTitle),
       if (isPillNavEnabled)
         TopAppBar(titleText: l10n.mainScreen_pillsPageTitle),
       if (isLarcNavEnabled)
