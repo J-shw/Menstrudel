@@ -19,7 +19,7 @@ class SexRepository {
 
   Future<List<SexLogEntry>> getAllLogs() async {
     final db = await dbProvider.database;
-    final maps = await db.query('sexual_activity_logs', orderBy: 'date DESC');
+    final maps = await db.query('sexual_activity_logs', orderBy: 'date_time DESC');
     return maps.map((map) => SexLogEntry.fromMap(map)).toList();
   }
 
