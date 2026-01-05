@@ -39,6 +39,12 @@ class MainNavigationBar extends StatelessWidget {
             icon: Icon(Icons.water_drop_outlined),
             label: l10n.navBar_sanitary,
           ),
+        if (settingsService.isSexActivityNavEnabled)
+          NavigationDestination(
+            selectedIcon: Icon(Icons.favorite_rounded),
+            icon: Icon(Icons.favorite_border_rounded),
+            label: l10n.navBar_sexActivity,
+          ),
         if (settingsService.isPillNavEnabled)
           NavigationDestination(
             selectedIcon: Icon(Icons.medication_rounded),
