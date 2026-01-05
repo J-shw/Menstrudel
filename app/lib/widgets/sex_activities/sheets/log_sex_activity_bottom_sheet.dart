@@ -169,7 +169,7 @@ class _LogSexActivityBottomSheetState extends State<LogSexActivityBottomSheet> {
               spacing: 8,
               children: SexTypes.values.map((type) {
                 return ChoiceChip(
-                  label: Text(type.name),
+                  label: Text(type.getDisplayName(l10n)),
                   selected: _selectedSexType == type,
                   onSelected: (val) => setState(() => _selectedSexType = val ? type : null),
                 );
