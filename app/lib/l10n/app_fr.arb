@@ -13,7 +13,7 @@
     "end": "Fin",
     "day": "Jour",
     "days": "Jours",
-    "hours": "Hours",
+    "hours": "Heures",
     "dayCount": "{count, plural, one{{count} Jour} other{{count} Jours}}",
     "@dayCount": {
         "description": "A message that displays a count of days, handling singular and plural forms.",
@@ -24,7 +24,7 @@
             }
         }
     },
-    "monthCount": "{count, plural, one{{count} Month} other{{count} Months}}",
+    "monthCount": "{count, plural, one{{count} mois} other{{count} mois}}",
     "@monthCount": {
         "description": "A message that displays a count of months, handling singular and plural forms.",
         "placeholders": {
@@ -44,7 +44,7 @@
             }
         }
     },
-    "edit": "Edit",
+    "edit": "Éditer",
     "delete": "Supprimer",
     "clear": "Effacer",
     "save": "Sauvegarder",
@@ -57,10 +57,10 @@
     "cancel": "Annuler",
     "select": "Sélectionner",
     "close": "Fermer",
-    "reset": "Reset",
-    "add": "Add",
-    "notSet": "Not set",
-    "removed": "Removed",
+    "reset": "Réinitialiser",
+    "add": "Ajouter",
+    "notSet": "Non-défini",
+    "removed": "Supprimé",
     "note": "Note",
     "systemDefault": "Valeur par défaut du système",
     "flow": "Flux /",
