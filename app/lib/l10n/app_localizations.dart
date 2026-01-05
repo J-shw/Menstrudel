@@ -866,6 +866,18 @@ abstract class AppLocalizations {
   /// **'Change Due At {time}'**
   String sanitaryProductsScreen_changeDueAt(String time);
 
+  /// No description provided for @sexActivityScreen_noSexActivityRecordsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No sex activity records found.'**
+  String get sexActivityScreen_noSexActivityRecordsFound;
+
+  /// The total sex activity history count.
+  ///
+  /// In en, this message translates to:
+  /// **'History ({history})'**
+  String sexActivityScreen_history(int history);
+
   /// No description provided for @settingsScreen_selectHistoryView.
   ///
   /// In en, this message translates to:
@@ -1516,6 +1528,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Show the Sanitary Products tab on the main navigation bar.'**
   String get preferencesScreen_enableSanitaryProductsScreenSubtitle;
+
+  /// No description provided for @preferencesScreen_enableSexActivityScreen.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable Sex Activity Screen'**
+  String get preferencesScreen_enableSexActivityScreen;
+
+  /// No description provided for @preferencesScreen_enableSexActivityScreenSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Show the Sex Activity tab on the main navigation bar.'**
+  String get preferencesScreen_enableSexActivityScreenSubtitle;
 
   /// No description provided for @settingsScreen_about.
   ///

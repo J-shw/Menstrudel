@@ -295,6 +295,18 @@
         }
     },
 
+    "sexActivityScreen_noSexActivityRecordsFound": "No sex activity records found.",
+    "sexActivityScreen_history": "History ({history})",
+    "@sexActivityScreen_history": {
+        "description": "The total sex activity history count.",
+        "placeholders": {
+            "history": {
+                "type": "int",
+                "example": "5"
+            }
+        }
+    },
+
     "settingsScreen_selectHistoryView": "Select History View",
     "settingsScreen_deleteRegimen_question": "Delete Regimen?",
     "settingsScreen_deleteRegimenDescription": "This will delete your current pill pack settings and all associated pill logs. This cannot be undone.",
@@ -453,6 +465,8 @@
     "preferencesScreen_language": "Language",
     "preferencesScreen_enableSanitaryProductsScreen": "Enable Sanitary Products Screen",
     "preferencesScreen_enableSanitaryProductsScreenSubtitle": "Show the Sanitary Products tab on the main navigation bar.",
+    "preferencesScreen_enableSexActivityScreen": "Enable Sex Activity Screen",
+    "preferencesScreen_enableSexActivityScreenSubtitle": "Show the Sex Activity tab on the main navigation bar.",
 
     "settingsScreen_about": "About",
     "aboutScreen_version": "Version",

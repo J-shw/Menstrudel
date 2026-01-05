@@ -462,6 +462,15 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
+  String get sexActivityScreen_noSexActivityRecordsFound =>
+      'No sex activity records found.';
+
+  @override
+  String sexActivityScreen_history(int history) {
+    return 'History ($history)';
+  }
+
+  @override
   String get settingsScreen_selectHistoryView =>
       'Sélectionner la vue de l\'historique';
 
@@ -866,6 +875,14 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get preferencesScreen_enableSanitaryProductsScreenSubtitle =>
       'Show the Sanitary Products tab on the main navigation bar.';
+
+  @override
+  String get preferencesScreen_enableSexActivityScreen =>
+      'Enable Sex Activity Screen';
+
+  @override
+  String get preferencesScreen_enableSexActivityScreenSubtitle =>
+      'Show the Sex Activity tab on the main navigation bar.';
 
   @override
   String get settingsScreen_about => 'À propos';
