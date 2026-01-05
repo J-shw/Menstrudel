@@ -159,6 +159,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get navBar_sanitary => 'Sanitary';
 
   @override
+  String get navBar_sexActivity => 'Sex Activity';
+
+  @override
   String get navBar_pill => 'Pill';
 
   @override
@@ -353,6 +356,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get mainScreen_insightsPageTitle => 'Your Insights';
+
+  @override
+  String get mainSceen_sexActivityPageTitle => 'Sex Activity';
 
   @override
   String get mainScreen_sanitaryPageTitle => 'Sanitary Products';

@@ -85,6 +85,7 @@
     "navBar_insights": "Insights",
     "navBar_logs": "Logs",
     "navBar_sanitary": "Sanitary",
+    "navBar_sexActivity": "Sex Activity",
     "navBar_pill": "Pill",
     "navBar_larc": "LARC",
     "navBar_settings": "Settings",
@@ -208,6 +209,7 @@
 
 
     "mainScreen_insightsPageTitle": "Your Insights",
+    "mainSceen_sexActivityPageTitle": "Sex Activity",
     "mainScreen_sanitaryPageTitle": "Sanitary Products",
     "mainScreen_pillsPageTitle": "Pills",
     "mainScreen_LarcsPageTitle": "LARCs",

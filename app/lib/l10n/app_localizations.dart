@@ -356,6 +356,12 @@ abstract class AppLocalizations {
   /// **'Sanitary'**
   String get navBar_sanitary;
 
+  /// No description provided for @navBar_sexActivity.
+  ///
+  /// In en, this message translates to:
+  /// **'Sex Activity'**
+  String get navBar_sexActivity;
+
   /// No description provided for @navBar_pill.
   ///
   /// In en, this message translates to:
@@ -703,6 +709,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Your Insights'**
   String get mainScreen_insightsPageTitle;
+
+  /// No description provided for @mainSceen_sexActivityPageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sex Activity'**
+  String get mainSceen_sexActivityPageTitle;
 
   /// No description provided for @mainScreen_sanitaryPageTitle.
   ///
