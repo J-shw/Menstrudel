@@ -41,7 +41,7 @@ enum SexTypes {
   IconData get icon {
     return switch (this) {
       SexTypes.vaginal => Icons.favorite,
-      SexTypes.anal => Icons.air,
+      SexTypes.anal => Icons.flare,
       SexTypes.oral => Icons.auto_awesome,
       SexTypes.manual => Icons.front_hand,
       SexTypes.other => Icons.extension,
