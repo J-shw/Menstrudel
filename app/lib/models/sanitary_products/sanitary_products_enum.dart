@@ -53,4 +53,17 @@ extension LarcTypeDisplay on SanitaryProducts {
         return 12;
     }
   }
+
+  Color getColorScheme(ColorScheme colorScheme) {
+    switch (this) {
+      case SanitaryProducts.tampon:
+        return colorScheme.secondary;
+      case SanitaryProducts.pad:
+        return colorScheme.primary;
+      case SanitaryProducts.menstrualCup:
+        return colorScheme.tertiary;
+      case SanitaryProducts.periodUnderwear:
+        return colorScheme.primaryContainer;
+    }
+  }
 }
