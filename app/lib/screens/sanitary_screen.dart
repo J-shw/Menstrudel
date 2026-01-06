@@ -6,10 +6,12 @@ import 'package:menstrudel/models/sanitary_products/sanitary_products_entry.dart
 import 'package:menstrudel/models/sanitary_products/sanitary_products_enum.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/services/notification_service.dart';
+import 'package:menstrudel/widgets/sanitary_products/screen/sanitary_product_insights_tab.dart';
+import 'package:menstrudel/widgets/sanitary_products/screen/sanitary_product_logs_tab.dart';
 import 'package:menstrudel/widgets/sanitary_products/sheets/edit_sanitary_product_bottom_sheet.dart';
 import 'package:menstrudel/widgets/sanitary_products/sheets/log_sanitary_product_bottom_sheet.dart';
 import 'package:menstrudel/widgets/sanitary_products/screen/sanitary_product_log_card.dart';
-import 'package:menstrudel/widgets/sanitary_products/screen/countdown_card.dart'; 
+import 'package:menstrudel/widgets/sanitary_products/screen/countdown_card.dart';
 
 class SanitaryScreen extends StatefulWidget {
   const SanitaryScreen({super.key});
@@ -42,57 +44,52 @@ class _SanitaryScreenState extends State<SanitaryScreen> {
 
   Future<void> _loadHistory() async {
     setState(() { _isLoading = true; });
-
     final loadedEntries = await repo.getInactiveLogs();
     final activeEntry = await repo.getActiveEntry();
-
 
     setState(() {
       _loggedSanitaryProducts = loadedEntries;
       _activeEntry = activeEntry;
       _isLoading = false;
     });
+
     if (!mounted) return;
     if (activeEntry != null) {
       final l10n = AppLocalizations.of(context)!;
       await _scheduleNotifications(l10n, activeEntry.reminderTime, activeEntry.type);
     } else {
-      await NotificationService.cancelSanitaryProductReminder(); 
+      await NotificationService.cancelSanitaryProductReminder();
     }
-    
   }
 
   Future<void> _scheduleNotifications(AppLocalizations l10n, DateTime reminderDateTime, SanitaryProducts type) async {
-     await NotificationService.cancelSanitaryProductReminder();
-     final activeEntry = _activeEntry;
-     if (activeEntry != null) {
-       final endTime = activeEntry.reminderTime;
-       if (endTime.isAfter(DateTime.now())) {
-          await NotificationService.scheduleSanitaryProductReminder(
-            reminderDateTime: reminderDateTime,
-            title: l10n.notification_SanitaryProductReminderTitle,
-            body: l10n.notification_SanitaryProductReminderBody,
-          );
-       }
-     }
+    await NotificationService.cancelSanitaryProductReminder();
+    final activeEntry = _activeEntry;
+    if (activeEntry != null) {
+      final endTime = activeEntry.reminderTime;
+      if (endTime.isAfter(DateTime.now())) {
+        await NotificationService.scheduleSanitaryProductReminder(
+          reminderDateTime: reminderDateTime,
+          title: l10n.notification_SanitaryProductReminderTitle,
+          body: l10n.notification_SanitaryProductReminderBody,
+        );
+      }
+    }
   }
 
   void _presentLogSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      builder: (ctx) {
-        return LogSanitaryProductBottomSheet(
-          onSave: (logTime, note, type, reminderEndTime) {
-            _saveLog(logTime: logTime, note: note, type: type, reminderEndTime: reminderEndTime);
-          },
-        );
-      },
+      builder: (ctx) => LogSanitaryProductBottomSheet(
+        onSave: (logTime, note, type, reminderEndTime) {
+          _saveLog(logTime: logTime, note: note, type: type, reminderEndTime: reminderEndTime);
+        },
+      ),
     );
   }
 
   Future<void> _saveLog({required DateTime logTime, required String? note, required SanitaryProducts type, required DateTime reminderEndTime}) async {
-
     final newEntry = SanitaryProductsEntry(
       id: null,
       logTime: logTime,
@@ -100,7 +97,6 @@ class _SanitaryScreenState extends State<SanitaryScreen> {
       type: type,
       note: note,
     );
-
     await repo.logSanitaryProduct(newEntry);
     _loadHistory();
   }
@@ -114,24 +110,22 @@ class _SanitaryScreenState extends State<SanitaryScreen> {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      builder: (ctx) {
-        return EditSanitaryProductBottomSheet(
-          log: entry,
-          onSave: (updatedEntry) {
-            _updateLog(updatedEntry);
-            Navigator.pop(context);
-          },
-          onDelete: () {
-            _deleteLog(entry.id!);
-            Navigator.pop(context);
-          },
-        );
-      },
+      builder: (ctx) => EditSanitaryProductBottomSheet(
+        log: entry,
+        onSave: (updatedEntry) {
+          _updateLog(updatedEntry);
+          Navigator.pop(context);
+        },
+        onDelete: () {
+          _deleteLog(entry.id!);
+          Navigator.pop(context);
+        },
+      ),
     );
   }
 
   Future<void> _updateLog(SanitaryProductsEntry updatedEntry) async {
-    await repo.updateLog(updatedEntry); 
+    await repo.updateLog(updatedEntry);
     _loadHistory();
   }
 
@@ -140,82 +134,54 @@ class _SanitaryScreenState extends State<SanitaryScreen> {
     final colorScheme = Theme.of(context).colorScheme;
     final l10n = AppLocalizations.of(context)!;
 
-    return Scaffold(
-      body: _buildBody(colorScheme, l10n),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => _presentLogSheet(context),
-        backgroundColor: colorScheme.primaryContainer,
-        child: Icon(Icons.add, color: colorScheme.onPrimaryContainer),
-      ),
-    );
-  }
-
-  Widget _buildBody(ColorScheme colorScheme, AppLocalizations l10n) {
-    if (_isLoading) {
-      return const Center(child: CircularProgressIndicator());
-    }
-
-    final activeEntry = _activeEntry;
-    
-    
-    return SafeArea(
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+    return DefaultTabController(
+      length: 2,
+      child: Stack(
+        children: [
+          Column(
             children: [
-              // --- Countdown Section ---
-              if (activeEntry != null) ...[
-                CountdownCard(
-                  entry: activeEntry,
-                  l10n: l10n,
-                  onCancel: () async {
-                    await _deleteLog(activeEntry.id!);
-                  },
-                  onRemove: () async {
-                    await repo.markEntryAsRemoved(activeEntry.id!, DateTime.now());
-                    _loadHistory();
-                  },
-                ),
-                const SizedBox(height: 24),
-              ],
-
-              // --- History Section ---
-              Text(
-                l10n.sanitaryProductsScreen_history(_loggedSanitaryProducts.length),
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: colorScheme.onSurface, 
+              TabBar(
+                labelColor: colorScheme.primary,
+                unselectedLabelColor: colorScheme.onSurfaceVariant,
+                indicatorSize: TabBarIndicatorSize.tab,
+                tabs: [
+                  Tab(text: l10n.logs),
+                  Tab(text: l10n.insights),
+                ],
+              ),
+              Expanded(
+                child: TabBarView(
+                  children: [
+                    SanitaryProductLogsTab(
+                      isLoading: _isLoading,
+                      activeEntry: _activeEntry,
+                      historyEntries: _loggedSanitaryProducts,
+                      onCancelActive: () => repo.deleteLog(_activeEntry!.id!).then((_) => _loadHistory()),
+                      onRemoveActive: () async {
+                        await repo.markEntryAsRemoved(_activeEntry!.id!, DateTime.now());
+                        _loadHistory();
+                      },
+                      onTapEntry: (entry) => _presentEditDeleteSheet(context, entry),
+                    ),
+                    SanitaryProductInsightsTab(
+                      isLoading: _isLoading,
+                      historyEntries: _loggedSanitaryProducts,
+                    ),
+                  ],
                 ),
               ),
-              const SizedBox(height: 12),
-              
-              if (_loggedSanitaryProducts.isEmpty)
-                Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(32.0),
-                    child: Text(l10n.sanitaryProductsScreen_noHistoryRecords, style: TextStyle(color: colorScheme.outline)),
-                  ),
-                )
-              else
-                ..._loggedSanitaryProducts.map((entry) {
-                  final dateStr = DateFormat('MMM d, h:mm a').format(entry.logTime);
-
-                  return SanitaryProductsLogCard(
-                    entry: entry,
-                    l10n: l10n,
-                    logDate: dateStr,
-                    onTap: () => _presentEditDeleteSheet(context, entry),
-                  );
-                }),
-                
-              // Space for FAB
-              const SizedBox(height: 80),
             ],
           ),
-        ),
+          Positioned(
+            bottom: 16,
+            right: 16,
+            child: FloatingActionButton(
+              onPressed: () => _presentLogSheet(context),
+              backgroundColor: colorScheme.primaryContainer,
+              child: Icon(Icons.add, color: colorScheme.onPrimaryContainer),
+            ),
+          ),
+        ],
       ),
     );
   }
