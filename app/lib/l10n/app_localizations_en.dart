@@ -261,6 +261,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get sanitaryProducts_mostUsed => 'Most Used';
 
   @override
+  String get sanitaryProducts_usageTrend => 'Usage Trend';
+
+  @override
   String get error_valueMustbePositive => 'Value must be positive';
 
   @override

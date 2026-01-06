@@ -560,6 +560,12 @@ abstract class AppLocalizations {
   /// **'Most Used'**
   String get sanitaryProducts_mostUsed;
 
+  /// No description provided for @sanitaryProducts_usageTrend.
+  ///
+  /// In en, this message translates to:
+  /// **'Usage Trend'**
+  String get sanitaryProducts_usageTrend;
+
   /// No description provided for @error_valueMustbePositive.
   ///
   /// In en, this message translates to:

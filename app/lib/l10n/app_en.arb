@@ -125,6 +125,7 @@
     "sanitaryProduct_menstrualCup": "Menstrual Cup",
     "sanitaryProduct_periodUnderwear": "Period Underwear",
     "sanitaryProducts_mostUsed": "Most Used",
+    "sanitaryProducts_usageTrend": "Usage Trend",
 
     "error_valueMustbePositive": "Value must be positive",
     "error_valueCannotBeNull": "Value cannot be null",
