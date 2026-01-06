@@ -150,7 +150,6 @@ class _EditSexLogBottomSheetState extends State<EditSexLogBottomSheet> {
                 icon: Icon(Icons.delete_outline, color: colorScheme.error),
                 onPressed: () {
                   widget.onDelete();
-                  Navigator.pop(context);
                 },
               ),
             ],
@@ -191,7 +190,7 @@ class _EditSexLogBottomSheetState extends State<EditSexLogBottomSheet> {
           ],
         ),
         const SizedBox(height: 20),
-        _buildChipSection("Sex Type", SexTypes.values, _editedSexType, (val, type) => setState(() => _editedSexType = val ? type : null)),
+        _buildChipSection("Sex Type", SexTypes.values, _editedSexType, (val, type) => setState(() => _editedSexType = val ? type : null), l10n: l10n),
         _buildChipSection("Participation", SexParticipationTypes.values, _editedParticipation, (val, type) => setState(() => _editedParticipation = val ? type : null), l10n: l10n),
         _buildChipSection("Protection", SexProtectionTypes.values, _editedProtection, (val, type) => setState(() => _editedProtection = val ? type : null), l10n: l10n),
         const SizedBox(height: 16),
@@ -232,6 +231,7 @@ class _EditSexLogBottomSheetState extends State<EditSexLogBottomSheet> {
 
   Widget _buildChipSection<T>(String title, List<T> values, T? selectedValue, Function(bool, T) onSelected, {AppLocalizations? l10n}) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -245,7 +245,7 @@ class _EditSexLogBottomSheetState extends State<EditSexLogBottomSheet> {
             return ChoiceChip(
               showCheckmark: false,
               avatar: item.icon != null ? Icon(item.icon, size: 18, color: theme.colorScheme.onSurfaceVariant) : null,
-              label: Text(l10n != null ? item.getDisplayName(l10n) : item.name),
+              label: Text(item.getDisplayName(l10n)),
               selected: selectedValue == type,
               onSelected: (val) => onSelected(val, type),
             );
