@@ -75,6 +75,8 @@
     "notSet": "Not set",
     "removed": "Removed",
 
+    "totalLogs": "Total Logs",
+
     "note": "Note",
 
     "systemDefault": "System Default",
@@ -122,6 +124,7 @@
     "sanitaryProduct_pad": "Pad",
     "sanitaryProduct_menstrualCup": "Menstrual Cup",
     "sanitaryProduct_periodUnderwear": "Period Underwear",
+    "sanitaryProducts_mostUsed": "Most Used",
 
     "error_valueMustbePositive": "Value must be positive",
     "error_valueCannotBeNull": "Value cannot be null",

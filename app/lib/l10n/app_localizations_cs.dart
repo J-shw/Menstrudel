@@ -141,6 +141,9 @@ class AppLocalizationsCs extends AppLocalizations {
   String get removed => 'smazáno';
 
   @override
+  String get totalLogs => 'Total Logs';
+
+  @override
   String get note => 'poznámka';
 
   @override
@@ -253,6 +256,9 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get sanitaryProduct_periodUnderwear => 'menstruační kalhotky';
+
+  @override
+  String get sanitaryProducts_mostUsed => 'Most Used';
 
   @override
   String get error_valueMustbePositive => 'hodnota musí být kladná';

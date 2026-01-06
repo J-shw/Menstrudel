@@ -320,6 +320,12 @@ abstract class AppLocalizations {
   /// **'Removed'**
   String get removed;
 
+  /// No description provided for @totalLogs.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Logs'**
+  String get totalLogs;
+
   /// No description provided for @note.
   ///
   /// In en, this message translates to:
@@ -547,6 +553,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Period Underwear'**
   String get sanitaryProduct_periodUnderwear;
+
+  /// No description provided for @sanitaryProducts_mostUsed.
+  ///
+  /// In en, this message translates to:
+  /// **'Most Used'**
+  String get sanitaryProducts_mostUsed;
 
   /// No description provided for @error_valueMustbePositive.
   ///
