@@ -52,6 +52,9 @@
         }
     },
 
+    "logs": "Logs",
+    "insights": "Insights",
+
     "edit": "Edit",
 
     "delete": "Delete",
