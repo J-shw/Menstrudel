@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
+import 'app_localizations_cs.dart';
 import 'app_localizations_de.dart';
 import 'app_localizations_en.dart';
 import 'app_localizations_fr.dart';
@@ -96,6 +97,7 @@ abstract class AppLocalizations {
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
+    Locale('cs'),
     Locale('de'),
     Locale('en'),
     Locale('fr'),
@@ -204,6 +206,18 @@ abstract class AppLocalizations {
   /// **'{count, plural, one{{count} Year} other{{count} Years}}'**
   String yearCount(int count);
 
+  /// No description provided for @logs.
+  ///
+  /// In en, this message translates to:
+  /// **'Logs'**
+  String get logs;
+
+  /// No description provided for @insights.
+  ///
+  /// In en, this message translates to:
+  /// **'Insights'**
+  String get insights;
+
   /// No description provided for @edit.
   ///
   /// In en, this message translates to:
@@ -305,6 +319,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Removed'**
   String get removed;
+
+  /// No description provided for @totalLogs.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Logs'**
+  String get totalLogs;
 
   /// No description provided for @note.
   ///
@@ -533,6 +553,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Period Underwear'**
   String get sanitaryProduct_periodUnderwear;
+
+  /// No description provided for @sanitaryProducts_mostUsed.
+  ///
+  /// In en, this message translates to:
+  /// **'Most Used'**
+  String get sanitaryProducts_mostUsed;
+
+  /// No description provided for @sanitaryProducts_usageTrend.
+  ///
+  /// In en, this message translates to:
+  /// **'Usage Trend'**
+  String get sanitaryProducts_usageTrend;
 
   /// No description provided for @error_valueMustbePositive.
   ///
@@ -1803,7 +1835,7 @@ class _AppLocalizationsDelegate
 
   @override
   bool isSupported(Locale locale) =>
-      <String>['de', 'en', 'fr', 'it'].contains(locale.languageCode);
+      <String>['cs', 'de', 'en', 'fr', 'it'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
@@ -1812,6 +1844,8 @@ class _AppLocalizationsDelegate
 AppLocalizations lookupAppLocalizations(Locale locale) {
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
+    case 'cs':
+      return AppLocalizationsCs();
     case 'de':
       return AppLocalizationsDe();
     case 'en':

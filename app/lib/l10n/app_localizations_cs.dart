@@ -4,51 +4,51 @@ import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
 
-/// The translations for English (`en`).
-class AppLocalizationsEn extends AppLocalizations {
-  AppLocalizationsEn([String locale = 'en']) : super(locale);
+/// The translations for Czech (`cs`).
+class AppLocalizationsCs extends AppLocalizations {
+  AppLocalizationsCs([String locale = 'cs']) : super(locale);
 
   @override
-  String get appTitle => 'Menstrudel';
+  String get appTitle => 'Menstrundel';
 
   @override
-  String get nextDue => 'Next Due';
+  String get nextDue => 'další termín';
 
   @override
-  String get ongoing => 'Ongoing';
+  String get ongoing => 'probíhající';
 
   @override
-  String get overdue => 'Overdue';
+  String get overdue => 'zpožděný';
 
   @override
-  String get total => 'Total';
+  String get total => 'celkově';
 
   @override
-  String get shortest => 'Shortest';
+  String get shortest => 'nejkratší';
 
   @override
-  String get longest => 'Longest';
+  String get longest => 'nejdelší';
 
   @override
-  String get date => 'Date';
+  String get date => 'datum';
 
   @override
-  String get time => 'Time';
+  String get time => 'čas';
 
   @override
-  String get start => 'Start';
+  String get start => 'začátek';
 
   @override
-  String get end => 'End';
+  String get end => 'konec';
 
   @override
-  String get day => 'Day';
+  String get day => 'den';
 
   @override
-  String get days => 'Days';
+  String get days => 'dny';
 
   @override
-  String get hours => 'Hours';
+  String get hours => 'hodiny';
 
   @override
   String dayCount(int count) {
@@ -90,172 +90,172 @@ class AppLocalizationsEn extends AppLocalizations {
   String get insights => 'Insights';
 
   @override
-  String get edit => 'Edit';
+  String get edit => 'upravit';
 
   @override
-  String get delete => 'Delete';
+  String get delete => 'smazat';
 
   @override
-  String get clear => 'Clear';
+  String get clear => 'vyčistit';
 
   @override
-  String get save => 'Save';
+  String get save => 'uložit';
 
   @override
-  String get import => 'Import';
+  String get import => 'importovat';
 
   @override
-  String get ok => 'OK';
+  String get ok => 'ok';
 
   @override
-  String get confirm => 'Confirm';
+  String get confirm => 'potvrdit';
 
   @override
-  String get set => 'Set';
+  String get set => 'nastavit';
 
   @override
-  String get yes => 'Yes';
+  String get yes => 'ano';
 
   @override
-  String get no => 'No';
+  String get no => 'ne';
 
   @override
-  String get cancel => 'Cancel';
+  String get cancel => 'zrušit';
 
   @override
-  String get select => 'Select';
+  String get select => 'vybrat';
 
   @override
-  String get close => 'Close';
+  String get close => 'zavřít';
 
   @override
-  String get reset => 'Reset';
+  String get reset => 'restartovat';
 
   @override
-  String get add => 'Add';
+  String get add => 'přidat';
 
   @override
-  String get notSet => 'Not set';
+  String get notSet => 'nenastavené';
 
   @override
-  String get removed => 'Removed';
+  String get removed => 'smazáno';
 
   @override
   String get totalLogs => 'Total Logs';
 
   @override
-  String get note => 'Note';
+  String get note => 'poznámka';
 
   @override
-  String get systemDefault => 'System Default';
+  String get systemDefault => 'podle systému';
 
   @override
-  String get flow => 'Flow';
+  String get flow => 'tok';
 
   @override
-  String get type => 'Type';
+  String get type => 'typ';
 
   @override
-  String get navBar_insights => 'Insights';
+  String get navBar_insights => 'Statistiky';
 
   @override
-  String get navBar_logs => 'Logs';
+  String get navBar_logs => 'Záznamy';
 
   @override
-  String get navBar_sanitary => 'Sanitary';
+  String get navBar_sanitary => 'Pomůcky';
 
   @override
-  String get navBar_pill => 'Pill';
+  String get navBar_pill => 'Pilulky';
 
   @override
-  String get navBar_larc => 'LARC';
+  String get navBar_larc => 'DPRA';
 
   @override
-  String get navBar_settings => 'Settings';
+  String get navBar_settings => 'Nastavení';
 
   @override
-  String get flowIntensity_none => 'None';
+  String get flowIntensity_none => 'žádná';
 
   @override
-  String get flowIntensity_spotting => 'Spotting';
+  String get flowIntensity_spotting => 'špinění';
 
   @override
-  String get flowIntensity_light => 'Light';
+  String get flowIntensity_light => 'lehké';
 
   @override
-  String get flowIntensity_moderate => 'Moderate';
+  String get flowIntensity_moderate => 'střední';
 
   @override
-  String get flowIntensity_heavy => 'Heavy';
+  String get flowIntensity_heavy => 'vysoké';
 
   @override
-  String get builtInSymptom_acne => 'Acne';
+  String get builtInSymptom_acne => 'akné';
 
   @override
-  String get builtInSymptom_backPain => 'Back pain';
+  String get builtInSymptom_backPain => 'Bolest zad';
 
   @override
-  String get builtInSymptom_bloating => 'Bloating';
+  String get builtInSymptom_bloating => 'Nadýmání';
 
   @override
-  String get builtInSymptom_cramps => 'Cramps';
+  String get builtInSymptom_cramps => 'Bolesti';
 
   @override
-  String get builtInSymptom_fatigue => 'Fatigue';
+  String get builtInSymptom_fatigue => 'Závratě';
 
   @override
-  String get builtInSymptom_headache => 'Headache';
+  String get builtInSymptom_headache => 'Bolest hlavy';
 
   @override
-  String get builtInSymptom_moodSwings => 'Mood swings';
+  String get builtInSymptom_moodSwings => 'Změny nálad';
 
   @override
-  String get builtInSymptom_nausea => 'Nausea';
+  String get builtInSymptom_nausea => 'Nevolnost';
 
   @override
-  String get painLevel_title => 'Pain Level';
+  String get painLevel_title => 'Intenzita bolesti';
 
   @override
-  String get painLevel_none => 'None';
+  String get painLevel_none => 'žádný';
 
   @override
-  String get painLevel_mild => 'Mild';
+  String get painLevel_mild => 'lehký';
 
   @override
-  String get painLevel_moderate => 'Moderate';
+  String get painLevel_moderate => 'střední';
 
   @override
-  String get painLevel_severe => 'Severe';
+  String get painLevel_severe => 'bolestivý';
 
   @override
-  String get pain_unbearable => 'Unbearable';
+  String get pain_unbearable => 'nesnesitelné';
 
   @override
-  String get larcType_iud => 'IUD';
+  String get larcType_iud => 'nitroděložní tělísko';
 
   @override
-  String get larcType_implant => 'Implant';
+  String get larcType_implant => 'implantát';
 
   @override
-  String get larcType_injection => 'Injection';
+  String get larcType_injection => 'injekce';
 
   @override
-  String get larcType_ring => 'Ring';
+  String get larcType_ring => 'vaginální kroužek';
 
   @override
-  String get larcType_patch => 'Patch';
+  String get larcType_patch => 'náplast';
 
   @override
-  String get sanitaryProduct_tampon => 'Tampon';
+  String get sanitaryProduct_tampon => 'tampon';
 
   @override
-  String get sanitaryProduct_pad => 'Pad';
+  String get sanitaryProduct_pad => 'vložka';
 
   @override
-  String get sanitaryProduct_menstrualCup => 'Menstrual Cup';
+  String get sanitaryProduct_menstrualCup => 'menstruační kalíšek';
 
   @override
-  String get sanitaryProduct_periodUnderwear => 'Period Underwear';
+  String get sanitaryProduct_periodUnderwear => 'menstruační kalhotky';
 
   @override
   String get sanitaryProducts_mostUsed => 'Most Used';
@@ -264,13 +264,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get sanitaryProducts_usageTrend => 'Usage Trend';
 
   @override
-  String get error_valueMustbePositive => 'Value must be positive';
+  String get error_valueMustbePositive => 'hodnota musí být kladná';
 
   @override
-  String get error_valueCannotBeNull => 'Value cannot be null';
+  String get error_valueCannotBeNull => 'hodnota nesmí být prázdná';
 
   @override
-  String get notification_periodTitle => 'Period Approaching';
+  String get notification_periodTitle => 'blížící se menstruace';
 
   @override
   String notification_periodBody(int count) {
@@ -284,7 +284,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get notification_periodOverdueTitle => 'Period Overdue';
+  String get notification_periodOverdueTitle => 'opožděná menstruace';
 
   @override
   String notification_periodOverdueBody(int count) {
@@ -298,18 +298,17 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get notification_pillTitle => 'Pill Reminder';
+  String get notification_pillTitle => 'připomenutí pilulky';
 
   @override
-  String get notification_pillBody =>
-      'Don\'t forget to take your pill for today.';
+  String get notification_pillBody => 'Nezapomeňte si dnes vzít pilulky!';
 
   @override
-  String get notification_larcTitle => 'LARC Reminder';
+  String get notification_larcTitle => 'Upomínka DPRA';
 
   @override
   String notification_larcBody(String type, int days) {
-    return '$type is due for renewal in $days days.';
+    return '.';
   }
 
   @override

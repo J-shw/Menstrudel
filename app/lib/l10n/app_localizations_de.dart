@@ -84,6 +84,12 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
+  String get logs => 'Logs';
+
+  @override
+  String get insights => 'Insights';
+
+  @override
   String get edit => 'Edit';
 
   @override
@@ -133,6 +139,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get removed => 'Entfernt';
+
+  @override
+  String get totalLogs => 'Total Logs';
 
   @override
   String get note => 'Hinweis';
@@ -247,6 +256,12 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get sanitaryProduct_periodUnderwear => 'Periodenunterwäsche';
+
+  @override
+  String get sanitaryProducts_mostUsed => 'Most Used';
+
+  @override
+  String get sanitaryProducts_usageTrend => 'Usage Trend';
 
   @override
   String get error_valueMustbePositive => 'Der Wert muss positiv sein';
