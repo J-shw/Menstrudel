@@ -17,7 +17,6 @@ class SanitaryProductInsightsTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
     final l10n = AppLocalizations.of(context)!;
 
     final counts = <SanitaryProducts, int>{};
