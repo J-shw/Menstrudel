@@ -57,13 +57,13 @@ extension LarcTypeDisplay on SanitaryProducts {
   Color getColorScheme(ColorScheme colorScheme) {
     switch (this) {
       case SanitaryProducts.tampon:
-        return colorScheme.secondary;
+        return Colors.orangeAccent;
       case SanitaryProducts.pad:
-        return colorScheme.primary;
+        return Colors.indigoAccent;
       case SanitaryProducts.menstrualCup:
-        return colorScheme.tertiary;
+        return Colors.teal;
       case SanitaryProducts.periodUnderwear:
-        return colorScheme.primaryContainer;
+        return Colors.pinkAccent;
     }
   }
 }
