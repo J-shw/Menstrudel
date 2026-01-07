@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'dart:async';
 import 'package:menstrudel/database/repositories/sanitary_product_repository.dart';
 import 'package:menstrudel/models/sanitary_products/sanitary_products_entry.dart';
@@ -10,8 +9,6 @@ import 'package:menstrudel/widgets/sanitary_products/screen/sanitary_product_ins
 import 'package:menstrudel/widgets/sanitary_products/screen/sanitary_product_logs_tab.dart';
 import 'package:menstrudel/widgets/sanitary_products/sheets/edit_sanitary_product_bottom_sheet.dart';
 import 'package:menstrudel/widgets/sanitary_products/sheets/log_sanitary_product_bottom_sheet.dart';
-import 'package:menstrudel/widgets/sanitary_products/screen/sanitary_product_log_card.dart';
-import 'package:menstrudel/widgets/sanitary_products/screen/countdown_card.dart';
 
 class SanitaryScreen extends StatefulWidget {
   const SanitaryScreen({super.key});
