@@ -44,6 +44,8 @@
             }
         }
     },
+    "logs": "Logs",
+    "insights": "Insights",
     "edit": "upravit",
     "delete": "smazat",
     "clear": "vyčistit",
@@ -61,6 +63,7 @@
     "add": "přidat",
     "notSet": "nenastavené",
     "removed": "smazáno",
+    "totalLogs": "Total Logs",
     "note": "poznámka",
     "systemDefault": "podle systému",
     "flow": "tok",
@@ -99,6 +102,8 @@
     "sanitaryProduct_pad": "vložka",
     "sanitaryProduct_menstrualCup": "menstruační kalíšek",
     "sanitaryProduct_periodUnderwear": "menstruační kalhotky",
+    "sanitaryProducts_mostUsed": "Most Used",
+    "sanitaryProducts_usageTrend": "Usage Trend",
     "error_valueMustbePositive": "hodnota musí být kladná",
     "error_valueCannotBeNull": "hodnota nesmí být prázdná",
     "notification_periodTitle": "blížící se menstruace",
