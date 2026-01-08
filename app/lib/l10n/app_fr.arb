@@ -44,6 +44,8 @@
             }
         }
     },
+    "logs": "Logs",
+    "insights": "Insights",
     "edit": "Éditer",
     "delete": "Supprimer",
     "clear": "Effacer",
@@ -61,6 +63,7 @@
     "add": "Ajouter",
     "notSet": "Non-défini",
     "removed": "Supprimé",
+    "totalLogs": "Total Logs",
     "note": "Note",
     "systemDefault": "Valeur par défaut du système",
     "flow": "Flux /",
@@ -99,6 +102,8 @@
     "sanitaryProduct_pad": "Serviette hygiénique",
     "sanitaryProduct_menstrualCup": "Coupe menstruelle",
     "sanitaryProduct_periodUnderwear": "Lingerie menstruelle",
+    "sanitaryProducts_mostUsed": "Most Used",
+    "sanitaryProducts_usageTrend": "Usage Trend",
     "error_valueMustbePositive": "La valeur doit être supérieure à zéro",
     "error_valueCannotBeNull": "La valeur ne peut pas être vide",
     "notification_periodTitle": "Règles imminentes",

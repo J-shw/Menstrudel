@@ -44,6 +44,8 @@
             }
         }
     },
+    "logs": "Logs",
+    "insights": "Insights",
     "edit": "Edit",
     "delete": "Löschen",
     "clear": "Löschen",
@@ -61,6 +63,7 @@
     "add": "Hinzufügen",
     "notSet": "Nicht festgelegt",
     "removed": "Entfernt",
+    "totalLogs": "Total Logs",
     "note": "Hinweis",
     "systemDefault": "System Standard",
     "flow": "Ausfluss",
@@ -99,6 +102,8 @@
     "sanitaryProduct_pad": "Polster",
     "sanitaryProduct_menstrualCup": "Menstruationstasse",
     "sanitaryProduct_periodUnderwear": "Periodenunterwäsche",
+    "sanitaryProducts_mostUsed": "Most Used",
+    "sanitaryProducts_usageTrend": "Usage Trend",
     "error_valueMustbePositive": "Der Wert muss positiv sein",
     "error_valueCannotBeNull": "Der Wert darf nicht null sein",
     "notification_periodTitle": "Periode nähert sich",
