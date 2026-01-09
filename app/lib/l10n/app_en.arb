@@ -127,6 +127,14 @@
     "sanitaryProducts_mostUsed": "Most Used",
     "sanitaryProducts_usageTrend": "Usage Trend",
 
+    "dayOfWeek_monday": "Monday",
+    "dayOfWeek_tuesday": "Tuesday",
+    "dayOfWeek_wednesday": "Wednesday",
+    "dayOfWeek_thursday": "Thursday",
+    "dayOfWeek_friday": "Friday",
+    "dayOfWeek_saturday": "Saturday",
+    "dayOfWeek_sunday": "Sunday",
+
     "error_valueMustbePositive": "Value must be positive",
     "error_valueCannotBeNull": "Value cannot be null",
 
