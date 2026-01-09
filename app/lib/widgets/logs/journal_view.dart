@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/models/period_logs/log_day.dart';
+import 'package:menstrudel/models/prefrences/day_of_week_enum.dart';
 import 'package:menstrudel/services/log_service.dart';
+import 'package:menstrudel/services/settings_service.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/models/flows/flow_enum.dart';
@@ -36,6 +38,7 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
     final l10n = AppLocalizations.of(context)!;
     final periodService = context.watch<PeriodService>();
     final logService = context.watch<LogService>();
+    final settingsService = context.watch<SettingsService>();
 
     final isPeriodServiceLoading = periodService.isLoading;
     final isLogServiceLoading = logService.isLoading;
@@ -77,6 +80,9 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
           firstDay: earliestLogDate.subtract(const Duration(days: 365)),
           lastDay: calendarBoundary.add(const Duration(days: 365)),
           focusedDay: _focusedDay,
+          startingDayOfWeek: DayOfWeek
+              .fromString(settingsService.startingDayOfWeek)
+              .toTableCalendar,
           headerStyle: const HeaderStyle(
             formatButtonVisible: false,
             titleCentered: true,

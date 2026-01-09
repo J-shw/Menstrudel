@@ -36,6 +36,7 @@ class SettingsService extends ChangeNotifier {
   bool _larcNotificationsEnabled = kDefaultLarcNotificationsEnabled;
   int _larcReminderDays = kDefaultLarcReminderDays;
   TimeOfDay _larcReminderTime = kDefaultLarcReminderTime;
+  String _startingDayOfWeek = kDefaultStartingDayOfWeek;
 
   /// Whether the 'Pill' tab is visible in the main navigation bar.
   bool get isPillNavEnabled => _pillNavEnabled;
@@ -89,6 +90,8 @@ class SettingsService extends ChangeNotifier {
   bool get isLoggingReminderNotificationEnabled => _loggingReminder;
   /// The time of day the logging reminder should be sent
   TimeOfDay get loggingReminderTime => _loggingReminderTime;
+  /// The starting day of the week for calendars
+  String get startingDayOfWeek => _startingDayOfWeek;
 
   Future<void> loadSettings() async {
     _prefs = await SharedPreferences.getInstance();
@@ -115,6 +118,7 @@ class SettingsService extends ChangeNotifier {
     _themeMode = _loadThemeMode();
 
     _defaultSymptoms = _loadDefaultSymptoms();
+    _startingDayOfWeek = _prefs.getString(startingDayOfWeekKey) ?? 'monday';
 
     final String? storedDurationsJson = _prefs.getString(larcDurationsKey);
     if (storedDurationsJson != null) {
@@ -337,6 +341,12 @@ class SettingsService extends ChangeNotifier {
   Future<void> setThemeMode(AppThemeMode theme) async {
     _themeMode = theme;
     await _prefs.setInt(themeModeKey, theme.index);
+    notifyListeners();
+  }
+
+  Future<void> setStartingDayOfWeek(String day) async {
+    _startingDayOfWeek = day;
+    await _prefs.setString(startingDayOfWeekKey, day);
     notifyListeners();
   }
 

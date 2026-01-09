@@ -264,6 +264,27 @@ class AppLocalizationsIt extends AppLocalizations {
   String get sanitaryProducts_usageTrend => 'Usage Trend';
 
   @override
+  String get dayOfWeek_monday => 'Monday';
+
+  @override
+  String get dayOfWeek_tuesday => 'Tuesday';
+
+  @override
+  String get dayOfWeek_wednesday => 'Wednesday';
+
+  @override
+  String get dayOfWeek_thursday => 'Thursday';
+
+  @override
+  String get dayOfWeek_friday => 'Friday';
+
+  @override
+  String get dayOfWeek_saturday => 'Saturday';
+
+  @override
+  String get dayOfWeek_sunday => 'Sunday';
+
+  @override
   String get error_valueMustbePositive => 'Value must be positive';
 
   @override
@@ -821,6 +842,9 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get preferencesScreen_enableSanitaryProductsScreenSubtitle =>
       'Show the Sanitary Products tab on the main navigation bar.';
+
+  @override
+  String get preferencesScreen_StartingDayOfWeek => 'Starting Day of the Week';
 
   @override
   String get settingsScreen_about => 'Informazioni';
