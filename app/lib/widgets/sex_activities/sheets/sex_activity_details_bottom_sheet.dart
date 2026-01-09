@@ -194,7 +194,10 @@ class _EditSexLogBottomSheetState extends State<EditSexLogBottomSheet> {
         _buildChipSection("Participation", SexParticipationTypes.values, _editedParticipation, (val, type) => setState(() => _editedParticipation = val ? type : null), l10n: l10n),
         _buildChipSection("Protection", SexProtectionTypes.values, _editedProtection, (val, type) => setState(() => _editedProtection = val ? type : null), l10n: l10n),
         const SizedBox(height: 16),
-        TextField(controller: _noteController, decoration: InputDecoration(labelText: l10n.note, border: const OutlineInputBorder()), maxLength: 500),
+
+        Text(l10n.note, style: Theme.of(context).textTheme.bodySmall),
+        const SizedBox(height: 8),
+        TextField(controller: _noteController, maxLength: 500),
       ],
     );
   }

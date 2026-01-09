@@ -235,7 +235,6 @@ class _LogSexActivityBottomSheetState extends State<LogSexActivityBottomSheet> {
               controller: _noteController,
               maxLength: 500,
               maxLines: 1,
-              decoration: const InputDecoration(border: OutlineInputBorder()),
             ),
 
             const SizedBox(height: 24),
