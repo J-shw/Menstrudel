@@ -144,6 +144,13 @@
     "sexParticipation_solo": "Solo",
     "sexParticipation_partner": "Partner",
     "sexParticipation_group": "Group",
+    "dayOfWeek_monday": "Monday",
+    "dayOfWeek_tuesday": "Tuesday",
+    "dayOfWeek_wednesday": "Wednesday",
+    "dayOfWeek_thursday": "Thursday",
+    "dayOfWeek_friday": "Friday",
+    "dayOfWeek_saturday": "Saturday",
+    "dayOfWeek_sunday": "Sunday",
 
     "error_valueMustbePositive": "Value must be positive",
     "error_valueCannotBeNull": "Value cannot be null",
@@ -474,6 +481,7 @@
     "preferencesScreen_enableSanitaryProductsScreenSubtitle": "Show the Sanitary Products tab on the main navigation bar.",
     "preferencesScreen_enableSexActivityScreen": "Enable Sex Activity Screen",
     "preferencesScreen_enableSexActivityScreenSubtitle": "Show the Sex Activity tab on the main navigation bar.",
+    "preferencesScreen_StartingDayOfWeek": "Starting Day of the Week",
 
     "settingsScreen_about": "About",
     "aboutScreen_version": "Version",

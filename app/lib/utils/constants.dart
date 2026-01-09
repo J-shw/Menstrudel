@@ -62,6 +62,7 @@ const String larcNotificationDaysKey = 'larc_notification_days';
 const String larcNotificationTimeKey = 'larc_notification_time';
 const String loggingReminderKey = 'logging_reminder_notification_enabled';
 const String loggingReminderTimeKey = 'logging_reminder_notification_time';
+const String startingDayOfWeekKey = 'starting_day_of_week';
 
 // Notifications
 const String tamponReminderDateTimeKey = 'tampon_reminder_date_time';
@@ -93,3 +94,4 @@ const int kDefaultLarcReminderDays = 30;
 const TimeOfDay kDefaultLarcReminderTime = TimeOfDay(hour: 9, minute: 0);
 const bool kDefaultLoggingReminder = false;
 const TimeOfDay kDefaultLoggingReminderTime = TimeOfDay(hour: 9, minute: 0);
+const String kDefaultStartingDayOfWeek = 'monday';

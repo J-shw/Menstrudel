@@ -300,6 +300,27 @@ class AppLocalizationsIt extends AppLocalizations {
   String get sexParticipation_group => 'Group';
 
   @override
+  String get dayOfWeek_monday => 'Monday';
+
+  @override
+  String get dayOfWeek_tuesday => 'Tuesday';
+
+  @override
+  String get dayOfWeek_wednesday => 'Wednesday';
+
+  @override
+  String get dayOfWeek_thursday => 'Thursday';
+
+  @override
+  String get dayOfWeek_friday => 'Friday';
+
+  @override
+  String get dayOfWeek_saturday => 'Saturday';
+
+  @override
+  String get dayOfWeek_sunday => 'Sunday';
+
+  @override
   String get error_valueMustbePositive => 'Value must be positive';
 
   @override

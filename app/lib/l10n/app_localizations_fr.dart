@@ -270,43 +270,29 @@ class AppLocalizationsFr extends AppLocalizations {
   String get sanitaryProducts_usageTrend => 'Usage Trend';
 
   @override
-  String get sexProtection_none => 'None';
+  String get dayOfWeek_monday => 'Monday';
 
   @override
-  String get sexProtection_barrier => 'Barrier';
+  String get dayOfWeek_tuesday => 'Tuesday';
 
   @override
-  String get sexProtection_hormonal => 'Hormonal';
+  String get dayOfWeek_wednesday => 'Wednesday';
 
   @override
-  String get sexProtection_natural => 'Natural';
+  String get dayOfWeek_thursday => 'Thursday';
 
   @override
-  String get sexProtection_permanent => 'Permanent';
+  String get dayOfWeek_friday => 'Friday';
 
   @override
-  String get sexType_vaginal => 'Vaginal';
+  String get dayOfWeek_saturday => 'Saturday';
 
   @override
-  String get sexType_anal => 'Anal';
+  String get dayOfWeek_sunday => 'Sunday';
 
   @override
-  String get sexType_oral => 'Oral';
-
-  @override
-  String get sexType_manual => 'Manual';
-
-  @override
-  String get sexParticipation_solo => 'Solo';
-
-  @override
-  String get sexParticipation_partner => 'Partner';
-
-  @override
-  String get sexParticipation_group => 'Group';
-
-  @override
-  String get error_valueMustbePositive => 'Value must be positive';
+  String get error_valueMustbePositive =>
+      'La valeur doit être supérieure à zéro';
 
   @override
   String get error_valueCannotBeNull => 'La valeur ne peut pas être vide';

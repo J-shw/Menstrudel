@@ -638,6 +638,48 @@ abstract class AppLocalizations {
   /// **'Group'**
   String get sexParticipation_group;
 
+  /// No description provided for @dayOfWeek_monday.
+  ///
+  /// In en, this message translates to:
+  /// **'Monday'**
+  String get dayOfWeek_monday;
+
+  /// No description provided for @dayOfWeek_tuesday.
+  ///
+  /// In en, this message translates to:
+  /// **'Tuesday'**
+  String get dayOfWeek_tuesday;
+
+  /// No description provided for @dayOfWeek_wednesday.
+  ///
+  /// In en, this message translates to:
+  /// **'Wednesday'**
+  String get dayOfWeek_wednesday;
+
+  /// No description provided for @dayOfWeek_thursday.
+  ///
+  /// In en, this message translates to:
+  /// **'Thursday'**
+  String get dayOfWeek_thursday;
+
+  /// No description provided for @dayOfWeek_friday.
+  ///
+  /// In en, this message translates to:
+  /// **'Friday'**
+  String get dayOfWeek_friday;
+
+  /// No description provided for @dayOfWeek_saturday.
+  ///
+  /// In en, this message translates to:
+  /// **'Saturday'**
+  String get dayOfWeek_saturday;
+
+  /// No description provided for @dayOfWeek_sunday.
+  ///
+  /// In en, this message translates to:
+  /// **'Sunday'**
+  String get dayOfWeek_sunday;
+
   /// No description provided for @error_valueMustbePositive.
   ///
   /// In en, this message translates to:
@@ -1547,17 +1589,11 @@ abstract class AppLocalizations {
   /// **'Show the Sanitary Products tab on the main navigation bar.'**
   String get preferencesScreen_enableSanitaryProductsScreenSubtitle;
 
-  /// No description provided for @preferencesScreen_enableSexActivityScreen.
+  /// No description provided for @preferencesScreen_StartingDayOfWeek.
   ///
   /// In en, this message translates to:
-  /// **'Enable Sex Activity Screen'**
-  String get preferencesScreen_enableSexActivityScreen;
-
-  /// No description provided for @preferencesScreen_enableSexActivityScreenSubtitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Show the Sex Activity tab on the main navigation bar.'**
-  String get preferencesScreen_enableSexActivityScreenSubtitle;
+  /// **'Starting Day of the Week'**
+  String get preferencesScreen_StartingDayOfWeek;
 
   /// No description provided for @settingsScreen_about.
   ///
