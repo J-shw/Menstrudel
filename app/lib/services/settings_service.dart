@@ -16,6 +16,7 @@ class SettingsService extends ChangeNotifier {
   bool _pillNavEnabled = kDefaultPillNavEnabled;
   bool _larcNavEnabled = kDefaultLarcNavEnabled;
   bool _sanitaryNavEnabled = kDefaultSanitaryNavEnabled;
+  bool _sexActivityNavEnabled = kDefaultSexActivityNavEnabled;
   LarcTypes _larcType = kDefaultLarcType;
   String _languageCode = kDefaultLanguageCode;
   bool _biometricsEnabled = kDefaultBiometricsEnabled;
@@ -44,6 +45,8 @@ class SettingsService extends ChangeNotifier {
   bool get isLarcNavEnabled => _larcNavEnabled;
   /// Sanitary Products navigation enabled
   bool get isSanitaryNavEnabled => _sanitaryNavEnabled;
+  /// Sex Activity navigation enabled
+  bool get isSexActivityNavEnabled => _sexActivityNavEnabled;
   /// LARC type selected
   LarcTypes get larcType => _larcType;
   /// The selected language code for the app (e.g., 'en', 'es', or 'system').
@@ -99,6 +102,7 @@ class SettingsService extends ChangeNotifier {
     _pillNavEnabled = _prefs.getBool(pillNavEnabledKey) ?? false;
     _larcNavEnabled = _prefs.getBool(larcNavEnabledKey) ?? false;
     _sanitaryNavEnabled = _prefs.getBool(sanitaryNavEnabledKey) ?? true;
+    _sexActivityNavEnabled = _prefs.getBool(sexActivityNavEnabledKey) ?? false;
     _languageCode = _prefs.getString(languageKey) ?? 'system';
     _biometricsEnabled = _prefs.getBool(biometricEnabledKey) ?? false;
     _notificationsEnabled = _prefs.getBool(notificationsEnabledKey) ?? true;
@@ -213,6 +217,12 @@ class SettingsService extends ChangeNotifier {
   Future<void> setLarcNavEnabled(bool isEnabled) async {
     _larcNavEnabled = isEnabled;
     await _prefs.setBool(larcNavEnabledKey, isEnabled);
+    notifyListeners();
+  }
+
+  Future<void> setSexActivityNavEnabled(bool isEnabled) async {
+    _sexActivityNavEnabled = isEnabled;
+    await _prefs.setBool(sexActivityNavEnabledKey, isEnabled);
     notifyListeners();
   }
 

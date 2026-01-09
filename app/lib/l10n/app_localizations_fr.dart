@@ -156,6 +156,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get type => 'Écrire';
 
   @override
+  String get other => 'Other';
+
+  @override
   String get navBar_insights => 'Statistiques';
 
   @override
@@ -163,6 +166,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get navBar_sanitary => 'Sanitaire';
+
+  @override
+  String get navBar_sexActivity => 'Sex Activity';
 
   @override
   String get navBar_pill => 'Pilule';
@@ -353,7 +359,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get mainScreen_insightsPageTitle => 'Votre Aperçu';
 
   @override
-  String get mainScreen_sanitaryPageTitle => 'Produits hygiéniques';
+  String get mainSceen_sexActivityPageTitle => 'Sex Activity';
+
+  @override
+  String get mainScreen_sanitaryPageTitle => 'Sanitary Products';
 
   @override
   String get mainScreen_pillsPageTitle => 'Pilules';
@@ -452,6 +461,15 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String sanitaryProductsScreen_changeDueAt(String time) {
     return 'Changement prévu à $time';
+  }
+
+  @override
+  String get sexActivityScreen_noSexActivityRecordsFound =>
+      'No sex activity records found.';
+
+  @override
+  String sexActivityScreen_history(int history) {
+    return 'History ($history)';
   }
 
   @override
@@ -863,7 +881,12 @@ class AppLocalizationsFr extends AppLocalizations {
       'Show the Sanitary Products tab on the main navigation bar.';
 
   @override
-  String get preferencesScreen_StartingDayOfWeek => 'Starting Day of the Week';
+  String get preferencesScreen_enableSexActivityScreen =>
+      'Enable Sex Activity Screen';
+
+  @override
+  String get preferencesScreen_enableSexActivityScreenSubtitle =>
+      'Show the Sex Activity tab on the main navigation bar.';
 
   @override
   String get settingsScreen_about => 'À propos';

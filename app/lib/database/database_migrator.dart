@@ -35,6 +35,7 @@ class DatabaseMigrator {
     }
     if (oldVersion < 9) await createLarcTables(db);
     if (oldVersion < 10) await createSanitaryProductTables(db);
+    if (oldVersion < 11) await createSexualActivityTables(db);
   }
 
   // --- Table Creation Methods ---
@@ -124,6 +125,20 @@ class DatabaseMigrator {
         reminderTime TEXT NOT NULL,
         removedTime TEXT,
         type TEXT NOT NULL,
+        note TEXT
+      )
+      ''');
+  }
+
+  static Future<void> createSexualActivityTables(Database db) async {
+    await db.execute('''
+      CREATE TABLE sexual_activity_logs (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        date_time TEXT NOT NULL,
+        sex_type TEXT,
+        participation_type TEXT,
+        protection_used INTEGER,
+        protection_type TEXT,
         note TEXT
       )
       ''');

@@ -156,6 +156,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get type => 'Typ';
 
   @override
+  String get other => 'Other';
+
+  @override
   String get navBar_insights => 'Einblicke';
 
   @override
@@ -163,6 +166,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get navBar_sanitary => 'Hygiene';
+
+  @override
+  String get navBar_sexActivity => 'Sex Activity';
 
   @override
   String get navBar_pill => 'Pille';
@@ -258,10 +264,40 @@ class AppLocalizationsDe extends AppLocalizations {
   String get sanitaryProduct_periodUnderwear => 'Periodenunterwäsche';
 
   @override
-  String get sanitaryProducts_mostUsed => 'Most Used';
+  String get sexProtection_none => 'None';
 
   @override
-  String get sanitaryProducts_usageTrend => 'Usage Trend';
+  String get sexProtection_barrier => 'Barrier';
+
+  @override
+  String get sexProtection_hormonal => 'Hormonal';
+
+  @override
+  String get sexProtection_natural => 'Natural';
+
+  @override
+  String get sexProtection_permanent => 'Permanent';
+
+  @override
+  String get sexType_vaginal => 'Vaginal';
+
+  @override
+  String get sexType_anal => 'Anal';
+
+  @override
+  String get sexType_oral => 'Oral';
+
+  @override
+  String get sexType_manual => 'Manual';
+
+  @override
+  String get sexParticipation_solo => 'Solo';
+
+  @override
+  String get sexParticipation_partner => 'Partner';
+
+  @override
+  String get sexParticipation_group => 'Group';
 
   @override
   String get dayOfWeek_monday => 'Monday';
@@ -350,6 +386,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get mainScreen_insightsPageTitle => 'Deine Erkenntnisse';
+
+  @override
+  String get mainSceen_sexActivityPageTitle => 'Sex Activity';
 
   @override
   String get mainScreen_sanitaryPageTitle => 'Hygieneartikel';
@@ -450,6 +489,15 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String sanitaryProductsScreen_changeDueAt(String time) {
     return 'Änderung fällig um $time';
+  }
+
+  @override
+  String get sexActivityScreen_noSexActivityRecordsFound =>
+      'No sex activity records found.';
+
+  @override
+  String sexActivityScreen_history(int history) {
+    return 'History ($history)';
   }
 
   @override

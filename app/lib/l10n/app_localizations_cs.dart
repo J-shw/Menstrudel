@@ -84,12 +84,6 @@ class AppLocalizationsCs extends AppLocalizations {
   }
 
   @override
-  String get logs => 'Logs';
-
-  @override
-  String get insights => 'Insights';
-
-  @override
   String get edit => 'upravit';
 
   @override
@@ -141,9 +135,6 @@ class AppLocalizationsCs extends AppLocalizations {
   String get removed => 'smazáno';
 
   @override
-  String get totalLogs => 'Total Logs';
-
-  @override
   String get note => 'poznámka';
 
   @override
@@ -156,6 +147,9 @@ class AppLocalizationsCs extends AppLocalizations {
   String get type => 'typ';
 
   @override
+  String get other => 'Other';
+
+  @override
   String get navBar_insights => 'Statistiky';
 
   @override
@@ -163,6 +157,9 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get navBar_sanitary => 'Pomůcky';
+
+  @override
+  String get navBar_sexActivity => 'Sex Activity';
 
   @override
   String get navBar_pill => 'Pilulky';
@@ -258,10 +255,40 @@ class AppLocalizationsCs extends AppLocalizations {
   String get sanitaryProduct_periodUnderwear => 'menstruační kalhotky';
 
   @override
-  String get sanitaryProducts_mostUsed => 'Most Used';
+  String get sexProtection_none => 'None';
 
   @override
-  String get sanitaryProducts_usageTrend => 'Usage Trend';
+  String get sexProtection_barrier => 'Barrier';
+
+  @override
+  String get sexProtection_hormonal => 'Hormonal';
+
+  @override
+  String get sexProtection_natural => 'Natural';
+
+  @override
+  String get sexProtection_permanent => 'Permanent';
+
+  @override
+  String get sexType_vaginal => 'Vaginal';
+
+  @override
+  String get sexType_anal => 'Anal';
+
+  @override
+  String get sexType_oral => 'Oral';
+
+  @override
+  String get sexType_manual => 'Manual';
+
+  @override
+  String get sexParticipation_solo => 'Solo';
+
+  @override
+  String get sexParticipation_partner => 'Partner';
+
+  @override
+  String get sexParticipation_group => 'Group';
 
   @override
   String get dayOfWeek_monday => 'Monday';
@@ -349,6 +376,9 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get mainScreen_insightsPageTitle => 'Your Insights';
+
+  @override
+  String get mainSceen_sexActivityPageTitle => 'Sex Activity';
 
   @override
   String get mainScreen_sanitaryPageTitle => 'Sanitary Products';
@@ -449,6 +479,15 @@ class AppLocalizationsCs extends AppLocalizations {
   @override
   String sanitaryProductsScreen_changeDueAt(String time) {
     return 'Change Due At $time';
+  }
+
+  @override
+  String get sexActivityScreen_noSexActivityRecordsFound =>
+      'No sex activity records found.';
+
+  @override
+  String sexActivityScreen_history(int history) {
+    return 'History ($history)';
   }
 
   @override

@@ -67,6 +67,16 @@ class PreferencesSettingsScreen extends StatelessWidget {
               context.read<SettingsService>().setSanitaryNavEnabled(value);
             },
           ),
+          SwitchListTile(
+            title: Text(l10n.preferencesScreen_enableSexActivityScreen),
+            subtitle:
+                Text(l10n.preferencesScreen_enableSexActivityScreenSubtitle),
+            secondary: const Icon(Icons.favorite_border_rounded),
+            value: settingsService.isSexActivityNavEnabled,
+            onChanged: (bool value) {
+              context.read<SettingsService>().setSexActivityNavEnabled(value);
+            },
+          ),
         ],
       ),
     );

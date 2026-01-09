@@ -350,6 +350,12 @@ abstract class AppLocalizations {
   /// **'Type'**
   String get type;
 
+  /// No description provided for @other.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get other;
+
   /// No description provided for @navBar_insights.
   ///
   /// In en, this message translates to:
@@ -367,6 +373,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Sanitary'**
   String get navBar_sanitary;
+
+  /// No description provided for @navBar_sexActivity.
+  ///
+  /// In en, this message translates to:
+  /// **'Sex Activity'**
+  String get navBar_sexActivity;
 
   /// No description provided for @navBar_pill.
   ///
@@ -554,17 +566,77 @@ abstract class AppLocalizations {
   /// **'Period Underwear'**
   String get sanitaryProduct_periodUnderwear;
 
-  /// No description provided for @sanitaryProducts_mostUsed.
+  /// No description provided for @sexProtection_none.
   ///
   /// In en, this message translates to:
-  /// **'Most Used'**
-  String get sanitaryProducts_mostUsed;
+  /// **'None'**
+  String get sexProtection_none;
 
-  /// No description provided for @sanitaryProducts_usageTrend.
+  /// No description provided for @sexProtection_barrier.
   ///
   /// In en, this message translates to:
-  /// **'Usage Trend'**
-  String get sanitaryProducts_usageTrend;
+  /// **'Barrier'**
+  String get sexProtection_barrier;
+
+  /// No description provided for @sexProtection_hormonal.
+  ///
+  /// In en, this message translates to:
+  /// **'Hormonal'**
+  String get sexProtection_hormonal;
+
+  /// No description provided for @sexProtection_natural.
+  ///
+  /// In en, this message translates to:
+  /// **'Natural'**
+  String get sexProtection_natural;
+
+  /// No description provided for @sexProtection_permanent.
+  ///
+  /// In en, this message translates to:
+  /// **'Permanent'**
+  String get sexProtection_permanent;
+
+  /// No description provided for @sexType_vaginal.
+  ///
+  /// In en, this message translates to:
+  /// **'Vaginal'**
+  String get sexType_vaginal;
+
+  /// No description provided for @sexType_anal.
+  ///
+  /// In en, this message translates to:
+  /// **'Anal'**
+  String get sexType_anal;
+
+  /// No description provided for @sexType_oral.
+  ///
+  /// In en, this message translates to:
+  /// **'Oral'**
+  String get sexType_oral;
+
+  /// No description provided for @sexType_manual.
+  ///
+  /// In en, this message translates to:
+  /// **'Manual'**
+  String get sexType_manual;
+
+  /// No description provided for @sexParticipation_solo.
+  ///
+  /// In en, this message translates to:
+  /// **'Solo'**
+  String get sexParticipation_solo;
+
+  /// No description provided for @sexParticipation_partner.
+  ///
+  /// In en, this message translates to:
+  /// **'Partner'**
+  String get sexParticipation_partner;
+
+  /// No description provided for @sexParticipation_group.
+  ///
+  /// In en, this message translates to:
+  /// **'Group'**
+  String get sexParticipation_group;
 
   /// No description provided for @dayOfWeek_monday.
   ///
@@ -697,6 +769,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Your Insights'**
   String get mainScreen_insightsPageTitle;
+
+  /// No description provided for @mainSceen_sexActivityPageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sex Activity'**
+  String get mainSceen_sexActivityPageTitle;
 
   /// No description provided for @mainScreen_sanitaryPageTitle.
   ///
@@ -847,6 +925,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Change Due At {time}'**
   String sanitaryProductsScreen_changeDueAt(String time);
+
+  /// No description provided for @sexActivityScreen_noSexActivityRecordsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No sex activity records found.'**
+  String get sexActivityScreen_noSexActivityRecordsFound;
+
+  /// The total sex activity history count.
+  ///
+  /// In en, this message translates to:
+  /// **'History ({history})'**
+  String sexActivityScreen_history(int history);
 
   /// No description provided for @settingsScreen_selectHistoryView.
   ///
