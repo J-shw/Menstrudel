@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:menstrudel/models/prefrences/day_of_week_enum.dart';
 import 'package:menstrudel/services/settings_service.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/l10n/l10n.dart';
@@ -34,6 +35,24 @@ class PreferencesSettingsScreen extends StatelessWidget {
               onChanged: (String? newLanguageCode) {
                 if (newLanguageCode != null) {
                   context.read<LocaleNotifier>().setLocale(newLanguageCode);
+                }
+              },
+            ),
+          ),
+          ListTile(
+            leading: const Icon(Icons.calendar_month_outlined),
+            title: Text(l10n.preferencesScreen_StartingDayOfWeek),
+            trailing: DropdownButton<String>(
+              value: settingsService.startingDayOfWeek,
+              items: StartingDayOfWeek.values.map((entry) {
+                return DropdownMenuItem<String>(
+                  value: entry.value,
+                  child: Text(entry.getDisplayName(l10n)),
+                );
+              }).toList(),
+              onChanged: (String? newStartingDayOfWeek) {
+                if (newStartingDayOfWeek != null) {
+                  context.read<SettingsService>().setStartingDayOfWeek(newStartingDayOfWeek);
                 }
               },
             ),
