@@ -1499,6 +1499,12 @@ abstract class AppLocalizations {
   /// **'Show the Sanitary Products tab on the main navigation bar.'**
   String get preferencesScreen_enableSanitaryProductsScreenSubtitle;
 
+  /// No description provided for @preferencesScreen_StartingDayOfWeek.
+  ///
+  /// In en, this message translates to:
+  /// **'Starting Day of the Week'**
+  String get preferencesScreen_StartingDayOfWeek;
+
   /// No description provided for @settingsScreen_about.
   ///
   /// In en, this message translates to:

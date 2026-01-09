@@ -837,6 +837,9 @@ class AppLocalizationsCs extends AppLocalizations {
       'Show the Sanitary Products tab on the main navigation bar.';
 
   @override
+  String get preferencesScreen_StartingDayOfWeek => 'Starting Day of the Week';
+
+  @override
   String get settingsScreen_about => 'About';
 
   @override

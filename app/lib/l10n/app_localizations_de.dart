@@ -846,6 +846,9 @@ class AppLocalizationsDe extends AppLocalizations {
       'Hygieneartikel in der Hauptnavigationsleiste anzeigen.';
 
   @override
+  String get preferencesScreen_StartingDayOfWeek => 'Starting Day of the Week';
+
+  @override
   String get settingsScreen_about => 'Über';
 
   @override
