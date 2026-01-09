@@ -99,7 +99,7 @@ class SettingsService extends ChangeNotifier {
     _pillNavEnabled = _prefs.getBool(pillNavEnabledKey) ?? false;
     _larcNavEnabled = _prefs.getBool(larcNavEnabledKey) ?? false;
     _sanitaryNavEnabled = _prefs.getBool(sanitaryNavEnabledKey) ?? true;
-    _sexActivityNavEnabled = _prefs.getBool(sexActivityNavEnabledKey) ?? true;
+    _sexActivityNavEnabled = _prefs.getBool(sexActivityNavEnabledKey) ?? false;
     _languageCode = _prefs.getString(languageKey) ?? 'system';
     _biometricsEnabled = _prefs.getBool(biometricEnabledKey) ?? false;
     _notificationsEnabled = _prefs.getBool(notificationsEnabledKey) ?? true;
