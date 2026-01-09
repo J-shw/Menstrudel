@@ -68,9 +68,11 @@
     "systemDefault": "podle systému",
     "flow": "tok",
     "type": "typ",
+    "other": "Other",
     "navBar_insights": "Statistiky",
     "navBar_logs": "Záznamy",
     "navBar_sanitary": "Pomůcky",
+    "navBar_sexActivity": "Sex Activity",
     "navBar_pill": "Pilulky",
     "navBar_larc": "DPRA",
     "navBar_settings": "Nastavení",
@@ -104,6 +106,18 @@
     "sanitaryProduct_periodUnderwear": "menstruační kalhotky",
     "sanitaryProducts_mostUsed": "Nejvíce používané",
     "sanitaryProducts_usageTrend": "Usage Trend",
+    "sexProtection_none": "None",
+    "sexProtection_barrier": "Barrier",
+    "sexProtection_hormonal": "Hormonal",
+    "sexProtection_natural": "Natural",
+    "sexProtection_permanent": "Permanent",
+    "sexType_vaginal": "Vaginal",
+    "sexType_anal": "Anal",
+    "sexType_oral": "Oral",
+    "sexType_manual": "Manual",
+    "sexParticipation_solo": "Solo",
+    "sexParticipation_partner": "Partner",
+    "sexParticipation_group": "Group",
     "dayOfWeek_monday": "Monday",
     "dayOfWeek_tuesday": "Tuesday",
     "dayOfWeek_wednesday": "Wednesday",
@@ -176,6 +190,7 @@
     "notification_SanitaryProductReminderTitle": "Sanitary Product Reminder",
     "notification_SanitaryProductReminderBody": "Remember to change your product.",
     "mainScreen_insightsPageTitle": "Vaše statistiky",
+    "mainSceen_sexActivityPageTitle": "Sex Activity",
     "mainScreen_sanitaryPageTitle": "Menstruační pomůcky",
     "mainScreen_pillsPageTitle": "Pills",
     "mainScreen_LarcsPageTitle": "LARCs",
@@ -251,6 +266,17 @@
             "time": {
                 "type": "String",
                 "example": "3:30 PM"
+            }
+        }
+    },
+    "sexActivityScreen_noSexActivityRecordsFound": "No sex activity records found.",
+    "sexActivityScreen_history": "History ({history})",
+    "@sexActivityScreen_history": {
+        "description": "The total sex activity history count.",
+        "placeholders": {
+            "history": {
+                "type": "int",
+                "example": "5"
             }
         }
     },
@@ -402,6 +428,8 @@
     "preferencesScreen_language": "Language",
     "preferencesScreen_enableSanitaryProductsScreen": "Enable Sanitary Products Screen",
     "preferencesScreen_enableSanitaryProductsScreenSubtitle": "Show the Sanitary Products tab on the main navigation bar.",
+    "preferencesScreen_enableSexActivityScreen": "Enable Sex Activity Screen",
+    "preferencesScreen_enableSexActivityScreenSubtitle": "Show the Sex Activity tab on the main navigation bar.",
     "preferencesScreen_StartingDayOfWeek": "Starting Day of the Week",
     "settingsScreen_about": "About",
     "aboutScreen_version": "Version",
