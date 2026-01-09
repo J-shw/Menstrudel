@@ -52,6 +52,9 @@
         }
     },
 
+    "logs": "Logs",
+    "insights": "Insights",
+
     "edit": "Edit",
 
     "delete": "Delete",
@@ -71,6 +74,8 @@
     "add": "Add",
     "notSet": "Not set",
     "removed": "Removed",
+
+    "totalLogs": "Total Logs",
 
     "note": "Note",
 
@@ -122,6 +127,8 @@
     "sanitaryProduct_pad": "Pad",
     "sanitaryProduct_menstrualCup": "Menstrual Cup",
     "sanitaryProduct_periodUnderwear": "Period Underwear",
+    "sanitaryProducts_mostUsed": "Most Used",
+    "sanitaryProducts_usageTrend": "Usage Trend",
 
     "sexProtection_none": "None",
     "sexProtection_barrier": "Barrier",

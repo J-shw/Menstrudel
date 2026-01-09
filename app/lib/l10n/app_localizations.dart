@@ -206,6 +206,18 @@ abstract class AppLocalizations {
   /// **'{count, plural, one{{count} Year} other{{count} Years}}'**
   String yearCount(int count);
 
+  /// No description provided for @logs.
+  ///
+  /// In en, this message translates to:
+  /// **'Logs'**
+  String get logs;
+
+  /// No description provided for @insights.
+  ///
+  /// In en, this message translates to:
+  /// **'Insights'**
+  String get insights;
+
   /// No description provided for @edit.
   ///
   /// In en, this message translates to:
@@ -307,6 +319,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Removed'**
   String get removed;
+
+  /// No description provided for @totalLogs.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Logs'**
+  String get totalLogs;
 
   /// No description provided for @note.
   ///

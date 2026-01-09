@@ -44,6 +44,8 @@
             }
         }
     },
+    "logs": "Logs",
+    "insights": "Insights",
     "edit": "Edit",
     "delete": "Elimina",
     "clear": "Cancella",
@@ -61,6 +63,7 @@
     "add": "Add",
     "notSet": "Not set",
     "removed": "Removed",
+    "totalLogs": "Total Logs",
     "note": "Note",
     "systemDefault": "System Default",
     "flow": "Flusso",
@@ -99,6 +102,8 @@
     "sanitaryProduct_pad": "Pad",
     "sanitaryProduct_menstrualCup": "Menstrual Cup",
     "sanitaryProduct_periodUnderwear": "Period Underwear",
+    "sanitaryProducts_mostUsed": "Most Used",
+    "sanitaryProducts_usageTrend": "Usage Trend",
     "error_valueMustbePositive": "Value must be positive",
     "error_valueCannotBeNull": "Value cannot be null",
     "notification_periodTitle": "Ciclo in arrivo",

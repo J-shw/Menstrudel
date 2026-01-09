@@ -84,6 +84,12 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get logs => 'Logs';
+
+  @override
+  String get insights => 'Insights';
+
+  @override
   String get edit => 'Edit';
 
   @override
@@ -133,6 +139,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get removed => 'Removed';
+
+  @override
+  String get totalLogs => 'Total Logs';
 
   @override
   String get note => 'Note';
