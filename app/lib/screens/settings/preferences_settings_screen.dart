@@ -44,7 +44,7 @@ class PreferencesSettingsScreen extends StatelessWidget {
             title: Text(l10n.preferencesScreen_StartingDayOfWeek),
             trailing: DropdownButton<String>(
               value: settingsService.startingDayOfWeek,
-              items: StartingDayOfWeek.values.map((entry) {
+              items: DayOfWeek.values.map((entry) {
                 return DropdownMenuItem<String>(
                   value: entry.value,
                   child: Text(entry.getDisplayName(l10n)),
