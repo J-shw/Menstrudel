@@ -1,9 +1,10 @@
 
 import 'package:menstrudel/l10n/app_localizations.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 /// Enum representing the starting day of the week.
 /// Currently used for calendar displays.
-enum StartingDayOfWeek {
+enum DayOfWeek {
   monday('monday'),
   tuesday('tuesday'),
   wednesday('wednesday'),
@@ -13,15 +14,28 @@ enum StartingDayOfWeek {
   sunday('sunday');
 
   final String value;
-  const StartingDayOfWeek(this.value);
+  const DayOfWeek(this.value);
 
   /// Converts a string to the corresponding StartingDayOfWeek enum value.
   /// Defaults to Monday if no match is found.
-  static StartingDayOfWeek fromString(String day) {
-    return StartingDayOfWeek.values.firstWhere(
+  static DayOfWeek fromString(String day) {
+    return DayOfWeek.values.firstWhere(
       (e) => e.value == day.toLowerCase(),
-      orElse: () => StartingDayOfWeek.monday,
+      orElse: () => DayOfWeek.monday,
     );
+  }
+
+  /// Converts to the TableCalendar StartingDayOfWeek enum.
+  StartingDayOfWeek get toTableCalendar {
+    return switch (this) {
+      monday    => StartingDayOfWeek.monday,
+      tuesday   => StartingDayOfWeek.tuesday,
+      wednesday => StartingDayOfWeek.wednesday,
+      thursday  => StartingDayOfWeek.thursday,
+      friday    => StartingDayOfWeek.friday,
+      saturday  => StartingDayOfWeek.saturday,
+      sunday    => StartingDayOfWeek.sunday,
+    };
   }
 
   /// Returns the localised display name for the day of the week.
