@@ -68,9 +68,11 @@
     "systemDefault": "System Standard",
     "flow": "Ausfluss",
     "type": "Typ",
+    "other": "Other",
     "navBar_insights": "Einblicke",
     "navBar_logs": "Protokolle",
     "navBar_sanitary": "Hygiene",
+    "navBar_sexActivity": "Sex Activity",
     "navBar_pill": "Pille",
     "navBar_larc": "LARC",
     "navBar_settings": "Einstellungen",
@@ -104,6 +106,18 @@
     "sanitaryProduct_periodUnderwear": "Periodenunterwäsche",
     "sanitaryProducts_mostUsed": "Most Used",
     "sanitaryProducts_usageTrend": "Usage Trend",
+    "sexProtection_none": "None",
+    "sexProtection_barrier": "Barrier",
+    "sexProtection_hormonal": "Hormonal",
+    "sexProtection_natural": "Natural",
+    "sexProtection_permanent": "Permanent",
+    "sexType_vaginal": "Vaginal",
+    "sexType_anal": "Anal",
+    "sexType_oral": "Oral",
+    "sexType_manual": "Manual",
+    "sexParticipation_solo": "Solo",
+    "sexParticipation_partner": "Partner",
+    "sexParticipation_group": "Group",
     "dayOfWeek_monday": "Monday",
     "dayOfWeek_tuesday": "Tuesday",
     "dayOfWeek_wednesday": "Wednesday",
@@ -176,6 +190,7 @@
     "notification_SanitaryProductReminderTitle": "Erinnerung an Hygieneartikel",
     "notification_SanitaryProductReminderBody": "Denke daran, Dein Produkt zu wechseln.",
     "mainScreen_insightsPageTitle": "Deine Erkenntnisse",
+    "mainSceen_sexActivityPageTitle": "Sex Activity",
     "mainScreen_sanitaryPageTitle": "Hygieneartikel",
     "mainScreen_pillsPageTitle": "Pille",
     "mainScreen_LarcsPageTitle": "LARC",
@@ -251,6 +266,17 @@
             "time": {
                 "type": "String",
                 "example": "3:30 PM"
+            }
+        }
+    },
+    "sexActivityScreen_noSexActivityRecordsFound": "No sex activity records found.",
+    "sexActivityScreen_history": "History ({history})",
+    "@sexActivityScreen_history": {
+        "description": "The total sex activity history count.",
+        "placeholders": {
+            "history": {
+                "type": "int",
+                "example": "5"
             }
         }
     },
@@ -402,6 +428,8 @@
     "preferencesScreen_language": "Sprache",
     "preferencesScreen_enableSanitaryProductsScreen": "Bildschirm für Hygieneartikel aktivieren",
     "preferencesScreen_enableSanitaryProductsScreenSubtitle": "Hygieneartikel in der Hauptnavigationsleiste anzeigen.",
+    "preferencesScreen_enableSexActivityScreen": "Enable Sex Activity Screen",
+    "preferencesScreen_enableSexActivityScreenSubtitle": "Show the Sex Activity tab on the main navigation bar.",
     "preferencesScreen_StartingDayOfWeek": "Starting Day of the Week",
     "settingsScreen_about": "Über",
     "aboutScreen_version": "Version",
