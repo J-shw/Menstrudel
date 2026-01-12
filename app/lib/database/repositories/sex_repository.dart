@@ -76,7 +76,7 @@ class Manager {
 
       if (!importData.containsKey('sexual_activity_logs'))
       {
-        throw const FormatException('Invalid import file: Missing required larcs data sections.');
+        throw const FormatException('Invalid import file: Missing required sexual activity logs data sections.');
       }
       
       final importedDbVersion = importData['db_version'] as int?;
