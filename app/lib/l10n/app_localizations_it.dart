@@ -264,6 +264,12 @@ class AppLocalizationsIt extends AppLocalizations {
   String get sanitaryProduct_periodUnderwear => 'Period Underwear';
 
   @override
+  String get sanitaryProducts_mostUsed => 'Most Used';
+
+  @override
+  String get sanitaryProducts_usageTrend => 'Usage Trend';
+
+  @override
   String get sexProtection_none => 'None';
 
   @override
@@ -298,6 +304,18 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get sexParticipation_group => 'Group';
+
+  @override
+  String get userGoal_general => 'General Health';
+
+  @override
+  String get userGoal_sexual => 'Sexual Health';
+
+  @override
+  String get userGoal_conceive => 'Trying to Conceive';
+
+  @override
+  String get userGoal_avoid => 'Avoiding Pregnancy';
 
   @override
   String get dayOfWeek_monday => 'Monday';
@@ -898,6 +916,9 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get preferencesScreen_enableSexActivityScreenSubtitle =>
       'Show the Sex Activity tab on the main navigation bar.';
+
+  @override
+  String get preferencesScreen_StartingDayOfWeek => 'Starting Day of the Week';
 
   @override
   String get settingsScreen_about => 'Informazioni';

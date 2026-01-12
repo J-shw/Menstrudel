@@ -144,6 +144,25 @@
     "sexParticipation_solo": "Solo",
     "sexParticipation_partner": "Partner",
     "sexParticipation_group": "Group",
+
+    "userGoal_general": "General Health",
+    "@userGoal_general": {
+        "description": "For users tracking periods for general health."
+    },
+    "userGoal_sexual": "Sexual Health",
+    "@userGoal_sexual": {
+        "description": "For users focusing on sexual health."
+    },
+    "userGoal_conceive": "Trying to Conceive",
+    "@userGoal_conceive": {
+        "description": "For users focusing on trying to conceive."
+    },
+    "userGoal_avoid": "Avoiding Pregnancy",
+    "@userGoal_avoid": {
+        "description": "For users focusing on avoiding pregnancy."
+    },
+
+
     "dayOfWeek_monday": "Monday",
     "dayOfWeek_tuesday": "Tuesday",
     "dayOfWeek_wednesday": "Wednesday",
