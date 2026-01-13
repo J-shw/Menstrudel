@@ -1,13 +1,15 @@
 import 'package:menstrudel/models/app/user_goal_types_enum.dart';
 
 class UserEntry {
-  final int? id;
+  static const int singletonId = 1; // There can only ever be 1 user
+
+  final int id; 
   final String name;
   final DateTime? birthDate;
   final UserGoalTypes primaryGoal;
 
   UserEntry({
-    this.id,
+    this.id = singletonId,
     required this.name,
     this.birthDate,
     required this.primaryGoal,
@@ -23,13 +25,12 @@ class UserEntry {
   }
 
   UserEntry copyWith({
-    int? id,
     String? name,
     DateTime? birthDate,
     UserGoalTypes? primaryGoal,
   }) {
     return UserEntry(
-      id: id ?? this.id,
+      id: id,
       name: name ?? this.name,
       birthDate: birthDate ?? this.birthDate,
       primaryGoal: primaryGoal ?? this.primaryGoal,
@@ -40,7 +41,9 @@ class UserEntry {
     return UserEntry(
       id: map['id'] as int,
       name: map['name'] as String,
-      birthDate: map['birth_date'] != null ? DateTime.parse(map['birth_date'] as String): null,
+      birthDate: map['birth_date'] != null 
+          ? DateTime.parse(map['birth_date'] as String) 
+          : null,
       primaryGoal: UserGoalTypes.fromDbName(map['primary_goal'] as String),
     );
   }
