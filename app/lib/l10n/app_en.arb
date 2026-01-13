@@ -16,6 +16,9 @@
     "start": "Start",
     "end": "End",
 
+    "next": "Next",
+    "back": "Back",
+
     "day": "Day",
     "days": "Days",
 
@@ -240,6 +243,42 @@
     "notification_SanitaryProductReminderTitle": "Sanitary Product Reminder",
     "notification_SanitaryProductReminderBody": "Remember to change your product.",
 
+    "onboardingScreen_welcomeToMenstrudel": "Welcome to Menstrudel",
+    "@onboardingScreen_welcomeToMenstrudel": {
+        "description": "Title for the onboarding screen."
+    },
+    "onboardingScreen_welcomeToMenstrudelDescription": "Your offline, private cycle tracker.",
+    "@onboardingScreen_welcomeToMenstrudelDescription": {
+        "description": "Small into description for the onboarding screen."
+    },
+    "onboardingScreen_profileTitle": "About You",
+    "@onboardingScreen_profileTitle": {
+        "description": "Title for the profile onboarding screen."
+    },
+    "onboardingScreen_profileName": "What should we call you?",
+    "@onboardingScreen_profileName": {
+        "description": "Name question for the profile onboarding screen."
+    },
+    "onboardingScreen_profileDate": "Birth Date (Optional)",
+    "@onboardingScreen_profileDate": {
+        "description": "Birth date for the profile onboarding screen. This field is optional."
+    },
+    "onboardingScreen_profileDatePlaceholder": "Tap to set birthday",
+    "@onboardingScreen_profileDatePlaceholder": {
+        "description": "Displays when birthday value is none (Due to being optional). Prompts user to set their birthday"
+    },
+    "onboardingScreen_goalTitle": "What's your goal?",
+    "@onboardingScreen_goalTitle": {
+        "description": "Title for the goal onboarding screen."
+    },
+    "onboardingScreen_goalDescription": "This helps us tailor the insights you see.",
+    "@onboardingScreen_goalDescription": {
+        "description": "Description for the goal onboarding screen."
+    },
+    "onboardingScreen_getStarted": "Get Started",
+    "@onboardingScreen_getStarted": {
+        "description": "Button text for the get started navigation button"
+    },
 
     "mainScreen_insightsPageTitle": "Your Insights",
     "mainSceen_sexActivityPageTitle": "Sex Activity",

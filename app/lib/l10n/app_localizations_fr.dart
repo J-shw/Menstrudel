@@ -42,6 +42,12 @@ class AppLocalizationsFr extends AppLocalizations {
   String get end => 'Fin';
 
   @override
+  String get next => 'Next';
+
+  @override
+  String get back => 'Back';
+
+  @override
   String get day => 'Jour';
 
   @override
@@ -402,6 +408,35 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get notification_SanitaryProductReminderBody =>
       'N\'oubliez pas de changer votre produit hygiénique.';
+
+  @override
+  String get onboardingScreen_welcomeToMenstrudel => 'Welcome to Menstrudel';
+
+  @override
+  String get onboardingScreen_welcomeToMenstrudelDescription =>
+      'Your offline, private cycle tracker.';
+
+  @override
+  String get onboardingScreen_profileTitle => 'About You';
+
+  @override
+  String get onboardingScreen_profileName => 'What should we call you?';
+
+  @override
+  String get onboardingScreen_profileDate => 'Birth Date (Optional)';
+
+  @override
+  String get onboardingScreen_profileDatePlaceholder => 'Tap to set birthday';
+
+  @override
+  String get onboardingScreen_goalTitle => 'What\'s your goal?';
+
+  @override
+  String get onboardingScreen_goalDescription =>
+      'This helps us tailor the insights you see.';
+
+  @override
+  String get onboardingScreen_getStarted => 'Get Started';
 
   @override
   String get mainScreen_insightsPageTitle => 'Votre Aperçu';

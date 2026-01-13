@@ -170,6 +170,18 @@ abstract class AppLocalizations {
   /// **'End'**
   String get end;
 
+  /// No description provided for @next.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get next;
+
+  /// No description provided for @back.
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get back;
+
   /// No description provided for @day.
   ///
   /// In en, this message translates to:
@@ -799,6 +811,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Remember to change your product.'**
   String get notification_SanitaryProductReminderBody;
+
+  /// Title for the onboarding screen.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome to Menstrudel'**
+  String get onboardingScreen_welcomeToMenstrudel;
+
+  /// Small into description for the onboarding screen.
+  ///
+  /// In en, this message translates to:
+  /// **'Your offline, private cycle tracker.'**
+  String get onboardingScreen_welcomeToMenstrudelDescription;
+
+  /// Title for the profile onboarding screen.
+  ///
+  /// In en, this message translates to:
+  /// **'About You'**
+  String get onboardingScreen_profileTitle;
+
+  /// Name question for the profile onboarding screen.
+  ///
+  /// In en, this message translates to:
+  /// **'What should we call you?'**
+  String get onboardingScreen_profileName;
+
+  /// Birth date for the profile onboarding screen. This field is optional.
+  ///
+  /// In en, this message translates to:
+  /// **'Birth Date (Optional)'**
+  String get onboardingScreen_profileDate;
+
+  /// Displays when birthday value is none (Due to being optional). Prompts user to set their birthday
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to set birthday'**
+  String get onboardingScreen_profileDatePlaceholder;
+
+  /// Title for the goal onboarding screen.
+  ///
+  /// In en, this message translates to:
+  /// **'What\'s your goal?'**
+  String get onboardingScreen_goalTitle;
+
+  /// Description for the goal onboarding screen.
+  ///
+  /// In en, this message translates to:
+  /// **'This helps us tailor the insights you see.'**
+  String get onboardingScreen_goalDescription;
+
+  /// Button text for the get started navigation button
+  ///
+  /// In en, this message translates to:
+  /// **'Get Started'**
+  String get onboardingScreen_getStarted;
 
   /// No description provided for @mainScreen_insightsPageTitle.
   ///
