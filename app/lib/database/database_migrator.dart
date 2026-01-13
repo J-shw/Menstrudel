@@ -150,7 +150,7 @@ class DatabaseMigrator {
   static Future<void> createUserTables(Database db) async {
     await db.execute('''
       CREATE TABLE user (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        id INTEGER PRIMARY KEY CHECK (id = 1),
         name TEXT NOT NULL,
         birth_date TEXT,
         primary_goal TEXT NOT NULL,
