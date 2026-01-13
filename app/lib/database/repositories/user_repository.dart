@@ -41,6 +41,11 @@ class UserRepository {
     final db = await dbProvider.database;
     await db.delete('user', where: 'id = ?', whereArgs: [id]);
   }
+
+  Future<void> setOnboardingComplete() async {
+    final db = await dbProvider.database;
+    await db.update('user', {'onboarding_complete': 1});
+  }
 }
 
 class Manager {
