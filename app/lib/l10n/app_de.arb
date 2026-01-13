@@ -24,7 +24,7 @@
             }
         }
     },
-    "monthCount": "{count, plural, one{{count} Month} other{{count} Months}}",
+    "monthCount": "{count, plural, one{{count} Monat} other{{count} Monate}}",
     "@monthCount": {
         "description": "A message that displays a count of months, handling singular and plural forms.",
         "placeholders": {
@@ -34,7 +34,7 @@
             }
         }
     },
-    "yearCount": "{count, plural, one{{count} Year} other{{count} Years}}",
+    "yearCount": "{count, plural, one{{count} Jahr} other{{count} Jahre}}",
     "@yearCount": {
         "description": "A message that displays a count of years, handling singular and plural forms.",
         "placeholders": {
@@ -44,9 +44,9 @@
             }
         }
     },
-    "logs": "Logs",
+    "logs": "Protokolle",
     "insights": "Insights",
-    "edit": "Edit",
+    "edit": "Bearbeiten",
     "delete": "Löschen",
     "clear": "Löschen",
     "save": "Speichern",
@@ -68,7 +68,7 @@
     "systemDefault": "System Standard",
     "flow": "Ausfluss",
     "type": "Typ",
-    "other": "Other",
+    "other": "Sonstiges",
     "navBar_insights": "Einblicke",
     "navBar_logs": "Protokolle",
     "navBar_sanitary": "Hygiene",
@@ -108,9 +108,9 @@
     "sanitaryProducts_usageTrend": "Usage Trend",
     "sexProtection_none": "None",
     "sexProtection_barrier": "Barrier",
-    "sexProtection_hormonal": "Hormonal",
-    "sexProtection_natural": "Natural",
-    "sexProtection_permanent": "Permanent",
+    "sexProtection_hormonal": "Hormonell",
+    "sexProtection_natural": "Natürlich",
+    "sexProtection_permanent": "Dauerhaft",
     "sexType_vaginal": "Vaginal",
     "sexType_anal": "Anal",
     "sexType_oral": "Oral",
@@ -118,13 +118,13 @@
     "sexParticipation_solo": "Solo",
     "sexParticipation_partner": "Partner",
     "sexParticipation_group": "Group",
-    "dayOfWeek_monday": "Monday",
-    "dayOfWeek_tuesday": "Tuesday",
-    "dayOfWeek_wednesday": "Wednesday",
-    "dayOfWeek_thursday": "Thursday",
-    "dayOfWeek_friday": "Friday",
-    "dayOfWeek_saturday": "Saturday",
-    "dayOfWeek_sunday": "Sunday",
+    "dayOfWeek_monday": "Montag",
+    "dayOfWeek_tuesday": "Dienstag",
+    "dayOfWeek_wednesday": "Mittwoch",
+    "dayOfWeek_thursday": "Donnerstag",
+    "dayOfWeek_friday": "Freitag",
+    "dayOfWeek_saturday": "Samstag",
+    "dayOfWeek_sunday": "Sonntag",
     "error_valueMustbePositive": "Der Wert muss positiv sein",
     "error_valueCannotBeNull": "Der Wert darf nicht null sein",
     "notification_periodTitle": "Periode nähert sich",
@@ -190,7 +190,7 @@
     "notification_SanitaryProductReminderTitle": "Erinnerung an Hygieneartikel",
     "notification_SanitaryProductReminderBody": "Denke daran, Dein Produkt zu wechseln.",
     "mainScreen_insightsPageTitle": "Deine Erkenntnisse",
-    "mainSceen_sexActivityPageTitle": "Sex Activity",
+    "mainSceen_sexActivityPageTitle": "Sexuelle Aktivität",
     "mainScreen_sanitaryPageTitle": "Hygieneartikel",
     "mainScreen_pillsPageTitle": "Pille",
     "mainScreen_LarcsPageTitle": "LARC",
@@ -269,8 +269,8 @@
             }
         }
     },
-    "sexActivityScreen_noSexActivityRecordsFound": "No sex activity records found.",
-    "sexActivityScreen_history": "History ({history})",
+    "sexActivityScreen_noSexActivityRecordsFound": "Keine Aufzeichnungen über sexuelle Aktivitäten gefunden.",
+    "sexActivityScreen_history": "Historie ({history})",
     "@sexActivityScreen_history": {
         "description": "The total sex activity history count.",
         "placeholders": {
