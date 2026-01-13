@@ -35,7 +35,10 @@ class DatabaseMigrator {
     }
     if (oldVersion < 9) await createLarcTables(db);
     if (oldVersion < 10) await createSanitaryProductTables(db);
-    if (oldVersion < 11) await createSexualActivityTables(db);
+    if (oldVersion < 11) {
+      await createSexualActivityTables(db);
+      await createUserTables(db);
+      }
   }
 
   // --- Table Creation Methods ---
@@ -141,6 +144,18 @@ class DatabaseMigrator {
         protection_type TEXT,
         note TEXT
       )
+      ''');
+  }
+
+  static Future<void> createUserTables(Database db) async {
+    await db.execute('''
+      CREATE TABLE user (
+        id INTEGER PRIMARY KEY CHECK (id = 1),
+        name TEXT NOT NULL,
+        birth_date TEXT,
+        primary_goal TEXT NOT NULL,
+        onboarding_complete INTEGER NOT NULL DEFAULT 0
+        )
       ''');
   }
 

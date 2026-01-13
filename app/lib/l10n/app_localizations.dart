@@ -566,6 +566,18 @@ abstract class AppLocalizations {
   /// **'Period Underwear'**
   String get sanitaryProduct_periodUnderwear;
 
+  /// No description provided for @sanitaryProducts_mostUsed.
+  ///
+  /// In en, this message translates to:
+  /// **'Most Used'**
+  String get sanitaryProducts_mostUsed;
+
+  /// No description provided for @sanitaryProducts_usageTrend.
+  ///
+  /// In en, this message translates to:
+  /// **'Usage Trend'**
+  String get sanitaryProducts_usageTrend;
+
   /// No description provided for @sexProtection_none.
   ///
   /// In en, this message translates to:
@@ -637,6 +649,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Group'**
   String get sexParticipation_group;
+
+  /// For users tracking periods for general health.
+  ///
+  /// In en, this message translates to:
+  /// **'General Health'**
+  String get userGoal_general;
+
+  /// For users focusing on sexual health.
+  ///
+  /// In en, this message translates to:
+  /// **'Sexual Health'**
+  String get userGoal_sexual;
+
+  /// For users focusing on trying to conceive.
+  ///
+  /// In en, this message translates to:
+  /// **'Trying to Conceive'**
+  String get userGoal_conceive;
+
+  /// For users focusing on avoiding pregnancy.
+  ///
+  /// In en, this message translates to:
+  /// **'Avoiding Pregnancy'**
+  String get userGoal_avoid;
 
   /// No description provided for @dayOfWeek_monday.
   ///
@@ -1588,6 +1624,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Show the Sanitary Products tab on the main navigation bar.'**
   String get preferencesScreen_enableSanitaryProductsScreenSubtitle;
+
+  /// No description provided for @preferencesScreen_enableSexActivityScreen.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable Sex Activity Screen'**
+  String get preferencesScreen_enableSexActivityScreen;
+
+  /// No description provided for @preferencesScreen_enableSexActivityScreenSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Show the Sex Activity tab on the main navigation bar.'**
+  String get preferencesScreen_enableSexActivityScreenSubtitle;
 
   /// No description provided for @preferencesScreen_StartingDayOfWeek.
   ///

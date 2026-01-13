@@ -270,6 +270,54 @@ class AppLocalizationsFr extends AppLocalizations {
   String get sanitaryProducts_usageTrend => 'Usage Trend';
 
   @override
+  String get sexProtection_none => 'None';
+
+  @override
+  String get sexProtection_barrier => 'Barrier';
+
+  @override
+  String get sexProtection_hormonal => 'Hormonal';
+
+  @override
+  String get sexProtection_natural => 'Natural';
+
+  @override
+  String get sexProtection_permanent => 'Permanent';
+
+  @override
+  String get sexType_vaginal => 'Vaginal';
+
+  @override
+  String get sexType_anal => 'Anal';
+
+  @override
+  String get sexType_oral => 'Oral';
+
+  @override
+  String get sexType_manual => 'Manual';
+
+  @override
+  String get sexParticipation_solo => 'Solo';
+
+  @override
+  String get sexParticipation_partner => 'Partner';
+
+  @override
+  String get sexParticipation_group => 'Group';
+
+  @override
+  String get userGoal_general => 'General Health';
+
+  @override
+  String get userGoal_sexual => 'Sexual Health';
+
+  @override
+  String get userGoal_conceive => 'Trying to Conceive';
+
+  @override
+  String get userGoal_avoid => 'Avoiding Pregnancy';
+
+  @override
   String get dayOfWeek_monday => 'Monday';
 
   @override
@@ -362,7 +410,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get mainSceen_sexActivityPageTitle => 'Sex Activity';
 
   @override
-  String get mainScreen_sanitaryPageTitle => 'Sanitary Products';
+  String get mainScreen_sanitaryPageTitle => 'Produits hygiéniques';
 
   @override
   String get mainScreen_pillsPageTitle => 'Pilules';
@@ -887,6 +935,9 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get preferencesScreen_enableSexActivityScreenSubtitle =>
       'Show the Sex Activity tab on the main navigation bar.';
+
+  @override
+  String get preferencesScreen_StartingDayOfWeek => 'Starting Day of the Week';
 
   @override
   String get settingsScreen_about => 'À propos';

@@ -46,6 +46,8 @@ class AppDatabase {
     await DatabaseMigrator.createSanitaryProductTables(db);
 
     await DatabaseMigrator.createSexualActivityTables(db);
+
+    await DatabaseMigrator.createUserTables(db);
   }
 
   Future<void> close() async {

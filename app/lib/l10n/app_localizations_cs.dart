@@ -9,46 +9,46 @@ class AppLocalizationsCs extends AppLocalizations {
   AppLocalizationsCs([String locale = 'cs']) : super(locale);
 
   @override
-  String get appTitle => 'Menstrundel';
+  String get appTitle => 'Menstrudel';
 
   @override
-  String get nextDue => 'další termín';
+  String get nextDue => 'Další termín';
 
   @override
-  String get ongoing => 'probíhající';
+  String get ongoing => 'Probíhající';
 
   @override
-  String get overdue => 'zpožděný';
+  String get overdue => 'Zpožděný';
 
   @override
-  String get total => 'celkově';
+  String get total => 'Celkově';
 
   @override
-  String get shortest => 'nejkratší';
+  String get shortest => 'Nejkratší';
 
   @override
-  String get longest => 'nejdelší';
+  String get longest => 'Nejdelší';
 
   @override
-  String get date => 'datum';
+  String get date => 'Datum';
 
   @override
-  String get time => 'čas';
+  String get time => 'Čas';
 
   @override
-  String get start => 'začátek';
+  String get start => 'Začátek';
 
   @override
-  String get end => 'konec';
+  String get end => 'Konec';
 
   @override
-  String get day => 'den';
+  String get day => 'Den';
 
   @override
-  String get days => 'dny';
+  String get days => 'Dny';
 
   @override
-  String get hours => 'hodiny';
+  String get hours => 'Hodiny';
 
   @override
   String dayCount(int count) {
@@ -84,70 +84,79 @@ class AppLocalizationsCs extends AppLocalizations {
   }
 
   @override
-  String get edit => 'upravit';
+  String get logs => 'Záznamy';
 
   @override
-  String get delete => 'smazat';
+  String get insights => 'Statistiky';
 
   @override
-  String get clear => 'vyčistit';
+  String get edit => 'Upravit';
 
   @override
-  String get save => 'uložit';
+  String get delete => 'Smazat';
 
   @override
-  String get import => 'importovat';
+  String get clear => 'Vyčistit';
 
   @override
-  String get ok => 'ok';
+  String get save => 'Uložit';
 
   @override
-  String get confirm => 'potvrdit';
+  String get import => 'Importovat';
 
   @override
-  String get set => 'nastavit';
+  String get ok => 'Ok';
 
   @override
-  String get yes => 'ano';
+  String get confirm => 'Potvrdit';
 
   @override
-  String get no => 'ne';
+  String get set => 'Nastavit';
 
   @override
-  String get cancel => 'zrušit';
+  String get yes => 'Ano';
 
   @override
-  String get select => 'vybrat';
+  String get no => 'Ne';
 
   @override
-  String get close => 'zavřít';
+  String get cancel => 'Zrušit';
 
   @override
-  String get reset => 'restartovat';
+  String get select => 'Vybrat';
 
   @override
-  String get add => 'přidat';
+  String get close => 'Zavřít';
 
   @override
-  String get notSet => 'nenastavené';
+  String get reset => 'Restartovat';
 
   @override
-  String get removed => 'smazáno';
+  String get add => 'Přidat';
 
   @override
-  String get note => 'poznámka';
+  String get notSet => 'Nenastavené';
 
   @override
-  String get systemDefault => 'podle systému';
+  String get removed => 'Smazáno';
 
   @override
-  String get flow => 'tok';
+  String get totalLogs => 'Všechny záznamy';
 
   @override
-  String get type => 'typ';
+  String get note => 'Poznámka';
 
   @override
-  String get other => 'Other';
+  String get systemDefault => 'Podle systému';
+
+  @override
+  String get flow => 'Tok';
+
+  @override
+  String get type => 'Typ';
+
+  @override
+  String get other => 'Jiný';
 
   @override
   String get navBar_insights => 'Statistiky';
@@ -159,7 +168,7 @@ class AppLocalizationsCs extends AppLocalizations {
   String get navBar_sanitary => 'Pomůcky';
 
   @override
-  String get navBar_sexActivity => 'Sex Activity';
+  String get navBar_sexActivity => 'Sexuální aktivita';
 
   @override
   String get navBar_pill => 'Pilulky';
@@ -171,22 +180,22 @@ class AppLocalizationsCs extends AppLocalizations {
   String get navBar_settings => 'Nastavení';
 
   @override
-  String get flowIntensity_none => 'žádná';
+  String get flowIntensity_none => 'Žádná';
 
   @override
-  String get flowIntensity_spotting => 'špinění';
+  String get flowIntensity_spotting => 'Špinění';
 
   @override
-  String get flowIntensity_light => 'lehké';
+  String get flowIntensity_light => 'Lehké';
 
   @override
-  String get flowIntensity_moderate => 'střední';
+  String get flowIntensity_moderate => 'Střední';
 
   @override
-  String get flowIntensity_heavy => 'vysoké';
+  String get flowIntensity_heavy => 'Vysoké';
 
   @override
-  String get builtInSymptom_acne => 'akné';
+  String get builtInSymptom_acne => 'Akné';
 
   @override
   String get builtInSymptom_backPain => 'Bolest zad';
@@ -213,112 +222,130 @@ class AppLocalizationsCs extends AppLocalizations {
   String get painLevel_title => 'Intenzita bolesti';
 
   @override
-  String get painLevel_none => 'žádný';
+  String get painLevel_none => 'Žádná';
 
   @override
-  String get painLevel_mild => 'lehký';
+  String get painLevel_mild => 'Lehká';
 
   @override
-  String get painLevel_moderate => 'střední';
+  String get painLevel_moderate => 'Střední';
 
   @override
-  String get painLevel_severe => 'bolestivý';
+  String get painLevel_severe => 'Těžká';
 
   @override
-  String get pain_unbearable => 'nesnesitelné';
+  String get pain_unbearable => 'Nesnesitelná';
 
   @override
-  String get larcType_iud => 'nitroděložní tělísko';
+  String get larcType_iud => 'Nitroděložní tělísko';
 
   @override
-  String get larcType_implant => 'implantát';
+  String get larcType_implant => 'Implantát';
 
   @override
-  String get larcType_injection => 'injekce';
+  String get larcType_injection => 'Injekce';
 
   @override
-  String get larcType_ring => 'vaginální kroužek';
+  String get larcType_ring => 'Vaginální kroužek';
 
   @override
-  String get larcType_patch => 'náplast';
+  String get larcType_patch => 'Náplast';
 
   @override
-  String get sanitaryProduct_tampon => 'tampon';
+  String get sanitaryProduct_tampon => 'Tampon';
 
   @override
-  String get sanitaryProduct_pad => 'vložka';
+  String get sanitaryProduct_pad => 'Vložka';
 
   @override
-  String get sanitaryProduct_menstrualCup => 'menstruační kalíšek';
+  String get sanitaryProduct_menstrualCup => 'Menstruační kalíšek';
 
   @override
-  String get sanitaryProduct_periodUnderwear => 'menstruační kalhotky';
+  String get sanitaryProduct_periodUnderwear => 'Menstruační kalhotky';
 
   @override
-  String get sexProtection_none => 'None';
+  String get sanitaryProducts_mostUsed => 'Nejvíce používané';
 
   @override
-  String get sexProtection_barrier => 'Barrier';
+  String get sanitaryProducts_usageTrend => 'Trend používání';
 
   @override
-  String get sexProtection_hormonal => 'Hormonal';
+  String get sexProtection_none => 'Žádná';
 
   @override
-  String get sexProtection_natural => 'Natural';
+  String get sexProtection_barrier => 'Bariérová';
 
   @override
-  String get sexProtection_permanent => 'Permanent';
+  String get sexProtection_hormonal => 'Hormonální';
 
   @override
-  String get sexType_vaginal => 'Vaginal';
+  String get sexProtection_natural => 'Naturální';
 
   @override
-  String get sexType_anal => 'Anal';
+  String get sexProtection_permanent => 'Permanentní';
 
   @override
-  String get sexType_oral => 'Oral';
+  String get sexType_vaginal => 'Vaginální';
 
   @override
-  String get sexType_manual => 'Manual';
+  String get sexType_anal => 'Anální';
 
   @override
-  String get sexParticipation_solo => 'Solo';
+  String get sexType_oral => 'Orální';
+
+  @override
+  String get sexType_manual => 'Manuální';
+
+  @override
+  String get sexParticipation_solo => 'Sólo';
 
   @override
   String get sexParticipation_partner => 'Partner';
 
   @override
-  String get sexParticipation_group => 'Group';
+  String get sexParticipation_group => 'Skupina';
 
   @override
-  String get dayOfWeek_monday => 'Monday';
+  String get userGoal_general => 'General Health';
 
   @override
-  String get dayOfWeek_tuesday => 'Tuesday';
+  String get userGoal_sexual => 'Sexual Health';
 
   @override
-  String get dayOfWeek_wednesday => 'Wednesday';
+  String get userGoal_conceive => 'Trying to Conceive';
 
   @override
-  String get dayOfWeek_thursday => 'Thursday';
+  String get userGoal_avoid => 'Avoiding Pregnancy';
 
   @override
-  String get dayOfWeek_friday => 'Friday';
+  String get dayOfWeek_monday => 'Pondělí';
 
   @override
-  String get dayOfWeek_saturday => 'Saturday';
+  String get dayOfWeek_tuesday => 'Úterý';
 
   @override
-  String get dayOfWeek_sunday => 'Sunday';
+  String get dayOfWeek_wednesday => 'Středa';
 
   @override
-  String get error_valueMustbePositive => 'hodnota musí být kladná';
+  String get dayOfWeek_thursday => 'Čtvrtek';
 
   @override
-  String get error_valueCannotBeNull => 'hodnota nesmí být prázdná';
+  String get dayOfWeek_friday => 'Pátek';
 
   @override
-  String get notification_periodTitle => 'blížící se menstruace';
+  String get dayOfWeek_saturday => 'Sobota';
+
+  @override
+  String get dayOfWeek_sunday => 'Neděle';
+
+  @override
+  String get error_valueMustbePositive => 'Hodnota musí být kladná';
+
+  @override
+  String get error_valueCannotBeNull => 'Hodnota nesmí být prázdná';
+
+  @override
+  String get notification_periodTitle => 'Blížící se menstruace';
 
   @override
   String notification_periodBody(int count) {
@@ -332,7 +359,7 @@ class AppLocalizationsCs extends AppLocalizations {
   }
 
   @override
-  String get notification_periodOverdueTitle => 'opožděná menstruace';
+  String get notification_periodOverdueTitle => 'Opožděná menstruace';
 
   @override
   String notification_periodOverdueBody(int count) {
@@ -346,13 +373,13 @@ class AppLocalizationsCs extends AppLocalizations {
   }
 
   @override
-  String get notification_pillTitle => 'připomenutí pilulky';
+  String get notification_pillTitle => 'Připomenutí pilulky';
 
   @override
-  String get notification_pillBody => 'Nezapomeňte si dnes vzít pilulky!';
+  String get notification_pillBody => 'Nezapomeňte si dnes vzít pilulky.';
 
   @override
-  String get notification_larcTitle => 'Upomínka DPRA';
+  String get notification_larcTitle => 'Upomínka LARC';
 
   @override
   String notification_larcBody(String type, int days) {
@@ -360,59 +387,59 @@ class AppLocalizationsCs extends AppLocalizations {
   }
 
   @override
-  String get notification_loggingReminderTitle => 'Logging Reminder';
+  String get notification_loggingReminderTitle => 'Upozornění záznamu';
 
   @override
   String get notification_loggingReminderBody =>
-      'Tap to log your flow for today.';
+      'Klikněte a zaznamenejte svůj dnešní tok.';
 
   @override
   String get notification_SanitaryProductReminderTitle =>
-      'Sanitary Product Reminder';
+      'Upozornění na menstruační pomůcky';
 
   @override
   String get notification_SanitaryProductReminderBody =>
-      'Remember to change your product.';
+      'Nezapomeňte si vyměnit menstruační pomůcku.';
 
   @override
-  String get mainScreen_insightsPageTitle => 'Your Insights';
+  String get mainScreen_insightsPageTitle => 'Vaše statistiky';
 
   @override
-  String get mainSceen_sexActivityPageTitle => 'Sex Activity';
+  String get mainSceen_sexActivityPageTitle => 'Sexuální aktivita';
 
   @override
-  String get mainScreen_sanitaryPageTitle => 'Sanitary Products';
+  String get mainScreen_sanitaryPageTitle => 'Menstruační pomůcky';
 
   @override
-  String get mainScreen_pillsPageTitle => 'Pills';
+  String get mainScreen_pillsPageTitle => 'Pilulky';
 
   @override
-  String get mainScreen_LarcsPageTitle => 'LARCs';
+  String get mainScreen_LarcsPageTitle => 'LARC';
 
   @override
-  String get mainScreen_settingsPageTitle => 'Settings';
+  String get mainScreen_settingsPageTitle => 'Nastavení';
 
   @override
-  String get mainScreen_tooltipLogPeriod => 'Log period';
+  String get mainScreen_tooltipLogPeriod => 'Zapsání menstruace';
 
   @override
-  String get insightsScreen_errorPrefix => 'Error:';
+  String get insightsScreen_errorPrefix => 'Chyba:';
 
   @override
-  String get insightsScreen_noDataAvailable => 'No data available.';
+  String get insightsScreen_noDataAvailable => 'Žádná data k dispozici.';
 
   @override
-  String get logsScreen_calculatingPrediction => 'Calculating prediction...';
+  String get logsScreen_calculatingPrediction => 'Počítání předpovědi...';
 
   @override
   String get logScreen_logAtLeastTwoPeriods =>
-      'Log at least two periods to estimate next cycle.';
+      'Zapište nejméně dvě menstruace pro odhadnutí dalšího cyklu.';
 
   @override
-  String get logScreen_nextPeriodEstimate => 'Next period Est';
+  String get logScreen_nextPeriodEstimate => 'Odhad další menstruace';
 
   @override
-  String get logScreen_periodDueToday => 'Period due today';
+  String get logScreen_periodDueToday => 'Dnes má začít menstruace';
 
   @override
   String logScreen_periodOverdueBy(int count) {
@@ -427,14 +454,14 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get pillScreen_pillForTodayMarkedAsTaken =>
-      'Pill for today marked as taken.';
+      'Dnešní pilulka je označena jako užitá.';
 
   @override
   String get pillScreen_pillForTodayMarkedAsSkipped =>
-      'Pill for today marked as skipped.';
+      'Dnešní pilulka je označena jako přeskočena.';
 
   @override
-  String get larcScreen_noLarcRecordsFound => 'No LARC records found.';
+  String get larcScreen_noLarcRecordsFound => 'Žádné záznamy o LARC nalezeny.';
 
   @override
   String larcScreen_history(int history) {
@@ -448,19 +475,19 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get larcScreen_activeLarcsDescription =>
-      'Currently monitored LARC entries.';
+      'Aktuálně monitorované záznamy LARC.';
 
   @override
   String get larcScreen_noActiveRecords =>
-      'No LARC is currently active. Please log a new entry.';
+      'V současné době není aktivní LARC. Prosím přidejte nový záznam.';
 
   @override
   String get larcScreen_noHistoryRecords =>
-      'No past or overdue LARC records found.';
+      'Nebyly nalezeny žádné minulé ani prošlé záznamy LARC.';
 
   @override
   String get sanitaryProductsScreen_noSanitaryProductRecordsFound =>
-      'No sanitary product records found.';
+      'Žádné záznamy o menstruačních pomůckách nebyly nalezeny.';
 
   @override
   String sanitaryProductsScreen_history(int history) {
@@ -469,7 +496,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get sanitaryProductsScreen_noHistoryRecords =>
-      'No past sanitary product records found.';
+      'Žádné dřívější záznamy o menstruačních pomůckách nebyly nalezeny.';
 
   @override
   String sanitaryProductsScreen_activeProduct(String activeType) {
@@ -483,7 +510,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get sexActivityScreen_noSexActivityRecordsFound =>
-      'No sex activity records found.';
+      'Žádný záznam o sexuální aktivitě nalezen.';
 
   @override
   String sexActivityScreen_history(int history) {
@@ -491,147 +518,150 @@ class AppLocalizationsCs extends AppLocalizations {
   }
 
   @override
-  String get settingsScreen_selectHistoryView => 'Select History View';
+  String get settingsScreen_selectHistoryView => 'Zvolte zobrazení historie';
 
   @override
-  String get settingsScreen_deleteRegimen_question => 'Delete Regimen?';
+  String get settingsScreen_deleteRegimen_question => 'Odstranit režim?';
 
   @override
   String get settingsScreen_deleteRegimenDescription =>
-      'This will delete your current pill pack settings and all associated pill logs. This cannot be undone.';
+      'Tato akce vymaže vaše aktuální nastavení o balíčku pilulek a všechny záznamy o pilulkách. Tohle nemůže být vráceno.';
 
   @override
   String get settingsScreen_allLogsHaveBeenCleared =>
-      'All logs have been cleared.';
+      'Všechny zápisy byly vymazány.';
 
   @override
-  String get settingsScreen_clearAllLogs_question => 'Clear All Logs?';
+  String get settingsScreen_clearAllLogs_question => 'Smazat všechny záznamy?';
 
   @override
   String get settingsScreen_deleteAllLogsDescription =>
-      'This will permanently delete all your period logs. Your app settings will not be affected.';
+      'Tohle permanentně smaže všechny vaše záznamy o menstruaci. Nastavení aplikace zůstane beze změny.';
 
   @override
-  String get settingsScreen_appearance => 'Appearance';
+  String get settingsScreen_appearance => 'Vzhled';
 
   @override
-  String get settingsScreen_historyViewStyle => 'History View Style';
+  String get settingsScreen_historyViewStyle => 'Styl zobrazení historie';
 
   @override
-  String get settingsScreen_appTheme => 'App Theme';
+  String get settingsScreen_appTheme => 'Motiv aplikace';
 
   @override
-  String get settingsScreen_themeLight => 'Light';
+  String get settingsScreen_themeLight => 'Světlý';
 
   @override
-  String get settingsScreen_themeDark => 'Dark';
+  String get settingsScreen_themeDark => 'Tmavý';
 
   @override
-  String get settingsScreen_themeSystem => 'System';
+  String get settingsScreen_themeSystem => 'Systémový';
 
   @override
-  String get settingsScreen_dynamicTheme => 'Dynamic Theme';
+  String get settingsScreen_dynamicTheme => 'Dynamický motiv';
 
   @override
-  String get settingsScreen_useWallpaperColors => 'Use Wallpaper Colors';
+  String get settingsScreen_useWallpaperColors =>
+      'Použít barvy z tapety telefonu';
 
   @override
-  String get settingsScreen_themeColor => 'Theme Color';
+  String get settingsScreen_themeColor => 'Barva motivu';
 
   @override
-  String get settingsScreen_pickAColor => 'Pick a Color';
+  String get settingsScreen_pickAColor => 'Vyberte barvu';
 
   @override
-  String get settingsScreen_view => 'View';
+  String get settingsScreen_view => 'Zobrazení';
 
   @override
-  String get settingsScreen_birthControl => 'Birth Control';
+  String get settingsScreen_birthControl => 'Antikoncepce';
 
   @override
-  String get settingsScreen_enablePillTracking => 'Enable Pill Tracking';
+  String get settingsScreen_enablePillTracking => 'Zapnout sledování pilulek';
 
   @override
   String get settingsScreen_pillDescription =>
-      'Track your daily pill intake and get reminders.';
+      'Sledujte denní užívání pilulek a nastavte si připomenutí.';
 
   @override
-  String get settingsScreen_setUpPillRegimen => 'Set Up Pill Regimen';
+  String get settingsScreen_setUpPillRegimen => 'Nastavte si režim pilulek';
 
   @override
   String get settingsScreen_trackYourDailyPillIntake =>
-      'Track Your Daily Pill Intake';
+      'Sledujte svůj denní příjem pilulek';
 
   @override
-  String get settingsScreen_dailyPillReminder => 'Daily Pill Reminder';
+  String get settingsScreen_dailyPillReminder =>
+      'Denní připomenutí užívání pilulek';
 
   @override
-  String get settingsScreen_reminderTime => 'Reminder Time';
+  String get settingsScreen_reminderTime => 'Čas připomenutí';
 
   @override
   String get settingsScreen_periodPredictionAndReminders =>
-      'Period Prediction & Reminders';
+      'Předpověď menstruace a připomenutí';
 
   @override
   String get settingsScreen_upcomingPeriodReminder =>
-      'Upcoming Period Reminder';
+      'Připomenutí na přicházející menstruaci';
 
   @override
-  String get settingsScreen_remindMeBefore => 'Remind Me Before';
+  String get settingsScreen_remindMeBefore => 'Připomenout mi předem';
 
   @override
-  String get settingsScreen_notificationTime => 'Notification Time';
+  String get settingsScreen_notificationTime => 'Čas oznámení';
 
   @override
-  String get settingsScreen_overduePeriodReminder => 'Overdue Period Reminder';
+  String get settingsScreen_overduePeriodReminder =>
+      'Připomenutí na zpožděnou menstruaci';
 
   @override
-  String get settingsScreen_remindMeAfter => 'Remind Me After';
+  String get settingsScreen_remindMeAfter => 'Připomenout mi potom';
 
   @override
-  String get settingsScreen_enableLarcTracking => 'Enable LARC Tracking';
+  String get settingsScreen_enableLarcTracking => 'Zapnout sledování LARC';
 
   @override
   String get settingsScreen_larcDescription =>
-      'Track long-acting reversible contraceptives (LARCs).';
+      'Sledujte dlouhodobě působící reverzibilní antikoncepci (LARC).';
 
   @override
-  String get settingsScreen_larcType => 'LARC Type';
+  String get settingsScreen_larcType => 'Typ LARC';
 
   @override
-  String get settingsScreen_setDuration => 'Set Duration';
+  String get settingsScreen_setDuration => 'Nastavit čas trvání';
 
   @override
-  String get settingsScreen_larcDuration => 'LARC Replacement Duration';
+  String get settingsScreen_larcDuration => 'Doba platnosti LARC';
 
   @override
-  String get settingsScreen_enableLARCReminder => 'Enable LARC Reminder';
+  String get settingsScreen_enableLARCReminder => 'Zapnout připomenutí LARC';
 
   @override
-  String get settingsScreen_currentDuration => 'Current Duration';
+  String get settingsScreen_currentDuration => 'Aktuální doba trvání';
 
   @override
-  String get settingsScreen_durationInDays => 'Duration (Days)';
+  String get settingsScreen_durationInDays => 'Doba trvání (Dny)';
 
   @override
-  String get settingsScreen_LoggingScreen => 'Logging';
+  String get settingsScreen_LoggingScreen => 'Záznam';
 
   @override
   String get settingsScreen_enableLoggingReminders =>
-      'Enable Logging Reminders';
+      'Zapnout připomenutí záznamu';
 
   @override
   String get settingsScreen_loggingReminderDescription =>
-      'If you log a day with flow, you will receive a notification the following day to log your status.';
+      'Když zaznamenáte den s krvácením, následující den obdržíte oznámení, abyste zaznamenali svůj stav.';
 
   @override
-  String get settingsScreen_loggingReminderTime => 'Logging Reminder Time';
+  String get settingsScreen_loggingReminderTime => 'Čas upozornění záznamu';
 
   @override
-  String get settingsScreen_defaultSymptoms => 'Default Symptoms';
+  String get settingsScreen_defaultSymptoms => 'Výchozí příznaky';
 
   @override
   String get settingsScreen_defaultSymptomsSubtitle =>
-      'These are always available when logging new periods.\nTap an existing symptom to delete or \'+\' to add a new one.';
+      'Tyto jsou vždy k dispozici při zaznamenávání nových menstruací.\nKlepnutím na existující příznak jej smažete, klepnutím na „+“ přidáte nový.';
 
   @override
   String settingsScreen_deleteDefaultSymptomQuestion(String symptom) {
@@ -643,7 +673,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get settingsScreen_resetSymptomsListDescription =>
-      'This will remove all your custom symptoms and restore the original built-in list.\n\nYour existing log entries will not be changed.';
+      'Tohle smaže všechny vaše vlastní příznaky a obnoví původní vestavěný seznam.\n\nVaše existující záznamy se nezmění.';
 
   @override
   String settingsScreen_deleteDefaultSymptomDescription(
@@ -663,184 +693,194 @@ class AppLocalizationsCs extends AppLocalizations {
   }
 
   @override
-  String get settingsScreen_pillRegimens => 'Pill Regimens';
+  String get settingsScreen_pillRegimens => 'Režim pilulek';
 
   @override
-  String get settingsScreen_makeActive => 'Set as Active';
+  String get settingsScreen_makeActive => 'Nastavit jako aktivní';
 
   @override
   String get settingsScreen_activeRegimenReminder =>
-      'Active Regimen Reminder Settings';
+      'Nastavení připomenutí aktivního režimu';
 
   @override
-  String get settingsScreen_pack => 'Pack';
+  String get settingsScreen_pack => 'Balíček';
 
   @override
-  String get settingsScreen_dataManagement => 'Data Management';
+  String get settingsScreen_dataManagement => 'Správa dat';
 
   @override
-  String get settingsScreen_dangerZone => 'Danger Zone';
+  String get settingsScreen_dangerZone => 'Nebezpečná zóna';
 
   @override
-  String get settingsScreen_clearAllLogs => 'Clear All Logs';
+  String get settingsScreen_clearAllLogs => 'Vyčistit všechny záznamy';
 
   @override
   String get settingsScreen_clearAllLogsSubtitle =>
-      'Deletes your entire period and symptom history.';
+      'Vymaže celou historii menstruace a příznaků.';
 
   @override
-  String get settingsScreen_clearAllPillData => 'Clear All Pill Data';
+  String get settingsScreen_clearAllPillData =>
+      'Vyčistit všechny data o pilulkách';
 
   @override
   String get settingsScreen_clearAllPillDataSubtitle =>
-      'Removes your pill regimen and intake history.';
+      'Vymaže váš režim pilulek a historii užívání.';
 
   @override
-  String get settingsScreen_clearAllPillData_question => 'Clear All Pill Data?';
+  String get settingsScreen_clearAllPillData_question =>
+      'Vyčistit všechny data o pilulkách?';
 
   @override
   String get settingsScreen_deleteAllPillDataDescription =>
-      'This will permanently delete your pill regimen, reminders, and intake history.';
+      'Tímto krokem trvale smažete svůj režim užívání pilulek, připomenutí a historii užívání.';
 
   @override
   String get settingsScreen_allPillDataCleared =>
-      'All pill data has been cleared.';
+      'Všechny data o pilulkách byly vyčištěny.';
 
   @override
-  String get settingsScreen_clearAllLarcData => 'Clear All LARC Data';
+  String get settingsScreen_clearAllLarcData => 'Vyčistit všechny data o LARC';
 
   @override
   String get settingsScreen_clearAllLarcDataSubtitle =>
-      'Removes your LARCs history.';
+      'Smaže vaši historii o LARC.';
 
   @override
-  String get settingsScreen_clearAllLarcData_question => 'Clear All LARC Data?';
+  String get settingsScreen_clearAllLarcData_question =>
+      'Vyčistit všechny data o LARC?';
 
   @override
   String get settingsScreen_deleteAllLarcDataDescription =>
-      'This will permanently delete your LARC history.';
+      'Tímto trvale smažete svou historii LARC.';
 
   @override
   String get settingsScreen_allLarcDataCleared =>
-      'All LARC data has been cleared.';
+      'Všechny data o LARC byly vyčištěny.';
 
   @override
   String get settingsScreen_clearAllSanitaryData =>
-      'Clear All Sanitary Products Data';
+      'Vyčistit všechny data o menstruačních pomůckách';
 
   @override
   String get settingsScreen_clearAllSanitaryDataSubtitle =>
-      'Removes your sanitary products history.';
+      'Smaže vaši historii o menstruačních pomůckách.';
 
   @override
   String get settingsScreen_clearAllSanitaryData_question =>
-      'Clear All Sanitary Products Data?';
+      'Vyčistit všechny data o menstruačních pomůckách?';
 
   @override
   String get settingsScreen_deleteAllSanitaryDataDescription =>
-      'This will permanently delete your sanitary products history.';
+      'Tímto trvale smažete svou historii o menstruačních pomůckách.';
 
   @override
   String get settingsScreen_allSanitaryDataCleared =>
-      'All sanitary products data has been cleared.';
+      'Všechny data o menstruačních pomůckách byly vyčištěny.';
 
   @override
-  String get settingsScreen_exportPeriodData => 'Export Period Data';
+  String get settingsScreen_exportPeriodData =>
+      'Exportovat data o menstruacích';
 
   @override
-  String get settingsScreen_exportPillData => 'Export Pill Data';
+  String get settingsScreen_exportPillData => 'Exportovat data o pilulkách';
 
   @override
-  String get settingsScreen_exportLarcsData => 'Export LARCs Data';
+  String get settingsScreen_exportLarcsData => 'Exportovat data o LARC';
 
   @override
   String get settingsScreen_exportSanitaryData =>
-      'Export Sanitary Products Data';
+      'Exportovat data o menstruačních pomůckách';
 
   @override
-  String get settingsScreen_exportDataSubtitle => 'Create a JSON backup file.';
+  String get settingsScreen_exportDataSubtitle =>
+      'Vytvořit zálohovací JSON soubor.';
 
   @override
-  String get settingsScreen_exportSuccessful => 'Data exported successfully.';
+  String get settingsScreen_exportSuccessful =>
+      'Data byla exportována úspěšně.';
 
   @override
-  String get settingsScreen_exportFailed => 'Export failed. Please try again.';
+  String get settingsScreen_exportFailed =>
+      'Exportování se pokazilo. Prosím zkuste to znovu.';
 
   @override
-  String get settingsScreen_noDataToExport => 'No data found to export.';
+  String get settingsScreen_noDataToExport =>
+      'Nebyly nalezeny žádná data k exportování.';
 
   @override
   String get settingsScreen_exportDataMessage =>
-      'Here is my MenstruDel data export.';
+      'Zde je můj export dat z aplikace MenstruDel.';
 
   @override
-  String get settingsScreen_exportDataTitle => 'Export Data';
+  String get settingsScreen_exportDataTitle => 'Exportovat data';
 
   @override
-  String get settingsScreen_importDataTitle => 'Import Data';
+  String get settingsScreen_importDataTitle => 'Importovat data';
 
   @override
-  String get settingsScreen_importPeriodData => 'Import Period Data';
+  String get settingsScreen_importPeriodData =>
+      'Importovat data o menstruacích';
 
   @override
-  String get settingsScreen_importPillData => 'Import Pill Data';
+  String get settingsScreen_importPillData => 'Importovat data o pilulkách';
 
   @override
-  String get settingsScreen_importLarcsData => 'Import LARCs Data';
+  String get settingsScreen_importLarcsData => 'Importovat data o LARC';
 
   @override
   String get settingsScreen_importSanitaryData =>
-      'Import Sanitary Products Data';
+      'Importovat data o menstruačních pomůckách';
 
   @override
-  String get settingsScreen_importDataSubtitle => 'Overwrites existing data.';
+  String get settingsScreen_importDataSubtitle => 'Přepíše existující data.';
 
   @override
   String get settingsScreen_importPeriodData_question =>
-      'Are you sure you want to import Period Data?';
+      'Opravdu chcete importovat data o menstruacích?';
 
   @override
   String get settingsScreen_importPillData_question =>
-      'Are you sure you want to import Pill Data?';
+      'Opravdu chcete importovat data o pilulkách?';
 
   @override
   String get settingsScreen_importLarcData_question =>
-      'Are you sure you want to import LARC Data?';
+      'Opravdu chcete importovat data o LARC?';
 
   @override
   String get settingsScreen_importSanitaryData_question =>
-      'Are you sure you want to import Sanitary Products Data?';
+      'Opravdu chcete importovat data o menstruačních pomůckách?';
 
   @override
   String get settingsScreen_importPeriodDataDescription =>
-      'Importing data will permanently overwrite all your existing period logs and period settings. This cannot be undone.';
+      'Import dat trvale přepíše všechny vaše stávající záznamy o menstruacích a nastavení menstruace. Tento krok nelze vrátit zpět.';
 
   @override
   String get settingsScreen_importPillDataDescription =>
-      'Importing data will permanently overwrite all your existing pill history. This cannot be undone.';
+      'Import dat trvale přepíše všechny vaši stávající historii o pilulkách. Tento krok nelze vrátit zpět.';
 
   @override
   String get settingsScreen_importLarcDataDescription =>
-      'Importing data will permanently overwrite all your existing LARC history. This cannot be undone.';
+      'Import dat trvale přepíše všechny vaši stávající historii o LARC. Tento krok nelze vrátit zpět.';
 
   @override
   String get settingsScreen_importSanitaryDataDescription =>
-      'Importing data will permanently overwrite all your existing sanitary product history. This cannot be undone.';
+      'Import dat trvale přepíše všechny vaši stávající historii o menstruačních pomůckách. Tento krok nelze vrátit zpět.';
 
   @override
-  String get settingsScreen_importSuccessful => 'Data imported successfully!';
+  String get settingsScreen_importSuccessful =>
+      'Data byla importována úspěšně!';
 
   @override
   String get settingsScreen_importFailed =>
-      'Failed to import data. Please try again.';
+      'Importování se pokazilo. Prosím zkuste to znovu.';
 
   @override
   String get settingsScreen_importInvalidFile =>
-      'Invalid file format or data structure.';
+      'Neplatný formát souboru nebo struktura dat.';
 
   @override
   String get settingsScreen_importErrorGeneral =>
-      'Failed to import data. Please ensure the file is saved locally.';
+      'Importování se pokazilo. Prosím ujistěte se, že je soubor uložen lokálně.';
 
   @override
   String settingsScreen_importErrorPlatform(String message) {
@@ -848,32 +888,40 @@ class AppLocalizationsCs extends AppLocalizations {
   }
 
   @override
-  String get settingsScreen_security => 'Security';
+  String get settingsScreen_security => 'Bezpečnost';
 
   @override
-  String get securityScreen_enableBiometricLock => 'Enable Biometric Lock';
+  String get securityScreen_enableBiometricLock => 'Zapnout biometrický zámek';
 
   @override
   String get securityScreen_enableBiometricLockSubtitle =>
-      'Require fingerprint or face ID to open the app.';
+      'Vyžaduje otisk prstu nebo rozpoznání obličeje pro odemknutí aplikace.';
 
   @override
   String get securityScreen_noBiometricsAvailable =>
-      'No passcode, fingerprint, or face ID found. Please set one up in your device\'s settings.';
+      'Nebylo nalezeno žádné heslo, otisk prstu ani rozpoznání obličeje. Nastavte je prosím v nastavení svého zařízení.';
 
   @override
-  String get settingsScreen_preferences => 'Preferences';
+  String get settingsScreen_preferences => 'Preference';
 
   @override
-  String get preferencesScreen_language => 'Language';
+  String get preferencesScreen_language => 'Jazyk';
 
   @override
   String get preferencesScreen_enableSanitaryProductsScreen =>
-      'Enable Sanitary Products Screen';
+      'Povolit obrazovku menstruačních pomůcek';
 
   @override
   String get preferencesScreen_enableSanitaryProductsScreenSubtitle =>
-      'Show the Sanitary Products tab on the main navigation bar.';
+      'Zobrazit kartu menstruačních pomůcek na hlavní navigační liště.';
+
+  @override
+  String get preferencesScreen_enableSexActivityScreen =>
+      'Povolit obrazovku o sexuální aktivitě';
+
+  @override
+  String get preferencesScreen_enableSexActivityScreenSubtitle =>
+      'Show the Sex Activity tab on the main navigation bar.';
 
   @override
   String get preferencesScreen_StartingDayOfWeek => 'Starting Day of the Week';
