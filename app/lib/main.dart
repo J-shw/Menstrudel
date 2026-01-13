@@ -3,6 +3,8 @@ import 'package:menstrudel/controllers/log_ui_controller.dart';
 import 'package:menstrudel/coordinators/data_refresh_coordinator.dart';
 import 'package:menstrudel/database/repositories/periods_repository.dart';
 import 'package:menstrudel/database/repositories/logs_repository.dart';
+import 'package:menstrudel/database/repositories/user_repository.dart';
+import 'package:menstrudel/screens/gates/root_gate.dart';
 import 'package:timezone/data/latest.dart' as tz_data;
 import 'package:timezone/timezone.dart' as tz;
 import 'package:dynamic_color/dynamic_color.dart';
@@ -13,7 +15,6 @@ import 'package:menstrudel/notifiers/theme_notifier.dart';
 import 'package:provider/provider.dart';
 import 'package:menstrudel/services/wear_sync_service.dart';
 import 'package:menstrudel/models/themes/app_theme_mode_enum.dart';
-import 'package:menstrudel/screens/auth_gate.dart';
 import 'package:menstrudel/notifiers/locale_notifier.dart';
 import 'package:menstrudel/services/settings_service.dart';
 import 'package:home_widget/home_widget.dart';
@@ -49,6 +50,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => settingsService),
         Provider(create: (_) => LogsRepository()),
         Provider(create: (_) => PeriodsRepository()),
+        Provider(create: (_) => UserRepository()),
 
         // --- UI state ---
         ChangeNotifierProvider(
@@ -170,7 +172,7 @@ class _MainAppState extends State<MainApp> {
             colorScheme: darkColorScheme,
           ),
           themeMode: themeNotifier.themeMode.getThemeMode(),
-          home: const AuthGate(),
+          home: const RootGate(),
         );
       },
     );
