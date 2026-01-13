@@ -9,6 +9,7 @@ import 'package:menstrudel/screens/settings/sections/data_settings_screen.dart';
 import 'package:menstrudel/screens/settings/sections/security_settings_screen.dart';
 import 'package:menstrudel/screens/settings/sections/preferences_settings_screen.dart';
 import 'package:menstrudel/screens/settings/sections/about_screen.dart';
+import 'package:menstrudel/screens/settings/sections/user_settings_screen.dart';
 
 
 class SettingsScreen extends StatelessWidget {
@@ -20,6 +21,17 @@ class SettingsScreen extends StatelessWidget {
     
     return ListView(
       children: [
+        _SettingsSectionButton(
+          title: l10n.settingsScreen_userProfile,
+          icon: Icons.person_outline,
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const ProfileSettingsScreen()),
+            );
+          },
+        ),
+
         _SettingsSectionButton(
           title: l10n.settingsScreen_preferences,
           icon: Icons.tune_outlined,
