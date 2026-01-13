@@ -554,6 +554,24 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get settingsScreen_profile => 'Profile';
+
+  @override
+  String get settingsScreen_name => 'Name';
+
+  @override
+  String get settingsScreen_birthDate => 'Birth Date';
+
+  @override
+  String get settingsScreen_notSet => 'Not set';
+
+  @override
+  String get settingsScreen_appGoal => 'App Goal';
+
+  @override
+  String get settingsScreen_profileUpdated => 'Profile updated successfully';
+
+  @override
   String get settingsScreen_selectHistoryView => 'Select History View';
 
   @override
@@ -923,6 +941,9 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get securityScreen_noBiometricsAvailable =>
       'No passcode, fingerprint, or face ID found. Please set one up in your device\'s settings.';
+
+  @override
+  String get settingsScreen_userProfile => 'You';
 
   @override
   String get settingsScreen_preferences => 'Preferences';

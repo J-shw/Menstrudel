@@ -556,6 +556,24 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
+  String get settingsScreen_profile => 'Profile';
+
+  @override
+  String get settingsScreen_name => 'Name';
+
+  @override
+  String get settingsScreen_birthDate => 'Birth Date';
+
+  @override
+  String get settingsScreen_notSet => 'Not set';
+
+  @override
+  String get settingsScreen_appGoal => 'App Goal';
+
+  @override
+  String get settingsScreen_profileUpdated => 'Profile updated successfully';
+
+  @override
   String get settingsScreen_selectHistoryView =>
       'Sélectionner la vue de l\'historique';
 
@@ -948,6 +966,9 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get securityScreen_noBiometricsAvailable =>
       'Aucun code d\'accès, empreinte digitale ou Face ID n\'a été trouvé. Veuillez en configurer un dans les paramètres de votre appareil.';
+
+  @override
+  String get settingsScreen_userProfile => 'You';
 
   @override
   String get settingsScreen_preferences => 'Préférences';

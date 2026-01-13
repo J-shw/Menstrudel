@@ -1040,6 +1040,42 @@ abstract class AppLocalizations {
   /// **'History ({history})'**
   String sexActivityScreen_history(int history);
 
+  /// Title for the profile settings button.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get settingsScreen_profile;
+
+  /// No description provided for @settingsScreen_name.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get settingsScreen_name;
+
+  /// No description provided for @settingsScreen_birthDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Birth Date'**
+  String get settingsScreen_birthDate;
+
+  /// Used when birth date is not set.
+  ///
+  /// In en, this message translates to:
+  /// **'Not set'**
+  String get settingsScreen_notSet;
+
+  /// No description provided for @settingsScreen_appGoal.
+  ///
+  /// In en, this message translates to:
+  /// **'App Goal'**
+  String get settingsScreen_appGoal;
+
+  /// No description provided for @settingsScreen_profileUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile updated successfully'**
+  String get settingsScreen_profileUpdated;
+
   /// No description provided for @settingsScreen_selectHistoryView.
   ///
   /// In en, this message translates to:
@@ -1666,6 +1702,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No passcode, fingerprint, or face ID found. Please set one up in your device\'s settings.'**
   String get securityScreen_noBiometricsAvailable;
+
+  /// Title for the user profile settings button.
+  ///
+  /// In en, this message translates to:
+  /// **'You'**
+  String get settingsScreen_userProfile;
 
   /// No description provided for @settingsScreen_preferences.
   ///

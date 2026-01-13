@@ -553,6 +553,24 @@ class AppLocalizationsCs extends AppLocalizations {
   }
 
   @override
+  String get settingsScreen_profile => 'Profile';
+
+  @override
+  String get settingsScreen_name => 'Name';
+
+  @override
+  String get settingsScreen_birthDate => 'Birth Date';
+
+  @override
+  String get settingsScreen_notSet => 'Not set';
+
+  @override
+  String get settingsScreen_appGoal => 'App Goal';
+
+  @override
+  String get settingsScreen_profileUpdated => 'Profile updated successfully';
+
+  @override
   String get settingsScreen_selectHistoryView => 'Zvolte zobrazení historie';
 
   @override
@@ -935,6 +953,9 @@ class AppLocalizationsCs extends AppLocalizations {
   @override
   String get securityScreen_noBiometricsAvailable =>
       'Nebylo nalezeno žádné heslo, otisk prstu ani rozpoznání obličeje. Nastavte je prosím v nastavení svého zařízení.';
+
+  @override
+  String get settingsScreen_userProfile => 'You';
 
   @override
   String get settingsScreen_preferences => 'Preference';
