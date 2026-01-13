@@ -153,7 +153,8 @@ class DatabaseMigrator {
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
         birth_date TEXT,
-        primary_goal TEXT NOT NULL
+        primary_goal TEXT NOT NULL,
+        onboarding_complete INTEGER NOT NULL DEFAULT 0
         )
       ''');
   }
