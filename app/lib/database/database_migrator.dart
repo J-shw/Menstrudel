@@ -7,17 +7,22 @@ class DatabaseMigrator {
   static Future<void> upgrade(Database db, int oldVersion, int newVersion) async {
     // TODO: Remove old migrations
     
+    // v2.3.0
     if (oldVersion < 2) await createPillTables(db);
+    // v2.6.0
     if (oldVersion < 3) await _migrateSymptomsStrings(db);
+    // v2.7.0
     if (oldVersion < 4) {
       await db.execute(
         'ALTER TABLE period_logs ADD COLUMN painLevel INTEGER NOT NULL DEFAULT 0',
       );
     }
     if (oldVersion < 5) await db.execute('UPDATE period_logs SET flow = flow + 1');
+    // v2.8.0
     if (oldVersion < 6) {
       await db.execute('UPDATE period_logs SET flow = flow + 1 WHERE flow > 0');
     }
+    // v3.1.0
     if (oldVersion < 7) {
       await db.execute('''
         CREATE TABLE log_symptoms (
@@ -30,11 +35,15 @@ class DatabaseMigrator {
       await _migrateSymptomsToTable(db);
       await db.execute('ALTER TABLE period_logs DROP COLUMN symptoms');
     }
+    // v3.2.0
     if (oldVersion < 8) {
       await _migrateToNewPeriodLogsTable(db);
     }
+    // v3.3.0
     if (oldVersion < 9) await createLarcTables(db);
+    // v3.5.0
     if (oldVersion < 10) await createSanitaryProductTables(db);
+    // - Not released -
     if (oldVersion < 11) {
       await createSexualActivityTables(db);
       await createUserTables(db);
