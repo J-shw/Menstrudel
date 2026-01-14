@@ -170,6 +170,18 @@ abstract class AppLocalizations {
   /// **'End'**
   String get end;
 
+  /// No description provided for @next.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get next;
+
+  /// No description provided for @back.
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get back;
+
   /// No description provided for @day.
   ///
   /// In en, this message translates to:
@@ -800,6 +812,60 @@ abstract class AppLocalizations {
   /// **'Remember to change your product.'**
   String get notification_SanitaryProductReminderBody;
 
+  /// Title for the onboarding screen.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome to Menstrudel'**
+  String get onboardingScreen_welcomeToMenstrudel;
+
+  /// Small into description for the onboarding screen.
+  ///
+  /// In en, this message translates to:
+  /// **'Your offline, private cycle tracker.'**
+  String get onboardingScreen_welcomeToMenstrudelDescription;
+
+  /// Title for the profile onboarding screen.
+  ///
+  /// In en, this message translates to:
+  /// **'About You'**
+  String get onboardingScreen_profileTitle;
+
+  /// Name question for the profile onboarding screen.
+  ///
+  /// In en, this message translates to:
+  /// **'What should we call you?'**
+  String get onboardingScreen_profileName;
+
+  /// Birth date for the profile onboarding screen. This field is optional.
+  ///
+  /// In en, this message translates to:
+  /// **'Birth Date (Optional)'**
+  String get onboardingScreen_profileDate;
+
+  /// Displays when birthday value is none (Due to being optional). Prompts user to set their birthday
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to set birthday'**
+  String get onboardingScreen_profileDatePlaceholder;
+
+  /// Title for the goal onboarding screen.
+  ///
+  /// In en, this message translates to:
+  /// **'What\'s your goal?'**
+  String get onboardingScreen_goalTitle;
+
+  /// Description for the goal onboarding screen.
+  ///
+  /// In en, this message translates to:
+  /// **'This helps us tailor the insights you see.'**
+  String get onboardingScreen_goalDescription;
+
+  /// Button text for the get started navigation button
+  ///
+  /// In en, this message translates to:
+  /// **'Get Started'**
+  String get onboardingScreen_getStarted;
+
   /// No description provided for @mainScreen_insightsPageTitle.
   ///
   /// In en, this message translates to:
@@ -973,6 +1039,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'History ({history})'**
   String sexActivityScreen_history(int history);
+
+  /// Title for the profile settings button.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get settingsScreen_profile;
+
+  /// No description provided for @settingsScreen_name.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get settingsScreen_name;
+
+  /// No description provided for @settingsScreen_birthDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Birth Date'**
+  String get settingsScreen_birthDate;
+
+  /// Used when birth date is not set.
+  ///
+  /// In en, this message translates to:
+  /// **'Not set'**
+  String get settingsScreen_notSet;
+
+  /// No description provided for @settingsScreen_appGoal.
+  ///
+  /// In en, this message translates to:
+  /// **'App Goal'**
+  String get settingsScreen_appGoal;
+
+  /// No description provided for @settingsScreen_profileUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile updated successfully'**
+  String get settingsScreen_profileUpdated;
 
   /// No description provided for @settingsScreen_selectHistoryView.
   ///
@@ -1600,6 +1702,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No passcode, fingerprint, or face ID found. Please set one up in your device\'s settings.'**
   String get securityScreen_noBiometricsAvailable;
+
+  /// Title for the user profile settings button.
+  ///
+  /// In en, this message translates to:
+  /// **'You'**
+  String get settingsScreen_userProfile;
 
   /// No description provided for @settingsScreen_preferences.
   ///

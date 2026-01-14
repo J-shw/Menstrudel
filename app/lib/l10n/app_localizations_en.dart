@@ -42,6 +42,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get end => 'End';
 
   @override
+  String get next => 'Next';
+
+  @override
+  String get back => 'Back';
+
+  @override
   String get day => 'Day';
 
   @override
@@ -403,6 +409,35 @@ class AppLocalizationsEn extends AppLocalizations {
       'Remember to change your product.';
 
   @override
+  String get onboardingScreen_welcomeToMenstrudel => 'Welcome to Menstrudel';
+
+  @override
+  String get onboardingScreen_welcomeToMenstrudelDescription =>
+      'Your offline, private cycle tracker.';
+
+  @override
+  String get onboardingScreen_profileTitle => 'About You';
+
+  @override
+  String get onboardingScreen_profileName => 'What should we call you?';
+
+  @override
+  String get onboardingScreen_profileDate => 'Birth Date (Optional)';
+
+  @override
+  String get onboardingScreen_profileDatePlaceholder => 'Tap to set birthday';
+
+  @override
+  String get onboardingScreen_goalTitle => 'What\'s your goal?';
+
+  @override
+  String get onboardingScreen_goalDescription =>
+      'This helps us tailor the insights you see.';
+
+  @override
+  String get onboardingScreen_getStarted => 'Get Started';
+
+  @override
   String get mainScreen_insightsPageTitle => 'Your Insights';
 
   @override
@@ -517,6 +552,24 @@ class AppLocalizationsEn extends AppLocalizations {
   String sexActivityScreen_history(int history) {
     return 'History ($history)';
   }
+
+  @override
+  String get settingsScreen_profile => 'Profile';
+
+  @override
+  String get settingsScreen_name => 'Name';
+
+  @override
+  String get settingsScreen_birthDate => 'Birth Date';
+
+  @override
+  String get settingsScreen_notSet => 'Not set';
+
+  @override
+  String get settingsScreen_appGoal => 'App Goal';
+
+  @override
+  String get settingsScreen_profileUpdated => 'Profile updated successfully';
 
   @override
   String get settingsScreen_selectHistoryView => 'Select History View';
@@ -888,6 +941,9 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get securityScreen_noBiometricsAvailable =>
       'No passcode, fingerprint, or face ID found. Please set one up in your device\'s settings.';
+
+  @override
+  String get settingsScreen_userProfile => 'You';
 
   @override
   String get settingsScreen_preferences => 'Preferences';

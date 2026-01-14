@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/controllers/log_ui_controller.dart';
-import 'package:menstrudel/screens/logs_screen.dart';
-import 'package:menstrudel/screens/sanitary_screen.dart';
-import 'package:menstrudel/screens/settings_screen.dart';
-import 'package:menstrudel/screens/insights_screen.dart';
-import 'package:menstrudel/screens/pills_screen.dart';
-import 'package:menstrudel/screens/sex_screen.dart';
+import 'package:menstrudel/screens/dashboards/logs_screen.dart';
+import 'package:menstrudel/screens/dashboards/sanitary_screen.dart';
+import 'package:menstrudel/screens/settings/settings_screen.dart';
+import 'package:menstrudel/screens/dashboards/insights_screen.dart';
+import 'package:menstrudel/screens/dashboards/pills_screen.dart';
+import 'package:menstrudel/screens/dashboards/sex_screen.dart';
 import 'package:menstrudel/widgets/main/main_navigation_bar.dart';
 import 'package:menstrudel/widgets/main/app_bar.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/services/settings_service.dart';
 import 'package:provider/provider.dart';
-import 'package:menstrudel/screens/larc_screen.dart';
+import 'package:menstrudel/screens/dashboards/larc_screen.dart';
 
 enum FabState {
   logPeriod,

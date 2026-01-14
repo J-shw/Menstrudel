@@ -42,6 +42,12 @@ class AppLocalizationsDe extends AppLocalizations {
   String get end => 'Ende';
 
   @override
+  String get next => 'Next';
+
+  @override
+  String get back => 'Back';
+
+  @override
   String get day => 'Tag';
 
   @override
@@ -66,8 +72,8 @@ class AppLocalizationsDe extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count Months',
-      one: '$count Month',
+      other: '$count Monate',
+      one: '$count Monat',
     );
     return '$_temp0';
   }
@@ -77,20 +83,20 @@ class AppLocalizationsDe extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count Years',
-      one: '$count Year',
+      other: '$count Jahre',
+      one: '$count Jahr',
     );
     return '$_temp0';
   }
 
   @override
-  String get logs => 'Logs';
+  String get logs => 'Protokolle';
 
   @override
   String get insights => 'Insights';
 
   @override
-  String get edit => 'Edit';
+  String get edit => 'Bearbeiten';
 
   @override
   String get delete => 'Löschen';
@@ -156,7 +162,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get type => 'Typ';
 
   @override
-  String get other => 'Other';
+  String get other => 'Sonstiges';
 
   @override
   String get navBar_insights => 'Einblicke';
@@ -276,13 +282,13 @@ class AppLocalizationsDe extends AppLocalizations {
   String get sexProtection_barrier => 'Barrier';
 
   @override
-  String get sexProtection_hormonal => 'Hormonal';
+  String get sexProtection_hormonal => 'Hormonell';
 
   @override
-  String get sexProtection_natural => 'Natural';
+  String get sexProtection_natural => 'Natürlich';
 
   @override
-  String get sexProtection_permanent => 'Permanent';
+  String get sexProtection_permanent => 'Dauerhaft';
 
   @override
   String get sexType_vaginal => 'Vaginal';
@@ -318,25 +324,25 @@ class AppLocalizationsDe extends AppLocalizations {
   String get userGoal_avoid => 'Avoiding Pregnancy';
 
   @override
-  String get dayOfWeek_monday => 'Monday';
+  String get dayOfWeek_monday => 'Montag';
 
   @override
-  String get dayOfWeek_tuesday => 'Tuesday';
+  String get dayOfWeek_tuesday => 'Dienstag';
 
   @override
-  String get dayOfWeek_wednesday => 'Wednesday';
+  String get dayOfWeek_wednesday => 'Mittwoch';
 
   @override
-  String get dayOfWeek_thursday => 'Thursday';
+  String get dayOfWeek_thursday => 'Donnerstag';
 
   @override
-  String get dayOfWeek_friday => 'Friday';
+  String get dayOfWeek_friday => 'Freitag';
 
   @override
-  String get dayOfWeek_saturday => 'Saturday';
+  String get dayOfWeek_saturday => 'Samstag';
 
   @override
-  String get dayOfWeek_sunday => 'Sunday';
+  String get dayOfWeek_sunday => 'Sonntag';
 
   @override
   String get error_valueMustbePositive => 'Der Wert muss positiv sein';
@@ -403,10 +409,39 @@ class AppLocalizationsDe extends AppLocalizations {
       'Denke daran, Dein Produkt zu wechseln.';
 
   @override
+  String get onboardingScreen_welcomeToMenstrudel => 'Welcome to Menstrudel';
+
+  @override
+  String get onboardingScreen_welcomeToMenstrudelDescription =>
+      'Your offline, private cycle tracker.';
+
+  @override
+  String get onboardingScreen_profileTitle => 'About You';
+
+  @override
+  String get onboardingScreen_profileName => 'What should we call you?';
+
+  @override
+  String get onboardingScreen_profileDate => 'Birth Date (Optional)';
+
+  @override
+  String get onboardingScreen_profileDatePlaceholder => 'Tap to set birthday';
+
+  @override
+  String get onboardingScreen_goalTitle => 'What\'s your goal?';
+
+  @override
+  String get onboardingScreen_goalDescription =>
+      'This helps us tailor the insights you see.';
+
+  @override
+  String get onboardingScreen_getStarted => 'Get Started';
+
+  @override
   String get mainScreen_insightsPageTitle => 'Deine Erkenntnisse';
 
   @override
-  String get mainSceen_sexActivityPageTitle => 'Sex Activity';
+  String get mainSceen_sexActivityPageTitle => 'Sexuelle Aktivität';
 
   @override
   String get mainScreen_sanitaryPageTitle => 'Hygieneartikel';
@@ -511,12 +546,30 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get sexActivityScreen_noSexActivityRecordsFound =>
-      'No sex activity records found.';
+      'Keine Aufzeichnungen über sexuelle Aktivitäten gefunden.';
 
   @override
   String sexActivityScreen_history(int history) {
-    return 'History ($history)';
+    return 'Historie ($history)';
   }
+
+  @override
+  String get settingsScreen_profile => 'Profile';
+
+  @override
+  String get settingsScreen_name => 'Name';
+
+  @override
+  String get settingsScreen_birthDate => 'Birth Date';
+
+  @override
+  String get settingsScreen_notSet => 'Not set';
+
+  @override
+  String get settingsScreen_appGoal => 'App Goal';
+
+  @override
+  String get settingsScreen_profileUpdated => 'Profile updated successfully';
 
   @override
   String get settingsScreen_selectHistoryView =>
@@ -896,6 +949,9 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get securityScreen_noBiometricsAvailable =>
       'Es wurde kein Passcode, Fingerabdruck oder Face ID gefunden. Bitte lege einen in den Einstellungen des Geräts fest.';
+
+  @override
+  String get settingsScreen_userProfile => 'You';
 
   @override
   String get settingsScreen_preferences => 'Einstellungen';

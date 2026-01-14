@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 
-import 'package:menstrudel/screens/settings/appearance_settings_screen.dart';
-import 'package:menstrudel/screens/settings/birth_control_settings_screen.dart';
-import 'package:menstrudel/screens/settings/log_settings_screen.dart';
-import 'package:menstrudel/screens/settings/period_settings_screen.dart';
-import 'package:menstrudel/screens/settings/data_settings_screen.dart';
-import 'package:menstrudel/screens/settings/security_settings_screen.dart';
-import 'package:menstrudel/screens/settings/preferences_settings_screen.dart';
-import 'package:menstrudel/screens/settings/about_screen.dart';
+import 'package:menstrudel/screens/settings/sections/appearance_settings_screen.dart';
+import 'package:menstrudel/screens/settings/sections/birth_control_settings_screen.dart';
+import 'package:menstrudel/screens/settings/sections/log_settings_screen.dart';
+import 'package:menstrudel/screens/settings/sections/period_settings_screen.dart';
+import 'package:menstrudel/screens/settings/sections/data_settings_screen.dart';
+import 'package:menstrudel/screens/settings/sections/security_settings_screen.dart';
+import 'package:menstrudel/screens/settings/sections/preferences_settings_screen.dart';
+import 'package:menstrudel/screens/settings/sections/about_screen.dart';
+import 'package:menstrudel/screens/settings/sections/user_settings_screen.dart';
 
 
 class SettingsScreen extends StatelessWidget {
@@ -20,6 +21,17 @@ class SettingsScreen extends StatelessWidget {
     
     return ListView(
       children: [
+        _SettingsSectionButton(
+          title: l10n.settingsScreen_userProfile,
+          icon: Icons.person_outline,
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const ProfileSettingsScreen()),
+            );
+          },
+        ),
+
         _SettingsSectionButton(
           title: l10n.settingsScreen_preferences,
           icon: Icons.tune_outlined,

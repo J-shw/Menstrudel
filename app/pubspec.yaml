@@ -44,6 +44,8 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   generate: true
+  assets:
+    - assets/icon/menstrudel.png
 
 flutter_launcher_icons:
   android: true
