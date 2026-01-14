@@ -11,6 +11,8 @@
     "time": "Heure",
     "start": "Début",
     "end": "Fin",
+    "next": "Next",
+    "back": "Back",
     "day": "Jour",
     "days": "Jours",
     "hours": "Heures",
@@ -205,6 +207,42 @@
     },
     "notification_SanitaryProductReminderTitle": "Rappel des produits hygiénique",
     "notification_SanitaryProductReminderBody": "N'oubliez pas de changer votre produit hygiénique.",
+    "onboardingScreen_welcomeToMenstrudel": "Welcome to Menstrudel",
+    "@onboardingScreen_welcomeToMenstrudel": {
+        "description": "Title for the onboarding screen."
+    },
+    "onboardingScreen_welcomeToMenstrudelDescription": "Your offline, private cycle tracker.",
+    "@onboardingScreen_welcomeToMenstrudelDescription": {
+        "description": "Small into description for the onboarding screen."
+    },
+    "onboardingScreen_profileTitle": "About You",
+    "@onboardingScreen_profileTitle": {
+        "description": "Title for the profile onboarding screen."
+    },
+    "onboardingScreen_profileName": "What should we call you?",
+    "@onboardingScreen_profileName": {
+        "description": "Name question for the profile onboarding screen."
+    },
+    "onboardingScreen_profileDate": "Birth Date (Optional)",
+    "@onboardingScreen_profileDate": {
+        "description": "Birth date for the profile onboarding screen. This field is optional."
+    },
+    "onboardingScreen_profileDatePlaceholder": "Tap to set birthday",
+    "@onboardingScreen_profileDatePlaceholder": {
+        "description": "Displays when birthday value is none (Due to being optional). Prompts user to set their birthday"
+    },
+    "onboardingScreen_goalTitle": "What's your goal?",
+    "@onboardingScreen_goalTitle": {
+        "description": "Title for the goal onboarding screen."
+    },
+    "onboardingScreen_goalDescription": "This helps us tailor the insights you see.",
+    "@onboardingScreen_goalDescription": {
+        "description": "Description for the goal onboarding screen."
+    },
+    "onboardingScreen_getStarted": "Get Started",
+    "@onboardingScreen_getStarted": {
+        "description": "Button text for the get started navigation button"
+    },
     "mainScreen_insightsPageTitle": "Votre Aperçu",
     "mainSceen_sexActivityPageTitle": "Sex Activity",
     "mainScreen_sanitaryPageTitle": "Produits hygiéniques",
@@ -296,6 +334,18 @@
             }
         }
     },
+    "settingsScreen_profile": "Profile",
+    "@settingsScreen_profile": {
+        "description": "Title for the profile settings button."
+    },
+    "settingsScreen_name": "Name",
+    "settingsScreen_birthDate": "Birth Date",
+    "settingsScreen_notSet": "Not set",
+    "@settingsScreen_notSet": {
+        "description": "Used when birth date is not set."
+    },
+    "settingsScreen_appGoal": "App Goal",
+    "settingsScreen_profileUpdated": "Profile updated successfully",
     "settingsScreen_selectHistoryView": "Sélectionner la vue de l'historique",
     "settingsScreen_deleteRegimen_question": "Supprimer le traitement ?",
     "settingsScreen_deleteRegimenDescription": "Cela supprimera les réglages de votre plaquette actuelle ainsi que tous les journaux de pilules associés. Cette action est irréversible.",
@@ -440,6 +490,10 @@
     "securityScreen_enableBiometricLock": "Activer le verrouillage biométrique",
     "securityScreen_enableBiometricLockSubtitle": "Nécessite une empreinte digitale ou un identifiant facial pour ouvrir l'application.",
     "securityScreen_noBiometricsAvailable": "Aucun code d'accès, empreinte digitale ou Face ID n'a été trouvé. Veuillez en configurer un dans les paramètres de votre appareil.",
+    "settingsScreen_userProfile": "You",
+    "@settingsScreen_userProfile": {
+        "description": "Title for the user profile settings button."
+    },
     "settingsScreen_preferences": "Préférences",
     "preferencesScreen_language": "Langue",
     "preferencesScreen_enableSanitaryProductsScreen": "Enable Sanitary Products Screen",
