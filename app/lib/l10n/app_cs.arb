@@ -76,7 +76,7 @@
     "navBar_sanitary": "Pomůcky",
     "navBar_sexActivity": "Sexuální aktivita",
     "navBar_pill": "Pilulky",
-    "navBar_larc": "DPRA",
+    "navBar_larc": "LARC",
     "navBar_settings": "Nastavení",
     "flowIntensity_none": "Žádná",
     "flowIntensity_spotting": "Špinění",
@@ -256,7 +256,7 @@
     "logScreen_logAtLeastTwoPeriods": "Zapište nejméně dvě menstruace pro odhadnutí dalšího cyklu.",
     "logScreen_nextPeriodEstimate": "Odhad další menstruace",
     "logScreen_periodDueToday": "Dnes má začít menstruace",
-    "logScreen_periodOverdueBy": "{count, plural, =1{Period overdue by 1 day} other{Period overdue by {count} days}}",
+    "logScreen_periodOverdueBy": "{count, plural, =1{Vaše další menstruace je opožděná o jeden den.} other{Vaše další menstruace je opožděná o {count} dní}}",
     "@logScreen_periodOverdueBy": {
         "description": "A label showing the total number of days period is overdue.",
         "placeholders": {
@@ -268,7 +268,7 @@
     "pillScreen_pillForTodayMarkedAsTaken": "Dnešní pilulka je označena jako užitá.",
     "pillScreen_pillForTodayMarkedAsSkipped": "Dnešní pilulka je označena jako přeskočena.",
     "larcScreen_noLarcRecordsFound": "Žádné záznamy o LARC nalezeny.",
-    "larcScreen_history": "History ({history})",
+    "larcScreen_history": "Historie ({history})",
     "@larcScreen_history": {
         "description": "The total LARC history count.",
         "placeholders": {
@@ -278,7 +278,7 @@
             }
         }
     },
-    "larcScreen_activeLarcs": "Active LARCs ({activeCount})",
+    "larcScreen_activeLarcs": "Aktivní LARC ({activeCount})",
     "@larcScreen_activeLarcs": {
         "description": "The total active LARC count.",
         "placeholders": {
@@ -292,7 +292,7 @@
     "larcScreen_noActiveRecords": "V současné době není aktivní LARC. Prosím přidejte nový záznam.",
     "larcScreen_noHistoryRecords": "Nebyly nalezeny žádné minulé ani prošlé záznamy LARC.",
     "sanitaryProductsScreen_noSanitaryProductRecordsFound": "Žádné záznamy o menstruačních pomůckách nebyly nalezeny.",
-    "sanitaryProductsScreen_history": "History ({history})",
+    "sanitaryProductsScreen_history": "Historie ({history})",
     "@sanitaryProductsScreen_history": {
         "description": "The total sanitary product history count.",
         "placeholders": {
@@ -303,7 +303,7 @@
         }
     },
     "sanitaryProductsScreen_noHistoryRecords": "Žádné dřívější záznamy o menstruačních pomůckách nebyly nalezeny.",
-    "sanitaryProductsScreen_activeProduct": "Active {activeType}",
+    "sanitaryProductsScreen_activeProduct": "Aktivní {activeType}",
     "@sanitaryProductsScreen_activeProduct": {
         "description": "Label showing the type of active sanitary product.",
         "placeholders": {
@@ -313,7 +313,7 @@
             }
         }
     },
-    "sanitaryProductsScreen_changeDueAt": "Change Due At {time}",
+    "sanitaryProductsScreen_changeDueAt": "K výměně v {time}",
     "@sanitaryProductsScreen_changeDueAt": {
         "description": "Label showing the time when the sanitary product needs to be changed.",
         "placeholders": {
@@ -324,7 +324,7 @@
         }
     },
     "sexActivityScreen_noSexActivityRecordsFound": "Žádný záznam o sexuální aktivitě nalezen.",
-    "sexActivityScreen_history": "History ({history})",
+    "sexActivityScreen_history": "Historie ({history})",
     "@sexActivityScreen_history": {
         "description": "The total sex activity history count.",
         "placeholders": {
@@ -390,7 +390,7 @@
     "settingsScreen_loggingReminderTime": "Čas upozornění záznamu",
     "settingsScreen_defaultSymptoms": "Výchozí příznaky",
     "settingsScreen_defaultSymptomsSubtitle": "Tyto jsou vždy k dispozici při zaznamenávání nových menstruací.\nKlepnutím na existující příznak jej smažete, klepnutím na „+“ přidáte nový.",
-    "settingsScreen_deleteDefaultSymptomQuestion": "Delete '{symptom}'?",
+    "settingsScreen_deleteDefaultSymptomQuestion": "Smazat '{symptom}'?",
     "@settingsScreen_deleteDefaultSymptomQuestion": {
         "description": "Question whether a symptom should be deleted.",
         "placeholders": {
@@ -402,7 +402,7 @@
     },
     "settingsScreen_resetSymptomsList": "Obnovit seznam příznaků?",
     "settingsScreen_resetSymptomsListDescription": "Tohle smaže všechny vaše vlastní příznaky a obnoví původní vestavěný seznam.\n\nVaše existující záznamy se nezmění.",
-    "settingsScreen_deleteDefaultSymptomDescription": "'{symptom}' will no longer be available when logging a period.\n\n{usageCount, plural, zero{There are currently no period logs with this symptom!} one{There is already 1 period log with this symptom!\nThis log will not be changed.} other{There are {usageCount} period logs with this symptom!\nThese logs will not be changed.}}",
+    "settingsScreen_deleteDefaultSymptomDescription": "'{symptom}' už nebude dostupný při záznamu menstruace.\n\n{usageCount, plural, zero{V současné době nejsou žádné záznamy menstruací s tímto příznakem!} one{V současné době je jeden záznam menstruace s tímto příznakem!\nTento záznam nebude změněn.} other{Jsou zde{usageCount} záznamy menstruace s tímto příznakem!\nTyto záznamy nebudou změněny.}}",
     "@settingsScreen_deleteDefaultSymptomDescription": {
         "description": "Question whether a symptom should be deleted.",
         "placeholders": {
@@ -476,7 +476,7 @@
     "@settingsScreen_importErrorGeneral": {
         "description": "General message when file import fails for unknown reasons."
     },
-    "settingsScreen_importErrorPlatform": "Import failed: {message}. Please ensure the file is saved on the device and try again.",
+    "settingsScreen_importErrorPlatform": "Importování se nepodařilo: {message}. Prosím ujistěte se, že je soubor uložen lokálně a zkuste to znovu.",
     "@settingsScreen_importErrorPlatform": {
         "description": "Error when the native file picker fails, includes the specific error message.",
         "placeholders": {
@@ -536,7 +536,7 @@
     "listViewWidget_confirmDeleteDescription": "Jste si jisti že chcete smazat tento záznam?",
     "emptyPillStateWidget_noPillRegimenFound": "Žádný režim pilulek nebyl nalezen.",
     "emptyPillStateWidget_noPillRegimenFoundDescription": "Nastavte si balíček pilulek v nastavení, abyste mohli začít sledovat.",
-    "pillStatus_pillsOfTotal": "{count, plural, =1{of 1 pill} other{of {count} pills}}",
+    "pillStatus_pillsOfTotal": "{count, plural, =1{z 1 pilulky} other{z {count} pilulek}}",
     "@pillStatus_pillsOfTotal": {
         "description": "A label showing the total number of pills.",
         "placeholders": {
@@ -548,7 +548,7 @@
     "pillStatus_undo": "Zpět",
     "pillStatus_skip": "Přeskočit",
     "pillStatus_markAsTaken": "Označit jako užité",
-    "pillStatus_packStartInFuture": "Your next pill pack starts on {date}.",
+    "pillStatus_packStartInFuture": "Váš další balíček pilulek začne v {date}.",
     "@pillStatus_packStartInFuture": {
         "description": "Message shown when the pill pack start date is in the future.",
         "placeholders": {
@@ -572,7 +572,7 @@
     "larcEntrySheet_logLARCDetails": "Zaznamenat LARC podrobnosti",
     "sanitaryEntrySheet_logSanitaryProduct": "Zaznamenat menstruační pomůcky",
     "sanitaryEntrySheet_setReminderDuration": "Nastavit délku připomenutí",
-    "sanitaryEntrySheet_maxDuration": "Max Duration: {hours} hours",
+    "sanitaryEntrySheet_maxDuration": "Maximální délka: {hours} hodin",
     "@sanitaryEntrySheet_maxDuration": {
         "description": "Label showing the maximum duration for the selected sanitary product type.",
         "placeholders": {
@@ -583,7 +583,7 @@
     },
     "sanitaryEntrySheet_futureLogTimeError": "Zaznamenaný čas nemůže být v budoucnosti.",
     "sanitaryEntrySheet_pastReminderTimeError": "Čas ukončení připomenutí nemůže být v minulosti.",
-    "periodPredictionCircle_days": "{count, plural, =1{Day} other{Days}}",
+    "periodPredictionCircle_days": "{count, plural, =1{Den} other{Dní}}",
     "@periodPredictionCircle_days": {
         "description": "A label showing the total number of days until period is due.",
         "placeholders": {
