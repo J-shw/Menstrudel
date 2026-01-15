@@ -207,39 +207,39 @@
     },
     "notification_SanitaryProductReminderTitle": "Upozornění na menstruační pomůcky",
     "notification_SanitaryProductReminderBody": "Nezapomeňte si vyměnit menstruační pomůcku.",
-    "onboardingScreen_welcomeToMenstrudel": "Welcome to Menstrudel",
+    "onboardingScreen_welcomeToMenstrudel": "Vítejte v Menstrudel",
     "@onboardingScreen_welcomeToMenstrudel": {
         "description": "Title for the onboarding screen."
     },
-    "onboardingScreen_welcomeToMenstrudelDescription": "Your offline, private cycle tracker.",
+    "onboardingScreen_welcomeToMenstrudelDescription": "Soukromá aplikace pro sledování cyklu, která funguje bez internetu.",
     "@onboardingScreen_welcomeToMenstrudelDescription": {
         "description": "Small into description for the onboarding screen."
     },
-    "onboardingScreen_profileTitle": "About You",
+    "onboardingScreen_profileTitle": "O vás",
     "@onboardingScreen_profileTitle": {
         "description": "Title for the profile onboarding screen."
     },
-    "onboardingScreen_profileName": "What should we call you?",
+    "onboardingScreen_profileName": "Jak vám máme říkat?",
     "@onboardingScreen_profileName": {
         "description": "Name question for the profile onboarding screen."
     },
-    "onboardingScreen_profileDate": "Birth Date (Optional)",
+    "onboardingScreen_profileDate": "Datum narození (volitelné)",
     "@onboardingScreen_profileDate": {
         "description": "Birth date for the profile onboarding screen. This field is optional."
     },
-    "onboardingScreen_profileDatePlaceholder": "Tap to set birthday",
+    "onboardingScreen_profileDatePlaceholder": "Klikněte pro zadání data narození",
     "@onboardingScreen_profileDatePlaceholder": {
         "description": "Displays when birthday value is none (Due to being optional). Prompts user to set their birthday"
     },
-    "onboardingScreen_goalTitle": "What's your goal?",
+    "onboardingScreen_goalTitle": "Co je váš cíl?",
     "@onboardingScreen_goalTitle": {
         "description": "Title for the goal onboarding screen."
     },
-    "onboardingScreen_goalDescription": "This helps us tailor the insights you see.",
+    "onboardingScreen_goalDescription": "To nám pomáhá přizpůsobit informace, které vidíte.",
     "@onboardingScreen_goalDescription": {
         "description": "Description for the goal onboarding screen."
     },
-    "onboardingScreen_getStarted": "Get Started",
+    "onboardingScreen_getStarted": "Začínáme",
     "@onboardingScreen_getStarted": {
         "description": "Button text for the get started navigation button"
     },
@@ -334,18 +334,18 @@
             }
         }
     },
-    "settingsScreen_profile": "Profile",
+    "settingsScreen_profile": "Profil",
     "@settingsScreen_profile": {
         "description": "Title for the profile settings button."
     },
-    "settingsScreen_name": "Name",
-    "settingsScreen_birthDate": "Birth Date",
-    "settingsScreen_notSet": "Not set",
+    "settingsScreen_name": "Jméno",
+    "settingsScreen_birthDate": "Datum narození",
+    "settingsScreen_notSet": "Nenastaveno",
     "@settingsScreen_notSet": {
         "description": "Used when birth date is not set."
     },
-    "settingsScreen_appGoal": "App Goal",
-    "settingsScreen_profileUpdated": "Profile updated successfully",
+    "settingsScreen_appGoal": "Cíl aplikace",
+    "settingsScreen_profileUpdated": "Profil byl úspěšně aktualizován",
     "settingsScreen_selectHistoryView": "Zvolte zobrazení historie",
     "settingsScreen_deleteRegimen_question": "Odstranit režim?",
     "settingsScreen_deleteRegimenDescription": "Tato akce vymaže vaše aktuální nastavení o balíčku pilulek a všechny záznamy o pilulkách. Tohle nemůže být vráceno.",
@@ -400,7 +400,7 @@
             }
         }
     },
-    "settingsScreen_resetSymptomsList": "Reset Symptoms List?",
+    "settingsScreen_resetSymptomsList": "Obnovit seznam příznaků?",
     "settingsScreen_resetSymptomsListDescription": "Tohle smaže všechny vaše vlastní příznaky a obnoví původní vestavěný seznam.\n\nVaše existující záznamy se nezmění.",
     "settingsScreen_deleteDefaultSymptomDescription": "'{symptom}' will no longer be available when logging a period.\n\n{usageCount, plural, zero{There are currently no period logs with this symptom!} one{There is already 1 period log with this symptom!\nThis log will not be changed.} other{There are {usageCount} period logs with this symptom!\nThese logs will not be changed.}}",
     "@settingsScreen_deleteDefaultSymptomDescription": {
@@ -490,7 +490,7 @@
     "securityScreen_enableBiometricLock": "Zapnout biometrický zámek",
     "securityScreen_enableBiometricLockSubtitle": "Vyžaduje otisk prstu nebo rozpoznání obličeje pro odemknutí aplikace.",
     "securityScreen_noBiometricsAvailable": "Nebylo nalezeno žádné heslo, otisk prstu ani rozpoznání obličeje. Nastavte je prosím v nastavení svého zařízení.",
-    "settingsScreen_userProfile": "You",
+    "settingsScreen_userProfile": "Vy",
     "@settingsScreen_userProfile": {
         "description": "Title for the user profile settings button."
     },
@@ -499,34 +499,34 @@
     "preferencesScreen_enableSanitaryProductsScreen": "Povolit obrazovku menstruačních pomůcek",
     "preferencesScreen_enableSanitaryProductsScreenSubtitle": "Zobrazit kartu menstruačních pomůcek na hlavní navigační liště.",
     "preferencesScreen_enableSexActivityScreen": "Povolit obrazovku o sexuální aktivitě",
-    "preferencesScreen_enableSexActivityScreenSubtitle": "Show the Sex Activity tab on the main navigation bar.",
-    "preferencesScreen_StartingDayOfWeek": "Starting Day of the Week",
-    "settingsScreen_about": "About",
-    "aboutScreen_version": "Version",
+    "preferencesScreen_enableSexActivityScreenSubtitle": "Zobrazit kartu o sexuální aktivitě na hlavní navigační liště.",
+    "preferencesScreen_StartingDayOfWeek": "Počáteční den v týdnu",
+    "settingsScreen_about": "O aplikaci",
+    "aboutScreen_version": "Verze",
     "aboutScreen_github": "GitHub",
-    "aboutScreen_githubSubtitle": "Source code and issue tracking",
+    "aboutScreen_githubSubtitle": "Zdrojový kód a sledování problémů",
     "aboutScreen_discord": "Discord",
-    "aboutScreen_discordSubtitle": "Support and community",
-    "aboutScreen_share": "Share",
-    "aboutScreen_shareSubtitle": "Share the app with friends",
-    "aboutScreen_urlError": "Could not open the link.",
-    "logSummaryWidget_loggedDays": "Logged Days",
-    "logSummaryWidget_trackingHistory": "Tracking History",
-    "cycleLengthVarianceWidget_logAtLeastTwoPeriods": "Need at least two cycles to show variance.",
-    "cycleLengthVarianceWidget_title": "Cycle Length Variance",
-    "cycleLengthVarianceWidget_averageCycle": "Avg. Cycle",
-    "cycleLengthVarianceWidget_cycle": "Cycle",
-    "periodDurationWidget_logAtLeastTwoPeriods": "Log at least two periods to see period statistics.",
-    "periodDurationWidget_title": "Period Duration Variance",
-    "periodDurationWidget_averagePeriod": "Avg. Period",
-    "periodDurationWidget_period": "Period",
-    "flowIntensityWidget_flowIntensityBreakdown": "Flow Intensity Breakdown",
-    "flowIntensityWidget_noFlowDataLoggedYet": "No flow data logged yet.",
-    "painLevelWidget_noPainDataLoggedYet": "No pain data logged yet.",
-    "painLevelWidget_painLevelBreakdown": "Pain Level Breakdown",
-    "monthlyFlowChartWidget_noDataToDisplay": "No data to display.",
-    "monthlyFlowChartWidget_cycleFlowPatterns": "Cycle Flow Patterns",
-    "monthlyFlowChartWidget_cycleFlowPatternsDescription": "Each line represents one complete cycle",
+    "aboutScreen_discordSubtitle": "Podpora a komunita",
+    "aboutScreen_share": "Sdílet",
+    "aboutScreen_shareSubtitle": "Sdílet aplikaci s přáteli",
+    "aboutScreen_urlError": "Nebylo možné otevřít odkaz.",
+    "logSummaryWidget_loggedDays": "Zaznamenané dny",
+    "logSummaryWidget_trackingHistory": "Historie sledování",
+    "cycleLengthVarianceWidget_logAtLeastTwoPeriods": "Je potřeba mít nejméně dva cykly pro zobrazení rozdílů.",
+    "cycleLengthVarianceWidget_title": "Kolísání délky cyklu",
+    "cycleLengthVarianceWidget_averageCycle": "Průměrný cyklus",
+    "cycleLengthVarianceWidget_cycle": "Cyklus",
+    "periodDurationWidget_logAtLeastTwoPeriods": "Zaznamenejte nejméně dvě menstruace pro zobrazení statistik.",
+    "periodDurationWidget_title": "Kolísání délky menstruace",
+    "periodDurationWidget_averagePeriod": "Průměrná menstruace",
+    "periodDurationWidget_period": "Menstruace",
+    "flowIntensityWidget_flowIntensityBreakdown": "Rozložení intenzity krvácení",
+    "flowIntensityWidget_noFlowDataLoggedYet": "Dosud nebyly zaznamenány žádné údaje o krvácení.",
+    "painLevelWidget_noPainDataLoggedYet": "Dosud nebyly zaznamenány žádné údaje o bolesti.",
+    "painLevelWidget_painLevelBreakdown": "Rozdělení úrovní bolesti",
+    "monthlyFlowChartWidget_noDataToDisplay": "Žádná data k zobrazení.",
+    "monthlyFlowChartWidget_cycleFlowPatterns": "Vzorce průběhu cyklu",
+    "monthlyFlowChartWidget_cycleFlowPatternsDescription": "Každá linka reprezentuje jeden kompletní cyklus",
     "symptomFrequencyWidget_noSymptomsLoggedYet": "No symptoms logged yet.",
     "symptomFrequencyWidget_mostCommonSymptoms": "Most Common Symptoms",
     "yearHeatMapWidget_yearlyOverview": "Yearly Overview",
