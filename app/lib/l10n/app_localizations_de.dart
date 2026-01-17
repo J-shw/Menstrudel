@@ -436,7 +436,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String onboardingScreen_contraceptionHint(String sectionName) {
-    return 'Note: You can enable Pill or LARC tracking later in the app settings under \'$sectionName\' if needed.';
+    return 'Note: You can enable Pill or LARC tracking later in the app settings under \'$sectionName\' if wanted.';
   }
 
   @override
