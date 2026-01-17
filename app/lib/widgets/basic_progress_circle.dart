@@ -75,10 +75,7 @@ class _BasicProgressCircleState extends State<BasicProgressCircle>
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final l10n = AppLocalizations.of(context)!;
 
-    return SizedBox(
-      width: widget.circleSize,
-      height: widget.circleSize,
-      child: Stack(
+    return Stack(
         alignment: Alignment.center,
         children: [
           SizedBox(
@@ -114,7 +111,7 @@ class _BasicProgressCircleState extends State<BasicProgressCircle>
             ],
           ),
         ],
-      ),
+      
     );
   }
 }
