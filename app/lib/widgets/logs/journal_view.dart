@@ -61,7 +61,9 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
       return Center(
         child: Padding(
           padding: EdgeInsets.all(32.0),
-          child: Text(l10n.journalViewWidget_logYourFirstPeriod), //TODO: change to 'Log your first entry' no longer period specific.
+          child: Text(
+            l10n.journalViewWidget_logYourFirstPeriod,
+          ), //TODO: change to 'Log your first entry' no longer period specific.
         ),
       );
     }
@@ -73,119 +75,115 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
         ? focusedDateOnly
         : latestLogDateForBoundary;
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        TableCalendar(
-          firstDay: earliestLogDate.subtract(const Duration(days: 365)),
-          lastDay: calendarBoundary.add(const Duration(days: 365)),
-          focusedDay: _focusedDay,
-          startingDayOfWeek: DayOfWeek
-              .fromString(settingsService.startingDayOfWeek)
-              .toTableCalendar,
-          headerStyle: const HeaderStyle(
-            formatButtonVisible: false,
-            titleCentered: true,
-          ),
-          calendarStyle: CalendarStyle(
-            outsideDaysVisible: false,
-            todayDecoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(color: colorScheme.primary, width: 2.0),
-            ),
-            todayTextStyle: TextStyle(
-              color: colorScheme.primary,
-              fontWeight: FontWeight.bold,
-            ),
-            selectedDecoration: BoxDecoration(
-              color: colorScheme.primary,
-              shape: BoxShape.circle,
-            ),
-            selectedTextStyle: TextStyle(
-              color: colorScheme.onPrimary,
-              fontWeight: FontWeight.bold,
-            ),
-            disabledTextStyle: TextStyle(
-              color: colorScheme.onSurface.withAlpha(75),
-            ),
-          ),
-          selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
-          enabledDayPredicate: (day) {
-            final today = DateUtils.dateOnly(DateTime.now());
-            return !DateUtils.dateOnly(day).isAfter(today);
-          },
-          onDaySelected: (selectedDay, focusedDay) {
-            setState(() {
-              _selectedDay = selectedDay;
-              _focusedDay = focusedDay;
-            });
-
-            final logForSelectedDay = logMap[DateUtils.dateOnly(selectedDay)];
-            if (logForSelectedDay != null) {
-              widget.onLogTapped(logForSelectedDay);
-            } else {
-              widget.onLogRequested(selectedDay);
-            }
-          },
-          onPageChanged: (focusedDay) {
-            setState(() {
-              _focusedDay = focusedDay;
-            });
-          },
-          calendarBuilders: CalendarBuilders(
-            prioritizedBuilder: (context, day, focusedDay) {
-              final dayOnly = DateUtils.dateOnly(day);
-              final log = logMap[dayOnly];
-
-              if (log != null) {
-                return Container(
-                  margin: const EdgeInsets.all(4.0),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: log.flow.color,
-                  ),
-                  alignment: Alignment.center,
-                  child: Text(
-                    '${day.day}',
-                    style: TextStyle(
-                      color: colorScheme.onPrimary.withValues(alpha: 0.9),
-                    ),
-                  ),
-                );
-              }
-
-              final startDate = predictionResult?.estimatedStartDate;
-              final endDate = predictionResult?.estimatedEndDate;
-              bool isPredictedDay = false;
-
-              if (startDate != null && endDate != null) {
-                final startOnly = DateUtils.dateOnly(startDate);
-                final endOnly = DateUtils.dateOnly(endDate);
-                isPredictedDay = !dayOnly.isBefore(startOnly) && !dayOnly.isAfter(endOnly);
-              }
-
-              if (isPredictedDay) {
-                return Container(
-                  margin: const EdgeInsets.all(4.0),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: colorScheme.error.withValues(alpha: 0.4),
-                  ),
-                  alignment: Alignment.center,
-                  child: Text(
-                    '${day.day}',
-                    style: TextStyle(
-                      color: colorScheme.error,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                );
-              }
-              return null;
-            },
-          ),
+    return TableCalendar(
+      firstDay: earliestLogDate.subtract(const Duration(days: 365)),
+      lastDay: calendarBoundary.add(const Duration(days: 365)),
+      focusedDay: _focusedDay,
+      startingDayOfWeek: DayOfWeek.fromString(
+        settingsService.startingDayOfWeek,
+      ).toTableCalendar,
+      headerStyle: const HeaderStyle(
+        formatButtonVisible: false,
+        titleCentered: true,
+      ),
+      calendarStyle: CalendarStyle(
+        outsideDaysVisible: false,
+        todayDecoration: BoxDecoration(
+          shape: BoxShape.circle,
+          border: Border.all(color: colorScheme.primary, width: 2.0),
         ),
-      ],
+        todayTextStyle: TextStyle(
+          color: colorScheme.primary,
+          fontWeight: FontWeight.bold,
+        ),
+        selectedDecoration: BoxDecoration(
+          color: colorScheme.primary,
+          shape: BoxShape.circle,
+        ),
+        selectedTextStyle: TextStyle(
+          color: colorScheme.onPrimary,
+          fontWeight: FontWeight.bold,
+        ),
+        disabledTextStyle: TextStyle(
+          color: colorScheme.onSurface.withAlpha(75),
+        ),
+      ),
+      selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
+      enabledDayPredicate: (day) {
+        final today = DateUtils.dateOnly(DateTime.now());
+        return !DateUtils.dateOnly(day).isAfter(today);
+      },
+      onDaySelected: (selectedDay, focusedDay) {
+        setState(() {
+          _selectedDay = selectedDay;
+          _focusedDay = focusedDay;
+        });
+
+        final logForSelectedDay = logMap[DateUtils.dateOnly(selectedDay)];
+        if (logForSelectedDay != null) {
+          widget.onLogTapped(logForSelectedDay);
+        } else {
+          widget.onLogRequested(selectedDay);
+        }
+      },
+      onPageChanged: (focusedDay) {
+        setState(() {
+          _focusedDay = focusedDay;
+        });
+      },
+      calendarBuilders: CalendarBuilders(
+        prioritizedBuilder: (context, day, focusedDay) {
+          final dayOnly = DateUtils.dateOnly(day);
+          final log = logMap[dayOnly];
+
+          if (log != null) {
+            return Container(
+              margin: const EdgeInsets.all(4.0),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: log.flow.color,
+              ),
+              alignment: Alignment.center,
+              child: Text(
+                '${day.day}',
+                style: TextStyle(
+                  color: colorScheme.onPrimary.withValues(alpha: 0.9),
+                ),
+              ),
+            );
+          }
+
+          final startDate = predictionResult?.estimatedStartDate;
+          final endDate = predictionResult?.estimatedEndDate;
+          bool isPredictedDay = false;
+
+          if (startDate != null && endDate != null) {
+            final startOnly = DateUtils.dateOnly(startDate);
+            final endOnly = DateUtils.dateOnly(endDate);
+            isPredictedDay =
+                !dayOnly.isBefore(startOnly) && !dayOnly.isAfter(endOnly);
+          }
+
+          if (isPredictedDay) {
+            return Container(
+              margin: const EdgeInsets.all(4.0),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: colorScheme.error.withValues(alpha: 0.4),
+              ),
+              alignment: Alignment.center,
+              child: Text(
+                '${day.day}',
+                style: TextStyle(
+                  color: colorScheme.error,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            );
+          }
+          return null;
+        },
+      ),
     );
   }
 }
