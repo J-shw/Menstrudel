@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/services/period_service.dart';
-import 'package:menstrudel/widgets/basic_progress_circle.dart';
+import 'package:menstrudel/screens/dashboards/logs/widgets/basic_progress_circle.dart';
 
 class LogsScreenPeriodQuickViewTab extends StatelessWidget {
   final PeriodService periodService;
