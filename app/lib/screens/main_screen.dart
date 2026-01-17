@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/controllers/log_ui_controller.dart';
-import 'package:menstrudel/screens/dashboards/logs_screen.dart';
+import 'package:menstrudel/screens/dashboards/logs/logs_screen.dart';
 import 'package:menstrudel/screens/dashboards/sanitary_screen.dart';
 import 'package:menstrudel/screens/settings/settings_screen.dart';
 import 'package:menstrudel/screens/dashboards/insights_screen.dart';
@@ -74,7 +74,7 @@ class _MainScreenState extends State<MainScreen> {
     /// Define app bars based on enabled features
     final List<PreferredSizeWidget?> appBars = [
       TopAppBar(titleText: l10n.mainScreen_insightsPageTitle),
-      null,
+      TopAppBar(titleText: l10n.mainScreen_logsPageTitle),
       if (isSanitaryNavEnabled)
         TopAppBar(titleText: l10n.mainScreen_sanitaryPageTitle),
       if (isSexActivityNavEnabled)
