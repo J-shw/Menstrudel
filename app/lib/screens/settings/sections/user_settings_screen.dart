@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:menstrudel/services/settings_service.dart';
 import 'package:menstrudel/widgets/goal_card.dart';
 import 'package:provider/provider.dart';
 import 'package:menstrudel/database/repositories/user_repository.dart';
@@ -50,6 +51,8 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
     );
 
     await context.read<UserRepository>().updateUser(updatedUser);
+
+    if (mounted) await context.read<SettingsService>().applySettingsForGoal(_selectedGoal!);
     
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
