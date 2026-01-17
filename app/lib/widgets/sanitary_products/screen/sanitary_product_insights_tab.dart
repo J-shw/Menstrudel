@@ -18,15 +18,7 @@ class SanitaryProductInsightsTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-
     final counts = <SanitaryProducts, int>{};
-    for (var entry in historyEntries) {
-      counts[entry.type] = (counts[entry.type] ?? 0) + 1;
-    }
-
-    final mostUsedType = counts.entries
-        .reduce((a, b) => a.value > b.value ? a : b)
-        .key;
 
     if (isLoading) return const Center(child: CircularProgressIndicator());
 
@@ -35,6 +27,14 @@ class SanitaryProductInsightsTab extends StatelessWidget {
         child: Text(l10n.sanitaryProductsScreen_noHistoryRecords),
       );
     }
+
+    for (var entry in historyEntries) {
+      counts[entry.type] = (counts[entry.type] ?? 0) + 1;
+    }
+
+    final mostUsedType = counts.entries
+        .reduce((a, b) => a.value > b.value ? a : b)
+        .key;
 
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16.0),
