@@ -13,6 +13,36 @@ class GoalStep extends StatelessWidget {
     required this.onGoalChanged,
   });
 
+  Widget _buildContraceptionHint(BuildContext context, AppLocalizations l10n, ColorScheme colorScheme) {
+    final showHint = selectedGoal == UserGoalTypes.avoid || selectedGoal == UserGoalTypes.sexual;
+
+    if (!showHint) return const SizedBox.shrink();
+
+    return Container(
+      key: ValueKey(selectedGoal),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: colorScheme.secondaryContainer.withValues(alpha: 0.5),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: colorScheme.secondaryContainer),
+      ),
+      child: Row(
+        children: [
+          Icon(Icons.info_outline, color: colorScheme.onSecondaryContainer),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Text(
+              l10n.onboardingScreen_contraceptionHint(l10n.settingsScreen_birthControl), 
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: colorScheme.onSecondaryContainer,
+                  ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
@@ -56,6 +86,11 @@ class GoalStep extends StatelessWidget {
                 onTap: () => onGoalChanged(goal),
               );
             }).toList(),
+          ),
+          const SizedBox(height: 24),
+          AnimatedSwitcher(
+            duration: const Duration(milliseconds: 300),
+            child: _buildContraceptionHint(context, l10n, colorScheme),
           ),
         ],
       ),
