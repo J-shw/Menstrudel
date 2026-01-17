@@ -271,7 +271,7 @@
     "@onboardingScreen_goalTitle": {
         "description": "Title for the goal onboarding screen."
     },
-    "onboardingScreen_goalDescription": "This helps us tailor the insights you see.",
+    "onboardingScreen_goalDescription": "This helps tailor the insights you see.",
     "@onboardingScreen_goalDescription": {
         "description": "Description for the goal onboarding screen."
     },
