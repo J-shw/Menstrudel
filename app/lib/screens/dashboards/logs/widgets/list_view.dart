@@ -6,16 +6,13 @@ import 'package:menstrudel/models/periods/period.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/models/flows/flow_enum.dart';
 import 'package:menstrudel/services/log_service.dart';
-import 'package:menstrudel/services/period_service.dart'; 
+import 'package:menstrudel/services/period_service.dart';
 import 'package:provider/provider.dart';
 
 class PeriodListView extends StatelessWidget {
   final Function(LogDay) onLogTapped;
 
-  const PeriodListView({
-    super.key,
-    required this.onLogTapped,
-  });
+  const PeriodListView({super.key, required this.onLogTapped});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +22,7 @@ class PeriodListView extends StatelessWidget {
 
     final isPeriodServiceLoading = periodService.isLoading;
     final isLogServiceLoading = logService.isLoading;
-    
+
     final periodLogEntries = logService.logs;
     final periodEntries = periodService.periodEntries;
 
@@ -53,20 +50,21 @@ class PeriodListView extends StatelessWidget {
 
     final items = periodService.timelineItems;
 
-    return Expanded(
-      child: ListView.builder(
-        itemCount: items.length,
-        itemBuilder: (context, index) {
-          final item = items[index];
-          if (item is DateTime) {
-            return _buildMonthHeader(item, context);
-          } else if (item is Period) {
-            return _buildPeriodHeader(item, context);
-          } else if (item is LogDay) {
-            return _buildPeriodLog(item, context);
-          }
-          return const SizedBox.shrink();
-        },
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ...items.map((item) {
+            if (item is DateTime) {
+              return _buildMonthHeader(item, context);
+            } else if (item is Period) {
+              return _buildPeriodHeader(item, context);
+            } else if (item is LogDay) {
+              return _buildPeriodLog(item, context);
+            }
+            return const SizedBox.shrink();
+          }),
+        ],
       ),
     );
   }
@@ -119,10 +117,15 @@ class PeriodListView extends StatelessWidget {
               width: 40,
               child: Column(
                 children: [
-                  Text(DateFormat('d').format(entry.date), style: textTheme.titleMedium),
+                  Text(
+                    DateFormat('d').format(entry.date),
+                    style: textTheme.titleMedium,
+                  ),
                   Text(
                     DateFormat('EEE').format(entry.date).toUpperCase(),
-                    style: textTheme.bodySmall?.copyWith(color: colorScheme.onSurfaceVariant),
+                    style: textTheme.bodySmall?.copyWith(
+                      color: colorScheme.onSurfaceVariant,
+                    ),
                   ),
                 ],
               ),
@@ -143,7 +146,8 @@ class PeriodListView extends StatelessWidget {
                         ),
                       ),
                     ),
-                  if (entry.flow.intValue > 0 && entry.symptoms.isNotEmpty) const SizedBox(height: 6),
+                  if (entry.flow.intValue > 0 && entry.symptoms.isNotEmpty)
+                    const SizedBox(height: 6),
                   if (entry.symptoms.isNotEmpty)
                     Wrap(
                       spacing: 6.0,
@@ -153,7 +157,10 @@ class PeriodListView extends StatelessWidget {
                           label: Text(symptom.getDisplayName(l10n)),
                           side: BorderSide.none,
                           padding: EdgeInsets.zero,
-                          visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
+                          visualDensity: const VisualDensity(
+                            horizontal: 0,
+                            vertical: -4,
+                          ),
                           backgroundColor: colorScheme.secondaryContainer,
                           labelStyle: TextStyle(
                             fontSize: 12,
