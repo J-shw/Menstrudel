@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
+import 'package:menstrudel/models/app/settings_presets.dart';
 
 /// Enum representing different types of user app goals.
 enum UserGoalTypes {
@@ -44,4 +45,8 @@ enum UserGoalTypes {
       UserGoalTypes.avoid => Icons.shield,
     };
   }
+}
+
+extension UserGoalExtension on UserGoalTypes {
+  GoalPreset get settings => kGoalPresets[this]!;
 }
