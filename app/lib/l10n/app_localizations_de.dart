@@ -443,6 +443,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get onboardingScreen_getStarted => 'Get Started';
 
   @override
+  String get mainScreen_logsPageTitle => 'Logs';
+
+  @override
   String get mainScreen_insightsPageTitle => 'Deine Erkenntnisse';
 
   @override
