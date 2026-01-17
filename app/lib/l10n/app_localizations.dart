@@ -878,12 +878,6 @@ abstract class AppLocalizations {
   /// **'Logs'**
   String get mainScreen_logsPageTitle;
 
-  /// No description provided for @mainScreen_insightsPageTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Your Insights'**
-  String get mainScreen_insightsPageTitle;
-
   /// No description provided for @mainSceen_sexActivityPageTitle.
   ///
   /// In en, this message translates to:

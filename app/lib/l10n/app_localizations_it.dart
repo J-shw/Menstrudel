@@ -446,9 +446,6 @@ class AppLocalizationsIt extends AppLocalizations {
   String get mainScreen_logsPageTitle => 'Logs';
 
   @override
-  String get mainScreen_insightsPageTitle => 'Le tue statistiche';
-
-  @override
   String get mainSceen_sexActivityPageTitle => 'Sex Activity';
 
   @override

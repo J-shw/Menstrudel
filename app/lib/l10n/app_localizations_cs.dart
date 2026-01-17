@@ -446,9 +446,6 @@ class AppLocalizationsCs extends AppLocalizations {
   String get mainScreen_logsPageTitle => 'Logs';
 
   @override
-  String get mainScreen_insightsPageTitle => 'Vaše statistiky';
-
-  @override
   String get mainSceen_sexActivityPageTitle => 'Sexuální aktivita';
 
   @override
