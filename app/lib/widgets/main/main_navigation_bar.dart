@@ -24,11 +24,6 @@ class MainNavigationBar extends StatelessWidget {
       indicatorColor: Theme.of(context).colorScheme.primaryContainer,
       destinations: <Widget>[
         NavigationDestination(
-          selectedIcon: Icon(Icons.bar_chart_rounded),
-          icon: Icon(Icons.bar_chart_sharp),
-          label: l10n.navBar_insights,
-        ),
-        NavigationDestination(
           selectedIcon: Icon(Icons.book),
           icon: Icon(Icons.book_outlined),
           label: l10n.navBar_logs,
