@@ -42,10 +42,10 @@ class AppLocalizationsCs extends AppLocalizations {
   String get end => 'Konec';
 
   @override
-  String get next => 'Next';
+  String get next => 'Další';
 
   @override
-  String get back => 'Back';
+  String get back => 'Zpět';
 
   @override
   String get day => 'Den';
@@ -61,8 +61,8 @@ class AppLocalizationsCs extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count Days',
-      one: '$count Day',
+      other: '$count Dny',
+      one: '$count Den',
     );
     return '$_temp0';
   }
@@ -72,8 +72,8 @@ class AppLocalizationsCs extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count Months',
-      one: '$count Month',
+      other: '$count Měsíce',
+      one: '$count Měsíc',
     );
     return '$_temp0';
   }
@@ -83,8 +83,8 @@ class AppLocalizationsCs extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count Years',
-      one: '$count Year',
+      other: '$count Roky',
+      one: '$count Rok',
     );
     return '$_temp0';
   }
@@ -180,7 +180,7 @@ class AppLocalizationsCs extends AppLocalizations {
   String get navBar_pill => 'Pilulky';
 
   @override
-  String get navBar_larc => 'DPRA';
+  String get navBar_larc => 'LARC';
 
   @override
   String get navBar_settings => 'Nastavení';
@@ -312,16 +312,16 @@ class AppLocalizationsCs extends AppLocalizations {
   String get sexParticipation_group => 'Skupina';
 
   @override
-  String get userGoal_general => 'General Health';
+  String get userGoal_general => 'Celkový zdravotní stav';
 
   @override
-  String get userGoal_sexual => 'Sexual Health';
+  String get userGoal_sexual => 'Sexuální zdraví';
 
   @override
-  String get userGoal_conceive => 'Trying to Conceive';
+  String get userGoal_conceive => 'Snaha o otěhotnění';
 
   @override
-  String get userGoal_avoid => 'Avoiding Pregnancy';
+  String get userGoal_avoid => 'Zabránění těhotenství';
 
   @override
   String get dayOfWeek_monday => 'Pondělí';
@@ -358,8 +358,8 @@ class AppLocalizationsCs extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'Your next period is estimated to start in $count days.',
-      one: 'Your next period is estimated to start in 1 day.',
+      other: 'Předpokládaný začátek další menstruace je za $count dní.',
+      one: 'Předpokládaný začátek další menstruace je za 1 den.',
     );
     return '$_temp0';
   }
@@ -372,8 +372,8 @@ class AppLocalizationsCs extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'Your next period is overdue by $count days.',
-      one: 'Your next period is overdue by 1 day.',
+      other: 'Vaše další menstruace má být opožděná o $count dní.',
+      one: 'Vaše další menstruace má být opožděná o jeden den.',
     );
     return '$_temp0';
   }
@@ -389,7 +389,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String notification_larcBody(String type, int days) {
-    return '.';
+    return '$type má být obnoveno v $days dnech.';
   }
 
   @override
@@ -408,33 +408,39 @@ class AppLocalizationsCs extends AppLocalizations {
       'Nezapomeňte si vyměnit menstruační pomůcku.';
 
   @override
-  String get onboardingScreen_welcomeToMenstrudel => 'Welcome to Menstrudel';
+  String get onboardingScreen_welcomeToMenstrudel => 'Vítejte v Menstrudel';
 
   @override
   String get onboardingScreen_welcomeToMenstrudelDescription =>
-      'Your offline, private cycle tracker.';
+      'Soukromá aplikace pro sledování cyklu, která funguje bez internetu.';
 
   @override
-  String get onboardingScreen_profileTitle => 'About You';
+  String get onboardingScreen_profileTitle => 'O vás';
 
   @override
-  String get onboardingScreen_profileName => 'What should we call you?';
+  String get onboardingScreen_profileName => 'Jak vám máme říkat?';
 
   @override
-  String get onboardingScreen_profileDate => 'Birth Date (Optional)';
+  String get onboardingScreen_profileDate => 'Datum narození (volitelné)';
 
   @override
-  String get onboardingScreen_profileDatePlaceholder => 'Tap to set birthday';
+  String get onboardingScreen_profileDatePlaceholder =>
+      'Klikněte pro zadání data narození';
 
   @override
-  String get onboardingScreen_goalTitle => 'What\'s your goal?';
+  String get onboardingScreen_goalTitle => 'Co je váš cíl?';
 
   @override
   String get onboardingScreen_goalDescription =>
-      'This helps us tailor the insights you see.';
+      'To nám pomáhá přizpůsobit informace, které vidíte.';
 
   @override
-  String get onboardingScreen_getStarted => 'Get Started';
+  String onboardingScreen_contraceptionHint(String sectionName) {
+    return 'Note: You can enable Pill or LARC tracking later in the app settings under \'$sectionName\' if wanted.';
+  }
+
+  @override
+  String get onboardingScreen_getStarted => 'Začínáme';
 
   @override
   String get mainScreen_insightsPageTitle => 'Vaše statistiky';
@@ -481,8 +487,8 @@ class AppLocalizationsCs extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'Period overdue by $count days',
-      one: 'Period overdue by 1 day',
+      other: 'Vaše další menstruace je opožděná o $count dní',
+      one: 'Vaše další menstruace je opožděná o jeden den.',
     );
     return '$_temp0';
   }
@@ -500,12 +506,12 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String larcScreen_history(int history) {
-    return 'History ($history)';
+    return 'Historie ($history)';
   }
 
   @override
   String larcScreen_activeLarcs(int activeCount) {
-    return 'Active LARCs ($activeCount)';
+    return 'Aktivní LARC ($activeCount)';
   }
 
   @override
@@ -526,7 +532,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String sanitaryProductsScreen_history(int history) {
-    return 'History ($history)';
+    return 'Historie ($history)';
   }
 
   @override
@@ -535,12 +541,12 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String sanitaryProductsScreen_activeProduct(String activeType) {
-    return 'Active $activeType';
+    return 'Aktivní $activeType';
   }
 
   @override
   String sanitaryProductsScreen_changeDueAt(String time) {
-    return 'Change Due At $time';
+    return 'K výměně v $time';
   }
 
   @override
@@ -549,26 +555,26 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String sexActivityScreen_history(int history) {
-    return 'History ($history)';
+    return 'Historie ($history)';
   }
 
   @override
-  String get settingsScreen_profile => 'Profile';
+  String get settingsScreen_profile => 'Profil';
 
   @override
-  String get settingsScreen_name => 'Name';
+  String get settingsScreen_name => 'Jméno';
 
   @override
-  String get settingsScreen_birthDate => 'Birth Date';
+  String get settingsScreen_birthDate => 'Datum narození';
 
   @override
-  String get settingsScreen_notSet => 'Not set';
+  String get settingsScreen_notSet => 'Nenastaveno';
 
   @override
-  String get settingsScreen_appGoal => 'App Goal';
+  String get settingsScreen_appGoal => 'Cíl aplikace';
 
   @override
-  String get settingsScreen_profileUpdated => 'Profile updated successfully';
+  String get settingsScreen_profileUpdated => 'Profil byl úspěšně aktualizován';
 
   @override
   String get settingsScreen_selectHistoryView => 'Zvolte zobrazení historie';
@@ -718,11 +724,11 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String settingsScreen_deleteDefaultSymptomQuestion(String symptom) {
-    return 'Delete \'$symptom\'?';
+    return 'Smazat \'$symptom\'?';
   }
 
   @override
-  String get settingsScreen_resetSymptomsList => 'Reset Symptoms List?';
+  String get settingsScreen_resetSymptomsList => 'Obnovit seznam příznaků?';
 
   @override
   String get settingsScreen_resetSymptomsListDescription =>
@@ -737,12 +743,13 @@ class AppLocalizationsCs extends AppLocalizations {
       usageCount,
       locale: localeName,
       other:
-          'There are $usageCount period logs with this symptom!\nThese logs will not be changed.',
+          'Jsou zde$usageCount záznamy menstruace s tímto příznakem!\nTyto záznamy nebudou změněny.',
       one:
-          'There is already 1 period log with this symptom!\nThis log will not be changed.',
-      zero: 'There are currently no period logs with this symptom!',
+          'V současné době je jeden záznam menstruace s tímto příznakem!\nTento záznam nebude změněn.',
+      zero:
+          'V současné době nejsou žádné záznamy menstruací s tímto příznakem!',
     );
-    return '\'$symptom\' will no longer be available when logging a period.\n\n$_temp0';
+    return '\'$symptom\' už nebude dostupný při záznamu menstruace.\n\n$_temp0';
   }
 
   @override
@@ -937,7 +944,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String settingsScreen_importErrorPlatform(String message) {
-    return 'Import failed: $message. Please ensure the file is saved on the device and try again.';
+    return 'Importování se nepodařilo: $message. Prosím ujistěte se, že je soubor uložen lokálně a zkuste to znovu.';
   }
 
   @override
@@ -955,7 +962,7 @@ class AppLocalizationsCs extends AppLocalizations {
       'Nebylo nalezeno žádné heslo, otisk prstu ani rozpoznání obličeje. Nastavte je prosím v nastavení svého zařízení.';
 
   @override
-  String get settingsScreen_userProfile => 'You';
+  String get settingsScreen_userProfile => 'Vy';
 
   @override
   String get settingsScreen_preferences => 'Preference';
@@ -977,227 +984,234 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get preferencesScreen_enableSexActivityScreenSubtitle =>
-      'Show the Sex Activity tab on the main navigation bar.';
+      'Zobrazit kartu o sexuální aktivitě na hlavní navigační liště.';
 
   @override
-  String get preferencesScreen_StartingDayOfWeek => 'Starting Day of the Week';
+  String get preferencesScreen_StartingDayOfWeek => 'Počáteční den v týdnu';
 
   @override
-  String get settingsScreen_about => 'About';
+  String get settingsScreen_about => 'O aplikaci';
 
   @override
-  String get aboutScreen_version => 'Version';
+  String get aboutScreen_version => 'Verze';
 
   @override
   String get aboutScreen_github => 'GitHub';
 
   @override
-  String get aboutScreen_githubSubtitle => 'Source code and issue tracking';
+  String get aboutScreen_githubSubtitle => 'Zdrojový kód a sledování problémů';
 
   @override
   String get aboutScreen_discord => 'Discord';
 
   @override
-  String get aboutScreen_discordSubtitle => 'Support and community';
+  String get aboutScreen_discordSubtitle => 'Podpora a komunita';
 
   @override
-  String get aboutScreen_share => 'Share';
+  String get aboutScreen_share => 'Sdílet';
 
   @override
-  String get aboutScreen_shareSubtitle => 'Share the app with friends';
+  String get aboutScreen_shareSubtitle => 'Sdílet aplikaci s přáteli';
 
   @override
-  String get aboutScreen_urlError => 'Could not open the link.';
+  String get aboutScreen_urlError => 'Nebylo možné otevřít odkaz.';
 
   @override
-  String get logSummaryWidget_loggedDays => 'Logged Days';
+  String get logSummaryWidget_loggedDays => 'Zaznamenané dny';
 
   @override
-  String get logSummaryWidget_trackingHistory => 'Tracking History';
+  String get logSummaryWidget_trackingHistory => 'Historie sledování';
 
   @override
   String get cycleLengthVarianceWidget_logAtLeastTwoPeriods =>
-      'Need at least two cycles to show variance.';
+      'Je potřeba mít nejméně dva cykly pro zobrazení rozdílů.';
 
   @override
-  String get cycleLengthVarianceWidget_title => 'Cycle Length Variance';
+  String get cycleLengthVarianceWidget_title => 'Kolísání délky cyklu';
 
   @override
-  String get cycleLengthVarianceWidget_averageCycle => 'Avg. Cycle';
+  String get cycleLengthVarianceWidget_averageCycle => 'Průměrný cyklus';
 
   @override
-  String get cycleLengthVarianceWidget_cycle => 'Cycle';
+  String get cycleLengthVarianceWidget_cycle => 'Cyklus';
 
   @override
   String get periodDurationWidget_logAtLeastTwoPeriods =>
-      'Log at least two periods to see period statistics.';
+      'Zaznamenejte nejméně dvě menstruace pro zobrazení statistik.';
 
   @override
-  String get periodDurationWidget_title => 'Period Duration Variance';
+  String get periodDurationWidget_title => 'Kolísání délky menstruace';
 
   @override
-  String get periodDurationWidget_averagePeriod => 'Avg. Period';
+  String get periodDurationWidget_averagePeriod => 'Průměrná menstruace';
 
   @override
-  String get periodDurationWidget_period => 'Period';
+  String get periodDurationWidget_period => 'Menstruace';
 
   @override
   String get flowIntensityWidget_flowIntensityBreakdown =>
-      'Flow Intensity Breakdown';
+      'Rozložení intenzity krvácení';
 
   @override
   String get flowIntensityWidget_noFlowDataLoggedYet =>
-      'No flow data logged yet.';
+      'Dosud nebyly zaznamenány žádné údaje o krvácení.';
 
   @override
-  String get painLevelWidget_noPainDataLoggedYet => 'No pain data logged yet.';
+  String get painLevelWidget_noPainDataLoggedYet =>
+      'Dosud nebyly zaznamenány žádné údaje o bolesti.';
 
   @override
-  String get painLevelWidget_painLevelBreakdown => 'Pain Level Breakdown';
+  String get painLevelWidget_painLevelBreakdown => 'Rozdělení úrovní bolesti';
 
   @override
-  String get monthlyFlowChartWidget_noDataToDisplay => 'No data to display.';
+  String get monthlyFlowChartWidget_noDataToDisplay =>
+      'Žádná data k zobrazení.';
 
   @override
-  String get monthlyFlowChartWidget_cycleFlowPatterns => 'Cycle Flow Patterns';
+  String get monthlyFlowChartWidget_cycleFlowPatterns => 'Vzorce průběhu cyklu';
 
   @override
   String get monthlyFlowChartWidget_cycleFlowPatternsDescription =>
-      'Each line represents one complete cycle';
+      'Každá linka reprezentuje jeden kompletní cyklus';
 
   @override
   String get symptomFrequencyWidget_noSymptomsLoggedYet =>
-      'No symptoms logged yet.';
+      'Žádné příznaky nebyly zaznamenány.';
 
   @override
   String get symptomFrequencyWidget_mostCommonSymptoms =>
-      'Most Common Symptoms';
+      'Nejvíce běžné příznaky';
 
   @override
-  String get yearHeatMapWidget_yearlyOverview => 'Yearly Overview';
+  String get yearHeatMapWidget_yearlyOverview => 'Roční přehled';
 
   @override
-  String get journalViewWidget_logYourFirstPeriod => 'Log your first period.';
+  String get journalViewWidget_logYourFirstPeriod =>
+      'Zaznamenejte první menstruaci.';
 
   @override
   String get listViewWidget_noPeriodsLogged =>
-      'No periods logged yet.\nTap the + button to add one.';
+      'Žádné menstruace nebyly zaznamenány.\nKlepněte na tlačítko + pro přidání.';
 
   @override
-  String get listViewWidget_confirmDelete => 'Confirm Delete';
+  String get listViewWidget_confirmDelete => 'Potvrdit smazání';
 
   @override
   String get listViewWidget_confirmDeleteDescription =>
-      'Are you sure you want to delete this entry?';
+      'Jste si jisti že chcete smazat tento záznam?';
 
   @override
   String get emptyPillStateWidget_noPillRegimenFound =>
-      'No pill regimen found.';
+      'Žádný režim pilulek nebyl nalezen.';
 
   @override
   String get emptyPillStateWidget_noPillRegimenFoundDescription =>
-      'Set up your pill pack in settings to start tracking.';
+      'Nastavte si balíček pilulek v nastavení, abyste mohli začít sledovat.';
 
   @override
   String pillStatus_pillsOfTotal(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'of $count pills',
-      one: 'of 1 pill',
+      other: 'z $count pilulek',
+      one: 'z 1 pilulky',
     );
     return '$_temp0';
   }
 
   @override
-  String get pillStatus_undo => 'Undo';
+  String get pillStatus_undo => 'Zpět';
 
   @override
-  String get pillStatus_skip => 'Skip';
+  String get pillStatus_skip => 'Přeskočit';
 
   @override
-  String get pillStatus_markAsTaken => 'Mark As Taken';
+  String get pillStatus_markAsTaken => 'Označit jako užité';
 
   @override
   String pillStatus_packStartInFuture(DateTime date) {
     final intl.DateFormat dateDateFormat = intl.DateFormat.yMMMd(localeName);
     final String dateString = dateDateFormat.format(date);
 
-    return 'Your next pill pack starts on $dateString.';
+    return 'Váš další balíček pilulek začne v $dateString.';
   }
 
   @override
-  String get regimenSetupWidget_setUpPillRegimen => 'Set Up Pill Regimen';
+  String get regimenSetupWidget_setUpPillRegimen => 'Nastavte si režim pilulek';
 
   @override
-  String get regimenSetupWidget_packName => 'Pack Name';
+  String get regimenSetupWidget_packName => 'Název balíčku';
 
   @override
-  String get regimenSetupWidget_pleaseEnterAName => 'Please enter a name';
+  String get regimenSetupWidget_pleaseEnterAName => 'Prosím zadejte jméno';
 
   @override
-  String get regimenSetupWidget_activePills => 'Active Pills';
+  String get regimenSetupWidget_activePills => 'Aktivní pilulky';
 
   @override
-  String get regimenSetupWidget_enterANumber => 'Enter a number';
+  String get regimenSetupWidget_enterANumber => 'Zadejte číslo';
 
   @override
-  String get regimenSetupWidget_placeboPills => 'Placebo Pills';
+  String get regimenSetupWidget_placeboPills => 'Placebo pilulky';
 
   @override
-  String get regimenSetupWidget_firstDayOfThisPack => 'First Day of This Pack';
+  String get regimenSetupWidget_firstDayOfThisPack =>
+      'První den tohohle balíčku';
 
   @override
-  String get symptomEntrySheet_logYourDay => 'Log Your Day';
+  String get symptomEntrySheet_logYourDay => 'Zaznamenejte svůj den';
 
   @override
-  String get symptomEntrySheet_symptomsOptional => 'Symptoms (Optional)';
+  String get symptomEntrySheet_symptomsOptional => 'Příznaky (volitelné)';
 
   @override
-  String get periodDetailsSheet_symptoms => 'Symptoms';
+  String get periodDetailsSheet_symptoms => 'Příznaky';
 
   @override
-  String get periodDetailsSheet_flow => 'Flow';
+  String get periodDetailsSheet_flow => 'Tok';
 
   @override
-  String get larcEntrySheet_logLARCDetails => 'Log LARC Details';
+  String get larcEntrySheet_logLARCDetails => 'Zaznamenat LARC podrobnosti';
 
   @override
-  String get sanitaryEntrySheet_logSanitaryProduct => 'Log Sanitary Product';
+  String get sanitaryEntrySheet_logSanitaryProduct =>
+      'Zaznamenat menstruační pomůcky';
 
   @override
-  String get sanitaryEntrySheet_setReminderDuration => 'Set Reminder Duration';
+  String get sanitaryEntrySheet_setReminderDuration =>
+      'Nastavit délku připomenutí';
 
   @override
   String sanitaryEntrySheet_maxDuration(int hours) {
-    return 'Max Duration: $hours hours';
+    return 'Maximální délka: $hours hodin';
   }
 
   @override
   String get sanitaryEntrySheet_futureLogTimeError =>
-      'Log time cannot be in the future.';
+      'Zaznamenaný čas nemůže být v budoucnosti.';
 
   @override
   String get sanitaryEntrySheet_pastReminderTimeError =>
-      'Reminder end time cannot be in the past.';
+      'Čas ukončení připomenutí nemůže být v minulosti.';
 
   @override
   String periodPredictionCircle_days(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'Days',
-      one: 'Day',
+      other: 'Dní',
+      one: 'Den',
     );
     return '$_temp0';
   }
 
   @override
-  String get customSymptomDialog_newSymptom => 'New Symptom';
+  String get customSymptomDialog_newSymptom => 'Nový příznak';
 
   @override
-  String get customSymptomDialog_enterCustomSymptom => 'Enter a custom symptom';
+  String get customSymptomDialog_enterCustomSymptom =>
+      'Zadejte vlastní příznak';
 
   @override
-  String get customSymptomDialog_temporarySymptom => 'Temporary Symptom';
+  String get customSymptomDialog_temporarySymptom => 'Dočasný příznak';
 }

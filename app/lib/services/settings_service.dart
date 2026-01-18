@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:menstrudel/models/app/settings_presets.dart';
+import 'package:menstrudel/models/app/user_goal_types_enum.dart';
 import 'dart:convert';
 import 'package:menstrudel/models/birth_control/larcs/larc_types_enum.dart';
 import 'package:menstrudel/models/period_logs/symptom.dart';
@@ -385,5 +387,21 @@ class SettingsService extends ChangeNotifier {
     final newSet = Set<Symptom>.from(_defaultSymptoms);
     newSet.remove(symptom);
     await setDefaultSymptoms(newSet);
+  }
+
+  Future<void> applySettingsForGoal(UserGoalTypes goal) async {
+    final preset = goal.settings;
+
+    // I'm not using the class methods because they will each notifyListeners which would result in 2 notify events.
+
+    _sanitaryNavEnabled = preset.sanitaryNav;
+    _sexActivityNavEnabled = preset.sexNav;
+
+    await Future.wait([
+      _prefs.setBool(sanitaryNavEnabledKey, _sanitaryNavEnabled),
+      _prefs.setBool(sexActivityNavEnabledKey, _sexActivityNavEnabled)
+    ]);
+    
+    notifyListeners();
   }
 }

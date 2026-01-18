@@ -271,9 +271,18 @@
     "@onboardingScreen_goalTitle": {
         "description": "Title for the goal onboarding screen."
     },
-    "onboardingScreen_goalDescription": "This helps us tailor the insights you see.",
+    "onboardingScreen_goalDescription": "This helps tailor the insights you see.",
     "@onboardingScreen_goalDescription": {
         "description": "Description for the goal onboarding screen."
+    },
+    "onboardingScreen_contraceptionHint": "Note: You can enable Pill or LARC tracking later in the app settings under '{sectionName}' if wanted.",
+    "@onboardingScreen_contraceptionHint": {
+        "description": "Hint for birth control settings",
+        "placeholders": {
+            "sectionName": {
+                "type": "String"
+            }
+        }
     },
     "onboardingScreen_getStarted": "Get Started",
     "@onboardingScreen_getStarted": {

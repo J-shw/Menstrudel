@@ -857,8 +857,14 @@ abstract class AppLocalizations {
   /// Description for the goal onboarding screen.
   ///
   /// In en, this message translates to:
-  /// **'This helps us tailor the insights you see.'**
+  /// **'This helps tailor the insights you see.'**
   String get onboardingScreen_goalDescription;
+
+  /// Hint for birth control settings
+  ///
+  /// In en, this message translates to:
+  /// **'Note: You can enable Pill or LARC tracking later in the app settings under \'{sectionName}\' if wanted.'**
+  String onboardingScreen_contraceptionHint(String sectionName);
 
   /// Button text for the get started navigation button
   ///
