@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:menstrudel/screens/dashboards/logs/widgets/logs_screen_insights_tab.dart';
-import 'package:menstrudel/screens/dashboards/logs/widgets/logs_screen_log_tab.dart';
-import 'package:menstrudel/screens/dashboards/logs/widgets/logs_screen_period_quick_view_tab.dart';
+import 'package:menstrudel/screens/dashboards/logs/widgets/tabs/logs_screen_insights_tab.dart';
+import 'package:menstrudel/screens/dashboards/logs/widgets/tabs/logs_screen_log_tab.dart';
+import 'package:menstrudel/screens/dashboards/logs/widgets/tabs/logs_screen_period_quick_view_tab.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:menstrudel/services/period_service.dart';
