@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:menstrudel/controllers/log_sanitary_ui_controller.dart';
 import 'package:menstrudel/controllers/log_ui_controller.dart';
 import 'package:menstrudel/coordinators/data_refresh_coordinator.dart';
 import 'package:menstrudel/database/repositories/periods_repository.dart';
@@ -82,6 +83,7 @@ void main() async {
         ),
 
         ChangeNotifierProvider(create: (_) => LogUIController()),
+        ChangeNotifierProvider(create: (_) => LogSanitaryUIController()),
       ],
       child: const MainApp(),
     ),
