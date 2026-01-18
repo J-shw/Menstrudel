@@ -48,6 +48,9 @@ class AppLocalizationsCs extends AppLocalizations {
   String get back => 'Zpět';
 
   @override
+  String get today => 'Today';
+
+  @override
   String get day => 'Den';
 
   @override
