@@ -1083,9 +1083,6 @@ class AppLocalizationsCs extends AppLocalizations {
       'Nejvíce běžné příznaky';
 
   @override
-  String get yearHeatMapWidget_yearlyOverview => 'Roční přehled';
-
-  @override
   String get journalViewWidget_logYourFirstPeriod =>
       'Zaznamenejte první menstruaci.';
 

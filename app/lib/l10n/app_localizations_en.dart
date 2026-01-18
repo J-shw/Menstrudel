@@ -1067,9 +1067,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'Most Common Symptoms';
 
   @override
-  String get yearHeatMapWidget_yearlyOverview => 'Yearly Overview';
-
-  @override
   String get journalViewWidget_logYourFirstPeriod => 'Log your first period.';
 
   @override

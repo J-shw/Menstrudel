@@ -1925,12 +1925,6 @@ abstract class AppLocalizations {
   /// **'Most Common Symptoms'**
   String get symptomFrequencyWidget_mostCommonSymptoms;
 
-  /// No description provided for @yearHeatMapWidget_yearlyOverview.
-  ///
-  /// In en, this message translates to:
-  /// **'Yearly Overview'**
-  String get yearHeatMapWidget_yearlyOverview;
-
   /// No description provided for @journalViewWidget_logYourFirstPeriod.
   ///
   /// In en, this message translates to:

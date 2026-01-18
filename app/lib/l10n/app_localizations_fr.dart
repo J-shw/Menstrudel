@@ -1096,9 +1096,6 @@ class AppLocalizationsFr extends AppLocalizations {
       'Symptômes les plus courants';
 
   @override
-  String get yearHeatMapWidget_yearlyOverview => 'Aperçu annuel';
-
-  @override
   String get journalViewWidget_logYourFirstPeriod =>
       'Enregistrer vos premières règles.';
 
