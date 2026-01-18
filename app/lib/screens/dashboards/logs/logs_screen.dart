@@ -36,7 +36,7 @@ class LogsScreenState extends State<LogsScreen> {
                 unselectedLabelColor: colorScheme.onSurfaceVariant,
                 indicatorSize: TabBarIndicatorSize.tab,
                 tabs: [
-                  Tab(text: "Main"), //TODO: Needs a new name and needs to be localised. Not sure what to call it yet...
+                  Tab(text: l10n.today),
                   Tab(text: l10n.logs),
                   Tab(text: l10n.insights),
                 ],
