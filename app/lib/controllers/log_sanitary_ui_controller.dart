@@ -54,12 +54,14 @@ class LogSanitaryUIController extends ChangeNotifier {
           onSave: (updatedEntry) async {
             await _repo.updateLog(updatedEntry);
             if (!sheetContext.mounted) return;
+            Navigator.pop(context);
             notifyListeners();
           },
           onDelete: () async {
             if (entry.id != null) {
               await _repo.deleteLog(entry.id!);
               if (!sheetContext.mounted) return;
+              Navigator.pop(context);
               notifyListeners();
             }
           },
