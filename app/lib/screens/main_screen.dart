@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/controllers/log_ui_controller.dart';
-import 'package:menstrudel/screens/dashboards/logs_screen.dart';
+import 'package:menstrudel/screens/dashboards/logs/logs_screen.dart';
 import 'package:menstrudel/screens/dashboards/sanitary_screen.dart';
 import 'package:menstrudel/screens/settings/settings_screen.dart';
-import 'package:menstrudel/screens/dashboards/insights_screen.dart';
 import 'package:menstrudel/screens/dashboards/pills_screen.dart';
 import 'package:menstrudel/screens/dashboards/sex_screen.dart';
 import 'package:menstrudel/widgets/main/main_navigation_bar.dart';
@@ -27,7 +26,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  int _selectedIndex = 1;
+  int _selectedIndex = 0;
 
   void _onItemTapped(int index) {
     setState(() {
@@ -62,7 +61,6 @@ class _MainScreenState extends State<MainScreen> {
       
     /// Define pages on enabled features
     final List<Widget> pages = <Widget>[
-      const InsightsScreen(),
       const LogsScreen(),
       if (isSanitaryNavEnabled) const SanitaryScreen(),
       if (isSexActivityNavEnabled) const SexScreen(),
@@ -73,8 +71,7 @@ class _MainScreenState extends State<MainScreen> {
 
     /// Define app bars based on enabled features
     final List<PreferredSizeWidget?> appBars = [
-      TopAppBar(titleText: l10n.mainScreen_insightsPageTitle),
-      null,
+      TopAppBar(titleText: l10n.mainScreen_logsPageTitle),
       if (isSanitaryNavEnabled)
         TopAppBar(titleText: l10n.mainScreen_sanitaryPageTitle),
       if (isSexActivityNavEnabled)
@@ -98,7 +95,7 @@ class _MainScreenState extends State<MainScreen> {
         selectedIndex: correctedIndex,
         onDestinationSelected: _onItemTapped,
       ),
-      floatingActionButton: correctedIndex == 1
+      floatingActionButton: correctedIndex == 0
           ? AnimatedSwitcher(
               duration: const Duration(milliseconds: 200),
               transitionBuilder: (Widget child, Animation<double> animation) {

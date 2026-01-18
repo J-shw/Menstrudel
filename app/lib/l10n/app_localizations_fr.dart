@@ -444,7 +444,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get onboardingScreen_getStarted => 'Get Started';
 
   @override
-  String get mainScreen_insightsPageTitle => 'Votre Aperçu';
+  String get mainScreen_logsPageTitle => 'Logs';
 
   @override
   String get mainSceen_sexActivityPageTitle => 'Sex Activity';

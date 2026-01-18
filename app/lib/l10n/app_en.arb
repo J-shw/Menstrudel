@@ -289,7 +289,7 @@
         "description": "Button text for the get started navigation button"
     },
 
-    "mainScreen_insightsPageTitle": "Your Insights",
+    "mainScreen_logsPageTitle": "Logs",
     "mainSceen_sexActivityPageTitle": "Sex Activity",
     "mainScreen_sanitaryPageTitle": "Sanitary Products",
     "mainScreen_pillsPageTitle": "Pills",

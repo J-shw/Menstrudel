@@ -443,7 +443,7 @@ class AppLocalizationsCs extends AppLocalizations {
   String get onboardingScreen_getStarted => 'Začínáme';
 
   @override
-  String get mainScreen_insightsPageTitle => 'Vaše statistiky';
+  String get mainScreen_logsPageTitle => 'Logs';
 
   @override
   String get mainSceen_sexActivityPageTitle => 'Sexuální aktivita';

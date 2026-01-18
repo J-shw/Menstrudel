@@ -872,11 +872,11 @@ abstract class AppLocalizations {
   /// **'Get Started'**
   String get onboardingScreen_getStarted;
 
-  /// No description provided for @mainScreen_insightsPageTitle.
+  /// No description provided for @mainScreen_logsPageTitle.
   ///
   /// In en, this message translates to:
-  /// **'Your Insights'**
-  String get mainScreen_insightsPageTitle;
+  /// **'Logs'**
+  String get mainScreen_logsPageTitle;
 
   /// No description provided for @mainSceen_sexActivityPageTitle.
   ///

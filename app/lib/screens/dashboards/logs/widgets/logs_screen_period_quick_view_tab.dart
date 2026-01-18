@@ -1,29 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:menstrudel/controllers/log_ui_controller.dart';
-import 'package:menstrudel/widgets/basic_progress_circle.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
-import 'package:provider/provider.dart';
 import 'package:menstrudel/services/period_service.dart';
-import 'package:menstrudel/widgets/logs/dynamic_history_view.dart';
+import 'package:menstrudel/screens/dashboards/logs/widgets/basic_progress_circle.dart';
 
-class LogsScreen extends StatefulWidget {
-  const LogsScreen({super.key});
+class LogsScreenPeriodQuickViewTab extends StatelessWidget {
+  final PeriodService periodService;
 
-  @override
-  State<LogsScreen> createState() => LogsScreenState();
-}
-
-class LogsScreenState extends State<LogsScreen> {
-  @override
-  void initState() {
-    super.initState();
-  }
+  const LogsScreenPeriodQuickViewTab({super.key, required this.periodService});
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final periodService = context.watch<PeriodService>();
+    final isLoading = periodService.isLoading;
+
+    if (isLoading) return const Center(child: CircularProgressIndicator());
 
     String predictionText = '';
     if (periodService.isLoading) {
@@ -46,12 +37,10 @@ class LogsScreenState extends State<LogsScreen> {
       }
     }
 
-    return Column(
-      mainAxisSize: MainAxisSize.max,
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
+    return Center( child: Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const SizedBox(height: 100),
         BasicProgressCircle(
           currentValue: periodService.circleCurrentValue,
           maxValue: periodService.circleMaxValue,
@@ -70,20 +59,8 @@ class LogsScreenState extends State<LogsScreen> {
             color: Colors.blueGrey,
           ),
         ),
-        const SizedBox(height: 20),
-        DynamicHistoryView(
-          onLogRequested: (date) {
-            context.read<LogUIController>().handleCreateNewLog(
-                  context: context,
-                  selectedDate: date,
-                );
-          },
-          onLogTapped: (log) => context.read<LogUIController>().handleEditLog(
-            context: context,
-            log: log,
-          ),
-        ),
       ],
+    ),
     );
   }
 }

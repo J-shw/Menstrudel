@@ -17,14 +17,14 @@ import 'package:menstrudel/widgets/insights/monthly_flow.dart';
 
 import 'package:menstrudel/l10n/app_localizations.dart';
 
-class InsightsScreen extends StatefulWidget {
-  const InsightsScreen({super.key});
+class LogsScreenInsightsTab extends StatefulWidget {
+  const LogsScreenInsightsTab({super.key});
 
   @override
-  State<InsightsScreen> createState() => _InsightsScreenState();
+  State<LogsScreenInsightsTab> createState() => _LogsScreenInsightsTab();
 }
 
-class _InsightsScreenState extends State<InsightsScreen> {
+class _LogsScreenInsightsTab extends State<LogsScreenInsightsTab> {
   late Future<List<dynamic>> _insightsDataFuture;
   final periodsRepo = PeriodsRepository();
   final logsRepo = LogsRepository();
