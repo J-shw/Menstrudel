@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:menstrudel/controllers/log_larc_ui_controller.dart';
 import 'package:menstrudel/controllers/log_sanitary_ui_controller.dart';
+import 'package:menstrudel/controllers/log_sex_ui_controller.dart';
 import 'package:menstrudel/controllers/log_ui_controller.dart';
 import 'package:menstrudel/screens/dashboards/logs/logs_screen.dart';
 import 'package:menstrudel/screens/dashboards/sanitary_screen.dart';
@@ -73,10 +75,7 @@ class _MainScreenState extends State<MainScreen> {
       key: const ValueKey('log_sex_fab'),
       tooltip: l10n.fabToolTip_sexActivity,
       onPressed: () {
-        context.read<LogUIController>().handleCreateNewLog(
-              context: context,
-              selectedDate: DateTime.now(),
-            );
+        context.read<LogSexUIController>().handleCreateNewSexLog(context: context);
       },
       child: const Icon(Icons.add),
     );
@@ -89,10 +88,7 @@ class _MainScreenState extends State<MainScreen> {
       key: const ValueKey('log_larc_fab'),
       tooltip: l10n.fabToolTip_larc,
       onPressed: () {
-        context.read<LogUIController>().handleCreateNewLog(
-              context: context,
-              selectedDate: DateTime.now(),
-            );
+        context.read<LogLarcUIController>().handleCreateNewLarcLog(context: context);
       },
       child: const Icon(Icons.add),
     );
