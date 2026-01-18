@@ -18,10 +18,7 @@ class LogsScreenLogTab extends StatelessWidget {
 
     if (isLoading) return const Center(child: CircularProgressIndicator());
 
-    return SingleChildScrollView(
-      child:Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+    return 
         DynamicHistoryView(
           onLogRequested: (date) {
             context.read<LogUIController>().handleCreateNewLog(
@@ -33,9 +30,6 @@ class LogsScreenLogTab extends StatelessWidget {
             context: context,
             log: log,
           ),
-        ),
-      ],
-      ),
     );
   }
 }
