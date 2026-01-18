@@ -435,7 +435,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get onboardingScreen_goalDescription =>
-      'This helps us tailor the insights you see.';
+      'This helps tailor the insights you see.';
 
   @override
   String onboardingScreen_contraceptionHint(String sectionName) {
@@ -444,6 +444,18 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get onboardingScreen_getStarted => 'Get Started';
+
+  @override
+  String get fabToolTip_logs => 'Log day';
+
+  @override
+  String get fabToolTip_sanitary => 'Log sanitary product';
+
+  @override
+  String get fabToolTip_sexActivity => 'Log sex activity';
+
+  @override
+  String get fabToolTip_larc => 'Log LARC';
 
   @override
   String get mainScreen_logsPageTitle => 'Logs';
@@ -462,9 +474,6 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get mainScreen_settingsPageTitle => 'Einstellungen';
-
-  @override
-  String get mainScreen_tooltipLogPeriod => 'Periode Eintragen';
 
   @override
   String get insightsScreen_errorPrefix => 'Fehler:';

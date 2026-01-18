@@ -878,6 +878,30 @@ abstract class AppLocalizations {
   /// **'Get Started'**
   String get onboardingScreen_getStarted;
 
+  /// Used for the main logs screen fab button as a tooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Log day'**
+  String get fabToolTip_logs;
+
+  /// Used for the sanitary screen fab button as a tooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Log sanitary product'**
+  String get fabToolTip_sanitary;
+
+  /// Used for the sex activity screen fab button as a tooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Log sex activity'**
+  String get fabToolTip_sexActivity;
+
+  /// Used for the LARC screen fab button as a tooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Log LARC'**
+  String get fabToolTip_larc;
+
   /// No description provided for @mainScreen_logsPageTitle.
   ///
   /// In en, this message translates to:
@@ -913,12 +937,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Settings'**
   String get mainScreen_settingsPageTitle;
-
-  /// No description provided for @mainScreen_tooltipLogPeriod.
-  ///
-  /// In en, this message translates to:
-  /// **'Log period'**
-  String get mainScreen_tooltipLogPeriod;
 
   /// No description provided for @insightsScreen_errorPrefix.
   ///
