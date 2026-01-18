@@ -12,7 +12,6 @@ import 'package:menstrudel/widgets/insights/period_duration.dart';
 import 'package:menstrudel/widgets/insights/flow_intensity.dart';
 import 'package:menstrudel/widgets/insights/pain_intensity.dart';
 import 'package:menstrudel/widgets/insights/log_summary_widget.dart';
-import 'package:menstrudel/widgets/insights/year_heat_map.dart';
 import 'package:menstrudel/widgets/insights/monthly_flow.dart';
 
 import 'package:menstrudel/l10n/app_localizations.dart';
@@ -249,10 +248,6 @@ class _LogsScreenInsightsTab extends State<LogsScreenInsightsTab> {
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: FlowPatternsWidget(monthlyFlowData: allFlows),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: YearHeatmapWidget(logs: allLogs),
               ),
             ],
           );
