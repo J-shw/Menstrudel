@@ -74,11 +74,7 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
     final calendarBoundary = focusedDateOnly.isAfter(latestLogDateForBoundary)
         ? focusedDateOnly
         : latestLogDateForBoundary;
-
-    String? languageCode; // TODO: Use applocalisation or similar to get active lanCode. This method only works if user specifically sets app
-    if (settingsService.languageCode != 'system'){
-      languageCode = settingsService.languageCode;
-    }
+    final String languageCode = AppLocalizations.of(context)!.localeName;
 
     return TableCalendar(
       locale: languageCode,
