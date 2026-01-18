@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:menstrudel/models/flows/flow_enum.dart';
+import 'package:provider/provider.dart';
+import 'package:scrollable_clean_calendar/controllers/clean_calendar_controller.dart';
+import 'package:scrollable_clean_calendar/scrollable_clean_calendar.dart';
+import 'package:scrollable_clean_calendar/utils/enums.dart';
+import 'package:menstrudel/l10n/app_localizations.dart';
+import 'package:menstrudel/services/log_service.dart';
+import 'package:menstrudel/services/period_service.dart';
+import 'package:menstrudel/services/settings_service.dart';
 import 'package:menstrudel/models/period_logs/log_day.dart';
 import 'package:menstrudel/models/prefrences/day_of_week_enum.dart';
-import 'package:menstrudel/services/log_service.dart';
-import 'package:menstrudel/services/settings_service.dart';
-import 'package:table_calendar/table_calendar.dart';
-import 'package:menstrudel/l10n/app_localizations.dart';
-import 'package:menstrudel/models/flows/flow_enum.dart';
-import 'package:menstrudel/services/period_service.dart';
-import 'package:provider/provider.dart';
 
 class PeriodJournalView extends StatefulWidget {
   final Function(DateTime) onLogRequested;
@@ -24,14 +26,7 @@ class PeriodJournalView extends StatefulWidget {
 }
 
 class _PeriodJournalViewState extends State<PeriodJournalView> {
-  late DateTime _focusedDay;
-  DateTime? _selectedDay;
-
-  @override
-  void initState() {
-    super.initState();
-    _focusedDay = DateTime.now();
-  }
+  CleanCalendarController? _calendarController;
 
   @override
   Widget build(BuildContext context) {
@@ -40,152 +35,87 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
     final logService = context.watch<LogService>();
     final settingsService = context.watch<SettingsService>();
 
-    final isPeriodServiceLoading = periodService.isLoading;
-    final isLogServiceLoading = logService.isLoading;
+    if (periodService.isLoading || logService.isLoading) {
+      return const Center(child: CircularProgressIndicator());
+    }
 
-    final predictionResult = periodService.predictionResult;
-    final logMap = logService.logMap;
     final earliestLogDate = logService.earliestLogDate;
-    final latestLogDate = logService.latestLogDate;
-
-    if (isPeriodServiceLoading || isLogServiceLoading) {
-      return const Center(
-        child: Padding(
-          padding: EdgeInsets.all(32.0),
-          child: CircularProgressIndicator(),
-        ),
-      );
-    }
-
     if (earliestLogDate == null) {
-      return Center(
-        child: Padding(
-          padding: EdgeInsets.all(32.0),
-          child: Text(
-            l10n.journalViewWidget_logYourFirstPeriod,
-          ), //TODO: change to 'Log your first entry' no longer period specific.
-        ),
-      );
+      return Center(child: Text(l10n.journalViewWidget_logYourFirstPeriod));
     }
 
+    final logMap = logService.logMap;
+    final predictionResult = periodService.predictionResult;
     final colorScheme = Theme.of(context).colorScheme;
-    final latestLogDateForBoundary = latestLogDate ?? DateTime.now();
-    final focusedDateOnly = DateUtils.dateOnly(_focusedDay);
-    final calendarBoundary = focusedDateOnly.isAfter(latestLogDateForBoundary)
-        ? focusedDateOnly
-        : latestLogDateForBoundary;
-    final String languageCode = AppLocalizations.of(context)!.localeName;
 
-    return TableCalendar(
-      locale: languageCode,
-      firstDay: earliestLogDate.subtract(const Duration(days: 365)),
-      lastDay: calendarBoundary.add(const Duration(days: 365)),
-      focusedDay: _focusedDay,
-      startingDayOfWeek: DayOfWeek.fromString(
-        settingsService.startingDayOfWeek,
-      ).toTableCalendar,
-      headerStyle: const HeaderStyle(
-        formatButtonVisible: false,
-        titleCentered: true,
-      ),
-      calendarStyle: CalendarStyle(
-        outsideDaysVisible: false,
-        todayDecoration: BoxDecoration(
-          shape: BoxShape.circle,
-          border: Border.all(color: colorScheme.primary, width: 2.0),
-        ),
-        todayTextStyle: TextStyle(
-          color: colorScheme.primary,
-          fontWeight: FontWeight.bold,
-        ),
-        selectedDecoration: BoxDecoration(
-          color: colorScheme.primary,
-          shape: BoxShape.circle,
-        ),
-        selectedTextStyle: TextStyle(
-          color: colorScheme.onPrimary,
-          fontWeight: FontWeight.bold,
-        ),
-        disabledTextStyle: TextStyle(
-          color: colorScheme.onSurface.withAlpha(75),
-        ),
-      ),
-      selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
-      enabledDayPredicate: (day) {
-        final today = DateUtils.dateOnly(DateTime.now());
-        return !DateUtils.dateOnly(day).isAfter(today);
-      },
-      onDaySelected: (selectedDay, focusedDay) {
-        setState(() {
-          _selectedDay = selectedDay;
-          _focusedDay = focusedDay;
-        });
+    _calendarController ??= CleanCalendarController(
+      minDate: earliestLogDate.subtract(const Duration(days: 365)),
+      maxDate: DateTime.now().add(const Duration(days: 365)),
+      initialFocusDate: DateTime.now(),
+      weekdayStart: DayOfWeek.fromString(settingsService.startingDayOfWeek).toTableCalendar
+    );
 
-        final logForSelectedDay = logMap[DateUtils.dateOnly(selectedDay)];
-        if (logForSelectedDay != null) {
-          widget.onLogTapped(logForSelectedDay);
-        } else {
-          widget.onLogRequested(selectedDay);
+    return ScrollableCleanCalendar(
+      calendarController: _calendarController!,
+      layout: Layout.BEAUTY,
+      locale: AppLocalizations.of(context)!.localeName,
+      dayBuilder: (context, values) {
+        final day = values.day;
+        final dayOnly = DateUtils.dateOnly(day);
+        final log = logMap[dayOnly];
+
+        if (log != null) {
+          return GestureDetector(
+            onTap: () => widget.onLogTapped(log),
+            child: Container(
+              decoration: BoxDecoration(color: log.flow.color, shape: BoxShape.circle),
+              alignment: Alignment.center,
+              child: Text('${day.day}', style: TextStyle(color: colorScheme.onPrimary)),
+            ),
+          );
         }
-      },
-      onPageChanged: (focusedDay) {
-        setState(() {
-          _focusedDay = focusedDay;
-        });
-      },
-      calendarBuilders: CalendarBuilders(
-        prioritizedBuilder: (context, day, focusedDay) {
-          final dayOnly = DateUtils.dateOnly(day);
-          final log = logMap[dayOnly];
 
-          if (log != null) {
-            return Container(
-              margin: const EdgeInsets.all(4.0),
+        bool isPredictedDay = false;
+        if (predictionResult?.estimatedStartDate != null && predictionResult?.estimatedEndDate != null) {
+          final startOnly = DateUtils.dateOnly(predictionResult!.estimatedStartDate!);
+          final endOnly = DateUtils.dateOnly(predictionResult!.estimatedEndDate!);
+          isPredictedDay = !dayOnly.isBefore(startOnly) && !dayOnly.isAfter(endOnly);
+        }
+
+        if (isPredictedDay) {
+          return GestureDetector(
+            onTap: () => widget.onLogRequested(day),
+            child: Container(
               decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: log.flow.color,
-              ),
-              alignment: Alignment.center,
-              child: Text(
-                '${day.day}',
-                style: TextStyle(
-                  color: colorScheme.onPrimary.withValues(alpha: 0.9),
-                ),
-              ),
-            );
-          }
-
-          final startDate = predictionResult?.estimatedStartDate;
-          final endDate = predictionResult?.estimatedEndDate;
-          bool isPredictedDay = false;
-
-          if (startDate != null && endDate != null) {
-            final startOnly = DateUtils.dateOnly(startDate);
-            final endOnly = DateUtils.dateOnly(endDate);
-            isPredictedDay =
-                !dayOnly.isBefore(startOnly) && !dayOnly.isAfter(endOnly);
-          }
-
-          if (isPredictedDay) {
-            return Container(
-              margin: const EdgeInsets.all(4.0),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
                 color: colorScheme.error.withValues(alpha: 0.4),
+                shape: BoxShape.circle,
               ),
               alignment: Alignment.center,
-              child: Text(
-                '${day.day}',
-                style: TextStyle(
-                  color: colorScheme.error,
-                  fontWeight: FontWeight.bold,
-                ),
+              child: Text('${day.day}', style: TextStyle(color: colorScheme.error, fontWeight: FontWeight.bold)),
+            ),
+          );
+        }
+
+        final isToday = DateUtils.isSameDay(day, DateTime.now());
+        return GestureDetector(
+          onTap: () => day.isAfter(DateTime.now()) ? null : widget.onLogRequested(day),
+          child: Container(
+            alignment: Alignment.center,
+            decoration: isToday ? BoxDecoration(
+              border: Border.all(color: colorScheme.primary, width: 2),
+              shape: BoxShape.circle,
+            ) : null,
+            child: Text(
+              '${day.day}',
+              style: TextStyle(
+                color: day.isAfter(DateTime.now()) 
+                    ? colorScheme.onSurface.withAlpha(75) 
+                    : colorScheme.onSurface,
               ),
-            );
-          }
-          return null;
-        },
-      ),
+            ),
+          ),
+        );
+      },
     );
   }
 }
