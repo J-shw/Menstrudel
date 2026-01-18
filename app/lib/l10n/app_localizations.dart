@@ -182,6 +182,12 @@ abstract class AppLocalizations {
   /// **'Back'**
   String get back;
 
+  /// No description provided for @today.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get today;
+
   /// No description provided for @day.
   ///
   /// In en, this message translates to:
@@ -1924,12 +1930,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Most Common Symptoms'**
   String get symptomFrequencyWidget_mostCommonSymptoms;
-
-  /// No description provided for @yearHeatMapWidget_yearlyOverview.
-  ///
-  /// In en, this message translates to:
-  /// **'Yearly Overview'**
-  String get yearHeatMapWidget_yearlyOverview;
 
   /// No description provided for @journalViewWidget_logYourFirstPeriod.
   ///

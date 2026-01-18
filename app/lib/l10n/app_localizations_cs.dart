@@ -48,6 +48,9 @@ class AppLocalizationsCs extends AppLocalizations {
   String get back => 'Zpět';
 
   @override
+  String get today => 'Today';
+
+  @override
   String get day => 'Den';
 
   @override
@@ -1081,9 +1084,6 @@ class AppLocalizationsCs extends AppLocalizations {
   @override
   String get symptomFrequencyWidget_mostCommonSymptoms =>
       'Nejvíce běžné příznaky';
-
-  @override
-  String get yearHeatMapWidget_yearlyOverview => 'Roční přehled';
 
   @override
   String get journalViewWidget_logYourFirstPeriod =>

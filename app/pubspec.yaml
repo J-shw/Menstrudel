@@ -22,7 +22,6 @@ dependencies:
   dynamic_color: ^1.8.1
   flutter_timezone: ^5.0.0
   fl_chart: ^1.0.0
-  table_calendar: ^3.2.0
   path: ^1.9.1
   flutter_colorpicker: ^1.1.0
   provider: ^6.1.5+1
@@ -33,6 +32,7 @@ dependencies:
   share_plus: ^12.0.0
   file_picker: ^10.3.3
   home_widget: ^0.8.1
+  scrollable_clean_calendar: ^1.5.0
 
 dev_dependencies:
   flutter_test:

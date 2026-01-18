@@ -19,6 +19,7 @@
     "next": "Next",
     "back": "Back",
 
+    "today": "Today",
     "day": "Day",
     "days": "Days",
 
@@ -602,8 +603,6 @@
 
     "symptomFrequencyWidget_noSymptomsLoggedYet": "No symptoms logged yet.",
     "symptomFrequencyWidget_mostCommonSymptoms": "Most Common Symptoms",
-
-    "yearHeatMapWidget_yearlyOverview": "Yearly Overview",
 
     "journalViewWidget_logYourFirstPeriod": "Log your first period.",
 

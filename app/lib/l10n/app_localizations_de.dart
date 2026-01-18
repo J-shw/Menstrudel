@@ -48,6 +48,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get back => 'Back';
 
   @override
+  String get today => 'Today';
+
+  @override
   String get day => 'Tag';
 
   @override
@@ -1076,9 +1079,6 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get symptomFrequencyWidget_mostCommonSymptoms => 'Häufigste Symptome';
-
-  @override
-  String get yearHeatMapWidget_yearlyOverview => 'Jahresübersicht';
 
   @override
   String get journalViewWidget_logYourFirstPeriod =>
