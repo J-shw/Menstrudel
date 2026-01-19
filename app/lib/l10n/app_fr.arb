@@ -253,13 +253,28 @@
     "@onboardingScreen_getStarted": {
         "description": "Button text for the get started navigation button"
     },
+    "fabToolTip_logs": "Log day",
+    "@fabToolTip_logs": {
+        "description": "Used for the main logs screen fab button as a tooltip."
+    },
+    "fabToolTip_sanitary": "Log sanitary product",
+    "@fabToolTip_sanitary": {
+        "description": "Used for the sanitary screen fab button as a tooltip."
+    },
+    "fabToolTip_sexActivity": "Log sex activity",
+    "@fabToolTip_sexActivity": {
+        "description": "Used for the sex activity screen fab button as a tooltip."
+    },
+    "fabToolTip_larc": "Log LARC",
+    "@fabToolTip_larc": {
+        "description": "Used for the LARC screen fab button as a tooltip."
+    },
     "mainScreen_logsPageTitle": "Logs",
     "mainSceen_sexActivityPageTitle": "Sex Activity",
     "mainScreen_sanitaryPageTitle": "Produits hygiéniques",
     "mainScreen_pillsPageTitle": "Pilules",
     "mainScreen_LarcsPageTitle": "LARCs",
     "mainScreen_settingsPageTitle": "Paramètres",
-    "mainScreen_tooltipLogPeriod": "Enregistrer ses règles",
     "insightsScreen_errorPrefix": "Erreur:",
     "insightsScreen_noDataAvailable": "Aucune donnée disponible.",
     "logsScreen_calculatingPrediction": "Calcul de la prédication...",
