@@ -435,7 +435,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get onboardingScreen_goalDescription =>
-      'This helps us tailor the insights you see.';
+      'This helps tailor the insights you see.';
 
   @override
   String onboardingScreen_contraceptionHint(String sectionName) {

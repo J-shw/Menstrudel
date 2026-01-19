@@ -435,7 +435,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get onboardingScreen_goalDescription =>
-      'To nám pomáhá přizpůsobit informace, které vidíte.';
+      'This helps tailor the insights you see.';
 
   @override
   String onboardingScreen_contraceptionHint(String sectionName) {
