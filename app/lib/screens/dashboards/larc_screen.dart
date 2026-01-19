@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'dart:async';
+import 'package:provider/provider.dart';
 import 'package:menstrudel/database/repositories/larc_repository.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/models/birth_control/larcs/larc_log_entry.dart';
-import 'package:menstrudel/models/birth_control/larcs/larc_types_enum.dart';
 import 'package:menstrudel/services/notification_service.dart';
 import 'package:menstrudel/services/settings_service.dart';
 import 'package:menstrudel/widgets/larcs/screen/larc_log_card.dart';
-import 'package:menstrudel/widgets/larcs/sheets/edit_larc_bottom_sheet.dart';
-import 'package:menstrudel/widgets/larcs/sheets/log_larc_bottom_sheet.dart';
-import 'package:provider/provider.dart';
+import 'package:menstrudel/controllers/log_larc_ui_controller.dart';
 import 'package:timezone/timezone.dart' as tz;
 
 class LarcScreen extends StatefulWidget {
@@ -24,6 +22,7 @@ class _LarcScreenState extends State<LarcScreen> {
   List<LarcLogEntry> _loggedLarcs = [];
   bool _isLoading = true;
   final larcRepo = LarcRepository();
+  LogLarcUIController? _controller;
 
   @override
   void initState() {
@@ -31,94 +30,50 @@ class _LarcScreenState extends State<LarcScreen> {
     _loadHistory();
   }
 
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final newController = context.read<LogLarcUIController>();
+    if (_controller != newController) {
+      _controller?.removeListener(_loadHistory);
+      _controller = newController;
+      _controller?.addListener(_loadHistory);
+    }
+  }
+
+  @override
+  void dispose() {
+    _controller?.removeListener(_loadHistory);
+    super.dispose();
+  }
+
   Future<void> _loadHistory() async {
-    setState(() { _isLoading = true; });
+    if (!mounted) return;
+    if (_loggedLarcs.isEmpty) {
+      setState(() { _isLoading = true; });
+    }
 
     final loadedEntries = await larcRepo.getAllLogs();
+    
+    if (!mounted) return;
     setState(() {
       _loggedLarcs = loadedEntries;
       _isLoading = false;
     });
 
-    if (mounted) {
-      await setLarcReminders();
-    }
+    await setLarcReminders();
   }
-
-  void _presentLogSheet(BuildContext context) {
-  showModalBottomSheet(
-    context: context,
-    isScrollControlled: true,
-    builder: (ctx) {
-      return LogLarcBottomSheet(
-        onSave: (date, note) {
-          _saveLarcLog(date: date, note: note);
-        },
-      );
-    },
-  );
-}
-
-  Future<void> _saveLarcLog({required DateTime date, required String? note}) async {
-    final settingsService = context.read<SettingsService>();
-
-    final newEntry = LarcLogEntry(
-      id: null,
-      date: date,
-      type: settingsService.larcType,
-      note: note,
-    );
-
-    await larcRepo.logLarc(newEntry);
-    
-    _loadHistory();
-  }
-
-  Future<void> _deleteLarcLog(int id) async {
-  await larcRepo.deleteLog(id);
-  _loadHistory();
-}
-
-void _presentEditDeleteSheet(BuildContext context, LarcLogEntry entry) {
-  showModalBottomSheet(
-    context: context,
-    isScrollControlled: true,
-    builder: (ctx) {
-      return EditLarcLogBottomSheet(
-        log: entry,
-        onSave: (updatedEntry) {
-          _updateLarcLog(updatedEntry);
-          Navigator.pop(context);
-        },
-        onDelete: () {
-          _deleteLarcLog(entry.id!);
-          Navigator.pop(context);
-        },
-      );
-    },
-  );
-}
-
-Future<void> _updateLarcLog(LarcLogEntry updatedEntry) async {
-  await larcRepo.updateLog(updatedEntry); 
-  _loadHistory();
-}
 
   Map<String, dynamic> _calculateLarcStatus(LarcLogEntry entry) {
     final settingsService = context.read<SettingsService>();
     final durationDays = settingsService.getLarcDurationDays(entry.type);
-
     DateTime nextDueDate = entry.date.add(Duration(days: durationDays));
-  
-    final isOverdue = nextDueDate.isBefore(DateTime.now());
-    final isActive = !isOverdue;
-
     return {
       'nextDueDate': nextDueDate,
       'dueDateString': DateFormat('MMM d, yyyy').format(nextDueDate),
       'injectionDate': DateFormat('MMM d, yyyy').format(entry.date),
-      'isOverdue': isOverdue,
-      'isActive': isActive,
+      'isOverdue': nextDueDate.isBefore(DateTime.now()),
+      'isActive': nextDueDate.isAfter(DateTime.now()),
     };
   }
 
@@ -130,44 +85,31 @@ Future<void> _updateLarcLog(LarcLogEntry updatedEntry) async {
         .toList();
 
     final activeLarcs = allStatuses.where((status) => status['isActive'] == true).toList();
-    
     if (activeLarcs.isEmpty) {
-        await NotificationService.cancelLarcReminder();
-        return;
+      await NotificationService.cancelLarcReminder();
+      return;
     }
 
     activeLarcs.sort((a, b) => a['nextDueDate'].compareTo(b['nextDueDate']));
-    
     final nextDueStatus = activeLarcs.first;
     final nextDueDate = nextDueStatus['nextDueDate'] as DateTime;
     final nextLarcType = (nextDueStatus['entry'] as LarcLogEntry).type;
-    final reminderDaysBefore = settingsService.larcReminderDays;
-    final reminderTime = settingsService.larcReminderTime;
-    final reminderHour = reminderTime.hour;
-    final reminderMinute = reminderTime.minute;
 
-    final nextDueDateAtTime = DateTime(
-        nextDueDate.year, nextDueDate.month, nextDueDate.day,
-        reminderHour, reminderMinute,
-    );
+    final scheduledTime = tz.TZDateTime.from(
+      DateTime(nextDueDate.year, nextDueDate.month, nextDueDate.day,
+          settingsService.larcReminderTime.hour, settingsService.larcReminderTime.minute),
+      tz.local,
+    ).subtract(Duration(days: settingsService.larcReminderDays));
 
-    final finalScheduledTime = tz.TZDateTime.from(nextDueDateAtTime, tz.local)
-  .subtract(Duration(days: reminderDaysBefore));
-
-
-    if (finalScheduledTime.isBefore(DateTime.now())) {
+    if (scheduledTime.isBefore(DateTime.now())) {
       await NotificationService.cancelLarcReminder();
-      debugPrint('LARC Notification date is in the past. Skipping notification schedule.');
       return;
     }
 
     await NotificationService.scheduleLarcReminder(
-        reminderDateTime: finalScheduledTime, 
-        title: l10n.notification_larcTitle, 
-        body: l10n.notification_larcBody(
-            nextLarcType.getDisplayName(l10n), 
-            reminderDaysBefore,
-        ),
+      reminderDateTime: scheduledTime,
+      title: l10n.notification_larcTitle,
+      body: l10n.notification_larcBody(nextLarcType.getDisplayName(l10n), settingsService.larcReminderDays),
     );
   }
 
@@ -175,95 +117,59 @@ Future<void> _updateLarcLog(LarcLogEntry updatedEntry) async {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final l10n = AppLocalizations.of(context)!;
+    final controller = context.read<LogLarcUIController>();
 
-    return Scaffold(
-      body: _buildBody(colorScheme, l10n),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => _presentLogSheet(context),
-        backgroundColor: colorScheme.primaryContainer,
-        child: Icon(Icons.add, color: colorScheme.onPrimaryContainer),
-      ),
-    );
-  }
-
-  Widget _buildBody(ColorScheme colorScheme, AppLocalizations l10n) {
-    if (_isLoading) {
-      return const Center(child: CircularProgressIndicator());
-    }
+    if (_isLoading) return const Center(child: CircularProgressIndicator());
 
     _loggedLarcs.sort((a, b) => b.date.compareTo(a.date));
-
     final List<Map<String, dynamic>> allStatuses = _loggedLarcs
         .map((entry) => _calculateLarcStatus(entry)..['entry'] = entry)
         .toList();
     
-    final activeLarcs = allStatuses.where((status) => status['isActive'] == true).toList();
-    activeLarcs.sort((a, b) => a['nextDueDate'].compareTo(b['nextDueDate']));
-    
-    final historyLarcs = allStatuses.where((status) => status['isActive'] == false).toList();
-    historyLarcs.sort((a, b) => b['entry'].date.compareTo(a['entry'].date));
-
+    final activeLarcs = allStatuses.where((s) => s['isActive']).toList();
+    final historyLarcs = allStatuses.where((s) => !s['isActive']).toList();
 
     return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildHeader(l10n.larcScreen_activeLarcs(activeLarcs.length), colorScheme),
-            const SizedBox(height: 12),
-            if (activeLarcs.isEmpty)
-              _buildNoRecordsText(l10n.larcScreen_noActiveRecords, colorScheme)
-            else
-              ...activeLarcs.map((status) {
-                return LarcLogCard(
-                  entry: status['entry'],
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildHeader(l10n.larcScreen_activeLarcs(activeLarcs.length), colorScheme),
+          const SizedBox(height: 12),
+          if (activeLarcs.isEmpty)
+            _buildNoRecordsText(l10n.larcScreen_noActiveRecords, colorScheme)
+          else
+            ...activeLarcs.map((s) => LarcLogCard(
+                  entry: s['entry'],
                   l10n: l10n,
-                  injectionDate: status['injectionDate'],
-                  dueDateString: status['dueDateString'],
-                  isOverdue: status['isOverdue'],
-                  onTap: () => _presentEditDeleteSheet(context, status['entry']),
-                );
-              }),
-            
-            const SizedBox(height: 32),
-            
-            _buildHeader(l10n.larcScreen_history(historyLarcs.length), colorScheme),
-            const SizedBox(height: 12),
-            if (historyLarcs.isEmpty)
-              _buildNoRecordsText(l10n.larcScreen_noHistoryRecords, colorScheme)
-            else
-              ...historyLarcs.map((status) {
-                return LarcLogCard(
-                  entry: status['entry'],
+                  injectionDate: s['injectionDate'],
+                  dueDateString: s['dueDateString'],
+                  isOverdue: s['isOverdue'],
+                  onTap: () => controller.handleEditLarcLog(context: context, entry: s['entry']),
+                )),
+          const SizedBox(height: 32),
+          _buildHeader(l10n.larcScreen_history(historyLarcs.length), colorScheme),
+          const SizedBox(height: 12),
+          if (historyLarcs.isEmpty)
+            _buildNoRecordsText(l10n.larcScreen_noHistoryRecords, colorScheme)
+          else
+            ...historyLarcs.map((s) => LarcLogCard(
+                  entry: s['entry'],
                   l10n: l10n,
-                  injectionDate: status['injectionDate'],
-                  dueDateString: status['dueDateString'],
-                  isOverdue: status['isOverdue'],
-                  onTap: () => _presentEditDeleteSheet(context, status['entry']),
-                );
-              }),
-          ],
-        ),
+                  injectionDate: s['injectionDate'],
+                  dueDateString: s['dueDateString'],
+                  isOverdue: s['isOverdue'],
+                  onTap: () => controller.handleEditLarcLog(context: context, entry: s['entry']),
+                )),
+        ],
       ),
     );
   }
 
-  Widget _buildHeader(String title, ColorScheme colorScheme) {
-    return Text(
-      title, 
-      style: TextStyle(
-        fontSize: 20,
-        fontWeight: FontWeight.bold,
-        color: colorScheme.onSurface, 
-      ),
-    );
-  }
+  Widget _buildHeader(String title, ColorScheme colorScheme) => Text(title, 
+      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: colorScheme.onSurface));
 
-  Widget _buildNoRecordsText(String text, ColorScheme colorScheme) {
-    return Padding(
+  Widget _buildNoRecordsText(String text, ColorScheme colorScheme) => Padding(
       padding: const EdgeInsets.only(top: 8.0),
-      child: Text(text, style: TextStyle(color: colorScheme.outline)),
-    );
-  }
+      child: Text(text, style: TextStyle(color: colorScheme.outline)));
 }

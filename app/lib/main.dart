@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:menstrudel/controllers/log_larc_ui_controller.dart';
+import 'package:menstrudel/controllers/log_sanitary_ui_controller.dart';
+import 'package:menstrudel/controllers/log_sex_ui_controller.dart';
 import 'package:menstrudel/controllers/log_ui_controller.dart';
 import 'package:menstrudel/coordinators/data_refresh_coordinator.dart';
 import 'package:menstrudel/database/repositories/periods_repository.dart';
@@ -81,7 +84,11 @@ void main() async {
           ),
         ),
 
+        // --- Controllers ---
         ChangeNotifierProvider(create: (_) => LogUIController()),
+        ChangeNotifierProvider(create: (_) => LogSanitaryUIController()),
+        ChangeNotifierProvider(create: (_) => LogSexUIController()),
+        ChangeNotifierProvider(create: (_) => LogLarcUIController())
       ],
       child: const MainApp(),
     ),

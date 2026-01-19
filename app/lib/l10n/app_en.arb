@@ -290,14 +290,29 @@
         "description": "Button text for the get started navigation button"
     },
 
+    "fabToolTip_logs": "Log day",
+    "@fabToolTip_logs": {
+        "description": "Used for the main logs screen fab button as a tooltip."
+    },
+    "fabToolTip_sanitary": "Log sanitary product",
+    "@fabToolTip_sanitary": {
+        "description": "Used for the sanitary screen fab button as a tooltip."
+    },
+    "fabToolTip_sexActivity": "Log sex activity",
+    "@fabToolTip_sexActivity": {
+        "description": "Used for the sex activity screen fab button as a tooltip."
+    },
+    "fabToolTip_larc": "Log LARC",
+    "@fabToolTip_larc": {
+        "description": "Used for the LARC screen fab button as a tooltip."
+    },
+
     "mainScreen_logsPageTitle": "Logs",
     "mainSceen_sexActivityPageTitle": "Sex Activity",
     "mainScreen_sanitaryPageTitle": "Sanitary Products",
     "mainScreen_pillsPageTitle": "Pills",
     "mainScreen_LarcsPageTitle": "LARCs",
     "mainScreen_settingsPageTitle": "Settings",
-
-    "mainScreen_tooltipLogPeriod": "Log period",
 
     "insightsScreen_errorPrefix": "Error:",
     "insightsScreen_noDataAvailable": "No data available.",

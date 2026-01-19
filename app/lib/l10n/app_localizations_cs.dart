@@ -435,7 +435,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get onboardingScreen_goalDescription =>
-      'To nám pomáhá přizpůsobit informace, které vidíte.';
+      'This helps tailor the insights you see.';
 
   @override
   String onboardingScreen_contraceptionHint(String sectionName) {
@@ -444,6 +444,18 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get onboardingScreen_getStarted => 'Začínáme';
+
+  @override
+  String get fabToolTip_logs => 'Log day';
+
+  @override
+  String get fabToolTip_sanitary => 'Log sanitary product';
+
+  @override
+  String get fabToolTip_sexActivity => 'Log sex activity';
+
+  @override
+  String get fabToolTip_larc => 'Log LARC';
 
   @override
   String get mainScreen_logsPageTitle => 'Logs';
@@ -462,9 +474,6 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get mainScreen_settingsPageTitle => 'Nastavení';
-
-  @override
-  String get mainScreen_tooltipLogPeriod => 'Zapsání menstruace';
 
   @override
   String get insightsScreen_errorPrefix => 'Chyba:';

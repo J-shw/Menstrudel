@@ -7,56 +7,38 @@ enum LarcTypes {
   implant,
   injection,
   ring,
-  patch,
-}
+  patch;
 
-/// Extension to get display values for LarcTypes.
-extension LarcTypeDisplay on LarcTypes {
   /// Gets the localised display name
   String getDisplayName(AppLocalizations l10n) {
-    switch (this) { 
-      case LarcTypes.iud:
-        return l10n.larcType_iud; 
-      case LarcTypes.implant:
-        return l10n.larcType_implant;
-      case LarcTypes.injection:
-        return l10n.larcType_injection;
-      case LarcTypes.ring:
-        return l10n.larcType_ring;
-      case LarcTypes.patch:
-        return l10n.larcType_patch;
-    }
+    return switch (this) { 
+      LarcTypes.iud => l10n.larcType_iud,
+      LarcTypes.implant => l10n.larcType_implant,
+      LarcTypes.injection => l10n.larcType_injection,
+      LarcTypes.ring => l10n.larcType_ring,
+      LarcTypes.patch => l10n.larcType_patch,
+    };
   }
 
   /// gets the associated icon
   IconData getIcon(){
-    switch (this) { 
-      case LarcTypes.iud:
-        return Icons.device_thermostat_rounded; 
-      case LarcTypes.implant:
-        return Icons.fiber_manual_record_outlined;
-      case LarcTypes.injection:
-        return Icons.medical_services_outlined;
-      case LarcTypes.ring:
-        return Icons.trip_origin_rounded;
-      case LarcTypes.patch:
-        return Icons.square_outlined;
-    }
+    return switch (this) { 
+      LarcTypes.iud => Icons.device_thermostat_rounded,
+      LarcTypes.implant => Icons.fiber_manual_record_outlined,
+      LarcTypes.injection => Icons.medical_services_outlined,
+      LarcTypes.ring => Icons.trip_origin_rounded,
+      LarcTypes.patch => Icons.square_outlined,
+    };
   }
 
   /// The default duration in days for each LARC type
   int get defaultDurationDays {
-    switch (this) {
-      case LarcTypes.iud:
-        return 1825; 
-      case LarcTypes.implant:
-        return 1095;
-      case LarcTypes.injection:
-        return 84; 
-      case LarcTypes.ring:
-        return 21;
-      case LarcTypes.patch:
-        return 28;
-    }
+    return switch (this) {
+      LarcTypes.iud => 1825,
+      LarcTypes.implant => 1095,
+      LarcTypes.injection => 84,
+      LarcTypes.ring => 21,
+      LarcTypes.patch => 28,
+    };
   }
 }
