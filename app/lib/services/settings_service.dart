@@ -34,7 +34,7 @@ class SettingsService extends ChangeNotifier {
   Color _themeColor = kDefaultThemeColor;
   AppThemeMode _themeMode = kDefaultThemeMode;
   Set<Symptom> _defaultSymptoms = kDefaultSymptoms;
-  Map<ReversibleContraceptiveTypes, int> _larcDurations = {};
+  Map<ReversibleContraceptiveTypes, int> _reversibleContraceptiveDurations = {};
   bool _larcNotificationsEnabled = kDefaultLarcNotificationsEnabled;
   int _larcReminderDays = kDefaultLarcReminderDays;
   TimeOfDay _larcReminderTime = kDefaultLarcReminderTime;
@@ -77,10 +77,10 @@ class SettingsService extends ChangeNotifier {
   AppThemeMode get themeMode => _themeMode;
   /// The user configured default symptoms
   Set<Symptom> get defaultSymptoms => _defaultSymptoms;
-  /// Retrieves the duration in days for a specific LARC type, which determines its estimated renewal date.
-  int getLarcDurationDays(ReversibleContraceptiveTypes type) {
-    if (_larcDurations.containsKey(type)) {
-      return _larcDurations[type]!;
+  /// Retrieves the duration in days for a specific Reversible Contraceptive type, which determines its estimated renewal date.
+  int getReversibleContraceptiveDurationDays(ReversibleContraceptiveTypes type) {
+    if (_reversibleContraceptiveDurations.containsKey(type)) {
+      return _reversibleContraceptiveDurations[type]!;
     }
     return type.defaultDurationDays; 
   }
@@ -139,12 +139,12 @@ class SettingsService extends ChangeNotifier {
     if (storedDurationsJson != null) {
       final Map<String, dynamic> decodedMap = json.decode(storedDurationsJson);
       
-      _larcDurations = decodedMap.map((key, value) {
+      _reversibleContraceptiveDurations = decodedMap.map((key, value) {
         final type = ReversibleContraceptiveTypes.values.firstWhere((e) => e.name == key);
         return MapEntry(type, value as int);
       });
     } else {
-      _larcDurations = {};
+      _reversibleContraceptiveDurations = {};
     }
 
     try {
@@ -244,8 +244,8 @@ class SettingsService extends ChangeNotifier {
   }
 
   Future<void> setLarcDurationForType(ReversibleContraceptiveTypes type, int durationDays) async {
-    _larcDurations[type] = durationDays;
-    final Map<String, int> mapForStorage = _larcDurations.map(
+    _reversibleContraceptiveDurations[type] = durationDays;
+    final Map<String, int> mapForStorage = _reversibleContraceptiveDurations.map(
       (key, value) => MapEntry(key.name, value),
     );
     final String encodedJson = json.encode(mapForStorage);
