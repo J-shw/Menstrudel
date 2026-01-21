@@ -257,7 +257,7 @@ class SettingsService extends ChangeNotifier {
     _larcNotificationsEnabled = enabled;
     await _prefs.setBool(larcNotificationsEnanledKey, enabled);
     if (!enabled) {
-      await NotificationService.cancelLarcReminder();
+      await NotificationService.cancelReveribleContraceptiveReminder();
     }
     notifyListeners();
   }
