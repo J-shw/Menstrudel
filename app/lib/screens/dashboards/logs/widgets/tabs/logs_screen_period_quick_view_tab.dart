@@ -7,11 +7,14 @@ import 'package:menstrudel/models/cycles/cycle_stats.dart';
 import 'package:menstrudel/models/periods/period_stats.dart';
 import 'package:menstrudel/services/period_service.dart';
 import 'package:menstrudel/screens/dashboards/logs/widgets/basic_progress_circle.dart';
+import 'package:menstrudel/services/settings_service.dart';
 import 'package:menstrudel/utils/cycle_phase_predictor.dart';
 import 'package:menstrudel/utils/period_predictor.dart';
+import 'package:provider/provider.dart';
 
 class LogsScreenPeriodQuickViewTab extends StatelessWidget {
   final PeriodService periodService;
+
 
   const LogsScreenPeriodQuickViewTab({super.key, required this.periodService});
 
@@ -20,6 +23,7 @@ class LogsScreenPeriodQuickViewTab extends StatelessWidget {
     final l10n = AppLocalizations.of(context)!;
     final colorScheme = Theme.of(context).colorScheme;
     final isLoading = periodService.isLoading;
+    final settingsService = context.read<SettingsService>();
 
     if (isLoading) return const Center(child: CircularProgressIndicator());
 
@@ -85,14 +89,14 @@ class LogsScreenPeriodQuickViewTab extends StatelessWidget {
           value: datePart.isNotEmpty ? datePart : "--",
           color: colorScheme.surfaceContainerHighest,
         ),
-
-        _buildStatusCard(
-          context,
-          icon: phaseResult.phase.icon,
-          title: phaseResult.phase.getDisplayName(l10n),
-          value: phaseText,
-          color: phaseResult.phase.color.withValues(alpha: 0.1),
-        ),
+        if (settingsService.isNaturalCycle)
+          _buildStatusCard(
+            context,
+            icon: phaseResult.phase.icon,
+            title: phaseResult.phase.getDisplayName(l10n),
+            value: phaseText,
+            color: phaseResult.phase.color.withValues(alpha: 0.1),
+          ),
       ],
     );
   }
