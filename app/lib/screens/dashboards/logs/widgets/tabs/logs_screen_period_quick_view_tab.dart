@@ -12,55 +12,80 @@ class LogsScreenPeriodQuickViewTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    final colorScheme = Theme.of(context).colorScheme;
     final isLoading = periodService.isLoading;
 
     if (isLoading) return const Center(child: CircularProgressIndicator());
 
     String predictionText = '';
-    if (periodService.isLoading) {
-      predictionText = l10n.logsScreen_calculatingPrediction;
-    } else if (periodService.predictionResult == null) {
+    String datePart = '';
+    
+    if (periodService.predictionResult == null) {
       predictionText = l10n.logScreen_logAtLeastTwoPeriods;
     } else {
       final prediction = periodService.predictionResult!;
-      String datePart = DateFormat(
-        'dd/MM/yyyy',
-      ).format(prediction.estimatedStartDate);
+      datePart = DateFormat('dd/MM/yyyy').format(prediction.estimatedStartDate);
+      
       if (prediction.daysUntilDue > 0) {
-        predictionText = '${l10n.logScreen_nextPeriodEstimate}: $datePart';
+        predictionText = l10n.logScreen_nextPeriodEstimate;
       } else if (prediction.daysUntilDue == 0) {
-        predictionText = '${l10n.logScreen_periodDueToday} $datePart';
+        predictionText = l10n.logScreen_periodDueToday;
       } else {
-        // overdue
-        predictionText =
-            '${l10n.logScreen_periodOverdueBy(-prediction.daysUntilDue)}: $datePart';
+        predictionText = l10n.logScreen_periodOverdueBy(-prediction.daysUntilDue);
       }
     }
 
-    return Center( child: Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
+    return ListView(
+      padding: const EdgeInsets.all(24.0),
       children: [
-        BasicProgressCircle(
-          currentValue: periodService.circleCurrentValue,
-          maxValue: periodService.circleMaxValue,
-          circleSize: 220,
-          strokeWidth: 20,
-          progressColor: const Color.fromARGB(255, 255, 118, 118),
-          trackColor: const Color.fromARGB(20, 255, 118, 118),
-        ),
-        const SizedBox(height: 15),
-        Text(
-          predictionText,
-          textAlign: TextAlign.center,
-          style: const TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.bold,
-            color: Colors.blueGrey,
+        const SizedBox(height: 20),
+        Center(
+          child: BasicProgressCircle(
+            currentValue: periodService.circleCurrentValue,
+            maxValue: periodService.circleMaxValue,
+            circleSize: 240,
+            strokeWidth: 22,
+            progressColor: colorScheme.primary,
+            trackColor: colorScheme.primaryContainer.withValues(alpha: 0.3),
           ),
         ),
+        const SizedBox(height: 40),
+
+        _buildStatusCard(
+          context,
+          icon: Icons.event,
+          title: predictionText,
+          value: datePart.isNotEmpty ? datePart : "--",
+          color: colorScheme.surfaceContainerHighest,
+        ),
       ],
-    ),
+    );
+  }
+
+  // This can be used for future items (Such as pregnancy chance, or current phase etc..)
+  Widget _buildStatusCard(
+    BuildContext context, {
+    required IconData icon,
+    required String title,
+    required String value,
+    required Color color,
+  }) {
+    return Card(
+      elevation: 0,
+      color: color,
+      margin: const EdgeInsets.only(bottom: 12),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      child: ListTile(
+        leading: Icon(icon, color: Theme.of(context).colorScheme.primary),
+        title: Text(
+          title,
+          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+        ),
+        trailing: Text(
+          value,
+          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+        ),
+      ),
     );
   }
 }
