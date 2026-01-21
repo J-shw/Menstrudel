@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:menstrudel/models/app/settings_presets.dart';
 import 'package:menstrudel/models/app/user_goal_types_enum.dart';
 import 'dart:convert';
 import 'package:menstrudel/models/birth_control/larcs/larc_types_enum.dart';
