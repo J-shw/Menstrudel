@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:menstrudel/models/period_logs/symptom.dart';
 import 'package:menstrudel/models/themes/app_theme_mode_enum.dart';
 import 'package:menstrudel/services/settings_service.dart';
-import 'package:menstrudel/models/birth_control/larcs/larc_types_enum.dart';
+import 'package:menstrudel/models/birth_control/larcs/reversible_contraceptive_types_enum.dart';
 
 /// The base app seed colour.
 const seedColor = Color(0xFF60A5FA);
@@ -74,7 +74,7 @@ const bool kDefaultPillNavEnabled = false;
 const bool kDefaultLarcNavEnabled = false;
 const bool kDefaultSanitaryNavEnabled = true;
 const bool kDefaultSexActivityNavEnabled = false;
-const LarcTypes kDefaultLarcType = LarcTypes.injection;
+const ReversibleContraceptiveTypes kDefaultLarcType = ReversibleContraceptiveTypes.injection;
 const String kDefaultLanguageCode = 'system';
 const bool kDefaultAlwaysShowReminderButton = false;
 const bool kDefaultBiometricsEnabled = false;
