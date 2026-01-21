@@ -371,6 +371,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get cyclePhase_luteal => 'Post-Ovulation';
 
   @override
+  String get cyclePhase_late => 'Late Period';
+
+  @override
   String get cyclePhase_unknown => 'Unknown';
 
   @override
@@ -388,6 +391,9 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get cyclePhase_lutealDescription =>
       'Progesterone is dominant. Monitor for PMS symptoms as you approach your next period.';
+
+  @override
+  String get cyclePhase_lateDescription => 'Your period is late.';
 
   @override
   String get cyclePhase_unknownDescription =>

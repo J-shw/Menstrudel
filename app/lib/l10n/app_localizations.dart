@@ -766,6 +766,12 @@ abstract class AppLocalizations {
   /// **'Post-Ovulation'**
   String get cyclePhase_luteal;
 
+  /// No description provided for @cyclePhase_late.
+  ///
+  /// In en, this message translates to:
+  /// **'Late Period'**
+  String get cyclePhase_late;
+
   /// No description provided for @cyclePhase_unknown.
   ///
   /// In en, this message translates to:
@@ -795,6 +801,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Progesterone is dominant. Monitor for PMS symptoms as you approach your next period.'**
   String get cyclePhase_lutealDescription;
+
+  /// No description provided for @cyclePhase_lateDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Your period is late.'**
+  String get cyclePhase_lateDescription;
 
   /// No description provided for @cyclePhase_unknownDescription.
   ///
