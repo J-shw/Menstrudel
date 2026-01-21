@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
+import 'package:menstrudel/models/cycle_phase/cycle_phase.dart';
+import 'package:menstrudel/models/cycle_phase/cycle_phase_enum.dart';
+import 'package:menstrudel/models/cycles/cycle_stats.dart';
+import 'package:menstrudel/models/periods/period_stats.dart';
 import 'package:menstrudel/services/period_service.dart';
 import 'package:menstrudel/screens/dashboards/logs/widgets/basic_progress_circle.dart';
+import 'package:menstrudel/utils/cycle_phase_predictor.dart';
+import 'package:menstrudel/utils/period_predictor.dart';
 
 class LogsScreenPeriodQuickViewTab extends StatelessWidget {
   final PeriodService periodService;
@@ -24,6 +30,7 @@ class LogsScreenPeriodQuickViewTab extends StatelessWidget {
       predictionText = l10n.logScreen_logAtLeastTwoPeriods;
     } else {
       final prediction = periodService.predictionResult!;
+      
       datePart = DateFormat('dd/MM/yyyy').format(prediction.estimatedStartDate);
       
       if (prediction.daysUntilDue > 0) {
@@ -33,6 +40,26 @@ class LogsScreenPeriodQuickViewTab extends StatelessWidget {
       } else {
         predictionText = l10n.logScreen_periodOverdueBy(-prediction.daysUntilDue);
       }
+    }
+
+    final allPeriods = periodService.periodEntries;
+    final CycleStats? cycleStats = PeriodPredictor.getCycleStats(allPeriods);
+    final PeriodStats? periodStats = PeriodPredictor.getPeriodStats(allPeriods);
+
+    final CyclePhaseResult phaseResult = CyclePhasePredictor.getPhaseStatus(
+      lastPeriodStartDate: allPeriods.isNotEmpty ? allPeriods.first.startDate : null,
+      averageCycleLength: cycleStats?.averageCycleLength,
+      averagePeriodDuration: periodStats?.averageLength,
+      isPeriodOngoing: periodService.isPeriodOngoing,
+    );
+
+    String phaseText;
+    if (phaseResult.phase == CyclePhase.unknown) {
+      phaseText = "";
+    } else if (phaseResult.daysRemainingInPhase > 0) {
+      phaseText = l10n.countdown_daysLeft(phaseResult.daysRemainingInPhase);
+    } else {
+      phaseText = l10n.ongoing;
     }
 
     return ListView(
@@ -57,6 +84,14 @@ class LogsScreenPeriodQuickViewTab extends StatelessWidget {
           title: predictionText,
           value: datePart.isNotEmpty ? datePart : "--",
           color: colorScheme.surfaceContainerHighest,
+        ),
+
+        _buildStatusCard(
+          context,
+          icon: phaseResult.phase.icon,
+          title: phaseResult.phase.getDisplayName(l10n),
+          value: phaseText,
+          color: phaseResult.phase.color.withValues(alpha: 0.1),
         ),
       ],
     );
