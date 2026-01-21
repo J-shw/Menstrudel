@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/models/app/user_goal_types_enum.dart';
 import 'dart:convert';
-import 'package:menstrudel/models/birth_control/larcs/larc_types_enum.dart';
+import 'package:menstrudel/models/birth_control/larcs/reversible_contraceptive_types_enum.dart';
 import 'package:menstrudel/models/period_logs/symptom.dart';
 import 'package:menstrudel/models/period_logs/symptom_type_enum.dart';
 import 'package:menstrudel/services/notification_service.dart';
@@ -18,7 +18,7 @@ class SettingsService extends ChangeNotifier {
   bool _larcNavEnabled = kDefaultLarcNavEnabled;
   bool _sanitaryNavEnabled = kDefaultSanitaryNavEnabled;
   bool _sexActivityNavEnabled = kDefaultSexActivityNavEnabled;
-  LarcTypes _larcType = kDefaultLarcType;
+  ReversibleContraceptiveTypes _larcType = kDefaultLarcType;
   String _languageCode = kDefaultLanguageCode;
   bool _biometricsEnabled = kDefaultBiometricsEnabled;
   bool _notificationsEnabled = kDefaultNotificationsEnabled;
@@ -34,7 +34,7 @@ class SettingsService extends ChangeNotifier {
   Color _themeColor = kDefaultThemeColor;
   AppThemeMode _themeMode = kDefaultThemeMode;
   Set<Symptom> _defaultSymptoms = kDefaultSymptoms;
-  Map<LarcTypes, int> _larcDurations = {};
+  Map<ReversibleContraceptiveTypes, int> _larcDurations = {};
   bool _larcNotificationsEnabled = kDefaultLarcNotificationsEnabled;
   int _larcReminderDays = kDefaultLarcReminderDays;
   TimeOfDay _larcReminderTime = kDefaultLarcReminderTime;
@@ -49,7 +49,7 @@ class SettingsService extends ChangeNotifier {
   /// Sex Activity navigation enabled
   bool get isSexActivityNavEnabled => _sexActivityNavEnabled;
   /// LARC type selected
-  LarcTypes get larcType => _larcType;
+  ReversibleContraceptiveTypes get larcType => _larcType;
   /// The selected language code for the app (e.g., 'en', 'es', or 'system').
   String get languageCode => _languageCode;
   /// Whether the app requires biometric authentication (e.g., fingerprint, face) on startup.
@@ -78,7 +78,7 @@ class SettingsService extends ChangeNotifier {
   /// The user configured default symptoms
   Set<Symptom> get defaultSymptoms => _defaultSymptoms;
   /// Retrieves the duration in days for a specific LARC type, which determines its estimated renewal date.
-  int getLarcDurationDays(LarcTypes type) {
+  int getLarcDurationDays(ReversibleContraceptiveTypes type) {
     if (_larcDurations.containsKey(type)) {
       return _larcDurations[type]!;
     }
@@ -96,6 +96,16 @@ class SettingsService extends ChangeNotifier {
   TimeOfDay get loggingReminderTime => _loggingReminderTime;
   /// The starting day of the week for calendars
   String get startingDayOfWeek => _startingDayOfWeek;
+  /// Returns true if user is on natural cycle (Not using pill or affecting LARC).
+  bool get isNaturalCycle {
+    if (_pillNavEnabled) return false;
+    
+    if (_larcNavEnabled) {
+      // Only the Copper IUD allows for a natural hormonal cycle.
+      return _larcType == ReversibleContraceptiveTypes.copperIud;
+    }
+    return true;
+  }
 
   Future<void> loadSettings() async {
     _prefs = await SharedPreferences.getInstance();
@@ -130,7 +140,7 @@ class SettingsService extends ChangeNotifier {
       final Map<String, dynamic> decodedMap = json.decode(storedDurationsJson);
       
       _larcDurations = decodedMap.map((key, value) {
-        final type = LarcTypes.values.firstWhere((e) => e.name == key);
+        final type = ReversibleContraceptiveTypes.values.firstWhere((e) => e.name == key);
         return MapEntry(type, value as int);
       });
     } else {
@@ -139,7 +149,7 @@ class SettingsService extends ChangeNotifier {
 
     try {
       final String? larcTypeString = _prefs.getString(larcTypeKey);
-      _larcType = LarcTypes.values.firstWhere(
+      _larcType = ReversibleContraceptiveTypes.values.firstWhere(
         (e) => e.name == larcTypeString,
       );
     } catch (e) {
@@ -227,13 +237,13 @@ class SettingsService extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> setLarcType(LarcTypes type) async {
+  Future<void> setLarcType(ReversibleContraceptiveTypes type) async {
     _larcType = type;
     await _prefs.setString(larcTypeKey, type.name);
     notifyListeners();
   }
 
-  Future<void> setLarcDurationForType(LarcTypes type, int durationDays) async {
+  Future<void> setLarcDurationForType(ReversibleContraceptiveTypes type, int durationDays) async {
     _larcDurations[type] = durationDays;
     final Map<String, int> mapForStorage = _larcDurations.map(
       (key, value) => MapEntry(key.name, value),
