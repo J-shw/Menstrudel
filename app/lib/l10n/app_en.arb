@@ -56,6 +56,14 @@
         }
     },
 
+    "countdown_daysLeft": "{days, plural, one{{days} Day left} other{{days} Days left}}",
+    "@countdown_daysLeft": {
+        "description": "A countdown message indicating the number of days left.",
+        "placeholders": {
+            "days": {}
+        }
+    },
+
     "logs": "Logs",
     "insights": "Insights",
 
@@ -174,6 +182,18 @@
     "dayOfWeek_friday": "Friday",
     "dayOfWeek_saturday": "Saturday",
     "dayOfWeek_sunday": "Sunday",
+
+    "cyclePhase_menstruation": "On Period",
+    "cyclePhase_follicular": "Pre-Ovulation",
+    "cyclePhase_ovulation": "Peak Fertility",
+    "cyclePhase_luteal": "Post-Ovulation",
+    "cyclePhase_unknown": "Unknown",
+    "cyclePhase_menstruationDescription": "Your period is active and the uterine lining is being shed.",
+    "cyclePhase_follicularDescription": "Estrogen is rising to prepare the egg; your energy levels may be increasing.",
+    "cyclePhase_ovulationDescription": "An egg has been released. This is your most fertile time.",
+    "cyclePhase_lutealDescription": "Progesterone is dominant. Monitor for PMS symptoms as you approach your next period.",
+    "cyclePhase_unknownDescription": "We need more data to accurately predict your cycle phase.",
+
 
     "error_valueMustbePositive": "Value must be positive",
     "error_valueCannotBeNull": "Value cannot be null",
