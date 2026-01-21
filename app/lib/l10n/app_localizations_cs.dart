@@ -257,7 +257,10 @@ class AppLocalizationsCs extends AppLocalizations {
   String get pain_unbearable => 'Nesnesitelná';
 
   @override
-  String get larcType_iud => 'Nitroděložní tělísko';
+  String get larcType_hormonalIud => 'Hormonal IUD';
+
+  @override
+  String get larcType_copperIud => 'Copper IUD';
 
   @override
   String get larcType_implant => 'Implantát';

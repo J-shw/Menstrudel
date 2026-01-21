@@ -538,11 +538,17 @@ abstract class AppLocalizations {
   /// **'Unbearable'**
   String get pain_unbearable;
 
-  /// No description provided for @larcType_iud.
+  /// No description provided for @larcType_hormonalIud.
   ///
   /// In en, this message translates to:
-  /// **'IUD'**
-  String get larcType_iud;
+  /// **'Hormonal IUD'**
+  String get larcType_hormonalIud;
+
+  /// No description provided for @larcType_copperIud.
+  ///
+  /// In en, this message translates to:
+  /// **'Copper IUD'**
+  String get larcType_copperIud;
 
   /// No description provided for @larcType_implant.
   ///

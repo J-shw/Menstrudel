@@ -257,7 +257,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get pain_unbearable => 'Insupportable';
 
   @override
-  String get larcType_iud => 'Stérilet';
+  String get larcType_hormonalIud => 'Hormonal IUD';
+
+  @override
+  String get larcType_copperIud => 'Copper IUD';
 
   @override
   String get larcType_implant => 'Implant';
