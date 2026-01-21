@@ -27,8 +27,9 @@ const sanitaryProductChannelName = 'Sanitary Products Reminders';
 const pillReminderChannelId = 'pill_reminder_channel';
 const pillReminderChannelName = 'Pill Reminders';
 
-const larcReminderChannelId = 'larc_reminder_channel';
-const larcReminderChannelName = 'LARC Reminders';
+// This ID will have to stay for now. I don't want to change it and cause notification issues for existing users.
+const reversibleContraceptivesReminderChannelId = 'larc_reminder_channel';
+const reversibleContraceptivesReminderChannelName = 'Reversible Contraceptive Reminders';
 
 const loggingReminderChannelId = 'logging_reminder_channel';
 const loggingReminderChannelName = 'Logging Reminders';
