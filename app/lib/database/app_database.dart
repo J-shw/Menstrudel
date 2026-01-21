@@ -27,7 +27,7 @@ class AppDatabase {
 
     _database = await openDatabase(
       path,
-      version: 10,
+      version: 11,
       onCreate: _createDB,
       onUpgrade: DatabaseMigrator.upgrade,
     );
@@ -44,6 +44,10 @@ class AppDatabase {
     await DatabaseMigrator.createLarcTables(db);
 
     await DatabaseMigrator.createSanitaryProductTables(db);
+
+    await DatabaseMigrator.createSexualActivityTables(db);
+
+    await DatabaseMigrator.createUserTables(db);
   }
 
   Future<void> close() async {

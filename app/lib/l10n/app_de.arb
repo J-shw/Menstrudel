@@ -11,6 +11,9 @@
     "time": "Zeit",
     "start": "Beginn",
     "end": "Ende",
+    "next": "Next",
+    "back": "Back",
+    "today": "Today",
     "day": "Tag",
     "days": "Tage",
     "hours": "Stunden",
@@ -24,7 +27,7 @@
             }
         }
     },
-    "monthCount": "{count, plural, one{{count} Month} other{{count} Months}}",
+    "monthCount": "{count, plural, one{{count} Monat} other{{count} Monate}}",
     "@monthCount": {
         "description": "A message that displays a count of months, handling singular and plural forms.",
         "placeholders": {
@@ -34,7 +37,7 @@
             }
         }
     },
-    "yearCount": "{count, plural, one{{count} Year} other{{count} Years}}",
+    "yearCount": "{count, plural, one{{count} Jahr} other{{count} Jahre}}",
     "@yearCount": {
         "description": "A message that displays a count of years, handling singular and plural forms.",
         "placeholders": {
@@ -44,7 +47,9 @@
             }
         }
     },
-    "edit": "Edit",
+    "logs": "Protokolle",
+    "insights": "Insights",
+    "edit": "Bearbeiten",
     "delete": "Löschen",
     "clear": "Löschen",
     "save": "Speichern",
@@ -61,13 +66,16 @@
     "add": "Hinzufügen",
     "notSet": "Nicht festgelegt",
     "removed": "Entfernt",
+    "totalLogs": "Total Logs",
     "note": "Hinweis",
     "systemDefault": "System Standard",
     "flow": "Ausfluss",
     "type": "Typ",
+    "other": "Sonstiges",
     "navBar_insights": "Einblicke",
     "navBar_logs": "Protokolle",
     "navBar_sanitary": "Hygiene",
+    "navBar_sexActivity": "Sex Activity",
     "navBar_pill": "Pille",
     "navBar_larc": "LARC",
     "navBar_settings": "Einstellungen",
@@ -99,6 +107,43 @@
     "sanitaryProduct_pad": "Polster",
     "sanitaryProduct_menstrualCup": "Menstruationstasse",
     "sanitaryProduct_periodUnderwear": "Periodenunterwäsche",
+    "sanitaryProducts_mostUsed": "Most Used",
+    "sanitaryProducts_usageTrend": "Usage Trend",
+    "sexProtection_none": "None",
+    "sexProtection_barrier": "Barrier",
+    "sexProtection_hormonal": "Hormonell",
+    "sexProtection_natural": "Natürlich",
+    "sexProtection_permanent": "Dauerhaft",
+    "sexType_vaginal": "Vaginal",
+    "sexType_anal": "Anal",
+    "sexType_oral": "Oral",
+    "sexType_manual": "Manual",
+    "sexParticipation_solo": "Solo",
+    "sexParticipation_partner": "Partner",
+    "sexParticipation_group": "Group",
+    "userGoal_general": "General Health",
+    "@userGoal_general": {
+        "description": "For users tracking periods for general health."
+    },
+    "userGoal_sexual": "Sexual Health",
+    "@userGoal_sexual": {
+        "description": "For users focusing on sexual health."
+    },
+    "userGoal_conceive": "Trying to Conceive",
+    "@userGoal_conceive": {
+        "description": "For users focusing on trying to conceive."
+    },
+    "userGoal_avoid": "Avoiding Pregnancy",
+    "@userGoal_avoid": {
+        "description": "For users focusing on avoiding pregnancy."
+    },
+    "dayOfWeek_monday": "Montag",
+    "dayOfWeek_tuesday": "Dienstag",
+    "dayOfWeek_wednesday": "Mittwoch",
+    "dayOfWeek_thursday": "Donnerstag",
+    "dayOfWeek_friday": "Freitag",
+    "dayOfWeek_saturday": "Samstag",
+    "dayOfWeek_sunday": "Sonntag",
     "error_valueMustbePositive": "Der Wert muss positiv sein",
     "error_valueCannotBeNull": "Der Wert darf nicht null sein",
     "notification_periodTitle": "Periode nähert sich",
@@ -163,12 +208,73 @@
     },
     "notification_SanitaryProductReminderTitle": "Erinnerung an Hygieneartikel",
     "notification_SanitaryProductReminderBody": "Denke daran, Dein Produkt zu wechseln.",
-    "mainScreen_insightsPageTitle": "Deine Erkenntnisse",
+    "onboardingScreen_welcomeToMenstrudel": "Welcome to Menstrudel",
+    "@onboardingScreen_welcomeToMenstrudel": {
+        "description": "Title for the onboarding screen."
+    },
+    "onboardingScreen_welcomeToMenstrudelDescription": "Your offline, private cycle tracker.",
+    "@onboardingScreen_welcomeToMenstrudelDescription": {
+        "description": "Small into description for the onboarding screen."
+    },
+    "onboardingScreen_profileTitle": "About You",
+    "@onboardingScreen_profileTitle": {
+        "description": "Title for the profile onboarding screen."
+    },
+    "onboardingScreen_profileName": "What should we call you?",
+    "@onboardingScreen_profileName": {
+        "description": "Name question for the profile onboarding screen."
+    },
+    "onboardingScreen_profileDate": "Birth Date (Optional)",
+    "@onboardingScreen_profileDate": {
+        "description": "Birth date for the profile onboarding screen. This field is optional."
+    },
+    "onboardingScreen_profileDatePlaceholder": "Tap to set birthday",
+    "@onboardingScreen_profileDatePlaceholder": {
+        "description": "Displays when birthday value is none (Due to being optional). Prompts user to set their birthday"
+    },
+    "onboardingScreen_goalTitle": "What's your goal?",
+    "@onboardingScreen_goalTitle": {
+        "description": "Title for the goal onboarding screen."
+    },
+    "onboardingScreen_goalDescription": "This helps tailor the insights you see.",
+    "@onboardingScreen_goalDescription": {
+        "description": "Description for the goal onboarding screen."
+    },
+    "onboardingScreen_contraceptionHint": "Note: You can enable Pill or LARC tracking later in the app settings under '{sectionName}' if wanted.",
+    "@onboardingScreen_contraceptionHint": {
+        "description": "Hint for birth control settings",
+        "placeholders": {
+            "sectionName": {
+                "type": "String"
+            }
+        }
+    },
+    "onboardingScreen_getStarted": "Get Started",
+    "@onboardingScreen_getStarted": {
+        "description": "Button text for the get started navigation button"
+    },
+    "fabToolTip_logs": "Log day",
+    "@fabToolTip_logs": {
+        "description": "Used for the main logs screen fab button as a tooltip."
+    },
+    "fabToolTip_sanitary": "Log sanitary product",
+    "@fabToolTip_sanitary": {
+        "description": "Used for the sanitary screen fab button as a tooltip."
+    },
+    "fabToolTip_sexActivity": "Log sex activity",
+    "@fabToolTip_sexActivity": {
+        "description": "Used for the sex activity screen fab button as a tooltip."
+    },
+    "fabToolTip_larc": "Log LARC",
+    "@fabToolTip_larc": {
+        "description": "Used for the LARC screen fab button as a tooltip."
+    },
+    "mainScreen_logsPageTitle": "Logs",
+    "mainSceen_sexActivityPageTitle": "Sexuelle Aktivität",
     "mainScreen_sanitaryPageTitle": "Hygieneartikel",
     "mainScreen_pillsPageTitle": "Pille",
     "mainScreen_LarcsPageTitle": "LARC",
     "mainScreen_settingsPageTitle": "Einstellungen",
-    "mainScreen_tooltipLogPeriod": "Periode Eintragen",
     "insightsScreen_errorPrefix": "Fehler:",
     "insightsScreen_noDataAvailable": "Keine Daten verfügbar.",
     "logsScreen_calculatingPrediction": "Berechnung der Vorhersage...",
@@ -242,6 +348,29 @@
             }
         }
     },
+    "sexActivityScreen_noSexActivityRecordsFound": "Keine Aufzeichnungen über sexuelle Aktivitäten gefunden.",
+    "sexActivityScreen_history": "Historie ({history})",
+    "@sexActivityScreen_history": {
+        "description": "The total sex activity history count.",
+        "placeholders": {
+            "history": {
+                "type": "int",
+                "example": "5"
+            }
+        }
+    },
+    "settingsScreen_profile": "Profile",
+    "@settingsScreen_profile": {
+        "description": "Title for the profile settings button."
+    },
+    "settingsScreen_name": "Name",
+    "settingsScreen_birthDate": "Birth Date",
+    "settingsScreen_notSet": "Not set",
+    "@settingsScreen_notSet": {
+        "description": "Used when birth date is not set."
+    },
+    "settingsScreen_appGoal": "App Goal",
+    "settingsScreen_profileUpdated": "Profile updated successfully",
     "settingsScreen_selectHistoryView": "Vergangenheitsansicht auswählen",
     "settingsScreen_deleteRegimen_question": "Kuren löschen?",
     "settingsScreen_deleteRegimenDescription": "Dies wird deine aktuellen Pillenverpackungseinstellungen und alle zugehörigen Pillenaufzeichnungen löschen. Diese Aktion kann nicht rückgängig gemacht werden.",
@@ -386,10 +515,17 @@
     "securityScreen_enableBiometricLock": "Biometrische Sperre aktivieren",
     "securityScreen_enableBiometricLockSubtitle": "Zum Öffnen der App ist eine Fingerabdruck- oder Gesichtserkennung erforderlich.",
     "securityScreen_noBiometricsAvailable": "Es wurde kein Passcode, Fingerabdruck oder Face ID gefunden. Bitte lege einen in den Einstellungen des Geräts fest.",
+    "settingsScreen_userProfile": "You",
+    "@settingsScreen_userProfile": {
+        "description": "Title for the user profile settings button."
+    },
     "settingsScreen_preferences": "Einstellungen",
     "preferencesScreen_language": "Sprache",
     "preferencesScreen_enableSanitaryProductsScreen": "Bildschirm für Hygieneartikel aktivieren",
     "preferencesScreen_enableSanitaryProductsScreenSubtitle": "Hygieneartikel in der Hauptnavigationsleiste anzeigen.",
+    "preferencesScreen_enableSexActivityScreen": "Enable Sex Activity Screen",
+    "preferencesScreen_enableSexActivityScreenSubtitle": "Show the Sex Activity tab on the main navigation bar.",
+    "preferencesScreen_StartingDayOfWeek": "Starting Day of the Week",
     "settingsScreen_about": "Über",
     "aboutScreen_version": "Version",
     "aboutScreen_github": "GitHub",
@@ -418,7 +554,6 @@
     "monthlyFlowChartWidget_cycleFlowPatternsDescription": "Jede Linie stellt einen vollständigen Zyklus dar",
     "symptomFrequencyWidget_noSymptomsLoggedYet": "Noch keine Symptome erfasst.",
     "symptomFrequencyWidget_mostCommonSymptoms": "Häufigste Symptome",
-    "yearHeatMapWidget_yearlyOverview": "Jahresübersicht",
     "journalViewWidget_logYourFirstPeriod": "Trage deine erste Periode ein.",
     "listViewWidget_noPeriodsLogged": "Es wurden noch keine Perioden protokolliert.\nDrücke auf die Schaltfläche „+“, um eine hinzuzufügen.",
     "listViewWidget_confirmDelete": "Löschen bestätigen",

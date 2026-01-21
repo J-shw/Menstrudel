@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:menstrudel/controllers/log_larc_ui_controller.dart';
+import 'package:menstrudel/controllers/log_sanitary_ui_controller.dart';
+import 'package:menstrudel/controllers/log_sex_ui_controller.dart';
 import 'package:menstrudel/controllers/log_ui_controller.dart';
-import 'package:menstrudel/screens/logs_screen.dart';
-import 'package:menstrudel/screens/sanitary_screen.dart';
-import 'package:menstrudel/screens/settings_screen.dart';
-import 'package:menstrudel/screens/insights_screen.dart';
-import 'package:menstrudel/screens/pills_screen.dart';
+import 'package:menstrudel/screens/dashboards/logs/logs_screen.dart';
+import 'package:menstrudel/screens/dashboards/sanitary_screen.dart';
+import 'package:menstrudel/screens/settings/settings_screen.dart';
+import 'package:menstrudel/screens/dashboards/pills_screen.dart';
+import 'package:menstrudel/screens/dashboards/sex_screen.dart';
 import 'package:menstrudel/widgets/main/main_navigation_bar.dart';
 import 'package:menstrudel/widgets/main/app_bar.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/services/settings_service.dart';
 import 'package:provider/provider.dart';
-import 'package:menstrudel/screens/larc_screen.dart';
+import 'package:menstrudel/screens/dashboards/larc_screen.dart';
 
 enum FabState {
   logPeriod,
@@ -26,7 +29,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  int _selectedIndex = 1;
+  int _selectedIndex = 0;
 
   void _onItemTapped(int index) {
     setState(() {
@@ -34,16 +37,58 @@ class _MainScreenState extends State<MainScreen> {
     });
   }
 
+  /// Builds Log screen FAB
   Widget _buildLogDayFab(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return FloatingActionButton(
-      key: const ValueKey('log_fab'),
-      tooltip: l10n.mainScreen_tooltipLogPeriod, //TODO: Change to log day (No longer just periods)
+      key: const ValueKey('log_day_fab'),
+      tooltip: l10n.fabToolTip_logs,
       onPressed: () {
         context.read<LogUIController>().handleCreateNewLog(
               context: context,
               selectedDate: DateTime.now(),
             );
+      },
+      child: const Icon(Icons.add),
+    );
+  }
+
+  /// Builds Sanitary screen FAB
+  Widget _buildSanitaryFab(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    return FloatingActionButton(
+      key: const ValueKey('log_sanitary_fab'),
+      tooltip: l10n.fabToolTip_sanitary,
+      onPressed: () {
+        context.read<LogSanitaryUIController>().handleCreateNewSanitaryLog(
+              context: context,
+            );
+      },
+      child: const Icon(Icons.add),
+    );
+  }
+
+  /// Builds Sex screen FAB
+  Widget _buildSexFab(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    return FloatingActionButton(
+      key: const ValueKey('log_sex_fab'),
+      tooltip: l10n.fabToolTip_sexActivity,
+      onPressed: () {
+        context.read<LogSexUIController>().handleCreateNewSexLog(context: context);
+      },
+      child: const Icon(Icons.add),
+    );
+  }
+
+  /// Builds LARC screen FAB
+  Widget _buildLARCFab(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    return FloatingActionButton(
+      key: const ValueKey('log_larc_fab'),
+      tooltip: l10n.fabToolTip_larc,
+      onPressed: () {
+        context.read<LogLarcUIController>().handleCreateNewLarcLog(context: context);
       },
       child: const Icon(Icons.add),
     );
@@ -57,12 +102,13 @@ class _MainScreenState extends State<MainScreen> {
     final bool isPillNavEnabled = settingsService.isPillNavEnabled;
     final bool isLarcNavEnabled = settingsService.isLarcNavEnabled;
     final bool isSanitaryNavEnabled = settingsService.isSanitaryNavEnabled;
+    final bool isSexActivityNavEnabled = settingsService.isSexActivityNavEnabled;
       
     /// Define pages on enabled features
     final List<Widget> pages = <Widget>[
-      const InsightsScreen(),
       const LogsScreen(),
       if (isSanitaryNavEnabled) const SanitaryScreen(),
+      if (isSexActivityNavEnabled) const SexScreen(),
       if (isPillNavEnabled) const PillsScreen(),
       if (isLarcNavEnabled) const LarcScreen(),
       const SettingsScreen(),
@@ -70,14 +116,25 @@ class _MainScreenState extends State<MainScreen> {
 
     /// Define app bars based on enabled features
     final List<PreferredSizeWidget?> appBars = [
-      TopAppBar(titleText: l10n.mainScreen_insightsPageTitle),
-      null,
-      TopAppBar(titleText: l10n.mainScreen_sanitaryPageTitle),
+      TopAppBar(titleText: l10n.mainScreen_logsPageTitle),
+      if (isSanitaryNavEnabled)
+        TopAppBar(titleText: l10n.mainScreen_sanitaryPageTitle),
+      if (isSexActivityNavEnabled)
+        TopAppBar(titleText: l10n.mainSceen_sexActivityPageTitle),
       if (isPillNavEnabled)
         TopAppBar(titleText: l10n.mainScreen_pillsPageTitle),
       if (isLarcNavEnabled)
         TopAppBar(titleText: l10n.mainScreen_LarcsPageTitle),
       TopAppBar(titleText: l10n.mainScreen_settingsPageTitle),
+    ];
+
+    final List appFABs = [
+      _buildLogDayFab(context),
+      if (isSanitaryNavEnabled) _buildSanitaryFab(context),
+      if (isSexActivityNavEnabled) _buildSexFab(context),
+      if (isPillNavEnabled) null,
+      if (isLarcNavEnabled) _buildLARCFab(context),
+      null,
     ];
 
     int correctedIndex = _selectedIndex;
@@ -92,8 +149,7 @@ class _MainScreenState extends State<MainScreen> {
         selectedIndex: correctedIndex,
         onDestinationSelected: _onItemTapped,
       ),
-      floatingActionButton: correctedIndex == 1
-          ? AnimatedSwitcher(
+      floatingActionButton: AnimatedSwitcher(
               duration: const Duration(milliseconds: 200),
               transitionBuilder: (Widget child, Animation<double> animation) {
                 return ScaleTransition(
@@ -101,9 +157,8 @@ class _MainScreenState extends State<MainScreen> {
                   child: child,
                 );
               },
-              child: _buildLogDayFab(context),
+              child: appFABs[correctedIndex],
             )
-          : null,
     );
   }
 }

@@ -63,72 +63,65 @@ class PeriodsRepository {
   }
 
   /// Recalculates periods based on existing period logs and assigns them accordingly.
-  Future<void> recalculateAndAssignPeriods() async {
+  Future<Map<int, int>> recalculateAndAssignPeriods(List<LogDay> logs) async {
     final db = await dbProvider.database;
     await db.delete('periods');
 
-    final allEntryMaps = await db.query(
-      'period_logs',
-      orderBy: 'date ASC',
-      where: 'flow != ?',
-      whereArgs: [FlowRate.none.index],
-    );
-    final allEntries = allEntryMaps.map((e) => LogDay.fromMap(e)).toList();
+    final allEntries = logs.where((log) => log.flow != FlowRate.none).toList()
+      ..sort((a, b) => a.date.compareTo(b.date));
 
     if (allEntries.isEmpty) {
-      return;
+      return {};
     }
 
+    final Map<int, int> allLogUpdates = {};
     List<LogDay> currentPeriodLogs = [];
 
     for (final entry in allEntries) {
       if (currentPeriodLogs.isEmpty ||
           entry.date.difference(currentPeriodLogs.last.date).inDays > 1) {
         if (currentPeriodLogs.isNotEmpty) {
-          await _createPeriodFromLogs(db, currentPeriodLogs);
+          final clusterMap = await _createPeriodFromLogs(db, currentPeriodLogs);
+          allLogUpdates.addAll(clusterMap);
         }
         currentPeriodLogs = [entry];
       } else {
         currentPeriodLogs.add(entry);
       }
     }
+
     if (currentPeriodLogs.isNotEmpty) {
-      await _createPeriodFromLogs(db, currentPeriodLogs);
+      final clusterMap = await _createPeriodFromLogs(db, currentPeriodLogs);
+      allLogUpdates.addAll(clusterMap);
     }
+
+    return allLogUpdates;
   }
 
   /// Creates a Period entry in the DB from logs with at flow rate.
-  Future<void> _createPeriodFromLogs(Database db, List<LogDay> logs) async {
+  Future<Map<int, int>> _createPeriodFromLogs(
+    Database db,
+    List<LogDay> logs,
+  ) async {
+    final Map<int, int> updates = {};
     final periodDays = logs.where((log) => log.flow != FlowRate.none).toList();
 
-    if (periodDays.isEmpty) {
-      return;
-    }
+    if (periodDays.isEmpty) return updates;
 
     final startDate = periodDays.first.date;
     final endDate = periodDays.last.date;
-    final totalDays = endDate.difference(startDate).inDays + 1;
 
-    final newPeriodMap = {
+    final periodId = await db.insert('periods', {
       'start_date': startDate.millisecondsSinceEpoch,
       'end_date': endDate.millisecondsSinceEpoch,
-      'total_days': totalDays,
-    };
-
-    final periodId = await db.insert('periods', newPeriodMap);
-
-    final logIds = periodDays.map((log) => log.id!).toList();
-
-    await db.transaction((txn) async {
-      for (final logId in logIds) {
-        await txn.update(
-          'period_logs',
-          {'period_id': periodId},
-          where: _whereId,
-          whereArgs: [logId],
-        );
-      }
+      'total_days': endDate.difference(startDate).inDays + 1,
     });
+
+    for (final log in periodDays) {
+      updates[log.id!] = periodId;
+    }
+
+    return updates;
   }
 
   /// Fetches monthly flow data exclusively from logs that are part of a period.

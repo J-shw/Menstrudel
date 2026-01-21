@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:menstrudel/models/prefrences/day_of_week_enum.dart';
 import 'package:menstrudel/services/settings_service.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/l10n/l10n.dart';
@@ -38,6 +39,24 @@ class PreferencesSettingsScreen extends StatelessWidget {
               },
             ),
           ),
+          ListTile(
+            leading: const Icon(Icons.calendar_month_outlined),
+            title: Text(l10n.preferencesScreen_StartingDayOfWeek),
+            trailing: DropdownButton<String>(
+              value: settingsService.startingDayOfWeek,
+              items: DayOfWeek.values.map((entry) {
+                return DropdownMenuItem<String>(
+                  value: entry.value,
+                  child: Text(entry.getDisplayName(l10n)),
+                );
+              }).toList(),
+              onChanged: (String? newStartingDayOfWeek) {
+                if (newStartingDayOfWeek != null) {
+                  context.read<SettingsService>().setStartingDayOfWeek(newStartingDayOfWeek);
+                }
+              },
+            ),
+          ),
           SwitchListTile(
             title: Text(l10n.preferencesScreen_enableSanitaryProductsScreen),
             subtitle:
@@ -46,6 +65,16 @@ class PreferencesSettingsScreen extends StatelessWidget {
             value: settingsService.isSanitaryNavEnabled,
             onChanged: (bool value) {
               context.read<SettingsService>().setSanitaryNavEnabled(value);
+            },
+          ),
+          SwitchListTile(
+            title: Text(l10n.preferencesScreen_enableSexActivityScreen),
+            subtitle:
+                Text(l10n.preferencesScreen_enableSexActivityScreenSubtitle),
+            secondary: const Icon(Icons.favorite_border_rounded),
+            value: settingsService.isSexActivityNavEnabled,
+            onChanged: (bool value) {
+              context.read<SettingsService>().setSexActivityNavEnabled(value);
             },
           ),
         ],

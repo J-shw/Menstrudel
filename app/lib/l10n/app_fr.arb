@@ -1,9 +1,9 @@
 {
     "@@locale": "fr",
     "appTitle": "Menstrudel",
-    "nextDue": "Next Due",
+    "nextDue": "Prochaine échéance",
     "ongoing": "En cours",
-    "overdue": "Overdue",
+    "overdue": "Retard",
     "total": "Total",
     "shortest": "Shortest",
     "longest": "Longest",
@@ -11,10 +11,13 @@
     "time": "Heure",
     "start": "Début",
     "end": "Fin",
+    "next": "Next",
+    "back": "Back",
+    "today": "Today",
     "day": "Jour",
     "days": "Jours",
-    "hours": "Hours",
-    "dayCount": "{count, plural, one{{count} Jour} other{{count} Jours}}",
+    "hours": "Heures",
+    "dayCount": "{count, plural, one{{count} jour} other{{count} jours}}",
     "@dayCount": {
         "description": "A message that displays a count of days, handling singular and plural forms.",
         "placeholders": {
@@ -24,7 +27,7 @@
             }
         }
     },
-    "monthCount": "{count, plural, one{{count} Month} other{{count} Months}}",
+    "monthCount": "{count, plural, one{{count} mois} other{{count} mois}}",
     "@monthCount": {
         "description": "A message that displays a count of months, handling singular and plural forms.",
         "placeholders": {
@@ -34,7 +37,7 @@
             }
         }
     },
-    "yearCount": "{count, plural, one{{count} Year} other{{count} Years}}",
+    "yearCount": "{count, plural, one{{count} année} other{{count} années}}",
     "@yearCount": {
         "description": "A message that displays a count of years, handling singular and plural forms.",
         "placeholders": {
@@ -44,7 +47,9 @@
             }
         }
     },
-    "edit": "Edit",
+    "logs": "Logs",
+    "insights": "Insights",
+    "edit": "Éditer",
     "delete": "Supprimer",
     "clear": "Effacer",
     "save": "Sauvegarder",
@@ -57,17 +62,20 @@
     "cancel": "Annuler",
     "select": "Sélectionner",
     "close": "Fermer",
-    "reset": "Reset",
-    "add": "Add",
-    "notSet": "Not set",
-    "removed": "Removed",
+    "reset": "Réinitialiser",
+    "add": "Ajouter",
+    "notSet": "Non-défini",
+    "removed": "Supprimé",
+    "totalLogs": "Total Logs",
     "note": "Note",
     "systemDefault": "Valeur par défaut du système",
     "flow": "Flux /",
-    "type": "Type",
+    "type": "Écrire",
+    "other": "Other",
     "navBar_insights": "Statistiques",
-    "navBar_logs": "Historique",
-    "navBar_sanitary": "Sanitary",
+    "navBar_logs": "Suivis",
+    "navBar_sanitary": "Sanitaire",
+    "navBar_sexActivity": "Sex Activity",
     "navBar_pill": "Pilule",
     "navBar_larc": "LARC",
     "navBar_settings": "Paramètres",
@@ -76,31 +84,68 @@
     "flowIntensity_light": "Léger",
     "flowIntensity_moderate": "Modéré",
     "flowIntensity_heavy": "Abondant",
-    "builtInSymptom_acne": "Acne",
-    "builtInSymptom_backPain": "Back pain",
-    "builtInSymptom_bloating": "Bloating",
-    "builtInSymptom_cramps": "Cramps",
+    "builtInSymptom_acne": "Acné",
+    "builtInSymptom_backPain": "Mal de dos",
+    "builtInSymptom_bloating": "Ballonnements",
+    "builtInSymptom_cramps": "Crampes",
     "builtInSymptom_fatigue": "Fatigue",
-    "builtInSymptom_headache": "Headache",
-    "builtInSymptom_moodSwings": "Mood swings",
-    "builtInSymptom_nausea": "Nausea",
+    "builtInSymptom_headache": "Migraine",
+    "builtInSymptom_moodSwings": "Sauts d'humeur",
+    "builtInSymptom_nausea": "Nausée",
     "painLevel_title": "Intensité de la douleur",
     "painLevel_none": "Aucune",
     "painLevel_mild": "Légère",
     "painLevel_moderate": "Modérée",
     "painLevel_severe": "Forte",
     "pain_unbearable": "Insupportable",
-    "larcType_iud": "IUD",
+    "larcType_iud": "Stérilet",
     "larcType_implant": "Implant",
     "larcType_injection": "Injection",
-    "larcType_ring": "Ring",
+    "larcType_ring": "Anneau",
     "larcType_patch": "Patch",
     "sanitaryProduct_tampon": "Tampon",
-    "sanitaryProduct_pad": "Pad",
-    "sanitaryProduct_menstrualCup": "Menstrual Cup",
-    "sanitaryProduct_periodUnderwear": "Period Underwear",
-    "error_valueMustbePositive": "Value must be positive",
-    "error_valueCannotBeNull": "Value cannot be null",
+    "sanitaryProduct_pad": "Serviette hygiénique",
+    "sanitaryProduct_menstrualCup": "Coupe menstruelle",
+    "sanitaryProduct_periodUnderwear": "Lingerie menstruelle",
+    "sanitaryProducts_mostUsed": "Most Used",
+    "sanitaryProducts_usageTrend": "Usage Trend",
+    "sexProtection_none": "None",
+    "sexProtection_barrier": "Barrier",
+    "sexProtection_hormonal": "Hormonal",
+    "sexProtection_natural": "Natural",
+    "sexProtection_permanent": "Permanent",
+    "sexType_vaginal": "Vaginal",
+    "sexType_anal": "Anal",
+    "sexType_oral": "Oral",
+    "sexType_manual": "Manual",
+    "sexParticipation_solo": "Solo",
+    "sexParticipation_partner": "Partner",
+    "sexParticipation_group": "Group",
+    "userGoal_general": "General Health",
+    "@userGoal_general": {
+        "description": "For users tracking periods for general health."
+    },
+    "userGoal_sexual": "Sexual Health",
+    "@userGoal_sexual": {
+        "description": "For users focusing on sexual health."
+    },
+    "userGoal_conceive": "Trying to Conceive",
+    "@userGoal_conceive": {
+        "description": "For users focusing on trying to conceive."
+    },
+    "userGoal_avoid": "Avoiding Pregnancy",
+    "@userGoal_avoid": {
+        "description": "For users focusing on avoiding pregnancy."
+    },
+    "dayOfWeek_monday": "Monday",
+    "dayOfWeek_tuesday": "Tuesday",
+    "dayOfWeek_wednesday": "Wednesday",
+    "dayOfWeek_thursday": "Thursday",
+    "dayOfWeek_friday": "Friday",
+    "dayOfWeek_saturday": "Saturday",
+    "dayOfWeek_sunday": "Sunday",
+    "error_valueMustbePositive": "La valeur doit être supérieure à zéro",
+    "error_valueCannotBeNull": "La valeur ne peut pas être vide",
     "notification_periodTitle": "Règles imminentes",
     "@notification_periodTitle": {
         "description": "Title for the upcoming period notification."
@@ -135,7 +180,7 @@
     "@notification_pillBody": {
         "description": "Body for the daily pill reminder notification."
     },
-    "notification_larcTitle": "LARC Reminder",
+    "notification_larcTitle": "Rappel de LARC",
     "@notification_larcTitle": {
         "description": "Title for the LARC reminder notification."
     },
@@ -153,26 +198,87 @@
             }
         }
     },
-    "notification_loggingReminderTitle": "Logging Reminder",
+    "notification_loggingReminderTitle": "Rappel de suivi",
     "@notification_loggingReminderTitle": {
         "description": "Title for the logging reminder notification."
     },
-    "notification_loggingReminderBody": "Tap to log your flow for today.",
+    "notification_loggingReminderBody": "Appuyer pour enregistrer votre flux d'aujourd'hui.",
     "@notification_loggingReminderBody": {
         "description": "Body for the logging reminder notification."
     },
-    "notification_SanitaryProductReminderTitle": "Sanitary Product Reminder",
-    "notification_SanitaryProductReminderBody": "Remember to change your product.",
-    "mainScreen_insightsPageTitle": "Votre Aperçu",
-    "mainScreen_sanitaryPageTitle": "Sanitary Products",
+    "notification_SanitaryProductReminderTitle": "Rappel des produits hygiénique",
+    "notification_SanitaryProductReminderBody": "N'oubliez pas de changer votre produit hygiénique.",
+    "onboardingScreen_welcomeToMenstrudel": "Welcome to Menstrudel",
+    "@onboardingScreen_welcomeToMenstrudel": {
+        "description": "Title for the onboarding screen."
+    },
+    "onboardingScreen_welcomeToMenstrudelDescription": "Your offline, private cycle tracker.",
+    "@onboardingScreen_welcomeToMenstrudelDescription": {
+        "description": "Small into description for the onboarding screen."
+    },
+    "onboardingScreen_profileTitle": "About You",
+    "@onboardingScreen_profileTitle": {
+        "description": "Title for the profile onboarding screen."
+    },
+    "onboardingScreen_profileName": "What should we call you?",
+    "@onboardingScreen_profileName": {
+        "description": "Name question for the profile onboarding screen."
+    },
+    "onboardingScreen_profileDate": "Birth Date (Optional)",
+    "@onboardingScreen_profileDate": {
+        "description": "Birth date for the profile onboarding screen. This field is optional."
+    },
+    "onboardingScreen_profileDatePlaceholder": "Tap to set birthday",
+    "@onboardingScreen_profileDatePlaceholder": {
+        "description": "Displays when birthday value is none (Due to being optional). Prompts user to set their birthday"
+    },
+    "onboardingScreen_goalTitle": "What's your goal?",
+    "@onboardingScreen_goalTitle": {
+        "description": "Title for the goal onboarding screen."
+    },
+    "onboardingScreen_goalDescription": "This helps tailor the insights you see.",
+    "@onboardingScreen_goalDescription": {
+        "description": "Description for the goal onboarding screen."
+    },
+    "onboardingScreen_contraceptionHint": "Note: You can enable Pill or LARC tracking later in the app settings under '{sectionName}' if wanted.",
+    "@onboardingScreen_contraceptionHint": {
+        "description": "Hint for birth control settings",
+        "placeholders": {
+            "sectionName": {
+                "type": "String"
+            }
+        }
+    },
+    "onboardingScreen_getStarted": "Get Started",
+    "@onboardingScreen_getStarted": {
+        "description": "Button text for the get started navigation button"
+    },
+    "fabToolTip_logs": "Log day",
+    "@fabToolTip_logs": {
+        "description": "Used for the main logs screen fab button as a tooltip."
+    },
+    "fabToolTip_sanitary": "Log sanitary product",
+    "@fabToolTip_sanitary": {
+        "description": "Used for the sanitary screen fab button as a tooltip."
+    },
+    "fabToolTip_sexActivity": "Log sex activity",
+    "@fabToolTip_sexActivity": {
+        "description": "Used for the sex activity screen fab button as a tooltip."
+    },
+    "fabToolTip_larc": "Log LARC",
+    "@fabToolTip_larc": {
+        "description": "Used for the LARC screen fab button as a tooltip."
+    },
+    "mainScreen_logsPageTitle": "Logs",
+    "mainSceen_sexActivityPageTitle": "Sex Activity",
+    "mainScreen_sanitaryPageTitle": "Produits hygiéniques",
     "mainScreen_pillsPageTitle": "Pilules",
     "mainScreen_LarcsPageTitle": "LARCs",
     "mainScreen_settingsPageTitle": "Paramètres",
-    "mainScreen_tooltipLogPeriod": "Historique des règles",
-    "insightsScreen_errorPrefix": "Erreur :",
+    "insightsScreen_errorPrefix": "Erreur:",
     "insightsScreen_noDataAvailable": "Aucune donnée disponible.",
     "logsScreen_calculatingPrediction": "Calcul de la prédication...",
-    "logScreen_logAtLeastTwoPeriods": "Enregistre au moins deux périodes pour estimer le prochain cycle.",
+    "logScreen_logAtLeastTwoPeriods": "Enregistrer au moins deux périodes pour estimer le prochain cycle.",
     "logScreen_nextPeriodEstimate": "Prochaine période estimée",
     "logScreen_periodDueToday": "Règles prévues pour aujourd’hui",
     "logScreen_periodOverdueBy": "{count, plural, =1{Règles en retard d’un jour} other{Règles en retard de {count} jours}}",
@@ -186,8 +292,8 @@
     },
     "pillScreen_pillForTodayMarkedAsTaken": "Pilule du jour marquée comme prise.",
     "pillScreen_pillForTodayMarkedAsSkipped": "Pilule du jour marquée comme sautée.",
-    "larcScreen_noLarcRecordsFound": "No LARC records found.",
-    "larcScreen_history": "History ({history})",
+    "larcScreen_noLarcRecordsFound": "Aucun enregistrement LARC n'a été trouvé.",
+    "larcScreen_history": "Historique ({history})",
     "@larcScreen_history": {
         "description": "The total LARC history count.",
         "placeholders": {
@@ -197,7 +303,7 @@
             }
         }
     },
-    "larcScreen_activeLarcs": "Active LARCs ({activeCount})",
+    "larcScreen_activeLarcs": "LARCs actives ({activeCount})",
     "@larcScreen_activeLarcs": {
         "description": "The total active LARC count.",
         "placeholders": {
@@ -208,10 +314,10 @@
         }
     },
     "larcScreen_activeLarcsDescription": "Currently monitored LARC entries.",
-    "larcScreen_noActiveRecords": "No LARC is currently active. Please log a new entry.",
-    "larcScreen_noHistoryRecords": "No past or overdue LARC records found.",
-    "sanitaryProductsScreen_noSanitaryProductRecordsFound": "No sanitary product records found.",
-    "sanitaryProductsScreen_history": "History ({history})",
+    "larcScreen_noActiveRecords": "Aucune LARC n'est actuellement active. Merci d'enregistrer une nouvelle entrée.",
+    "larcScreen_noHistoryRecords": "Aucune LARC passée ou en retard n'a été trouvée.",
+    "sanitaryProductsScreen_noSanitaryProductRecordsFound": "Aucun enregistrement de produit hygiénique n'a été trouvé.",
+    "sanitaryProductsScreen_history": "Historique ({history})",
     "@sanitaryProductsScreen_history": {
         "description": "The total sanitary product history count.",
         "placeholders": {
@@ -221,7 +327,7 @@
             }
         }
     },
-    "sanitaryProductsScreen_noHistoryRecords": "No past sanitary product records found.",
+    "sanitaryProductsScreen_noHistoryRecords": "Aucun enregistrement de produit hygiénique n'a été trouvé.",
     "sanitaryProductsScreen_activeProduct": "Actif{activeType}",
     "@sanitaryProductsScreen_activeProduct": {
         "description": "Label showing the type of active sanitary product.",
@@ -232,7 +338,7 @@
             }
         }
     },
-    "sanitaryProductsScreen_changeDueAt": "Change Due At {time}",
+    "sanitaryProductsScreen_changeDueAt": "Changement prévu à {time}",
     "@sanitaryProductsScreen_changeDueAt": {
         "description": "Label showing the time when the sanitary product needs to be changed.",
         "placeholders": {
@@ -242,6 +348,29 @@
             }
         }
     },
+    "sexActivityScreen_noSexActivityRecordsFound": "No sex activity records found.",
+    "sexActivityScreen_history": "History ({history})",
+    "@sexActivityScreen_history": {
+        "description": "The total sex activity history count.",
+        "placeholders": {
+            "history": {
+                "type": "int",
+                "example": "5"
+            }
+        }
+    },
+    "settingsScreen_profile": "Profile",
+    "@settingsScreen_profile": {
+        "description": "Title for the profile settings button."
+    },
+    "settingsScreen_name": "Name",
+    "settingsScreen_birthDate": "Birth Date",
+    "settingsScreen_notSet": "Not set",
+    "@settingsScreen_notSet": {
+        "description": "Used when birth date is not set."
+    },
+    "settingsScreen_appGoal": "App Goal",
+    "settingsScreen_profileUpdated": "Profile updated successfully",
     "settingsScreen_selectHistoryView": "Sélectionner la vue de l'historique",
     "settingsScreen_deleteRegimen_question": "Supprimer le traitement ?",
     "settingsScreen_deleteRegimenDescription": "Cela supprimera les réglages de votre plaquette actuelle ainsi que tous les journaux de pilules associés. Cette action est irréversible.",
@@ -261,7 +390,7 @@
     "settingsScreen_view": "Vue",
     "settingsScreen_birthControl": "Contraception",
     "settingsScreen_enablePillTracking": "Activer le suivi des pilules",
-    "settingsScreen_pillDescription": "Track your daily pill intake and get reminders.",
+    "settingsScreen_pillDescription": "Suivez votre prise quotidienne de pilule et recevez des rappels.",
     "settingsScreen_setUpPillRegimen": "Configurer le régime de pilule",
     "settingsScreen_trackYourDailyPillIntake": "Suivi quotidien de la pilule",
     "settingsScreen_dailyPillReminder": "Rappel pour la pilule quotidienne",
@@ -272,21 +401,21 @@
     "settingsScreen_notificationTime": "Heure de la notification",
     "settingsScreen_overduePeriodReminder": "Alerte de retard de règles",
     "settingsScreen_remindMeAfter": "Me rappeler après",
-    "settingsScreen_enableLarcTracking": "Enable LARC Tracking",
-    "settingsScreen_larcDescription": "Track long-acting reversible contraceptives (LARCs).",
-    "settingsScreen_larcType": "LARC Type",
-    "settingsScreen_setDuration": "Set Duration",
-    "settingsScreen_larcDuration": "LARC Replacement Duration",
-    "settingsScreen_enableLARCReminder": "Enable LARC Reminder",
-    "settingsScreen_currentDuration": "Current Duration",
-    "settingsScreen_durationInDays": "Duration (Days)",
-    "settingsScreen_LoggingScreen": "Logging",
-    "settingsScreen_enableLoggingReminders": "Enable Logging Reminders",
-    "settingsScreen_loggingReminderDescription": "If you log a day with flow, you will receive a notification the following day to log your status.",
-    "settingsScreen_loggingReminderTime": "Logging Reminder Time",
-    "settingsScreen_defaultSymptoms": "Default Symptoms",
-    "settingsScreen_defaultSymptomsSubtitle": "These are always available when logging new periods.\nTap an existing symptom to delete or '+' to add a new one.",
-    "settingsScreen_deleteDefaultSymptomQuestion": "Delete '{symptom}'?",
+    "settingsScreen_enableLarcTracking": "Activer le suivi de LARC",
+    "settingsScreen_larcDescription": "Suivre des contraceptifs réversibles à action prolongée (LARCs).",
+    "settingsScreen_larcType": "Type de LARC",
+    "settingsScreen_setDuration": "Déterminer une durée",
+    "settingsScreen_larcDuration": "Durée de remplacement de la LARC",
+    "settingsScreen_enableLARCReminder": "Activer le rappel pour la LARC",
+    "settingsScreen_currentDuration": "Durée actuelle",
+    "settingsScreen_durationInDays": "Durée (Jours)",
+    "settingsScreen_LoggingScreen": "Suivi",
+    "settingsScreen_enableLoggingReminders": "Activer un rappel de suivis",
+    "settingsScreen_loggingReminderDescription": "Si vous enregistrez un jour avec flux, vous recevrez une notification le lendemain pour enregistrer votre statut.",
+    "settingsScreen_loggingReminderTime": "Heure du rappel de suivi",
+    "settingsScreen_defaultSymptoms": "Symptômes par défaut",
+    "settingsScreen_defaultSymptomsSubtitle": "Ceux-ci sont toujours disponibles lorsque vous enregistrez de nouveaux cycles de règles.\nAppuyez sur un symptôme existant pour le supprimer ou sur « + » pour en ajouter un nouveau.",
+    "settingsScreen_deleteDefaultSymptomQuestion": "Supprimer '{symptom}'?",
     "@settingsScreen_deleteDefaultSymptomQuestion": {
         "description": "Question whether a symptom should be deleted.",
         "placeholders": {
@@ -296,8 +425,8 @@
             }
         }
     },
-    "settingsScreen_resetSymptomsList": "Reset Symptoms List?",
-    "settingsScreen_resetSymptomsListDescription": "This will remove all your custom symptoms and restore the original built-in list.\n\nYour existing log entries will not be changed.",
+    "settingsScreen_resetSymptomsList": "Réinitialiser la liste des symptômes ?",
+    "settingsScreen_resetSymptomsListDescription": "Cela supprimera tous vos symptômes personnalisés et restaurera la liste d'origine.\n\nVos entrées existantes ne seront pas modifiées.",
     "settingsScreen_deleteDefaultSymptomDescription": "'{symptom}' will no longer be available when logging a period.\n\n{usageCount, plural, zero{There are currently no period logs with this symptom!} one{There is already 1 period log with this symptom!\nThis log will not be changed.} other{There are {usageCount} period logs with this symptom!\nThese logs will not be changed.}}",
     "@settingsScreen_deleteDefaultSymptomDescription": {
         "description": "Question whether a symptom should be deleted.",
@@ -343,7 +472,7 @@
     "settingsScreen_allSanitaryDataCleared": "All sanitary products data has been cleared.",
     "settingsScreen_exportPeriodData": "Exporter les donnés de vos périodes",
     "settingsScreen_exportPillData": "Exporter données de vos pilules",
-    "settingsScreen_exportLarcsData": "Export LARCs Data",
+    "settingsScreen_exportLarcsData": "Exporter les données de LARCs",
     "settingsScreen_exportSanitaryData": "Export Sanitary Products Data",
     "settingsScreen_exportDataSubtitle": "Créer un fichier de sauvegarde JSON.",
     "settingsScreen_exportSuccessful": "Données exportées avec succès.",
@@ -354,16 +483,16 @@
     "settingsScreen_importDataTitle": "Importation Des Données",
     "settingsScreen_importPeriodData": "Importer Les Données Des Périodes",
     "settingsScreen_importPillData": "Importer Les Données Des Pilules",
-    "settingsScreen_importLarcsData": "Import LARCs Data",
+    "settingsScreen_importLarcsData": "Importer les données de LARCs",
     "settingsScreen_importSanitaryData": "Import Sanitary Products Data",
     "settingsScreen_importDataSubtitle": "Écraser les données existantes.",
     "settingsScreen_importPeriodData_question": "Êtes-vous sûr de vouloir importer des données de période ?",
     "settingsScreen_importPillData_question": "Êtes-vous sûr de vouloir importer les données de la pilule ?",
-    "settingsScreen_importLarcData_question": "Are you sure you want to import LARC Data?",
+    "settingsScreen_importLarcData_question": "Êtes-vous sûre de vouloir importer les données de LARC ?",
     "settingsScreen_importSanitaryData_question": "Are you sure you want to import Sanitary Products Data?",
     "settingsScreen_importPeriodDataDescription": "L'importation de données écrasera définitivement tout votre historique et paramètres de règles existants. Cette opération est irréversible.",
     "settingsScreen_importPillDataDescription": "L'importation de données écrasera définitivement tout votre historique de pilules. Cette opération est irréversible.",
-    "settingsScreen_importLarcDataDescription": "Importing data will permanently overwrite all your existing LARC history. This cannot be undone.",
+    "settingsScreen_importLarcDataDescription": "Importer des données va écraser votre historique LARC complet. Ceci est irréversible.",
     "settingsScreen_importSanitaryDataDescription": "Importing data will permanently overwrite all your existing sanitary product history. This cannot be undone.",
     "settingsScreen_importSuccessful": "Données importées avec succès !",
     "settingsScreen_importFailed": "Échec de l'importation des données. Veuillez réessayer.",
@@ -386,29 +515,36 @@
     "securityScreen_enableBiometricLock": "Activer le verrouillage biométrique",
     "securityScreen_enableBiometricLockSubtitle": "Nécessite une empreinte digitale ou un identifiant facial pour ouvrir l'application.",
     "securityScreen_noBiometricsAvailable": "Aucun code d'accès, empreinte digitale ou Face ID n'a été trouvé. Veuillez en configurer un dans les paramètres de votre appareil.",
+    "settingsScreen_userProfile": "You",
+    "@settingsScreen_userProfile": {
+        "description": "Title for the user profile settings button."
+    },
     "settingsScreen_preferences": "Préférences",
     "preferencesScreen_language": "Langue",
     "preferencesScreen_enableSanitaryProductsScreen": "Enable Sanitary Products Screen",
     "preferencesScreen_enableSanitaryProductsScreenSubtitle": "Show the Sanitary Products tab on the main navigation bar.",
+    "preferencesScreen_enableSexActivityScreen": "Enable Sex Activity Screen",
+    "preferencesScreen_enableSexActivityScreenSubtitle": "Show the Sex Activity tab on the main navigation bar.",
+    "preferencesScreen_StartingDayOfWeek": "Starting Day of the Week",
     "settingsScreen_about": "À propos",
     "aboutScreen_version": "Version",
     "aboutScreen_github": "GitHub",
     "aboutScreen_githubSubtitle": "Code source et suivis des erreurs",
     "aboutScreen_discord": "Discord",
-    "aboutScreen_discordSubtitle": "Support and community",
+    "aboutScreen_discordSubtitle": "Support et communauté",
     "aboutScreen_share": "Partager",
     "aboutScreen_shareSubtitle": "Partager l'appli avec vos proches",
     "aboutScreen_urlError": "Impossible d'ouvrir le lien.",
-    "logSummaryWidget_loggedDays": "Logged Days",
-    "logSummaryWidget_trackingHistory": "Tracking History",
+    "logSummaryWidget_loggedDays": "Jours suivis",
+    "logSummaryWidget_trackingHistory": "Historique de suivi",
     "cycleLengthVarianceWidget_logAtLeastTwoPeriods": "Need at least two cycles to show variance.",
     "cycleLengthVarianceWidget_title": "Cycle Length Variance",
     "cycleLengthVarianceWidget_averageCycle": "Cycle Moyen",
     "cycleLengthVarianceWidget_cycle": "Cycle",
-    "periodDurationWidget_logAtLeastTwoPeriods": "Log at least two periods to see period statistics.",
+    "periodDurationWidget_logAtLeastTwoPeriods": "Enregistrez au moins deux cycles pour voir les statistiques de règles.",
     "periodDurationWidget_title": "Period Duration Variance",
-    "periodDurationWidget_averagePeriod": "Avg. Period",
-    "periodDurationWidget_period": "Period",
+    "periodDurationWidget_averagePeriod": "Moyenne de règles",
+    "periodDurationWidget_period": "Règles",
     "flowIntensityWidget_flowIntensityBreakdown": "Décomposition de l'intensité du flux",
     "flowIntensityWidget_noFlowDataLoggedYet": "Aucune donnée du flux enregistrée pour le moment.",
     "painLevelWidget_noPainDataLoggedYet": "Aucune donnée sur la douleur n'a encore été enregistrée.",
@@ -418,7 +554,6 @@
     "monthlyFlowChartWidget_cycleFlowPatternsDescription": "Chaque ligne représente un cycle complet",
     "symptomFrequencyWidget_noSymptomsLoggedYet": "Aucun symptôme n'a encore été enregistré.",
     "symptomFrequencyWidget_mostCommonSymptoms": "Symptômes les plus courants",
-    "yearHeatMapWidget_yearlyOverview": "Aperçu annuel",
     "journalViewWidget_logYourFirstPeriod": "Enregistrer vos premières règles.",
     "listViewWidget_noPeriodsLogged": "Aucun cycle menstruel enregistré pour le moment.\nAppuyez sur le bouton + pour en ajouter une.",
     "listViewWidget_confirmDelete": "Confirmer la suppression",
@@ -458,10 +593,10 @@
     "symptomEntrySheet_symptomsOptional": "Symptômes (Optionnel)",
     "periodDetailsSheet_symptoms": "Symptômes",
     "periodDetailsSheet_flow": "Flux",
-    "larcEntrySheet_logLARCDetails": "Log LARC Details",
+    "larcEntrySheet_logLARCDetails": "Enregistrer les détails de LARC",
     "sanitaryEntrySheet_logSanitaryProduct": "Log Sanitary Product",
-    "sanitaryEntrySheet_setReminderDuration": "Set Reminder Duration",
-    "sanitaryEntrySheet_maxDuration": "Max Duration: {hours} hours",
+    "sanitaryEntrySheet_setReminderDuration": "Définir la durée du rappel",
+    "sanitaryEntrySheet_maxDuration": "Durée maximale: {hours} heures",
     "@sanitaryEntrySheet_maxDuration": {
         "description": "Label showing the maximum duration for the selected sanitary product type.",
         "placeholders": {
@@ -470,8 +605,8 @@
             }
         }
     },
-    "sanitaryEntrySheet_futureLogTimeError": "Log time cannot be in the future.",
-    "sanitaryEntrySheet_pastReminderTimeError": "Reminder end time cannot be in the past.",
+    "sanitaryEntrySheet_futureLogTimeError": "Un suivi ne peut pas être dans le futur.",
+    "sanitaryEntrySheet_pastReminderTimeError": "La fin d'un rappel ne peut pas être dans le passé.",
     "periodPredictionCircle_days": "{count, plural, =1{Jour} other{Jours}}",
     "@periodPredictionCircle_days": {
         "description": "A label showing the total number of days until period is due.",
@@ -481,7 +616,7 @@
             }
         }
     },
-    "customSymptomDialog_newSymptom": "New Symptom",
+    "customSymptomDialog_newSymptom": "Nouveau symptôme",
     "customSymptomDialog_enterCustomSymptom": "Please enter a custom symptom",
-    "customSymptomDialog_temporarySymptom": "Temporary Symptom"
+    "customSymptomDialog_temporarySymptom": "Symptôme temporaire"
 }

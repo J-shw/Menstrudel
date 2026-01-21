@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:menstrudel/models/app/settings_presets.dart';
+import 'package:menstrudel/models/app/user_goal_types_enum.dart';
 import 'dart:convert';
 import 'package:menstrudel/models/birth_control/larcs/larc_types_enum.dart';
 import 'package:menstrudel/models/period_logs/symptom.dart';
@@ -16,6 +18,7 @@ class SettingsService extends ChangeNotifier {
   bool _pillNavEnabled = kDefaultPillNavEnabled;
   bool _larcNavEnabled = kDefaultLarcNavEnabled;
   bool _sanitaryNavEnabled = kDefaultSanitaryNavEnabled;
+  bool _sexActivityNavEnabled = kDefaultSexActivityNavEnabled;
   LarcTypes _larcType = kDefaultLarcType;
   String _languageCode = kDefaultLanguageCode;
   bool _biometricsEnabled = kDefaultBiometricsEnabled;
@@ -36,6 +39,7 @@ class SettingsService extends ChangeNotifier {
   bool _larcNotificationsEnabled = kDefaultLarcNotificationsEnabled;
   int _larcReminderDays = kDefaultLarcReminderDays;
   TimeOfDay _larcReminderTime = kDefaultLarcReminderTime;
+  String _startingDayOfWeek = kDefaultStartingDayOfWeek;
 
   /// Whether the 'Pill' tab is visible in the main navigation bar.
   bool get isPillNavEnabled => _pillNavEnabled;
@@ -43,6 +47,8 @@ class SettingsService extends ChangeNotifier {
   bool get isLarcNavEnabled => _larcNavEnabled;
   /// Sanitary Products navigation enabled
   bool get isSanitaryNavEnabled => _sanitaryNavEnabled;
+  /// Sex Activity navigation enabled
+  bool get isSexActivityNavEnabled => _sexActivityNavEnabled;
   /// LARC type selected
   LarcTypes get larcType => _larcType;
   /// The selected language code for the app (e.g., 'en', 'es', or 'system').
@@ -89,6 +95,8 @@ class SettingsService extends ChangeNotifier {
   bool get isLoggingReminderNotificationEnabled => _loggingReminder;
   /// The time of day the logging reminder should be sent
   TimeOfDay get loggingReminderTime => _loggingReminderTime;
+  /// The starting day of the week for calendars
+  String get startingDayOfWeek => _startingDayOfWeek;
 
   Future<void> loadSettings() async {
     _prefs = await SharedPreferences.getInstance();
@@ -96,6 +104,7 @@ class SettingsService extends ChangeNotifier {
     _pillNavEnabled = _prefs.getBool(pillNavEnabledKey) ?? false;
     _larcNavEnabled = _prefs.getBool(larcNavEnabledKey) ?? false;
     _sanitaryNavEnabled = _prefs.getBool(sanitaryNavEnabledKey) ?? true;
+    _sexActivityNavEnabled = _prefs.getBool(sexActivityNavEnabledKey) ?? false;
     _languageCode = _prefs.getString(languageKey) ?? 'system';
     _biometricsEnabled = _prefs.getBool(biometricEnabledKey) ?? false;
     _notificationsEnabled = _prefs.getBool(notificationsEnabledKey) ?? true;
@@ -115,6 +124,7 @@ class SettingsService extends ChangeNotifier {
     _themeMode = _loadThemeMode();
 
     _defaultSymptoms = _loadDefaultSymptoms();
+    _startingDayOfWeek = _prefs.getString(startingDayOfWeekKey) ?? 'monday';
 
     final String? storedDurationsJson = _prefs.getString(larcDurationsKey);
     if (storedDurationsJson != null) {
@@ -209,6 +219,12 @@ class SettingsService extends ChangeNotifier {
   Future<void> setLarcNavEnabled(bool isEnabled) async {
     _larcNavEnabled = isEnabled;
     await _prefs.setBool(larcNavEnabledKey, isEnabled);
+    notifyListeners();
+  }
+
+  Future<void> setSexActivityNavEnabled(bool isEnabled) async {
+    _sexActivityNavEnabled = isEnabled;
+    await _prefs.setBool(sexActivityNavEnabledKey, isEnabled);
     notifyListeners();
   }
 
@@ -340,6 +356,12 @@ class SettingsService extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> setStartingDayOfWeek(String day) async {
+    _startingDayOfWeek = day;
+    await _prefs.setString(startingDayOfWeekKey, day);
+    notifyListeners();
+  }
+
   Future<void> setDefaultSymptoms(Set<Symptom> symptoms) async {
     _defaultSymptoms = symptoms;
     await _prefs.setStringList(
@@ -365,5 +387,21 @@ class SettingsService extends ChangeNotifier {
     final newSet = Set<Symptom>.from(_defaultSymptoms);
     newSet.remove(symptom);
     await setDefaultSymptoms(newSet);
+  }
+
+  Future<void> applySettingsForGoal(UserGoalTypes goal) async {
+    final preset = goal.settings;
+
+    // I'm not using the class methods because they will each notifyListeners which would result in 2 notify events.
+
+    _sanitaryNavEnabled = preset.sanitaryNav;
+    _sexActivityNavEnabled = preset.sexNav;
+
+    await Future.wait([
+      _prefs.setBool(sanitaryNavEnabledKey, _sanitaryNavEnabled),
+      _prefs.setBool(sexActivityNavEnabledKey, _sexActivityNavEnabled)
+    ]);
+    
+    notifyListeners();
   }
 }

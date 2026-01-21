@@ -100,9 +100,9 @@ You can view our privacy policy [here](https://menstrudel.app/privacy/).
 
 | Your daily logs |  Quick symptom entry | Sanitary product reminders |
 | :---: | :---: | :---: |
-| ![Log View](docs/screenshots/android/logs_screen.png) | ![Symptom Entry Dialog](docs/screenshots/android/log_screen.png) | ![Symptom Entry Dialog](docs/screenshots/android/sanitary_screen.png) |
+| ![Log View](docs/screenshots/android/logs_screen.png) | ![Symptom Entry Dialog](docs/screenshots/android/log_screen.png) | ![Sanitary Product Tracking Screen](docs/screenshots/android/sanitary_screen.png) |
 | Pill Reminder | Quick insights | Settings |
-| ![Screenshot of the pill reminder screen in Menstrudel](docs/screenshots/android/pills_screen.png)  | ![Insights View](docs/screenshots/android/insights_screen.png) | ![Symptom Entry Dialog](docs/screenshots/android/settings_screen.png) | 
+| ![Screenshot of the pill reminder screen in Menstrudel](docs/screenshots/android/pills_screen.png)  | ![Insights View](docs/screenshots/android/insights_screen.png) | ![Settins Screen](docs/screenshots/android/settings_screen.png) | 
 | LARC Tracking | Widgets |  |
 | ![Screenshot of the LARC tracking screen](docs/screenshots/android/larc_screen.png) | ![Screenshot of the widgets screen on home screen](docs/screenshots/android/widget_screen.png) |   | 
 

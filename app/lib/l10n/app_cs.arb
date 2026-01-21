@@ -1,0 +1,622 @@
+{
+    "@@locale": "cs",
+    "appTitle": "Menstrudel",
+    "nextDue": "Další termín",
+    "ongoing": "Probíhající",
+    "overdue": "Zpožděný",
+    "total": "Celkově",
+    "shortest": "Nejkratší",
+    "longest": "Nejdelší",
+    "date": "Datum",
+    "time": "Čas",
+    "start": "Začátek",
+    "end": "Konec",
+    "next": "Další",
+    "back": "Zpět",
+    "today": "Today",
+    "day": "Den",
+    "days": "Dny",
+    "hours": "Hodiny",
+    "dayCount": "{count, plural, one{{count} Den} other{{count} Dny}}",
+    "@dayCount": {
+        "description": "A message that displays a count of days, handling singular and plural forms.",
+        "placeholders": {
+            "count": {
+                "type": "int",
+                "example": "5"
+            }
+        }
+    },
+    "monthCount": "{count, plural, one{{count} Měsíc} other{{count} Měsíce}}",
+    "@monthCount": {
+        "description": "A message that displays a count of months, handling singular and plural forms.",
+        "placeholders": {
+            "count": {
+                "type": "int",
+                "example": "2"
+            }
+        }
+    },
+    "yearCount": "{count, plural, one{{count} Rok} other{{count} Roky}}",
+    "@yearCount": {
+        "description": "A message that displays a count of years, handling singular and plural forms.",
+        "placeholders": {
+            "count": {
+                "type": "int",
+                "example": "3"
+            }
+        }
+    },
+    "logs": "Záznamy",
+    "insights": "Statistiky",
+    "edit": "Upravit",
+    "delete": "Smazat",
+    "clear": "Vyčistit",
+    "save": "Uložit",
+    "import": "Importovat",
+    "ok": "Ok",
+    "confirm": "Potvrdit",
+    "set": "Nastavit",
+    "yes": "Ano",
+    "no": "Ne",
+    "cancel": "Zrušit",
+    "select": "Vybrat",
+    "close": "Zavřít",
+    "reset": "Restartovat",
+    "add": "Přidat",
+    "notSet": "Nenastavené",
+    "removed": "Smazáno",
+    "totalLogs": "Všechny záznamy",
+    "note": "Poznámka",
+    "systemDefault": "Podle systému",
+    "flow": "Tok",
+    "type": "Typ",
+    "other": "Jiný",
+    "navBar_insights": "Statistiky",
+    "navBar_logs": "Záznamy",
+    "navBar_sanitary": "Pomůcky",
+    "navBar_sexActivity": "Sexuální aktivita",
+    "navBar_pill": "Pilulky",
+    "navBar_larc": "LARC",
+    "navBar_settings": "Nastavení",
+    "flowIntensity_none": "Žádná",
+    "flowIntensity_spotting": "Špinění",
+    "flowIntensity_light": "Lehké",
+    "flowIntensity_moderate": "Střední",
+    "flowIntensity_heavy": "Vysoké",
+    "builtInSymptom_acne": "Akné",
+    "builtInSymptom_backPain": "Bolest zad",
+    "builtInSymptom_bloating": "Nadýmání",
+    "builtInSymptom_cramps": "Bolesti",
+    "builtInSymptom_fatigue": "Závratě",
+    "builtInSymptom_headache": "Bolest hlavy",
+    "builtInSymptom_moodSwings": "Změny nálad",
+    "builtInSymptom_nausea": "Nevolnost",
+    "painLevel_title": "Intenzita bolesti",
+    "painLevel_none": "Žádná",
+    "painLevel_mild": "Lehká",
+    "painLevel_moderate": "Střední",
+    "painLevel_severe": "Těžká",
+    "pain_unbearable": "Nesnesitelná",
+    "larcType_iud": "Nitroděložní tělísko",
+    "larcType_implant": "Implantát",
+    "larcType_injection": "Injekce",
+    "larcType_ring": "Vaginální kroužek",
+    "larcType_patch": "Náplast",
+    "sanitaryProduct_tampon": "Tampon",
+    "sanitaryProduct_pad": "Vložka",
+    "sanitaryProduct_menstrualCup": "Menstruační kalíšek",
+    "sanitaryProduct_periodUnderwear": "Menstruační kalhotky",
+    "sanitaryProducts_mostUsed": "Nejvíce používané",
+    "sanitaryProducts_usageTrend": "Trend používání",
+    "sexProtection_none": "Žádná",
+    "sexProtection_barrier": "Bariérová",
+    "sexProtection_hormonal": "Hormonální",
+    "sexProtection_natural": "Naturální",
+    "sexProtection_permanent": "Permanentní",
+    "sexType_vaginal": "Vaginální",
+    "sexType_anal": "Anální",
+    "sexType_oral": "Orální",
+    "sexType_manual": "Manuální",
+    "sexParticipation_solo": "Sólo",
+    "sexParticipation_partner": "Partner",
+    "sexParticipation_group": "Skupina",
+    "userGoal_general": "Celkový zdravotní stav",
+    "@userGoal_general": {
+        "description": "For users tracking periods for general health."
+    },
+    "userGoal_sexual": "Sexuální zdraví",
+    "@userGoal_sexual": {
+        "description": "For users focusing on sexual health."
+    },
+    "userGoal_conceive": "Snaha o otěhotnění",
+    "@userGoal_conceive": {
+        "description": "For users focusing on trying to conceive."
+    },
+    "userGoal_avoid": "Zabránění těhotenství",
+    "@userGoal_avoid": {
+        "description": "For users focusing on avoiding pregnancy."
+    },
+    "dayOfWeek_monday": "Pondělí",
+    "dayOfWeek_tuesday": "Úterý",
+    "dayOfWeek_wednesday": "Středa",
+    "dayOfWeek_thursday": "Čtvrtek",
+    "dayOfWeek_friday": "Pátek",
+    "dayOfWeek_saturday": "Sobota",
+    "dayOfWeek_sunday": "Neděle",
+    "error_valueMustbePositive": "Hodnota musí být kladná",
+    "error_valueCannotBeNull": "Hodnota nesmí být prázdná",
+    "notification_periodTitle": "Blížící se menstruace",
+    "@notification_periodTitle": {
+        "description": "Title for the upcoming period notification."
+    },
+    "notification_periodBody": "{count, plural, =1{Předpokládaný začátek další menstruace je za 1 den.} other{Předpokládaný začátek další menstruace je za {count} dní.}}",
+    "@notification_periodBody": {
+        "description": "Body for the upcoming period notification.",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "notification_periodOverdueTitle": "Opožděná menstruace",
+    "@notification_periodOverdueTitle": {
+        "description": "Title for the overdue period notification."
+    },
+    "notification_periodOverdueBody": "{count, plural, =1{Vaše další menstruace má být opožděná o jeden den.} other{Vaše další menstruace má být opožděná o {count} dní.}}",
+    "@notification_periodOverdueBody": {
+        "description": "Body for the overdue period notification.",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "notification_pillTitle": "Připomenutí pilulky",
+    "@notification_pillTitle": {
+        "description": "Title for the daily pill reminder notification."
+    },
+    "notification_pillBody": "Nezapomeňte si dnes vzít pilulky.",
+    "@notification_pillBody": {
+        "description": "Body for the daily pill reminder notification."
+    },
+    "notification_larcTitle": "Upomínka LARC",
+    "@notification_larcTitle": {
+        "description": "Title for the LARC reminder notification."
+    },
+    "notification_larcBody": "{type} má být obnoveno v {days} dnech.",
+    "@notification_larcBody": {
+        "description": "The body of the LARC reminder notification, indicating the type of LARC and how many days until renewal.",
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "example": "IUD"
+            },
+            "days": {
+                "type": "int",
+                "example": "30"
+            }
+        }
+    },
+    "notification_loggingReminderTitle": "Upozornění záznamu",
+    "@notification_loggingReminderTitle": {
+        "description": "Title for the logging reminder notification."
+    },
+    "notification_loggingReminderBody": "Klikněte a zaznamenejte svůj dnešní tok.",
+    "@notification_loggingReminderBody": {
+        "description": "Body for the logging reminder notification."
+    },
+    "notification_SanitaryProductReminderTitle": "Upozornění na menstruační pomůcky",
+    "notification_SanitaryProductReminderBody": "Nezapomeňte si vyměnit menstruační pomůcku.",
+    "onboardingScreen_welcomeToMenstrudel": "Vítejte v Menstrudel",
+    "@onboardingScreen_welcomeToMenstrudel": {
+        "description": "Title for the onboarding screen."
+    },
+    "onboardingScreen_welcomeToMenstrudelDescription": "Soukromá aplikace pro sledování cyklu, která funguje bez internetu.",
+    "@onboardingScreen_welcomeToMenstrudelDescription": {
+        "description": "Small into description for the onboarding screen."
+    },
+    "onboardingScreen_profileTitle": "O vás",
+    "@onboardingScreen_profileTitle": {
+        "description": "Title for the profile onboarding screen."
+    },
+    "onboardingScreen_profileName": "Jak vám máme říkat?",
+    "@onboardingScreen_profileName": {
+        "description": "Name question for the profile onboarding screen."
+    },
+    "onboardingScreen_profileDate": "Datum narození (volitelné)",
+    "@onboardingScreen_profileDate": {
+        "description": "Birth date for the profile onboarding screen. This field is optional."
+    },
+    "onboardingScreen_profileDatePlaceholder": "Klikněte pro zadání data narození",
+    "@onboardingScreen_profileDatePlaceholder": {
+        "description": "Displays when birthday value is none (Due to being optional). Prompts user to set their birthday"
+    },
+    "onboardingScreen_goalTitle": "Co je váš cíl?",
+    "@onboardingScreen_goalTitle": {
+        "description": "Title for the goal onboarding screen."
+    },
+    "onboardingScreen_goalDescription": "This helps tailor the insights you see.",
+    "@onboardingScreen_goalDescription": {
+        "description": "Description for the goal onboarding screen."
+    },
+    "onboardingScreen_contraceptionHint": "Note: You can enable Pill or LARC tracking later in the app settings under '{sectionName}' if wanted.",
+    "@onboardingScreen_contraceptionHint": {
+        "description": "Hint for birth control settings",
+        "placeholders": {
+            "sectionName": {
+                "type": "String"
+            }
+        }
+    },
+    "onboardingScreen_getStarted": "Začínáme",
+    "@onboardingScreen_getStarted": {
+        "description": "Button text for the get started navigation button"
+    },
+    "fabToolTip_logs": "Log day",
+    "@fabToolTip_logs": {
+        "description": "Used for the main logs screen fab button as a tooltip."
+    },
+    "fabToolTip_sanitary": "Log sanitary product",
+    "@fabToolTip_sanitary": {
+        "description": "Used for the sanitary screen fab button as a tooltip."
+    },
+    "fabToolTip_sexActivity": "Log sex activity",
+    "@fabToolTip_sexActivity": {
+        "description": "Used for the sex activity screen fab button as a tooltip."
+    },
+    "fabToolTip_larc": "Log LARC",
+    "@fabToolTip_larc": {
+        "description": "Used for the LARC screen fab button as a tooltip."
+    },
+    "mainScreen_logsPageTitle": "Logs",
+    "mainSceen_sexActivityPageTitle": "Sexuální aktivita",
+    "mainScreen_sanitaryPageTitle": "Menstruační pomůcky",
+    "mainScreen_pillsPageTitle": "Pilulky",
+    "mainScreen_LarcsPageTitle": "LARC",
+    "mainScreen_settingsPageTitle": "Nastavení",
+    "insightsScreen_errorPrefix": "Chyba:",
+    "insightsScreen_noDataAvailable": "Žádná data k dispozici.",
+    "logsScreen_calculatingPrediction": "Počítání předpovědi...",
+    "logScreen_logAtLeastTwoPeriods": "Zapište nejméně dvě menstruace pro odhadnutí dalšího cyklu.",
+    "logScreen_nextPeriodEstimate": "Odhad další menstruace",
+    "logScreen_periodDueToday": "Dnes má začít menstruace",
+    "logScreen_periodOverdueBy": "{count, plural, =1{Vaše další menstruace je opožděná o jeden den.} other{Vaše další menstruace je opožděná o {count} dní}}",
+    "@logScreen_periodOverdueBy": {
+        "description": "A label showing the total number of days period is overdue.",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "pillScreen_pillForTodayMarkedAsTaken": "Dnešní pilulka je označena jako užitá.",
+    "pillScreen_pillForTodayMarkedAsSkipped": "Dnešní pilulka je označena jako přeskočena.",
+    "larcScreen_noLarcRecordsFound": "Žádné záznamy o LARC nalezeny.",
+    "larcScreen_history": "Historie ({history})",
+    "@larcScreen_history": {
+        "description": "The total LARC history count.",
+        "placeholders": {
+            "history": {
+                "type": "int",
+                "example": "12"
+            }
+        }
+    },
+    "larcScreen_activeLarcs": "Aktivní LARC ({activeCount})",
+    "@larcScreen_activeLarcs": {
+        "description": "The total active LARC count.",
+        "placeholders": {
+            "activeCount": {
+                "type": "int",
+                "example": "2"
+            }
+        }
+    },
+    "larcScreen_activeLarcsDescription": "Aktuálně monitorované záznamy LARC.",
+    "larcScreen_noActiveRecords": "V současné době není aktivní LARC. Prosím přidejte nový záznam.",
+    "larcScreen_noHistoryRecords": "Nebyly nalezeny žádné minulé ani prošlé záznamy LARC.",
+    "sanitaryProductsScreen_noSanitaryProductRecordsFound": "Žádné záznamy o menstruačních pomůckách nebyly nalezeny.",
+    "sanitaryProductsScreen_history": "Historie ({history})",
+    "@sanitaryProductsScreen_history": {
+        "description": "The total sanitary product history count.",
+        "placeholders": {
+            "history": {
+                "type": "int",
+                "example": "5"
+            }
+        }
+    },
+    "sanitaryProductsScreen_noHistoryRecords": "Žádné dřívější záznamy o menstruačních pomůckách nebyly nalezeny.",
+    "sanitaryProductsScreen_activeProduct": "Aktivní {activeType}",
+    "@sanitaryProductsScreen_activeProduct": {
+        "description": "Label showing the type of active sanitary product.",
+        "placeholders": {
+            "activeType": {
+                "type": "String",
+                "example": "Tampon"
+            }
+        }
+    },
+    "sanitaryProductsScreen_changeDueAt": "K výměně v {time}",
+    "@sanitaryProductsScreen_changeDueAt": {
+        "description": "Label showing the time when the sanitary product needs to be changed.",
+        "placeholders": {
+            "time": {
+                "type": "String",
+                "example": "3:30 PM"
+            }
+        }
+    },
+    "sexActivityScreen_noSexActivityRecordsFound": "Žádný záznam o sexuální aktivitě nalezen.",
+    "sexActivityScreen_history": "Historie ({history})",
+    "@sexActivityScreen_history": {
+        "description": "The total sex activity history count.",
+        "placeholders": {
+            "history": {
+                "type": "int",
+                "example": "5"
+            }
+        }
+    },
+    "settingsScreen_profile": "Profil",
+    "@settingsScreen_profile": {
+        "description": "Title for the profile settings button."
+    },
+    "settingsScreen_name": "Jméno",
+    "settingsScreen_birthDate": "Datum narození",
+    "settingsScreen_notSet": "Nenastaveno",
+    "@settingsScreen_notSet": {
+        "description": "Used when birth date is not set."
+    },
+    "settingsScreen_appGoal": "Cíl aplikace",
+    "settingsScreen_profileUpdated": "Profil byl úspěšně aktualizován",
+    "settingsScreen_selectHistoryView": "Zvolte zobrazení historie",
+    "settingsScreen_deleteRegimen_question": "Odstranit režim?",
+    "settingsScreen_deleteRegimenDescription": "Tato akce vymaže vaše aktuální nastavení o balíčku pilulek a všechny záznamy o pilulkách. Tohle nemůže být vráceno.",
+    "settingsScreen_allLogsHaveBeenCleared": "Všechny zápisy byly vymazány.",
+    "settingsScreen_clearAllLogs_question": "Smazat všechny záznamy?",
+    "settingsScreen_deleteAllLogsDescription": "Tohle permanentně smaže všechny vaše záznamy o menstruaci. Nastavení aplikace zůstane beze změny.",
+    "settingsScreen_appearance": "Vzhled",
+    "settingsScreen_historyViewStyle": "Styl zobrazení historie",
+    "settingsScreen_appTheme": "Motiv aplikace",
+    "settingsScreen_themeLight": "Světlý",
+    "settingsScreen_themeDark": "Tmavý",
+    "settingsScreen_themeSystem": "Systémový",
+    "settingsScreen_dynamicTheme": "Dynamický motiv",
+    "settingsScreen_useWallpaperColors": "Použít barvy z tapety telefonu",
+    "settingsScreen_themeColor": "Barva motivu",
+    "settingsScreen_pickAColor": "Vyberte barvu",
+    "settingsScreen_view": "Zobrazení",
+    "settingsScreen_birthControl": "Antikoncepce",
+    "settingsScreen_enablePillTracking": "Zapnout sledování pilulek",
+    "settingsScreen_pillDescription": "Sledujte denní užívání pilulek a nastavte si připomenutí.",
+    "settingsScreen_setUpPillRegimen": "Nastavte si režim pilulek",
+    "settingsScreen_trackYourDailyPillIntake": "Sledujte svůj denní příjem pilulek",
+    "settingsScreen_dailyPillReminder": "Denní připomenutí užívání pilulek",
+    "settingsScreen_reminderTime": "Čas připomenutí",
+    "settingsScreen_periodPredictionAndReminders": "Předpověď menstruace a připomenutí",
+    "settingsScreen_upcomingPeriodReminder": "Připomenutí na přicházející menstruaci",
+    "settingsScreen_remindMeBefore": "Připomenout mi předem",
+    "settingsScreen_notificationTime": "Čas oznámení",
+    "settingsScreen_overduePeriodReminder": "Připomenutí na zpožděnou menstruaci",
+    "settingsScreen_remindMeAfter": "Připomenout mi potom",
+    "settingsScreen_enableLarcTracking": "Zapnout sledování LARC",
+    "settingsScreen_larcDescription": "Sledujte dlouhodobě působící reverzibilní antikoncepci (LARC).",
+    "settingsScreen_larcType": "Typ LARC",
+    "settingsScreen_setDuration": "Nastavit čas trvání",
+    "settingsScreen_larcDuration": "Doba platnosti LARC",
+    "settingsScreen_enableLARCReminder": "Zapnout připomenutí LARC",
+    "settingsScreen_currentDuration": "Aktuální doba trvání",
+    "settingsScreen_durationInDays": "Doba trvání (Dny)",
+    "settingsScreen_LoggingScreen": "Záznam",
+    "settingsScreen_enableLoggingReminders": "Zapnout připomenutí záznamu",
+    "settingsScreen_loggingReminderDescription": "Když zaznamenáte den s krvácením, následující den obdržíte oznámení, abyste zaznamenali svůj stav.",
+    "settingsScreen_loggingReminderTime": "Čas upozornění záznamu",
+    "settingsScreen_defaultSymptoms": "Výchozí příznaky",
+    "settingsScreen_defaultSymptomsSubtitle": "Tyto jsou vždy k dispozici při zaznamenávání nových menstruací.\nKlepnutím na existující příznak jej smažete, klepnutím na „+“ přidáte nový.",
+    "settingsScreen_deleteDefaultSymptomQuestion": "Smazat '{symptom}'?",
+    "@settingsScreen_deleteDefaultSymptomQuestion": {
+        "description": "Question whether a symptom should be deleted.",
+        "placeholders": {
+            "symptom": {
+                "type": "String",
+                "example": "The name of the symptom."
+            }
+        }
+    },
+    "settingsScreen_resetSymptomsList": "Obnovit seznam příznaků?",
+    "settingsScreen_resetSymptomsListDescription": "Tohle smaže všechny vaše vlastní příznaky a obnoví původní vestavěný seznam.\n\nVaše existující záznamy se nezmění.",
+    "settingsScreen_deleteDefaultSymptomDescription": "'{symptom}' už nebude dostupný při záznamu menstruace.\n\n{usageCount, plural, zero{V současné době nejsou žádné záznamy menstruací s tímto příznakem!} one{V současné době je jeden záznam menstruace s tímto příznakem!\nTento záznam nebude změněn.} other{Jsou zde{usageCount} záznamy menstruace s tímto příznakem!\nTyto záznamy nebudou změněny.}}",
+    "@settingsScreen_deleteDefaultSymptomDescription": {
+        "description": "Question whether a symptom should be deleted.",
+        "placeholders": {
+            "symptom": {
+                "type": "String",
+                "example": "The name of the symptom."
+            },
+            "usageCount": {}
+        }
+    },
+    "settingsScreen_pillRegimens": "Režim pilulek",
+    "@settingsScreen_pillRegimens": {
+        "description": "Header for the section listing all created pill regimens."
+    },
+    "settingsScreen_makeActive": "Nastavit jako aktivní",
+    "@settingsScreen_makeActive": {
+        "description": "Button to select a regimen and set it as the one currently being tracked."
+    },
+    "settingsScreen_activeRegimenReminder": "Nastavení připomenutí aktivního režimu",
+    "@settingsScreen_activeRegimenReminder": {
+        "description": "Header for the daily reminder settings section."
+    },
+    "settingsScreen_pack": "Balíček",
+    "settingsScreen_dataManagement": "Správa dat",
+    "settingsScreen_dangerZone": "Nebezpečná zóna",
+    "settingsScreen_clearAllLogs": "Vyčistit všechny záznamy",
+    "settingsScreen_clearAllLogsSubtitle": "Vymaže celou historii menstruace a příznaků.",
+    "settingsScreen_clearAllPillData": "Vyčistit všechny data o pilulkách",
+    "settingsScreen_clearAllPillDataSubtitle": "Vymaže váš režim pilulek a historii užívání.",
+    "settingsScreen_clearAllPillData_question": "Vyčistit všechny data o pilulkách?",
+    "settingsScreen_deleteAllPillDataDescription": "Tímto krokem trvale smažete svůj režim užívání pilulek, připomenutí a historii užívání.",
+    "settingsScreen_allPillDataCleared": "Všechny data o pilulkách byly vyčištěny.",
+    "settingsScreen_clearAllLarcData": "Vyčistit všechny data o LARC",
+    "settingsScreen_clearAllLarcDataSubtitle": "Smaže vaši historii o LARC.",
+    "settingsScreen_clearAllLarcData_question": "Vyčistit všechny data o LARC?",
+    "settingsScreen_deleteAllLarcDataDescription": "Tímto trvale smažete svou historii LARC.",
+    "settingsScreen_allLarcDataCleared": "Všechny data o LARC byly vyčištěny.",
+    "settingsScreen_clearAllSanitaryData": "Vyčistit všechny data o menstruačních pomůckách",
+    "settingsScreen_clearAllSanitaryDataSubtitle": "Smaže vaši historii o menstruačních pomůckách.",
+    "settingsScreen_clearAllSanitaryData_question": "Vyčistit všechny data o menstruačních pomůckách?",
+    "settingsScreen_deleteAllSanitaryDataDescription": "Tímto trvale smažete svou historii o menstruačních pomůckách.",
+    "settingsScreen_allSanitaryDataCleared": "Všechny data o menstruačních pomůckách byly vyčištěny.",
+    "settingsScreen_exportPeriodData": "Exportovat data o menstruacích",
+    "settingsScreen_exportPillData": "Exportovat data o pilulkách",
+    "settingsScreen_exportLarcsData": "Exportovat data o LARC",
+    "settingsScreen_exportSanitaryData": "Exportovat data o menstruačních pomůckách",
+    "settingsScreen_exportDataSubtitle": "Vytvořit zálohovací JSON soubor.",
+    "settingsScreen_exportSuccessful": "Data byla exportována úspěšně.",
+    "settingsScreen_exportFailed": "Exportování se pokazilo. Prosím zkuste to znovu.",
+    "settingsScreen_noDataToExport": "Nebyly nalezeny žádná data k exportování.",
+    "settingsScreen_exportDataMessage": "Zde je můj export dat z aplikace MenstruDel.",
+    "settingsScreen_exportDataTitle": "Exportovat data",
+    "settingsScreen_importDataTitle": "Importovat data",
+    "settingsScreen_importPeriodData": "Importovat data o menstruacích",
+    "settingsScreen_importPillData": "Importovat data o pilulkách",
+    "settingsScreen_importLarcsData": "Importovat data o LARC",
+    "settingsScreen_importSanitaryData": "Importovat data o menstruačních pomůckách",
+    "settingsScreen_importDataSubtitle": "Přepíše existující data.",
+    "settingsScreen_importPeriodData_question": "Opravdu chcete importovat data o menstruacích?",
+    "settingsScreen_importPillData_question": "Opravdu chcete importovat data o pilulkách?",
+    "settingsScreen_importLarcData_question": "Opravdu chcete importovat data o LARC?",
+    "settingsScreen_importSanitaryData_question": "Opravdu chcete importovat data o menstruačních pomůckách?",
+    "settingsScreen_importPeriodDataDescription": "Import dat trvale přepíše všechny vaše stávající záznamy o menstruacích a nastavení menstruace. Tento krok nelze vrátit zpět.",
+    "settingsScreen_importPillDataDescription": "Import dat trvale přepíše všechny vaši stávající historii o pilulkách. Tento krok nelze vrátit zpět.",
+    "settingsScreen_importLarcDataDescription": "Import dat trvale přepíše všechny vaši stávající historii o LARC. Tento krok nelze vrátit zpět.",
+    "settingsScreen_importSanitaryDataDescription": "Import dat trvale přepíše všechny vaši stávající historii o menstruačních pomůckách. Tento krok nelze vrátit zpět.",
+    "settingsScreen_importSuccessful": "Data byla importována úspěšně!",
+    "settingsScreen_importFailed": "Importování se pokazilo. Prosím zkuste to znovu.",
+    "settingsScreen_importInvalidFile": "Neplatný formát souboru nebo struktura dat.",
+    "settingsScreen_importErrorGeneral": "Importování se pokazilo. Prosím ujistěte se, že je soubor uložen lokálně.",
+    "@settingsScreen_importErrorGeneral": {
+        "description": "General message when file import fails for unknown reasons."
+    },
+    "settingsScreen_importErrorPlatform": "Importování se nepodařilo: {message}. Prosím ujistěte se, že je soubor uložen lokálně a zkuste to znovu.",
+    "@settingsScreen_importErrorPlatform": {
+        "description": "Error when the native file picker fails, includes the specific error message.",
+        "placeholders": {
+            "message": {
+                "type": "String",
+                "example": "Unknown path or network access required."
+            }
+        }
+    },
+    "settingsScreen_security": "Bezpečnost",
+    "securityScreen_enableBiometricLock": "Zapnout biometrický zámek",
+    "securityScreen_enableBiometricLockSubtitle": "Vyžaduje otisk prstu nebo rozpoznání obličeje pro odemknutí aplikace.",
+    "securityScreen_noBiometricsAvailable": "Nebylo nalezeno žádné heslo, otisk prstu ani rozpoznání obličeje. Nastavte je prosím v nastavení svého zařízení.",
+    "settingsScreen_userProfile": "Vy",
+    "@settingsScreen_userProfile": {
+        "description": "Title for the user profile settings button."
+    },
+    "settingsScreen_preferences": "Preference",
+    "preferencesScreen_language": "Jazyk",
+    "preferencesScreen_enableSanitaryProductsScreen": "Povolit obrazovku menstruačních pomůcek",
+    "preferencesScreen_enableSanitaryProductsScreenSubtitle": "Zobrazit kartu menstruačních pomůcek na hlavní navigační liště.",
+    "preferencesScreen_enableSexActivityScreen": "Povolit obrazovku o sexuální aktivitě",
+    "preferencesScreen_enableSexActivityScreenSubtitle": "Zobrazit kartu o sexuální aktivitě na hlavní navigační liště.",
+    "preferencesScreen_StartingDayOfWeek": "Počáteční den v týdnu",
+    "settingsScreen_about": "O aplikaci",
+    "aboutScreen_version": "Verze",
+    "aboutScreen_github": "GitHub",
+    "aboutScreen_githubSubtitle": "Zdrojový kód a sledování problémů",
+    "aboutScreen_discord": "Discord",
+    "aboutScreen_discordSubtitle": "Podpora a komunita",
+    "aboutScreen_share": "Sdílet",
+    "aboutScreen_shareSubtitle": "Sdílet aplikaci s přáteli",
+    "aboutScreen_urlError": "Nebylo možné otevřít odkaz.",
+    "logSummaryWidget_loggedDays": "Zaznamenané dny",
+    "logSummaryWidget_trackingHistory": "Historie sledování",
+    "cycleLengthVarianceWidget_logAtLeastTwoPeriods": "Je potřeba mít nejméně dva cykly pro zobrazení rozdílů.",
+    "cycleLengthVarianceWidget_title": "Kolísání délky cyklu",
+    "cycleLengthVarianceWidget_averageCycle": "Průměrný cyklus",
+    "cycleLengthVarianceWidget_cycle": "Cyklus",
+    "periodDurationWidget_logAtLeastTwoPeriods": "Zaznamenejte nejméně dvě menstruace pro zobrazení statistik.",
+    "periodDurationWidget_title": "Kolísání délky menstruace",
+    "periodDurationWidget_averagePeriod": "Průměrná menstruace",
+    "periodDurationWidget_period": "Menstruace",
+    "flowIntensityWidget_flowIntensityBreakdown": "Rozložení intenzity krvácení",
+    "flowIntensityWidget_noFlowDataLoggedYet": "Dosud nebyly zaznamenány žádné údaje o krvácení.",
+    "painLevelWidget_noPainDataLoggedYet": "Dosud nebyly zaznamenány žádné údaje o bolesti.",
+    "painLevelWidget_painLevelBreakdown": "Rozdělení úrovní bolesti",
+    "monthlyFlowChartWidget_noDataToDisplay": "Žádná data k zobrazení.",
+    "monthlyFlowChartWidget_cycleFlowPatterns": "Vzorce průběhu cyklu",
+    "monthlyFlowChartWidget_cycleFlowPatternsDescription": "Každá linka reprezentuje jeden kompletní cyklus",
+    "symptomFrequencyWidget_noSymptomsLoggedYet": "Žádné příznaky nebyly zaznamenány.",
+    "symptomFrequencyWidget_mostCommonSymptoms": "Nejvíce běžné příznaky",
+    "journalViewWidget_logYourFirstPeriod": "Zaznamenejte první menstruaci.",
+    "listViewWidget_noPeriodsLogged": "Žádné menstruace nebyly zaznamenány.\nKlepněte na tlačítko + pro přidání.",
+    "listViewWidget_confirmDelete": "Potvrdit smazání",
+    "listViewWidget_confirmDeleteDescription": "Jste si jisti že chcete smazat tento záznam?",
+    "emptyPillStateWidget_noPillRegimenFound": "Žádný režim pilulek nebyl nalezen.",
+    "emptyPillStateWidget_noPillRegimenFoundDescription": "Nastavte si balíček pilulek v nastavení, abyste mohli začít sledovat.",
+    "pillStatus_pillsOfTotal": "{count, plural, =1{z 1 pilulky} other{z {count} pilulek}}",
+    "@pillStatus_pillsOfTotal": {
+        "description": "A label showing the total number of pills.",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "pillStatus_undo": "Zpět",
+    "pillStatus_skip": "Přeskočit",
+    "pillStatus_markAsTaken": "Označit jako užité",
+    "pillStatus_packStartInFuture": "Váš další balíček pilulek začne v {date}.",
+    "@pillStatus_packStartInFuture": {
+        "description": "Message shown when the pill pack start date is in the future.",
+        "placeholders": {
+            "date": {
+                "type": "DateTime",
+                "format": "yMMMd"
+            }
+        }
+    },
+    "regimenSetupWidget_setUpPillRegimen": "Nastavte si režim pilulek",
+    "regimenSetupWidget_packName": "Název balíčku",
+    "regimenSetupWidget_pleaseEnterAName": "Prosím zadejte jméno",
+    "regimenSetupWidget_activePills": "Aktivní pilulky",
+    "regimenSetupWidget_enterANumber": "Zadejte číslo",
+    "regimenSetupWidget_placeboPills": "Placebo pilulky",
+    "regimenSetupWidget_firstDayOfThisPack": "První den tohohle balíčku",
+    "symptomEntrySheet_logYourDay": "Zaznamenejte svůj den",
+    "symptomEntrySheet_symptomsOptional": "Příznaky (volitelné)",
+    "periodDetailsSheet_symptoms": "Příznaky",
+    "periodDetailsSheet_flow": "Tok",
+    "larcEntrySheet_logLARCDetails": "Zaznamenat LARC podrobnosti",
+    "sanitaryEntrySheet_logSanitaryProduct": "Zaznamenat menstruační pomůcky",
+    "sanitaryEntrySheet_setReminderDuration": "Nastavit délku připomenutí",
+    "sanitaryEntrySheet_maxDuration": "Maximální délka: {hours} hodin",
+    "@sanitaryEntrySheet_maxDuration": {
+        "description": "Label showing the maximum duration for the selected sanitary product type.",
+        "placeholders": {
+            "hours": {
+                "type": "int"
+            }
+        }
+    },
+    "sanitaryEntrySheet_futureLogTimeError": "Zaznamenaný čas nemůže být v budoucnosti.",
+    "sanitaryEntrySheet_pastReminderTimeError": "Čas ukončení připomenutí nemůže být v minulosti.",
+    "periodPredictionCircle_days": "{count, plural, =1{Den} other{Dní}}",
+    "@periodPredictionCircle_days": {
+        "description": "A label showing the total number of days until period is due.",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "customSymptomDialog_newSymptom": "Nový příznak",
+    "customSymptomDialog_enterCustomSymptom": "Zadejte vlastní příznak",
+    "customSymptomDialog_temporarySymptom": "Dočasný příznak"
+}

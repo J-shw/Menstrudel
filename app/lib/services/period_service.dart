@@ -16,10 +16,10 @@ import 'package:menstrudel/l10n/app_localizations.dart';
 
 class PeriodService extends ChangeNotifier {
   final SettingsService _settingsService;
-  final _periodsRepo = PeriodsRepository();
+  final PeriodsRepository _periodsRepo;
   final _watchSyncService = WatchSyncService();
 
-  PeriodService(this._settingsService);
+  PeriodService(this._settingsService, this._periodsRepo);
 
   bool _isLoading = true;
   List<Period> _periodEntries = [];
@@ -31,51 +31,79 @@ class PeriodService extends ChangeNotifier {
 
   /// Whether a background operation is currently in progress.
   bool get isLoading => _isLoading;
+
   /// The list of calculated [Period] objects, representing entire period cycles.
   List<Period> get periodEntries => _periodEntries;
+
   /// The calculated prediction for the next period, if available.
   PeriodPredictionResult? get predictionResult => _predictionResult;
+
   /// The current value for the main progress circle (e.g., days until due).
   int get circleCurrentValue => _circleCurrentValue;
+
   /// The maximum value for the main progress circle (e.g., average cycle length).
   int get circleMaxValue => _circleMaxValue;
+
   /// Whether the user's period is considered to be ongoing today.
   bool get isPeriodOngoing => _isPeriodOngoing;
+
   /// A pre-computed list of timeline items for the PeriodListView.
   List<Object> get timelineItems => _timelineItems;
 
-  
-  /// Refreshes all data after a user action
+  /// Refreshes all period-related data, predictions, notifications, and widgets.
   Future<void> refreshData({
     required List<LogDay> currentLogs,
-    required AppLocalizations l10n,
+    AppLocalizations? l10n,
     required WidgetController widgetController,
   }) async {
+    debugPrint('PeriodService: Starting data refresh.');
+
+    if (_isLoading && _periodEntries.isNotEmpty) return;
+
     _isLoading = true;
+
     notifyListeners();
 
     final oldPredictionDate = _predictionResult?.estimatedStartDate;
 
-    await _periodsRepo.recalculateAndAssignPeriods();
-    _periodEntries = await _periodsRepo.readAllPeriods();
+    try {
+      _periodEntries = await _periodsRepo.readAllPeriods();
 
-    _calculatePrediction();
-    _updateUiState();
-    _buildTimelineItems(currentLogs: currentLogs);
+      _calculatePrediction();
+      _updateUiState();
+      _buildTimelineItems(currentLogs: currentLogs);
 
-    _updateWidgetData(l10n, widgetController);
-    if (oldPredictionDate != _predictionResult?.estimatedStartDate) _schedulePeriodNotifications(l10n);
-    _syncWatchData();
+      if (l10n != null) {
+        _updateWidgetData(l10n, widgetController);
+        if (oldPredictionDate != _predictionResult?.estimatedStartDate) {
+          _schedulePeriodNotifications(l10n);
+        }
+      }
 
-    _isLoading = false;
-    notifyListeners();
+      _syncWatchData();
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
   }
 
   /// Calculates the period prediction and ongoing status.
   void _calculatePrediction() {
-    _predictionResult = PeriodPredictor.estimateNextPeriod(_periodEntries, DateTime.now());
-    _isPeriodOngoing = _periodEntries.isNotEmpty &&
-        DateUtils.isSameDay(_periodEntries.first.endDate, DateTime.now());
+    _predictionResult = PeriodPredictor.estimateNextPeriod(
+      _periodEntries,
+      DateTime.now(),
+    );
+
+    final lastPeriod = _periodEntries.firstOrNull;
+    _isPeriodOngoing =
+        lastPeriod != null &&
+        DateUtils.isSameDay(lastPeriod.endDate, DateTime.now());
+  }
+
+  /// Recalculates periods based on the provided [logs] and returns a mapping of log IDs to period IDs.
+  Future<Map<int, int>> recalculatePeriods(List<LogDay> logs) async {
+    final mapping = await _periodsRepo.recalculateAndAssignPeriods(logs);    
+    return mapping;
   }
 
   /// Updates the circle and FAB state variables.
@@ -91,8 +119,9 @@ class PeriodService extends ChangeNotifier {
     String smallText = l10n.periodPredictionCircle_days(_circleCurrentValue);
 
     String dateText = '';
-    if (_predictionResult != null) { 
-      dateText = '${l10n.logScreen_nextPeriodEstimate}:\n ${DateFormat('MMM d').format(_predictionResult!.estimatedStartDate)}';
+    if (_predictionResult != null) {
+      dateText =
+          '${l10n.logScreen_nextPeriodEstimate}:\n ${DateFormat('MMM d').format(_predictionResult!.estimatedStartDate)}';
     }
     controller.saveAndAndUpdateCircle(
       currentValue: _circleCurrentValue,
@@ -130,7 +159,9 @@ class PeriodService extends ChangeNotifier {
         daysAfter: _settingsService.periodOverdueNotificationDays,
         notificationTime: _settingsService.periodOverdueNotificationTime,
         title: l10n.notification_periodOverdueTitle,
-        body: l10n.notification_periodOverdueBody(_settingsService.periodOverdueNotificationDays),
+        body: l10n.notification_periodOverdueBody(
+          _settingsService.periodOverdueNotificationDays,
+        ),
         notificationID: periodOverdueNotificationId,
       );
     } catch (e) {
@@ -140,16 +171,17 @@ class PeriodService extends ChangeNotifier {
 
   /// Schedules a logging reminder from a [LogDay] object.
   Future<void> scheduleLoggingReminder({
-  required LogDay log,
-  required SettingsService settings,
-  required AppLocalizations l10n,
+    required LogDay log,
+    required SettingsService settings,
+    required AppLocalizations l10n,
   }) async {
     if (log.flow == FlowRate.none) {
       await NotificationService.cancelLoggingReminder(log.date);
-    }else if (log.flow != FlowRate.none) {
+    } else if (log.flow != FlowRate.none) {
       final nextDay = log.date.add(const Duration(days: 1));
       final reminderTime = settings.loggingReminderTime;
-      final bool isReminderEnabled = settings.isLoggingReminderNotificationEnabled;
+      final bool isReminderEnabled =
+          settings.isLoggingReminderNotificationEnabled;
 
       final scheduledTime = DateTime(
         nextDay.year,
@@ -177,41 +209,41 @@ class PeriodService extends ChangeNotifier {
   }
 
   /// Populates the [_timelineItems] list for the list view.
-  void _buildTimelineItems({ required List<LogDay> currentLogs }) {
-    final groupedLogs = groupBy(currentLogs, (log) => log.periodId ?? -1);
+  void _buildTimelineItems({required List<LogDay> currentLogs}) {
+    final logsByPeriod = groupBy(currentLogs, (log) => log.periodId);
 
-    final List<Object> timelineEvents = [
+    final List<Object> standaloneEvents = [
       ..._periodEntries,
-      ...(groupedLogs[-1] ?? []),
+      ...currentLogs.where((log) => log.periodId == null || log.periodId == -1),
     ];
 
-    final groupedByMonth = groupBy<Object, DateTime>(timelineEvents, (event) {
+    final groupedByMonth = groupBy<Object, DateTime>(standaloneEvents, (event) {
       final date = event is Period ? event.startDate : (event as LogDay).date;
       return DateTime(date.year, date.month);
     });
 
     final sortedMonths = groupedByMonth.keys.toList()
       ..sort((a, b) => b.compareTo(a));
-
     final List<Object> items = [];
+
     for (final month in sortedMonths) {
       items.add(month);
 
-      final eventsInMonth = groupedByMonth[month]!;
-      eventsInMonth.sort((a, b) {
-        final dateA = a is Period ? a.startDate : (a as LogDay).date;
-        final dateB = b is Period ? b.startDate : (b as LogDay).date;
-        return dateB.compareTo(dateA);
-      });
+      final monthEvents = groupedByMonth[month]!
+        ..sort((a, b) {
+          final dateA = a is Period ? a.startDate : (a as LogDay).date;
+          final dateB = b is Period ? b.startDate : (b as LogDay).date;
+          return dateB.compareTo(dateA);
+        });
 
-      for (final event in eventsInMonth) {
+      for (final event in monthEvents) {
+        items.add(event);
+
         if (event is Period) {
-          items.add(event);
-          final logsForPeriod = (groupedLogs[event.id] ?? [])
-            ..sort((a, b) => a.date.compareTo(b.date));
-          items.addAll(logsForPeriod);
-        } else if (event is LogDay) {
-          items.add(event);
+          final childLogs = (logsByPeriod[event.id] ?? [])
+            ..sort((a, b) => b.date.compareTo(a.date));
+
+          items.addAll(childLogs);
         }
       }
     }

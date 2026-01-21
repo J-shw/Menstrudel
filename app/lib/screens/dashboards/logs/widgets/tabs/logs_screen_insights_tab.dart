@@ -17,20 +17,19 @@ import 'package:menstrudel/widgets/insights/period_duration.dart';
 import 'package:menstrudel/widgets/insights/flow_intensity.dart';
 import 'package:menstrudel/widgets/insights/pain_intensity.dart';
 import 'package:menstrudel/widgets/insights/log_summary_widget.dart';
-import 'package:menstrudel/widgets/insights/year_heat_map.dart';
 import 'package:menstrudel/widgets/insights/monthly_flow.dart';
 import 'package:menstrudel/utils/cycle_phase_predictor.dart';
 
 import 'package:menstrudel/l10n/app_localizations.dart';
 
-class InsightsScreen extends StatefulWidget {
-  const InsightsScreen({super.key});
+class LogsScreenInsightsTab extends StatefulWidget {
+  const LogsScreenInsightsTab({super.key});
 
   @override
-  State<InsightsScreen> createState() => _InsightsScreenState();
+  State<LogsScreenInsightsTab> createState() => _LogsScreenInsightsTab();
 }
 
-class _InsightsScreenState extends State<InsightsScreen> {
+class _LogsScreenInsightsTab extends State<LogsScreenInsightsTab> {
   late Future<List<dynamic>> _insightsDataFuture;
   final periodsRepo = PeriodsRepository();
   final logsRepo = LogsRepository();
@@ -271,10 +270,6 @@ class _InsightsScreenState extends State<InsightsScreen> {
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: FlowPatternsWidget(monthlyFlowData: allFlows),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: YearHeatmapWidget(logs: allLogs),
               ),
             ],
           );
