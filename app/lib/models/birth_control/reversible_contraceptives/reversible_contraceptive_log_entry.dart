@@ -1,4 +1,4 @@
-import 'package:menstrudel/models/birth_control/larcs/reversible_contraceptive_types_enum.dart';
+import 'package:menstrudel/models/birth_control/reversible_contraceptives/reversible_contraceptive_types_enum.dart';
 
 class ReversibleContraceptiveLogEntry {
   int? id;
