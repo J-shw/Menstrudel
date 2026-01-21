@@ -446,6 +446,18 @@ class AppLocalizationsEs extends AppLocalizations {
   String get onboardingScreen_getStarted => 'Get Started';
 
   @override
+  String get fabToolTip_logs => 'Log day';
+
+  @override
+  String get fabToolTip_sanitary => 'Log sanitary product';
+
+  @override
+  String get fabToolTip_sexActivity => 'Log sex activity';
+
+  @override
+  String get fabToolTip_larc => 'Log LARC';
+
+  @override
   String get mainScreen_logsPageTitle => 'Logs';
 
   @override
@@ -462,9 +474,6 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get mainScreen_settingsPageTitle => 'Settings';
-
-  @override
-  String get mainScreen_tooltipLogPeriod => 'Log period';
 
   @override
   String get insightsScreen_errorPrefix => 'Error:';

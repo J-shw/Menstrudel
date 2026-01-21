@@ -49,8 +49,8 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
     final colorScheme = Theme.of(context).colorScheme;
 
     _calendarController ??= CleanCalendarController(
-      minDate: earliestLogDate.subtract(const Duration(days: 365)),
-      maxDate: DateTime.now().add(const Duration(days: 365)),
+      minDate: earliestLogDate.subtract(const Duration(days: 90)),
+      maxDate: DateTime.now().add(const Duration(days: 60)),
       initialFocusDate: DateTime.now(),
       weekdayStart: DayOfWeek.fromString(settingsService.startingDayOfWeek).toTableCalendar
     );
