@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
-import 'package:menstrudel/models/birth_control/larcs/larc_types_enum.dart';
+import 'package:menstrudel/models/birth_control/larcs/reversible_contraceptive_types_enum.dart';
 import 'package:provider/provider.dart';
 import 'package:menstrudel/services/settings_service.dart';
 
-class LarcDurationConfigDialog extends StatefulWidget {
-  const LarcDurationConfigDialog({
+class ReversableContraceptiveDurationConfigDialog extends StatefulWidget {
+  const ReversableContraceptiveDurationConfigDialog({
     super.key,
-    required this.larcType,
+    required this.contraceptiveType,
   });
 
-  final LarcTypes larcType;
+  final ReversibleContraceptiveTypes contraceptiveType;
 
   @override
-  State<LarcDurationConfigDialog> createState() => _LarcDurationConfigDialogState();
+  State<ReversableContraceptiveDurationConfigDialog> createState() => _ReversableContraceptiveDurationConfigDialogState();
 }
 
-class _LarcDurationConfigDialogState extends State<LarcDurationConfigDialog> {
+class _ReversableContraceptiveDurationConfigDialogState extends State<ReversableContraceptiveDurationConfigDialog> {
   final _formKey = GlobalKey<FormState>();
   late TextEditingController _controller;
   
@@ -25,7 +25,7 @@ class _LarcDurationConfigDialogState extends State<LarcDurationConfigDialog> {
   void initState() {
     super.initState();
     final settingsService = context.read<SettingsService>();
-    final currentDuration = settingsService.getLarcDurationDays(widget.larcType);
+    final currentDuration = settingsService.getReversibleContraceptiveDurationDays(widget.contraceptiveType);
     
     _controller = TextEditingController(text: currentDuration.toString());
   }
@@ -50,7 +50,7 @@ class _LarcDurationConfigDialogState extends State<LarcDurationConfigDialog> {
 
     return AlertDialog.adaptive(
       title: Text(
-        '${l10n.settingsScreen_setDuration} (${widget.larcType.getDisplayName(l10n)})',
+        '${l10n.settingsScreen_setDuration} (${widget.contraceptiveType.getDisplayName(l10n)})',
         textAlign: TextAlign.center,
       ),
       content: SizedBox(
