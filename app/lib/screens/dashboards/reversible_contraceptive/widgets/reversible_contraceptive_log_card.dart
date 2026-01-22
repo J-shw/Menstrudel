@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/models/birth_control/reversible_contraceptives/reversible_contraceptive_log_entry.dart';
-import 'package:menstrudel/models/birth_control/reversible_contraceptives/reversible_contraceptive_types_enum.dart';
 
-class LarcLogCard extends StatelessWidget {
-  const LarcLogCard({
+class ReversibleContraceptiveLogCard extends StatelessWidget {
+  const ReversibleContraceptiveLogCard({
     super.key,
     required this.entry,
     required this.l10n,
@@ -14,7 +13,7 @@ class LarcLogCard extends StatelessWidget {
     required this.onTap,
   });
 
-  final LarcLogEntry entry;
+  final ReversibleContraceptiveLogEntry entry;
   final AppLocalizations l10n;
   final String injectionDate;
   final String dueDateString;
