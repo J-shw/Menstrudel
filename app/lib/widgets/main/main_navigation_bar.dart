@@ -50,7 +50,7 @@ class MainNavigationBar extends StatelessWidget {
           NavigationDestination(
             selectedIcon: Icon(Icons.verified_user_rounded),
             icon: Icon(Icons.verified_user_outlined),
-            label: l10n.navBar_larc,
+            label: l10n.navBar_reversibleContraceptive,
           ),
         NavigationDestination(
           selectedIcon: Icon(Icons.settings),

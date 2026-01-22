@@ -105,7 +105,7 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
 
     final l10n = AppLocalizations.of(context)!;
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(l10n.settingsScreen_allLarcDataCleared)),
+      SnackBar(content: Text(l10n.settingsScreen_allReversibleContraceptiveDataCleared)),
     );
     setState(() {
       _isLoading = false;
@@ -137,8 +137,8 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
       context: context,
       builder: (BuildContext context) {
         return ConfirmationDialog(
-          title: l10n.settingsScreen_clearAllLarcData_question,
-          contentText: l10n.settingsScreen_deleteAllLarcDataDescription,
+          title: l10n.settingsScreen_clearAllReversibleContraceptiveData_question,
+          contentText: l10n.settingsScreen_deleteAllReversibleContraceptiveDataDescription,
           confirmButtonText: l10n.clear,
           onConfirm: clearReversibleContraceptiveData,
         );
@@ -590,8 +590,8 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
           context: context,
           builder: (BuildContext context) {
             return ConfirmationDialog(
-              title: l10n.settingsScreen_importLarcData_question,
-              contentText: l10n.settingsScreen_importLarcDataDescription,
+              title: l10n.settingsScreen_importReversibleContraceptiveData_question,
+              contentText: l10n.settingsScreen_importReversibleContraceptiveDataDescription,
               confirmButtonText: l10n.import,
               onConfirm: () =>
                   _importData(filePath, isPillData: false, isReversibleContraceptiveData: true),
@@ -769,13 +769,13 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
 
                         ListTile(
                           title: Text(
-                            l10n.settingsScreen_clearAllLarcData,
+                            l10n.settingsScreen_clearAllReversibleContraceptiveData,
                             style: theme.textTheme.titleMedium?.copyWith(
                               color: colorScheme.onErrorContainer,
                             ),
                           ),
                           subtitle: Text(
-                            l10n.settingsScreen_clearAllLarcDataSubtitle,
+                            l10n.settingsScreen_clearAllReversibleContraceptiveDataSubtitle,
                             style: theme.textTheme.bodyMedium?.copyWith(
                               color: colorScheme.onErrorContainer.withValues(
                                 alpha: 0.8,
@@ -873,7 +873,7 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
 
                         ListTile(
                           title: Text(
-                            l10n.settingsScreen_exportLarcsData,
+                            l10n.settingsScreen_exportReversibleContraceptivesData,
                             style: theme.textTheme.titleMedium,
                           ),
                           subtitle: Text(
@@ -959,7 +959,7 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
 
                         ListTile(
                           title: Text(
-                            l10n.settingsScreen_importLarcsData,
+                            l10n.settingsScreen_importReversibleContraceptivesData,
                             style: theme.textTheme.titleMedium,
                           ),
                           subtitle: Text(

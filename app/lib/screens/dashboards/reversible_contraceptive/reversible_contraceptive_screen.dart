@@ -108,8 +108,8 @@ class _ReversibleContraceptiveScreenState extends State<ReversibleContraceptiveS
 
     await NotificationService.scheduleReversibleContraceptiveReminder(
       reminderDateTime: scheduledTime,
-      title: l10n.notification_larcTitle,
-      body: l10n.notification_larcBody(nextReversibleContraceptiveType.getDisplayName(l10n), settingsService.reversibleContraceptiveReminderDays),
+      title: l10n.notification_reversibleContraceptiveTitle,
+      body: l10n.notification_reversibleContraceptiveBody(nextReversibleContraceptiveType.getDisplayName(l10n), settingsService.reversibleContraceptiveReminderDays),
     );
   }
 
@@ -134,10 +134,10 @@ class _ReversibleContraceptiveScreenState extends State<ReversibleContraceptiveS
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildHeader(l10n.larcScreen_activeLarcs(activeReversibleContraceptives.length), colorScheme),
+          _buildHeader(l10n.reversibleContraceptiveScreen_activeReversibleContraceptives(activeReversibleContraceptives.length), colorScheme),
           const SizedBox(height: 12),
           if (activeReversibleContraceptives.isEmpty)
-            _buildNoRecordsText(l10n.larcScreen_noActiveRecords, colorScheme)
+            _buildNoRecordsText(l10n.reversibleContraceptiveScreen_noActiveRecords, colorScheme)
           else
             ...activeReversibleContraceptives.map((s) => ReversibleContraceptiveLogCard(
                   entry: s['entry'],
@@ -148,10 +148,10 @@ class _ReversibleContraceptiveScreenState extends State<ReversibleContraceptiveS
                   onTap: () => controller.handleEditReversibleContraceptiveLog(context: context, entry: s['entry']),
                 )),
           const SizedBox(height: 32),
-          _buildHeader(l10n.larcScreen_history(historyReversibleContraceptives.length), colorScheme),
+          _buildHeader(l10n.reversibleContraceptiveScreen_history(historyReversibleContraceptives.length), colorScheme),
           const SizedBox(height: 12),
           if (historyReversibleContraceptives.isEmpty)
-            _buildNoRecordsText(l10n.larcScreen_noHistoryRecords, colorScheme)
+            _buildNoRecordsText(l10n.reversibleContraceptiveScreen_noHistoryRecords, colorScheme)
           else
             ...historyReversibleContraceptives.map((s) => ReversibleContraceptiveLogCard(
                   entry: s['entry'],

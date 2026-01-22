@@ -289,8 +289,8 @@ class _BirthControlSettingsScreenState extends State<BirthControlSettingsScreen>
                 const Divider(),
                 
                 SwitchListTile(
-                  title: Text(l10n.settingsScreen_enableLarcTracking),
-                  subtitle: Text(l10n.settingsScreen_larcDescription),
+                  title: Text(l10n.settingsScreen_enableReversibleContraceptiveTracking),
+                  subtitle: Text(l10n.settingsScreen_reversibleContraceptiveDescription),
                   value: reversibleContraceptiveEnabled,
                   onChanged: (bool value) {
                     context.read<SettingsService>().setReversibleContraceptiveNavEnabled(value);
@@ -300,7 +300,7 @@ class _BirthControlSettingsScreenState extends State<BirthControlSettingsScreen>
                   shortDivider,
                   ListTile(
                     leading: const Icon(Icons.verified_user_outlined),
-                    title: Text(l10n.settingsScreen_larcType),
+                    title: Text(l10n.settingsScreen_reversibleContraceptiveType),
                     trailing: DropdownButton<ReversibleContraceptiveTypes>(
                       value: settingsService.reversibleContraceptiveType,
                       items: ReversibleContraceptiveTypes.values.map((type) {
@@ -318,7 +318,7 @@ class _BirthControlSettingsScreenState extends State<BirthControlSettingsScreen>
                   ),
                   ListTile(
                     leading: const Icon(Icons.date_range_outlined),
-                    title: Text(l10n.settingsScreen_larcDuration),
+                    title: Text(l10n.settingsScreen_reversibleContraceptiveDuration),
                     subtitle: Text('${l10n.settingsScreen_currentDuration}: ${settingsService.getReversibleContraceptiveDurationDays(activeReversibleContraceptiveType)} ${l10n.days}'),
                     trailing: const Icon(Icons.edit_outlined),
                     onTap: () async {
@@ -333,7 +333,7 @@ class _BirthControlSettingsScreenState extends State<BirthControlSettingsScreen>
                     },
                   ),
                   SwitchListTile(
-                    title: Text(l10n.settingsScreen_enableLARCReminder),
+                    title: Text(l10n.settingsScreen_enableReversibleContraceptiveReminder),
                     value: settingsService.reversibleContraceptiveNotificationsEnabled,
                     onChanged: (bool value) {
                       context.read<SettingsService>().setReversibleContraceptiveNotificationsEnabled(value);

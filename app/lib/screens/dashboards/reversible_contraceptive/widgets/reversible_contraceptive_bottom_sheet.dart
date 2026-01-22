@@ -88,7 +88,7 @@ class _LogReversibleContraceptiveBottomSheetState extends State<LogReversibleCon
             const SizedBox(height: 12),
             
             // --- Title ---
-            Center(child: Text(l10n.larcEntrySheet_logLARCDetails, style: textTheme.titleLarge)),
+            Center(child: Text(l10n.reversibleContraceptiveEntrySheet_logReversibleContraceptiveDetails, style: textTheme.titleLarge)),
             
             // --- Date Picker ---
             const SizedBox(height: 24),

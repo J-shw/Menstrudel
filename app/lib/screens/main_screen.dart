@@ -86,7 +86,7 @@ class _MainScreenState extends State<MainScreen> {
     final l10n = AppLocalizations.of(context)!;
     return FloatingActionButton(
       key: const ValueKey('log_reversible_contraceptive_fab'),
-      tooltip: l10n.fabToolTip_larc,
+      tooltip: l10n.fabToolTip_reversibleContraceptive,
       onPressed: () {
         context.read<LogReversibleContraceptiveUIController>().handleCreateNewReversibleContraceptiveLog(context: context);
       },
@@ -124,7 +124,7 @@ class _MainScreenState extends State<MainScreen> {
       if (isPillNavEnabled)
         TopAppBar(titleText: l10n.mainScreen_pillsPageTitle),
       if (isReversibleContraceptiveNavEnabled)
-        TopAppBar(titleText: l10n.mainScreen_LarcsPageTitle),
+        TopAppBar(titleText: l10n.mainScreen_reversibleContraceptivesPageTitle),
       TopAppBar(titleText: l10n.mainScreen_settingsPageTitle),
     ];
 

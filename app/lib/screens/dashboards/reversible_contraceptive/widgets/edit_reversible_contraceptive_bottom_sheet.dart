@@ -150,7 +150,7 @@ class _EditReversibleContraceptiveLogBottomSheetState extends State<EditReversib
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          l10n.larcEntrySheet_logLARCDetails, 
+          l10n.reversibleContraceptiveEntrySheet_logReversibleContraceptiveDetails, 
           style: textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)
         ),
         
