@@ -179,9 +179,6 @@ class AppLocalizationsDe extends AppLocalizations {
   String get other => 'Sonstiges';
 
   @override
-  String get navBar_insights => 'Einblicke';
-
-  @override
   String get navBar_logs => 'Protokolle';
 
   @override
@@ -194,7 +191,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get navBar_pill => 'Pille';
 
   @override
-  String get navBar_larc => 'LARC';
+  String get navBar_reversibleContraceptive => 'Contraceptives';
 
   @override
   String get navBar_settings => 'Einstellungen';
@@ -257,22 +254,22 @@ class AppLocalizationsDe extends AppLocalizations {
   String get pain_unbearable => 'Unerträglich';
 
   @override
-  String get larcType_hormonalIud => 'Hormonal IUD';
+  String get reversibleContraceptive_hormonalIud => 'Hormonal IUD';
 
   @override
-  String get larcType_copperIud => 'Copper IUD';
+  String get reversibleContraceptive_copperIud => 'Copper IUD';
 
   @override
-  String get larcType_implant => 'Implantat';
+  String get reversibleContraceptive_implant => 'Implant';
 
   @override
-  String get larcType_injection => 'Injektion';
+  String get reversibleContraceptive_injection => 'Injection';
 
   @override
-  String get larcType_ring => 'Ring';
+  String get reversibleContraceptive_ring => 'Ring';
 
   @override
-  String get larcType_patch => 'Patch';
+  String get reversibleContraceptive_patch => 'Patch';
 
   @override
   String get sanitaryProduct_tampon => 'Tampon';
@@ -444,11 +441,12 @@ class AppLocalizationsDe extends AppLocalizations {
       'Vergiss nicht, Deine Pille für heute einzunehmen.';
 
   @override
-  String get notification_larcTitle => 'LARC-Erinnerung';
+  String get notification_reversibleContraceptiveTitle =>
+      'Reversible Contraceptive Reminder';
 
   @override
-  String notification_larcBody(String type, int days) {
-    return '$type muss in $days Tagen erneuert werden.';
+  String notification_reversibleContraceptiveBody(String type, int days) {
+    return '$type is due for renewal in $days days.';
   }
 
   @override
@@ -510,7 +508,8 @@ class AppLocalizationsDe extends AppLocalizations {
   String get fabToolTip_sexActivity => 'Log sex activity';
 
   @override
-  String get fabToolTip_larc => 'Log LARC';
+  String get fabToolTip_reversibleContraceptive =>
+      'Log Reversible Contraceptive';
 
   @override
   String get mainScreen_logsPageTitle => 'Logs';
@@ -525,7 +524,8 @@ class AppLocalizationsDe extends AppLocalizations {
   String get mainScreen_pillsPageTitle => 'Pille';
 
   @override
-  String get mainScreen_LarcsPageTitle => 'LARC';
+  String get mainScreen_reversibleContraceptivesPageTitle =>
+      'Reversible Contraceptives';
 
   @override
   String get mainScreen_settingsPageTitle => 'Einstellungen';
@@ -569,29 +569,33 @@ class AppLocalizationsDe extends AppLocalizations {
       'Pille für heute als ausgelassen markiert.';
 
   @override
-  String get larcScreen_noLarcRecordsFound => 'Keine LARC-Datensätze gefunden.';
+  String get reversibleContraceptiveScreen_noRecordsFound =>
+      'No records found.';
 
   @override
-  String larcScreen_history(int history) {
-    return 'Verlauf ($history)';
+  String reversibleContraceptiveScreen_history(int history) {
+    return 'History ($history)';
   }
 
   @override
-  String larcScreen_activeLarcs(int activeCount) {
-    return 'Aktive LARC ($activeCount)';
+  String reversibleContraceptiveScreen_activeReversibleContraceptives(
+    int activeCount,
+  ) {
+    return 'Active Reversible Contraceptives ($activeCount)';
   }
 
   @override
-  String get larcScreen_activeLarcsDescription =>
-      'Derzeit überwachte LARC-Einträge.';
+  String
+  get reversibleContraceptiveScreen_activeReversibleContraceptivesDescription =>
+      'Currently monitored reversible contraceptive entries.';
 
   @override
-  String get larcScreen_noActiveRecords =>
-      'Derzeit ist kein LARC aktiv. Bitte einen neuen Eintrag vornehmen.';
+  String get reversibleContraceptiveScreen_noActiveRecords =>
+      'No reversible contraceptive is currently active. Please log a new entry.';
 
   @override
-  String get larcScreen_noHistoryRecords =>
-      'Es wurden keine früheren oder überfälligen LARC-Datensätze gefunden.';
+  String get reversibleContraceptiveScreen_noHistoryRecords =>
+      'No past or overdue reversible contraceptive records found.';
 
   @override
   String get sanitaryProductsScreen_noSanitaryProductRecordsFound =>
@@ -743,23 +747,27 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsScreen_remindMeAfter => 'Erinnere mich in';
 
   @override
-  String get settingsScreen_enableLarcTracking => 'LARC-Verfolgung aktivieren';
+  String get settingsScreen_enableReversibleContraceptiveTracking =>
+      'Enable Reversible Contraceptive Tracking';
 
   @override
-  String get settingsScreen_larcDescription =>
-      'Erfassung langwirksamer reversibler Verhütungsmittel (LARCs).';
+  String get settingsScreen_reversibleContraceptiveDescription =>
+      'Track Reversible Contraceptives.';
 
   @override
-  String get settingsScreen_larcType => 'LARC Typ';
+  String get settingsScreen_reversibleContraceptive =>
+      'Reversible Contraceptive Type';
 
   @override
   String get settingsScreen_setDuration => 'Dauer festlegen';
 
   @override
-  String get settingsScreen_larcDuration => 'Dauer des LARC-Ersatzes';
+  String get settingsScreen_reversibleContraceptiveDuration =>
+      'Reversible Contraceptive Replacement Duration';
 
   @override
-  String get settingsScreen_enableLARCReminder => 'LARC-Erinnerung aktivieren';
+  String get settingsScreen_enableReversibleContraceptiveReminder =>
+      'Enable Reversible Contraceptive Reminder';
 
   @override
   String get settingsScreen_currentDuration => 'Aktuelle Dauer';
@@ -862,23 +870,24 @@ class AppLocalizationsDe extends AppLocalizations {
       'Alle Pille-Daten wurden gelöscht.';
 
   @override
-  String get settingsScreen_clearAllLarcData => 'Alle LARC-Daten löschen';
+  String get settingsScreen_clearAllReversibleContraceptiveData =>
+      'Clear All Reversible Contraceptive Data';
 
   @override
-  String get settingsScreen_clearAllLarcDataSubtitle =>
-      'Löscht deinen LARC-Verlauf.';
+  String get settingsScreen_clearAllReversibleContraceptiveDataSubtitle =>
+      'Removes your reversible contraceptives history.';
 
   @override
-  String get settingsScreen_clearAllLarcData_question =>
-      'Alle LARC-Daten löschen?';
+  String get settingsScreen_clearAllReversibleContraceptiveData_question =>
+      'Clear All Reversible Contraceptive Data?';
 
   @override
-  String get settingsScreen_deleteAllLarcDataDescription =>
-      'Dadurch wird Dein LARC-Verlauf dauerhaft gelöscht.';
+  String get settingsScreen_deleteAllReversibleContraceptiveDataDescription =>
+      'This will permanently delete your Reversible Contraceptive history.';
 
   @override
-  String get settingsScreen_allLarcDataCleared =>
-      'Alle LARC-Daten wurden gelöscht.';
+  String get settingsScreen_allReversibleContraceptiveDataCleared =>
+      'All Reversible Contraceptive data has been cleared.';
 
   @override
   String get settingsScreen_clearAllSanitaryData =>
@@ -907,7 +916,8 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsScreen_exportPillData => 'Periodendaten exportieren';
 
   @override
-  String get settingsScreen_exportLarcsData => 'LARCs-Daten exportieren';
+  String get settingsScreen_exportReversibleContraceptivesData =>
+      'Export Reversible Contraceptives Data';
 
   @override
   String get settingsScreen_exportSanitaryData =>
@@ -945,7 +955,8 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsScreen_importPillData => 'Periodendaten importieren';
 
   @override
-  String get settingsScreen_importLarcsData => 'LARCs-Daten importieren';
+  String get settingsScreen_importReversibleContraceptivesData =>
+      'Import Reversible Contraceptives Data';
 
   @override
   String get settingsScreen_importSanitaryData =>
@@ -964,8 +975,8 @@ class AppLocalizationsDe extends AppLocalizations {
       'Willst du wirklich die Pille-Daten importieren?';
 
   @override
-  String get settingsScreen_importLarcData_question =>
-      'Willst du wirklich die Pille-Daten importieren?';
+  String get settingsScreen_importReversibleContraceptiveData_question =>
+      'Are you sure you want to import Reversible Contraceptive Data?';
 
   @override
   String get settingsScreen_importSanitaryData_question =>
@@ -980,8 +991,8 @@ class AppLocalizationsDe extends AppLocalizations {
       'Durch den Import von Daten werden alle bisherigen Pillen-Daten dauerhaft überschrieben. Dieser Vorgang kann nicht rückgängig gemacht werden.';
 
   @override
-  String get settingsScreen_importLarcDataDescription =>
-      'Durch den Import von Daten werden alle Ihre bisher gespeicherten LARC-Daten dauerhaft überschrieben. Dieser Vorgang kann nicht rückgängig gemacht werden.';
+  String get settingsScreen_importReversibleContraceptiveDataDescription =>
+      'Importing data will permanently overwrite all your existing reversible contraceptive history. This cannot be undone.';
 
   @override
   String get settingsScreen_importSanitaryDataDescription =>
@@ -1231,7 +1242,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get periodDetailsSheet_flow => 'Ausfluss';
 
   @override
-  String get larcEntrySheet_logLARCDetails => 'LARC-Details protokollieren';
+  String
+  get reversibleContraceptiveEntrySheet_logReversibleContraceptiveDetails =>
+      'Log Reversible Contraceptive Details';
 
   @override
   String get sanitaryEntrySheet_logSanitaryProduct => 'Log-Hygieneartikel';

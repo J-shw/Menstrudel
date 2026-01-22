@@ -179,9 +179,6 @@ class AppLocalizationsCs extends AppLocalizations {
   String get other => 'Jiný';
 
   @override
-  String get navBar_insights => 'Statistiky';
-
-  @override
   String get navBar_logs => 'Záznamy';
 
   @override
@@ -194,7 +191,7 @@ class AppLocalizationsCs extends AppLocalizations {
   String get navBar_pill => 'Pilulky';
 
   @override
-  String get navBar_larc => 'LARC';
+  String get navBar_reversibleContraceptive => 'Contraceptives';
 
   @override
   String get navBar_settings => 'Nastavení';
@@ -257,22 +254,22 @@ class AppLocalizationsCs extends AppLocalizations {
   String get pain_unbearable => 'Nesnesitelná';
 
   @override
-  String get larcType_hormonalIud => 'Hormonal IUD';
+  String get reversibleContraceptive_hormonalIud => 'Hormonal IUD';
 
   @override
-  String get larcType_copperIud => 'Copper IUD';
+  String get reversibleContraceptive_copperIud => 'Copper IUD';
 
   @override
-  String get larcType_implant => 'Implantát';
+  String get reversibleContraceptive_implant => 'Implant';
 
   @override
-  String get larcType_injection => 'Injekce';
+  String get reversibleContraceptive_injection => 'Injection';
 
   @override
-  String get larcType_ring => 'Vaginální kroužek';
+  String get reversibleContraceptive_ring => 'Ring';
 
   @override
-  String get larcType_patch => 'Náplast';
+  String get reversibleContraceptive_patch => 'Patch';
 
   @override
   String get sanitaryProduct_tampon => 'Tampon';
@@ -443,11 +440,12 @@ class AppLocalizationsCs extends AppLocalizations {
   String get notification_pillBody => 'Nezapomeňte si dnes vzít pilulky.';
 
   @override
-  String get notification_larcTitle => 'Upomínka LARC';
+  String get notification_reversibleContraceptiveTitle =>
+      'Reversible Contraceptive Reminder';
 
   @override
-  String notification_larcBody(String type, int days) {
-    return '$type má být obnoveno v $days dnech.';
+  String notification_reversibleContraceptiveBody(String type, int days) {
+    return '$type is due for renewal in $days days.';
   }
 
   @override
@@ -510,7 +508,8 @@ class AppLocalizationsCs extends AppLocalizations {
   String get fabToolTip_sexActivity => 'Log sex activity';
 
   @override
-  String get fabToolTip_larc => 'Log LARC';
+  String get fabToolTip_reversibleContraceptive =>
+      'Log Reversible Contraceptive';
 
   @override
   String get mainScreen_logsPageTitle => 'Logs';
@@ -525,7 +524,8 @@ class AppLocalizationsCs extends AppLocalizations {
   String get mainScreen_pillsPageTitle => 'Pilulky';
 
   @override
-  String get mainScreen_LarcsPageTitle => 'LARC';
+  String get mainScreen_reversibleContraceptivesPageTitle =>
+      'Reversible Contraceptives';
 
   @override
   String get mainScreen_settingsPageTitle => 'Nastavení';
@@ -569,29 +569,33 @@ class AppLocalizationsCs extends AppLocalizations {
       'Dnešní pilulka je označena jako přeskočena.';
 
   @override
-  String get larcScreen_noLarcRecordsFound => 'Žádné záznamy o LARC nalezeny.';
+  String get reversibleContraceptiveScreen_noRecordsFound =>
+      'No records found.';
 
   @override
-  String larcScreen_history(int history) {
-    return 'Historie ($history)';
+  String reversibleContraceptiveScreen_history(int history) {
+    return 'History ($history)';
   }
 
   @override
-  String larcScreen_activeLarcs(int activeCount) {
-    return 'Aktivní LARC ($activeCount)';
+  String reversibleContraceptiveScreen_activeReversibleContraceptives(
+    int activeCount,
+  ) {
+    return 'Active Reversible Contraceptives ($activeCount)';
   }
 
   @override
-  String get larcScreen_activeLarcsDescription =>
-      'Aktuálně monitorované záznamy LARC.';
+  String
+  get reversibleContraceptiveScreen_activeReversibleContraceptivesDescription =>
+      'Currently monitored reversible contraceptive entries.';
 
   @override
-  String get larcScreen_noActiveRecords =>
-      'V současné době není aktivní LARC. Prosím přidejte nový záznam.';
+  String get reversibleContraceptiveScreen_noActiveRecords =>
+      'No reversible contraceptive is currently active. Please log a new entry.';
 
   @override
-  String get larcScreen_noHistoryRecords =>
-      'Nebyly nalezeny žádné minulé ani prošlé záznamy LARC.';
+  String get reversibleContraceptiveScreen_noHistoryRecords =>
+      'No past or overdue reversible contraceptive records found.';
 
   @override
   String get sanitaryProductsScreen_noSanitaryProductRecordsFound =>
@@ -744,23 +748,27 @@ class AppLocalizationsCs extends AppLocalizations {
   String get settingsScreen_remindMeAfter => 'Připomenout mi potom';
 
   @override
-  String get settingsScreen_enableLarcTracking => 'Zapnout sledování LARC';
+  String get settingsScreen_enableReversibleContraceptiveTracking =>
+      'Enable Reversible Contraceptive Tracking';
 
   @override
-  String get settingsScreen_larcDescription =>
-      'Sledujte dlouhodobě působící reverzibilní antikoncepci (LARC).';
+  String get settingsScreen_reversibleContraceptiveDescription =>
+      'Track Reversible Contraceptives.';
 
   @override
-  String get settingsScreen_larcType => 'Typ LARC';
+  String get settingsScreen_reversibleContraceptive =>
+      'Reversible Contraceptive Type';
 
   @override
   String get settingsScreen_setDuration => 'Nastavit čas trvání';
 
   @override
-  String get settingsScreen_larcDuration => 'Doba platnosti LARC';
+  String get settingsScreen_reversibleContraceptiveDuration =>
+      'Reversible Contraceptive Replacement Duration';
 
   @override
-  String get settingsScreen_enableLARCReminder => 'Zapnout připomenutí LARC';
+  String get settingsScreen_enableReversibleContraceptiveReminder =>
+      'Enable Reversible Contraceptive Reminder';
 
   @override
   String get settingsScreen_currentDuration => 'Aktuální doba trvání';
@@ -866,23 +874,24 @@ class AppLocalizationsCs extends AppLocalizations {
       'Všechny data o pilulkách byly vyčištěny.';
 
   @override
-  String get settingsScreen_clearAllLarcData => 'Vyčistit všechny data o LARC';
+  String get settingsScreen_clearAllReversibleContraceptiveData =>
+      'Clear All Reversible Contraceptive Data';
 
   @override
-  String get settingsScreen_clearAllLarcDataSubtitle =>
-      'Smaže vaši historii o LARC.';
+  String get settingsScreen_clearAllReversibleContraceptiveDataSubtitle =>
+      'Removes your reversible contraceptives history.';
 
   @override
-  String get settingsScreen_clearAllLarcData_question =>
-      'Vyčistit všechny data o LARC?';
+  String get settingsScreen_clearAllReversibleContraceptiveData_question =>
+      'Clear All Reversible Contraceptive Data?';
 
   @override
-  String get settingsScreen_deleteAllLarcDataDescription =>
-      'Tímto trvale smažete svou historii LARC.';
+  String get settingsScreen_deleteAllReversibleContraceptiveDataDescription =>
+      'This will permanently delete your Reversible Contraceptive history.';
 
   @override
-  String get settingsScreen_allLarcDataCleared =>
-      'Všechny data o LARC byly vyčištěny.';
+  String get settingsScreen_allReversibleContraceptiveDataCleared =>
+      'All Reversible Contraceptive data has been cleared.';
 
   @override
   String get settingsScreen_clearAllSanitaryData =>
@@ -912,7 +921,8 @@ class AppLocalizationsCs extends AppLocalizations {
   String get settingsScreen_exportPillData => 'Exportovat data o pilulkách';
 
   @override
-  String get settingsScreen_exportLarcsData => 'Exportovat data o LARC';
+  String get settingsScreen_exportReversibleContraceptivesData =>
+      'Export Reversible Contraceptives Data';
 
   @override
   String get settingsScreen_exportSanitaryData =>
@@ -952,7 +962,8 @@ class AppLocalizationsCs extends AppLocalizations {
   String get settingsScreen_importPillData => 'Importovat data o pilulkách';
 
   @override
-  String get settingsScreen_importLarcsData => 'Importovat data o LARC';
+  String get settingsScreen_importReversibleContraceptivesData =>
+      'Import Reversible Contraceptives Data';
 
   @override
   String get settingsScreen_importSanitaryData =>
@@ -970,8 +981,8 @@ class AppLocalizationsCs extends AppLocalizations {
       'Opravdu chcete importovat data o pilulkách?';
 
   @override
-  String get settingsScreen_importLarcData_question =>
-      'Opravdu chcete importovat data o LARC?';
+  String get settingsScreen_importReversibleContraceptiveData_question =>
+      'Are you sure you want to import Reversible Contraceptive Data?';
 
   @override
   String get settingsScreen_importSanitaryData_question =>
@@ -986,8 +997,8 @@ class AppLocalizationsCs extends AppLocalizations {
       'Import dat trvale přepíše všechny vaši stávající historii o pilulkách. Tento krok nelze vrátit zpět.';
 
   @override
-  String get settingsScreen_importLarcDataDescription =>
-      'Import dat trvale přepíše všechny vaši stávající historii o LARC. Tento krok nelze vrátit zpět.';
+  String get settingsScreen_importReversibleContraceptiveDataDescription =>
+      'Importing data will permanently overwrite all your existing reversible contraceptive history. This cannot be undone.';
 
   @override
   String get settingsScreen_importSanitaryDataDescription =>
@@ -1235,7 +1246,9 @@ class AppLocalizationsCs extends AppLocalizations {
   String get periodDetailsSheet_flow => 'Tok';
 
   @override
-  String get larcEntrySheet_logLARCDetails => 'Zaznamenat LARC podrobnosti';
+  String
+  get reversibleContraceptiveEntrySheet_logReversibleContraceptiveDetails =>
+      'Log Reversible Contraceptive Details';
 
   @override
   String get sanitaryEntrySheet_logSanitaryProduct =>
