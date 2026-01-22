@@ -257,7 +257,7 @@ class SettingsService extends ChangeNotifier {
     _reversibleContraceptiveNotificationsEnabled = enabled;
     await _prefs.setBool(reversibleContraceptiveNotificationsEnabledKey, enabled);
     if (!enabled) {
-      await NotificationService.cancelReveribleContraceptiveReminder();
+      await NotificationService.cancelReversibleContraceptiveReminder();
     }
     notifyListeners();
   }
