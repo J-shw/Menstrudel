@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:menstrudel/controllers/log_larc_ui_controller.dart';
+import 'package:menstrudel/controllers/log_reversible_contraceptive_ui_controller.dart';
 import 'package:menstrudel/controllers/log_sanitary_ui_controller.dart';
 import 'package:menstrudel/controllers/log_sex_ui_controller.dart';
 import 'package:menstrudel/controllers/log_ui_controller.dart';
@@ -110,7 +110,7 @@ class _MainScreenState extends State<MainScreen> {
       if (isSanitaryNavEnabled) const SanitaryScreen(),
       if (isSexActivityNavEnabled) const SexScreen(),
       if (isPillNavEnabled) const PillsScreen(),
-      if (isReversibleContraceptiveNavEnabled) const LarcScreen(),
+      if (isReversibleContraceptiveNavEnabled) const ReversibleContraceptiveScreen(),
       const SettingsScreen(),
     ];
 
