@@ -18,7 +18,7 @@ class SettingsService extends ChangeNotifier {
   bool _reversibleContraceptiveNavEnabled = kDefaultReversibleContraceptiveNavEnabled;
   bool _sanitaryNavEnabled = kDefaultSanitaryNavEnabled;
   bool _sexActivityNavEnabled = kDefaultSexActivityNavEnabled;
-  ReversibleContraceptiveTypes _larcType = kDefaultReversibleContraceptiveType;
+  ReversibleContraceptiveTypes _reversibleContraceptiveType = kDefaultReversibleContraceptiveType;
   String _languageCode = kDefaultLanguageCode;
   bool _biometricsEnabled = kDefaultBiometricsEnabled;
   bool _notificationsEnabled = kDefaultNotificationsEnabled;
@@ -35,21 +35,21 @@ class SettingsService extends ChangeNotifier {
   AppThemeMode _themeMode = kDefaultThemeMode;
   Set<Symptom> _defaultSymptoms = kDefaultSymptoms;
   Map<ReversibleContraceptiveTypes, int> _reversibleContraceptiveDurations = {};
-  bool _larcNotificationsEnabled = kDefaultLarcNotificationsEnabled;
-  int _larcReminderDays = kDefaultLarcReminderDays;
-  TimeOfDay _larcReminderTime = kDefaultLarcReminderTime;
+  bool _reversibleContraceptiveNotificationsEnabled = kDefaultReversibleContraceptiveNotificationsEnabled;
+  int _reversibleContraceptiveReminderDays = kDefaultReversibleContraceptiveReminderDays;
+  TimeOfDay _reversibleContraceptiveReminderTime = kDefaultReversibleContraceptiveReminderTime;
   String _startingDayOfWeek = kDefaultStartingDayOfWeek;
 
   /// Whether the 'Pill' tab is visible in the main navigation bar.
   bool get isPillNavEnabled => _pillNavEnabled;
-  /// LARCs (Long-Acting Reversible Contraceptives) navigation enabled
+  /// Reversible Contraceptive navigation enabled
   bool get isReversibleContraceptiveNavEnabled => _reversibleContraceptiveNavEnabled;
   /// Sanitary Products navigation enabled
   bool get isSanitaryNavEnabled => _sanitaryNavEnabled;
   /// Sex Activity navigation enabled
   bool get isSexActivityNavEnabled => _sexActivityNavEnabled;
-  /// LARC type selected
-  ReversibleContraceptiveTypes get larcType => _larcType;
+  /// Reversible Contraceptive type selected
+  ReversibleContraceptiveTypes get reversibleContraceptiveType => _reversibleContraceptiveType;
   /// The selected language code for the app (e.g., 'en', 'es', or 'system').
   String get languageCode => _languageCode;
   /// Whether the app requires biometric authentication (e.g., fingerprint, face) on startup.
@@ -84,25 +84,25 @@ class SettingsService extends ChangeNotifier {
     }
     return type.defaultDurationDays; 
   }
-  /// If LARC notifications are enabled
-  bool get larcNotificationsEnabled => _larcNotificationsEnabled;
-  /// The amount of days before LARC renew date notificaiton shuold be sent
-  int get larcReminderDays => _larcReminderDays;
-  /// The time of day the LARC renew notification should be sent
-  TimeOfDay get larcReminderTime => _larcReminderTime;
+  /// If reversible contraceptive notifications are enabled
+  bool get reversibleContraceptiveNotificationsEnabled => _reversibleContraceptiveNotificationsEnabled;
+  /// The amount of days before reversible contraceptive renew date notificaiton shuold be sent
+  int get reversibleContraceptiveReminderDays => _reversibleContraceptiveReminderDays;
+  /// The time of day the reversible contraceptive renew notification should be sent
+  TimeOfDay get reversibleContraceptiveReminderTime => _reversibleContraceptiveReminderTime;
   /// Whether the logging reminder is enabled
   bool get isLoggingReminderNotificationEnabled => _loggingReminder;
   /// The time of day the logging reminder should be sent
   TimeOfDay get loggingReminderTime => _loggingReminderTime;
   /// The starting day of the week for calendars
   String get startingDayOfWeek => _startingDayOfWeek;
-  /// Returns true if user is on natural cycle (Not using pill or affecting LARC).
+  /// Returns true if user is on natural cycle (Not using pill or affecting reversible contraceptive).
   bool get isNaturalCycle {
     if (_pillNavEnabled) return false;
     
     if (_reversibleContraceptiveNavEnabled) {
       // Only the Copper IUD allows for a natural hormonal cycle.
-      return _larcType == ReversibleContraceptiveTypes.copperIud;
+      return _reversibleContraceptiveType == ReversibleContraceptiveTypes.copperIud;
     }
     return true;
   }
@@ -148,17 +148,17 @@ class SettingsService extends ChangeNotifier {
     }
 
     try {
-      final String? larcTypeString = _prefs.getString(reversibleContraceptiveTypeKey);
-      _larcType = ReversibleContraceptiveTypes.values.firstWhere(
-        (e) => e.name == larcTypeString,
+      final String? reversibleContraceptiveTypeString = _prefs.getString(reversibleContraceptiveTypeKey);
+      _reversibleContraceptiveType = ReversibleContraceptiveTypes.values.firstWhere(
+        (e) => e.name == reversibleContraceptiveTypeString,
       );
     } catch (e) {
-      debugPrint('Corrupt saved LARC type. Resetting to default.');
-      _larcType = kDefaultReversibleContraceptiveType;
+      debugPrint('Corrupt saved reversible contraceptive type. Resetting to default.');
+      _reversibleContraceptiveType = kDefaultReversibleContraceptiveType;
     }
-    _larcNotificationsEnabled = _prefs.getBool(reversibleContraceptiveNotificationsEnabledKey) ?? true;
-    _larcReminderDays = _prefs.getInt(reversibleContraceptiveNotificationDaysKey) ?? 30;
-    _larcReminderTime = _loadTimeOfDay(reversibleContraceptiveNotificationTimeKey, 9, 0);
+    _reversibleContraceptiveNotificationsEnabled = _prefs.getBool(reversibleContraceptiveNotificationsEnabledKey) ?? true;
+    _reversibleContraceptiveReminderDays = _prefs.getInt(reversibleContraceptiveNotificationDaysKey) ?? 30;
+    _reversibleContraceptiveReminderTime = _loadTimeOfDay(reversibleContraceptiveNotificationTimeKey, 9, 0);
 
     notifyListeners();
   }
@@ -237,13 +237,13 @@ class SettingsService extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> setLarcType(ReversibleContraceptiveTypes type) async {
-    _larcType = type;
+  Future<void> setReversibleContraceptiveType(ReversibleContraceptiveTypes type) async {
+    _reversibleContraceptiveType = type;
     await _prefs.setString(reversibleContraceptiveTypeKey, type.name);
     notifyListeners();
   }
 
-  Future<void> setLarcDurationForType(ReversibleContraceptiveTypes type, int durationDays) async {
+  Future<void> setReversibleContraceptiveDurationForType(ReversibleContraceptiveTypes type, int durationDays) async {
     _reversibleContraceptiveDurations[type] = durationDays;
     final Map<String, int> mapForStorage = _reversibleContraceptiveDurations.map(
       (key, value) => MapEntry(key.name, value),
@@ -253,8 +253,8 @@ class SettingsService extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> setLarcNotificationsEnabled(bool enabled) async {
-    _larcNotificationsEnabled = enabled;
+  Future<void> setReversibleContraceptiveNotificationsEnabled(bool enabled) async {
+    _reversibleContraceptiveNotificationsEnabled = enabled;
     await _prefs.setBool(reversibleContraceptiveNotificationsEnabledKey, enabled);
     if (!enabled) {
       await NotificationService.cancelReveribleContraceptiveReminder();
@@ -262,14 +262,14 @@ class SettingsService extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> setLarcReminderDays(int days) async {
-    _larcReminderDays = days;
+  Future<void> setReversibleContraceptiveReminderDays(int days) async {
+    _reversibleContraceptiveReminderDays = days;
     await _prefs.setInt(reversibleContraceptiveNotificationDaysKey, days);
     notifyListeners();
   }
 
-  Future<void> setLarcReminderTime(TimeOfDay time) async {
-    _larcReminderTime = time;
+  Future<void> setReversibleContraceptiveReminderTime(TimeOfDay time) async {
+    _reversibleContraceptiveReminderTime = time;
     final String formattedTime = '${time.hour}:${time.minute}';
     await _prefs.setString(reversibleContraceptiveNotificationTimeKey, formattedTime);
     notifyListeners();
