@@ -753,19 +753,18 @@ class AppLocalizationsEs extends AppLocalizations {
       'Track Reversible Contraceptives.';
 
   @override
-  String get settingsScreen_reversibleContraceptiveType =>
-      'Reversible Contraceptive Type';
+  String get settingsScreen_reversibleContraceptiveType => 'Contraceptive Type';
 
   @override
   String get settingsScreen_setDuration => 'Set Duration';
 
   @override
   String get settingsScreen_reversibleContraceptiveDuration =>
-      'Reversible Contraceptive Replacement Duration';
+      'Contraceptive Replacement Duration';
 
   @override
   String get settingsScreen_enableReversibleContraceptiveReminder =>
-      'Enable Reversible Contraceptive Reminder';
+      'Enable Contraceptive Reminder';
 
   @override
   String get settingsScreen_currentDuration => 'Current Duration';

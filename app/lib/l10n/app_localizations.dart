@@ -1384,7 +1384,7 @@ abstract class AppLocalizations {
   /// No description provided for @settingsScreen_reversibleContraceptiveType.
   ///
   /// In en, this message translates to:
-  /// **'Reversible Contraceptive Type'**
+  /// **'Contraceptive Type'**
   String get settingsScreen_reversibleContraceptiveType;
 
   /// No description provided for @settingsScreen_setDuration.
@@ -1396,13 +1396,13 @@ abstract class AppLocalizations {
   /// No description provided for @settingsScreen_reversibleContraceptiveDuration.
   ///
   /// In en, this message translates to:
-  /// **'Reversible Contraceptive Replacement Duration'**
+  /// **'Contraceptive Replacement Duration'**
   String get settingsScreen_reversibleContraceptiveDuration;
 
   /// No description provided for @settingsScreen_enableReversibleContraceptiveReminder.
   ///
   /// In en, this message translates to:
-  /// **'Enable Reversible Contraceptive Reminder'**
+  /// **'Enable Contraceptive Reminder'**
   String get settingsScreen_enableReversibleContraceptiveReminder;
 
   /// No description provided for @settingsScreen_currentDuration.
