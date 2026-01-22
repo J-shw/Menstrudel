@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
-import 'package:menstrudel/models/birth_control/larcs/reversible_contraceptive_types_enum.dart';
+import 'package:menstrudel/models/birth_control/reversible_contraceptives/reversible_contraceptive_types_enum.dart';
 import 'package:provider/provider.dart';
 import 'package:menstrudel/services/settings_service.dart';
 
