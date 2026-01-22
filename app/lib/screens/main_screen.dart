@@ -13,7 +13,7 @@ import 'package:menstrudel/widgets/main/app_bar.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/services/settings_service.dart';
 import 'package:provider/provider.dart';
-import 'package:menstrudel/screens/dashboards/larc_screen.dart';
+import 'package:menstrudel/screens/dashboards/reversible_contraceptive/reversible_contraceptive_screen.dart';
 
 enum FabState {
   logPeriod,
@@ -81,14 +81,14 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 
-  /// Builds LARC screen FAB
-  Widget _buildLARCFab(BuildContext context) {
+  /// Builds Reversible contraceptive screen FAB
+  Widget _buildReversibleContraceptiveFab(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return FloatingActionButton(
-      key: const ValueKey('log_larc_fab'),
+      key: const ValueKey('log_reversible_contraceptive_fab'),
       tooltip: l10n.fabToolTip_larc,
       onPressed: () {
-        context.read<LogLarcUIController>().handleCreateNewLarcLog(context: context);
+        context.read<LogReversibleContraceptiveUIController>().handleCreateNewReversibleContraceptiveLog(context: context);
       },
       child: const Icon(Icons.add),
     );
@@ -100,7 +100,7 @@ class _MainScreenState extends State<MainScreen> {
     final settingsService = context.watch<SettingsService>();
 
     final bool isPillNavEnabled = settingsService.isPillNavEnabled;
-    final bool isLarcNavEnabled = settingsService.isLarcNavEnabled;
+    final bool isReversibleContraceptiveNavEnabled = settingsService.isReversibleContraceptiveNavEnabled;
     final bool isSanitaryNavEnabled = settingsService.isSanitaryNavEnabled;
     final bool isSexActivityNavEnabled = settingsService.isSexActivityNavEnabled;
       
@@ -110,7 +110,7 @@ class _MainScreenState extends State<MainScreen> {
       if (isSanitaryNavEnabled) const SanitaryScreen(),
       if (isSexActivityNavEnabled) const SexScreen(),
       if (isPillNavEnabled) const PillsScreen(),
-      if (isLarcNavEnabled) const LarcScreen(),
+      if (isReversibleContraceptiveNavEnabled) const LarcScreen(),
       const SettingsScreen(),
     ];
 
@@ -123,7 +123,7 @@ class _MainScreenState extends State<MainScreen> {
         TopAppBar(titleText: l10n.mainSceen_sexActivityPageTitle),
       if (isPillNavEnabled)
         TopAppBar(titleText: l10n.mainScreen_pillsPageTitle),
-      if (isLarcNavEnabled)
+      if (isReversibleContraceptiveNavEnabled)
         TopAppBar(titleText: l10n.mainScreen_LarcsPageTitle),
       TopAppBar(titleText: l10n.mainScreen_settingsPageTitle),
     ];
@@ -133,7 +133,7 @@ class _MainScreenState extends State<MainScreen> {
       if (isSanitaryNavEnabled) _buildSanitaryFab(context),
       if (isSexActivityNavEnabled) _buildSexFab(context),
       if (isPillNavEnabled) null,
-      if (isLarcNavEnabled) _buildLARCFab(context),
+      if (isReversibleContraceptiveNavEnabled) _buildReversibleContraceptiveFab(context),
       null,
     ];
 
