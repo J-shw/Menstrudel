@@ -79,12 +79,11 @@
     "flow": "Flux /",
     "type": "Écrire",
     "other": "Other",
-    "navBar_insights": "Statistiques",
     "navBar_logs": "Suivis",
     "navBar_sanitary": "Sanitaire",
     "navBar_sexActivity": "Sex Activity",
     "navBar_pill": "Pilule",
-    "navBar_larc": "LARC",
+    "navBar_reversibleContraceptive": "Contraceptives",
     "navBar_settings": "Paramètres",
     "flowIntensity_none": "Aucun",
     "flowIntensity_spotting": "Saignement léger",
@@ -105,11 +104,12 @@
     "painLevel_moderate": "Modérée",
     "painLevel_severe": "Forte",
     "pain_unbearable": "Insupportable",
-    "larcType_iud": "Stérilet",
-    "larcType_implant": "Implant",
-    "larcType_injection": "Injection",
-    "larcType_ring": "Anneau",
-    "larcType_patch": "Patch",
+    "reversibleContraceptive_hormonalIud": "Hormonal IUD",
+    "reversibleContraceptive_copperIud": "Copper IUD",
+    "reversibleContraceptive_implant": "Implant",
+    "reversibleContraceptive_injection": "Injection",
+    "reversibleContraceptive_ring": "Ring",
+    "reversibleContraceptive_patch": "Patch",
     "sanitaryProduct_tampon": "Tampon",
     "sanitaryProduct_pad": "Serviette hygiénique",
     "sanitaryProduct_menstrualCup": "Coupe menstruelle",
@@ -155,11 +155,13 @@
     "cyclePhase_follicular": "Pre-Ovulation",
     "cyclePhase_ovulation": "Peak Fertility",
     "cyclePhase_luteal": "Post-Ovulation",
+    "cyclePhase_late": "Late",
     "cyclePhase_unknown": "Unknown",
     "cyclePhase_menstruationDescription": "Your period is active and the uterine lining is being shed.",
     "cyclePhase_follicularDescription": "Estrogen is rising to prepare the egg; your energy levels may be increasing.",
     "cyclePhase_ovulationDescription": "An egg has been released. This is your most fertile time.",
     "cyclePhase_lutealDescription": "Progesterone is dominant. Monitor for PMS symptoms as you approach your next period.",
+    "cyclePhase_lateDescription": "Your period is late.",
     "cyclePhase_unknownDescription": "We need more data to accurately predict your cycle phase.",
     "error_valueMustbePositive": "La valeur doit être supérieure à zéro",
     "error_valueCannotBeNull": "La valeur ne peut pas être vide",
@@ -197,13 +199,13 @@
     "@notification_pillBody": {
         "description": "Body for the daily pill reminder notification."
     },
-    "notification_larcTitle": "Rappel de LARC",
-    "@notification_larcTitle": {
-        "description": "Title for the LARC reminder notification."
+    "notification_reversibleContraceptiveTitle": "Reversible Contraceptive Reminder",
+    "@notification_reversibleContraceptiveTitle": {
+        "description": "Title for the Reversible Contraceptive reminder notification."
     },
-    "notification_larcBody": "{type} is due for renewal in {days} days.",
-    "@notification_larcBody": {
-        "description": "The body of the LARC reminder notification, indicating the type of LARC and how many days until renewal.",
+    "notification_reversibleContraceptiveBody": "{type} is due for renewal in {days} days.",
+    "@notification_reversibleContraceptiveBody": {
+        "description": "The body of the Reversible Contraceptive reminder notification, indicating the type of Reversible Contraceptive and how many days until renewal.",
         "placeholders": {
             "type": {
                 "type": "String",
@@ -282,15 +284,15 @@
     "@fabToolTip_sexActivity": {
         "description": "Used for the sex activity screen fab button as a tooltip."
     },
-    "fabToolTip_larc": "Log LARC",
-    "@fabToolTip_larc": {
-        "description": "Used for the LARC screen fab button as a tooltip."
+    "fabToolTip_reversibleContraceptive": "Log Reversible Contraceptive",
+    "@fabToolTip_reversibleContraceptive": {
+        "description": "Used for the Reversible Contraceptive screen fab button as a tooltip."
     },
     "mainScreen_logsPageTitle": "Logs",
     "mainSceen_sexActivityPageTitle": "Sex Activity",
     "mainScreen_sanitaryPageTitle": "Produits hygiéniques",
     "mainScreen_pillsPageTitle": "Pilules",
-    "mainScreen_LarcsPageTitle": "LARCs",
+    "mainScreen_reversibleContraceptivesPageTitle": "Reversible Contraceptives",
     "mainScreen_settingsPageTitle": "Paramètres",
     "insightsScreen_errorPrefix": "Erreur:",
     "insightsScreen_noDataAvailable": "Aucune donnée disponible.",
@@ -309,10 +311,10 @@
     },
     "pillScreen_pillForTodayMarkedAsTaken": "Pilule du jour marquée comme prise.",
     "pillScreen_pillForTodayMarkedAsSkipped": "Pilule du jour marquée comme sautée.",
-    "larcScreen_noLarcRecordsFound": "Aucun enregistrement LARC n'a été trouvé.",
-    "larcScreen_history": "Historique ({history})",
-    "@larcScreen_history": {
-        "description": "The total LARC history count.",
+    "reversibleContraceptiveScreen_noRecordsFound": "No records found.",
+    "reversibleContraceptiveScreen_history": "History ({history})",
+    "@reversibleContraceptiveScreen_history": {
+        "description": "The total Reversible Contraceptive history count.",
         "placeholders": {
             "history": {
                 "type": "int",
@@ -320,9 +322,9 @@
             }
         }
     },
-    "larcScreen_activeLarcs": "LARCs actives ({activeCount})",
-    "@larcScreen_activeLarcs": {
-        "description": "The total active LARC count.",
+    "reversibleContraceptiveScreen_activeReversibleContraceptives": "Active ({activeCount})",
+    "@reversibleContraceptiveScreen_activeReversibleContraceptives": {
+        "description": "The total active Reversible Contraceptive count.",
         "placeholders": {
             "activeCount": {
                 "type": "int",
@@ -330,9 +332,9 @@
             }
         }
     },
-    "larcScreen_activeLarcsDescription": "Currently monitored LARC entries.",
-    "larcScreen_noActiveRecords": "Aucune LARC n'est actuellement active. Merci d'enregistrer une nouvelle entrée.",
-    "larcScreen_noHistoryRecords": "Aucune LARC passée ou en retard n'a été trouvée.",
+    "reversibleContraceptiveScreen_activeReversibleContraceptivesDescription": "Currently monitored reversible contraceptive entries.",
+    "reversibleContraceptiveScreen_noActiveRecords": "No reversible contraceptive is currently active. Please log a new entry.",
+    "reversibleContraceptiveScreen_noHistoryRecords": "No past or overdue reversible contraceptive records found.",
     "sanitaryProductsScreen_noSanitaryProductRecordsFound": "Aucun enregistrement de produit hygiénique n'a été trouvé.",
     "sanitaryProductsScreen_history": "Historique ({history})",
     "@sanitaryProductsScreen_history": {
@@ -418,12 +420,12 @@
     "settingsScreen_notificationTime": "Heure de la notification",
     "settingsScreen_overduePeriodReminder": "Alerte de retard de règles",
     "settingsScreen_remindMeAfter": "Me rappeler après",
-    "settingsScreen_enableLarcTracking": "Activer le suivi de LARC",
-    "settingsScreen_larcDescription": "Suivre des contraceptifs réversibles à action prolongée (LARCs).",
-    "settingsScreen_larcType": "Type de LARC",
+    "settingsScreen_enableReversibleContraceptiveTracking": "Enable Reversible Contraceptive Tracking",
+    "settingsScreen_reversibleContraceptiveDescription": "Track Reversible Contraceptives.",
+    "settingsScreen_reversibleContraceptiveType": "Contraceptive Type",
     "settingsScreen_setDuration": "Déterminer une durée",
-    "settingsScreen_larcDuration": "Durée de remplacement de la LARC",
-    "settingsScreen_enableLARCReminder": "Activer le rappel pour la LARC",
+    "settingsScreen_reversibleContraceptiveDuration": "Contraceptive Replacement Duration",
+    "settingsScreen_enableReversibleContraceptiveReminder": "Enable Contraceptive Reminder",
     "settingsScreen_currentDuration": "Durée actuelle",
     "settingsScreen_durationInDays": "Durée (Jours)",
     "settingsScreen_LoggingScreen": "Suivi",
@@ -477,11 +479,11 @@
     "settingsScreen_clearAllPillData_question": "Effacer toutes les données de la pilule ?",
     "settingsScreen_deleteAllPillDataDescription": "Cela supprimera définitivement votre prise de pilules, vos rappels et votre historique de prise. Cette action est irréversible.",
     "settingsScreen_allPillDataCleared": "Toutes les données sur les pilules ont été effacé.",
-    "settingsScreen_clearAllLarcData": "Clear All LARC Data",
-    "settingsScreen_clearAllLarcDataSubtitle": "Removes your LARCs history.",
-    "settingsScreen_clearAllLarcData_question": "Clear All LARC Data?",
-    "settingsScreen_deleteAllLarcDataDescription": "This will permanently delete your LARC history.",
-    "settingsScreen_allLarcDataCleared": "All LARC data has been cleared.",
+    "settingsScreen_clearAllReversibleContraceptiveData": "Clear All Reversible Contraceptive Data",
+    "settingsScreen_clearAllReversibleContraceptiveDataSubtitle": "Removes your reversible contraceptives history.",
+    "settingsScreen_clearAllReversibleContraceptiveData_question": "Clear All Reversible Contraceptive Data?",
+    "settingsScreen_deleteAllReversibleContraceptiveDataDescription": "This will permanently delete your Reversible Contraceptive history.",
+    "settingsScreen_allReversibleContraceptiveDataCleared": "All Reversible Contraceptive data has been cleared.",
     "settingsScreen_clearAllSanitaryData": "Clear All Sanitary Products Data",
     "settingsScreen_clearAllSanitaryDataSubtitle": "Removes your sanitary products history.",
     "settingsScreen_clearAllSanitaryData_question": "Clear All Sanitary Products Data?",
@@ -489,7 +491,7 @@
     "settingsScreen_allSanitaryDataCleared": "All sanitary products data has been cleared.",
     "settingsScreen_exportPeriodData": "Exporter les donnés de vos périodes",
     "settingsScreen_exportPillData": "Exporter données de vos pilules",
-    "settingsScreen_exportLarcsData": "Exporter les données de LARCs",
+    "settingsScreen_exportReversibleContraceptivesData": "Export Reversible Contraceptives Data",
     "settingsScreen_exportSanitaryData": "Export Sanitary Products Data",
     "settingsScreen_exportDataSubtitle": "Créer un fichier de sauvegarde JSON.",
     "settingsScreen_exportSuccessful": "Données exportées avec succès.",
@@ -500,16 +502,16 @@
     "settingsScreen_importDataTitle": "Importation Des Données",
     "settingsScreen_importPeriodData": "Importer Les Données Des Périodes",
     "settingsScreen_importPillData": "Importer Les Données Des Pilules",
-    "settingsScreen_importLarcsData": "Importer les données de LARCs",
+    "settingsScreen_importReversibleContraceptivesData": "Import Reversible Contraceptives Data",
     "settingsScreen_importSanitaryData": "Import Sanitary Products Data",
     "settingsScreen_importDataSubtitle": "Écraser les données existantes.",
     "settingsScreen_importPeriodData_question": "Êtes-vous sûr de vouloir importer des données de période ?",
     "settingsScreen_importPillData_question": "Êtes-vous sûr de vouloir importer les données de la pilule ?",
-    "settingsScreen_importLarcData_question": "Êtes-vous sûre de vouloir importer les données de LARC ?",
+    "settingsScreen_importReversibleContraceptiveData_question": "Are you sure you want to import Reversible Contraceptive Data?",
     "settingsScreen_importSanitaryData_question": "Are you sure you want to import Sanitary Products Data?",
     "settingsScreen_importPeriodDataDescription": "L'importation de données écrasera définitivement tout votre historique et paramètres de règles existants. Cette opération est irréversible.",
     "settingsScreen_importPillDataDescription": "L'importation de données écrasera définitivement tout votre historique de pilules. Cette opération est irréversible.",
-    "settingsScreen_importLarcDataDescription": "Importer des données va écraser votre historique LARC complet. Ceci est irréversible.",
+    "settingsScreen_importReversibleContraceptiveDataDescription": "Importing data will permanently overwrite all your existing reversible contraceptive history. This cannot be undone.",
     "settingsScreen_importSanitaryDataDescription": "Importing data will permanently overwrite all your existing sanitary product history. This cannot be undone.",
     "settingsScreen_importSuccessful": "Données importées avec succès !",
     "settingsScreen_importFailed": "Échec de l'importation des données. Veuillez réessayer.",
@@ -610,7 +612,7 @@
     "symptomEntrySheet_symptomsOptional": "Symptômes (Optionnel)",
     "periodDetailsSheet_symptoms": "Symptômes",
     "periodDetailsSheet_flow": "Flux",
-    "larcEntrySheet_logLARCDetails": "Enregistrer les détails de LARC",
+    "reversibleContraceptiveEntrySheet_logReversibleContraceptiveDetails": "Log Contraceptive Details",
     "sanitaryEntrySheet_logSanitaryProduct": "Log Sanitary Product",
     "sanitaryEntrySheet_setReminderDuration": "Définir la durée du rappel",
     "sanitaryEntrySheet_maxDuration": "Durée maximale: {hours} heures",
