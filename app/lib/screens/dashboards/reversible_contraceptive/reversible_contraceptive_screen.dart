@@ -3,26 +3,26 @@ import 'package:intl/intl.dart';
 import 'dart:async';
 import 'package:provider/provider.dart';
 import 'package:menstrudel/database/repositories/reversible_contraceptive_repository.dart';
+import 'package:menstrudel/screens/dashboards/reversible_contraceptive/widgets/reversible_contraceptive_log_card.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/models/birth_control/reversible_contraceptives/reversible_contraceptive_log_entry.dart';
 import 'package:menstrudel/services/notification_service.dart';
 import 'package:menstrudel/services/settings_service.dart';
-import 'package:menstrudel/widgets/larcs/screen/reversible_contraceptive_log_card.dart';
 import 'package:menstrudel/controllers/log_larc_ui_controller.dart';
 import 'package:timezone/timezone.dart' as tz;
 
-class LarcScreen extends StatefulWidget {
-  const LarcScreen({super.key});
+class ReversibleContraceptiveScreen extends StatefulWidget {
+  const ReversibleContraceptiveScreen({super.key});
 
   @override
-  State<LarcScreen> createState() => _LarcScreenState();
+  State<ReversibleContraceptiveScreen> createState() => _ReversibleContraceptiveScreenState();
 }
 
-class _LarcScreenState extends State<LarcScreen> {
-  List<LarcLogEntry> _loggedLarcs = [];
+class _ReversibleContraceptiveScreenState extends State<ReversibleContraceptiveScreen> {
+  List<ReversibleContraceptiveLogEntry> _loggedReversibleContraceptives = [];
   bool _isLoading = true;
-  final larcRepo = LarcRepository();
-  LogLarcUIController? _controller;
+  final reversibleContraceptiveRepo = ReversibleContraceptiveRepository();
+  LogReversibleContraceptiveUIController? _controller;
 
   @override
   void initState() {
@@ -33,7 +33,7 @@ class _LarcScreenState extends State<LarcScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final newController = context.read<LogLarcUIController>();
+    final newController = context.read<LogReversibleContraceptiveUIController>();
     if (_controller != newController) {
       _controller?.removeListener(_loadHistory);
       _controller = newController;
@@ -49,24 +49,24 @@ class _LarcScreenState extends State<LarcScreen> {
 
   Future<void> _loadHistory() async {
     if (!mounted) return;
-    if (_loggedLarcs.isEmpty) {
+    if (_loggedReversibleContraceptives.isEmpty) {
       setState(() { _isLoading = true; });
     }
 
-    final loadedEntries = await larcRepo.getAllLogs();
+    final loadedEntries = await reversibleContraceptiveRepo.getAllLogs();
     
     if (!mounted) return;
     setState(() {
-      _loggedLarcs = loadedEntries;
+      _loggedReversibleContraceptives = loadedEntries;
       _isLoading = false;
     });
 
-    await setLarcReminders();
+    await setReversibleContraceptiveReminders();
   }
 
-  Map<String, dynamic> _calculateLarcStatus(LarcLogEntry entry) {
+  Map<String, dynamic> _calculateReversibleContraceptiveStatus(ReversibleContraceptiveLogEntry entry) {
     final settingsService = context.read<SettingsService>();
-    final durationDays = settingsService.getLarcDurationDays(entry.type);
+    final durationDays = settingsService.getReversibleContraceptiveDurationDays(entry.type);
     DateTime nextDueDate = entry.date.add(Duration(days: durationDays));
     return {
       'nextDueDate': nextDueDate,
@@ -77,39 +77,39 @@ class _LarcScreenState extends State<LarcScreen> {
     };
   }
 
-  Future<void> setLarcReminders() async {
+  Future<void> setReversibleContraceptiveReminders() async {
     final settingsService = context.read<SettingsService>();
     final l10n = AppLocalizations.of(context)!;
-    final List<Map<String, dynamic>> allStatuses = _loggedLarcs
-        .map((entry) => _calculateLarcStatus(entry)..['entry'] = entry)
+    final List<Map<String, dynamic>> allStatuses = _loggedReversibleContraceptives
+        .map((entry) => _calculateReversibleContraceptiveStatus(entry)..['entry'] = entry)
         .toList();
 
-    final activeLarcs = allStatuses.where((status) => status['isActive'] == true).toList();
-    if (activeLarcs.isEmpty) {
-      await NotificationService.cancelLarcReminder();
+    final activeReversibleContraceptives = allStatuses.where((status) => status['isActive'] == true).toList();
+    if (activeReversibleContraceptives.isEmpty) {
+      await NotificationService.cancelReversibleContraceptiveReminder();
       return;
     }
 
-    activeLarcs.sort((a, b) => a['nextDueDate'].compareTo(b['nextDueDate']));
-    final nextDueStatus = activeLarcs.first;
+    activeReversibleContraceptives.sort((a, b) => a['nextDueDate'].compareTo(b['nextDueDate']));
+    final nextDueStatus = activeReversibleContraceptives.first;
     final nextDueDate = nextDueStatus['nextDueDate'] as DateTime;
-    final nextLarcType = (nextDueStatus['entry'] as LarcLogEntry).type;
+    final nextReversibleContraceptiveType = (nextDueStatus['entry'] as ReversibleContraceptiveLogEntry).type;
 
     final scheduledTime = tz.TZDateTime.from(
       DateTime(nextDueDate.year, nextDueDate.month, nextDueDate.day,
-          settingsService.larcReminderTime.hour, settingsService.larcReminderTime.minute),
+          settingsService.reversibleContraceptiveReminderTime.hour, settingsService.reversibleContraceptiveReminderTime.minute),
       tz.local,
-    ).subtract(Duration(days: settingsService.larcReminderDays));
+    ).subtract(Duration(days: settingsService.reversibleContraceptiveReminderDays));
 
     if (scheduledTime.isBefore(DateTime.now())) {
-      await NotificationService.cancelLarcReminder();
+      await NotificationService.cancelReversibleContraceptiveReminder();
       return;
     }
 
-    await NotificationService.scheduleLarcReminder(
+    await NotificationService.scheduleReversibleContraceptiveReminder(
       reminderDateTime: scheduledTime,
       title: l10n.notification_larcTitle,
-      body: l10n.notification_larcBody(nextLarcType.getDisplayName(l10n), settingsService.larcReminderDays),
+      body: l10n.notification_larcBody(nextReversibleContraceptiveType.getDisplayName(l10n), settingsService.reversibleContraceptiveReminderDays),
     );
   }
 
@@ -117,49 +117,49 @@ class _LarcScreenState extends State<LarcScreen> {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final l10n = AppLocalizations.of(context)!;
-    final controller = context.read<LogLarcUIController>();
+    final controller = context.read<LogReversibleContraceptiveUIController>();
 
     if (_isLoading) return const Center(child: CircularProgressIndicator());
 
-    _loggedLarcs.sort((a, b) => b.date.compareTo(a.date));
-    final List<Map<String, dynamic>> allStatuses = _loggedLarcs
-        .map((entry) => _calculateLarcStatus(entry)..['entry'] = entry)
+    _loggedReversibleContraceptives.sort((a, b) => b.date.compareTo(a.date));
+    final List<Map<String, dynamic>> allStatuses = _loggedReversibleContraceptives
+        .map((entry) => _calculateReversibleContraceptiveStatus(entry)..['entry'] = entry)
         .toList();
     
-    final activeLarcs = allStatuses.where((s) => s['isActive']).toList();
-    final historyLarcs = allStatuses.where((s) => !s['isActive']).toList();
+    final activeReversibleContraceptives = allStatuses.where((s) => s['isActive']).toList();
+    final historyReversibleContraceptives = allStatuses.where((s) => !s['isActive']).toList();
 
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildHeader(l10n.larcScreen_activeLarcs(activeLarcs.length), colorScheme),
+          _buildHeader(l10n.larcScreen_activeLarcs(activeReversibleContraceptives.length), colorScheme),
           const SizedBox(height: 12),
-          if (activeLarcs.isEmpty)
+          if (activeReversibleContraceptives.isEmpty)
             _buildNoRecordsText(l10n.larcScreen_noActiveRecords, colorScheme)
           else
-            ...activeLarcs.map((s) => LarcLogCard(
+            ...activeReversibleContraceptives.map((s) => ReversibleContraceptiveLogCard(
                   entry: s['entry'],
                   l10n: l10n,
                   injectionDate: s['injectionDate'],
                   dueDateString: s['dueDateString'],
                   isOverdue: s['isOverdue'],
-                  onTap: () => controller.handleEditLarcLog(context: context, entry: s['entry']),
+                  onTap: () => controller.handleEditReversibleContraceptiveLog(context: context, entry: s['entry']),
                 )),
           const SizedBox(height: 32),
-          _buildHeader(l10n.larcScreen_history(historyLarcs.length), colorScheme),
+          _buildHeader(l10n.larcScreen_history(historyReversibleContraceptives.length), colorScheme),
           const SizedBox(height: 12),
-          if (historyLarcs.isEmpty)
+          if (historyReversibleContraceptives.isEmpty)
             _buildNoRecordsText(l10n.larcScreen_noHistoryRecords, colorScheme)
           else
-            ...historyLarcs.map((s) => LarcLogCard(
+            ...historyReversibleContraceptives.map((s) => ReversibleContraceptiveLogCard(
                   entry: s['entry'],
                   l10n: l10n,
                   injectionDate: s['injectionDate'],
                   dueDateString: s['dueDateString'],
                   isOverdue: s['isOverdue'],
-                  onTap: () => controller.handleEditLarcLog(context: context, entry: s['entry']),
+                  onTap: () => controller.handleEditReversibleContraceptiveLog(context: context, entry: s['entry']),
                 )),
         ],
       ),
