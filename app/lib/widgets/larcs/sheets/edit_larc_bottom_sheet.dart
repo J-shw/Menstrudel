@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
-import 'package:menstrudel/models/birth_control/larcs/larc_log_entry.dart';
+import 'package:menstrudel/models/birth_control/reversible_contraceptives/reversible_contraceptive_log_entry.dart';
 
-typedef LarcUpdateCallback = void Function(LarcLogEntry updatedEntry);
+typedef ReversibleContraceptiveUpdateCallback = void Function(ReversibleContraceptiveLogEntry updatedEntry);
 
-class EditLarcLogBottomSheet extends StatefulWidget {
-  final LarcLogEntry log;
-  final LarcUpdateCallback onSave;
+class EditReversibleContraceptiveLogBottomSheet extends StatefulWidget {
+  final ReversibleContraceptiveLogEntry log;
+  final ReversibleContraceptiveUpdateCallback onSave;
   final VoidCallback onDelete;
 
-  const EditLarcLogBottomSheet({
+  const EditReversibleContraceptiveLogBottomSheet({
     super.key,
     required this.log,
     required this.onSave,
@@ -18,10 +18,10 @@ class EditLarcLogBottomSheet extends StatefulWidget {
   });
 
   @override
-  State<EditLarcLogBottomSheet> createState() => _EditLarcLogBottomSheetState();
+  State<EditReversibleContraceptiveLogBottomSheet> createState() => _EditReversibleContraceptiveLogBottomSheetState();
 }
 
-class _EditLarcLogBottomSheetState extends State<EditLarcLogBottomSheet> {
+class _EditReversibleContraceptiveLogBottomSheetState extends State<EditReversibleContraceptiveLogBottomSheet> {
   late DateTime _selectedDate;
   late TextEditingController _noteController;
   bool _isEditing = false;
