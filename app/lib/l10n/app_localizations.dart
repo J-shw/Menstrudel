@@ -1087,7 +1087,7 @@ abstract class AppLocalizations {
   /// The total active Reversible Contraceptive count.
   ///
   /// In en, this message translates to:
-  /// **'Active Reversible Contraceptives ({activeCount})'**
+  /// **'Active ({activeCount})'**
   String reversibleContraceptiveScreen_activeReversibleContraceptives(
     int activeCount,
   );
@@ -1381,11 +1381,11 @@ abstract class AppLocalizations {
   /// **'Track Reversible Contraceptives.'**
   String get settingsScreen_reversibleContraceptiveDescription;
 
-  /// No description provided for @settingsScreen_reversibleContraceptive.
+  /// No description provided for @settingsScreen_reversibleContraceptiveType.
   ///
   /// In en, this message translates to:
   /// **'Reversible Contraceptive Type'**
-  String get settingsScreen_reversibleContraceptive;
+  String get settingsScreen_reversibleContraceptiveType;
 
   /// No description provided for @settingsScreen_setDuration.
   ///
@@ -2167,7 +2167,7 @@ abstract class AppLocalizations {
   /// No description provided for @reversibleContraceptiveEntrySheet_logReversibleContraceptiveDetails.
   ///
   /// In en, this message translates to:
-  /// **'Log Reversible Contraceptive Details'**
+  /// **'Log Contraceptive Details'**
   String
   get reversibleContraceptiveEntrySheet_logReversibleContraceptiveDetails;
 

@@ -582,7 +582,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String reversibleContraceptiveScreen_activeReversibleContraceptives(
     int activeCount,
   ) {
-    return 'Active Reversible Contraceptives ($activeCount)';
+    return 'Active ($activeCount)';
   }
 
   @override
@@ -757,7 +757,7 @@ class AppLocalizationsIt extends AppLocalizations {
       'Track Reversible Contraceptives.';
 
   @override
-  String get settingsScreen_reversibleContraceptive =>
+  String get settingsScreen_reversibleContraceptiveType =>
       'Reversible Contraceptive Type';
 
   @override
@@ -1242,7 +1242,7 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String
   get reversibleContraceptiveEntrySheet_logReversibleContraceptiveDetails =>
-      'Log Reversible Contraceptive Details';
+      'Log Contraceptive Details';
 
   @override
   String get sanitaryEntrySheet_logSanitaryProduct => 'Log Sanitary Product';
