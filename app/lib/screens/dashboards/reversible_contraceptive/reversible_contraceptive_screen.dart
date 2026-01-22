@@ -7,7 +7,7 @@ import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/models/birth_control/reversible_contraceptives/reversible_contraceptive_log_entry.dart';
 import 'package:menstrudel/services/notification_service.dart';
 import 'package:menstrudel/services/settings_service.dart';
-import 'package:menstrudel/widgets/larcs/screen/larc_log_card.dart';
+import 'package:menstrudel/widgets/larcs/screen/reversible_contraceptive_log_card.dart';
 import 'package:menstrudel/controllers/log_larc_ui_controller.dart';
 import 'package:timezone/timezone.dart' as tz;
 
