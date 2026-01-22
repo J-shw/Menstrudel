@@ -270,9 +270,9 @@ class NotificationService {
     return DateTime.fromMillisecondsSinceEpoch(storedTimestamp);
   }
 
-  // LARC
+  // Reversible Contraceptives
 
-  static Future<void> scheduleReveribleContraceptiveReminder({
+  static Future<void> scheduleReversibleContraceptiveReminder({
     required DateTime reminderDateTime,
     required String title,
     required String body,
@@ -292,7 +292,7 @@ class NotificationService {
     );
 
     await _plugin.zonedSchedule(
-        larcReminderId,
+        reversibleContraceptiveReminderId,
         title,
         body,
         scheduledDate,
@@ -302,7 +302,7 @@ class NotificationService {
 
   static Future<void> cancelReveribleContraceptiveReminder() async {
     debugPrint('Canceling reverible contraceptive reminder');
-    await _plugin.cancel(larcReminderId);
+    await _plugin.cancel(reversibleContraceptiveReminderId);
   }
 
 
