@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:menstrudel/database/app_database.dart';
-import 'package:menstrudel/database/repositories/larc_repository.dart';
-import 'package:menstrudel/models/birth_control/larcs/larc_log_entry.dart';
-import 'package:menstrudel/models/birth_control/larcs/larc_types_enum.dart';
+import 'package:menstrudel/database/repositories/reversible_contraceptive_repository.dart';
+import 'package:menstrudel/models/birth_control/reversible_contraceptives/reversible_contraceptive_log_entry.dart';
+import 'package:menstrudel/models/birth_control/reversible_contraceptives/reversible_contraceptive_types_enum.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 LarcLogEntry _larc(String date, {LarcTypes type = LarcTypes.iud, int? id}) => 
