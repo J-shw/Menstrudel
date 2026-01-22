@@ -367,7 +367,7 @@
             }
         }
     },
-    "reversibleContraceptiveScreen_activeReversibleContraceptives": "Active Reversible Contraceptives ({activeCount})",
+    "reversibleContraceptiveScreen_activeReversibleContraceptives": "Active ({activeCount})",
     "@reversibleContraceptiveScreen_activeReversibleContraceptives": {
         "description": "The total active Reversible Contraceptive count.",
         "placeholders": {
@@ -475,7 +475,7 @@
 
     "settingsScreen_enableReversibleContraceptiveTracking": "Enable Reversible Contraceptive Tracking",
     "settingsScreen_reversibleContraceptiveDescription": "Track Reversible Contraceptives.",
-    "settingsScreen_reversibleContraceptive": "Reversible Contraceptive Type",
+    "settingsScreen_reversibleContraceptiveType": "Reversible Contraceptive Type",
     "settingsScreen_setDuration": "Set Duration",
     "settingsScreen_reversibleContraceptiveDuration": "Reversible Contraceptive Replacement Duration",
     "settingsScreen_enableReversibleContraceptiveReminder": "Enable Reversible Contraceptive Reminder",
@@ -687,7 +687,7 @@
     "periodDetailsSheet_symptoms": "Symptoms",
     "periodDetailsSheet_flow": "Flow",
 
-    "reversibleContraceptiveEntrySheet_logReversibleContraceptiveDetails": "Log Reversible Contraceptive Details",
+    "reversibleContraceptiveEntrySheet_logReversibleContraceptiveDetails": "Log Contraceptive Details",
 
     "sanitaryEntrySheet_logSanitaryProduct": "Log Sanitary Product",
     "sanitaryEntrySheet_setReminderDuration": "Set Reminder Duration",
