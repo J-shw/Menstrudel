@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/models/app/user_goal_types_enum.dart';
 import 'dart:convert';
-import 'package:menstrudel/models/birth_control/larcs/reversible_contraceptive_types_enum.dart';
+import 'package:menstrudel/models/birth_control/reversible_contraceptives/reversible_contraceptive_types_enum.dart';
 import 'package:menstrudel/models/period_logs/symptom.dart';
 import 'package:menstrudel/models/period_logs/symptom_type_enum.dart';
 import 'package:menstrudel/services/notification_service.dart';
@@ -15,10 +15,10 @@ class SettingsService extends ChangeNotifier {
   late SharedPreferences _prefs;
 
   bool _pillNavEnabled = kDefaultPillNavEnabled;
-  bool _larcNavEnabled = kDefaultLarcNavEnabled;
+  bool _reversibleContraceptiveNavEnabled = kDefaultReversibleContraceptiveNavEnabled;
   bool _sanitaryNavEnabled = kDefaultSanitaryNavEnabled;
   bool _sexActivityNavEnabled = kDefaultSexActivityNavEnabled;
-  ReversibleContraceptiveTypes _larcType = kDefaultLarcType;
+  ReversibleContraceptiveTypes _larcType = kDefaultReversibleContraceptiveType;
   String _languageCode = kDefaultLanguageCode;
   bool _biometricsEnabled = kDefaultBiometricsEnabled;
   bool _notificationsEnabled = kDefaultNotificationsEnabled;
@@ -43,7 +43,7 @@ class SettingsService extends ChangeNotifier {
   /// Whether the 'Pill' tab is visible in the main navigation bar.
   bool get isPillNavEnabled => _pillNavEnabled;
   /// LARCs (Long-Acting Reversible Contraceptives) navigation enabled
-  bool get isLarcNavEnabled => _larcNavEnabled;
+  bool get isReversibleContraceptiveNavEnabled => _reversibleContraceptiveNavEnabled;
   /// Sanitary Products navigation enabled
   bool get isSanitaryNavEnabled => _sanitaryNavEnabled;
   /// Sex Activity navigation enabled
@@ -100,7 +100,7 @@ class SettingsService extends ChangeNotifier {
   bool get isNaturalCycle {
     if (_pillNavEnabled) return false;
     
-    if (_larcNavEnabled) {
+    if (_reversibleContraceptiveNavEnabled) {
       // Only the Copper IUD allows for a natural hormonal cycle.
       return _larcType == ReversibleContraceptiveTypes.copperIud;
     }
@@ -111,7 +111,7 @@ class SettingsService extends ChangeNotifier {
     _prefs = await SharedPreferences.getInstance();
 
     _pillNavEnabled = _prefs.getBool(pillNavEnabledKey) ?? false;
-    _larcNavEnabled = _prefs.getBool(larcNavEnabledKey) ?? false;
+    _reversibleContraceptiveNavEnabled = _prefs.getBool(reversibleContraceptiveNavEnabledKey) ?? false;
     _sanitaryNavEnabled = _prefs.getBool(sanitaryNavEnabledKey) ?? true;
     _sexActivityNavEnabled = _prefs.getBool(sexActivityNavEnabledKey) ?? false;
     _languageCode = _prefs.getString(languageKey) ?? 'system';
@@ -135,7 +135,7 @@ class SettingsService extends ChangeNotifier {
     _defaultSymptoms = _loadDefaultSymptoms();
     _startingDayOfWeek = _prefs.getString(startingDayOfWeekKey) ?? 'monday';
 
-    final String? storedDurationsJson = _prefs.getString(larcDurationsKey);
+    final String? storedDurationsJson = _prefs.getString(reversibleContraceptiveDurationsKey);
     if (storedDurationsJson != null) {
       final Map<String, dynamic> decodedMap = json.decode(storedDurationsJson);
       
@@ -148,17 +148,17 @@ class SettingsService extends ChangeNotifier {
     }
 
     try {
-      final String? larcTypeString = _prefs.getString(larcTypeKey);
+      final String? larcTypeString = _prefs.getString(reversibleContraceptiveTypeKey);
       _larcType = ReversibleContraceptiveTypes.values.firstWhere(
         (e) => e.name == larcTypeString,
       );
     } catch (e) {
       debugPrint('Corrupt saved LARC type. Resetting to default.');
-      _larcType = kDefaultLarcType;
+      _larcType = kDefaultReversibleContraceptiveType;
     }
-    _larcNotificationsEnabled = _prefs.getBool(larcNotificationsEnanledKey) ?? true;
-    _larcReminderDays = _prefs.getInt(larcNotificationDaysKey) ?? 30;
-    _larcReminderTime = _loadTimeOfDay(larcNotificationTimeKey, 9, 0);
+    _larcNotificationsEnabled = _prefs.getBool(reversibleContraceptiveNotificationsEnabledKey) ?? true;
+    _larcReminderDays = _prefs.getInt(reversibleContraceptiveNotificationDaysKey) ?? 30;
+    _larcReminderTime = _loadTimeOfDay(reversibleContraceptiveNotificationTimeKey, 9, 0);
 
     notifyListeners();
   }
@@ -225,9 +225,9 @@ class SettingsService extends ChangeNotifier {
     notifyListeners();
   }
   
-  Future<void> setLarcNavEnabled(bool isEnabled) async {
-    _larcNavEnabled = isEnabled;
-    await _prefs.setBool(larcNavEnabledKey, isEnabled);
+  Future<void> setReversibleContraceptiveNavEnabled(bool isEnabled) async {
+    _reversibleContraceptiveNavEnabled = isEnabled;
+    await _prefs.setBool(reversibleContraceptiveNavEnabledKey, isEnabled);
     notifyListeners();
   }
 
@@ -239,7 +239,7 @@ class SettingsService extends ChangeNotifier {
 
   Future<void> setLarcType(ReversibleContraceptiveTypes type) async {
     _larcType = type;
-    await _prefs.setString(larcTypeKey, type.name);
+    await _prefs.setString(reversibleContraceptiveTypeKey, type.name);
     notifyListeners();
   }
 
@@ -249,13 +249,13 @@ class SettingsService extends ChangeNotifier {
       (key, value) => MapEntry(key.name, value),
     );
     final String encodedJson = json.encode(mapForStorage);
-    await _prefs.setString(larcDurationsKey, encodedJson);
+    await _prefs.setString(reversibleContraceptiveDurationsKey, encodedJson);
     notifyListeners();
   }
 
   Future<void> setLarcNotificationsEnabled(bool enabled) async {
     _larcNotificationsEnabled = enabled;
-    await _prefs.setBool(larcNotificationsEnanledKey, enabled);
+    await _prefs.setBool(reversibleContraceptiveNotificationsEnabledKey, enabled);
     if (!enabled) {
       await NotificationService.cancelReveribleContraceptiveReminder();
     }
@@ -264,14 +264,14 @@ class SettingsService extends ChangeNotifier {
 
   Future<void> setLarcReminderDays(int days) async {
     _larcReminderDays = days;
-    await _prefs.setInt(larcNotificationDaysKey, days);
+    await _prefs.setInt(reversibleContraceptiveNotificationDaysKey, days);
     notifyListeners();
   }
 
   Future<void> setLarcReminderTime(TimeOfDay time) async {
     _larcReminderTime = time;
     final String formattedTime = '${time.hour}:${time.minute}';
-    await _prefs.setString(larcNotificationTimeKey, formattedTime);
+    await _prefs.setString(reversibleContraceptiveNotificationTimeKey, formattedTime);
     notifyListeners();
   }
 
