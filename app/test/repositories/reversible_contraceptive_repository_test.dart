@@ -6,12 +6,12 @@ import 'package:menstrudel/models/birth_control/reversible_contraceptives/revers
 import 'package:menstrudel/models/birth_control/reversible_contraceptives/reversible_contraceptive_types_enum.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
-LarcLogEntry _larc(String date, {LarcTypes type = LarcTypes.iud, int? id}) => 
-    LarcLogEntry(
+ReversibleContraceptiveLogEntry _reversibleContraceptive(String date, {ReversibleContraceptiveTypes type = ReversibleContraceptiveTypes.copperIud, int? id}) => 
+    ReversibleContraceptiveLogEntry(
       id: id,
       date: DateTime.parse(date),
       type: type,
-      note: 'Test LARC note',
+      note: 'Test reversible contraceptive note',
     );
 
 void main() {
@@ -19,30 +19,30 @@ void main() {
   databaseFactory = databaseFactoryFfi;
   sqfliteFfiInit();
 
-  group('LarcRepository Tests', () {
-    late LarcRepository repository;
+  group('ReversibleContraceptiveRepository Tests', () {
+    late ReversibleContraceptiveRepository repository;
     late AppDatabase dbProvider;
 
     setUp(() async {
       dbProvider = AppDatabase.instance;
       await dbProvider.init(inMemory: true);
-      repository = LarcRepository();
+      repository = ReversibleContraceptiveRepository();
     });
 
     tearDown(() async {
       await dbProvider.close();
     });
 
-    group('Core LARC Operations (CRUD)', () {
-      test('logLarc should save a new entry', () async {
-        await repository.logLarc(_larc('2025-01-01'));
+    group('Core ReversibleContraceptive Operations (CRUD)', () {
+      test('logReversibleContraceptive should save a new entry', () async {
+        await repository.log(_reversibleContraceptive('2025-01-01'));
         final logs = await repository.getAllLogs();
         expect(logs.length, 1);
-        expect(logs.first.type, LarcTypes.iud);
+        expect(logs.first.type, ReversibleContraceptiveTypes.copperIud);
       });
 
       test('getLogById should return the correct entry', () async {
-        await repository.logLarc(_larc('2025-01-01'));
+        await repository.log(_reversibleContraceptive('2025-01-01'));
         final all = await repository.getAllLogs();
         final id = all.first.id!;
         
@@ -52,19 +52,19 @@ void main() {
       });
 
       test('updateLog should modify an existing entry', () async {
-        await repository.logLarc(_larc('2025-01-01', type: LarcTypes.iud));
+        await repository.log(_reversibleContraceptive('2025-01-01', type: ReversibleContraceptiveTypes.copperIud));
         var log = (await repository.getAllLogs()).first;
         
-        final updatedLog = log.copyWith(type: LarcTypes.implant, note: 'Updated');
+        final updatedLog = log.copyWith(type: ReversibleContraceptiveTypes.implant, note: 'Updated');
         
         await repository.updateLog(updatedLog);
         final result = await repository.getLogById(log.id!);
-        expect(result!.type, LarcTypes.implant);
+        expect(result!.type, ReversibleContraceptiveTypes.implant);
         expect(result.note, 'Updated');
       });
 
       test('deleteLog should remove a specific entry', () async {
-        await repository.logLarc(_larc('2025-01-01'));
+        await repository.log(_reversibleContraceptive('2025-01-01'));
         final id = (await repository.getAllLogs()).first.id!;
         
         await repository.deleteLog(id);
@@ -76,7 +76,7 @@ void main() {
     group('Manager (Import/Export)', () {
       test('importDataFromJson should restore logs correctly', () async {
         final mockData = jsonEncode({
-          'larc_logs': [
+          'reversible_contraceptive_logs': [
             {
               'date': '2025-05-05T00:00:00.000', 
               'type': 'injection', 
@@ -89,11 +89,11 @@ void main() {
         await repository.manager.importDataFromJson(mockData);
         final logs = await repository.getAllLogs();
         expect(logs.length, 1);
-        expect(logs.first.type, LarcTypes.injection);
+        expect(logs.first.type, ReversibleContraceptiveTypes.injection);
       });
 
       test('clearAllData should wipe the table', () async {
-        await repository.logLarc(_larc('2025-01-01'));
+        await repository.log(_reversibleContraceptive('2025-01-01'));
         await repository.manager.clearAllData();
         final logs = await repository.getAllLogs();
         expect(logs, isEmpty);
