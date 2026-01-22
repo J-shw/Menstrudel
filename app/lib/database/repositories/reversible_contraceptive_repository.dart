@@ -90,9 +90,9 @@ class Manager {
         
         await txn.delete('larc_logs');
 
-        final List larcLogsRaw = importData['reversible_contraceptive_logs'] as List;
+        final List logsRaw = importData['reversible_contraceptive_logs'] as List;
         for (final Map<String, dynamic> logRaw
-            in larcLogsRaw.cast<Map<String, dynamic>>()) {
+            in logsRaw.cast<Map<String, dynamic>>()) {
           final Map<String, dynamic> logToInsert = Map.from(logRaw);
 
           logToInsert.remove('id');
