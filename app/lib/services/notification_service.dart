@@ -301,7 +301,7 @@ class NotificationService {
   }
 
   static Future<void> cancelReversibleContraceptiveReminder() async {
-    debugPrint('Canceling reverible contraceptive reminder');
+    debugPrint('Canceling reverisble contraceptive reminder');
     await _plugin.cancel(reversibleContraceptiveReminderId);
   }
 
