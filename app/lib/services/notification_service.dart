@@ -300,7 +300,7 @@ class NotificationService {
         androidScheduleMode: fln.AndroidScheduleMode.exactAllowWhileIdle);
   }
 
-  static Future<void> cancelReveribleContraceptiveReminder() async {
+  static Future<void> cancelReversibleContraceptiveReminder() async {
     debugPrint('Canceling reverible contraceptive reminder');
     await _plugin.cancel(reversibleContraceptiveReminderId);
   }
