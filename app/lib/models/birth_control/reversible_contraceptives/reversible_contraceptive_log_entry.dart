@@ -1,12 +1,12 @@
-import 'package:menstrudel/models/birth_control/larcs/larc_types_enum.dart';
+import 'package:menstrudel/models/birth_control/reversible_contraceptives/reversible_contraceptive_types_enum.dart';
 
-class LarcLogEntry {
+class ReversibleContraceptiveLogEntry {
   int? id;
   final DateTime date;
-  final LarcTypes type;
+  final ReversibleContraceptiveTypes type;
   final String? note;
 
-  LarcLogEntry({
+  ReversibleContraceptiveLogEntry({
     this.id,
     required this.date,
     required this.type,
@@ -22,13 +22,13 @@ class LarcLogEntry {
     };
   }
 
-  LarcLogEntry copyWith({
+  ReversibleContraceptiveLogEntry copyWith({
 		int? id,
 		DateTime? date,
-    LarcTypes? type,
+    ReversibleContraceptiveTypes? type,
     String? note,
 	}) {
-		return LarcLogEntry(
+		return ReversibleContraceptiveLogEntry(
 			id: id ?? this.id,
 			date: date ?? this.date,
       type: type ?? this.type,
@@ -36,11 +36,11 @@ class LarcLogEntry {
 		);
 	}
 
-  static LarcLogEntry fromMap(Map<String, dynamic> map) {
-    return LarcLogEntry(
+  static ReversibleContraceptiveLogEntry fromMap(Map<String, dynamic> map) {
+    return ReversibleContraceptiveLogEntry(
       id: map['id'] as int,
       date: DateTime.parse(map['date'] as String),
-      type: LarcTypes.values.firstWhere((e) => e.name == map['type']),
+      type: ReversibleContraceptiveTypes.values.firstWhere((e) => e.name == map['type']),
       note: map['note'],
     );
   }

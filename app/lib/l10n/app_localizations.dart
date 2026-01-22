@@ -382,12 +382,6 @@ abstract class AppLocalizations {
   /// **'Other'**
   String get other;
 
-  /// No description provided for @navBar_insights.
-  ///
-  /// In en, this message translates to:
-  /// **'Insights'**
-  String get navBar_insights;
-
   /// No description provided for @navBar_logs.
   ///
   /// In en, this message translates to:
@@ -412,11 +406,11 @@ abstract class AppLocalizations {
   /// **'Pill'**
   String get navBar_pill;
 
-  /// No description provided for @navBar_larc.
+  /// No description provided for @navBar_reversibleContraceptive.
   ///
   /// In en, this message translates to:
-  /// **'LARC'**
-  String get navBar_larc;
+  /// **'Contraceptives'**
+  String get navBar_reversibleContraceptive;
 
   /// No description provided for @navBar_settings.
   ///
@@ -538,35 +532,41 @@ abstract class AppLocalizations {
   /// **'Unbearable'**
   String get pain_unbearable;
 
-  /// No description provided for @larcType_iud.
+  /// No description provided for @reversibleContraceptive_hormonalIud.
   ///
   /// In en, this message translates to:
-  /// **'IUD'**
-  String get larcType_iud;
+  /// **'Hormonal IUD'**
+  String get reversibleContraceptive_hormonalIud;
 
-  /// No description provided for @larcType_implant.
+  /// No description provided for @reversibleContraceptive_copperIud.
+  ///
+  /// In en, this message translates to:
+  /// **'Copper IUD'**
+  String get reversibleContraceptive_copperIud;
+
+  /// No description provided for @reversibleContraceptive_implant.
   ///
   /// In en, this message translates to:
   /// **'Implant'**
-  String get larcType_implant;
+  String get reversibleContraceptive_implant;
 
-  /// No description provided for @larcType_injection.
+  /// No description provided for @reversibleContraceptive_injection.
   ///
   /// In en, this message translates to:
   /// **'Injection'**
-  String get larcType_injection;
+  String get reversibleContraceptive_injection;
 
-  /// No description provided for @larcType_ring.
+  /// No description provided for @reversibleContraceptive_ring.
   ///
   /// In en, this message translates to:
   /// **'Ring'**
-  String get larcType_ring;
+  String get reversibleContraceptive_ring;
 
-  /// No description provided for @larcType_patch.
+  /// No description provided for @reversibleContraceptive_patch.
   ///
   /// In en, this message translates to:
   /// **'Patch'**
-  String get larcType_patch;
+  String get reversibleContraceptive_patch;
 
   /// No description provided for @sanitaryProduct_tampon.
   ///
@@ -862,17 +862,17 @@ abstract class AppLocalizations {
   /// **'Don\'t forget to take your pill for today.'**
   String get notification_pillBody;
 
-  /// Title for the LARC reminder notification.
+  /// Title for the Reversible Contraceptive reminder notification.
   ///
   /// In en, this message translates to:
-  /// **'LARC Reminder'**
-  String get notification_larcTitle;
+  /// **'Reversible Contraceptive Reminder'**
+  String get notification_reversibleContraceptiveTitle;
 
-  /// The body of the LARC reminder notification, indicating the type of LARC and how many days until renewal.
+  /// The body of the Reversible Contraceptive reminder notification, indicating the type of Reversible Contraceptive and how many days until renewal.
   ///
   /// In en, this message translates to:
   /// **'{type} is due for renewal in {days} days.'**
-  String notification_larcBody(String type, int days);
+  String notification_reversibleContraceptiveBody(String type, int days);
 
   /// Title for the logging reminder notification.
   ///
@@ -949,7 +949,7 @@ abstract class AppLocalizations {
   /// Hint for birth control settings
   ///
   /// In en, this message translates to:
-  /// **'Note: You can enable Pill or LARC tracking later in the app settings under \'{sectionName}\' if wanted.'**
+  /// **'Note: You can enable Pill or Reversible Contraceptive tracking later in the app settings under \'{sectionName}\' if wanted.'**
   String onboardingScreen_contraceptionHint(String sectionName);
 
   /// Button text for the get started navigation button
@@ -976,11 +976,11 @@ abstract class AppLocalizations {
   /// **'Log sex activity'**
   String get fabToolTip_sexActivity;
 
-  /// Used for the LARC screen fab button as a tooltip.
+  /// Used for the Reversible Contraceptive screen fab button as a tooltip.
   ///
   /// In en, this message translates to:
-  /// **'Log LARC'**
-  String get fabToolTip_larc;
+  /// **'Log Reversible Contraceptive'**
+  String get fabToolTip_reversibleContraceptive;
 
   /// No description provided for @mainScreen_logsPageTitle.
   ///
@@ -1006,11 +1006,11 @@ abstract class AppLocalizations {
   /// **'Pills'**
   String get mainScreen_pillsPageTitle;
 
-  /// No description provided for @mainScreen_LarcsPageTitle.
+  /// No description provided for @mainScreen_reversibleContraceptivesPageTitle.
   ///
   /// In en, this message translates to:
-  /// **'LARCs'**
-  String get mainScreen_LarcsPageTitle;
+  /// **'Reversible Contraceptives'**
+  String get mainScreen_reversibleContraceptivesPageTitle;
 
   /// No description provided for @mainScreen_settingsPageTitle.
   ///
@@ -1072,41 +1072,44 @@ abstract class AppLocalizations {
   /// **'Pill for today marked as skipped.'**
   String get pillScreen_pillForTodayMarkedAsSkipped;
 
-  /// No description provided for @larcScreen_noLarcRecordsFound.
+  /// No description provided for @reversibleContraceptiveScreen_noRecordsFound.
   ///
   /// In en, this message translates to:
-  /// **'No LARC records found.'**
-  String get larcScreen_noLarcRecordsFound;
+  /// **'No records found.'**
+  String get reversibleContraceptiveScreen_noRecordsFound;
 
-  /// The total LARC history count.
+  /// The total Reversible Contraceptive history count.
   ///
   /// In en, this message translates to:
   /// **'History ({history})'**
-  String larcScreen_history(int history);
+  String reversibleContraceptiveScreen_history(int history);
 
-  /// The total active LARC count.
+  /// The total active Reversible Contraceptive count.
   ///
   /// In en, this message translates to:
-  /// **'Active LARCs ({activeCount})'**
-  String larcScreen_activeLarcs(int activeCount);
+  /// **'Active ({activeCount})'**
+  String reversibleContraceptiveScreen_activeReversibleContraceptives(
+    int activeCount,
+  );
 
-  /// No description provided for @larcScreen_activeLarcsDescription.
+  /// No description provided for @reversibleContraceptiveScreen_activeReversibleContraceptivesDescription.
   ///
   /// In en, this message translates to:
-  /// **'Currently monitored LARC entries.'**
-  String get larcScreen_activeLarcsDescription;
+  /// **'Currently monitored reversible contraceptive entries.'**
+  String
+  get reversibleContraceptiveScreen_activeReversibleContraceptivesDescription;
 
-  /// No description provided for @larcScreen_noActiveRecords.
+  /// No description provided for @reversibleContraceptiveScreen_noActiveRecords.
   ///
   /// In en, this message translates to:
-  /// **'No LARC is currently active. Please log a new entry.'**
-  String get larcScreen_noActiveRecords;
+  /// **'No reversible contraceptive is currently active. Please log a new entry.'**
+  String get reversibleContraceptiveScreen_noActiveRecords;
 
-  /// No description provided for @larcScreen_noHistoryRecords.
+  /// No description provided for @reversibleContraceptiveScreen_noHistoryRecords.
   ///
   /// In en, this message translates to:
-  /// **'No past or overdue LARC records found.'**
-  String get larcScreen_noHistoryRecords;
+  /// **'No past or overdue reversible contraceptive records found.'**
+  String get reversibleContraceptiveScreen_noHistoryRecords;
 
   /// No description provided for @sanitaryProductsScreen_noSanitaryProductRecordsFound.
   ///
@@ -1366,23 +1369,23 @@ abstract class AppLocalizations {
   /// **'Remind Me After'**
   String get settingsScreen_remindMeAfter;
 
-  /// No description provided for @settingsScreen_enableLarcTracking.
+  /// No description provided for @settingsScreen_enableReversibleContraceptiveTracking.
   ///
   /// In en, this message translates to:
-  /// **'Enable LARC Tracking'**
-  String get settingsScreen_enableLarcTracking;
+  /// **'Enable Reversible Contraceptive Tracking'**
+  String get settingsScreen_enableReversibleContraceptiveTracking;
 
-  /// No description provided for @settingsScreen_larcDescription.
+  /// No description provided for @settingsScreen_reversibleContraceptiveDescription.
   ///
   /// In en, this message translates to:
-  /// **'Track long-acting reversible contraceptives (LARCs).'**
-  String get settingsScreen_larcDescription;
+  /// **'Track Reversible Contraceptives.'**
+  String get settingsScreen_reversibleContraceptiveDescription;
 
-  /// No description provided for @settingsScreen_larcType.
+  /// No description provided for @settingsScreen_reversibleContraceptiveType.
   ///
   /// In en, this message translates to:
-  /// **'LARC Type'**
-  String get settingsScreen_larcType;
+  /// **'Contraceptive Type'**
+  String get settingsScreen_reversibleContraceptiveType;
 
   /// No description provided for @settingsScreen_setDuration.
   ///
@@ -1390,17 +1393,17 @@ abstract class AppLocalizations {
   /// **'Set Duration'**
   String get settingsScreen_setDuration;
 
-  /// No description provided for @settingsScreen_larcDuration.
+  /// No description provided for @settingsScreen_reversibleContraceptiveDuration.
   ///
   /// In en, this message translates to:
-  /// **'LARC Replacement Duration'**
-  String get settingsScreen_larcDuration;
+  /// **'Contraceptive Replacement Duration'**
+  String get settingsScreen_reversibleContraceptiveDuration;
 
-  /// No description provided for @settingsScreen_enableLARCReminder.
+  /// No description provided for @settingsScreen_enableReversibleContraceptiveReminder.
   ///
   /// In en, this message translates to:
-  /// **'Enable LARC Reminder'**
-  String get settingsScreen_enableLARCReminder;
+  /// **'Enable Contraceptive Reminder'**
+  String get settingsScreen_enableReversibleContraceptiveReminder;
 
   /// No description provided for @settingsScreen_currentDuration.
   ///
@@ -1555,35 +1558,35 @@ abstract class AppLocalizations {
   /// **'All pill data has been cleared.'**
   String get settingsScreen_allPillDataCleared;
 
-  /// No description provided for @settingsScreen_clearAllLarcData.
+  /// No description provided for @settingsScreen_clearAllReversibleContraceptiveData.
   ///
   /// In en, this message translates to:
-  /// **'Clear All LARC Data'**
-  String get settingsScreen_clearAllLarcData;
+  /// **'Clear All Reversible Contraceptive Data'**
+  String get settingsScreen_clearAllReversibleContraceptiveData;
 
-  /// No description provided for @settingsScreen_clearAllLarcDataSubtitle.
+  /// No description provided for @settingsScreen_clearAllReversibleContraceptiveDataSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Removes your LARCs history.'**
-  String get settingsScreen_clearAllLarcDataSubtitle;
+  /// **'Removes your reversible contraceptives history.'**
+  String get settingsScreen_clearAllReversibleContraceptiveDataSubtitle;
 
-  /// No description provided for @settingsScreen_clearAllLarcData_question.
+  /// No description provided for @settingsScreen_clearAllReversibleContraceptiveData_question.
   ///
   /// In en, this message translates to:
-  /// **'Clear All LARC Data?'**
-  String get settingsScreen_clearAllLarcData_question;
+  /// **'Clear All Reversible Contraceptive Data?'**
+  String get settingsScreen_clearAllReversibleContraceptiveData_question;
 
-  /// No description provided for @settingsScreen_deleteAllLarcDataDescription.
+  /// No description provided for @settingsScreen_deleteAllReversibleContraceptiveDataDescription.
   ///
   /// In en, this message translates to:
-  /// **'This will permanently delete your LARC history.'**
-  String get settingsScreen_deleteAllLarcDataDescription;
+  /// **'This will permanently delete your Reversible Contraceptive history.'**
+  String get settingsScreen_deleteAllReversibleContraceptiveDataDescription;
 
-  /// No description provided for @settingsScreen_allLarcDataCleared.
+  /// No description provided for @settingsScreen_allReversibleContraceptiveDataCleared.
   ///
   /// In en, this message translates to:
-  /// **'All LARC data has been cleared.'**
-  String get settingsScreen_allLarcDataCleared;
+  /// **'All Reversible Contraceptive data has been cleared.'**
+  String get settingsScreen_allReversibleContraceptiveDataCleared;
 
   /// No description provided for @settingsScreen_clearAllSanitaryData.
   ///
@@ -1627,11 +1630,11 @@ abstract class AppLocalizations {
   /// **'Export Pill Data'**
   String get settingsScreen_exportPillData;
 
-  /// No description provided for @settingsScreen_exportLarcsData.
+  /// No description provided for @settingsScreen_exportReversibleContraceptivesData.
   ///
   /// In en, this message translates to:
-  /// **'Export LARCs Data'**
-  String get settingsScreen_exportLarcsData;
+  /// **'Export Reversible Contraceptives Data'**
+  String get settingsScreen_exportReversibleContraceptivesData;
 
   /// No description provided for @settingsScreen_exportSanitaryData.
   ///
@@ -1693,11 +1696,11 @@ abstract class AppLocalizations {
   /// **'Import Pill Data'**
   String get settingsScreen_importPillData;
 
-  /// No description provided for @settingsScreen_importLarcsData.
+  /// No description provided for @settingsScreen_importReversibleContraceptivesData.
   ///
   /// In en, this message translates to:
-  /// **'Import LARCs Data'**
-  String get settingsScreen_importLarcsData;
+  /// **'Import Reversible Contraceptives Data'**
+  String get settingsScreen_importReversibleContraceptivesData;
 
   /// No description provided for @settingsScreen_importSanitaryData.
   ///
@@ -1723,11 +1726,11 @@ abstract class AppLocalizations {
   /// **'Are you sure you want to import Pill Data?'**
   String get settingsScreen_importPillData_question;
 
-  /// No description provided for @settingsScreen_importLarcData_question.
+  /// No description provided for @settingsScreen_importReversibleContraceptiveData_question.
   ///
   /// In en, this message translates to:
-  /// **'Are you sure you want to import LARC Data?'**
-  String get settingsScreen_importLarcData_question;
+  /// **'Are you sure you want to import Reversible Contraceptive Data?'**
+  String get settingsScreen_importReversibleContraceptiveData_question;
 
   /// No description provided for @settingsScreen_importSanitaryData_question.
   ///
@@ -1747,11 +1750,11 @@ abstract class AppLocalizations {
   /// **'Importing data will permanently overwrite all your existing pill history. This cannot be undone.'**
   String get settingsScreen_importPillDataDescription;
 
-  /// No description provided for @settingsScreen_importLarcDataDescription.
+  /// No description provided for @settingsScreen_importReversibleContraceptiveDataDescription.
   ///
   /// In en, this message translates to:
-  /// **'Importing data will permanently overwrite all your existing LARC history. This cannot be undone.'**
-  String get settingsScreen_importLarcDataDescription;
+  /// **'Importing data will permanently overwrite all your existing reversible contraceptive history. This cannot be undone.'**
+  String get settingsScreen_importReversibleContraceptiveDataDescription;
 
   /// No description provided for @settingsScreen_importSanitaryDataDescription.
   ///
@@ -2161,11 +2164,12 @@ abstract class AppLocalizations {
   /// **'Flow'**
   String get periodDetailsSheet_flow;
 
-  /// No description provided for @larcEntrySheet_logLARCDetails.
+  /// No description provided for @reversibleContraceptiveEntrySheet_logReversibleContraceptiveDetails.
   ///
   /// In en, this message translates to:
-  /// **'Log LARC Details'**
-  String get larcEntrySheet_logLARCDetails;
+  /// **'Log Contraceptive Details'**
+  String
+  get reversibleContraceptiveEntrySheet_logReversibleContraceptiveDetails;
 
   /// No description provided for @sanitaryEntrySheet_logSanitaryProduct.
   ///
