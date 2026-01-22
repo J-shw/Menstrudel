@@ -475,10 +475,10 @@
 
     "settingsScreen_enableReversibleContraceptiveTracking": "Enable Reversible Contraceptive Tracking",
     "settingsScreen_reversibleContraceptiveDescription": "Track Reversible Contraceptives.",
-    "settingsScreen_reversibleContraceptiveType": "Reversible Contraceptive Type",
+    "settingsScreen_reversibleContraceptiveType": "Contraceptive Type",
     "settingsScreen_setDuration": "Set Duration",
-    "settingsScreen_reversibleContraceptiveDuration": "Reversible Contraceptive Replacement Duration",
-    "settingsScreen_enableReversibleContraceptiveReminder": "Enable Reversible Contraceptive Reminder",
+    "settingsScreen_reversibleContraceptiveDuration": "Contraceptive Replacement Duration",
+    "settingsScreen_enableReversibleContraceptiveReminder": "Enable Contraceptive Reminder",
     "settingsScreen_currentDuration": "Current Duration",
     "settingsScreen_durationInDays": "Duration (Days)",
 
