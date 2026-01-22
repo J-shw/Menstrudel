@@ -47,6 +47,13 @@
             }
         }
     },
+    "countdown_daysLeft": "{days, plural, one{{days} Day left} other{{days} Days left}}",
+    "@countdown_daysLeft": {
+        "description": "A countdown message indicating the number of days left.",
+        "placeholders": {
+            "days": {}
+        }
+    },
     "logs": "Záznamy",
     "insights": "Statistiky",
     "edit": "Upravit",
@@ -72,12 +79,11 @@
     "flow": "Tok",
     "type": "Typ",
     "other": "Jiný",
-    "navBar_insights": "Statistiky",
     "navBar_logs": "Záznamy",
     "navBar_sanitary": "Pomůcky",
     "navBar_sexActivity": "Sexuální aktivita",
     "navBar_pill": "Pilulky",
-    "navBar_larc": "LARC",
+    "navBar_reversibleContraceptive": "Contraceptives",
     "navBar_settings": "Nastavení",
     "flowIntensity_none": "Žádná",
     "flowIntensity_spotting": "Špinění",
@@ -98,11 +104,12 @@
     "painLevel_moderate": "Střední",
     "painLevel_severe": "Těžká",
     "pain_unbearable": "Nesnesitelná",
-    "larcType_iud": "Nitroděložní tělísko",
-    "larcType_implant": "Implantát",
-    "larcType_injection": "Injekce",
-    "larcType_ring": "Vaginální kroužek",
-    "larcType_patch": "Náplast",
+    "reversibleContraceptive_hormonalIud": "Hormonal IUD",
+    "reversibleContraceptive_copperIud": "Copper IUD",
+    "reversibleContraceptive_implant": "Implant",
+    "reversibleContraceptive_injection": "Injection",
+    "reversibleContraceptive_ring": "Ring",
+    "reversibleContraceptive_patch": "Patch",
     "sanitaryProduct_tampon": "Tampon",
     "sanitaryProduct_pad": "Vložka",
     "sanitaryProduct_menstrualCup": "Menstruační kalíšek",
@@ -144,6 +151,18 @@
     "dayOfWeek_friday": "Pátek",
     "dayOfWeek_saturday": "Sobota",
     "dayOfWeek_sunday": "Neděle",
+    "cyclePhase_menstruation": "On Period",
+    "cyclePhase_follicular": "Pre-Ovulation",
+    "cyclePhase_ovulation": "Peak Fertility",
+    "cyclePhase_luteal": "Post-Ovulation",
+    "cyclePhase_late": "Late",
+    "cyclePhase_unknown": "Unknown",
+    "cyclePhase_menstruationDescription": "Your period is active and the uterine lining is being shed.",
+    "cyclePhase_follicularDescription": "Estrogen is rising to prepare the egg; your energy levels may be increasing.",
+    "cyclePhase_ovulationDescription": "An egg has been released. This is your most fertile time.",
+    "cyclePhase_lutealDescription": "Progesterone is dominant. Monitor for PMS symptoms as you approach your next period.",
+    "cyclePhase_lateDescription": "Your period is late.",
+    "cyclePhase_unknownDescription": "We need more data to accurately predict your cycle phase.",
     "error_valueMustbePositive": "Hodnota musí být kladná",
     "error_valueCannotBeNull": "Hodnota nesmí být prázdná",
     "notification_periodTitle": "Blížící se menstruace",
@@ -180,13 +199,13 @@
     "@notification_pillBody": {
         "description": "Body for the daily pill reminder notification."
     },
-    "notification_larcTitle": "Upomínka LARC",
-    "@notification_larcTitle": {
-        "description": "Title for the LARC reminder notification."
+    "notification_reversibleContraceptiveTitle": "Reversible Contraceptive Reminder",
+    "@notification_reversibleContraceptiveTitle": {
+        "description": "Title for the Reversible Contraceptive reminder notification."
     },
-    "notification_larcBody": "{type} má být obnoveno v {days} dnech.",
-    "@notification_larcBody": {
-        "description": "The body of the LARC reminder notification, indicating the type of LARC and how many days until renewal.",
+    "notification_reversibleContraceptiveBody": "{type} is due for renewal in {days} days.",
+    "@notification_reversibleContraceptiveBody": {
+        "description": "The body of the Reversible Contraceptive reminder notification, indicating the type of Reversible Contraceptive and how many days until renewal.",
         "placeholders": {
             "type": {
                 "type": "String",
@@ -265,15 +284,15 @@
     "@fabToolTip_sexActivity": {
         "description": "Used for the sex activity screen fab button as a tooltip."
     },
-    "fabToolTip_larc": "Log LARC",
-    "@fabToolTip_larc": {
-        "description": "Used for the LARC screen fab button as a tooltip."
+    "fabToolTip_reversibleContraceptive": "Log Reversible Contraceptive",
+    "@fabToolTip_reversibleContraceptive": {
+        "description": "Used for the Reversible Contraceptive screen fab button as a tooltip."
     },
     "mainScreen_logsPageTitle": "Logs",
     "mainSceen_sexActivityPageTitle": "Sexuální aktivita",
     "mainScreen_sanitaryPageTitle": "Menstruační pomůcky",
     "mainScreen_pillsPageTitle": "Pilulky",
-    "mainScreen_LarcsPageTitle": "LARC",
+    "mainScreen_reversibleContraceptivesPageTitle": "Reversible Contraceptives",
     "mainScreen_settingsPageTitle": "Nastavení",
     "insightsScreen_errorPrefix": "Chyba:",
     "insightsScreen_noDataAvailable": "Žádná data k dispozici.",
@@ -292,10 +311,10 @@
     },
     "pillScreen_pillForTodayMarkedAsTaken": "Dnešní pilulka je označena jako užitá.",
     "pillScreen_pillForTodayMarkedAsSkipped": "Dnešní pilulka je označena jako přeskočena.",
-    "larcScreen_noLarcRecordsFound": "Žádné záznamy o LARC nalezeny.",
-    "larcScreen_history": "Historie ({history})",
-    "@larcScreen_history": {
-        "description": "The total LARC history count.",
+    "reversibleContraceptiveScreen_noRecordsFound": "No records found.",
+    "reversibleContraceptiveScreen_history": "History ({history})",
+    "@reversibleContraceptiveScreen_history": {
+        "description": "The total Reversible Contraceptive history count.",
         "placeholders": {
             "history": {
                 "type": "int",
@@ -303,9 +322,9 @@
             }
         }
     },
-    "larcScreen_activeLarcs": "Aktivní LARC ({activeCount})",
-    "@larcScreen_activeLarcs": {
-        "description": "The total active LARC count.",
+    "reversibleContraceptiveScreen_activeReversibleContraceptives": "Active ({activeCount})",
+    "@reversibleContraceptiveScreen_activeReversibleContraceptives": {
+        "description": "The total active Reversible Contraceptive count.",
         "placeholders": {
             "activeCount": {
                 "type": "int",
@@ -313,9 +332,9 @@
             }
         }
     },
-    "larcScreen_activeLarcsDescription": "Aktuálně monitorované záznamy LARC.",
-    "larcScreen_noActiveRecords": "V současné době není aktivní LARC. Prosím přidejte nový záznam.",
-    "larcScreen_noHistoryRecords": "Nebyly nalezeny žádné minulé ani prošlé záznamy LARC.",
+    "reversibleContraceptiveScreen_activeReversibleContraceptivesDescription": "Currently monitored reversible contraceptive entries.",
+    "reversibleContraceptiveScreen_noActiveRecords": "No reversible contraceptive is currently active. Please log a new entry.",
+    "reversibleContraceptiveScreen_noHistoryRecords": "No past or overdue reversible contraceptive records found.",
     "sanitaryProductsScreen_noSanitaryProductRecordsFound": "Žádné záznamy o menstruačních pomůckách nebyly nalezeny.",
     "sanitaryProductsScreen_history": "Historie ({history})",
     "@sanitaryProductsScreen_history": {
@@ -401,12 +420,12 @@
     "settingsScreen_notificationTime": "Čas oznámení",
     "settingsScreen_overduePeriodReminder": "Připomenutí na zpožděnou menstruaci",
     "settingsScreen_remindMeAfter": "Připomenout mi potom",
-    "settingsScreen_enableLarcTracking": "Zapnout sledování LARC",
-    "settingsScreen_larcDescription": "Sledujte dlouhodobě působící reverzibilní antikoncepci (LARC).",
-    "settingsScreen_larcType": "Typ LARC",
+    "settingsScreen_enableReversibleContraceptiveTracking": "Enable Reversible Contraceptive Tracking",
+    "settingsScreen_reversibleContraceptiveDescription": "Track Reversible Contraceptives.",
+    "settingsScreen_reversibleContraceptiveType": "Contraceptive Type",
     "settingsScreen_setDuration": "Nastavit čas trvání",
-    "settingsScreen_larcDuration": "Doba platnosti LARC",
-    "settingsScreen_enableLARCReminder": "Zapnout připomenutí LARC",
+    "settingsScreen_reversibleContraceptiveDuration": "Contraceptive Replacement Duration",
+    "settingsScreen_enableReversibleContraceptiveReminder": "Enable Contraceptive Reminder",
     "settingsScreen_currentDuration": "Aktuální doba trvání",
     "settingsScreen_durationInDays": "Doba trvání (Dny)",
     "settingsScreen_LoggingScreen": "Záznam",
@@ -460,11 +479,11 @@
     "settingsScreen_clearAllPillData_question": "Vyčistit všechny data o pilulkách?",
     "settingsScreen_deleteAllPillDataDescription": "Tímto krokem trvale smažete svůj režim užívání pilulek, připomenutí a historii užívání.",
     "settingsScreen_allPillDataCleared": "Všechny data o pilulkách byly vyčištěny.",
-    "settingsScreen_clearAllLarcData": "Vyčistit všechny data o LARC",
-    "settingsScreen_clearAllLarcDataSubtitle": "Smaže vaši historii o LARC.",
-    "settingsScreen_clearAllLarcData_question": "Vyčistit všechny data o LARC?",
-    "settingsScreen_deleteAllLarcDataDescription": "Tímto trvale smažete svou historii LARC.",
-    "settingsScreen_allLarcDataCleared": "Všechny data o LARC byly vyčištěny.",
+    "settingsScreen_clearAllReversibleContraceptiveData": "Clear All Reversible Contraceptive Data",
+    "settingsScreen_clearAllReversibleContraceptiveDataSubtitle": "Removes your reversible contraceptives history.",
+    "settingsScreen_clearAllReversibleContraceptiveData_question": "Clear All Reversible Contraceptive Data?",
+    "settingsScreen_deleteAllReversibleContraceptiveDataDescription": "This will permanently delete your Reversible Contraceptive history.",
+    "settingsScreen_allReversibleContraceptiveDataCleared": "All Reversible Contraceptive data has been cleared.",
     "settingsScreen_clearAllSanitaryData": "Vyčistit všechny data o menstruačních pomůckách",
     "settingsScreen_clearAllSanitaryDataSubtitle": "Smaže vaši historii o menstruačních pomůckách.",
     "settingsScreen_clearAllSanitaryData_question": "Vyčistit všechny data o menstruačních pomůckách?",
@@ -472,7 +491,7 @@
     "settingsScreen_allSanitaryDataCleared": "Všechny data o menstruačních pomůckách byly vyčištěny.",
     "settingsScreen_exportPeriodData": "Exportovat data o menstruacích",
     "settingsScreen_exportPillData": "Exportovat data o pilulkách",
-    "settingsScreen_exportLarcsData": "Exportovat data o LARC",
+    "settingsScreen_exportReversibleContraceptivesData": "Export Reversible Contraceptives Data",
     "settingsScreen_exportSanitaryData": "Exportovat data o menstruačních pomůckách",
     "settingsScreen_exportDataSubtitle": "Vytvořit zálohovací JSON soubor.",
     "settingsScreen_exportSuccessful": "Data byla exportována úspěšně.",
@@ -483,16 +502,16 @@
     "settingsScreen_importDataTitle": "Importovat data",
     "settingsScreen_importPeriodData": "Importovat data o menstruacích",
     "settingsScreen_importPillData": "Importovat data o pilulkách",
-    "settingsScreen_importLarcsData": "Importovat data o LARC",
+    "settingsScreen_importReversibleContraceptivesData": "Import Reversible Contraceptives Data",
     "settingsScreen_importSanitaryData": "Importovat data o menstruačních pomůckách",
     "settingsScreen_importDataSubtitle": "Přepíše existující data.",
     "settingsScreen_importPeriodData_question": "Opravdu chcete importovat data o menstruacích?",
     "settingsScreen_importPillData_question": "Opravdu chcete importovat data o pilulkách?",
-    "settingsScreen_importLarcData_question": "Opravdu chcete importovat data o LARC?",
+    "settingsScreen_importReversibleContraceptiveData_question": "Are you sure you want to import Reversible Contraceptive Data?",
     "settingsScreen_importSanitaryData_question": "Opravdu chcete importovat data o menstruačních pomůckách?",
     "settingsScreen_importPeriodDataDescription": "Import dat trvale přepíše všechny vaše stávající záznamy o menstruacích a nastavení menstruace. Tento krok nelze vrátit zpět.",
     "settingsScreen_importPillDataDescription": "Import dat trvale přepíše všechny vaši stávající historii o pilulkách. Tento krok nelze vrátit zpět.",
-    "settingsScreen_importLarcDataDescription": "Import dat trvale přepíše všechny vaši stávající historii o LARC. Tento krok nelze vrátit zpět.",
+    "settingsScreen_importReversibleContraceptiveDataDescription": "Importing data will permanently overwrite all your existing reversible contraceptive history. This cannot be undone.",
     "settingsScreen_importSanitaryDataDescription": "Import dat trvale přepíše všechny vaši stávající historii o menstruačních pomůckách. Tento krok nelze vrátit zpět.",
     "settingsScreen_importSuccessful": "Data byla importována úspěšně!",
     "settingsScreen_importFailed": "Importování se pokazilo. Prosím zkuste to znovu.",
@@ -593,7 +612,7 @@
     "symptomEntrySheet_symptomsOptional": "Příznaky (volitelné)",
     "periodDetailsSheet_symptoms": "Příznaky",
     "periodDetailsSheet_flow": "Tok",
-    "larcEntrySheet_logLARCDetails": "Zaznamenat LARC podrobnosti",
+    "reversibleContraceptiveEntrySheet_logReversibleContraceptiveDetails": "Log Contraceptive Details",
     "sanitaryEntrySheet_logSanitaryProduct": "Zaznamenat menstruační pomůcky",
     "sanitaryEntrySheet_setReminderDuration": "Nastavit délku připomenutí",
     "sanitaryEntrySheet_maxDuration": "Maximální délka: {hours} hodin",
