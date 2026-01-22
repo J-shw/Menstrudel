@@ -24,7 +24,7 @@ class DataSettingsScreen extends StatefulWidget {
 class _DataSettingsScreenState extends State<DataSettingsScreen> {
   final periodsRepo = PeriodsRepository();
   final pillsRepo = PillsRepository();
-  final larcsRepo = LarcRepository();
+  final reversibleContraceptiveRepo = ReversibleContraceptiveRepository();
   final sanitaryRepo = SanitaryProductRepository();
   bool _isLoading = false;
 
@@ -93,13 +93,13 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
     );
   }
 
-  Future<void> clearLarcData() async {
+  Future<void> clearReversibleContraceptiveData() async {
     setState(() {
       _isLoading = true;
     });
 
-    await larcsRepo.manager.clearAllData();
-    await NotificationService.cancelLarcReminder();
+    await reversibleContraceptiveRepo.manager.clearAllData();
+    await NotificationService.cancelReversibleContraceptiveReminder();
 
     if (!mounted) return;
 
@@ -131,7 +131,7 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
     });
   }
 
-  Future<void> showClearLarcDataDialog() async {
+  Future<void> showClearReversibleContraceptiveDataDialog() async {
     final l10n = AppLocalizations.of(context)!;
     return showDialog<void>(
       context: context,
@@ -140,7 +140,7 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
           title: l10n.settingsScreen_clearAllLarcData_question,
           contentText: l10n.settingsScreen_deleteAllLarcDataDescription,
           confirmButtonText: l10n.clear,
-          onConfirm: clearLarcData,
+          onConfirm: clearReversibleContraceptiveData,
         );
       },
     );
@@ -287,7 +287,7 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
     }
   }
 
-  Future<void> exportLarcsData() async {
+  Future<void> exportReversibleContraceptiveData() async {
     setState(() {
       _isLoading = true;
     });
@@ -296,7 +296,7 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
     String filePath = '';
 
     try {
-      final jsonData = await larcsRepo.manager.exportDataAsJson();
+      final jsonData = await reversibleContraceptiveRepo.manager.exportDataAsJson();
 
       if (jsonData.isEmpty) {
         throw Exception(l10n.settingsScreen_noDataToExport);
@@ -304,7 +304,7 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
 
       final Directory directory = await getApplicationDocumentsDirectory();
       final timestamp = DateFormat('yyyyMMdd_HHmmss').format(DateTime.now());
-      final fileName = 'menstrudel_larc_data_$timestamp.json';
+      final fileName = 'menstrudel_reversible_contraceptive_data_$timestamp.json';
       final exportFile = File('${directory.path}/$fileName');
 
       await exportFile.writeAsString(jsonData);
@@ -416,7 +416,7 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
   Future<void> _importData(
     String filePath, {
     bool isPillData = false,
-    bool isLarcData = false,
+    bool isReversibleContraceptiveData = false,
     bool isSanitaryData = false,
   }) async {
     setState(() {
@@ -431,8 +431,8 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
 
       if (isPillData) {
         await pillsRepo.manager.importDataFromJson(jsonString, l10n);
-      } else if (isLarcData) {
-        await larcsRepo.manager.importDataFromJson(jsonString);
+      } else if (isReversibleContraceptiveData) {
+        await reversibleContraceptiveRepo.manager.importDataFromJson(jsonString);
       } else if (isSanitaryData) {
         await sanitaryRepo.manager.importDataFromJson(jsonString);
       } else {
@@ -490,7 +490,7 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
               contentText: l10n.settingsScreen_importPeriodDataDescription,
               confirmButtonText: l10n.import,
               onConfirm: () =>
-                  _importData(filePath, isPillData: false, isLarcData: false),
+                  _importData(filePath, isPillData: false, isReversibleContraceptiveData: false),
             );
           },
         );
@@ -542,7 +542,7 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
               contentText: l10n.settingsScreen_importPillDataDescription,
               confirmButtonText: l10n.import,
               onConfirm: () =>
-                  _importData(filePath, isPillData: true, isLarcData: false),
+                  _importData(filePath, isPillData: true, isReversibleContraceptiveData: false),
             );
           },
         );
@@ -570,7 +570,7 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
     }
   }
 
-  Future<void> importLarcData() async {
+  Future<void> importReversibleContraceptiveData() async {
     final l10n = AppLocalizations.of(context)!;
     try {
       final result = await FilePicker.platform
@@ -594,7 +594,7 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
               contentText: l10n.settingsScreen_importLarcDataDescription,
               confirmButtonText: l10n.import,
               onConfirm: () =>
-                  _importData(filePath, isPillData: false, isLarcData: true),
+                  _importData(filePath, isPillData: false, isReversibleContraceptiveData: true),
             );
           },
         );
@@ -648,7 +648,7 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
               onConfirm: () => _importData(
                 filePath,
                 isPillData: false,
-                isLarcData: false,
+                isReversibleContraceptiveData: false,
                 isSanitaryData: true,
               ),
             );
@@ -786,7 +786,7 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
                             Icons.chevron_right,
                             color: colorScheme.onErrorContainer,
                           ),
-                          onTap: showClearLarcDataDialog,
+                          onTap: showClearReversibleContraceptiveDataDialog,
                         ),
 
                         ListTile(
@@ -881,7 +881,7 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
                             style: theme.textTheme.bodyMedium,
                           ),
                           trailing: const Icon(Icons.chevron_right),
-                          onTap: exportLarcsData,
+                          onTap: exportReversibleContraceptiveData,
                         ),
 
                         ListTile(
@@ -967,7 +967,7 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
                             style: theme.textTheme.bodyMedium,
                           ),
                           trailing: const Icon(Icons.chevron_right),
-                          onTap: importLarcData,
+                          onTap: importReversibleContraceptiveData,
                         ),
 
                         ListTile(
