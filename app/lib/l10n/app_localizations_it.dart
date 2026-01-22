@@ -4,9 +4,9 @@ import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
 
-/// The translations for Spanish Castilian (`es`).
-class AppLocalizationsEs extends AppLocalizations {
-  AppLocalizationsEs([String locale = 'es']) : super(locale);
+/// The translations for Italian (`it`).
+class AppLocalizationsIt extends AppLocalizations {
+  AppLocalizationsIt([String locale = 'it']) : super(locale);
 
   @override
   String get appTitle => 'Menstrudel';
@@ -15,7 +15,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get nextDue => 'Next Due';
 
   @override
-  String get ongoing => 'Ongoing';
+  String get ongoing => 'In corso';
 
   @override
   String get overdue => 'Overdue';
@@ -30,16 +30,16 @@ class AppLocalizationsEs extends AppLocalizations {
   String get longest => 'Longest';
 
   @override
-  String get date => 'Date';
+  String get date => 'Data';
 
   @override
-  String get time => 'Time';
+  String get time => 'Ora';
 
   @override
-  String get start => 'Start';
+  String get start => 'Inizio';
 
   @override
-  String get end => 'End';
+  String get end => 'Fine';
 
   @override
   String get next => 'Next';
@@ -51,10 +51,10 @@ class AppLocalizationsEs extends AppLocalizations {
   String get today => 'Today';
 
   @override
-  String get day => 'Day';
+  String get day => 'Giorno';
 
   @override
-  String get days => 'Days';
+  String get days => 'Giorni';
 
   @override
   String get hours => 'Hours';
@@ -64,8 +64,8 @@ class AppLocalizationsEs extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count Days',
-      one: '$count Day',
+      other: '$count Giorni',
+      one: '$count Giorno',
     );
     return '$_temp0';
   }
@@ -113,40 +113,40 @@ class AppLocalizationsEs extends AppLocalizations {
   String get edit => 'Edit';
 
   @override
-  String get delete => 'Delete';
+  String get delete => 'Elimina';
 
   @override
-  String get clear => 'Clear';
+  String get clear => 'Cancella';
 
   @override
-  String get save => 'Save';
+  String get save => 'Salva';
 
   @override
-  String get import => 'Import';
+  String get import => 'Importa';
 
   @override
   String get ok => 'OK';
 
   @override
-  String get confirm => 'Confirm';
+  String get confirm => 'Conferma';
 
   @override
-  String get set => 'Set';
+  String get set => 'Imposta';
 
   @override
-  String get yes => 'Yes';
+  String get yes => 'Si';
 
   @override
   String get no => 'No';
 
   @override
-  String get cancel => 'Cancel';
+  String get cancel => 'Annulla';
 
   @override
-  String get select => 'Select';
+  String get select => 'Seleziona';
 
   @override
-  String get close => 'Close';
+  String get close => 'Chiudi';
 
   @override
   String get reset => 'Reset';
@@ -170,7 +170,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get systemDefault => 'System Default';
 
   @override
-  String get flow => 'Flow';
+  String get flow => 'Flusso';
 
   @override
   String get type => 'Type';
@@ -179,7 +179,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get other => 'Other';
 
   @override
-  String get navBar_logs => 'Logs';
+  String get navBar_logs => 'Calendario';
 
   @override
   String get navBar_sanitary => 'Sanitary';
@@ -188,28 +188,28 @@ class AppLocalizationsEs extends AppLocalizations {
   String get navBar_sexActivity => 'Sex Activity';
 
   @override
-  String get navBar_pill => 'Pill';
+  String get navBar_pill => 'Pillola';
 
   @override
   String get navBar_reversibleContraceptive => 'Contraceptives';
 
   @override
-  String get navBar_settings => 'Settings';
+  String get navBar_settings => 'Impostazioni';
 
   @override
-  String get flowIntensity_none => 'None';
+  String get flowIntensity_none => 'Assente';
 
   @override
   String get flowIntensity_spotting => 'Spotting';
 
   @override
-  String get flowIntensity_light => 'Light';
+  String get flowIntensity_light => 'Leggero';
 
   @override
-  String get flowIntensity_moderate => 'Moderate';
+  String get flowIntensity_moderate => 'Medio';
 
   @override
-  String get flowIntensity_heavy => 'Heavy';
+  String get flowIntensity_heavy => 'Abbondante';
 
   @override
   String get builtInSymptom_acne => 'Acne';
@@ -236,22 +236,22 @@ class AppLocalizationsEs extends AppLocalizations {
   String get builtInSymptom_nausea => 'Nausea';
 
   @override
-  String get painLevel_title => 'Pain Level';
+  String get painLevel_title => 'Intensità del dolore';
 
   @override
-  String get painLevel_none => 'None';
+  String get painLevel_none => 'Assente';
 
   @override
-  String get painLevel_mild => 'Mild';
+  String get painLevel_mild => 'Leggero';
 
   @override
-  String get painLevel_moderate => 'Moderate';
+  String get painLevel_moderate => 'Medio';
 
   @override
-  String get painLevel_severe => 'Severe';
+  String get painLevel_severe => 'Forte';
 
   @override
-  String get pain_unbearable => 'Unbearable';
+  String get pain_unbearable => 'Insopportabile';
 
   @override
   String get reversibleContraceptive_hormonalIud => 'Hormonal IUD';
@@ -406,39 +406,39 @@ class AppLocalizationsEs extends AppLocalizations {
   String get error_valueCannotBeNull => 'Value cannot be null';
 
   @override
-  String get notification_periodTitle => 'Period Approaching';
+  String get notification_periodTitle => 'Ciclo in arrivo';
 
   @override
   String notification_periodBody(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'Your next period is estimated to start in $count days.',
-      one: 'Your next period is estimated to start in 1 day.',
+      other: 'Il tuo prossimo ciclo dovrebbe iniziare tra $count giorni.',
+      one: 'Il tuo prossimo ciclo dovrebbe iniziare tra 1 giorno.',
     );
     return '$_temp0';
   }
 
   @override
-  String get notification_periodOverdueTitle => 'Period Overdue';
+  String get notification_periodOverdueTitle => 'Ciclo in ritardo';
 
   @override
   String notification_periodOverdueBody(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'Your next period is overdue by $count days.',
-      one: 'Your next period is overdue by 1 day.',
+      other: 'Il tuo ciclo è in ritardo di $count giorni.',
+      one: 'Il tuo ciclo è in ritardo di 1 giorno.',
     );
     return '$_temp0';
   }
 
   @override
-  String get notification_pillTitle => 'Pill Reminder';
+  String get notification_pillTitle => 'Promemoria pillola';
 
   @override
   String get notification_pillBody =>
-      'Don\'t forget to take your pill for today.';
+      'Non dimenticare di prendere la pillola oggi.';
 
   @override
   String get notification_reversibleContraceptiveTitle =>
@@ -521,52 +521,53 @@ class AppLocalizationsEs extends AppLocalizations {
   String get mainScreen_sanitaryPageTitle => 'Sanitary Products';
 
   @override
-  String get mainScreen_pillsPageTitle => 'Pills';
+  String get mainScreen_pillsPageTitle => 'Pillole';
 
   @override
   String get mainScreen_reversibleContraceptivesPageTitle =>
       'Reversible Contraceptives';
 
   @override
-  String get mainScreen_settingsPageTitle => 'Settings';
+  String get mainScreen_settingsPageTitle => 'Impostazioni';
 
   @override
-  String get insightsScreen_errorPrefix => 'Error:';
+  String get insightsScreen_errorPrefix => 'Errore:';
 
   @override
-  String get insightsScreen_noDataAvailable => 'No data available.';
+  String get insightsScreen_noDataAvailable => 'Nessun dato disponibile.';
 
   @override
-  String get logsScreen_calculatingPrediction => 'Calculating prediction...';
+  String get logsScreen_calculatingPrediction =>
+      'Calcolo previsione in corso...';
 
   @override
   String get logScreen_logAtLeastTwoPeriods =>
-      'Log at least two periods to estimate next cycle.';
+      'Registra almeno due cicli per stimare il prossimo.';
 
   @override
-  String get logScreen_nextPeriodEstimate => 'Next period Est';
+  String get logScreen_nextPeriodEstimate => 'Prossimo ciclo previsto';
 
   @override
-  String get logScreen_periodDueToday => 'Period due today';
+  String get logScreen_periodDueToday => 'Ciclo previsto per oggi';
 
   @override
   String logScreen_periodOverdueBy(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'Period overdue by $count days',
-      one: 'Period overdue by 1 day',
+      other: 'Ciclo in ritardo di $count giorni',
+      one: 'Ciclo in ritardo di 1 giorno',
     );
     return '$_temp0';
   }
 
   @override
   String get pillScreen_pillForTodayMarkedAsTaken =>
-      'Pill for today marked as taken.';
+      'Pillola di oggi segnata come presa.';
 
   @override
   String get pillScreen_pillForTodayMarkedAsSkipped =>
-      'Pill for today marked as skipped.';
+      'Pillola di oggi segnata come saltata.';
 
   @override
   String get reversibleContraceptiveScreen_noRecordsFound =>
@@ -648,61 +649,62 @@ class AppLocalizationsEs extends AppLocalizations {
   String get settingsScreen_profileUpdated => 'Profile updated successfully';
 
   @override
-  String get settingsScreen_selectHistoryView => 'Select History View';
+  String get settingsScreen_selectHistoryView => 'Seleziona vista cronologia';
 
   @override
-  String get settingsScreen_deleteRegimen_question => 'Delete Regimen?';
+  String get settingsScreen_deleteRegimen_question =>
+      'Cancellare piano pillola?';
 
   @override
   String get settingsScreen_deleteRegimenDescription =>
-      'This will delete your current pill pack settings and all associated pill logs. This cannot be undone.';
+      'Questo eliminerà le impostazioni della tua confezione di pillole e tutta la cronologia associata. Questa operazione non può essere annullata.';
 
   @override
   String get settingsScreen_allLogsHaveBeenCleared =>
-      'All logs have been cleared.';
+      'Tutti i dati sono stati eliminati.';
 
   @override
-  String get settingsScreen_clearAllLogs_question => 'Clear All Logs?';
+  String get settingsScreen_clearAllLogs_question => 'Eliminare tutti i dati?';
 
   @override
   String get settingsScreen_deleteAllLogsDescription =>
-      'This will permanently delete all your period logs. Your app settings will not be affected.';
+      'Questo cancellerà definitivamente tutti i dati del ciclo. Le impostazioni dell\'app non verranno modificate.';
 
   @override
-  String get settingsScreen_appearance => 'Appearance';
+  String get settingsScreen_appearance => 'Aspetto';
 
   @override
-  String get settingsScreen_historyViewStyle => 'History View Style';
+  String get settingsScreen_historyViewStyle => 'Aspetto della cronologia';
 
   @override
-  String get settingsScreen_appTheme => 'App Theme';
+  String get settingsScreen_appTheme => 'Tema app';
 
   @override
-  String get settingsScreen_themeLight => 'Light';
+  String get settingsScreen_themeLight => 'Chiaro';
 
   @override
-  String get settingsScreen_themeDark => 'Dark';
+  String get settingsScreen_themeDark => 'Scuro';
 
   @override
-  String get settingsScreen_themeSystem => 'System';
+  String get settingsScreen_themeSystem => 'Come il sistema';
 
   @override
-  String get settingsScreen_dynamicTheme => 'Dynamic Theme';
+  String get settingsScreen_dynamicTheme => 'Tema dinamico';
 
   @override
-  String get settingsScreen_useWallpaperColors => 'Use Wallpaper Colors';
+  String get settingsScreen_useWallpaperColors => 'Usa i colori dello sfondo';
 
   @override
-  String get settingsScreen_themeColor => 'Theme Color';
+  String get settingsScreen_themeColor => 'Colore tema';
 
   @override
-  String get settingsScreen_pickAColor => 'Pick a Color';
+  String get settingsScreen_pickAColor => 'Scegli un colore';
 
   @override
-  String get settingsScreen_view => 'View';
+  String get settingsScreen_view => 'Visualizza';
 
   @override
-  String get settingsScreen_birthControl => 'Birth Control';
+  String get settingsScreen_birthControl => 'Contraccezione';
 
   @override
   String get settingsScreen_enablePillTracking => 'Enable Pill Tracking';
@@ -712,37 +714,39 @@ class AppLocalizationsEs extends AppLocalizations {
       'Track your daily pill intake and get reminders.';
 
   @override
-  String get settingsScreen_setUpPillRegimen => 'Set Up Pill Regimen';
+  String get settingsScreen_setUpPillRegimen => 'Crea piano pillola';
 
   @override
   String get settingsScreen_trackYourDailyPillIntake =>
-      'Track Your Daily Pill Intake';
+      'Monitoraggio pillola giornaliero';
 
   @override
-  String get settingsScreen_dailyPillReminder => 'Daily Pill Reminder';
+  String get settingsScreen_dailyPillReminder =>
+      'Promemoria pillola giornaliero';
 
   @override
-  String get settingsScreen_reminderTime => 'Reminder Time';
+  String get settingsScreen_reminderTime => 'Orario promemoria';
 
   @override
   String get settingsScreen_periodPredictionAndReminders =>
-      'Period Prediction & Reminders';
+      'Previsioni ciclo e promemoria';
 
   @override
   String get settingsScreen_upcomingPeriodReminder =>
-      'Upcoming Period Reminder';
+      'Promemoria ciclo in arrivo';
 
   @override
-  String get settingsScreen_remindMeBefore => 'Remind Me Before';
+  String get settingsScreen_remindMeBefore => 'Avvisami prima';
 
   @override
-  String get settingsScreen_notificationTime => 'Notification Time';
+  String get settingsScreen_notificationTime => 'Orario notifica';
 
   @override
-  String get settingsScreen_overduePeriodReminder => 'Overdue Period Reminder';
+  String get settingsScreen_overduePeriodReminder =>
+      'Promemoria ciclo in ritardo';
 
   @override
-  String get settingsScreen_remindMeAfter => 'Remind Me After';
+  String get settingsScreen_remindMeAfter => 'Avvisami dopo';
 
   @override
   String get settingsScreen_enableReversibleContraceptiveTracking =>
@@ -823,48 +827,50 @@ class AppLocalizationsEs extends AppLocalizations {
   }
 
   @override
-  String get settingsScreen_pillRegimens => 'Pill Regimens';
+  String get settingsScreen_pillRegimens => 'Piani pillola';
 
   @override
-  String get settingsScreen_makeActive => 'Set as Active';
+  String get settingsScreen_makeActive => 'Imposta come attivo';
 
   @override
   String get settingsScreen_activeRegimenReminder =>
-      'Active Regimen Reminder Settings';
+      'Impostazioni promemoria piano attivo';
 
   @override
-  String get settingsScreen_pack => 'Pack';
+  String get settingsScreen_pack => 'Confezione';
 
   @override
-  String get settingsScreen_dataManagement => 'Data Management';
+  String get settingsScreen_dataManagement => 'Gestione dati';
 
   @override
-  String get settingsScreen_dangerZone => 'Danger Zone';
+  String get settingsScreen_dangerZone => 'Azioni irreversibili';
 
   @override
-  String get settingsScreen_clearAllLogs => 'Clear All Logs';
+  String get settingsScreen_clearAllLogs => 'Elimina tutti i dati';
 
   @override
   String get settingsScreen_clearAllLogsSubtitle =>
-      'Deletes your entire period and symptom history.';
+      'Elimina l\'intera cronologia del ciclo e dei sintomi.';
 
   @override
-  String get settingsScreen_clearAllPillData => 'Clear All Pill Data';
+  String get settingsScreen_clearAllPillData =>
+      'Elimina tutti i dati della pillola';
 
   @override
   String get settingsScreen_clearAllPillDataSubtitle =>
-      'Removes your pill regimen and intake history.';
+      'Rimuove il tuo piano pillola e la cronologia delle assunzioni.';
 
   @override
-  String get settingsScreen_clearAllPillData_question => 'Clear All Pill Data?';
+  String get settingsScreen_clearAllPillData_question =>
+      'Eliminare tutti i dati della pillola?';
 
   @override
   String get settingsScreen_deleteAllPillDataDescription =>
-      'This will permanently delete your pill regimen, reminders, and intake history.';
+      'Questo eliminerà definitivamente il tuo piano pillola, i promemoria e la cronologia delle assunzioni. Questa azione non può essere annullata.';
 
   @override
   String get settingsScreen_allPillDataCleared =>
-      'All pill data has been cleared.';
+      'Tutti i dati della pillola sono stati eliminati.';
 
   @override
   String get settingsScreen_clearAllReversibleContraceptiveData =>
@@ -907,10 +913,10 @@ class AppLocalizationsEs extends AppLocalizations {
       'All sanitary products data has been cleared.';
 
   @override
-  String get settingsScreen_exportPeriodData => 'Export Period Data';
+  String get settingsScreen_exportPeriodData => 'Esporta dati ciclo';
 
   @override
-  String get settingsScreen_exportPillData => 'Export Pill Data';
+  String get settingsScreen_exportPillData => 'Esporta dati pillola';
 
   @override
   String get settingsScreen_exportReversibleContraceptivesData =>
@@ -921,32 +927,32 @@ class AppLocalizationsEs extends AppLocalizations {
       'Export Sanitary Products Data';
 
   @override
-  String get settingsScreen_exportDataSubtitle => 'Create a JSON backup file.';
+  String get settingsScreen_exportDataSubtitle => 'Crea un backup JSON.';
 
   @override
-  String get settingsScreen_exportSuccessful => 'Data exported successfully.';
+  String get settingsScreen_exportSuccessful => 'Dati esportati con successo.';
 
   @override
-  String get settingsScreen_exportFailed => 'Export failed. Please try again.';
+  String get settingsScreen_exportFailed => 'Esportazione fallita. Riprova.';
 
   @override
-  String get settingsScreen_noDataToExport => 'No data found to export.';
+  String get settingsScreen_noDataToExport => 'Nessun dato da esportare.';
 
   @override
   String get settingsScreen_exportDataMessage =>
-      'Here is my MenstruDel data export.';
+      'Ecco la mia esportazione dati di MenstruDel.';
 
   @override
-  String get settingsScreen_exportDataTitle => 'Export Data';
+  String get settingsScreen_exportDataTitle => 'Esporta dati';
 
   @override
-  String get settingsScreen_importDataTitle => 'Import Data';
+  String get settingsScreen_importDataTitle => 'Importa dati';
 
   @override
-  String get settingsScreen_importPeriodData => 'Import Period Data';
+  String get settingsScreen_importPeriodData => 'Importa dati ciclo';
 
   @override
-  String get settingsScreen_importPillData => 'Import Pill Data';
+  String get settingsScreen_importPillData => 'Importa dati pillola';
 
   @override
   String get settingsScreen_importReversibleContraceptivesData =>
@@ -957,15 +963,16 @@ class AppLocalizationsEs extends AppLocalizations {
       'Import Sanitary Products Data';
 
   @override
-  String get settingsScreen_importDataSubtitle => 'Overwrites existing data.';
+  String get settingsScreen_importDataSubtitle =>
+      'Sovrascrive i dati esistenti.';
 
   @override
   String get settingsScreen_importPeriodData_question =>
-      'Are you sure you want to import Period Data?';
+      'Importare i dati del ciclo?';
 
   @override
   String get settingsScreen_importPillData_question =>
-      'Are you sure you want to import Pill Data?';
+      'Importare i dati della pillola?';
 
   @override
   String get settingsScreen_importReversibleContraceptiveData_question =>
@@ -977,11 +984,11 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get settingsScreen_importPeriodDataDescription =>
-      'Importing data will permanently overwrite all your existing period logs and period settings. This cannot be undone.';
+      'L\'importazione dei dati sovrascriverà definitivamente tutta la tua cronologia e le impostazioni del ciclo. Questa operazione non può essere annullata.';
 
   @override
   String get settingsScreen_importPillDataDescription =>
-      'Importing data will permanently overwrite all your existing pill history. This cannot be undone.';
+      'L\'importazione dei dati sovrascriverà definitivamente tutta la tua cronologia pillola. Questa operazione non può essere annullata.';
 
   @override
   String get settingsScreen_importReversibleContraceptiveDataDescription =>
@@ -992,44 +999,43 @@ class AppLocalizationsEs extends AppLocalizations {
       'Importing data will permanently overwrite all your existing sanitary product history. This cannot be undone.';
 
   @override
-  String get settingsScreen_importSuccessful => 'Data imported successfully!';
+  String get settingsScreen_importSuccessful => 'Dati importati con successo';
 
   @override
   String get settingsScreen_importFailed =>
-      'Failed to import data. Please try again.';
+      'Importazione dati fallita. Riprova.';
 
   @override
-  String get settingsScreen_importInvalidFile =>
-      'Invalid file format or data structure.';
+  String get settingsScreen_importInvalidFile => 'Formato file non valido.';
 
   @override
   String get settingsScreen_importErrorGeneral =>
-      'Failed to import data. Please ensure the file is saved locally.';
+      'Importazione dati fallita. Assicurati che il file sia salvato sul dispositivo.';
 
   @override
   String settingsScreen_importErrorPlatform(String message) {
-    return 'Import failed: $message. Please ensure the file is saved on the device and try again.';
+    return 'Importazione fallita: $message. Assicurati che il file sia salvato sul dispositivo e riprova.';
   }
 
   @override
-  String get settingsScreen_security => 'Security';
+  String get settingsScreen_security => 'Sicurezza';
 
   @override
-  String get securityScreen_enableBiometricLock => 'Enable Biometric Lock';
+  String get securityScreen_enableBiometricLock => 'Abilita blocco biometrico';
 
   @override
   String get securityScreen_enableBiometricLockSubtitle =>
-      'Require fingerprint or face ID to open the app.';
+      'Richiedi impronta digitale o riconoscimento facciale per aprire l\'app.';
 
   @override
   String get securityScreen_noBiometricsAvailable =>
-      'No passcode, fingerprint, or face ID found. Please set one up in your device\'s settings.';
+      'Nessun codice di sblocco, impronta digitale o riconoscimento facciale trovato. Configuralo nelle impostazioni del tuo dispositivo.';
 
   @override
   String get settingsScreen_userProfile => 'You';
 
   @override
-  String get settingsScreen_preferences => 'Preferences';
+  String get settingsScreen_preferences => 'Preferenze';
 
   @override
   String get preferencesScreen_language => 'Language';
@@ -1054,16 +1060,17 @@ class AppLocalizationsEs extends AppLocalizations {
   String get preferencesScreen_StartingDayOfWeek => 'Starting Day of the Week';
 
   @override
-  String get settingsScreen_about => 'About';
+  String get settingsScreen_about => 'Informazioni';
 
   @override
-  String get aboutScreen_version => 'Version';
+  String get aboutScreen_version => 'Versione';
 
   @override
   String get aboutScreen_github => 'GitHub';
 
   @override
-  String get aboutScreen_githubSubtitle => 'Source code and issue tracking';
+  String get aboutScreen_githubSubtitle =>
+      'Codice sorgente e segnalazione errori';
 
   @override
   String get aboutScreen_discord => 'Discord';
@@ -1072,13 +1079,13 @@ class AppLocalizationsEs extends AppLocalizations {
   String get aboutScreen_discordSubtitle => 'Support and community';
 
   @override
-  String get aboutScreen_share => 'Share';
+  String get aboutScreen_share => 'Condividi';
 
   @override
-  String get aboutScreen_shareSubtitle => 'Share the app with friends';
+  String get aboutScreen_shareSubtitle => 'Condividi l\'app con gli amici';
 
   @override
-  String get aboutScreen_urlError => 'Could not open the link.';
+  String get aboutScreen_urlError => 'Impossibile aprire il link.';
 
   @override
   String get logSummaryWidget_loggedDays => 'Logged Days';
@@ -1094,10 +1101,10 @@ class AppLocalizationsEs extends AppLocalizations {
   String get cycleLengthVarianceWidget_title => 'Cycle Length Variance';
 
   @override
-  String get cycleLengthVarianceWidget_averageCycle => 'Avg. Cycle';
+  String get cycleLengthVarianceWidget_averageCycle => 'Ciclo medio';
 
   @override
-  String get cycleLengthVarianceWidget_cycle => 'Cycle';
+  String get cycleLengthVarianceWidget_cycle => 'Ciclo mestruale';
 
   @override
   String get periodDurationWidget_logAtLeastTwoPeriods =>
@@ -1114,118 +1121,122 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get flowIntensityWidget_flowIntensityBreakdown =>
-      'Flow Intensity Breakdown';
+      'Dettaglio intensità flusso';
 
   @override
   String get flowIntensityWidget_noFlowDataLoggedYet =>
-      'No flow data logged yet.';
+      'Nessun dato del flusso registrato.';
 
   @override
-  String get painLevelWidget_noPainDataLoggedYet => 'No pain data logged yet.';
+  String get painLevelWidget_noPainDataLoggedYet =>
+      'Nessun dato dolore registrato.';
 
   @override
-  String get painLevelWidget_painLevelBreakdown => 'Pain Level Breakdown';
+  String get painLevelWidget_painLevelBreakdown => 'Dettagli livello dolore';
 
   @override
-  String get monthlyFlowChartWidget_noDataToDisplay => 'No data to display.';
+  String get monthlyFlowChartWidget_noDataToDisplay =>
+      'Nessun dato da mostrare.';
 
   @override
-  String get monthlyFlowChartWidget_cycleFlowPatterns => 'Cycle Flow Patterns';
+  String get monthlyFlowChartWidget_cycleFlowPatterns =>
+      'Andamenti del flusso mestruale';
 
   @override
   String get monthlyFlowChartWidget_cycleFlowPatternsDescription =>
-      'Each line represents one complete cycle';
+      'Ogni linea rappresenta un ciclo completo.';
 
   @override
   String get symptomFrequencyWidget_noSymptomsLoggedYet =>
-      'No symptoms logged yet.';
+      'Nessun sintomo registrato.';
 
   @override
-  String get symptomFrequencyWidget_mostCommonSymptoms =>
-      'Most Common Symptoms';
+  String get symptomFrequencyWidget_mostCommonSymptoms => 'Sintomi più comuni';
 
   @override
-  String get journalViewWidget_logYourFirstPeriod => 'Log your first period.';
+  String get journalViewWidget_logYourFirstPeriod =>
+      'Registra il tuo primo ciclo.';
 
   @override
   String get listViewWidget_noPeriodsLogged =>
-      'No periods logged yet.\nTap the + button to add one.';
+      'Nessun ciclo registrato.\nTocca il pulsante + per aggiungerne uno.';
 
   @override
-  String get listViewWidget_confirmDelete => 'Confirm Delete';
+  String get listViewWidget_confirmDelete => 'Conferma eliminazione';
 
   @override
   String get listViewWidget_confirmDeleteDescription =>
-      'Are you sure you want to delete this entry?';
+      'Sei sicura di voler eliminare questa voce?';
 
   @override
   String get emptyPillStateWidget_noPillRegimenFound =>
-      'No pill regimen found.';
+      'Nessun piano pillola trovato.';
 
   @override
   String get emptyPillStateWidget_noPillRegimenFoundDescription =>
-      'Set up your pill pack in settings to start tracking.';
+      'Configura la tua confezione di pillole nelle impostazioni per iniziare il monitoraggio.';
 
   @override
   String pillStatus_pillsOfTotal(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'of $count pills',
-      one: 'of 1 pill',
+      other: 'di $count pillole',
+      one: 'di 1 pillola',
     );
     return '$_temp0';
   }
 
   @override
-  String get pillStatus_undo => 'Undo';
+  String get pillStatus_undo => 'Annulla';
 
   @override
-  String get pillStatus_skip => 'Skip';
+  String get pillStatus_skip => 'Salta';
 
   @override
-  String get pillStatus_markAsTaken => 'Mark As Taken';
+  String get pillStatus_markAsTaken => 'Segna come presa';
 
   @override
   String pillStatus_packStartInFuture(DateTime date) {
     final intl.DateFormat dateDateFormat = intl.DateFormat.yMMMd(localeName);
     final String dateString = dateDateFormat.format(date);
 
-    return 'Your next pill pack starts on $dateString.';
+    return 'La tua prossima confezione di pillole inizia il $dateString.';
   }
 
   @override
-  String get regimenSetupWidget_setUpPillRegimen => 'Set Up Pill Regimen';
+  String get regimenSetupWidget_setUpPillRegimen => 'Configura piano pillola';
 
   @override
-  String get regimenSetupWidget_packName => 'Pack Name';
+  String get regimenSetupWidget_packName => 'Nome confezione';
 
   @override
-  String get regimenSetupWidget_pleaseEnterAName => 'Please enter a name';
+  String get regimenSetupWidget_pleaseEnterAName => 'Inserire un nome';
 
   @override
-  String get regimenSetupWidget_activePills => 'Active Pills';
+  String get regimenSetupWidget_activePills => 'Pillole attive';
 
   @override
-  String get regimenSetupWidget_enterANumber => 'Enter a number';
+  String get regimenSetupWidget_enterANumber => 'Inserire un numero';
 
   @override
-  String get regimenSetupWidget_placeboPills => 'Placebo Pills';
+  String get regimenSetupWidget_placeboPills => 'Pillole vuote (placebo)';
 
   @override
-  String get regimenSetupWidget_firstDayOfThisPack => 'First Day of This Pack';
+  String get regimenSetupWidget_firstDayOfThisPack =>
+      'Primo giorno di questa confezione';
 
   @override
-  String get symptomEntrySheet_logYourDay => 'Log Your Day';
+  String get symptomEntrySheet_logYourDay => 'Inserisci i dati giornalieri';
 
   @override
-  String get symptomEntrySheet_symptomsOptional => 'Symptoms (Optional)';
+  String get symptomEntrySheet_symptomsOptional => 'Sintomi (facoltativo)';
 
   @override
-  String get periodDetailsSheet_symptoms => 'Symptoms';
+  String get periodDetailsSheet_symptoms => 'Sintomi';
 
   @override
-  String get periodDetailsSheet_flow => 'Flow';
+  String get periodDetailsSheet_flow => 'Flusso';
 
   @override
   String
@@ -1256,8 +1267,8 @@ class AppLocalizationsEs extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'Days',
-      one: 'Day',
+      other: 'Giorni',
+      one: 'Giorno',
     );
     return '$_temp0';
   }
@@ -1266,7 +1277,8 @@ class AppLocalizationsEs extends AppLocalizations {
   String get customSymptomDialog_newSymptom => 'New Symptom';
 
   @override
-  String get customSymptomDialog_enterCustomSymptom => 'Enter a custom symptom';
+  String get customSymptomDialog_enterCustomSymptom =>
+      'Please enter a custom symptom';
 
   @override
   String get customSymptomDialog_temporarySymptom => 'Temporary Symptom';

@@ -2,21 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 
-typedef LarcSaveCallback = void Function(DateTime date, String? note);
+typedef ReversibleContraceptiveSaveCallback = void Function(DateTime date, String? note);
 
-class LogLarcBottomSheet extends StatefulWidget {
-  final LarcSaveCallback onSave;
+class LogReversibleContraceptiveBottomSheet extends StatefulWidget {
+  final ReversibleContraceptiveSaveCallback onSave;
 
-  const LogLarcBottomSheet({
+  const LogReversibleContraceptiveBottomSheet({
     super.key,
     required this.onSave,
   });
 
   @override
-  State<LogLarcBottomSheet> createState() => _LogLarcBottomSheetState();
+  State<LogReversibleContraceptiveBottomSheet> createState() => _LogReversibleContraceptiveBottomSheetState();
 }
 
-class _LogLarcBottomSheetState extends State<LogLarcBottomSheet> {
+class _LogReversibleContraceptiveBottomSheetState extends State<LogReversibleContraceptiveBottomSheet> {
   DateTime _selectedDate = DateTime.now();
   final _noteController = TextEditingController();
 
@@ -88,7 +88,7 @@ class _LogLarcBottomSheetState extends State<LogLarcBottomSheet> {
             const SizedBox(height: 12),
             
             // --- Title ---
-            Center(child: Text(l10n.larcEntrySheet_logLARCDetails, style: textTheme.titleLarge)),
+            Center(child: Text(l10n.reversibleContraceptiveEntrySheet_logReversibleContraceptiveDetails, style: textTheme.titleLarge)),
             
             // --- Date Picker ---
             const SizedBox(height: 24),

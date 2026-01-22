@@ -10,6 +10,8 @@ enum CyclePhase {
   ovulation,
   /// Luteal phase (Post-Ovulation)
   luteal,
+  /// Late phase (After Cycle)
+  late,
   /// Unknown phase
   unknown,
 }
@@ -25,6 +27,8 @@ extension FlowExtension on CyclePhase {
         return l10n.cyclePhase_ovulation;
       case CyclePhase.luteal:
         return l10n.cyclePhase_luteal;
+      case CyclePhase.late:
+        return l10n.cyclePhase_late;
       case CyclePhase.unknown:
         return l10n.cyclePhase_unknown;
     }
@@ -40,6 +44,8 @@ extension FlowExtension on CyclePhase {
         return l10n.cyclePhase_ovulationDescription;
       case CyclePhase.luteal:
         return l10n.cyclePhase_lutealDescription;
+      case CyclePhase.late:
+        return l10n.cyclePhase_lateDescription;
       case CyclePhase.unknown:
         return l10n.cyclePhase_unknownDescription;
     }
@@ -55,6 +61,8 @@ extension FlowExtension on CyclePhase {
         return Icons.favorite;
       case CyclePhase.luteal:
         return Icons.cloud_queue;
+      case CyclePhase.late:
+        return Icons.error_outline;
       case CyclePhase.unknown:
         return Icons.help_outline;
     }
@@ -70,6 +78,8 @@ extension FlowExtension on CyclePhase {
         return Colors.yellow;
       case CyclePhase.luteal:
         return Colors.purple;
+      case CyclePhase.late:
+        return Colors.orange;
       case CyclePhase.unknown:
         return Colors.grey;
     }

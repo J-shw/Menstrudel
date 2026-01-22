@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:menstrudel/database/repositories/larc_repository.dart';
-import 'package:menstrudel/models/birth_control/larcs/larc_log_entry.dart';
+import 'package:menstrudel/database/repositories/reversible_contraceptive_repository.dart';
+import 'package:menstrudel/models/birth_control/reversible_contraceptives/reversible_contraceptive_log_entry.dart';
 import 'package:menstrudel/services/settings_service.dart';
-import 'package:menstrudel/widgets/larcs/sheets/edit_larc_bottom_sheet.dart';
-import 'package:menstrudel/widgets/larcs/sheets/log_larc_bottom_sheet.dart';
+import 'package:menstrudel/screens/dashboards/reversible_contraceptive/widgets/edit_reversible_contraceptive_bottom_sheet.dart';
+import 'package:menstrudel/screens/dashboards/reversible_contraceptive/widgets/reversible_contraceptive_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 
-class LogLarcUIController extends ChangeNotifier {
-  final LarcRepository _repo = LarcRepository();
+class LogReversibleContraceptiveUIController extends ChangeNotifier {
+  final ReversibleContraceptiveRepository _repo = ReversibleContraceptiveRepository();
 
-  /// Handles creating a new LARC log entry
-  Future<void> handleCreateNewLarcLog({
+  /// Handles creating a new Reversible Contraceptive log entry
+  Future<void> handleCreateNewReversibleContraceptiveLog({
     required BuildContext context,
   }) async {
     final settingsService = context.read<SettingsService>();
@@ -22,16 +22,16 @@ class LogLarcUIController extends ChangeNotifier {
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
       builder: (sheetContext) {
-        return LogLarcBottomSheet(
+        return LogReversibleContraceptiveBottomSheet(
           onSave: (date, note) async {
-            final newEntry = LarcLogEntry(
+            final newEntry = ReversibleContraceptiveLogEntry(
               id: null,
               date: date,
-              type: settingsService.larcType,
+              type: settingsService.reversibleContraceptiveType,
               note: note,
             );
 
-            await _repo.logLarc(newEntry);
+            await _repo.log(newEntry);
             if (!sheetContext.mounted) return;
             notifyListeners();
           },
@@ -40,10 +40,10 @@ class LogLarcUIController extends ChangeNotifier {
     );
   }
 
-  /// Handles editing or deleting an existing LARC log
-  Future<void> handleEditLarcLog({
+  /// Handles editing or deleting an existing ReversibleContraceptive log
+  Future<void> handleEditReversibleContraceptiveLog({
     required BuildContext context,
-    required LarcLogEntry entry,
+    required ReversibleContraceptiveLogEntry entry,
   }) async {
     await showModalBottomSheet<void>(
       context: context,
@@ -52,7 +52,7 @@ class LogLarcUIController extends ChangeNotifier {
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
       builder: (sheetContext) {
-        return EditLarcLogBottomSheet(
+        return EditReversibleContraceptiveLogBottomSheet(
           log: entry,
           onSave: (updatedEntry) async {
             await _repo.updateLog(updatedEntry);

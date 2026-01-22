@@ -270,9 +270,9 @@ class NotificationService {
     return DateTime.fromMillisecondsSinceEpoch(storedTimestamp);
   }
 
-  // LARC
+  // Reversible Contraceptives
 
-  static Future<void> scheduleLarcReminder({
+  static Future<void> scheduleReversibleContraceptiveReminder({
     required DateTime reminderDateTime,
     required String title,
     required String body,
@@ -281,18 +281,18 @@ class NotificationService {
 
     if (scheduledDate.isBefore(tz.TZDateTime.now(tz.local))) throw PastNotificationException();
 
-    debugPrint('Scheduling LARC reminder');
+    debugPrint('Scheduling reverible contraceptive reminder');
 
     const details = fln.NotificationDetails(
       android: fln.AndroidNotificationDetails(
-        larcReminderChannelId, larcReminderChannelName,
+        reversibleContraceptivesReminderChannelId, reversibleContraceptivesReminderChannelName,
         importance: fln.Importance.max, priority: fln.Priority.high,
       ),
       iOS: fln.DarwinNotificationDetails(presentSound: true, presentBadge: true, presentAlert: true),
     );
 
     await _plugin.zonedSchedule(
-        larcReminderId,
+        reversibleContraceptiveReminderId,
         title,
         body,
         scheduledDate,
@@ -300,9 +300,9 @@ class NotificationService {
         androidScheduleMode: fln.AndroidScheduleMode.exactAllowWhileIdle);
   }
 
-  static Future<void> cancelLarcReminder() async {
-    debugPrint('Canceling LARC reminder');
-    await _plugin.cancel(larcReminderId);
+  static Future<void> cancelReversibleContraceptiveReminder() async {
+    debugPrint('Canceling reverisble contraceptive reminder');
+    await _plugin.cancel(reversibleContraceptiveReminderId);
   }
 
 
