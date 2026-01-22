@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/database/repositories/pills_repository.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
-import 'package:menstrudel/models/birth_control/larcs/larc_types_enum.dart';
+import 'package:menstrudel/models/birth_control/reversible_contraceptives/reversible_contraceptive_types_enum.dart';
 import 'package:menstrudel/models/birth_control/pills/pill_regimen.dart';
 import 'package:menstrudel/models/birth_control/pills/pill_reminder.dart';
 import 'package:menstrudel/services/notification_service.dart';
 import 'package:menstrudel/widgets/dialogs/delete_confirmation_dialog.dart';
-import 'package:menstrudel/widgets/dialogs/larc_duration_config_dialog.dart';
+import 'package:menstrudel/widgets/dialogs/reversible_contraceptive_duration_config_dialog.dart';
 import 'package:menstrudel/widgets/settings/regimen_setup_dialog.dart';
 import 'package:menstrudel/services/settings_service.dart';
 import 'package:provider/provider.dart';
@@ -146,9 +146,9 @@ class _BirthControlSettingsScreenState extends State<BirthControlSettingsScreen>
     await _loadSettings();
   }
 
-  Future<void> _selectLarcReminderTime() async {
+  Future<void> _selectReversibleContraceptiveReminderTime() async {
     final settingsService = context.read<SettingsService>();
-    final TimeOfDay initialTime = settingsService.larcReminderTime; 
+    final TimeOfDay initialTime = settingsService.reversibleContraceptiveReminderTime; 
 
     final TimeOfDay? pickedTime = await showTimePicker(
       context: context,
@@ -156,7 +156,7 @@ class _BirthControlSettingsScreenState extends State<BirthControlSettingsScreen>
     );
 
     if (pickedTime != null && pickedTime != initialTime) {
-      await settingsService.setLarcReminderTime(pickedTime); 
+      await settingsService.setReversibleContraceptiveReminderTime(pickedTime); 
     }
   }
 
@@ -165,9 +165,9 @@ class _BirthControlSettingsScreenState extends State<BirthControlSettingsScreen>
     final l10n = AppLocalizations.of(context)!;
     final settingsService = context.watch<SettingsService>();
     final bool pillEnabled = settingsService.isPillNavEnabled;
-    final bool larcEnabled = settingsService.isLarcNavEnabled;
+    final bool reversibleContraceptiveEnabled = settingsService.isReversibleContraceptiveNavEnabled;
     final bool showReminderSettings = _activeRegimen != null && !_isLoading; 
-    final LarcTypes activeLarcType = settingsService.larcType;
+    final ReversibleContraceptiveTypes activeReversibleContraceptiveType = settingsService.reversibleContraceptiveType;
 
     const Widget shortDivider = Padding(padding: EdgeInsets.symmetric(horizontal: 24), child: Divider());
 
@@ -289,61 +289,61 @@ class _BirthControlSettingsScreenState extends State<BirthControlSettingsScreen>
                 const Divider(),
                 
                 SwitchListTile(
-                  title: Text(l10n.settingsScreen_enableLarcTracking),
-                  subtitle: Text(l10n.settingsScreen_larcDescription),
-                  value: larcEnabled,
+                  title: Text(l10n.settingsScreen_enableReversibleContraceptiveTracking),
+                  subtitle: Text(l10n.settingsScreen_reversibleContraceptiveDescription),
+                  value: reversibleContraceptiveEnabled,
                   onChanged: (bool value) {
-                    context.read<SettingsService>().setLarcNavEnabled(value);
+                    context.read<SettingsService>().setReversibleContraceptiveNavEnabled(value);
                   },
                 ),
-                if (larcEnabled) ...[
+                if (reversibleContraceptiveEnabled) ...[
                   shortDivider,
                   ListTile(
                     leading: const Icon(Icons.verified_user_outlined),
-                    title: Text(l10n.settingsScreen_larcType),
-                    trailing: DropdownButton<LarcTypes>(
-                      value: settingsService.larcType,
-                      items: LarcTypes.values.map((type) {
-                        return DropdownMenuItem<LarcTypes>(
+                    title: Text(l10n.settingsScreen_reversibleContraceptiveType),
+                    trailing: DropdownButton<ReversibleContraceptiveTypes>(
+                      value: settingsService.reversibleContraceptiveType,
+                      items: ReversibleContraceptiveTypes.values.map((type) {
+                        return DropdownMenuItem<ReversibleContraceptiveTypes>(
                           value: type,
                           child: Text(type.getDisplayName(l10n)),
                         );
                       }).toList(),
-                      onChanged: (LarcTypes? selectedType) {
+                      onChanged: (ReversibleContraceptiveTypes? selectedType) {
                         if (selectedType != null) {
-                          context.read<SettingsService>().setLarcType(selectedType);
+                          context.read<SettingsService>().setReversibleContraceptiveType(selectedType);
                         }
                       },
                     ),
                   ),
                   ListTile(
                     leading: const Icon(Icons.date_range_outlined),
-                    title: Text(l10n.settingsScreen_larcDuration),
-                    subtitle: Text('${l10n.settingsScreen_currentDuration}: ${settingsService.getLarcDurationDays(activeLarcType)} ${l10n.days}'),
+                    title: Text(l10n.settingsScreen_reversibleContraceptiveDuration),
+                    subtitle: Text('${l10n.settingsScreen_currentDuration}: ${settingsService.getReversibleContraceptiveDurationDays(activeReversibleContraceptiveType)} ${l10n.days}'),
                     trailing: const Icon(Icons.edit_outlined),
                     onTap: () async {
                       final result = await showDialog<int>(
                         context: context,
-                        builder: (ctx) => LarcDurationConfigDialog(larcType: activeLarcType),
+                        builder: (ctx) => ReversableContraceptiveDurationConfigDialog(contraceptiveType: activeReversibleContraceptiveType),
                       );
 
                       if (result != null && context.mounted) {
-                        await context.read<SettingsService>().setLarcDurationForType(activeLarcType, result);
+                        await context.read<SettingsService>().setReversibleContraceptiveDurationForType(activeReversibleContraceptiveType, result);
                       }
                     },
                   ),
                   SwitchListTile(
-                    title: Text(l10n.settingsScreen_enableLARCReminder),
-                    value: settingsService.larcNotificationsEnabled,
+                    title: Text(l10n.settingsScreen_enableReversibleContraceptiveReminder),
+                    value: settingsService.reversibleContraceptiveNotificationsEnabled,
                     onChanged: (bool value) {
-                      context.read<SettingsService>().setLarcNotificationsEnabled(value);
+                      context.read<SettingsService>().setReversibleContraceptiveNotificationsEnabled(value);
                     },
                   ),
-                  if (settingsService.larcNotificationsEnabled) ...[
+                  if (settingsService.reversibleContraceptiveNotificationsEnabled) ...[
                     ListTile(
                       title: Text(l10n.settingsScreen_remindMeBefore),
                       trailing: DropdownButton<int>(
-                        value: settingsService.larcReminderDays,
+                        value: settingsService.reversibleContraceptiveReminderDays,
                         items: [1, 7, 14, 30].map((int days) {
                           return DropdownMenuItem<int>(
                             value: days,
@@ -352,7 +352,7 @@ class _BirthControlSettingsScreenState extends State<BirthControlSettingsScreen>
                         }).toList(),
                         onChanged: (int? newDays) {
                           if (newDays != null) {
-                            context.read<SettingsService>().setLarcReminderDays(newDays);
+                            context.read<SettingsService>().setReversibleContraceptiveReminderDays(newDays);
                           }
                         },
                       ),
@@ -362,10 +362,10 @@ class _BirthControlSettingsScreenState extends State<BirthControlSettingsScreen>
                       leading: const Icon(Icons.access_time),
                       title: Text(l10n.settingsScreen_reminderTime),
                       trailing: Text(
-                        settingsService.larcReminderTime.format(context),
+                        settingsService.reversibleContraceptiveReminderTime.format(context),
                         style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                       ),
-                      onTap: _selectLarcReminderTime,
+                      onTap: _selectReversibleContraceptiveReminderTime,
                     ),
                   ],
                 ]

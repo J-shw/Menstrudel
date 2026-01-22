@@ -1,13 +1,13 @@
-# LarcRepository Test Suite
+# ReversibleContraceptive Test Suite
 
-This document outlines the unit tests for the `LarcRepository` and its `Manager`, detailing the purpose of each test case.
+This document outlines the unit tests for the `ReversibleContraceptiveRepository` and its `Manager`, detailing the purpose of each test case.
 
-## Core LARC Operations (CRUD)
-Verifies the ability to manage Long-Acting Reversible Contraception (LARC) logs.
+## Core ReversibleContraceptive Operations (CRUD)
+Verifies the ability to manage Reversible Contraceptive logs.
 
 | Test Case Description | Purpose |
 |---|---|
-| `logLarc should save a new entry` | Verifies that a LARC log is correctly inserted into the database. |
+| `logReversibleContraceptive should save a new entry` | Verifies that a ReversibleContraceptive log is correctly inserted into the database. |
 | `getAllLogs should return logs in descending date order` | Ensures logs are retrieved with the most recent entries first. |
 | `getLogById should return the correct entry` | Validates that a specific log can be fetched using its unique ID. |
 | `updateLog should modify an existing entry` | Ensures that changes to a log (e.g., type or notes) are saved correctly. |

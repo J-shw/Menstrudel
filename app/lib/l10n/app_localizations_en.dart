@@ -4,9 +4,9 @@ import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
 
-/// The translations for Spanish Castilian (`es`).
-class AppLocalizationsEs extends AppLocalizations {
-  AppLocalizationsEs([String locale = 'es']) : super(locale);
+/// The translations for English (`en`).
+class AppLocalizationsEn extends AppLocalizations {
+  AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
   String get appTitle => 'Menstrudel';
@@ -492,7 +492,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String onboardingScreen_contraceptionHint(String sectionName) {
-    return 'Note: You can enable Pill or LARC tracking later in the app settings under \'$sectionName\' if wanted.';
+    return 'Note: You can enable Pill or Reversible Contraceptive tracking later in the app settings under \'$sectionName\' if wanted.';
   }
 
   @override
