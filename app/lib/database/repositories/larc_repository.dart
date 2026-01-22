@@ -1,35 +1,35 @@
 import 'dart:convert';
 
 import 'package:menstrudel/database/app_database.dart';
-import 'package:menstrudel/models/birth_control/larcs/larc_log_entry.dart';
+import 'package:menstrudel/models/birth_control/reversible_contraceptives/reversible_contraceptive_log_entry.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:sqflite/sqflite.dart';
 
-class LarcRepository {
+class ReversibleContraceptiveRepository {
   final dbProvider = AppDatabase.instance;
 
   final Manager manager;
 
-  LarcRepository() : manager = Manager(AppDatabase.instance);
+  ReversibleContraceptiveRepository() : manager = Manager(AppDatabase.instance);
   
-  Future<void> logLarc(LarcLogEntry entry) async {
+  Future<void> log(ReversibleContraceptiveLogEntry entry) async {
     final db = await dbProvider.database;
     await db.insert('larc_logs', entry.toMap());
   }
 
-  Future<List<LarcLogEntry>> getAllLogs() async {
+  Future<List<ReversibleContraceptiveLogEntry>> getAllLogs() async {
     final db = await dbProvider.database;
     final maps = await db.query('larc_logs', orderBy: 'date DESC');
-    return maps.map((map) => LarcLogEntry.fromMap(map)).toList();
+    return maps.map((map) => ReversibleContraceptiveLogEntry.fromMap(map)).toList();
   }
 
-  Future<LarcLogEntry?> getLogById(int id) async {
+  Future<ReversibleContraceptiveLogEntry?> getLogById(int id) async {
     final db = await dbProvider.database;
     final maps = await db.query('larc_logs', where: 'id = ?', whereArgs: [id]);
-    return maps.isNotEmpty ? LarcLogEntry.fromMap(maps.first) : null;
+    return maps.isNotEmpty ? ReversibleContraceptiveLogEntry.fromMap(maps.first) : null;
   }
 
-  Future<void> updateLog(LarcLogEntry entry) async {
+  Future<void> updateLog(ReversibleContraceptiveLogEntry entry) async {
     final db = await dbProvider.database;
     await db.update('larc_logs', entry.toMap(), where: 'id = ?', whereArgs: [entry.id]);
   }
@@ -45,17 +45,17 @@ class Manager {
 
   Manager(this.dbProvider);
 
-  /// Returns LARCs data as json - ready for exporting data.
+  /// Returns Reversible Contraceptive data as json - ready for exporting data.
   Future<String> exportDataAsJson() async {
     final db = await dbProvider.database;
 
-    final larcLogs = await db.query('larc_logs');
+    final reversibleContraceptiveLogs = await db.query('larc_logs');
     
     final packageInfo = await PackageInfo.fromPlatform();
     final dbVersion = await db.getVersion();
 
     final exportData = {
-      'larc_logs': larcLogs,
+      'reversible_contraceptive_logs': reversibleContraceptiveLogs,
       'exported_at': DateTime.now().toIso8601String(),
       'app_version': packageInfo.version,
       'db_version': dbVersion,
@@ -66,7 +66,7 @@ class Manager {
     return jsonString;
   }
 
-  /// Imports LARC data from a JSON string.
+  /// Imports Reversible Contraceptive data from a JSON string.
   /// Throws an exception if the JSON format is invalid or the database version is incompatible.
   Future<void> importDataFromJson(String jsonString) async {
     final db = await dbProvider.database;
@@ -74,7 +74,7 @@ class Manager {
     try {
       final Map<String, dynamic> importData = jsonDecode(jsonString);
 
-      if (!importData.containsKey('larc_logs'))
+      if (!importData.containsKey('reversible_contraceptive_logs'))
       {
         throw const FormatException('Invalid import file: Missing required larcs data sections.');
       }
@@ -90,7 +90,7 @@ class Manager {
         
         await txn.delete('larc_logs');
 
-        final List larcLogsRaw = importData['larc_logs'] as List;
+        final List larcLogsRaw = importData['reversible_contraceptive_logs'] as List;
         for (final Map<String, dynamic> logRaw
             in larcLogsRaw.cast<Map<String, dynamic>>()) {
           final Map<String, dynamic> logToInsert = Map.from(logRaw);
@@ -107,11 +107,11 @@ class Manager {
     } on FormatException catch (_) {
       rethrow;
     } catch (e) {
-      throw Exception('Failed to import LARC data: $e');
+      throw Exception('Failed to import Reversible contraceptive data: $e');
     }
   }
 
-  /// Deletes all entries from the LARC related tables.
+  /// Deletes all entries from the Reversible contraceptive related tables.
   Future<void> clearAllData() async {
     final db = await dbProvider.database;
     await db.transaction((txn) async {
