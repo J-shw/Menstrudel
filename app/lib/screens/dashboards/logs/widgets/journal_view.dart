@@ -46,7 +46,9 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
         minDate: earliest.subtract(const Duration(days: 90)),
         maxDate: DateTime.now().add(const Duration(days: 60)),
         initialFocusDate: DateTime.now(),
-        weekdayStart: DayOfWeek.fromString(settingsService.startingDayOfWeek).toTableCalendar,
+        weekdayStart: DayOfWeek.fromString(
+          settingsService.startingDayOfWeek,
+        ).toTableCalendar,
       );
     }
   }
@@ -55,7 +57,8 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
     final periodService = context.read<PeriodService>();
     final prediction = periodService.predictionResult;
 
-    if (prediction?.estimatedStartDate != null && prediction?.estimatedEndDate != null) {
+    if (prediction?.estimatedStartDate != null &&
+        prediction?.estimatedEndDate != null) {
       final start = DateUtils.dateOnly(prediction!.estimatedStartDate!);
       final end = DateUtils.dateOnly(prediction!.estimatedEndDate!);
 
@@ -76,9 +79,15 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final colorScheme = Theme.of(context).colorScheme;
+    final futureColor = colorScheme.onSurface.withAlpha(75);
+    final normalColor = colorScheme.onSurface;
+    final now = DateTime.now();
+    final today = DateUtils.dateOnly(now);
+    final todayMs = today.millisecondsSinceEpoch;
     final logMap = context.select((LogService s) => s.logMap);
-    final isLoading = context.select((LogService s) => s.isLoading) || 
-                      context.select((PeriodService s) => s.isLoading);
+    final isLoading =
+        context.select((LogService s) => s.isLoading) ||
+        context.select((PeriodService s) => s.isLoading);
 
     if (isLoading) return const Center(child: CircularProgressIndicator());
     if (_calendarController == null) {
@@ -91,6 +100,7 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
       locale: l10n.localeName,
       dayBuilder: (context, values) {
         final day = values.day;
+        final dayMs = day.millisecondsSinceEpoch;
         final dayOnly = DateUtils.dateOnly(day);
 
         if (logMap.containsKey(dayOnly)) {
@@ -101,7 +111,14 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
           return _buildPredictedDay(day, colorScheme);
         }
 
-        return _buildDefaultDay(day, colorScheme);
+        return _buildDefaultDay(
+          day: day,
+          isToday: dayMs == todayMs,
+          isFuture: dayMs > todayMs,
+          colorScheme: colorScheme,
+          normalColor: normalColor,
+          futureColor: futureColor,
+        );
       },
     );
   }
@@ -111,9 +128,15 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
       onTap: () => widget.onLogTapped(log),
       child: Container(
         margin: const EdgeInsets.all(4),
-        decoration: BoxDecoration(color: log.flow.color, shape: BoxShape.circle),
+        decoration: BoxDecoration(
+          color: log.flow.color,
+          shape: BoxShape.circle,
+        ),
         alignment: Alignment.center,
-        child: Text('${day.day}', style: TextStyle(color: colorScheme.onPrimary)),
+        child: Text(
+          '${day.day}',
+          style: TextStyle(color: colorScheme.onPrimary),
+        ),
       ),
     );
   }
@@ -130,29 +153,37 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
         alignment: Alignment.center,
         child: Text(
           '${day.day}',
-          style: TextStyle(color: colorScheme.error, fontWeight: FontWeight.bold),
+          style: TextStyle(
+            color: colorScheme.error,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
     );
   }
 
-  Widget _buildDefaultDay(DateTime day, ColorScheme colorScheme) {
-    final isToday = DateUtils.isSameDay(day, DateTime.now());
-    final isFuture = day.isAfter(DateTime.now());
-
+  Widget _buildDefaultDay({
+    required DateTime day,
+    required bool isToday,
+    required bool isFuture,
+    required ColorScheme colorScheme,
+    required Color normalColor,
+    required Color futureColor,
+  }) {
     return GestureDetector(
       onTap: isFuture ? null : () => widget.onLogRequested(day),
       child: Container(
         margin: const EdgeInsets.all(4),
         alignment: Alignment.center,
-        decoration: isToday 
-            ? BoxDecoration(border: Border.all(color: colorScheme.primary, width: 2), shape: BoxShape.circle) 
+        decoration: isToday
+            ? BoxDecoration(
+                border: Border.all(color: colorScheme.primary, width: 2),
+                shape: BoxShape.circle,
+              )
             : null,
         child: Text(
           '${day.day}',
-          style: TextStyle(
-            color: isFuture ? colorScheme.onSurface.withAlpha(75) : colorScheme.onSurface,
-          ),
+          style: TextStyle(color: isFuture ? futureColor : normalColor),
         ),
       ),
     );
