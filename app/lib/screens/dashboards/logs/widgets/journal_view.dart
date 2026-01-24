@@ -49,6 +49,9 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
         weekdayStart: DayOfWeek.fromString(
           settingsService.startingDayOfWeek,
         ).toTableCalendar,
+        onDayTapped: (date) {
+          widget.onLogRequested(date);
+        },
       );
     }
   }
@@ -59,8 +62,8 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
 
     if (prediction?.estimatedStartDate != null &&
         prediction?.estimatedEndDate != null) {
-      final start = DateUtils.dateOnly(prediction!.estimatedStartDate!);
-      final end = DateUtils.dateOnly(prediction!.estimatedEndDate!);
+      final start = DateUtils.dateOnly(prediction!.estimatedStartDate);
+      final end = DateUtils.dateOnly(prediction.estimatedEndDate);
 
       final dates = <DateTime>{};
       DateTime current = start;
@@ -170,21 +173,18 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
     required Color normalColor,
     required Color futureColor,
   }) {
-    return GestureDetector(
-      onTap: isFuture ? null : () => widget.onLogRequested(day),
-      child: Container(
-        margin: const EdgeInsets.all(4),
-        alignment: Alignment.center,
-        decoration: isToday
-            ? BoxDecoration(
-                border: Border.all(color: colorScheme.primary, width: 2),
-                shape: BoxShape.circle,
-              )
-            : null,
-        child: Text(
-          '${day.day}',
-          style: TextStyle(color: isFuture ? futureColor : normalColor),
-        ),
+    return Container(
+      margin: const EdgeInsets.all(4),
+      alignment: Alignment.center,
+      decoration: isToday
+          ? BoxDecoration(
+              border: Border.all(color: colorScheme.primary, width: 2),
+              shape: BoxShape.circle,
+            )
+          : null,
+      child: Text(
+        '${day.day}',
+        style: TextStyle(color: isFuture ? futureColor : normalColor),
       ),
     );
   }
