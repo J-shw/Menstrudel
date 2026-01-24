@@ -27,95 +27,134 @@ class PeriodJournalView extends StatefulWidget {
 
 class _PeriodJournalViewState extends State<PeriodJournalView> {
   CleanCalendarController? _calendarController;
+  Set<DateTime> _predictedDates = {};
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _initCalendar();
+    _precomputePredictions();
+  }
+
+  void _initCalendar() {
+    final logService = context.read<LogService>();
+    final settingsService = context.read<SettingsService>();
+    final earliest = logService.earliestLogDate;
+
+    if (earliest != null && _calendarController == null) {
+      _calendarController = CleanCalendarController(
+        minDate: earliest.subtract(const Duration(days: 90)),
+        maxDate: DateTime.now().add(const Duration(days: 60)),
+        initialFocusDate: DateTime.now(),
+        weekdayStart: DayOfWeek.fromString(settingsService.startingDayOfWeek).toTableCalendar,
+      );
+    }
+  }
+
+  void _precomputePredictions() {
+    final periodService = context.read<PeriodService>();
+    final prediction = periodService.predictionResult;
+
+    if (prediction?.estimatedStartDate != null && prediction?.estimatedEndDate != null) {
+      final start = DateUtils.dateOnly(prediction!.estimatedStartDate!);
+      final end = DateUtils.dateOnly(prediction!.estimatedEndDate!);
+
+      final dates = <DateTime>{};
+      DateTime current = start;
+      while (!current.isAfter(end)) {
+        dates.add(current);
+        current = current.add(const Duration(days: 1));
+      }
+
+      if (dates.length != _predictedDates.length) {
+        setState(() => _predictedDates = dates);
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final periodService = context.watch<PeriodService>();
-    final logService = context.watch<LogService>();
-    final settingsService = context.watch<SettingsService>();
+    final colorScheme = Theme.of(context).colorScheme;
+    final logMap = context.select((LogService s) => s.logMap);
+    final isLoading = context.select((LogService s) => s.isLoading) || 
+                      context.select((PeriodService s) => s.isLoading);
 
-    if (periodService.isLoading || logService.isLoading) {
-      return const Center(child: CircularProgressIndicator());
-    }
-
-    final earliestLogDate = logService.earliestLogDate;
-    if (earliestLogDate == null) {
+    if (isLoading) return const Center(child: CircularProgressIndicator());
+    if (_calendarController == null) {
       return Center(child: Text(l10n.journalViewWidget_logYourFirstPeriod));
     }
-
-    final logMap = logService.logMap;
-    final predictionResult = periodService.predictionResult;
-    final colorScheme = Theme.of(context).colorScheme;
-
-    _calendarController ??= CleanCalendarController(
-      minDate: earliestLogDate.subtract(const Duration(days: 90)),
-      maxDate: DateTime.now().add(const Duration(days: 60)),
-      initialFocusDate: DateTime.now(),
-      weekdayStart: DayOfWeek.fromString(settingsService.startingDayOfWeek).toTableCalendar
-    );
 
     return ScrollableCleanCalendar(
       calendarController: _calendarController!,
       layout: Layout.BEAUTY,
-      locale: AppLocalizations.of(context)!.localeName,
+      locale: l10n.localeName,
       dayBuilder: (context, values) {
         final day = values.day;
         final dayOnly = DateUtils.dateOnly(day);
-        final log = logMap[dayOnly];
 
-        if (log != null) {
-          return GestureDetector(
-            onTap: () => widget.onLogTapped(log),
-            child: Container(
-              decoration: BoxDecoration(color: log.flow.color, shape: BoxShape.circle),
-              alignment: Alignment.center,
-              child: Text('${day.day}', style: TextStyle(color: colorScheme.onPrimary)),
-            ),
-          );
+        if (logMap.containsKey(dayOnly)) {
+          return _buildLogDay(day, logMap[dayOnly]!, colorScheme);
         }
 
-        bool isPredictedDay = false;
-        if (predictionResult?.estimatedStartDate != null && predictionResult?.estimatedEndDate != null) {
-          final startOnly = DateUtils.dateOnly(predictionResult!.estimatedStartDate!);
-          final endOnly = DateUtils.dateOnly(predictionResult!.estimatedEndDate!);
-          isPredictedDay = !dayOnly.isBefore(startOnly) && !dayOnly.isAfter(endOnly);
+        if (_predictedDates.contains(dayOnly)) {
+          return _buildPredictedDay(day, colorScheme);
         }
 
-        if (isPredictedDay) {
-          return GestureDetector(
-            onTap: () => widget.onLogRequested(day),
-            child: Container(
-              decoration: BoxDecoration(
-                color: colorScheme.error.withValues(alpha: 0.4),
-                shape: BoxShape.circle,
-              ),
-              alignment: Alignment.center,
-              child: Text('${day.day}', style: TextStyle(color: colorScheme.error, fontWeight: FontWeight.bold)),
-            ),
-          );
-        }
-
-        final isToday = DateUtils.isSameDay(day, DateTime.now());
-        return GestureDetector(
-          onTap: () => day.isAfter(DateTime.now()) ? null : widget.onLogRequested(day),
-          child: Container(
-            alignment: Alignment.center,
-            decoration: isToday ? BoxDecoration(
-              border: Border.all(color: colorScheme.primary, width: 2),
-              shape: BoxShape.circle,
-            ) : null,
-            child: Text(
-              '${day.day}',
-              style: TextStyle(
-                color: day.isAfter(DateTime.now()) 
-                    ? colorScheme.onSurface.withAlpha(75) 
-                    : colorScheme.onSurface,
-              ),
-            ),
-          ),
-        );
+        return _buildDefaultDay(day, colorScheme);
       },
+    );
+  }
+
+  Widget _buildLogDay(DateTime day, LogDay log, ColorScheme colorScheme) {
+    return GestureDetector(
+      onTap: () => widget.onLogTapped(log),
+      child: Container(
+        margin: const EdgeInsets.all(4),
+        decoration: BoxDecoration(color: log.flow.color, shape: BoxShape.circle),
+        alignment: Alignment.center,
+        child: Text('${day.day}', style: TextStyle(color: colorScheme.onPrimary)),
+      ),
+    );
+  }
+
+  Widget _buildPredictedDay(DateTime day, ColorScheme colorScheme) {
+    return GestureDetector(
+      onTap: () => widget.onLogRequested(day),
+      child: Container(
+        margin: const EdgeInsets.all(4),
+        decoration: BoxDecoration(
+          color: colorScheme.error.withValues(alpha: 0.2),
+          shape: BoxShape.circle,
+        ),
+        alignment: Alignment.center,
+        child: Text(
+          '${day.day}',
+          style: TextStyle(color: colorScheme.error, fontWeight: FontWeight.bold),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDefaultDay(DateTime day, ColorScheme colorScheme) {
+    final isToday = DateUtils.isSameDay(day, DateTime.now());
+    final isFuture = day.isAfter(DateTime.now());
+
+    return GestureDetector(
+      onTap: isFuture ? null : () => widget.onLogRequested(day),
+      child: Container(
+        margin: const EdgeInsets.all(4),
+        alignment: Alignment.center,
+        decoration: isToday 
+            ? BoxDecoration(border: Border.all(color: colorScheme.primary, width: 2), shape: BoxShape.circle) 
+            : null,
+        child: Text(
+          '${day.day}',
+          style: TextStyle(
+            color: isFuture ? colorScheme.onSurface.withAlpha(75) : colorScheme.onSurface,
+          ),
+        ),
+      ),
     );
   }
 }
