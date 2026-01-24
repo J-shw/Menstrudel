@@ -630,6 +630,18 @@ class AppLocalizationsCs extends AppLocalizations {
   }
 
   @override
+  String get sexActivityScreen_primaryMethod => 'Primary Method';
+
+  @override
+  String get sexActivityScreen_mostFrequent => 'Most Frequent';
+
+  @override
+  String get sexActivityScreen_protected => 'Protected';
+
+  @override
+  String get sexActivityScreen_activityDistribution => 'Activity Distribution';
+
+  @override
   String get settingsScreen_profile => 'Profil';
 
   @override

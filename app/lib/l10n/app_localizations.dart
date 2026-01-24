@@ -1155,6 +1155,30 @@ abstract class AppLocalizations {
   /// **'History ({history})'**
   String sexActivityScreen_history(int history);
 
+  /// Label showing the primary sexual protection method.
+  ///
+  /// In en, this message translates to:
+  /// **'Primary Method'**
+  String get sexActivityScreen_primaryMethod;
+
+  /// Label showing the most frequent sex activity type.
+  ///
+  /// In en, this message translates to:
+  /// **'Most Frequent'**
+  String get sexActivityScreen_mostFrequent;
+
+  /// Label showing the total number of protected sex activities.
+  ///
+  /// In en, this message translates to:
+  /// **'Protected'**
+  String get sexActivityScreen_protected;
+
+  /// Title for the sex activity distribution chart.
+  ///
+  /// In en, this message translates to:
+  /// **'Activity Distribution'**
+  String get sexActivityScreen_activityDistribution;
+
   /// Title for the profile settings button.
   ///
   /// In en, this message translates to:
