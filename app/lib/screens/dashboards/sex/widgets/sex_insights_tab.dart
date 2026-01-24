@@ -42,7 +42,7 @@ class SexInsightsTab extends StatelessWidget {
     // Calculate Most Used Protection
     final protCounts = <SexProtectionTypes, int>{};
     for (var entry in historyEntries) {
-      if (entry.protectionType != null) {
+      if (entry.protectionType != SexProtectionTypes.none && entry.protectionType != null) {
         protCounts[entry.protectionType!] = (protCounts[entry.protectionType!] ?? 0) + 1;
       }
     }
