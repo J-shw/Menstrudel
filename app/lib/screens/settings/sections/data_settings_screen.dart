@@ -291,9 +291,12 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
                           ),
                         Expanded(
                           child: StepDataTypeSelection(
-                            title: _selectedAction == DataAction.delete
-                                ? l10n.settingsScreen_deleteZone
-                                : l10n.settingsScreen_dataManagement,
+                            title: switch (_selectedAction) {
+                              DataAction.import => l10n.settingsScreen_importDataTitle,
+                              DataAction.export => l10n.settingsScreen_exportDataTitle,
+                              DataAction.delete => l10n.settingsScreen_deleteZone,
+                              _ => '',
+                            },
                             onTypeSelected: _handleDataTask,
                           ),
                         ),
