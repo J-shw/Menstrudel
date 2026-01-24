@@ -119,14 +119,16 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
         );
       }
     } catch (e) {
-      if (mounted)
+      if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(l10n.settingsScreen_exportFailed)),
         );
+      }
     } finally {
       if (mounted) setState(() => _isLoading = false);
-      if (filePath.isNotEmpty)
+      if (filePath.isNotEmpty) {
         await File(filePath).delete().catchError((_) => null);
+      }
     }
   }
 
