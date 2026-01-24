@@ -299,6 +299,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get sexProtection_hormonal => 'Hormonal';
 
   @override
+  String get sexProtection_nonHormonal => 'Non-Hormonal';
+
+  @override
   String get sexProtection_natural => 'Natural';
 
   @override

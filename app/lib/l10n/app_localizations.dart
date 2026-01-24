@@ -606,31 +606,37 @@ abstract class AppLocalizations {
   /// **'Usage Trend'**
   String get sanitaryProducts_usageTrend;
 
-  /// No description provided for @sexProtection_none.
+  /// Indicates that no sexual protection method was used.
   ///
   /// In en, this message translates to:
   /// **'None'**
   String get sexProtection_none;
 
-  /// No description provided for @sexProtection_barrier.
+  /// Indicates the use of barrier methods of sexual protection (Condoms).
   ///
   /// In en, this message translates to:
   /// **'Barrier'**
   String get sexProtection_barrier;
 
-  /// No description provided for @sexProtection_hormonal.
+  /// Indicates the use of hormonal methods of sexual protection (The Pill).
   ///
   /// In en, this message translates to:
   /// **'Hormonal'**
   String get sexProtection_hormonal;
 
-  /// No description provided for @sexProtection_natural.
+  /// Indicates the use of non-hormonal methods of sexual protection (Copper IUD).
+  ///
+  /// In en, this message translates to:
+  /// **'Non-Hormonal'**
+  String get sexProtection_nonHormonal;
+
+  /// Indicates the use of natural methods of sexual protection (Fertility awernass).
   ///
   /// In en, this message translates to:
   /// **'Natural'**
   String get sexProtection_natural;
 
-  /// No description provided for @sexProtection_permanent.
+  /// Indicates the use of permanent methods of sexual protection (Sterilisation).
   ///
   /// In en, this message translates to:
   /// **'Permanent'**

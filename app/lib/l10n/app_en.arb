@@ -143,10 +143,29 @@
     "sanitaryProducts_usageTrend": "Usage Trend",
 
     "sexProtection_none": "None",
+    "@sexProtection_none": {
+        "description": "Indicates that no sexual protection method was used."
+    },
     "sexProtection_barrier": "Barrier",
+    "@sexProtection_barrier": {
+        "description": "Indicates the use of barrier methods of sexual protection (Condoms)."
+    },
     "sexProtection_hormonal": "Hormonal",
+    "@sexProtection_hormonal": {
+        "description": "Indicates the use of hormonal methods of sexual protection (The Pill)."
+    },
+    "sexProtection_nonHormonal": "Non-Hormonal",
+    "@sexProtection_nonHormonal": {
+        "description": "Indicates the use of non-hormonal methods of sexual protection (Copper IUD)."
+    },
     "sexProtection_natural": "Natural",
+    "@sexProtection_natural": {
+        "description": "Indicates the use of natural methods of sexual protection (Fertility awernass)."
+    },
     "sexProtection_permanent": "Permanent",
+    "@sexProtection_permanent": {
+        "description": "Indicates the use of permanent methods of sexual protection (Sterilisation)."
+    },
 
     "sexType_vaginal": "Vaginal",
     "sexType_anal": "Anal",
