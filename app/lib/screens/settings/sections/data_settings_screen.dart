@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:menstrudel/coordinators/data_refresh_coordinator.dart';
 import 'package:menstrudel/database/repositories/periods_repository.dart';
 import 'package:menstrudel/database/repositories/sex_repository.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
@@ -9,6 +10,7 @@ import 'package:menstrudel/database/repositories/reversible_contraceptive_reposi
 import 'package:menstrudel/database/repositories/sanitary_product_repository.dart';
 import 'package:menstrudel/services/notification_service.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:intl/intl.dart';
 import 'dart:io';
@@ -36,7 +38,7 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
   final sanitaryRepo = SanitaryProductRepository();
   final sexRepo = SexRepository();
 
-  void _handleDataTask(DataType type) {
+  Future<void> _handleDataTask(DataType type) async {
     switch (_selectedAction) {
       case DataAction.export:
         _exportLogic(type);
@@ -165,6 +167,7 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
 
   Future<void> _performImport(String path, DataType type) async {
     setState(() => _isLoading = true);
+    final coordinator = context.read<DataRefreshCoordinator>();
     final l10n = AppLocalizations.of(context)!;
     try {
       final content = await File(path).readAsString();
@@ -190,6 +193,9 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
           SnackBar(content: Text(l10n.settingsScreen_importFailed)),
         );
     } finally {
+      if (type == DataType.logsAndPeriods) {
+        await coordinator.resetAllData();
+      }
       if (mounted) setState(() => _isLoading = false);
     }
   }
@@ -212,10 +218,12 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
   Future<void> _performClear(DataType type) async {
     setState(() => _isLoading = true);
     final l10n = AppLocalizations.of(context)!;
+    final coordinator = context.read<DataRefreshCoordinator>();
 
     switch (type) {
       case DataType.logsAndPeriods:
         await periodsRepo.manager.clearAllData();
+        await coordinator.resetAllData();
       case DataType.pills:
         await pillsRepo.manager.clearAllData();
         await NotificationService.cancelPillReminder();
@@ -294,9 +302,12 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
                         Expanded(
                           child: StepDataTypeSelection(
                             title: switch (_selectedAction) {
-                              DataAction.import => l10n.settingsScreen_importDataTitle,
-                              DataAction.export => l10n.settingsScreen_exportDataTitle,
-                              DataAction.delete => l10n.settingsScreen_deleteZone,
+                              DataAction.import =>
+                                l10n.settingsScreen_importDataTitle,
+                              DataAction.export =>
+                                l10n.settingsScreen_exportDataTitle,
+                              DataAction.delete =>
+                                l10n.settingsScreen_deleteZone,
                               _ => '',
                             },
                             onTypeSelected: _handleDataTask,

@@ -42,6 +42,16 @@ class DataRefreshCoordinator {
     );
   }
 
+  Future<void> resetAllData() async {
+    _hasTriggeredInitialRefresh = false;
+    await logService.loadLogs();
+    await periodService.refreshData(
+      currentLogs: logService.logs,
+      l10n: _l10n!,
+      widgetController: widgetController,
+    );
+  }
+
   void onLogsChanged(AppLocalizations l10n) async {
     final updates = await periodService.recalculatePeriods(
       logService.logs,
