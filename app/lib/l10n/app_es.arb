@@ -1,5 +1,5 @@
 {
-    "@@locale": "es",
+    "@@locale": "es-ES",
     "appTitle": "Menstrudel",
     "nextDue": "Next Due",
     "ongoing": "Ongoing",
@@ -117,10 +117,29 @@
     "sanitaryProducts_mostUsed": "Most Used",
     "sanitaryProducts_usageTrend": "Usage Trend",
     "sexProtection_none": "None",
+    "@sexProtection_none": {
+        "description": "Indicates that no sexual protection method was used."
+    },
     "sexProtection_barrier": "Barrier",
+    "@sexProtection_barrier": {
+        "description": "Indicates the use of barrier methods of sexual protection (Condoms)."
+    },
     "sexProtection_hormonal": "Hormonal",
+    "@sexProtection_hormonal": {
+        "description": "Indicates the use of hormonal methods of sexual protection (The Pill)."
+    },
+    "sexProtection_nonHormonal": "Non-Hormonal",
+    "@sexProtection_nonHormonal": {
+        "description": "Indicates the use of non-hormonal methods of sexual protection (Copper IUD)."
+    },
     "sexProtection_natural": "Natural",
+    "@sexProtection_natural": {
+        "description": "Indicates the use of natural methods of sexual protection (Fertility awernass)."
+    },
     "sexProtection_permanent": "Permanent",
+    "@sexProtection_permanent": {
+        "description": "Indicates the use of permanent methods of sexual protection (Sterilisation)."
+    },
     "sexType_vaginal": "Vaginal",
     "sexType_anal": "Anal",
     "sexType_oral": "Oral",
@@ -377,6 +396,26 @@
                 "example": "5"
             }
         }
+    },
+    "sexActivityScreen_primaryMethod": "Primary Method",
+    "@sexActivityScreen_primaryMethod": {
+        "description": "Label showing the primary sexual protection method."
+    },
+    "sexActivityScreen_mostFrequent": "Most Frequent",
+    "@sexActivityScreen_mostFrequent": {
+        "description": "Label showing the most frequent sex activity type."
+    },
+    "sexActivityScreen_protected": "Protected",
+    "@sexActivityScreen_protected": {
+        "description": "Label showing the total number of protected sex activities."
+    },
+    "sexActivityScreen_activityDistribution": "Activity Distribution",
+    "@sexActivityScreen_activityDistribution": {
+        "description": "Title for the sex activity distribution chart."
+    },
+    "sexActivityScreen_protectionDistribution": "Protection Distribution",
+    "@sexActivityScreen_protectionDistribution": {
+        "description": "Title for the sexual protection distribution chart."
     },
     "settingsScreen_profile": "Profile",
     "@settingsScreen_profile": {
