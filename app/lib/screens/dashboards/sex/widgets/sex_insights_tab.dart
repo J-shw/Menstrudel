@@ -46,7 +46,7 @@ class SexInsightsTab extends StatelessWidget {
         protCounts[entry.protectionType!] = (protCounts[entry.protectionType!] ?? 0) + 1;
       }
     }
-    final primaryProt = protCounts.isNotEmpty 
+    final primaryProt = protCounts.isNotEmpty
         ? protCounts.entries.reduce((a, b) => a.value > b.value ? a : b).key 
         : null;
 
@@ -80,7 +80,7 @@ class SexInsightsTab extends StatelessWidget {
               ),
               QuickStatCard(
                 label: l10n.sexActivityScreen_protected,
-                value: "${historyEntries.where((e) => e.protectionType != SexProtectionTypes.none).length}",
+                value: "${historyEntries.where((e) => e.protectionType != SexProtectionTypes.none && e.protectionType != null).length}",
                 icon: Icons.verified_user_outlined,
               ),
             ],
