@@ -4,7 +4,6 @@ import 'package:menstrudel/database/repositories/periods_repository.dart';
 import 'package:menstrudel/database/repositories/sex_repository.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/models/app/data_settings_type_enum.dart';
-import 'package:menstrudel/services/log_service.dart';
 import 'package:menstrudel/widgets/dialogs/delete_confirmation_dialog.dart';
 import 'package:menstrudel/database/repositories/pills_repository.dart';
 import 'package:menstrudel/database/repositories/reversible_contraceptive_repository.dart';
