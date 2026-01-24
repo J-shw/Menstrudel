@@ -1,5 +1,5 @@
 {
-    "@@locale": "es",
+    "@@locale": "es-ES",
     "appTitle": "Menstrudel",
     "nextDue": "Next Due",
     "ongoing": "Ongoing",
@@ -471,64 +471,81 @@
     },
     "settingsScreen_pack": "Pack",
     "settingsScreen_dataManagement": "Data Management",
-    "settingsScreen_dangerZone": "Danger Zone",
-    "settingsScreen_clearAllLogs": "Clear All Logs",
-    "settingsScreen_clearAllLogsSubtitle": "Deletes your entire period and symptom history.",
-    "settingsScreen_clearAllPillData": "Clear All Pill Data",
-    "settingsScreen_clearAllPillDataSubtitle": "Removes your pill regimen and intake history.",
-    "settingsScreen_clearAllPillData_question": "Clear All Pill Data?",
-    "settingsScreen_deleteAllPillDataDescription": "This will permanently delete your pill regimen, reminders, and intake history.",
-    "settingsScreen_allPillDataCleared": "All pill data has been cleared.",
-    "settingsScreen_clearAllReversibleContraceptiveData": "Clear All Reversible Contraceptive Data",
-    "settingsScreen_clearAllReversibleContraceptiveDataSubtitle": "Removes your reversible contraceptives history.",
-    "settingsScreen_clearAllReversibleContraceptiveData_question": "Clear All Reversible Contraceptive Data?",
-    "settingsScreen_deleteAllReversibleContraceptiveDataDescription": "This will permanently delete your Reversible Contraceptive history.",
-    "settingsScreen_allReversibleContraceptiveDataCleared": "All Reversible Contraceptive data has been cleared.",
-    "settingsScreen_clearAllSanitaryData": "Clear All Sanitary Products Data",
-    "settingsScreen_clearAllSanitaryDataSubtitle": "Removes your sanitary products history.",
-    "settingsScreen_clearAllSanitaryData_question": "Clear All Sanitary Products Data?",
-    "settingsScreen_deleteAllSanitaryDataDescription": "This will permanently delete your sanitary products history.",
-    "settingsScreen_allSanitaryDataCleared": "All sanitary products data has been cleared.",
-    "settingsScreen_exportPeriodData": "Export Period Data",
-    "settingsScreen_exportPillData": "Export Pill Data",
-    "settingsScreen_exportReversibleContraceptivesData": "Export Reversible Contraceptives Data",
-    "settingsScreen_exportSanitaryData": "Export Sanitary Products Data",
-    "settingsScreen_exportDataSubtitle": "Create a JSON backup file.",
+    "settingsScreen_deleteZone": "Delete Zone",
+    "settingsScreen_clearLogsAndPeriods": "Clear Logs & Periods",
+    "@settingsScreen_clearLogsAndPeriods": {
+        "description": "Title for the period logs data clearing section."
+    },
+    "settingsScreen_clearLogsAndPeriodsSubtitle": "Deletes your entire period and symptom history.",
+    "@settingsScreen_clearLogsAndPeriodsSubtitle": {
+        "description": "Subtitle for the period logs data clearing section."
+    },
+    "settingsScreen_clearPillLogs": "Clear Pill Logs",
+    "@settingsScreen_clearPillLogs": {
+        "description": "Title for the pill logs data clearing section."
+    },
+    "settingsScreen_clearPillLogsSubtitle": "Removes your pill regimen and intake history.",
+    "@settingsScreen_clearPillLogsSubtitle": {
+        "description": "Subtitle for the pill logs data clearing section."
+    },
+    "settingsScreen_clearReversibleContraceptiveLogs": "Clear Reversible Contraceptive Logs",
+    "@settingsScreen_clearReversibleContraceptiveLogs": {
+        "description": "Title for the reversible contraceptive logs data clearing section."
+    },
+    "settingsScreen_clearReversibleContraceptiveLogsSubtitle": "Removes your reversible contraceptive history.",
+    "@settingsScreen_clearReversibleContraceptiveLogsSubtitle": {
+        "description": "Subtitle for the reversible contraceptive logs data clearing section."
+    },
+    "settingsScreen_clearSanitaryProductLogs": "Clear Sanitary Product Logs",
+    "@settingsScreen_clearSanitaryProductLogs": {
+        "description": "Title for the sanitary product logs data clearing section."
+    },
+    "settingsScreen_clearSanitaryProductLogsSubtitle": "Removes your sanitary products history.",
+    "@settingsScreen_clearSanitaryProductLogsSubtitle": {
+        "description": "Subtitle for the sanitary product logs data clearing section."
+    },
+    "settingsScreen_clearSexualActivityLogs": "Clear Sexual Activity Logs",
+    "@settingsScreen_clearSexualActivityLogs": {
+        "description": "Title for the sexual activity logs data clearing section."
+    },
+    "settingsScreen_clearSexualActivityLogsSubtitle": "Removes your sexual activity history.",
+    "@settingsScreen_clearSexualActivityLogsSubtitle": {
+        "description": "Subtitle for the sexual activity logs data clearing section."
+    },
+    "settingsScreen_logsAndPeriods": "Logs & Periods",
+    "@settingsScreen_logsAndPeriods": {
+        "description": "Title for the period logs data section."
+    },
+    "settingsScreen_pillLogs": "Pill Logs",
+    "@settingsScreen_pillLogs": {
+        "description": "Title for the pill logs data section."
+    },
+    "settingsScreen_reversibleContraceptivesLogs": "Reversible Contraceptive Logs",
+    "@settingsScreen_reversibleContraceptivesLogs": {
+        "description": "Title for the reversible contraceptives data section."
+    },
+    "settingsScreen_sanitaryProductLogs": "Sanitary Product Logs",
+    "@settingsScreen_sanitaryProductLogs": {
+        "description": "Title for the sanitary products data section."
+    },
+    "settingsScreen_sexualActivityLogs": "Sexual Activity Logs",
+    "@settingsScreen_sexualActivityLogs": {
+        "description": "Title for the sexual activity data section."
+    },
+    "settingsScreen_importSupportNote": "Import is currently only supported for files exported from Menstrudel.",
+    "@settingsScreen_importSupportNote": {
+        "description": "Note indicating that import is only supported for files exported from Menstrudel."
+    },
     "settingsScreen_exportSuccessful": "Data exported successfully.",
     "settingsScreen_exportFailed": "Export failed. Please try again.",
-    "settingsScreen_noDataToExport": "No data found to export.",
-    "settingsScreen_exportDataMessage": "Here is my MenstruDel data export.",
     "settingsScreen_exportDataTitle": "Export Data",
     "settingsScreen_importDataTitle": "Import Data",
-    "settingsScreen_importPeriodData": "Import Period Data",
-    "settingsScreen_importPillData": "Import Pill Data",
-    "settingsScreen_importReversibleContraceptivesData": "Import Reversible Contraceptives Data",
-    "settingsScreen_importSanitaryData": "Import Sanitary Products Data",
     "settingsScreen_importDataSubtitle": "Overwrites existing data.",
-    "settingsScreen_importPeriodData_question": "Are you sure you want to import Period Data?",
-    "settingsScreen_importPillData_question": "Are you sure you want to import Pill Data?",
-    "settingsScreen_importReversibleContraceptiveData_question": "Are you sure you want to import Reversible Contraceptive Data?",
-    "settingsScreen_importSanitaryData_question": "Are you sure you want to import Sanitary Products Data?",
-    "settingsScreen_importPeriodDataDescription": "Importing data will permanently overwrite all your existing period logs and period settings. This cannot be undone.",
-    "settingsScreen_importPillDataDescription": "Importing data will permanently overwrite all your existing pill history. This cannot be undone.",
-    "settingsScreen_importReversibleContraceptiveDataDescription": "Importing data will permanently overwrite all your existing reversible contraceptive history. This cannot be undone.",
-    "settingsScreen_importSanitaryDataDescription": "Importing data will permanently overwrite all your existing sanitary product history. This cannot be undone.",
     "settingsScreen_importSuccessful": "Data imported successfully!",
     "settingsScreen_importFailed": "Failed to import data. Please try again.",
-    "settingsScreen_importInvalidFile": "Invalid file format or data structure.",
     "settingsScreen_importErrorGeneral": "Failed to import data. Please ensure the file is saved locally.",
     "@settingsScreen_importErrorGeneral": {
         "description": "General message when file import fails for unknown reasons."
-    },
-    "settingsScreen_importErrorPlatform": "Import failed: {message}. Please ensure the file is saved on the device and try again.",
-    "@settingsScreen_importErrorPlatform": {
-        "description": "Error when the native file picker fails, includes the specific error message.",
-        "placeholders": {
-            "message": {
-                "type": "String",
-                "example": "Unknown path or network access required."
-            }
-        }
     },
     "settingsScreen_security": "Security",
     "securityScreen_enableBiometricLock": "Enable Biometric Lock",
