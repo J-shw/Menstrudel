@@ -4,7 +4,7 @@ import 'package:menstrudel/services/period_service.dart';
 import 'package:menstrudel/screens/dashboards/logs/widgets/dynamic_history_view.dart';
 import 'package:provider/provider.dart';
 
-class LogsScreenLogTab extends StatelessWidget {
+class LogsScreenLogTab extends StatefulWidget {
   final PeriodService periodService;
 
   const LogsScreenLogTab({
@@ -13,23 +13,32 @@ class LogsScreenLogTab extends StatelessWidget {
   });
 
   @override
+  State<LogsScreenLogTab> createState() => _LogsScreenLogTabState();
+}
+
+class _LogsScreenLogTabState extends State<LogsScreenLogTab> with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
-    final isLoading = periodService.isLoading;
+    super.build(context);
+
+    final isLoading = widget.periodService.isLoading;
 
     if (isLoading) return const Center(child: CircularProgressIndicator());
 
-    return 
-        DynamicHistoryView(
-          onLogRequested: (date) {
-            context.read<LogUIController>().handleCreateNewLog(
-              context: context,
-              selectedDate: date,
-            );
-          },
-          onLogTapped: (log) => context.read<LogUIController>().handleEditLog(
-            context: context,
-            log: log,
-          ),
+    return DynamicHistoryView(
+      onLogRequested: (date) {
+        context.read<LogUIController>().handleCreateNewLog(
+          context: context,
+          selectedDate: date,
+        );
+      },
+      onLogTapped: (log) => context.read<LogUIController>().handleEditLog(
+        context: context,
+        log: log,
+      ),
     );
   }
 }
