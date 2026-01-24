@@ -4,6 +4,7 @@ import 'package:menstrudel/models/sex/sex_log_entry.dart';
 import 'package:menstrudel/models/sex/sex_type_enum.dart';
 import 'package:menstrudel/models/sex/sex_protection_type_enum.dart';
 import 'package:menstrudel/screens/dashboards/sex/widgets/sex_activity_usage_chart.dart';
+import 'package:menstrudel/screens/dashboards/sex/widgets/sex_protection_usage_chart.dart';
 import 'package:menstrudel/widgets/insights/global/quick_stat_card.dart';
 
 class SexInsightsTab extends StatelessWidget {
@@ -85,10 +86,10 @@ class SexInsightsTab extends StatelessWidget {
               ),
             ],
           ),
-          
           const SizedBox(height: 24),
-          
           SexActivityUsageChart(historyEntries: historyEntries),
+          const SizedBox(height: 24),
+          SexProtectionUsageChart(historyEntries: historyEntries),
         ],
       ),
     );
