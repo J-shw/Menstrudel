@@ -56,15 +56,6 @@ class CyclePhasePredictor {
     final int fertileWindowStart = predictedOvulationDay - 5;
     final int fertileWindowEnd = predictedOvulationDay;
 
-    debugPrint('Days since last period start: $daysSinceLastPeriodStart');
-    debugPrint('Average cycle length: $averageCycleLength');
-    debugPrint('Average period duration: $averagePeriodDuration');
-    debugPrint('Menstruation end day: $menstruationEndDay');
-    debugPrint('Cycle length: $cycleLength');
-    debugPrint('Fertile window start: $fertileWindowStart');
-    debugPrint('Fertile window end: $fertileWindowEnd');
-
-
     // - - Determine Current Phase - -
 
     // Phase 1: Menstruation
