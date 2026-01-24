@@ -47,4 +47,19 @@ enum SexTypes {
       SexTypes.other => Icons.extension,
     };
   }
+
+  Color getColorScheme(ColorScheme colorScheme) {
+    switch (this) {
+      case SexTypes.vaginal:
+        return Colors.pinkAccent;
+      case SexTypes.anal:
+        return Colors.purpleAccent;
+      case SexTypes.oral:
+        return Colors.blueAccent;
+      case SexTypes.manual:
+        return Colors.greenAccent;
+      case SexTypes.other:
+        return Colors.grey;
+    }
+  }
 }

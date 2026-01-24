@@ -456,6 +456,10 @@
     "@sexActivityScreen_protected": {
         "description": "Label showing the total number of protected sex activities."
     },
+    "sexActivityScreen_activityTrend": "Activity Trend",
+    "@sexActivityScreen_activityTrend": {
+        "description": "Title for the sexual activity trend chart."
+    },
     "sexActivityScreen_activityDistribution": "Activity Distribution",
     "@sexActivityScreen_activityDistribution": {
         "description": "Title for the sex activity distribution chart."
