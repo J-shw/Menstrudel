@@ -7,7 +7,7 @@ import 'package:menstrudel/screens/dashboards/logs/logs_screen.dart';
 import 'package:menstrudel/screens/dashboards/sanitary_screen.dart';
 import 'package:menstrudel/screens/settings/settings_screen.dart';
 import 'package:menstrudel/screens/dashboards/pills_screen.dart';
-import 'package:menstrudel/screens/dashboards/sex_screen.dart';
+import 'package:menstrudel/screens/dashboards/sex/sex_screen.dart';
 import 'package:menstrudel/widgets/main/main_navigation_bar.dart';
 import 'package:menstrudel/widgets/main/app_bar.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';

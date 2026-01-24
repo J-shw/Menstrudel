@@ -9,6 +9,8 @@ enum SexProtectionTypes {
   barrier('barrier'),
   /// Use of hormonal methods (e.g., birth control pills).
   hormonal('hormonal'),
+  /// Use of non-hormonal methods (e.g., copper IUD).
+  nonHormonal('non_hormonal'),
   /// Use of natural methods (e.g., fertility awareness).
   natural('natural'),
   /// Permanent methods (e.g., sterilisation).
@@ -33,6 +35,7 @@ enum SexProtectionTypes {
       SexProtectionTypes.none => l10n.sexProtection_none,
       SexProtectionTypes.barrier => l10n.sexProtection_barrier,
       SexProtectionTypes.hormonal => l10n.sexProtection_hormonal,
+      SexProtectionTypes.nonHormonal => l10n.sexProtection_nonHormonal,
       SexProtectionTypes.natural => l10n.sexProtection_natural,
       SexProtectionTypes.permanent => l10n.sexProtection_permanent,
     };
@@ -43,6 +46,7 @@ enum SexProtectionTypes {
       SexProtectionTypes.none => Icons.close_rounded,
       SexProtectionTypes.barrier => Icons.shield_rounded,
       SexProtectionTypes.hormonal => Icons.medication_rounded,
+      SexProtectionTypes.nonHormonal => Icons.health_and_safety_rounded,
       SexProtectionTypes.natural => Icons.spa_rounded,
       SexProtectionTypes.permanent => Icons.lock_rounded,
     };

@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:menstrudel/models/cycle_phase/cycle_phase.dart';
 import 'package:menstrudel/models/cycle_phase/cycle_phase_enum.dart';
 
@@ -55,15 +54,6 @@ class CyclePhasePredictor {
     // https://www.acog.org/womens-health/experts-and-stories/the-latest/trying-to-get-pregnant-heres-when-to-have-sex - "the window of fertility is much wider than this—about 6 days each cycle."
     final int fertileWindowStart = predictedOvulationDay - 5;
     final int fertileWindowEnd = predictedOvulationDay;
-
-    debugPrint('Days since last period start: $daysSinceLastPeriodStart');
-    debugPrint('Average cycle length: $averageCycleLength');
-    debugPrint('Average period duration: $averagePeriodDuration');
-    debugPrint('Menstruation end day: $menstruationEndDay');
-    debugPrint('Cycle length: $cycleLength');
-    debugPrint('Fertile window start: $fertileWindowStart');
-    debugPrint('Fertile window end: $fertileWindowEnd');
-
 
     // - - Determine Current Phase - -
 
