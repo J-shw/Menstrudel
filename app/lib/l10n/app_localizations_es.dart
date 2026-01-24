@@ -371,7 +371,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get cyclePhase_luteal => 'Post-Ovulation';
 
   @override
-  String get cyclePhase_late => 'Late Period';
+  String get cyclePhase_late => 'Late';
 
   @override
   String get cyclePhase_unknown => 'Unknown';
@@ -839,89 +839,65 @@ class AppLocalizationsEs extends AppLocalizations {
   String get settingsScreen_dataManagement => 'Data Management';
 
   @override
-  String get settingsScreen_dangerZone => 'Danger Zone';
+  String get settingsScreen_deleteZone => 'Delete Zone';
 
   @override
-  String get settingsScreen_clearAllLogs => 'Clear All Logs';
+  String get settingsScreen_clearLogsAndPeriods => 'Clear Logs & Periods';
 
   @override
-  String get settingsScreen_clearAllLogsSubtitle =>
+  String get settingsScreen_clearLogsAndPeriodsSubtitle =>
       'Deletes your entire period and symptom history.';
 
   @override
-  String get settingsScreen_clearAllPillData => 'Clear All Pill Data';
+  String get settingsScreen_clearPillLogs => 'Clear Pill Logs';
 
   @override
-  String get settingsScreen_clearAllPillDataSubtitle =>
+  String get settingsScreen_clearPillLogsSubtitle =>
       'Removes your pill regimen and intake history.';
 
   @override
-  String get settingsScreen_clearAllPillData_question => 'Clear All Pill Data?';
+  String get settingsScreen_clearReversibleContraceptiveLogs =>
+      'Clear Reversible Contraceptive Logs';
 
   @override
-  String get settingsScreen_deleteAllPillDataDescription =>
-      'This will permanently delete your pill regimen, reminders, and intake history.';
+  String get settingsScreen_clearReversibleContraceptiveLogsSubtitle =>
+      'Removes your reversible contraceptive history.';
 
   @override
-  String get settingsScreen_allPillDataCleared =>
-      'All pill data has been cleared.';
+  String get settingsScreen_clearSanitaryProductLogs =>
+      'Clear Sanitary Product Logs';
 
   @override
-  String get settingsScreen_clearAllReversibleContraceptiveData =>
-      'Clear All Reversible Contraceptive Data';
-
-  @override
-  String get settingsScreen_clearAllReversibleContraceptiveDataSubtitle =>
-      'Removes your reversible contraceptives history.';
-
-  @override
-  String get settingsScreen_clearAllReversibleContraceptiveData_question =>
-      'Clear All Reversible Contraceptive Data?';
-
-  @override
-  String get settingsScreen_deleteAllReversibleContraceptiveDataDescription =>
-      'This will permanently delete your Reversible Contraceptive history.';
-
-  @override
-  String get settingsScreen_allReversibleContraceptiveDataCleared =>
-      'All Reversible Contraceptive data has been cleared.';
-
-  @override
-  String get settingsScreen_clearAllSanitaryData =>
-      'Clear All Sanitary Products Data';
-
-  @override
-  String get settingsScreen_clearAllSanitaryDataSubtitle =>
+  String get settingsScreen_clearSanitaryProductLogsSubtitle =>
       'Removes your sanitary products history.';
 
   @override
-  String get settingsScreen_clearAllSanitaryData_question =>
-      'Clear All Sanitary Products Data?';
+  String get settingsScreen_clearSexualActivityLogs =>
+      'Clear Sexual Activity Logs';
 
   @override
-  String get settingsScreen_deleteAllSanitaryDataDescription =>
-      'This will permanently delete your sanitary products history.';
+  String get settingsScreen_clearSexualActivityLogsSubtitle =>
+      'Removes your sexual activity history.';
 
   @override
-  String get settingsScreen_allSanitaryDataCleared =>
-      'All sanitary products data has been cleared.';
+  String get settingsScreen_logsAndPeriods => 'Logs & Periods';
 
   @override
-  String get settingsScreen_exportPeriodData => 'Export Period Data';
+  String get settingsScreen_pillLogs => 'Pill Logs';
 
   @override
-  String get settingsScreen_exportPillData => 'Export Pill Data';
+  String get settingsScreen_reversibleContraceptivesLogs =>
+      'Reversible Contraceptive Logs';
 
   @override
-  String get settingsScreen_exportReversibleContraceptivesData =>
-      'Export Reversible Contraceptives Data';
+  String get settingsScreen_sanitaryProductLogs => 'Sanitary Product Logs';
 
   @override
-  String get settingsScreen_exportSanitaryData =>
-      'Export Sanitary Products Data';
+  String get settingsScreen_sexualActivityLogs => 'Sexual Activity Logs';
 
   @override
-  String get settingsScreen_exportDataSubtitle => 'Create a JSON backup file.';
+  String get settingsScreen_importSupportNote =>
+      'Import is currently only supported for files exported from Menstrudel.';
 
   @override
   String get settingsScreen_exportSuccessful => 'Data exported successfully.';
@@ -930,66 +906,13 @@ class AppLocalizationsEs extends AppLocalizations {
   String get settingsScreen_exportFailed => 'Export failed. Please try again.';
 
   @override
-  String get settingsScreen_noDataToExport => 'No data found to export.';
-
-  @override
-  String get settingsScreen_exportDataMessage =>
-      'Here is my MenstruDel data export.';
-
-  @override
   String get settingsScreen_exportDataTitle => 'Export Data';
 
   @override
   String get settingsScreen_importDataTitle => 'Import Data';
 
   @override
-  String get settingsScreen_importPeriodData => 'Import Period Data';
-
-  @override
-  String get settingsScreen_importPillData => 'Import Pill Data';
-
-  @override
-  String get settingsScreen_importReversibleContraceptivesData =>
-      'Import Reversible Contraceptives Data';
-
-  @override
-  String get settingsScreen_importSanitaryData =>
-      'Import Sanitary Products Data';
-
-  @override
   String get settingsScreen_importDataSubtitle => 'Overwrites existing data.';
-
-  @override
-  String get settingsScreen_importPeriodData_question =>
-      'Are you sure you want to import Period Data?';
-
-  @override
-  String get settingsScreen_importPillData_question =>
-      'Are you sure you want to import Pill Data?';
-
-  @override
-  String get settingsScreen_importReversibleContraceptiveData_question =>
-      'Are you sure you want to import Reversible Contraceptive Data?';
-
-  @override
-  String get settingsScreen_importSanitaryData_question =>
-      'Are you sure you want to import Sanitary Products Data?';
-
-  @override
-  String get settingsScreen_importPeriodDataDescription =>
-      'Importing data will permanently overwrite all your existing period logs and period settings. This cannot be undone.';
-
-  @override
-  String get settingsScreen_importPillDataDescription =>
-      'Importing data will permanently overwrite all your existing pill history. This cannot be undone.';
-
-  @override
-  String get settingsScreen_importReversibleContraceptiveDataDescription =>
-      'Importing data will permanently overwrite all your existing reversible contraceptive history. This cannot be undone.';
-
-  @override
-  String get settingsScreen_importSanitaryDataDescription =>
-      'Importing data will permanently overwrite all your existing sanitary product history. This cannot be undone.';
 
   @override
   String get settingsScreen_importSuccessful => 'Data imported successfully!';
@@ -999,17 +922,8 @@ class AppLocalizationsEs extends AppLocalizations {
       'Failed to import data. Please try again.';
 
   @override
-  String get settingsScreen_importInvalidFile =>
-      'Invalid file format or data structure.';
-
-  @override
   String get settingsScreen_importErrorGeneral =>
       'Failed to import data. Please ensure the file is saved locally.';
-
-  @override
-  String settingsScreen_importErrorPlatform(String message) {
-    return 'Import failed: $message. Please ensure the file is saved on the device and try again.';
-  }
 
   @override
   String get settingsScreen_security => 'Security';

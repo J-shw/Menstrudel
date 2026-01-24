@@ -371,7 +371,7 @@ class AppLocalizationsCs extends AppLocalizations {
   String get cyclePhase_luteal => 'Post-Ovulation';
 
   @override
-  String get cyclePhase_late => 'Late Period';
+  String get cyclePhase_late => 'Late';
 
   @override
   String get cyclePhase_unknown => 'Unknown';
@@ -843,93 +843,65 @@ class AppLocalizationsCs extends AppLocalizations {
   String get settingsScreen_dataManagement => 'Správa dat';
 
   @override
-  String get settingsScreen_dangerZone => 'Nebezpečná zóna';
+  String get settingsScreen_deleteZone => 'Delete Zone';
 
   @override
-  String get settingsScreen_clearAllLogs => 'Vyčistit všechny záznamy';
+  String get settingsScreen_clearLogsAndPeriods => 'Clear Logs & Periods';
 
   @override
-  String get settingsScreen_clearAllLogsSubtitle =>
-      'Vymaže celou historii menstruace a příznaků.';
+  String get settingsScreen_clearLogsAndPeriodsSubtitle =>
+      'Deletes your entire period and symptom history.';
 
   @override
-  String get settingsScreen_clearAllPillData =>
-      'Vyčistit všechny data o pilulkách';
+  String get settingsScreen_clearPillLogs => 'Clear Pill Logs';
 
   @override
-  String get settingsScreen_clearAllPillDataSubtitle =>
-      'Vymaže váš režim pilulek a historii užívání.';
+  String get settingsScreen_clearPillLogsSubtitle =>
+      'Removes your pill regimen and intake history.';
 
   @override
-  String get settingsScreen_clearAllPillData_question =>
-      'Vyčistit všechny data o pilulkách?';
+  String get settingsScreen_clearReversibleContraceptiveLogs =>
+      'Clear Reversible Contraceptive Logs';
 
   @override
-  String get settingsScreen_deleteAllPillDataDescription =>
-      'Tímto krokem trvale smažete svůj režim užívání pilulek, připomenutí a historii užívání.';
+  String get settingsScreen_clearReversibleContraceptiveLogsSubtitle =>
+      'Removes your reversible contraceptive history.';
 
   @override
-  String get settingsScreen_allPillDataCleared =>
-      'Všechny data o pilulkách byly vyčištěny.';
+  String get settingsScreen_clearSanitaryProductLogs =>
+      'Clear Sanitary Product Logs';
 
   @override
-  String get settingsScreen_clearAllReversibleContraceptiveData =>
-      'Clear All Reversible Contraceptive Data';
+  String get settingsScreen_clearSanitaryProductLogsSubtitle =>
+      'Removes your sanitary products history.';
 
   @override
-  String get settingsScreen_clearAllReversibleContraceptiveDataSubtitle =>
-      'Removes your reversible contraceptives history.';
+  String get settingsScreen_clearSexualActivityLogs =>
+      'Clear Sexual Activity Logs';
 
   @override
-  String get settingsScreen_clearAllReversibleContraceptiveData_question =>
-      'Clear All Reversible Contraceptive Data?';
+  String get settingsScreen_clearSexualActivityLogsSubtitle =>
+      'Removes your sexual activity history.';
 
   @override
-  String get settingsScreen_deleteAllReversibleContraceptiveDataDescription =>
-      'This will permanently delete your Reversible Contraceptive history.';
+  String get settingsScreen_logsAndPeriods => 'Logs & Periods';
 
   @override
-  String get settingsScreen_allReversibleContraceptiveDataCleared =>
-      'All Reversible Contraceptive data has been cleared.';
+  String get settingsScreen_pillLogs => 'Pill Logs';
 
   @override
-  String get settingsScreen_clearAllSanitaryData =>
-      'Vyčistit všechny data o menstruačních pomůckách';
+  String get settingsScreen_reversibleContraceptivesLogs =>
+      'Reversible Contraceptive Logs';
 
   @override
-  String get settingsScreen_clearAllSanitaryDataSubtitle =>
-      'Smaže vaši historii o menstruačních pomůckách.';
+  String get settingsScreen_sanitaryProductLogs => 'Sanitary Product Logs';
 
   @override
-  String get settingsScreen_clearAllSanitaryData_question =>
-      'Vyčistit všechny data o menstruačních pomůckách?';
+  String get settingsScreen_sexualActivityLogs => 'Sexual Activity Logs';
 
   @override
-  String get settingsScreen_deleteAllSanitaryDataDescription =>
-      'Tímto trvale smažete svou historii o menstruačních pomůckách.';
-
-  @override
-  String get settingsScreen_allSanitaryDataCleared =>
-      'Všechny data o menstruačních pomůckách byly vyčištěny.';
-
-  @override
-  String get settingsScreen_exportPeriodData =>
-      'Exportovat data o menstruacích';
-
-  @override
-  String get settingsScreen_exportPillData => 'Exportovat data o pilulkách';
-
-  @override
-  String get settingsScreen_exportReversibleContraceptivesData =>
-      'Export Reversible Contraceptives Data';
-
-  @override
-  String get settingsScreen_exportSanitaryData =>
-      'Exportovat data o menstruačních pomůckách';
-
-  @override
-  String get settingsScreen_exportDataSubtitle =>
-      'Vytvořit zálohovací JSON soubor.';
+  String get settingsScreen_importSupportNote =>
+      'Import is currently only supported for files exported from Menstrudel.';
 
   @override
   String get settingsScreen_exportSuccessful =>
@@ -940,68 +912,13 @@ class AppLocalizationsCs extends AppLocalizations {
       'Exportování se pokazilo. Prosím zkuste to znovu.';
 
   @override
-  String get settingsScreen_noDataToExport =>
-      'Nebyly nalezeny žádná data k exportování.';
-
-  @override
-  String get settingsScreen_exportDataMessage =>
-      'Zde je můj export dat z aplikace MenstruDel.';
-
-  @override
   String get settingsScreen_exportDataTitle => 'Exportovat data';
 
   @override
   String get settingsScreen_importDataTitle => 'Importovat data';
 
   @override
-  String get settingsScreen_importPeriodData =>
-      'Importovat data o menstruacích';
-
-  @override
-  String get settingsScreen_importPillData => 'Importovat data o pilulkách';
-
-  @override
-  String get settingsScreen_importReversibleContraceptivesData =>
-      'Import Reversible Contraceptives Data';
-
-  @override
-  String get settingsScreen_importSanitaryData =>
-      'Importovat data o menstruačních pomůckách';
-
-  @override
   String get settingsScreen_importDataSubtitle => 'Přepíše existující data.';
-
-  @override
-  String get settingsScreen_importPeriodData_question =>
-      'Opravdu chcete importovat data o menstruacích?';
-
-  @override
-  String get settingsScreen_importPillData_question =>
-      'Opravdu chcete importovat data o pilulkách?';
-
-  @override
-  String get settingsScreen_importReversibleContraceptiveData_question =>
-      'Are you sure you want to import Reversible Contraceptive Data?';
-
-  @override
-  String get settingsScreen_importSanitaryData_question =>
-      'Opravdu chcete importovat data o menstruačních pomůckách?';
-
-  @override
-  String get settingsScreen_importPeriodDataDescription =>
-      'Import dat trvale přepíše všechny vaše stávající záznamy o menstruacích a nastavení menstruace. Tento krok nelze vrátit zpět.';
-
-  @override
-  String get settingsScreen_importPillDataDescription =>
-      'Import dat trvale přepíše všechny vaši stávající historii o pilulkách. Tento krok nelze vrátit zpět.';
-
-  @override
-  String get settingsScreen_importReversibleContraceptiveDataDescription =>
-      'Importing data will permanently overwrite all your existing reversible contraceptive history. This cannot be undone.';
-
-  @override
-  String get settingsScreen_importSanitaryDataDescription =>
-      'Import dat trvale přepíše všechny vaši stávající historii o menstruačních pomůckách. Tento krok nelze vrátit zpět.';
 
   @override
   String get settingsScreen_importSuccessful =>
@@ -1012,17 +929,8 @@ class AppLocalizationsCs extends AppLocalizations {
       'Importování se pokazilo. Prosím zkuste to znovu.';
 
   @override
-  String get settingsScreen_importInvalidFile =>
-      'Neplatný formát souboru nebo struktura dat.';
-
-  @override
   String get settingsScreen_importErrorGeneral =>
       'Importování se pokazilo. Prosím ujistěte se, že je soubor uložen lokálně.';
-
-  @override
-  String settingsScreen_importErrorPlatform(String message) {
-    return 'Importování se nepodařilo: $message. Prosím ujistěte se, že je soubor uložen lokálně a zkuste to znovu.';
-  }
 
   @override
   String get settingsScreen_security => 'Bezpečnost';

@@ -11,6 +11,7 @@ import 'app_localizations_en.dart';
 import 'app_localizations_es.dart';
 import 'app_localizations_fr.dart';
 import 'app_localizations_it.dart';
+import 'app_localizations_ru.dart';
 
 // ignore_for_file: type=lint
 
@@ -104,6 +105,7 @@ abstract class AppLocalizations {
     Locale('es'),
     Locale('fr'),
     Locale('it'),
+    Locale('ru'),
   ];
 
   /// No description provided for @appTitle.
@@ -769,7 +771,7 @@ abstract class AppLocalizations {
   /// No description provided for @cyclePhase_late.
   ///
   /// In en, this message translates to:
-  /// **'Late Period'**
+  /// **'Late'**
   String get cyclePhase_late;
 
   /// No description provided for @cyclePhase_unknown.
@@ -1510,143 +1512,107 @@ abstract class AppLocalizations {
   /// **'Data Management'**
   String get settingsScreen_dataManagement;
 
-  /// No description provided for @settingsScreen_dangerZone.
+  /// No description provided for @settingsScreen_deleteZone.
   ///
   /// In en, this message translates to:
-  /// **'Danger Zone'**
-  String get settingsScreen_dangerZone;
+  /// **'Delete Zone'**
+  String get settingsScreen_deleteZone;
 
-  /// No description provided for @settingsScreen_clearAllLogs.
+  /// Title for the period logs data clearing section.
   ///
   /// In en, this message translates to:
-  /// **'Clear All Logs'**
-  String get settingsScreen_clearAllLogs;
+  /// **'Clear Logs & Periods'**
+  String get settingsScreen_clearLogsAndPeriods;
 
-  /// No description provided for @settingsScreen_clearAllLogsSubtitle.
+  /// Subtitle for the period logs data clearing section.
   ///
   /// In en, this message translates to:
   /// **'Deletes your entire period and symptom history.'**
-  String get settingsScreen_clearAllLogsSubtitle;
+  String get settingsScreen_clearLogsAndPeriodsSubtitle;
 
-  /// No description provided for @settingsScreen_clearAllPillData.
+  /// Title for the pill logs data clearing section.
   ///
   /// In en, this message translates to:
-  /// **'Clear All Pill Data'**
-  String get settingsScreen_clearAllPillData;
+  /// **'Clear Pill Logs'**
+  String get settingsScreen_clearPillLogs;
 
-  /// No description provided for @settingsScreen_clearAllPillDataSubtitle.
+  /// Subtitle for the pill logs data clearing section.
   ///
   /// In en, this message translates to:
   /// **'Removes your pill regimen and intake history.'**
-  String get settingsScreen_clearAllPillDataSubtitle;
+  String get settingsScreen_clearPillLogsSubtitle;
 
-  /// No description provided for @settingsScreen_clearAllPillData_question.
+  /// Title for the reversible contraceptive logs data clearing section.
   ///
   /// In en, this message translates to:
-  /// **'Clear All Pill Data?'**
-  String get settingsScreen_clearAllPillData_question;
+  /// **'Clear Reversible Contraceptive Logs'**
+  String get settingsScreen_clearReversibleContraceptiveLogs;
 
-  /// No description provided for @settingsScreen_deleteAllPillDataDescription.
+  /// Subtitle for the reversible contraceptive logs data clearing section.
   ///
   /// In en, this message translates to:
-  /// **'This will permanently delete your pill regimen, reminders, and intake history.'**
-  String get settingsScreen_deleteAllPillDataDescription;
+  /// **'Removes your reversible contraceptive history.'**
+  String get settingsScreen_clearReversibleContraceptiveLogsSubtitle;
 
-  /// No description provided for @settingsScreen_allPillDataCleared.
+  /// Title for the sanitary product logs data clearing section.
   ///
   /// In en, this message translates to:
-  /// **'All pill data has been cleared.'**
-  String get settingsScreen_allPillDataCleared;
+  /// **'Clear Sanitary Product Logs'**
+  String get settingsScreen_clearSanitaryProductLogs;
 
-  /// No description provided for @settingsScreen_clearAllReversibleContraceptiveData.
-  ///
-  /// In en, this message translates to:
-  /// **'Clear All Reversible Contraceptive Data'**
-  String get settingsScreen_clearAllReversibleContraceptiveData;
-
-  /// No description provided for @settingsScreen_clearAllReversibleContraceptiveDataSubtitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Removes your reversible contraceptives history.'**
-  String get settingsScreen_clearAllReversibleContraceptiveDataSubtitle;
-
-  /// No description provided for @settingsScreen_clearAllReversibleContraceptiveData_question.
-  ///
-  /// In en, this message translates to:
-  /// **'Clear All Reversible Contraceptive Data?'**
-  String get settingsScreen_clearAllReversibleContraceptiveData_question;
-
-  /// No description provided for @settingsScreen_deleteAllReversibleContraceptiveDataDescription.
-  ///
-  /// In en, this message translates to:
-  /// **'This will permanently delete your Reversible Contraceptive history.'**
-  String get settingsScreen_deleteAllReversibleContraceptiveDataDescription;
-
-  /// No description provided for @settingsScreen_allReversibleContraceptiveDataCleared.
-  ///
-  /// In en, this message translates to:
-  /// **'All Reversible Contraceptive data has been cleared.'**
-  String get settingsScreen_allReversibleContraceptiveDataCleared;
-
-  /// No description provided for @settingsScreen_clearAllSanitaryData.
-  ///
-  /// In en, this message translates to:
-  /// **'Clear All Sanitary Products Data'**
-  String get settingsScreen_clearAllSanitaryData;
-
-  /// No description provided for @settingsScreen_clearAllSanitaryDataSubtitle.
+  /// Subtitle for the sanitary product logs data clearing section.
   ///
   /// In en, this message translates to:
   /// **'Removes your sanitary products history.'**
-  String get settingsScreen_clearAllSanitaryDataSubtitle;
+  String get settingsScreen_clearSanitaryProductLogsSubtitle;
 
-  /// No description provided for @settingsScreen_clearAllSanitaryData_question.
+  /// Title for the sexual activity logs data clearing section.
   ///
   /// In en, this message translates to:
-  /// **'Clear All Sanitary Products Data?'**
-  String get settingsScreen_clearAllSanitaryData_question;
+  /// **'Clear Sexual Activity Logs'**
+  String get settingsScreen_clearSexualActivityLogs;
 
-  /// No description provided for @settingsScreen_deleteAllSanitaryDataDescription.
+  /// Subtitle for the sexual activity logs data clearing section.
   ///
   /// In en, this message translates to:
-  /// **'This will permanently delete your sanitary products history.'**
-  String get settingsScreen_deleteAllSanitaryDataDescription;
+  /// **'Removes your sexual activity history.'**
+  String get settingsScreen_clearSexualActivityLogsSubtitle;
 
-  /// No description provided for @settingsScreen_allSanitaryDataCleared.
+  /// Title for the period logs data section.
   ///
   /// In en, this message translates to:
-  /// **'All sanitary products data has been cleared.'**
-  String get settingsScreen_allSanitaryDataCleared;
+  /// **'Logs & Periods'**
+  String get settingsScreen_logsAndPeriods;
 
-  /// No description provided for @settingsScreen_exportPeriodData.
+  /// Title for the pill logs data section.
   ///
   /// In en, this message translates to:
-  /// **'Export Period Data'**
-  String get settingsScreen_exportPeriodData;
+  /// **'Pill Logs'**
+  String get settingsScreen_pillLogs;
 
-  /// No description provided for @settingsScreen_exportPillData.
+  /// Title for the reversible contraceptives data section.
   ///
   /// In en, this message translates to:
-  /// **'Export Pill Data'**
-  String get settingsScreen_exportPillData;
+  /// **'Reversible Contraceptive Logs'**
+  String get settingsScreen_reversibleContraceptivesLogs;
 
-  /// No description provided for @settingsScreen_exportReversibleContraceptivesData.
+  /// Title for the sanitary products data section.
   ///
   /// In en, this message translates to:
-  /// **'Export Reversible Contraceptives Data'**
-  String get settingsScreen_exportReversibleContraceptivesData;
+  /// **'Sanitary Product Logs'**
+  String get settingsScreen_sanitaryProductLogs;
 
-  /// No description provided for @settingsScreen_exportSanitaryData.
+  /// Title for the sexual activity data section.
   ///
   /// In en, this message translates to:
-  /// **'Export Sanitary Products Data'**
-  String get settingsScreen_exportSanitaryData;
+  /// **'Sexual Activity Logs'**
+  String get settingsScreen_sexualActivityLogs;
 
-  /// No description provided for @settingsScreen_exportDataSubtitle.
+  /// Note indicating that import is only supported for files exported from Menstrudel.
   ///
   /// In en, this message translates to:
-  /// **'Create a JSON backup file.'**
-  String get settingsScreen_exportDataSubtitle;
+  /// **'Import is currently only supported for files exported from Menstrudel.'**
+  String get settingsScreen_importSupportNote;
 
   /// No description provided for @settingsScreen_exportSuccessful.
   ///
@@ -1660,18 +1626,6 @@ abstract class AppLocalizations {
   /// **'Export failed. Please try again.'**
   String get settingsScreen_exportFailed;
 
-  /// No description provided for @settingsScreen_noDataToExport.
-  ///
-  /// In en, this message translates to:
-  /// **'No data found to export.'**
-  String get settingsScreen_noDataToExport;
-
-  /// No description provided for @settingsScreen_exportDataMessage.
-  ///
-  /// In en, this message translates to:
-  /// **'Here is my MenstruDel data export.'**
-  String get settingsScreen_exportDataMessage;
-
   /// No description provided for @settingsScreen_exportDataTitle.
   ///
   /// In en, this message translates to:
@@ -1684,83 +1638,11 @@ abstract class AppLocalizations {
   /// **'Import Data'**
   String get settingsScreen_importDataTitle;
 
-  /// No description provided for @settingsScreen_importPeriodData.
-  ///
-  /// In en, this message translates to:
-  /// **'Import Period Data'**
-  String get settingsScreen_importPeriodData;
-
-  /// No description provided for @settingsScreen_importPillData.
-  ///
-  /// In en, this message translates to:
-  /// **'Import Pill Data'**
-  String get settingsScreen_importPillData;
-
-  /// No description provided for @settingsScreen_importReversibleContraceptivesData.
-  ///
-  /// In en, this message translates to:
-  /// **'Import Reversible Contraceptives Data'**
-  String get settingsScreen_importReversibleContraceptivesData;
-
-  /// No description provided for @settingsScreen_importSanitaryData.
-  ///
-  /// In en, this message translates to:
-  /// **'Import Sanitary Products Data'**
-  String get settingsScreen_importSanitaryData;
-
   /// No description provided for @settingsScreen_importDataSubtitle.
   ///
   /// In en, this message translates to:
   /// **'Overwrites existing data.'**
   String get settingsScreen_importDataSubtitle;
-
-  /// No description provided for @settingsScreen_importPeriodData_question.
-  ///
-  /// In en, this message translates to:
-  /// **'Are you sure you want to import Period Data?'**
-  String get settingsScreen_importPeriodData_question;
-
-  /// No description provided for @settingsScreen_importPillData_question.
-  ///
-  /// In en, this message translates to:
-  /// **'Are you sure you want to import Pill Data?'**
-  String get settingsScreen_importPillData_question;
-
-  /// No description provided for @settingsScreen_importReversibleContraceptiveData_question.
-  ///
-  /// In en, this message translates to:
-  /// **'Are you sure you want to import Reversible Contraceptive Data?'**
-  String get settingsScreen_importReversibleContraceptiveData_question;
-
-  /// No description provided for @settingsScreen_importSanitaryData_question.
-  ///
-  /// In en, this message translates to:
-  /// **'Are you sure you want to import Sanitary Products Data?'**
-  String get settingsScreen_importSanitaryData_question;
-
-  /// No description provided for @settingsScreen_importPeriodDataDescription.
-  ///
-  /// In en, this message translates to:
-  /// **'Importing data will permanently overwrite all your existing period logs and period settings. This cannot be undone.'**
-  String get settingsScreen_importPeriodDataDescription;
-
-  /// No description provided for @settingsScreen_importPillDataDescription.
-  ///
-  /// In en, this message translates to:
-  /// **'Importing data will permanently overwrite all your existing pill history. This cannot be undone.'**
-  String get settingsScreen_importPillDataDescription;
-
-  /// No description provided for @settingsScreen_importReversibleContraceptiveDataDescription.
-  ///
-  /// In en, this message translates to:
-  /// **'Importing data will permanently overwrite all your existing reversible contraceptive history. This cannot be undone.'**
-  String get settingsScreen_importReversibleContraceptiveDataDescription;
-
-  /// No description provided for @settingsScreen_importSanitaryDataDescription.
-  ///
-  /// In en, this message translates to:
-  /// **'Importing data will permanently overwrite all your existing sanitary product history. This cannot be undone.'**
-  String get settingsScreen_importSanitaryDataDescription;
 
   /// No description provided for @settingsScreen_importSuccessful.
   ///
@@ -1774,23 +1656,11 @@ abstract class AppLocalizations {
   /// **'Failed to import data. Please try again.'**
   String get settingsScreen_importFailed;
 
-  /// No description provided for @settingsScreen_importInvalidFile.
-  ///
-  /// In en, this message translates to:
-  /// **'Invalid file format or data structure.'**
-  String get settingsScreen_importInvalidFile;
-
   /// General message when file import fails for unknown reasons.
   ///
   /// In en, this message translates to:
   /// **'Failed to import data. Please ensure the file is saved locally.'**
   String get settingsScreen_importErrorGeneral;
-
-  /// Error when the native file picker fails, includes the specific error message.
-  ///
-  /// In en, this message translates to:
-  /// **'Import failed: {message}. Please ensure the file is saved on the device and try again.'**
-  String settingsScreen_importErrorPlatform(String message);
 
   /// No description provided for @settingsScreen_security.
   ///
@@ -2243,6 +2113,7 @@ class _AppLocalizationsDelegate
     'es',
     'fr',
     'it',
+    'ru',
   ].contains(locale.languageCode);
 
   @override
@@ -2264,6 +2135,8 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
       return AppLocalizationsFr();
     case 'it':
       return AppLocalizationsIt();
+    case 'ru':
+      return AppLocalizationsRu();
   }
 
   throw FlutterError(

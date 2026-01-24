@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/database/repositories/periods_repository.dart';
+import 'package:menstrudel/database/repositories/sex_repository.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
+import 'package:menstrudel/models/app/data_settings_type_enum.dart';
 import 'package:menstrudel/widgets/dialogs/delete_confirmation_dialog.dart';
 import 'package:menstrudel/database/repositories/pills_repository.dart';
 import 'package:menstrudel/database/repositories/reversible_contraceptive_repository.dart';
@@ -11,8 +13,11 @@ import 'package:share_plus/share_plus.dart';
 import 'package:intl/intl.dart';
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/services.dart';
 import 'dart:async';
+import 'widgets/step_action_selection.dart';
+import 'widgets/step_data_type_selection.dart';
+
+enum DataAction { export, import, delete }
 
 class DataSettingsScreen extends StatefulWidget {
   const DataSettingsScreen({super.key});
@@ -22,971 +27,281 @@ class DataSettingsScreen extends StatefulWidget {
 }
 
 class _DataSettingsScreenState extends State<DataSettingsScreen> {
+  DataAction? _selectedAction;
+  bool _isLoading = false;
+
   final periodsRepo = PeriodsRepository();
   final pillsRepo = PillsRepository();
   final reversibleContraceptiveRepo = ReversibleContraceptiveRepository();
   final sanitaryRepo = SanitaryProductRepository();
-  bool _isLoading = false;
+  final sexRepo = SexRepository();
 
-  Future<void> clearPeriodLogs() async {
-    setState(() {
-      _isLoading = true;
-    });
-    await periodsRepo.manager.clearAllData();
-    if (!mounted) return;
-
-    final l10n = AppLocalizations.of(context)!;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(l10n.settingsScreen_allLogsHaveBeenCleared)),
-    );
-    setState(() {
-      _isLoading = false;
-    });
+  void _handleDataTask(DataType type) {
+    switch (_selectedAction) {
+      case DataAction.export:
+        _exportLogic(type);
+        break;
+      case DataAction.import:
+        _importLogic(type);
+        break;
+      case DataAction.delete:
+        _deleteLogic(type);
+        break;
+      default:
+        break;
+    }
   }
 
-  Future<void> showClearPeriodLogsDialog() async {
-    final l10n = AppLocalizations.of(context)!;
-    return showDialog<void>(
-      context: context,
-      builder: (BuildContext context) {
-        return ConfirmationDialog(
-          title: l10n.settingsScreen_clearAllLogs_question,
-          contentText: l10n.settingsScreen_deleteAllLogsDescription,
-          confirmButtonText: l10n.clear,
-          onConfirm: clearPeriodLogs,
+  // --- Export Logic ---
+
+  Future<void> _exportLogic(DataType type) async {
+    switch (type) {
+      case DataType.logsAndPeriods:
+        await _performExport(
+          () => periodsRepo.manager.exportDataAsJson(),
+          type.fileName(),
         );
-      },
-    );
-  }
-
-  Future<void> clearPillData() async {
-    setState(() {
-      _isLoading = true;
-    });
-
-    await pillsRepo.manager.clearAllData();
-    await NotificationService.cancelPillReminder();
-
-    if (!mounted) return;
-
-    final l10n = AppLocalizations.of(context)!;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(l10n.settingsScreen_allPillDataCleared)),
-    );
-    setState(() {
-      _isLoading = false;
-    });
-  }
-
-  Future<void> showClearPillDataDialog() async {
-    final l10n = AppLocalizations.of(context)!;
-    return showDialog<void>(
-      context: context,
-      builder: (BuildContext context) {
-        return ConfirmationDialog(
-          title: l10n.settingsScreen_clearAllPillData_question,
-          contentText: l10n.settingsScreen_deleteAllPillDataDescription,
-          confirmButtonText: l10n.clear,
-          onConfirm: clearPillData,
+      case DataType.pills:
+        await _performExport(
+          () => pillsRepo.manager.exportDataAsJson(),
+          type.fileName(),
         );
-      },
-    );
-  }
-
-  Future<void> clearReversibleContraceptiveData() async {
-    setState(() {
-      _isLoading = true;
-    });
-
-    await reversibleContraceptiveRepo.manager.clearAllData();
-    await NotificationService.cancelReversibleContraceptiveReminder();
-
-    if (!mounted) return;
-
-    final l10n = AppLocalizations.of(context)!;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(l10n.settingsScreen_allReversibleContraceptiveDataCleared)),
-    );
-    setState(() {
-      _isLoading = false;
-    });
-  }
-
-  Future<void> clearSanitaryData() async {
-    setState(() {
-      _isLoading = true;
-    });
-
-    await sanitaryRepo.manager.clearAllData();
-    await NotificationService.cancelSanitaryProductReminder();
-
-    if (!mounted) return;
-
-    final l10n = AppLocalizations.of(context)!;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(l10n.settingsScreen_allSanitaryDataCleared)),
-    );
-    setState(() {
-      _isLoading = false;
-    });
-  }
-
-  Future<void> showClearReversibleContraceptiveDataDialog() async {
-    final l10n = AppLocalizations.of(context)!;
-    return showDialog<void>(
-      context: context,
-      builder: (BuildContext context) {
-        return ConfirmationDialog(
-          title: l10n.settingsScreen_clearAllReversibleContraceptiveData_question,
-          contentText: l10n.settingsScreen_deleteAllReversibleContraceptiveDataDescription,
-          confirmButtonText: l10n.clear,
-          onConfirm: clearReversibleContraceptiveData,
+      case DataType.reversibleContraceptives:
+        await _performExport(
+          () => reversibleContraceptiveRepo.manager.exportDataAsJson(),
+          type.fileName(),
         );
-      },
-    );
-  }
-
-  Future<void> showClearSanitaryDataDialog() async {
-    final l10n = AppLocalizations.of(context)!;
-    return showDialog<void>(
-      context: context,
-      builder: (BuildContext context) {
-        return ConfirmationDialog(
-          title: l10n.settingsScreen_clearAllSanitaryData_question,
-          contentText: l10n.settingsScreen_deleteAllSanitaryDataDescription,
-          confirmButtonText: l10n.clear,
-          onConfirm: clearSanitaryData,
+      case DataType.sanitaryProducts:
+        await _performExport(
+          () => sanitaryRepo.manager.exportDataAsJson(),
+          type.fileName(),
         );
-      },
-    );
+      case DataType.sexualActivity:
+        await _performExport(
+          () => sexRepo.manager.exportDataAsJson(),
+          type.fileName(),
+        );
+    }
   }
 
-  Future<void> exportPeriodData() async {
-    setState(() {
-      _isLoading = true;
-    });
-
+  Future<void> _performExport(
+    Future<String> Function() dataSource,
+    String fileNamePart,
+  ) async {
+    setState(() => _isLoading = true);
     final l10n = AppLocalizations.of(context)!;
     String filePath = '';
 
     try {
-      final jsonData = await periodsRepo.manager.exportDataAsJson();
-
-      if (jsonData.isEmpty) {
-        throw Exception(l10n.settingsScreen_noDataToExport);
-      }
+      final jsonData = await dataSource();
+      if (jsonData.isEmpty) throw Exception();
 
       final Directory directory = await getApplicationDocumentsDirectory();
       final timestamp = DateFormat('yyyyMMdd_HHmmss').format(DateTime.now());
-      final fileName = 'menstrudel_period_data_$timestamp.json';
-      final exportFile = File('${directory.path}/$fileName');
+      final fileName = 'menstrudel_${fileNamePart}_$timestamp.json';
+      final file = File('${directory.path}/$fileName');
 
-      await exportFile.writeAsString(jsonData);
-      filePath = exportFile.path;
-
-      if (!mounted) {
-        return;
-      }
-
-      final RenderBox box = context.findRenderObject() as RenderBox;
-
-      final params = ShareParams(
-        files: [XFile(filePath)],
-        sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size,
-      );
-
-      final result = await SharePlus.instance.share(params);
-      if (result.status == ShareResultStatus.success && mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(l10n.settingsScreen_exportSuccessful)),
-        );
-      }
-    } catch (e) {
-      debugPrint('Export failed: $e');
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(l10n.settingsScreen_exportFailed)),
-        );
-      }
-    } finally {
-      if (mounted) {
-        setState(() {
-          _isLoading = false;
-        });
-        if (filePath.isNotEmpty) {
-          try {
-            await File(filePath).delete();
-          } catch (e) {
-            debugPrint('Failed to delete temporary file: $e');
-          }
-        }
-      }
-    }
-  }
-
-  Future<void> exportPillData() async {
-    setState(() {
-      _isLoading = true;
-    });
-
-    final l10n = AppLocalizations.of(context)!;
-    String filePath = '';
-
-    try {
-      final jsonData = await pillsRepo.manager.exportDataAsJson();
-
-      if (jsonData.isEmpty) {
-        throw Exception(l10n.settingsScreen_noDataToExport);
-      }
-
-      final Directory directory = await getApplicationDocumentsDirectory();
-      final timestamp = DateFormat('yyyyMMdd_HHmmss').format(DateTime.now());
-      final fileName = 'menstrudel_pill_data_$timestamp.json';
-      final exportFile = File('${directory.path}/$fileName');
-
-      await exportFile.writeAsString(jsonData);
-      filePath = exportFile.path;
-
-      if (!mounted) {
-        return;
-      }
-
-      final RenderBox box = context.findRenderObject() as RenderBox;
-
-      final params = ShareParams(
-        files: [XFile(filePath)],
-        sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size,
-      );
-
-      final result = await SharePlus.instance.share(params);
-      if (result.status == ShareResultStatus.success && mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(l10n.settingsScreen_exportSuccessful)),
-        );
-      }
-    } catch (e) {
-      debugPrint('Export failed: $e');
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(l10n.settingsScreen_exportFailed)),
-        );
-      }
-    } finally {
-      if (mounted) {
-        setState(() {
-          _isLoading = false;
-        });
-        if (filePath.isNotEmpty) {
-          try {
-            await File(filePath).delete();
-          } catch (e) {
-            debugPrint('Failed to delete temporary file: $e');
-          }
-        }
-      }
-    }
-  }
-
-  Future<void> exportReversibleContraceptiveData() async {
-    setState(() {
-      _isLoading = true;
-    });
-
-    final l10n = AppLocalizations.of(context)!;
-    String filePath = '';
-
-    try {
-      final jsonData = await reversibleContraceptiveRepo.manager.exportDataAsJson();
-
-      if (jsonData.isEmpty) {
-        throw Exception(l10n.settingsScreen_noDataToExport);
-      }
-
-      final Directory directory = await getApplicationDocumentsDirectory();
-      final timestamp = DateFormat('yyyyMMdd_HHmmss').format(DateTime.now());
-      final fileName = 'menstrudel_reversible_contraceptive_data_$timestamp.json';
-      final exportFile = File('${directory.path}/$fileName');
-
-      await exportFile.writeAsString(jsonData);
-      filePath = exportFile.path;
-
-      if (!mounted) {
-        return;
-      }
-
-      final RenderBox box = context.findRenderObject() as RenderBox;
-
-      final params = ShareParams(
-        files: [XFile(filePath)],
-        sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size,
-      );
-
-      final result = await SharePlus.instance.share(params);
-      if (result.status == ShareResultStatus.success && mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(l10n.settingsScreen_exportSuccessful)),
-        );
-      }
-    } catch (e) {
-      debugPrint('Export failed: $e');
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(l10n.settingsScreen_exportFailed)),
-        );
-      }
-    } finally {
-      if (mounted) {
-        setState(() {
-          _isLoading = false;
-        });
-        if (filePath.isNotEmpty) {
-          try {
-            await File(filePath).delete();
-          } catch (e) {
-            debugPrint('Failed to delete temporary file: $e');
-          }
-        }
-      }
-    }
-  }
-
-  Future<void> exportSanitaryData() async {
-    setState(() {
-      _isLoading = true;
-    });
-
-    final l10n = AppLocalizations.of(context)!;
-    String filePath = '';
-
-    try {
-      final jsonData = await sanitaryRepo.manager.exportDataAsJson();
-
-      if (jsonData.isEmpty) {
-        throw Exception(l10n.settingsScreen_noDataToExport);
-      }
-
-      final Directory directory = await getApplicationDocumentsDirectory();
-      final timestamp = DateFormat('yyyyMMdd_HHmmss').format(DateTime.now());
-      final fileName = 'menstrudel_sanitary_products_data_$timestamp.json';
-      final exportFile = File('${directory.path}/$fileName');
-
-      await exportFile.writeAsString(jsonData);
-      filePath = exportFile.path;
-
-      if (!mounted) {
-        return;
-      }
-
-      final RenderBox box = context.findRenderObject() as RenderBox;
-
-      final params = ShareParams(
-        files: [XFile(filePath)],
-        sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size,
-      );
-
-      final result = await SharePlus.instance.share(params);
-      if (result.status == ShareResultStatus.success && mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(l10n.settingsScreen_exportSuccessful)),
-        );
-      }
-    } catch (e) {
-      debugPrint('Export failed: $e');
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(l10n.settingsScreen_exportFailed)),
-        );
-      }
-    } finally {
-      if (mounted) {
-        setState(() {
-          _isLoading = false;
-        });
-        if (filePath.isNotEmpty) {
-          try {
-            await File(filePath).delete();
-          } catch (e) {
-            debugPrint('Failed to delete temporary file: $e');
-          }
-        }
-      }
-    }
-  }
-
-  Future<void> _importData(
-    String filePath, {
-    bool isPillData = false,
-    bool isReversibleContraceptiveData = false,
-    bool isSanitaryData = false,
-  }) async {
-    setState(() {
-      _isLoading = true;
-    });
-
-    final l10n = AppLocalizations.of(context)!;
-
-    try {
-      final file = File(filePath);
-      final jsonString = await file.readAsString();
-
-      if (isPillData) {
-        await pillsRepo.manager.importDataFromJson(jsonString, l10n);
-      } else if (isReversibleContraceptiveData) {
-        await reversibleContraceptiveRepo.manager.importDataFromJson(jsonString);
-      } else if (isSanitaryData) {
-        await sanitaryRepo.manager.importDataFromJson(jsonString);
-      } else {
-        await periodsRepo.manager.importDataFromJson(jsonString);
-      }
+      await file.writeAsString(jsonData);
+      filePath = file.path;
 
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(l10n.settingsScreen_importSuccessful)),
+      final box = context.findRenderObject() as RenderBox;
+      final result = await SharePlus.instance.share(
+        ShareParams(
+          files: [XFile(filePath)],
+          sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size,
+        ),
       );
-    } on FormatException catch (e) {
-      debugPrint('Import failed: $e');
-      if (mounted) {
+
+      if (result.status == ShareResultStatus.success && mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(l10n.settingsScreen_importInvalidFile)),
+          SnackBar(content: Text(l10n.settingsScreen_exportSuccessful)),
         );
       }
     } catch (e) {
-      debugPrint('Import failed: $e');
-      if (mounted) {
+      if (mounted)
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(l10n.settingsScreen_exportFailed)),
+        );
+    } finally {
+      if (mounted) setState(() => _isLoading = false);
+      if (filePath.isNotEmpty)
+        await File(filePath).delete().catchError((_) => null);
+    }
+  }
+
+  // --- Import Logic ---
+
+  Future<void> _importLogic(DataType type) async {
+    final l10n = AppLocalizations.of(context)!;
+    try {
+      final result = await FilePicker.platform.pickFiles(
+        type: FileType.custom,
+        allowedExtensions: ['json'],
+      );
+      if (result == null || result.files.single.path == null || !mounted)
+        return;
+
+      final path = result.files.single.path!;
+
+      showDialog(
+        context: context,
+        builder: (ctx) => ConfirmationDialog(
+          title: l10n.import,
+          contentText: l10n.settingsScreen_importDataSubtitle,
+          confirmButtonText: l10n.import,
+          onConfirm: () => _performImport(path, type),
+        ),
+      );
+    } catch (e) {
+      if (mounted)
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(l10n.settingsScreen_importErrorGeneral)),
+        );
+    }
+  }
+
+  Future<void> _performImport(String path, DataType type) async {
+    setState(() => _isLoading = true);
+    final l10n = AppLocalizations.of(context)!;
+    try {
+      final content = await File(path).readAsString();
+      switch (type) {
+        case DataType.logsAndPeriods:
+          await periodsRepo.manager.importDataFromJson(content);
+        case DataType.pills:
+          await pillsRepo.manager.importDataFromJson(content, l10n);
+        case DataType.reversibleContraceptives:
+          await reversibleContraceptiveRepo.manager.importDataFromJson(content);
+        case DataType.sanitaryProducts:
+          await sanitaryRepo.manager.importDataFromJson(content);
+        case DataType.sexualActivity:
+          await sexRepo.manager.importDataFromJson(content);
+      }
+      if (mounted)
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(l10n.settingsScreen_importSuccessful)),
+        );
+    } catch (e) {
+      if (mounted)
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(l10n.settingsScreen_importFailed)),
         );
-      }
     } finally {
-      if (mounted) {
-        setState(() {
-          _isLoading = false;
-        });
-      }
+      if (mounted) setState(() => _isLoading = false);
     }
   }
 
-  Future<void> importPeriodData() async {
+  // --- Delete Logic ---
+
+  void _deleteLogic(DataType type) {
     final l10n = AppLocalizations.of(context)!;
-    try {
-      final result = await FilePicker.platform
-          .pickFiles(type: FileType.custom, allowedExtensions: ['json'])
-          .timeout(
-            const Duration(seconds: 30),
-            onTimeout: () {
-              throw TimeoutException('File picking timed out.');
-            },
-          );
-
-      if (result != null && result.files.single.path != null) {
-        final filePath = result.files.single.path!;
-
-        if (!mounted) return;
-        return showDialog<void>(
-          context: context,
-          builder: (BuildContext context) {
-            return ConfirmationDialog(
-              title: l10n.settingsScreen_importPeriodData_question,
-              contentText: l10n.settingsScreen_importPeriodDataDescription,
-              confirmButtonText: l10n.import,
-              onConfirm: () =>
-                  _importData(filePath, isPillData: false, isReversibleContraceptiveData: false),
-            );
-          },
-        );
-      }
-    } on PlatformException catch (e) {
-      debugPrint("File picker platform error: $e");
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              l10n.settingsScreen_importErrorPlatform(
-                e.message ?? 'An unknown error occurred.',
-              ),
-            ),
-          ),
-        );
-      }
-    } catch (e) {
-      debugPrint("General file picker error: $e");
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(l10n.settingsScreen_importErrorGeneral)),
-        );
-      }
-    }
+    showDialog(
+      context: context,
+      builder: (ctx) => ConfirmationDialog(
+        title: type.clearTitle(l10n),
+        contentText: type.clearSubtitle(l10n),
+        confirmButtonText: l10n.clear,
+        onConfirm: () => _performClear(type),
+      ),
+    );
   }
 
-  Future<void> importPillData() async {
+  Future<void> _performClear(DataType type) async {
+    setState(() => _isLoading = true);
     final l10n = AppLocalizations.of(context)!;
-    try {
-      final result = await FilePicker.platform
-          .pickFiles(type: FileType.custom, allowedExtensions: ['json'])
-          .timeout(
-            const Duration(seconds: 30),
-            onTimeout: () {
-              throw TimeoutException('File picking timed out.');
-            },
-          );
 
-      if (result != null && result.files.single.path != null) {
-        final filePath = result.files.single.path!;
-
-        if (!mounted) return;
-        return showDialog<void>(
-          context: context,
-          builder: (BuildContext context) {
-            return ConfirmationDialog(
-              title: l10n.settingsScreen_importPillData_question,
-              contentText: l10n.settingsScreen_importPillDataDescription,
-              confirmButtonText: l10n.import,
-              onConfirm: () =>
-                  _importData(filePath, isPillData: true, isReversibleContraceptiveData: false),
-            );
-          },
-        );
-      }
-    } on PlatformException catch (e) {
-      debugPrint("File picker platform error: $e");
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              l10n.settingsScreen_importErrorPlatform(
-                e.message ?? 'An unknown error occurred.',
-              ),
-            ),
-          ),
-        );
-      }
-    } catch (e) {
-      debugPrint("General file picker error: $e");
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(l10n.settingsScreen_importErrorGeneral)),
-        );
-      }
+    switch (type) {
+      case DataType.logsAndPeriods:
+        await periodsRepo.manager.clearAllData();
+      case DataType.pills:
+        await pillsRepo.manager.clearAllData();
+        await NotificationService.cancelPillReminder();
+      case DataType.reversibleContraceptives:
+        await reversibleContraceptiveRepo.manager.clearAllData();
+        await NotificationService.cancelReversibleContraceptiveReminder();
+      case DataType.sanitaryProducts:
+        await sanitaryRepo.manager.clearAllData();
+        await NotificationService.cancelSanitaryProductReminder();
+      case DataType.sexualActivity:
+        await sexRepo.manager.clearAllData();
     }
-  }
 
-  Future<void> importReversibleContraceptiveData() async {
-    final l10n = AppLocalizations.of(context)!;
-    try {
-      final result = await FilePicker.platform
-          .pickFiles(type: FileType.custom, allowedExtensions: ['json'])
-          .timeout(
-            const Duration(seconds: 30),
-            onTimeout: () {
-              throw TimeoutException('File picking timed out.');
-            },
-          );
-
-      if (result != null && result.files.single.path != null) {
-        final filePath = result.files.single.path!;
-
-        if (!mounted) return;
-        return showDialog<void>(
-          context: context,
-          builder: (BuildContext context) {
-            return ConfirmationDialog(
-              title: l10n.settingsScreen_importReversibleContraceptiveData_question,
-              contentText: l10n.settingsScreen_importReversibleContraceptiveDataDescription,
-              confirmButtonText: l10n.import,
-              onConfirm: () =>
-                  _importData(filePath, isPillData: false, isReversibleContraceptiveData: true),
-            );
-          },
-        );
-      }
-    } on PlatformException catch (e) {
-      debugPrint("File picker platform error: $e");
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              l10n.settingsScreen_importErrorPlatform(
-                e.message ?? 'An unknown error occurred.',
-              ),
-            ),
-          ),
-        );
-      }
-    } catch (e) {
-      debugPrint("General file picker error: $e");
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(l10n.settingsScreen_importErrorGeneral)),
-        );
-      }
-    }
-  }
-
-  Future<void> importSanitaryData() async {
-    final l10n = AppLocalizations.of(context)!;
-    try {
-      final result = await FilePicker.platform
-          .pickFiles(type: FileType.custom, allowedExtensions: ['json'])
-          .timeout(
-            const Duration(seconds: 30),
-            onTimeout: () {
-              throw TimeoutException('File picking timed out.');
-            },
-          );
-
-      if (result != null && result.files.single.path != null) {
-        final filePath = result.files.single.path!;
-
-        if (!mounted) return;
-        return showDialog<void>(
-          context: context,
-          builder: (BuildContext context) {
-            return ConfirmationDialog(
-              title: l10n.settingsScreen_importSanitaryData_question,
-              contentText: l10n.settingsScreen_importSanitaryDataDescription,
-              confirmButtonText: l10n.import,
-              onConfirm: () => _importData(
-                filePath,
-                isPillData: false,
-                isReversibleContraceptiveData: false,
-                isSanitaryData: true,
-              ),
-            );
-          },
-        );
-      }
-    } on PlatformException catch (e) {
-      debugPrint("File picker platform error: $e");
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              l10n.settingsScreen_importErrorPlatform(
-                e.message ?? 'An unknown error occurred.',
-              ),
-            ),
-          ),
-        );
-      }
-    } catch (e) {
-      debugPrint("General file picker error: $e");
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(l10n.settingsScreen_importErrorGeneral)),
-        );
-      }
+    if (mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(l10n.settingsScreen_allLogsHaveBeenCleared)),
+      );
+      setState(() => _isLoading = false);
     }
   }
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
 
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.settingsScreen_dataManagement)),
+      appBar: AppBar(
+        title: Text(l10n.settingsScreen_dataManagement),
+        leading: _selectedAction != null
+            ? IconButton(
+                icon: const Icon(Icons.arrow_back),
+                onPressed: () => setState(() => _selectedAction = null),
+              )
+            : null,
+      ),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
-          : SingleChildScrollView(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Card(
-                    elevation: 0,
-                    color: colorScheme.errorContainer,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
+          : AnimatedSwitcher(
+              duration: const Duration(milliseconds: 250),
+              child: _selectedAction == null
+                  ? StepActionSelection(
+                      onActionSelected: (a) =>
+                          setState(() => _selectedAction = a),
+                    )
+                  : Column(
                       children: [
-                        ListTile(
-                          leading: Icon(
-                            Icons.warning_amber_rounded,
-                            color: colorScheme.error,
-                          ),
-                          title: Text(
-                            l10n.settingsScreen_dangerZone,
-                            style: theme.textTheme.titleMedium?.copyWith(
-                              color: colorScheme.error,
-                              fontWeight: FontWeight.bold,
+                        if (_selectedAction == DataAction.import)
+                          Container(
+                            width: double.infinity,
+                            margin: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+                            padding: const EdgeInsets.all(12),
+                            decoration: BoxDecoration(
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .surfaceContainerHighest
+                                  .withValues(alpha: 0.5),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.info_outline,
+                                  size: 20,
+                                  color: Theme.of(context).colorScheme.primary,
+                                ),
+                                const SizedBox(width: 12),
+                                Expanded(
+                                  child: Text(
+                                    l10n.settingsScreen_importSupportNote,
+                                    style: TextStyle(fontSize: 13),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                        ),
-
-                        Divider(
-                          height: 1,
-                          color: colorScheme.onErrorContainer.withValues(
-                            alpha: 0.3,
+                        Expanded(
+                          child: StepDataTypeSelection(
+                            title: switch (_selectedAction) {
+                              DataAction.import => l10n.settingsScreen_importDataTitle,
+                              DataAction.export => l10n.settingsScreen_exportDataTitle,
+                              DataAction.delete => l10n.settingsScreen_deleteZone,
+                              _ => '',
+                            },
+                            onTypeSelected: _handleDataTask,
                           ),
-                        ),
-
-                        ListTile(
-                          title: Text(
-                            l10n.settingsScreen_clearAllLogs,
-                            style: theme.textTheme.titleMedium?.copyWith(
-                              color: colorScheme.onErrorContainer,
-                            ),
-                          ),
-                          subtitle: Text(
-                            l10n.settingsScreen_clearAllLogsSubtitle,
-                            style: theme.textTheme.bodyMedium?.copyWith(
-                              color: colorScheme.onErrorContainer.withValues(
-                                alpha: 0.8,
-                              ),
-                            ),
-                          ),
-                          trailing: Icon(
-                            Icons.chevron_right,
-                            color: colorScheme.onErrorContainer,
-                          ),
-                          onTap: showClearPeriodLogsDialog,
-                        ),
-
-                        ListTile(
-                          title: Text(
-                            l10n.settingsScreen_clearAllPillData,
-                            style: theme.textTheme.titleMedium?.copyWith(
-                              color: colorScheme.onErrorContainer,
-                            ),
-                          ),
-                          subtitle: Text(
-                            l10n.settingsScreen_clearAllPillDataSubtitle,
-                            style: theme.textTheme.bodyMedium?.copyWith(
-                              color: colorScheme.onErrorContainer.withValues(
-                                alpha: 0.8,
-                              ),
-                            ),
-                          ),
-                          trailing: Icon(
-                            Icons.chevron_right,
-                            color: colorScheme.onErrorContainer,
-                          ),
-                          onTap: showClearPillDataDialog,
-                        ),
-
-                        ListTile(
-                          title: Text(
-                            l10n.settingsScreen_clearAllReversibleContraceptiveData,
-                            style: theme.textTheme.titleMedium?.copyWith(
-                              color: colorScheme.onErrorContainer,
-                            ),
-                          ),
-                          subtitle: Text(
-                            l10n.settingsScreen_clearAllReversibleContraceptiveDataSubtitle,
-                            style: theme.textTheme.bodyMedium?.copyWith(
-                              color: colorScheme.onErrorContainer.withValues(
-                                alpha: 0.8,
-                              ),
-                            ),
-                          ),
-                          trailing: Icon(
-                            Icons.chevron_right,
-                            color: colorScheme.onErrorContainer,
-                          ),
-                          onTap: showClearReversibleContraceptiveDataDialog,
-                        ),
-
-                        ListTile(
-                          title: Text(
-                            l10n.settingsScreen_clearAllSanitaryData,
-                            style: theme.textTheme.titleMedium?.copyWith(
-                              color: colorScheme.onErrorContainer,
-                            ),
-                          ),
-                          subtitle: Text(
-                            l10n.settingsScreen_clearAllSanitaryDataSubtitle,
-                            style: theme.textTheme.bodyMedium?.copyWith(
-                              color: colorScheme.onErrorContainer.withValues(
-                                alpha: 0.8,
-                              ),
-                            ),
-                          ),
-                          trailing: Icon(
-                            Icons.chevron_right,
-                            color: colorScheme.onErrorContainer,
-                          ),
-                          onTap: showClearSanitaryDataDialog,
                         ),
                       ],
                     ),
-                  ),
-
-                  const SizedBox(height: 24),
-
-                  Card(
-                    elevation: 1,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        ListTile(
-                          leading: Icon(
-                            Icons.download_rounded,
-                            color: colorScheme.primary,
-                          ),
-                          title: Text(
-                            l10n.settingsScreen_exportDataTitle,
-                            style: theme.textTheme.titleMedium?.copyWith(
-                              color: colorScheme.primary,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-
-                        Divider(
-                          height: 1,
-                          color: colorScheme.onErrorContainer.withValues(
-                            alpha: 0.3,
-                          ),
-                        ),
-
-                        ListTile(
-                          title: Text(
-                            l10n.settingsScreen_exportPeriodData,
-                            style: theme.textTheme.titleMedium,
-                          ),
-                          subtitle: Text(
-                            l10n.settingsScreen_exportDataSubtitle,
-                            style: theme.textTheme.bodyMedium,
-                          ),
-                          trailing: const Icon(Icons.chevron_right),
-                          onTap: exportPeriodData,
-                        ),
-
-                        ListTile(
-                          title: Text(
-                            l10n.settingsScreen_exportPillData,
-                            style: theme.textTheme.titleMedium,
-                          ),
-                          subtitle: Text(
-                            l10n.settingsScreen_exportDataSubtitle,
-                            style: theme.textTheme.bodyMedium,
-                          ),
-                          trailing: const Icon(Icons.chevron_right),
-                          onTap: exportPillData,
-                        ),
-
-                        ListTile(
-                          title: Text(
-                            l10n.settingsScreen_exportReversibleContraceptivesData,
-                            style: theme.textTheme.titleMedium,
-                          ),
-                          subtitle: Text(
-                            l10n.settingsScreen_exportDataSubtitle,
-                            style: theme.textTheme.bodyMedium,
-                          ),
-                          trailing: const Icon(Icons.chevron_right),
-                          onTap: exportReversibleContraceptiveData,
-                        ),
-
-                        ListTile(
-                          title: Text(
-                            l10n.settingsScreen_exportSanitaryData,
-                            style: theme.textTheme.titleMedium,
-                          ),
-                          subtitle: Text(
-                            l10n.settingsScreen_exportDataSubtitle,
-                            style: theme.textTheme.bodyMedium,
-                          ),
-                          trailing: const Icon(Icons.chevron_right),
-                          onTap: exportSanitaryData,
-                        ),
-                      ],
-                    ),
-                  ),
-
-                  const SizedBox(height: 24),
-
-                  Card(
-                    elevation: 1,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        ListTile(
-                          leading: Icon(
-                            Icons.upload_rounded,
-                            color: colorScheme.primary,
-                          ),
-                          title: Text(
-                            l10n.settingsScreen_importDataTitle,
-                            style: theme.textTheme.titleMedium?.copyWith(
-                              color: colorScheme.primary,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-
-                        Divider(
-                          height: 1,
-                          color: colorScheme.onErrorContainer.withValues(
-                            alpha: 0.3,
-                          ),
-                        ),
-
-                        ListTile(
-                          title: Text(
-                            l10n.settingsScreen_importPeriodData,
-                            style: theme.textTheme.titleMedium,
-                          ),
-                          subtitle: Text(
-                            l10n.settingsScreen_importDataSubtitle,
-                            style: theme.textTheme.bodyMedium,
-                          ),
-                          trailing: const Icon(Icons.chevron_right),
-                          onTap: importPeriodData,
-                        ),
-
-                        ListTile(
-                          title: Text(
-                            l10n.settingsScreen_importPillData,
-                            style: theme.textTheme.titleMedium,
-                          ),
-                          subtitle: Text(
-                            l10n.settingsScreen_importDataSubtitle,
-                            style: theme.textTheme.bodyMedium,
-                          ),
-                          trailing: const Icon(Icons.chevron_right),
-                          onTap: importPillData,
-                        ),
-
-                        ListTile(
-                          title: Text(
-                            l10n.settingsScreen_importReversibleContraceptivesData,
-                            style: theme.textTheme.titleMedium,
-                          ),
-                          subtitle: Text(
-                            l10n.settingsScreen_importDataSubtitle,
-                            style: theme.textTheme.bodyMedium,
-                          ),
-                          trailing: const Icon(Icons.chevron_right),
-                          onTap: importReversibleContraceptiveData,
-                        ),
-
-                        ListTile(
-                          title: Text(
-                            l10n.settingsScreen_importSanitaryData,
-                            style: theme.textTheme.titleMedium,
-                          ),
-                          subtitle: Text(
-                            l10n.settingsScreen_importDataSubtitle,
-                            style: theme.textTheme.bodyMedium,
-                          ),
-                          trailing: const Icon(Icons.chevron_right),
-                          onTap: importSanitaryData,
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
             ),
     );
   }
