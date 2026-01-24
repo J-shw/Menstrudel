@@ -27,21 +27,21 @@ class PeriodJournalView extends StatefulWidget {
 
 class _PeriodJournalViewState extends State<PeriodJournalView> {
   CleanCalendarController? _calendarController;
-  Set<DateTime> _predictedDates = {};
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     _initCalendar();
-    _precomputePredictions();
   }
 
   void _initCalendar() {
+    if (_calendarController != null) return;
+
     final logService = context.read<LogService>();
     final settingsService = context.read<SettingsService>();
     final earliest = logService.earliestLogDate;
 
-    if (earliest != null && _calendarController == null) {
+    if (earliest != null) {
       _calendarController = CleanCalendarController(
         minDate: earliest.subtract(const Duration(days: 90)),
         maxDate: DateTime.now().add(const Duration(days: 60)),
@@ -56,43 +56,45 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
     }
   }
 
-  void _precomputePredictions() {
-    final periodService = context.read<PeriodService>();
+  Set<DateTime> _calculatePredictedDates(PeriodService periodService) {
     final prediction = periodService.predictionResult;
+    final dates = <DateTime>{};
 
     if (prediction?.estimatedStartDate != null &&
         prediction?.estimatedEndDate != null) {
       final start = DateUtils.dateOnly(prediction!.estimatedStartDate);
       final end = DateUtils.dateOnly(prediction.estimatedEndDate);
 
-      final dates = <DateTime>{};
       DateTime current = start;
       while (!current.isAfter(end)) {
         dates.add(current);
         current = current.add(const Duration(days: 1));
       }
-
-      if (dates.length != _predictedDates.length) {
-        setState(() => _predictedDates = dates);
-      }
     }
+    return dates;
   }
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final colorScheme = Theme.of(context).colorScheme;
+    final logService = context.watch<LogService>();
+    final periodService = context.watch<PeriodService>();
+    final logMap = logService.logMap;
+    final predictedDates = _calculatePredictedDates(periodService);
+    
+    final isLoading = logService.isLoading || periodService.isLoading;
     final futureColor = colorScheme.onSurface.withAlpha(75);
     final normalColor = colorScheme.onSurface;
     final now = DateTime.now();
-    final today = DateUtils.dateOnly(now);
-    final todayMs = today.millisecondsSinceEpoch;
-    final logMap = context.select((LogService s) => s.logMap);
-    final isLoading =
-        context.select((LogService s) => s.isLoading) ||
-        context.select((PeriodService s) => s.isLoading);
+    final todayMs = DateUtils.dateOnly(now).millisecondsSinceEpoch;
+
+    if (_calendarController == null && !isLoading) {
+       _initCalendar();
+    }
 
     if (isLoading) return const Center(child: CircularProgressIndicator());
+    
     if (_calendarController == null) {
       return Center(child: Text(l10n.journalViewWidget_logYourFirstPeriod));
     }
@@ -110,7 +112,7 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
           return _buildLogDay(day, logMap[dayOnly]!, colorScheme);
         }
 
-        if (_predictedDates.contains(dayOnly)) {
+        if (predictedDates.contains(dayOnly)) {
           return _buildPredictedDay(day, colorScheme);
         }
 
