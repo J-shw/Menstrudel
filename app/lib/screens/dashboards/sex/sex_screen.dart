@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:menstrudel/screens/dashboards/sex/widgets/sex_insights_tab.dart';
+import 'package:menstrudel/screens/dashboards/sex/widgets/sex_logs_tab.dart';
 import 'dart:async';
 import 'package:provider/provider.dart';
 import 'package:menstrudel/database/repositories/sex_repository.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/models/sex/sex_log_entry.dart';
-import 'package:menstrudel/widgets/sex_activities/screen/sex_log_card.dart';
 import 'package:menstrudel/controllers/log_sex_ui_controller.dart';
 
 class SexScreen extends StatefulWidget {
@@ -60,52 +60,44 @@ class _SexScreenState extends State<SexScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final l10n = AppLocalizations.of(context)!;
-    final controller = context.read<LogSexUIController>();
+Widget build(BuildContext context) {
+  final colorScheme = Theme.of(context).colorScheme;
+  final l10n = AppLocalizations.of(context)!;
+  final controller = context.read<LogSexUIController>();
 
-    if (_isLoading) {
-      return const Center(child: CircularProgressIndicator());
-    }
-
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              l10n.sexActivityScreen_history(_loggedSexActivities.length),
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: colorScheme.onSurface,
-              ),
-            ),
-            const SizedBox(height: 12),
-            if (_loggedSexActivities.isEmpty)
-              Padding(
-                padding: const EdgeInsets.only(top: 8.0),
-                child: Text(
-                  l10n.sexActivityScreen_noSexActivityRecordsFound,
-                  style: TextStyle(color: colorScheme.outline),
-                ),
-              )
-            else
-              ..._loggedSexActivities.map((log) {
-                return SexLogCard(
-                  entry: log,
-                  l10n: l10n,
-                  formattedDate: DateFormat.yMMMMd(Localizations.localeOf(context).languageCode)
-                      .add_jm()
-                      .format(log.dateTime),
-                  onTap: () => controller.handleEditSexLog(context: context, entry: log),
-                );
-              }),
+  return DefaultTabController(
+    length: 2,
+    child: Column(
+      children: [
+        TabBar(
+          labelColor: colorScheme.primary,
+          unselectedLabelColor: colorScheme.onSurfaceVariant,
+          indicatorSize: TabBarIndicatorSize.tab,
+          tabs: [
+            Tab(text: l10n.logs),
+            Tab(text: l10n.insights),
           ],
         ),
-      ),
-    );
-  }
+        Expanded(
+          child: TabBarView(
+            children: [
+              SexLogsTab(
+                isLoading: _isLoading,
+                historyEntries: _loggedSexActivities,
+                onTapEntry: (entry) => controller.handleEditSexLog(
+                  context: context, 
+                  entry: entry,
+                ),
+              ),
+              SexInsightsTab(
+                isLoading: _isLoading,
+                historyEntries: _loggedSexActivities,
+              ),
+            ],
+          ),
+        ),
+      ],
+    ),
+  );
+}
 }
