@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:menstrudel/models/cycle_phase/cycle_phase.dart';
 import 'package:menstrudel/models/cycle_phase/cycle_phase_enum.dart';
 
