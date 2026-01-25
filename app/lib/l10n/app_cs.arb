@@ -117,10 +117,29 @@
     "sanitaryProducts_mostUsed": "Nejvíce používané",
     "sanitaryProducts_usageTrend": "Trend používání",
     "sexProtection_none": "Žádná",
+    "@sexProtection_none": {
+        "description": "Indicates that no sexual protection method was used."
+    },
     "sexProtection_barrier": "Bariérová",
+    "@sexProtection_barrier": {
+        "description": "Indicates the use of barrier methods of sexual protection (Condoms)."
+    },
     "sexProtection_hormonal": "Hormonální",
+    "@sexProtection_hormonal": {
+        "description": "Indicates the use of hormonal methods of sexual protection (The Pill)."
+    },
+    "sexProtection_nonHormonal": "Non-Hormonal",
+    "@sexProtection_nonHormonal": {
+        "description": "Indicates the use of non-hormonal methods of sexual protection (Copper IUD)."
+    },
     "sexProtection_natural": "Naturální",
+    "@sexProtection_natural": {
+        "description": "Indicates the use of natural methods of sexual protection (Fertility awernass)."
+    },
     "sexProtection_permanent": "Permanentní",
+    "@sexProtection_permanent": {
+        "description": "Indicates the use of permanent methods of sexual protection (Sterilisation)."
+    },
     "sexType_vaginal": "Vaginální",
     "sexType_anal": "Anální",
     "sexType_oral": "Orální",
@@ -378,6 +397,30 @@
             }
         }
     },
+    "sexActivityScreen_primaryMethod": "Primary Method",
+    "@sexActivityScreen_primaryMethod": {
+        "description": "Label showing the primary sexual protection method."
+    },
+    "sexActivityScreen_mostFrequent": "Most Frequent",
+    "@sexActivityScreen_mostFrequent": {
+        "description": "Label showing the most frequent sex activity type."
+    },
+    "sexActivityScreen_protected": "Protected",
+    "@sexActivityScreen_protected": {
+        "description": "Label showing the total number of protected sex activities."
+    },
+    "sexActivityScreen_activityTrend": "Activity Trend",
+    "@sexActivityScreen_activityTrend": {
+        "description": "Title for the sexual activity trend chart."
+    },
+    "sexActivityScreen_activityDistribution": "Activity Distribution",
+    "@sexActivityScreen_activityDistribution": {
+        "description": "Title for the sex activity distribution chart."
+    },
+    "sexActivityScreen_protectionDistribution": "Protection Distribution",
+    "@sexActivityScreen_protectionDistribution": {
+        "description": "Title for the sexual protection distribution chart."
+    },
     "settingsScreen_profile": "Profil",
     "@settingsScreen_profile": {
         "description": "Title for the profile settings button."
@@ -471,64 +514,81 @@
     },
     "settingsScreen_pack": "Balíček",
     "settingsScreen_dataManagement": "Správa dat",
-    "settingsScreen_dangerZone": "Nebezpečná zóna",
-    "settingsScreen_clearAllLogs": "Vyčistit všechny záznamy",
-    "settingsScreen_clearAllLogsSubtitle": "Vymaže celou historii menstruace a příznaků.",
-    "settingsScreen_clearAllPillData": "Vyčistit všechny data o pilulkách",
-    "settingsScreen_clearAllPillDataSubtitle": "Vymaže váš režim pilulek a historii užívání.",
-    "settingsScreen_clearAllPillData_question": "Vyčistit všechny data o pilulkách?",
-    "settingsScreen_deleteAllPillDataDescription": "Tímto krokem trvale smažete svůj režim užívání pilulek, připomenutí a historii užívání.",
-    "settingsScreen_allPillDataCleared": "Všechny data o pilulkách byly vyčištěny.",
-    "settingsScreen_clearAllReversibleContraceptiveData": "Clear All Reversible Contraceptive Data",
-    "settingsScreen_clearAllReversibleContraceptiveDataSubtitle": "Removes your reversible contraceptives history.",
-    "settingsScreen_clearAllReversibleContraceptiveData_question": "Clear All Reversible Contraceptive Data?",
-    "settingsScreen_deleteAllReversibleContraceptiveDataDescription": "This will permanently delete your Reversible Contraceptive history.",
-    "settingsScreen_allReversibleContraceptiveDataCleared": "All Reversible Contraceptive data has been cleared.",
-    "settingsScreen_clearAllSanitaryData": "Vyčistit všechny data o menstruačních pomůckách",
-    "settingsScreen_clearAllSanitaryDataSubtitle": "Smaže vaši historii o menstruačních pomůckách.",
-    "settingsScreen_clearAllSanitaryData_question": "Vyčistit všechny data o menstruačních pomůckách?",
-    "settingsScreen_deleteAllSanitaryDataDescription": "Tímto trvale smažete svou historii o menstruačních pomůckách.",
-    "settingsScreen_allSanitaryDataCleared": "Všechny data o menstruačních pomůckách byly vyčištěny.",
-    "settingsScreen_exportPeriodData": "Exportovat data o menstruacích",
-    "settingsScreen_exportPillData": "Exportovat data o pilulkách",
-    "settingsScreen_exportReversibleContraceptivesData": "Export Reversible Contraceptives Data",
-    "settingsScreen_exportSanitaryData": "Exportovat data o menstruačních pomůckách",
-    "settingsScreen_exportDataSubtitle": "Vytvořit zálohovací JSON soubor.",
+    "settingsScreen_deleteZone": "Delete Zone",
+    "settingsScreen_clearLogsAndPeriods": "Clear Logs & Periods",
+    "@settingsScreen_clearLogsAndPeriods": {
+        "description": "Title for the period logs data clearing section."
+    },
+    "settingsScreen_clearLogsAndPeriodsSubtitle": "Deletes your entire period and symptom history.",
+    "@settingsScreen_clearLogsAndPeriodsSubtitle": {
+        "description": "Subtitle for the period logs data clearing section."
+    },
+    "settingsScreen_clearPillLogs": "Clear Pill Logs",
+    "@settingsScreen_clearPillLogs": {
+        "description": "Title for the pill logs data clearing section."
+    },
+    "settingsScreen_clearPillLogsSubtitle": "Removes your pill regimen and intake history.",
+    "@settingsScreen_clearPillLogsSubtitle": {
+        "description": "Subtitle for the pill logs data clearing section."
+    },
+    "settingsScreen_clearReversibleContraceptiveLogs": "Clear Reversible Contraceptive Logs",
+    "@settingsScreen_clearReversibleContraceptiveLogs": {
+        "description": "Title for the reversible contraceptive logs data clearing section."
+    },
+    "settingsScreen_clearReversibleContraceptiveLogsSubtitle": "Removes your reversible contraceptive history.",
+    "@settingsScreen_clearReversibleContraceptiveLogsSubtitle": {
+        "description": "Subtitle for the reversible contraceptive logs data clearing section."
+    },
+    "settingsScreen_clearSanitaryProductLogs": "Clear Sanitary Product Logs",
+    "@settingsScreen_clearSanitaryProductLogs": {
+        "description": "Title for the sanitary product logs data clearing section."
+    },
+    "settingsScreen_clearSanitaryProductLogsSubtitle": "Removes your sanitary products history.",
+    "@settingsScreen_clearSanitaryProductLogsSubtitle": {
+        "description": "Subtitle for the sanitary product logs data clearing section."
+    },
+    "settingsScreen_clearSexualActivityLogs": "Clear Sexual Activity Logs",
+    "@settingsScreen_clearSexualActivityLogs": {
+        "description": "Title for the sexual activity logs data clearing section."
+    },
+    "settingsScreen_clearSexualActivityLogsSubtitle": "Removes your sexual activity history.",
+    "@settingsScreen_clearSexualActivityLogsSubtitle": {
+        "description": "Subtitle for the sexual activity logs data clearing section."
+    },
+    "settingsScreen_logsAndPeriods": "Logs & Periods",
+    "@settingsScreen_logsAndPeriods": {
+        "description": "Title for the period logs data section."
+    },
+    "settingsScreen_pillLogs": "Pill Logs",
+    "@settingsScreen_pillLogs": {
+        "description": "Title for the pill logs data section."
+    },
+    "settingsScreen_reversibleContraceptivesLogs": "Reversible Contraceptive Logs",
+    "@settingsScreen_reversibleContraceptivesLogs": {
+        "description": "Title for the reversible contraceptives data section."
+    },
+    "settingsScreen_sanitaryProductLogs": "Sanitary Product Logs",
+    "@settingsScreen_sanitaryProductLogs": {
+        "description": "Title for the sanitary products data section."
+    },
+    "settingsScreen_sexualActivityLogs": "Sexual Activity Logs",
+    "@settingsScreen_sexualActivityLogs": {
+        "description": "Title for the sexual activity data section."
+    },
+    "settingsScreen_importSupportNote": "Import is currently only supported for files exported from Menstrudel.",
+    "@settingsScreen_importSupportNote": {
+        "description": "Note indicating that import is only supported for files exported from Menstrudel."
+    },
     "settingsScreen_exportSuccessful": "Data byla exportována úspěšně.",
     "settingsScreen_exportFailed": "Exportování se pokazilo. Prosím zkuste to znovu.",
-    "settingsScreen_noDataToExport": "Nebyly nalezeny žádná data k exportování.",
-    "settingsScreen_exportDataMessage": "Zde je můj export dat z aplikace MenstruDel.",
     "settingsScreen_exportDataTitle": "Exportovat data",
     "settingsScreen_importDataTitle": "Importovat data",
-    "settingsScreen_importPeriodData": "Importovat data o menstruacích",
-    "settingsScreen_importPillData": "Importovat data o pilulkách",
-    "settingsScreen_importReversibleContraceptivesData": "Import Reversible Contraceptives Data",
-    "settingsScreen_importSanitaryData": "Importovat data o menstruačních pomůckách",
     "settingsScreen_importDataSubtitle": "Přepíše existující data.",
-    "settingsScreen_importPeriodData_question": "Opravdu chcete importovat data o menstruacích?",
-    "settingsScreen_importPillData_question": "Opravdu chcete importovat data o pilulkách?",
-    "settingsScreen_importReversibleContraceptiveData_question": "Are you sure you want to import Reversible Contraceptive Data?",
-    "settingsScreen_importSanitaryData_question": "Opravdu chcete importovat data o menstruačních pomůckách?",
-    "settingsScreen_importPeriodDataDescription": "Import dat trvale přepíše všechny vaše stávající záznamy o menstruacích a nastavení menstruace. Tento krok nelze vrátit zpět.",
-    "settingsScreen_importPillDataDescription": "Import dat trvale přepíše všechny vaši stávající historii o pilulkách. Tento krok nelze vrátit zpět.",
-    "settingsScreen_importReversibleContraceptiveDataDescription": "Importing data will permanently overwrite all your existing reversible contraceptive history. This cannot be undone.",
-    "settingsScreen_importSanitaryDataDescription": "Import dat trvale přepíše všechny vaši stávající historii o menstruačních pomůckách. Tento krok nelze vrátit zpět.",
     "settingsScreen_importSuccessful": "Data byla importována úspěšně!",
     "settingsScreen_importFailed": "Importování se pokazilo. Prosím zkuste to znovu.",
-    "settingsScreen_importInvalidFile": "Neplatný formát souboru nebo struktura dat.",
     "settingsScreen_importErrorGeneral": "Importování se pokazilo. Prosím ujistěte se, že je soubor uložen lokálně.",
     "@settingsScreen_importErrorGeneral": {
         "description": "General message when file import fails for unknown reasons."
-    },
-    "settingsScreen_importErrorPlatform": "Importování se nepodařilo: {message}. Prosím ujistěte se, že je soubor uložen lokálně a zkuste to znovu.",
-    "@settingsScreen_importErrorPlatform": {
-        "description": "Error when the native file picker fails, includes the specific error message.",
-        "placeholders": {
-            "message": {
-                "type": "String",
-                "example": "Unknown path or network access required."
-            }
-        }
     },
     "settingsScreen_security": "Bezpečnost",
     "securityScreen_enableBiometricLock": "Zapnout biometrický zámek",
