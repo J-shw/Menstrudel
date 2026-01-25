@@ -431,7 +431,7 @@
     "@settingsScreen_notSet": {
         "description": "Used when birth date is not set."
     },
-    "settingsScreen_appGoal": "App Goal",
+    "settingsScreen_appGoal": "But de l'application",
     "settingsScreen_profileUpdated": "Profil mis à jour avec succès",
     "settingsScreen_selectHistoryView": "Sélectionner la vue de l'historique",
     "settingsScreen_deleteRegimen_question": "Supprimer le traitement ?",
@@ -463,8 +463,8 @@
     "settingsScreen_notificationTime": "Heure de la notification",
     "settingsScreen_overduePeriodReminder": "Alerte de retard de règles",
     "settingsScreen_remindMeAfter": "Me rappeler après",
-    "settingsScreen_enableReversibleContraceptiveTracking": "Enable Reversible Contraceptive Tracking",
-    "settingsScreen_reversibleContraceptiveDescription": "Track Reversible Contraceptives.",
+    "settingsScreen_enableReversibleContraceptiveTracking": "Activer le suivi des contraceptions réversibles",
+    "settingsScreen_reversibleContraceptiveDescription": "Suivre les contraceptions réversibles.",
     "settingsScreen_reversibleContraceptiveType": "Type de contraceptif",
     "settingsScreen_setDuration": "Déterminer une durée",
     "settingsScreen_reversibleContraceptiveDuration": "Contraceptive Replacement Duration",
@@ -515,43 +515,43 @@
     "settingsScreen_pack": "Pack",
     "settingsScreen_dataManagement": "Gestion des données",
     "settingsScreen_deleteZone": "Delete Zone",
-    "settingsScreen_clearLogsAndPeriods": "Clear Logs & Periods",
+    "settingsScreen_clearLogsAndPeriods": "Effacer le journal et le suivi des règles",
     "@settingsScreen_clearLogsAndPeriods": {
         "description": "Title for the period logs data clearing section."
     },
-    "settingsScreen_clearLogsAndPeriodsSubtitle": "Deletes your entire period and symptom history.",
+    "settingsScreen_clearLogsAndPeriodsSubtitle": "Efface l'entièreté de l'historique des règles et des symptômes.",
     "@settingsScreen_clearLogsAndPeriodsSubtitle": {
         "description": "Subtitle for the period logs data clearing section."
     },
-    "settingsScreen_clearPillLogs": "Clear Pill Logs",
+    "settingsScreen_clearPillLogs": "Effacer le journal des pillules",
     "@settingsScreen_clearPillLogs": {
         "description": "Title for the pill logs data clearing section."
     },
-    "settingsScreen_clearPillLogsSubtitle": "Removes your pill regimen and intake history.",
+    "settingsScreen_clearPillLogsSubtitle": "Efface le régime de pillule et l'historique de prises.",
     "@settingsScreen_clearPillLogsSubtitle": {
         "description": "Subtitle for the pill logs data clearing section."
     },
-    "settingsScreen_clearReversibleContraceptiveLogs": "Clear Reversible Contraceptive Logs",
+    "settingsScreen_clearReversibleContraceptiveLogs": "Effacer le journal de contraceptions réversibles",
     "@settingsScreen_clearReversibleContraceptiveLogs": {
         "description": "Title for the reversible contraceptive logs data clearing section."
     },
-    "settingsScreen_clearReversibleContraceptiveLogsSubtitle": "Removes your reversible contraceptive history.",
+    "settingsScreen_clearReversibleContraceptiveLogsSubtitle": "Efface l'historique des contraceptions réversibles.",
     "@settingsScreen_clearReversibleContraceptiveLogsSubtitle": {
         "description": "Subtitle for the reversible contraceptive logs data clearing section."
     },
-    "settingsScreen_clearSanitaryProductLogs": "Clear Sanitary Product Logs",
+    "settingsScreen_clearSanitaryProductLogs": "Effacer le journal de produits sanitaires",
     "@settingsScreen_clearSanitaryProductLogs": {
         "description": "Title for the sanitary product logs data clearing section."
     },
-    "settingsScreen_clearSanitaryProductLogsSubtitle": "Removes your sanitary products history.",
+    "settingsScreen_clearSanitaryProductLogsSubtitle": "Efface l'historique des produits sanitaires.",
     "@settingsScreen_clearSanitaryProductLogsSubtitle": {
         "description": "Subtitle for the sanitary product logs data clearing section."
     },
-    "settingsScreen_clearSexualActivityLogs": "Clear Sexual Activity Logs",
+    "settingsScreen_clearSexualActivityLogs": "Effacer le journal d'activités sexuelles",
     "@settingsScreen_clearSexualActivityLogs": {
         "description": "Title for the sexual activity logs data clearing section."
     },
-    "settingsScreen_clearSexualActivityLogsSubtitle": "Removes your sexual activity history.",
+    "settingsScreen_clearSexualActivityLogsSubtitle": "Efface l'historique des activités sexuelles.",
     "@settingsScreen_clearSexualActivityLogsSubtitle": {
         "description": "Subtitle for the sexual activity logs data clearing section."
     },
