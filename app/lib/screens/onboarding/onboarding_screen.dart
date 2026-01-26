@@ -112,27 +112,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               ),
             ),
           ),
-          const SizedBox(height: 16),
-          Wrap(
-            alignment: WrapAlignment.center,
-            children: [
-              Text(
-                l10n.onBoardingScreen_byUsingMenstrudelYouAgreeTo,
-                style: Theme.of(context).textTheme.bodySmall,
-              ),
-              GestureDetector(
-                onTap: () =>
-                    launchUrl(Uri.parse('https://menstrudel.app/privacy/')),
-                child: Text(
-                  l10n.onBoardingScreen_privacyPolicy,
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: Theme.of(context).primaryColor,
-                    decoration: TextDecoration.underline,
-                  ),
-                ),
-              ),
-            ],
-          ),
           const SizedBox(height: 12),
           if (_currentPage > 0)
             TextButton(
@@ -143,7 +122,26 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               child: Text(l10n.back),
             )
           else
-            const SizedBox(height: 48),
+            Wrap(
+              alignment: WrapAlignment.center,
+              children: [
+                Text(
+                  l10n.onBoardingScreen_byUsingMenstrudelYouAgreeTo,
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+                GestureDetector(
+                  onTap: () =>
+                      launchUrl(Uri.parse('https://menstrudel.app/privacy/')),
+                  child: Text(
+                    l10n.onBoardingScreen_privacyPolicy,
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      decoration: TextDecoration.underline,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
+            ),
         ],
       ),
     );
