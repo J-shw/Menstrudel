@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:menstrudel/models/app/user_entry.dart';
 import 'package:menstrudel/models/app/user_goal_types_enum.dart';
 import 'package:menstrudel/database/repositories/user_repository.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'widgets/welcome_step.dart';
 import 'widgets/profile_step.dart';
 import 'widgets/goal_step.dart';
@@ -32,7 +33,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       primaryGoal: _selectedGoal,
     );
     await context.read<UserRepository>().createUser(newUser);
-    if (mounted) await context.read<SettingsService>().applySettingsForGoal(_selectedGoal);
+    if (mounted){
+      await context.read<SettingsService>().applySettingsForGoal(_selectedGoal);
+    }
     if (mounted) Navigator.pushReplacementNamed(context, '/');
   }
 
@@ -62,7 +65,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           DateTime.now().day,
                         ),
                       );
-                      if (picked != null){
+                      if (picked != null) {
                         setState(() => _selectedDate = picked);
                       }
                     },
@@ -104,8 +107,31 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       curve: Curves.ease,
                     )
                   : _finish(),
-              child: Text(isLastPage ? l10n.onboardingScreen_getStarted : l10n.next),
+              child: Text(
+                isLastPage ? l10n.onboardingScreen_getStarted : l10n.next,
+              ),
             ),
+          ),
+          const SizedBox(height: 16),
+          Wrap(
+            alignment: WrapAlignment.center,
+            children: [
+              Text(
+                l10n.onBoardingScreen_byUsingMenstrudelYouAgreeTo,
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+              GestureDetector(
+                onTap: () =>
+                    launchUrl(Uri.parse('https://menstrudel.app/privacy/')),
+                child: Text(
+                  l10n.onBoardingScreen_privacyPolicy,
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: Theme.of(context).primaryColor,
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
+              ),
+            ],
           ),
           const SizedBox(height: 12),
           if (_currentPage > 0)
