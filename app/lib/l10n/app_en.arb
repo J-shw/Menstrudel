@@ -9,6 +9,7 @@
     "total": "Total",
     "shortest": "Shortest",
     "longest": "Longest",
+    "unknown": "Unknown",
 
     "date": "Date",
     "time": "Time",
