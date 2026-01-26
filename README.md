@@ -98,13 +98,13 @@ You can view our privacy policy [here](https://menstrudel.app/privacy/).
 
 # App Screenshots
 
-| Your daily logs |  Quick symptom entry | Sanitary product reminders |
-| :---: | :---: | :---: |
-| ![Log View](docs/screenshots/android/logs_screen.png) | ![Symptom Entry Dialog](docs/screenshots/android/log_screen.png) | ![Sanitary Product Tracking Screen](docs/screenshots/android/sanitary_screen.png) |
-| Pill Reminder | Quick insights | Settings |
-| ![Screenshot of the pill reminder screen in Menstrudel](docs/screenshots/android/pills_screen.png)  | ![Insights View](docs/screenshots/android/insights_screen.png) | ![Settins Screen](docs/screenshots/android/settings_screen.png) | 
-| LARC Tracking | Widgets |  |
-| ![Screenshot of the LARC tracking screen](docs/screenshots/android/larc_screen.png) | ![Screenshot of the widgets screen on home screen](docs/screenshots/android/widget_screen.png) |   | 
+| Today screen |  Quick log entry | Log calendar | Log insights |
+| :---: | :---: | :---: | :---: |
+| ![Screenshot of the today screen in Menstrudel](docs/screenshots/android/logs_today_screen.png) | ![Screenshot of the quick log entry dialog in Menstrudel](docs/screenshots/android/logs_add_log_screen.png) | ![Screenshot of the log calendar screen in Menstrudel](docs/screenshots/android/logs_calendar_screen.png) | ![Screenshot of the log insights screen in Menstrudel](docs/screenshots/android/logs_insights_screen.png) |
+| Sanitary product reminder | Sanitary product insigts |  Pill reminders | Settings |
+| ![Screenshot of the sanitary product reminder screen in Menstrudel](docs/screenshots/android/sanitary_product_log_screen.png) | ![Screenshot of the sanitary product insights screen in Menstrudel](docs/screenshots/android/sanitary_product_insight_screen.png)  | ![Insights View](docs/screenshots/android/pill_screen.png) | ![Screenshot of the settins screen in Menstrudel](docs/screenshots/android/settings_screen.png) | 
+| Reversible contraceptive tracking | Sex logging | Sex insights | Widgets |
+| ![Screenshot of the reversible contraceptive tracking screen](docs/screenshots/android/contraceptives_screen.png) | ![Screenshot of the sex logging screen in Menstrudel](docs/screenshots/android/sex_activity_log_screen.png) | ![Screenshot of the sex insights screen in Menstrudel](docs/screenshots/android/sex_activity_insight_screen.png) | ![Screenshot of the widgets screen on home screen](docs/screenshots/android/widget_screen.png) |
 
 # Wear OS
 
