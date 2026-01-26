@@ -1,5 +1,5 @@
 {
-    "@@locale": "es",
+    "@@locale": "es-ES",
     "appTitle": "Menstrudel",
     "nextDue": "Next Due",
     "ongoing": "Ongoing",
@@ -7,6 +7,7 @@
     "total": "Total",
     "shortest": "Shortest",
     "longest": "Longest",
+    "unknown": "Unknown",
     "date": "Date",
     "time": "Time",
     "start": "Start",
