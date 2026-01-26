@@ -41,71 +41,109 @@ class _AboutScreenState extends State<AboutScreen> {
   }
   
   void _shareWebsite() {
+    final l10n = AppLocalizations.of(context)!;
     final RenderBox box = context.findRenderObject() as RenderBox;
     SharePlus.instance.share(
-      ShareParams(text: 'Your cycle, your data. Check out Menstrudel, the free and private period tracker: https://menstrudel.app/', sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size,)
+      ShareParams(text: '${l10n.aboutScreen_shareText} https://menstrudel.app/', sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size,)
     );
   }
 
   @override
-  Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
+Widget build(BuildContext context) {
+  final l10n = AppLocalizations.of(context)!;
+  final theme = Theme.of(context);
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(l10n.settingsScreen_about),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Card(
-          elevation: 0,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              ListTile(
-                leading: const Icon(Icons.info_outline),
-                title: Text(l10n.aboutScreen_version),
-                subtitle: Text(_appVersion),
-              ),
-
-              const Divider(height: 1, indent: 16, endIndent: 16),
-
-              ListTile(
-                leading: const Icon(Icons.code_rounded),
-                title: Text(l10n.aboutScreen_github),
-                subtitle: Text(l10n.aboutScreen_githubSubtitle),
-                trailing: const Icon(Icons.chevron_right),
-                onTap: () {
-                  _launchUrl('https://github.com/J-shw/Menstrudel?utm_source=menstrudel_app', l10n);
-                },
-              ),
-
-              const Divider(height: 1, indent: 16, endIndent: 16),
-
-              ListTile(
-                leading: const Icon(Icons.discord),
-                title: Text(l10n.aboutScreen_discord),
-                subtitle: Text(l10n.aboutScreen_discordSubtitle),
-                trailing: const Icon(Icons.chevron_right),
-                onTap: () {
-                  _launchUrl('https://discord.gg/H95kG7zPWB', l10n);
-                },
-              ),
-
-              const Divider(height: 1, indent: 16, endIndent: 16),
-
-              ListTile(
-                leading: const Icon(Icons.share_rounded),
-                title: Text(l10n.aboutScreen_share),
-                subtitle: Text(l10n.aboutScreen_shareSubtitle),
-                trailing: const Icon(Icons.chevron_right),
-                onTap: _shareWebsite,
-              ),
-            ],
+  return Scaffold(
+    appBar: AppBar(title: Text(l10n.settingsScreen_about), centerTitle: true),
+    body: ListView(
+      children: [
+        const SizedBox(height: 32),
+        Center(
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(24),
+            child: Image.asset(
+              'assets/icon/menstrudel.png',
+              width: 100,
+              height: 100,
+              fit: BoxFit.cover,
+            ),
           ),
         ),
+        const SizedBox(height: 16),
+        Center(
+          child: Text(
+            "Menstrudel", 
+            style: theme.textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold),
+          ),
+        ),
+        Center(child: Text("${l10n.aboutScreen_version} $_appVersion", style: theme.textTheme.bodySmall)),
+        const SizedBox(height: 32),
+
+        _buildSectionHeader(context, l10n.aboutScreen_communityAndUpdates),
+        _buildListTile(
+          icon: Icons.history_rounded,
+          title: "Release Notes",
+          subtitle: l10n.aboutScreen_releaseNotesSubtitle(_appVersion),
+          onTap: () => _launchUrl('https://menstrudel.app/release-notes/', l10n),
+        ),
+        _buildListTile(
+          icon: Icons.discord,
+          title: l10n.aboutScreen_discord,
+          subtitle: l10n.aboutScreen_discordSubtitle,
+          onTap: () => _launchUrl('https://discord.gg/H95kG7zPWB', l10n),
+        ),
+
+        const Divider(),
+        _buildSectionHeader(context, l10n.aboutScreen_legalAndSource),
+        _buildListTile(
+          icon: Icons.privacy_tip_outlined,
+          title: l10n.aboutScreen_privacyPolicy,
+          subtitle: l10n.aboutScreen_privacyPolicySubtitle,
+          onTap: () => _launchUrl('https://github.com/J-shw/Menstrudel/blob/main/PRIVACY.md', l10n),
+        ),
+        _buildListTile(
+          icon: Icons.code_rounded,
+          title: l10n.aboutScreen_github,
+          subtitle: l10n.aboutScreen_githubSubtitle,
+          onTap: () => _launchUrl('https://github.com/J-shw/Menstrudel', l10n),
+        ),
+        
+        const SizedBox(height: 40),
+
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 32),
+          child: OutlinedButton.icon(
+            onPressed: _shareWebsite,
+            icon: const Icon(Icons.share_rounded, size: 18),
+            label: Text(l10n.aboutScreen_share),
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+Widget _buildSectionHeader(BuildContext context, String title) {
+  return Padding(
+    padding: const EdgeInsets.only(left: 16, top: 16, bottom: 8),
+    child: Text(
+      title.toUpperCase(),
+      style: Theme.of(context).textTheme.labelSmall?.copyWith(
+        color: Theme.of(context).colorScheme.primary,
+        letterSpacing: 1.2,
+        fontWeight: FontWeight.bold,
       ),
-    );
-  }
+    ),
+  );
+}
+
+Widget _buildListTile({required IconData icon, required String title, String? subtitle, required VoidCallback onTap}) {
+  return ListTile(
+    leading: Icon(icon),
+    title: Text(title),
+    subtitle: subtitle != null ? Text(subtitle) : null,
+    trailing: const Icon(Icons.arrow_forward_ios, size: 14),
+    onTap: onTap,
+  );
+}
 }
