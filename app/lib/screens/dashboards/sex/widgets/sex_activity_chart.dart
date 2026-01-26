@@ -128,7 +128,7 @@ class SexActivityChart extends StatelessWidget {
       runSpacing: 8,
       children: types.map((type) {
         final color = type?.getColorScheme(colorScheme) ?? colorScheme.outlineVariant;
-        final label = type?.getDisplayName(l10n) ?? l10n.;
+        final label = type?.getDisplayName(l10n) ?? l10n.unknown;
 
         return Row(
           mainAxisSize: MainAxisSize.min,
