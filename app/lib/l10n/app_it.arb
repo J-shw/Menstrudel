@@ -254,6 +254,14 @@
     "@onboardingScreen_welcomeToMenstrudelDescription": {
         "description": "Small into description for the onboarding screen."
     },
+    "onBoardingScreen_byUsingMenstrudelYouAgreeTo": "By using Menstrudel, you agree to our ",
+    "@onBoardingScreen_byUsingMenstrudelYouAgreeTo": {
+        "description": "Part of the privacy policy agreement text on the onboarding screen."
+    },
+    "onBoardingScreen_privacyPolicy": "Privacy Policy",
+    "@onBoardingScreen_privacyPolicy": {
+        "description": "Link text to the privacy policy on the onboarding screen."
+    },
     "onboardingScreen_profileTitle": "About You",
     "@onboardingScreen_profileTitle": {
         "description": "Title for the profile onboarding screen."
@@ -606,14 +614,71 @@
     "preferencesScreen_enableSexActivityScreenSubtitle": "Show the Sex Activity tab on the main navigation bar.",
     "preferencesScreen_StartingDayOfWeek": "Starting Day of the Week",
     "settingsScreen_about": "Informazioni",
+    "@settingsScreen_about": {
+        "description": "Title for the about settings button."
+    },
     "aboutScreen_version": "Versione",
+    "@aboutScreen_version": {
+        "description": "Label showing the current app version."
+    },
+    "aboutScreen_legalAndSource": "Legal & Source",
+    "@aboutScreen_legalAndSource": {
+        "description": "Title for the legal and source about section."
+    },
+    "aboutScreen_communityAndUpdates": "Community & Updates",
+    "@aboutScreen_communityAndUpdates": {
+        "description": "Title for the community and updates about section."
+    },
+    "aboutScreen_privacyPolicy": "Privacy Policy",
+    "@aboutScreen_privacyPolicy": {
+        "description": "Link text to the privacy policy on the about screen."
+    },
+    "aboutScreen_privacyPolicySubtitle": "Read our privacy policy",
+    "@aboutScreen_privacyPolicySubtitle": {
+        "description": "Subtitle for the privacy policy link on the about screen."
+    },
+    "aboutScreen_releaseNotes": "Release Notes",
+    "@aboutScreen_releaseNotes": {
+        "description": "Link text to the release notes on the about screen."
+    },
+    "aboutScreen_releaseNotesSubtitle": "What's new in {version}",
+    "@aboutScreen_releaseNotesSubtitle": {
+        "description": "Subtitle for the release notes link on the about screen.",
+        "placeholders": {
+            "version": {
+                "type": "String",
+                "example": "1.0.0"
+            }
+        }
+    },
     "aboutScreen_github": "GitHub",
+    "@aboutScreen_github": {
+        "description": "Link text to the GitHub repository on the about screen."
+    },
     "aboutScreen_githubSubtitle": "Codice sorgente e segnalazione errori",
+    "@aboutScreen_githubSubtitle": {
+        "description": "Subtitle for the GitHub link on the about screen."
+    },
     "aboutScreen_discord": "Discord",
+    "@aboutScreen_discord": {
+        "description": "Link text to the Discord server on the about screen."
+    },
     "aboutScreen_discordSubtitle": "Support and community",
+    "@aboutScreen_discordSubtitle": {
+        "description": "Subtitle for the Discord link on the about screen."
+    },
     "aboutScreen_share": "Condividi",
-    "aboutScreen_shareSubtitle": "Condividi l'app con gli amici",
+    "@aboutScreen_share": {
+        "description": "Link button text for the share button on the about screen."
+    },
+    "aboutScreen_shareText": "Check out Menstrudel, a private and offline period tracker app!",
+    "@aboutScreen_shareText": {
+        "description": "Text used when sharing the app from the about screen."
+    },
     "aboutScreen_urlError": "Impossibile aprire il link.",
+    "@aboutScreen_urlError": {
+        "description": "Error message shown when a link could not be opened."
+    },
     "logSummaryWidget_loggedDays": "Logged Days",
     "logSummaryWidget_trackingHistory": "Tracking History",
     "cycleLengthVarianceWidget_logAtLeastTwoPeriods": "Need at least two cycles to show variance.",
