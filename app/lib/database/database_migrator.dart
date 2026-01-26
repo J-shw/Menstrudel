@@ -43,7 +43,7 @@ class DatabaseMigrator {
     if (oldVersion < 9) await createLarcTables(db);
     // v3.5.0
     if (oldVersion < 10) await createSanitaryProductTables(db);
-    // - Not released -
+    // v4.0.0
     if (oldVersion < 11) {
       await createSexualActivityTables(db);
       await createUserTables(db);
