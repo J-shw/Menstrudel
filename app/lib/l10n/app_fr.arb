@@ -81,9 +81,9 @@
     "other": "Other",
     "navBar_logs": "Suivis",
     "navBar_sanitary": "Sanitaire",
-    "navBar_sexActivity": "Sex Activity",
+    "navBar_sexActivity": "Activité Sexuelle",
     "navBar_pill": "Pilule",
-    "navBar_reversibleContraceptive": "Contraceptives",
+    "navBar_reversibleContraceptive": "Contraceptifs",
     "navBar_settings": "Paramètres",
     "flowIntensity_none": "Aucun",
     "flowIntensity_spotting": "Saignement léger",
@@ -104,54 +104,54 @@
     "painLevel_moderate": "Modérée",
     "painLevel_severe": "Forte",
     "pain_unbearable": "Insupportable",
-    "reversibleContraceptive_hormonalIud": "Hormonal IUD",
-    "reversibleContraceptive_copperIud": "Copper IUD",
+    "reversibleContraceptive_hormonalIud": "DIU Hormonal",
+    "reversibleContraceptive_copperIud": "DIU au Cuivre",
     "reversibleContraceptive_implant": "Implant",
     "reversibleContraceptive_injection": "Injection",
-    "reversibleContraceptive_ring": "Ring",
+    "reversibleContraceptive_ring": "Anneau",
     "reversibleContraceptive_patch": "Patch",
     "sanitaryProduct_tampon": "Tampon",
     "sanitaryProduct_pad": "Serviette hygiénique",
     "sanitaryProduct_menstrualCup": "Coupe menstruelle",
     "sanitaryProduct_periodUnderwear": "Lingerie menstruelle",
-    "sanitaryProducts_mostUsed": "Most Used",
-    "sanitaryProducts_usageTrend": "Usage Trend",
-    "sexProtection_none": "None",
+    "sanitaryProducts_mostUsed": "Le plus utilisé",
+    "sanitaryProducts_usageTrend": "Tendance d'utilisation",
+    "sexProtection_none": "Aucune",
     "@sexProtection_none": {
         "description": "Indicates that no sexual protection method was used."
     },
-    "sexProtection_barrier": "Barrier",
+    "sexProtection_barrier": "Barrière",
     "@sexProtection_barrier": {
         "description": "Indicates the use of barrier methods of sexual protection (Condoms)."
     },
-    "sexProtection_hormonal": "Hormonal",
+    "sexProtection_hormonal": "Hormonale",
     "@sexProtection_hormonal": {
         "description": "Indicates the use of hormonal methods of sexual protection (The Pill)."
     },
-    "sexProtection_nonHormonal": "Non-Hormonal",
+    "sexProtection_nonHormonal": "Pas hormonale",
     "@sexProtection_nonHormonal": {
         "description": "Indicates the use of non-hormonal methods of sexual protection (Copper IUD)."
     },
-    "sexProtection_natural": "Natural",
+    "sexProtection_natural": "Naturelle",
     "@sexProtection_natural": {
         "description": "Indicates the use of natural methods of sexual protection (Fertility awernass)."
     },
-    "sexProtection_permanent": "Permanent",
+    "sexProtection_permanent": "Permanente",
     "@sexProtection_permanent": {
         "description": "Indicates the use of permanent methods of sexual protection (Sterilisation)."
     },
     "sexType_vaginal": "Vaginal",
     "sexType_anal": "Anal",
     "sexType_oral": "Oral",
-    "sexType_manual": "Manual",
-    "sexParticipation_solo": "Solo",
-    "sexParticipation_partner": "Partner",
-    "sexParticipation_group": "Group",
-    "userGoal_general": "General Health",
+    "sexType_manual": "Manuel",
+    "sexParticipation_solo": "Seul",
+    "sexParticipation_partner": "Partenaire",
+    "sexParticipation_group": "Groupe",
+    "userGoal_general": "Santé globale",
     "@userGoal_general": {
         "description": "For users tracking periods for general health."
     },
-    "userGoal_sexual": "Sexual Health",
+    "userGoal_sexual": "Santé sexuelle",
     "@userGoal_sexual": {
         "description": "For users focusing on sexual health."
     },
@@ -163,19 +163,19 @@
     "@userGoal_avoid": {
         "description": "For users focusing on avoiding pregnancy."
     },
-    "dayOfWeek_monday": "Monday",
-    "dayOfWeek_tuesday": "Tuesday",
-    "dayOfWeek_wednesday": "Wednesday",
-    "dayOfWeek_thursday": "Thursday",
-    "dayOfWeek_friday": "Friday",
-    "dayOfWeek_saturday": "Saturday",
-    "dayOfWeek_sunday": "Sunday",
-    "cyclePhase_menstruation": "On Period",
-    "cyclePhase_follicular": "Pre-Ovulation",
-    "cyclePhase_ovulation": "Peak Fertility",
-    "cyclePhase_luteal": "Post-Ovulation",
-    "cyclePhase_late": "Late",
-    "cyclePhase_unknown": "Unknown",
+    "dayOfWeek_monday": "Lundi",
+    "dayOfWeek_tuesday": "Mardi",
+    "dayOfWeek_wednesday": "Mercredi",
+    "dayOfWeek_thursday": "Jeudi",
+    "dayOfWeek_friday": "Vendredi",
+    "dayOfWeek_saturday": "Samedi",
+    "dayOfWeek_sunday": "Dimanche",
+    "cyclePhase_menstruation": "Règles",
+    "cyclePhase_follicular": "Pré-ovulation",
+    "cyclePhase_ovulation": "Pic de fertilité",
+    "cyclePhase_luteal": "Post-ovulation",
+    "cyclePhase_late": "En retard",
+    "cyclePhase_unknown": "Inconnue",
     "cyclePhase_menstruationDescription": "Your period is active and the uterine lining is being shed.",
     "cyclePhase_follicularDescription": "Estrogen is rising to prepare the egg; your energy levels may be increasing.",
     "cyclePhase_ovulationDescription": "An egg has been released. This is your most fertile time.",
@@ -421,18 +421,18 @@
     "@sexActivityScreen_protectionDistribution": {
         "description": "Title for the sexual protection distribution chart."
     },
-    "settingsScreen_profile": "Profile",
+    "settingsScreen_profile": "Profil",
     "@settingsScreen_profile": {
         "description": "Title for the profile settings button."
     },
-    "settingsScreen_name": "Name",
-    "settingsScreen_birthDate": "Birth Date",
-    "settingsScreen_notSet": "Not set",
+    "settingsScreen_name": "Nom",
+    "settingsScreen_birthDate": "Date de naissance",
+    "settingsScreen_notSet": "Non définie",
     "@settingsScreen_notSet": {
         "description": "Used when birth date is not set."
     },
-    "settingsScreen_appGoal": "App Goal",
-    "settingsScreen_profileUpdated": "Profile updated successfully",
+    "settingsScreen_appGoal": "But de l'application",
+    "settingsScreen_profileUpdated": "Profil mis à jour avec succès",
     "settingsScreen_selectHistoryView": "Sélectionner la vue de l'historique",
     "settingsScreen_deleteRegimen_question": "Supprimer le traitement ?",
     "settingsScreen_deleteRegimenDescription": "Cela supprimera les réglages de votre plaquette actuelle ainsi que tous les journaux de pilules associés. Cette action est irréversible.",
@@ -463,9 +463,9 @@
     "settingsScreen_notificationTime": "Heure de la notification",
     "settingsScreen_overduePeriodReminder": "Alerte de retard de règles",
     "settingsScreen_remindMeAfter": "Me rappeler après",
-    "settingsScreen_enableReversibleContraceptiveTracking": "Enable Reversible Contraceptive Tracking",
-    "settingsScreen_reversibleContraceptiveDescription": "Track Reversible Contraceptives.",
-    "settingsScreen_reversibleContraceptiveType": "Contraceptive Type",
+    "settingsScreen_enableReversibleContraceptiveTracking": "Activer le suivi des contraceptions réversibles",
+    "settingsScreen_reversibleContraceptiveDescription": "Suivre les contraceptions réversibles.",
+    "settingsScreen_reversibleContraceptiveType": "Type de contraceptif",
     "settingsScreen_setDuration": "Déterminer une durée",
     "settingsScreen_reversibleContraceptiveDuration": "Contraceptive Replacement Duration",
     "settingsScreen_enableReversibleContraceptiveReminder": "Enable Contraceptive Reminder",
@@ -515,63 +515,63 @@
     "settingsScreen_pack": "Pack",
     "settingsScreen_dataManagement": "Gestion des données",
     "settingsScreen_deleteZone": "Delete Zone",
-    "settingsScreen_clearLogsAndPeriods": "Clear Logs & Periods",
+    "settingsScreen_clearLogsAndPeriods": "Effacer le journal et le suivi des règles",
     "@settingsScreen_clearLogsAndPeriods": {
         "description": "Title for the period logs data clearing section."
     },
-    "settingsScreen_clearLogsAndPeriodsSubtitle": "Deletes your entire period and symptom history.",
+    "settingsScreen_clearLogsAndPeriodsSubtitle": "Efface l'entièreté de l'historique des règles et des symptômes.",
     "@settingsScreen_clearLogsAndPeriodsSubtitle": {
         "description": "Subtitle for the period logs data clearing section."
     },
-    "settingsScreen_clearPillLogs": "Clear Pill Logs",
+    "settingsScreen_clearPillLogs": "Effacer le journal des pillules",
     "@settingsScreen_clearPillLogs": {
         "description": "Title for the pill logs data clearing section."
     },
-    "settingsScreen_clearPillLogsSubtitle": "Removes your pill regimen and intake history.",
+    "settingsScreen_clearPillLogsSubtitle": "Efface le régime de pillule et l'historique de prises.",
     "@settingsScreen_clearPillLogsSubtitle": {
         "description": "Subtitle for the pill logs data clearing section."
     },
-    "settingsScreen_clearReversibleContraceptiveLogs": "Clear Reversible Contraceptive Logs",
+    "settingsScreen_clearReversibleContraceptiveLogs": "Effacer le journal de contraceptions réversibles",
     "@settingsScreen_clearReversibleContraceptiveLogs": {
         "description": "Title for the reversible contraceptive logs data clearing section."
     },
-    "settingsScreen_clearReversibleContraceptiveLogsSubtitle": "Removes your reversible contraceptive history.",
+    "settingsScreen_clearReversibleContraceptiveLogsSubtitle": "Efface l'historique des contraceptions réversibles.",
     "@settingsScreen_clearReversibleContraceptiveLogsSubtitle": {
         "description": "Subtitle for the reversible contraceptive logs data clearing section."
     },
-    "settingsScreen_clearSanitaryProductLogs": "Clear Sanitary Product Logs",
+    "settingsScreen_clearSanitaryProductLogs": "Effacer le journal de produits sanitaires",
     "@settingsScreen_clearSanitaryProductLogs": {
         "description": "Title for the sanitary product logs data clearing section."
     },
-    "settingsScreen_clearSanitaryProductLogsSubtitle": "Removes your sanitary products history.",
+    "settingsScreen_clearSanitaryProductLogsSubtitle": "Efface l'historique des produits sanitaires.",
     "@settingsScreen_clearSanitaryProductLogsSubtitle": {
         "description": "Subtitle for the sanitary product logs data clearing section."
     },
-    "settingsScreen_clearSexualActivityLogs": "Clear Sexual Activity Logs",
+    "settingsScreen_clearSexualActivityLogs": "Effacer le journal d'activités sexuelles",
     "@settingsScreen_clearSexualActivityLogs": {
         "description": "Title for the sexual activity logs data clearing section."
     },
-    "settingsScreen_clearSexualActivityLogsSubtitle": "Removes your sexual activity history.",
+    "settingsScreen_clearSexualActivityLogsSubtitle": "Efface l'historique des activités sexuelles.",
     "@settingsScreen_clearSexualActivityLogsSubtitle": {
         "description": "Subtitle for the sexual activity logs data clearing section."
     },
-    "settingsScreen_logsAndPeriods": "Logs & Periods",
+    "settingsScreen_logsAndPeriods": "Journal & règles",
     "@settingsScreen_logsAndPeriods": {
         "description": "Title for the period logs data section."
     },
-    "settingsScreen_pillLogs": "Pill Logs",
+    "settingsScreen_pillLogs": "Journal de pillule",
     "@settingsScreen_pillLogs": {
         "description": "Title for the pill logs data section."
     },
-    "settingsScreen_reversibleContraceptivesLogs": "Reversible Contraceptive Logs",
+    "settingsScreen_reversibleContraceptivesLogs": "Journal de contraception réversible",
     "@settingsScreen_reversibleContraceptivesLogs": {
         "description": "Title for the reversible contraceptives data section."
     },
-    "settingsScreen_sanitaryProductLogs": "Sanitary Product Logs",
+    "settingsScreen_sanitaryProductLogs": "Journal de produits sanitaires",
     "@settingsScreen_sanitaryProductLogs": {
         "description": "Title for the sanitary products data section."
     },
-    "settingsScreen_sexualActivityLogs": "Sexual Activity Logs",
+    "settingsScreen_sexualActivityLogs": "Journal d'activités sexuelles",
     "@settingsScreen_sexualActivityLogs": {
         "description": "Title for the sexual activity data section."
     },
@@ -594,7 +594,7 @@
     "securityScreen_enableBiometricLock": "Activer le verrouillage biométrique",
     "securityScreen_enableBiometricLockSubtitle": "Nécessite une empreinte digitale ou un identifiant facial pour ouvrir l'application.",
     "securityScreen_noBiometricsAvailable": "Aucun code d'accès, empreinte digitale ou Face ID n'a été trouvé. Veuillez en configurer un dans les paramètres de votre appareil.",
-    "settingsScreen_userProfile": "You",
+    "settingsScreen_userProfile": "Vous",
     "@settingsScreen_userProfile": {
         "description": "Title for the user profile settings button."
     },
@@ -602,9 +602,9 @@
     "preferencesScreen_language": "Langue",
     "preferencesScreen_enableSanitaryProductsScreen": "Enable Sanitary Products Screen",
     "preferencesScreen_enableSanitaryProductsScreenSubtitle": "Show the Sanitary Products tab on the main navigation bar.",
-    "preferencesScreen_enableSexActivityScreen": "Enable Sex Activity Screen",
-    "preferencesScreen_enableSexActivityScreenSubtitle": "Show the Sex Activity tab on the main navigation bar.",
-    "preferencesScreen_StartingDayOfWeek": "Starting Day of the Week",
+    "preferencesScreen_enableSexActivityScreen": "Activer l'écran d'activités sexuelles",
+    "preferencesScreen_enableSexActivityScreenSubtitle": "Afficher l'écran d'activités sexuelles dans la barre de navigation principale.",
+    "preferencesScreen_StartingDayOfWeek": "Jour de début de semaine",
     "settingsScreen_about": "À propos",
     "aboutScreen_version": "Version",
     "aboutScreen_github": "GitHub",
@@ -616,12 +616,12 @@
     "aboutScreen_urlError": "Impossible d'ouvrir le lien.",
     "logSummaryWidget_loggedDays": "Jours suivis",
     "logSummaryWidget_trackingHistory": "Historique de suivi",
-    "cycleLengthVarianceWidget_logAtLeastTwoPeriods": "Need at least two cycles to show variance.",
-    "cycleLengthVarianceWidget_title": "Cycle Length Variance",
+    "cycleLengthVarianceWidget_logAtLeastTwoPeriods": "Il faut au moins deux cycles pour observer une variance.",
+    "cycleLengthVarianceWidget_title": "Variance de la durée du cycle",
     "cycleLengthVarianceWidget_averageCycle": "Cycle Moyen",
     "cycleLengthVarianceWidget_cycle": "Cycle",
     "periodDurationWidget_logAtLeastTwoPeriods": "Enregistrez au moins deux cycles pour voir les statistiques de règles.",
-    "periodDurationWidget_title": "Period Duration Variance",
+    "periodDurationWidget_title": "Variance de la durée des règles",
     "periodDurationWidget_averagePeriod": "Moyenne de règles",
     "periodDurationWidget_period": "Règles",
     "flowIntensityWidget_flowIntensityBreakdown": "Décomposition de l'intensité du flux",
