@@ -139,10 +139,14 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
   Future<void> _importLogic(DataType type) async {
     final l10n = AppLocalizations.of(context)!;
     try {
-      final result = await FilePicker.platform.pickFiles(
-        type: FileType.custom,
-        allowedExtensions: ['json'],
-      );
+      final result = await FilePicker.platform
+          .pickFiles(type: FileType.custom, allowedExtensions: ['json'])
+          .timeout(
+            const Duration(seconds: 30),
+            onTimeout: () {
+              throw TimeoutException('File picking timed out.');
+            },
+          );
       if (result == null || result.files.single.path == null || !mounted)
         return;
 
