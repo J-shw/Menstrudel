@@ -293,6 +293,14 @@
     "@onboardingScreen_welcomeToMenstrudelDescription": {
         "description": "Small into description for the onboarding screen."
     },
+    "onBoardingScreen_byUsingMenstrudelYouAgreeTo": "By using Menstrudel, you agree to our ",
+    "@onBoardingScreen_byUsingMenstrudelYouAgreeTo": {
+        "description": "Part of the privacy policy agreement text on the onboarding screen."
+    },
+    "onBoardingScreen_privacyPolicy": "Privacy Policy",
+    "@onBoardingScreen_privacyPolicy": {
+        "description": "Link text to the privacy policy on the onboarding screen."
+    },
     "onboardingScreen_profileTitle": "About You",
     "@onboardingScreen_profileTitle": {
         "description": "Title for the profile onboarding screen."
