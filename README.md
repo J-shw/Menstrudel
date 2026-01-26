@@ -100,11 +100,11 @@ You can view our privacy policy [here](https://menstrudel.app/privacy/).
 
 | Today screen | Quick log entry | Log calendar | Log insights |
 | :---: | :---: | :---: | :---: |
-| <img src="docs/screenshots/android/logs_today_screen.png" width="200"> | <img src="docs/screenshots/android/logs_add_log_screen.png" width="200"> | <img src="docs/screenshots/android/logs_calendar_screen.png" width="200"> | <img src="docs/screenshots/android/logs_insights_screen.png" width="200"> |
+| <img src="docs/screenshots/android/logs_today_screen.png" width="150"> | <img src="docs/screenshots/android/logs_add_log_screen.png" width="150"> | <img src="docs/screenshots/android/logs_calendar_screen.png" width="150"> | <img src="docs/screenshots/android/logs_insights_screen.png" width="150"> |
 | **Sanitary product reminder** | **Sanitary product insights** | **Pill reminders** | **Settings** |
-| <img src="docs/screenshots/android/sanitary_product_log_screen.png" width="200"> | <img src="docs/screenshots/android/sanitary_product_insight_screen.png" width="200"> | <img src="docs/screenshots/android/pill_screen.png" width="200"> | <img src="docs/screenshots/android/settings_screen.png" width="200"> |
+| <img src="docs/screenshots/android/sanitary_product_log_screen.png" width="150"> | <img src="docs/screenshots/android/sanitary_product_insight_screen.png" width="150"> | <img src="docs/screenshots/android/pill_screen.png" width="150"> | <img src="docs/screenshots/android/settings_screen.png" width="150"> |
 | **Reversible contraceptive tracking** | **Sex logging** | **Sex insights** | **Widgets** |
-| <img src="docs/screenshots/android/contraceptives_screen.png" width="200"> | <img src="docs/screenshots/android/sex_activity_log_screen.png" width="200"> | <img src="docs/screenshots/android/sex_activity_insight_screen.png" width="200"> | <img src="docs/screenshots/android/widget_screen.png" width="200"> |
+| <img src="docs/screenshots/android/contraceptives_screen.png" width="150"> | <img src="docs/screenshots/android/sex_activity_log_screen.png" width="150"> | <img src="docs/screenshots/android/sex_activity_insight_screen.png" width="150"> | <img src="docs/screenshots/android/widget_screen.png" width="150"> |
 # Wear OS
 
 | Prediction View | Quick logging |
