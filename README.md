@@ -98,45 +98,13 @@ You can view our privacy policy [here](https://menstrudel.app/privacy/).
 
 # App Screenshots
 
-<table width="100%">
-  <tr>
-    <td width="25%" align="center"><b>Today screen</b></td>
-    <td width="25%" align="center"><b>Quick log entry</b></td>
-    <td width="25%" align="center"><b>Log calendar</b></td>
-    <td width="25%" align="center"><b>Log insights</b></td>
-  </tr>
-  <tr>
-    <td><img src="docs/screenshots/android/logs_today_screen.png" width="100%"></td>
-    <td><img src="docs/screenshots/android/logs_add_log_screen.png" width="100%"></td>
-    <td><img src="docs/screenshots/android/logs_calendar_screen.png" width="100%"></td>
-    <td><img src="docs/screenshots/android/logs_insights_screen.png" width="100%"></td>
-  </tr>
-  <tr>
-    <td align="center"><b>Sanitary product reminder</b></td>
-    <td align="center"><b>Sanitary product insights</b></td>
-    <td align="center"><b>Pill reminders</b></td>
-    <td align="center"><b>Settings</b></td>
-  </tr>
-  <tr>
-    <td><img src="docs/screenshots/android/sanitary_product_log_screen.png" width="100%"></td>
-    <td><img src="docs/screenshots/android/sanitary_product_insight_screen.png" width="100%"></td>
-    <td><img src="docs/screenshots/android/pill_screen.png" width="100%"></td>
-    <td><img src="docs/screenshots/android/settings_screen.png" width="100%"></td>
-  </tr>
-  <tr>
-    <td align="center"><b>Reversible contraceptives</b></td>
-    <td align="center"><b>Sex logging</b></td>
-    <td align="center"><b>Sex insights</b></td>
-    <td align="center"><b>Widgets</b></td>
-  </tr>
-  <tr>
-    <td><img src="docs/screenshots/android/contraceptives_screen.png" width="100%"></td>
-    <td><img src="docs/screenshots/android/sex_activity_log_screen.png" width="100%"></td>
-    <td><img src="docs/screenshots/android/sex_activity_insight_screen.png" width="100%"></td>
-    <td><img src="docs/screenshots/android/widget_screen.png" width="100%"></td>
-  </tr>
-</table>
-
+| Today screen | Quick log entry | Log calendar | Log insights |
+| :---: | :---: | :---: | :---: |
+| <img src="docs/screenshots/android/logs_today_screen.png" width="150"> | <img src="docs/screenshots/android/logs_add_log_screen.png" width="150"> | <img src="docs/screenshots/android/logs_calendar_screen.png" width="150"> | <img src="docs/screenshots/android/logs_insights_screen.png" width="150"> |
+| **Sanitary product reminder** | **Sanitary product insights** | **Pill reminders** | **Settings** |
+| <img src="docs/screenshots/android/sanitary_product_log_screen.png" width="150"> | <img src="docs/screenshots/android/sanitary_product_insight_screen.png" width="150"> | <img src="docs/screenshots/android/pill_screen.png" width="150"> | <img src="docs/screenshots/android/settings_screen.png" width="150"> |
+| **Reversible contraceptive tracking** | **Sex logging** | **Sex insights** | **Widgets** |
+| <img src="docs/screenshots/android/contraceptives_screen.png" width="150"> | <img src="docs/screenshots/android/sex_activity_log_screen.png" width="150"> | <img src="docs/screenshots/android/sex_activity_insight_screen.png" width="150"> | <img src="docs/screenshots/android/widget_screen.png" width="150"> |
 # Wear OS
 
 | Prediction View | Quick logging |
