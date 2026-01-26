@@ -53,7 +53,7 @@ class SexLogCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      entry.sexType?.getDisplayName(l10n) ?? "Unkown",
+                      entry.sexType?.getDisplayName(l10n) ?? l10n.unknown,
                       style: textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.bold,
                         color: colorScheme.onSurface,
