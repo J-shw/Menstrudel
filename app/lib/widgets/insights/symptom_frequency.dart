@@ -16,7 +16,7 @@ class SymptomFrequencyWidget extends StatelessWidget {
     final sortedSymptoms = symptomCounts.entries.sortedBy<num>((e) => e.value).reversed.toList();
     
     if (sortedSymptoms.isEmpty) {
-      return Card(child: Padding(padding: const EdgeInsets.all(24.0), child: Center(child: Text(l10n.symptomFrequencyWidget_noSymptomsLoggedYet))));
+      return Card(elevation: 0, child: Padding(padding: const EdgeInsets.all(24.0), child: Center(child: Text(l10n.symptomFrequencyWidget_noSymptomsLoggedYet))));
     }
 
     return Card(

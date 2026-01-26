@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:menstrudel/models/period_logs/symptom.dart';
 import 'package:menstrudel/models/themes/app_theme_mode_enum.dart';
 import 'package:menstrudel/services/settings_service.dart';
-import 'package:menstrudel/models/birth_control/larcs/larc_types_enum.dart';
+import 'package:menstrudel/models/birth_control/reversible_contraceptives/reversible_contraceptive_types_enum.dart';
 
 /// The base app seed colour.
 const seedColor = Color(0xFF60A5FA);
@@ -16,7 +16,7 @@ const int periodDueNotificationId = 1;
 const int periodOverdueNotificationId = 4;
 const int sanitaryProductsID = 2;
 const int pillReminderId = 3;
-const int larcReminderId = 5;
+const int reversibleContraceptiveReminderId = 5;
 
 const periodNotificationChannelId = 'period_channel';
 const periodNotificationChannelName = 'Period Predictions';
@@ -27,8 +27,9 @@ const sanitaryProductChannelName = 'Sanitary Products Reminders';
 const pillReminderChannelId = 'pill_reminder_channel';
 const pillReminderChannelName = 'Pill Reminders';
 
-const larcReminderChannelId = 'larc_reminder_channel';
-const larcReminderChannelName = 'LARC Reminders';
+// This ID will have to stay for now. I don't want to change it and cause notification issues for existing users.
+const reversibleContraceptivesReminderChannelId = 'larc_reminder_channel';
+const reversibleContraceptivesReminderChannelName = 'Reversible Contraceptive Reminders';
 
 const loggingReminderChannelId = 'logging_reminder_channel';
 const loggingReminderChannelName = 'Logging Reminders';
@@ -52,15 +53,17 @@ const String persistentReminderKey = "always_show_reminder_button";
 const String defaultSymptomsKey = "default_symptoms";
 const String languageKey = "language";
 const String pillNavEnabledKey = "pill_nav_enabled";
-const String larcNavEnabledKey = "larc_nav_enabled";
+const String reversibleContraceptiveNavEnabledKey = "larc_nav_enabled"; // Key will remain the same so existing users dont get unexpected behaviour.
 const String sanitaryNavEnabledKey = "sanitary_nav_enabled";
-const String larcTypeKey = "larc_type";
-const String larcDurationsKey = "larc_durations";
-const String larcNotificationsEnanledKey = "larc_notifications_enabled";
-const String larcNotificationDaysKey = 'larc_notification_days';
-const String larcNotificationTimeKey = 'larc_notification_time';
+const String sexActivityNavEnabledKey = "sex_activity_nav_enabled";
+const String reversibleContraceptiveTypeKey = "larc_type"; // Key will remain the same so existing users dont get unexpected behaviour.
+const String reversibleContraceptiveDurationsKey = "larc_durations"; // Key will remain the same so existing users dont get unexpected behaviour.
+const String reversibleContraceptiveNotificationsEnabledKey = "larc_notifications_enabled"; // Key will remain the same so existing users dont get unexpected behaviour.
+const String reversibleContraceptiveNotificationDaysKey = 'larc_notification_days'; // Key will remain the same so existing users dont get unexpected behaviour.
+const String reversibleContraceptiveNotificationTimeKey = 'larc_notification_time'; // Key will remain the same so existing users dont get unexpected behaviour.
 const String loggingReminderKey = 'logging_reminder_notification_enabled';
 const String loggingReminderTimeKey = 'logging_reminder_notification_time';
+const String startingDayOfWeekKey = 'starting_day_of_week';
 
 // Notifications
 const String tamponReminderDateTimeKey = 'tampon_reminder_date_time';
@@ -69,9 +72,10 @@ const String tamponReminderDateTimeKey = 'tampon_reminder_date_time';
 
 // Settings
 const bool kDefaultPillNavEnabled = false;
-const bool kDefaultLarcNavEnabled = false;
+const bool kDefaultReversibleContraceptiveNavEnabled = false;
 const bool kDefaultSanitaryNavEnabled = true;
-const LarcTypes kDefaultLarcType = LarcTypes.injection;
+const bool kDefaultSexActivityNavEnabled = false;
+const ReversibleContraceptiveTypes kDefaultReversibleContraceptiveType = ReversibleContraceptiveTypes.injection;
 const String kDefaultLanguageCode = 'system';
 const bool kDefaultAlwaysShowReminderButton = false;
 const bool kDefaultBiometricsEnabled = false;
@@ -86,8 +90,9 @@ const bool kDefaultDynamicColorEnabled = false;
 const Color kDefaultThemeColor = seedColor;
 const AppThemeMode kDefaultThemeMode = AppThemeMode.system;
 const Set<Symptom> kDefaultSymptoms = {};
-const bool kDefaultLarcNotificationsEnabled = false;
-const int kDefaultLarcReminderDays = 30;
-const TimeOfDay kDefaultLarcReminderTime = TimeOfDay(hour: 9, minute: 0);
+const bool kDefaultReversibleContraceptiveNotificationsEnabled = false;
+const int kDefaultReversibleContraceptiveReminderDays = 30;
+const TimeOfDay kDefaultReversibleContraceptiveReminderTime = TimeOfDay(hour: 9, minute: 0);
 const bool kDefaultLoggingReminder = false;
 const TimeOfDay kDefaultLoggingReminderTime = TimeOfDay(hour: 9, minute: 0);
+const String kDefaultStartingDayOfWeek = 'monday';

@@ -24,11 +24,6 @@ class MainNavigationBar extends StatelessWidget {
       indicatorColor: Theme.of(context).colorScheme.primaryContainer,
       destinations: <Widget>[
         NavigationDestination(
-          selectedIcon: Icon(Icons.bar_chart_rounded),
-          icon: Icon(Icons.bar_chart_sharp),
-          label: l10n.navBar_insights,
-        ),
-        NavigationDestination(
           selectedIcon: Icon(Icons.book),
           icon: Icon(Icons.book_outlined),
           label: l10n.navBar_logs,
@@ -39,17 +34,23 @@ class MainNavigationBar extends StatelessWidget {
             icon: Icon(Icons.water_drop_outlined),
             label: l10n.navBar_sanitary,
           ),
+        if (settingsService.isSexActivityNavEnabled)
+          NavigationDestination(
+            selectedIcon: Icon(Icons.favorite_rounded),
+            icon: Icon(Icons.favorite_border_rounded),
+            label: l10n.navBar_sexActivity,
+          ),
         if (settingsService.isPillNavEnabled)
           NavigationDestination(
             selectedIcon: Icon(Icons.medication_rounded),
             icon: Icon(Icons.medication_outlined),
             label: l10n.navBar_pill,
           ),
-        if (settingsService.isLarcNavEnabled)
+        if (settingsService.isReversibleContraceptiveNavEnabled)
           NavigationDestination(
             selectedIcon: Icon(Icons.verified_user_rounded),
             icon: Icon(Icons.verified_user_outlined),
-            label: l10n.navBar_larc,
+            label: l10n.navBar_reversibleContraceptive,
           ),
         NavigationDestination(
           selectedIcon: Icon(Icons.settings),

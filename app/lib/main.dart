@@ -1,4 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:menstrudel/controllers/log_reversible_contraceptive_ui_controller.dart';
+import 'package:menstrudel/controllers/log_sanitary_ui_controller.dart';
+import 'package:menstrudel/controllers/log_sex_ui_controller.dart';
+import 'package:menstrudel/controllers/log_ui_controller.dart';
+import 'package:menstrudel/coordinators/data_refresh_coordinator.dart';
+import 'package:menstrudel/database/repositories/periods_repository.dart';
+import 'package:menstrudel/database/repositories/logs_repository.dart';
+import 'package:menstrudel/database/repositories/user_repository.dart';
+import 'package:menstrudel/screens/gates/root_gate.dart';
 import 'package:timezone/data/latest.dart' as tz_data;
 import 'package:timezone/timezone.dart' as tz;
 import 'package:dynamic_color/dynamic_color.dart';
@@ -8,17 +17,16 @@ import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/notifiers/theme_notifier.dart';
 import 'package:provider/provider.dart';
 import 'package:menstrudel/services/wear_sync_service.dart';
-import 'package:menstrudel/database/repositories/periods_repository.dart';
 import 'package:menstrudel/models/themes/app_theme_mode_enum.dart';
-import 'package:menstrudel/screens/auth_gate.dart';
 import 'package:menstrudel/notifiers/locale_notifier.dart';
 import 'package:menstrudel/services/settings_service.dart';
 import 'package:home_widget/home_widget.dart';
 import 'package:menstrudel/services/widget_controller.dart';
 import 'package:menstrudel/services/period_service.dart';
+import 'package:menstrudel/services/log_service.dart';
 
 final watchService = WatchSyncService();
-final periodsRepository = PeriodsRepository();
+final logsRepository = LogsRepository();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,26 +44,56 @@ void main() async {
   final settingsService = SettingsService();
   await settingsService.loadSettings();
 
-  watchService.initialize(onPeriodLog: periodsRepository.logPeriodFromWatch);
+  watchService.initialize(onPeriodLog: logsRepository.logFromWatch);
 
   runApp(
     MultiProvider(
       providers: [
+        // --- Core services ---
         ChangeNotifierProvider(create: (_) => settingsService),
+        Provider(create: (_) => LogsRepository()),
+        Provider(create: (_) => PeriodsRepository()),
+        Provider(create: (_) => UserRepository()),
+
+        // --- UI state ---
         ChangeNotifierProvider(
           create: (context) => ThemeNotifier(context.read<SettingsService>()),
         ),
         ChangeNotifierProvider(
           create: (context) => LocaleNotifier(context.read<SettingsService>()),
         ),
+
+        // --- Integrations ---
         Provider(create: (_) => WidgetController()),
+
+        // --- Domain services ---
         ChangeNotifierProvider(
-          create: (context) => PeriodService(context.read<SettingsService>()),
+          create: (context) => LogService(context.read<LogsRepository>()),
         ),
+        ChangeNotifierProvider(
+          create: (context) => PeriodService(
+            context.read<SettingsService>(),
+            context.read<PeriodsRepository>(),
+          ),
+        ),
+        Provider(
+          create: (context) => DataRefreshCoordinator(
+            logService: context.read<LogService>(),
+            periodService: context.read<PeriodService>(),
+            widgetController: context.read<WidgetController>(),
+          ),
+        ),
+
+        // --- Controllers ---
+        ChangeNotifierProvider(create: (_) => LogUIController()),
+        ChangeNotifierProvider(create: (_) => LogSanitaryUIController()),
+        ChangeNotifierProvider(create: (_) => LogSexUIController()),
+        ChangeNotifierProvider(create: (_) => LogReversibleContraceptiveUIController())
       ],
       child: const MainApp(),
     ),
   );
+
 }
 
 class MainApp extends StatefulWidget {
@@ -120,12 +158,20 @@ class _MainAppState extends State<MainApp> {
 
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-
           locale: localeNotifier.locale,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
           onGenerateTitle: (context) {
             return AppLocalizations.of(context)!.appTitle;
+          },
+          builder: (context, child) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              final l10n = AppLocalizations.of(context);
+              if (l10n != null) {
+                context.read<DataRefreshCoordinator>().registerL10n(l10n);
+              }
+            });
+            return child!;
           },
           theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme),
           darkTheme: ThemeData(
@@ -133,7 +179,7 @@ class _MainAppState extends State<MainApp> {
             colorScheme: darkColorScheme,
           ),
           themeMode: themeNotifier.themeMode.getThemeMode(),
-          home: const AuthGate(),
+          home: const RootGate(),
         );
       },
     );

@@ -17,18 +17,14 @@ jobs:
           BRANCH_NAME: ${{ github.head_ref }}
           PR_TITLE: ${{ github.event.pull_request.title }}
         run: |
-          # --- Initialize Flags ---
           title_is_valid=false
 
-          # --- 1. Validate PR Title ---
-          # Follows conventional commit format: <type>: <description>
-          title_regex="^(Feature|Bugfix|Docs|Chore|Refactor|Style|Test)\/(app|wear|web|repo)\/([a-z0-9-]+\/)?[a-z0-9-]+"
+          title_regex="^(Feature|Bugfix|Docs|Chore|Refactor|Style|Test|Post)\/(app|wear|web|repo)\/([a-z0-9-]+\/)?[a-z0-9-]+"
           if [[ "$PR_TITLE" =~ $title_regex || "$PR_TITLE" == 'New Crowdin updates' ]] then
             title_is_valid=true
           fi
           echo "PR title validation: $title_is_valid"
           
-          # --- 2. Set Outputs ---
           echo "title_is_valid=$title_is_valid" >> $GITHUB_OUTPUT
 
       - name: 'Add PR Comment on Failure'

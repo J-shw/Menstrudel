@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/models/flows/flow_enum.dart';
-import 'package:provider/provider.dart';
 import 'package:collection/collection.dart';
 import 'package:intl/intl.dart';
 import 'package:menstrudel/database/repositories/periods_repository.dart';
@@ -11,108 +10,100 @@ import 'package:menstrudel/utils/constants.dart';
 import 'package:menstrudel/utils/period_predictor.dart';
 import 'package:menstrudel/services/notification_service.dart';
 import 'package:menstrudel/services/settings_service.dart';
-import 'package:menstrudel/services/period_logger_service.dart';
 import 'package:menstrudel/services/wear_sync_service.dart';
 import 'package:menstrudel/services/widget_controller.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 
 class PeriodService extends ChangeNotifier {
   final SettingsService _settingsService;
-  final _periodsRepo = PeriodsRepository();
+  final PeriodsRepository _periodsRepo;
   final _watchSyncService = WatchSyncService();
 
-  PeriodService(this._settingsService);
+  PeriodService(this._settingsService, this._periodsRepo);
 
   bool _isLoading = true;
-  List<LogDay> _periodLogEntries = [];
   List<Period> _periodEntries = [];
   List<Object> _timelineItems = [];
   PeriodPredictionResult? _predictionResult;
   int _circleCurrentValue = 0;
   int _circleMaxValue = 28;
   bool _isPeriodOngoing = false;
-  Map<DateTime, LogDay> _logMap = {};
-  DateTime? _earliestLogDate;
-  DateTime? _latestLogDate;
 
   /// Whether a background operation is currently in progress.
   bool get isLoading => _isLoading;
-  /// The complete list of all individual period day logs.
-  List<LogDay> get periodLogEntries => _periodLogEntries;
+
   /// The list of calculated [Period] objects, representing entire period cycles.
   List<Period> get periodEntries => _periodEntries;
+
   /// The calculated prediction for the next period, if available.
   PeriodPredictionResult? get predictionResult => _predictionResult;
+
   /// The current value for the main progress circle (e.g., days until due).
   int get circleCurrentValue => _circleCurrentValue;
+
   /// The maximum value for the main progress circle (e.g., average cycle length).
   int get circleMaxValue => _circleMaxValue;
+
   /// Whether the user's period is considered to be ongoing today.
   bool get isPeriodOngoing => _isPeriodOngoing;
+
   /// A pre-computed list of timeline items for the PeriodListView.
   List<Object> get timelineItems => _timelineItems;
-  /// A pre-computed map of logs, keyed by their date, for fast calendar lookups.
-  Map<DateTime, LogDay> get logMap => _logMap;
-  /// The date of the earliest log on record.
-  DateTime? get earliestLogDate => _earliestLogDate;
-  /// The date of the latest log on record.
-  DateTime? get latestLogDate => _latestLogDate;
 
-  /// Loads all initial data and performs calculations.
-  /// Should be called once when the screen is first initialised.
-  Future<void> loadInitialData(BuildContext context) async {
+  /// Refreshes all period-related data, predictions, notifications, and widgets.
+  Future<void> refreshData({
+    required List<LogDay> currentLogs,
+    AppLocalizations? l10n,
+    required WidgetController widgetController,
+  }) async {
+    debugPrint('PeriodService: Starting data refresh.');
+
+    if (_isLoading && _periodEntries.isNotEmpty) return;
+
     _isLoading = true;
+
     notifyListeners();
 
-    final l10n = AppLocalizations.of(context)!;
-    final controller = Provider.of<WidgetController>(context, listen: false);
-
-    await _fetchDataFromDb();
-    _calculatePrediction();
-    _updateUiState();
-    _buildTimelineItems();
-    _processJournalData();
-    _updateWidgetData(l10n, controller);
-    _schedulePeriodNotifications(l10n);
-    _syncWatchData();
-
-    _isLoading = false;
-    notifyListeners();
-  }
-
-  /// Refreshes all data after a user action (log, delete, etc.)
-  Future<void> _refreshData(BuildContext context) async {
     final oldPredictionDate = _predictionResult?.estimatedStartDate;
 
-    final l10n = AppLocalizations.of(context)!;
-    final controller = Provider.of<WidgetController>(context, listen: false);
+    try {
+      _periodEntries = await _periodsRepo.readAllPeriods();
 
-    await _fetchDataFromDb();
-    _calculatePrediction();
-    _updateUiState();
-    _buildTimelineItems();
-    _processJournalData();
-    _updateWidgetData(l10n, controller);
-    _syncWatchData();
+      _calculatePrediction();
+      _updateUiState();
+      _buildTimelineItems(currentLogs: currentLogs);
 
-    if (oldPredictionDate != _predictionResult?.estimatedStartDate) {
-      _schedulePeriodNotifications(l10n);
+      if (l10n != null) {
+        _updateWidgetData(l10n, widgetController);
+        if (oldPredictionDate != _predictionResult?.estimatedStartDate) {
+          _schedulePeriodNotifications(l10n);
+        }
+      }
+
+      _syncWatchData();
+    } finally {
+      _isLoading = false;
+      notifyListeners();
     }
-
-    notifyListeners();
-  }
-
-  /// Fetches all period and log data from the repository.
-  Future<void> _fetchDataFromDb() async {
-    _periodLogEntries = await _periodsRepo.readAllPeriodLogs();
-    _periodEntries = await _periodsRepo.readAllPeriods();
   }
 
   /// Calculates the period prediction and ongoing status.
   void _calculatePrediction() {
-    _predictionResult = PeriodPredictor.estimateNextPeriod(_periodEntries, DateTime.now());
-    _isPeriodOngoing = _periodEntries.isNotEmpty &&
-        DateUtils.isSameDay(_periodEntries.first.endDate, DateTime.now());
+    _predictionResult = PeriodPredictor.estimateNextPeriod(
+      _periodEntries,
+      DateTime.now(),
+    );
+
+    final lastPeriod = _periodEntries.firstOrNull;
+    _isPeriodOngoing =
+        lastPeriod != null &&
+        DateUtils.isSameDay(lastPeriod.endDate, DateTime.now());
+  }
+
+  /// Recalculates periods based on the provided [logs] and returns a mapping of log IDs to period IDs.
+  Future<Map<int, int>> recalculatePeriods(List<LogDay> logs) async {
+    final mapping = await _periodsRepo.recalculateAndAssignPeriods(logs);    
+    return mapping;
   }
 
   /// Updates the circle and FAB state variables.
@@ -128,8 +119,9 @@ class PeriodService extends ChangeNotifier {
     String smallText = l10n.periodPredictionCircle_days(_circleCurrentValue);
 
     String dateText = '';
-    if (_predictionResult != null) { 
-      dateText = '${l10n.logScreen_nextPeriodEstimate}:\n ${DateFormat('MMM d').format(_predictionResult!.estimatedStartDate)}';
+    if (_predictionResult != null) {
+      dateText =
+          '${l10n.logScreen_nextPeriodEstimate}:\n ${DateFormat('MMM d').format(_predictionResult!.estimatedStartDate)}';
     }
     controller.saveAndAndUpdateCircle(
       currentValue: _circleCurrentValue,
@@ -167,7 +159,9 @@ class PeriodService extends ChangeNotifier {
         daysAfter: _settingsService.periodOverdueNotificationDays,
         notificationTime: _settingsService.periodOverdueNotificationTime,
         title: l10n.notification_periodOverdueTitle,
-        body: l10n.notification_periodOverdueBody(_settingsService.periodOverdueNotificationDays),
+        body: l10n.notification_periodOverdueBody(
+          _settingsService.periodOverdueNotificationDays,
+        ),
         notificationID: periodOverdueNotificationId,
       );
     } catch (e) {
@@ -176,15 +170,18 @@ class PeriodService extends ChangeNotifier {
   }
 
   /// Schedules a logging reminder from a [LogDay] object.
-  Future<void> scheduleLoggingReminder(BuildContext context, LogDay log) async {
+  Future<void> scheduleLoggingReminder({
+    required LogDay log,
+    required SettingsService settings,
+    required AppLocalizations l10n,
+  }) async {
     if (log.flow == FlowRate.none) {
       await NotificationService.cancelLoggingReminder(log.date);
-    }else if (log.flow != FlowRate.none && context.mounted) {
-      final settingsService = context.read<SettingsService>();
+    } else if (log.flow != FlowRate.none) {
       final nextDay = log.date.add(const Duration(days: 1));
-      final reminderTime = settingsService.loggingReminderTime;
-      final bool isReminderEnabled = settingsService.isLoggingReminderNotificationEnabled;
-      final l10n = AppLocalizations.of(context)!;
+      final reminderTime = settings.loggingReminderTime;
+      final bool isReminderEnabled =
+          settings.isLoggingReminderNotificationEnabled;
 
       final scheduledTime = DateTime(
         nextDay.year,
@@ -211,117 +208,45 @@ class PeriodService extends ChangeNotifier {
     );
   }
 
-  /// Creates a new log entry.
-  Future<void> createNewLog(BuildContext context, DateTime selectedDate) async {
-    final bool wasLogSuccessful = await PeriodLoggerService.showAndLogPeriod(context, selectedDate);
-
-    if (wasLogSuccessful && context.mounted) {
-      _isLoading = true;
-      notifyListeners();
-      await _refreshData(context);
-      _isLoading = false;
-      notifyListeners();
-    }
-  }
-
-  /// Updates an existing log entry.
-  Future<void> updateExistingLog(BuildContext context, LogDay updatedLog) async {
-    await _periodsRepo.updatePeriodLog(updatedLog);
-    if(context.mounted){
-      scheduleLoggingReminder(context, updatedLog);
-    }
-
-    if (context.mounted) {
-      Navigator.of(context).pop();
-      _isLoading = true;
-      notifyListeners();
-      await _refreshData(context);
-      _isLoading = false;
-      notifyListeners();
-    }
-  }
-
-  /// Deletes a log entry.
-  Future<void> deleteExistingLog(BuildContext context, int? id) async {
-    if (id == null) return;
-
-    final logToDelete = _periodLogEntries.firstWhereOrNull((log) => log.id == id);
-
-    await _periodsRepo.deletePeriodLog(id);
-
-    if (logToDelete != null && logToDelete.flow != FlowRate.none) {
-      await NotificationService.cancelLoggingReminder(logToDelete.date);
-    }
-    
-    _isLoading = true;
-    notifyListeners();
-    if(context.mounted){
-      await _refreshData(context);
-      _isLoading = false;
-      notifyListeners();
-    }
-  }
-
   /// Populates the [_timelineItems] list for the list view.
-  void _buildTimelineItems() {
-    final groupedLogs = groupBy(_periodLogEntries, (log) => log.periodId ?? -1);
+  void _buildTimelineItems({required List<LogDay> currentLogs}) {
+    final logsByPeriod = groupBy(currentLogs, (log) => log.periodId);
 
-    final List<Object> timelineEvents = [
+    final List<Object> standaloneEvents = [
       ..._periodEntries,
-      ...(groupedLogs[-1] ?? []),
+      ...currentLogs.where((log) => log.periodId == null || log.periodId == -1),
     ];
 
-    final groupedByMonth = groupBy<Object, DateTime>(timelineEvents, (event) {
+    final groupedByMonth = groupBy<Object, DateTime>(standaloneEvents, (event) {
       final date = event is Period ? event.startDate : (event as LogDay).date;
       return DateTime(date.year, date.month);
     });
 
     final sortedMonths = groupedByMonth.keys.toList()
       ..sort((a, b) => b.compareTo(a));
-
     final List<Object> items = [];
+
     for (final month in sortedMonths) {
       items.add(month);
 
-      final eventsInMonth = groupedByMonth[month]!;
-      eventsInMonth.sort((a, b) {
-        final dateA = a is Period ? a.startDate : (a as LogDay).date;
-        final dateB = b is Period ? b.startDate : (b as LogDay).date;
-        return dateB.compareTo(dateA);
-      });
+      final monthEvents = groupedByMonth[month]!
+        ..sort((a, b) {
+          final dateA = a is Period ? a.startDate : (a as LogDay).date;
+          final dateB = b is Period ? b.startDate : (b as LogDay).date;
+          return dateB.compareTo(dateA);
+        });
 
-      for (final event in eventsInMonth) {
+      for (final event in monthEvents) {
+        items.add(event);
+
         if (event is Period) {
-          items.add(event);
-          final logsForPeriod = (groupedLogs[event.id] ?? [])
-            ..sort((a, b) => a.date.compareTo(b.date));
-          items.addAll(logsForPeriod);
-        } else if (event is LogDay) {
-          items.add(event);
+          final childLogs = (logsByPeriod[event.id] ?? [])
+            ..sort((a, b) => b.date.compareTo(a.date));
+
+          items.addAll(childLogs);
         }
       }
     }
     _timelineItems = items;
-  }
-
-  /// Populates the map and date boundaries for the Journal view.
-  void _processJournalData() {
-    if (_periodLogEntries.isEmpty) {
-      _logMap = {};
-      _earliestLogDate = null;
-      _latestLogDate = null;
-      return;
-    }
-
-    _logMap = {
-      for (var log in _periodLogEntries) DateUtils.dateOnly(log.date): log
-    };
-    
-    _earliestLogDate = _periodLogEntries
-        .reduce((a, b) => a.date.isBefore(b.date) ? a : b)
-        .date;
-    _latestLogDate = _periodLogEntries
-        .reduce((a, b) => a.date.isAfter(b.date) ? a : b)
-        .date;
   }
 }

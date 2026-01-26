@@ -20,6 +20,7 @@ android {
 
     dependencies {
         coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
+        implementation("es.antonborri.home_widget:home_widget:0.8.1")
     }
 
     kotlinOptions {

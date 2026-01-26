@@ -119,3 +119,7 @@ app.*.symbols
 !/dev/ci/**/Gemfile.lock
 .DS_Store
 /website/_site
+
+# Generated localisation files
+app/lib/l10n/app_localizations*.dart
+app/lib/l10n/app_localizations.dart

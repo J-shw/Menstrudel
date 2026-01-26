@@ -31,6 +31,7 @@ class FlowPatternsWidget extends StatelessWidget {
 
     if (monthlyFlowData.isEmpty) {
       return Card(
+        elevation: 0,
         child: Padding(
           padding: EdgeInsets.all(24.0),
           child: Center(child: Text(l10n.monthlyFlowChartWidget_noDataToDisplay)),
@@ -71,7 +72,6 @@ class FlowPatternsWidget extends StatelessWidget {
 
     return Card(
       elevation: 0,
-
       child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(

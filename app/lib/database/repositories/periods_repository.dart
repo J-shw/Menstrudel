@@ -1,17 +1,14 @@
 import 'dart:convert';
 
 import 'package:menstrudel/models/flows/flow_enum.dart';
-import 'package:menstrudel/models/period_logs/symptom.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:intl/intl.dart';
-import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import 'package:menstrudel/database/app_database.dart';
 import 'package:menstrudel/models/period_logs/log_day.dart';
 import 'package:menstrudel/models/periods/period.dart';
 import 'package:menstrudel/models/flows/flow_data.dart';
-import 'package:menstrudel/utils/exceptions.dart';
 
 class PeriodsRepository {
   final dbProvider = AppDatabase.instance;
@@ -20,59 +17,6 @@ class PeriodsRepository {
   final Manager manager;
 
   PeriodsRepository() : manager = Manager(AppDatabase.instance);
-
-  Future<void> logPeriodFromWatch() async {
-    debugPrint('Received request from watch! Logging period now...');
-
-    try {
-      final newLog = LogDay(
-        date: DateTime.now(),
-        flow: FlowRate.medium,
-        painLevel: null,
-      );
-
-      await createPeriodLog(newLog);
-      debugPrint('Successfully logged period from the watch.');
-    } on DuplicateLogException {
-      debugPrint('Watch log ignored: A log for today already exists.');
-    } catch (e) {
-      debugPrint('An error occurred while logging from the watch: $e');
-    }
-  }
-
-  /// Validates a log's date, throwing exceptions for future or duplicate dates.
-  Future<void> _validateLogDate(
-    Database db,
-    DateTime date, {
-    int? idToExclude,
-  }) async {
-    final today = DateUtils.dateOnly(DateTime.now());
-    final entryDate = DateUtils.dateOnly(date);
-
-    if (entryDate.isAfter(today)) {
-      throw FutureDateException('Logs cannot be for future dates.');
-    }
-
-    String whereClause = 'date(date) = date(?)';
-    if (idToExclude != null) {
-      whereClause += ' AND id != ?';
-    }
-
-    final existingLogs = await db.query(
-      'period_logs',
-      where: whereClause,
-      whereArgs: idToExclude != null
-          ? [date.toIso8601String(), idToExclude]
-          : [date.toIso8601String()],
-      limit: 1,
-    );
-
-    if (existingLogs.isNotEmpty) {
-      throw DuplicateLogException('A log already exists for this date.');
-    }
-  }
-
-  // Periods
 
   Future<Period> createPeriod(Period entry) async {
     final db = await dbProvider.database;
@@ -118,238 +62,66 @@ class PeriodsRepository {
     return await db.delete('periods', where: _whereId, whereArgs: [id]);
   }
 
-  // Period logs
-
-  Future<LogDay> createPeriodLog(LogDay entry) async {
+  /// Recalculates periods based on existing period logs and assigns them accordingly.
+  Future<Map<int, int>> recalculateAndAssignPeriods(List<LogDay> logs) async {
     final db = await dbProvider.database;
-
-    await _validateLogDate(db, entry.date);
-
-    int newLogId = -1;
-    await db.transaction((txn) async {
-      newLogId = await txn.insert('period_logs', entry.toMap());
-
-      if (entry.symptoms.isNotEmpty) {
-        final batch = txn.batch();
-        for (final symptom in entry.symptoms) {
-          batch.insert('log_symptoms', {
-            'log_id_fk': newLogId,
-            'symptom': symptom.getDbName(),
-          });
-        }
-        await batch.commit(noResult: true);
-      }
-    });
-
-    await _recalculateAndAssignPeriods(db);
-    return await readPeriodLog(newLogId);
-  }
-
-  Future<List<LogDay>> readAllPeriodLogs() async {
-    final db = await dbProvider.database;
-
-    const orderBy = 'date DESC';
-    final logsResult = await db.query('period_logs', orderBy: orderBy);
-
-    final symptomsResult = await db.query('log_symptoms');
-
-    final Map<int, List<Symptom>> symptomMap = {};
-    for (final row in symptomsResult) {
-      final int logId = row['log_id_fk'] as int;
-      final String symptom = row['symptom'] as String;
-      (symptomMap[logId] ??= []).add(Symptom.fromDbString(symptom));
-    }
-
-    return logsResult.map((json) {
-      final int logId = json['id'] as int;
-      final List<Symptom> symptoms = symptomMap[logId] ?? [];
-      return LogDay.fromMap(json, symptoms: symptoms);
-    }).toList();
-  }
-
-  Future<LogDay> readPeriodLog(int id) async {
-    final db = await dbProvider.database;
-
-    final result = await db.query(
-      'period_logs',
-      where: _whereId,
-      whereArgs: [id],
-    );
-
-    if (result.isEmpty) {
-      throw Exception('Log with id $id not found');
-    }
-
-    final symptomsResult = await db.query(
-      'log_symptoms',
-      columns: ['symptom'],
-      where: 'log_id_fk = ?',
-      whereArgs: [id],
-    );
-
-    final List<Symptom> symptoms = symptomsResult.map((row) => Symptom.fromDbString(row['symptom'] as String)).toList();
-
-    return LogDay.fromMap(result.first, symptoms: symptoms);
-  }
-
-  /// Calculates the usage count for every symptom in the database.
-  Future<Map<Symptom, int>> getSymptomFrequency() async {
-    final db = await dbProvider.database;
-
-    final result = await db.rawQuery(
-      'SELECT symptom, COUNT(symptom) as count FROM log_symptoms GROUP BY symptom',
-    );
-
-    if (result.isEmpty) {
-      return {};
-    }
-    return {
-      for (var row in result)
-        Symptom.fromDbString(row['symptom'] as String): row['count'] as int,
-    };
-  }
-
-  Future<int> getSingleSymptomFrequency(Symptom symptom) async {
-    final db = await dbProvider.database;
-
-    var key = symptom.getDbName();
-
-    final result = await db.rawQuery(
-      'SELECT symptom, COUNT(symptom) as count FROM log_symptoms WHERE symptom LIKE \'$key\' GROUP BY symptom',
-    );
-
-    return result.length == 1 ? result[0]["count"] as int : 0;
-  }
-
-  Future<int> updatePeriodLog(LogDay entry) async {
-    final db = await dbProvider.database;
-
-    if (entry.id == null) {
-      debugPrint('Error: updatePeriodLog called with null ID');
-      return 0;
-    }
-
-    await _validateLogDate(db, entry.date, idToExclude: entry.id);
-
-    int result = 0;
-
-    await db.transaction((txn) async {
-      result = await txn.update(
-        'period_logs',
-        entry.toMap(),
-        where: _whereId,
-        whereArgs: [entry.id],
-      );
-
-      if (result > 0) {
-        await txn.delete(
-          'log_symptoms',
-          where: 'log_id_fk = ?',
-          whereArgs: [entry.id],
-        );
-
-        if (entry.symptoms.isNotEmpty) {
-          final batch = txn.batch();
-          for (final symptom in entry.symptoms) {
-            batch.insert('log_symptoms', {
-              'log_id_fk': entry.id,
-              'symptom': symptom.getDbName(),
-            });
-          }
-          await batch.commit(noResult: true);
-        }
-      }
-    });
-
-    if (result > 0) {
-      await _recalculateAndAssignPeriods(db);
-    }
-
-    return result;
-  }
-
-  Future<int> deletePeriodLog(int id) async {
-    final db = await dbProvider.database;
-    final int result = await db.delete(
-      'period_logs',
-      where: _whereId,
-      whereArgs: [id],
-    );
-
-    if (result > 0) {
-      await _recalculateAndAssignPeriods(db);
-    }
-
-    return result;
-  }
-
-  // Other
-
-  Future<void> _recalculateAndAssignPeriods(Database db) async {
     await db.delete('periods');
 
-    final allEntryMaps = await db.query(
-      'period_logs',
-      orderBy: 'date ASC',
-      where: 'flow != ?',
-      whereArgs: [FlowRate.none.index],
-    );
-    final allEntries = allEntryMaps.map((e) => LogDay.fromMap(e)).toList();
+    final allEntries = logs.where((log) => log.flow != FlowRate.none).toList()
+      ..sort((a, b) => a.date.compareTo(b.date));
 
     if (allEntries.isEmpty) {
-      return;
+      return {};
     }
 
+    final Map<int, int> allLogUpdates = {};
     List<LogDay> currentPeriodLogs = [];
 
     for (final entry in allEntries) {
       if (currentPeriodLogs.isEmpty ||
           entry.date.difference(currentPeriodLogs.last.date).inDays > 1) {
         if (currentPeriodLogs.isNotEmpty) {
-          await _createPeriodFromLogs(db, currentPeriodLogs);
+          final clusterMap = await _createPeriodFromLogs(db, currentPeriodLogs);
+          allLogUpdates.addAll(clusterMap);
         }
         currentPeriodLogs = [entry];
       } else {
         currentPeriodLogs.add(entry);
       }
     }
+
     if (currentPeriodLogs.isNotEmpty) {
-      await _createPeriodFromLogs(db, currentPeriodLogs);
+      final clusterMap = await _createPeriodFromLogs(db, currentPeriodLogs);
+      allLogUpdates.addAll(clusterMap);
     }
+
+    return allLogUpdates;
   }
 
   /// Creates a Period entry in the DB from logs with at flow rate.
-  Future<void> _createPeriodFromLogs(Database db, List<LogDay> logs) async {
+  Future<Map<int, int>> _createPeriodFromLogs(
+    Database db,
+    List<LogDay> logs,
+  ) async {
+    final Map<int, int> updates = {};
     final periodDays = logs.where((log) => log.flow != FlowRate.none).toList();
 
-    if (periodDays.isEmpty) {
-      return;
-    }
+    if (periodDays.isEmpty) return updates;
 
     final startDate = periodDays.first.date;
     final endDate = periodDays.last.date;
-    final totalDays = endDate.difference(startDate).inDays + 1;
 
-    final newPeriodMap = {
+    final periodId = await db.insert('periods', {
       'start_date': startDate.millisecondsSinceEpoch,
       'end_date': endDate.millisecondsSinceEpoch,
-      'total_days': totalDays,
-    };
-
-    final periodId = await db.insert('periods', newPeriodMap);
-
-    final logIds = periodDays.map((log) => log.id!).toList();
-
-    await db.transaction((txn) async {
-      for (final logId in logIds) {
-        await txn.update(
-          'period_logs',
-          {'period_id': periodId},
-          where: _whereId,
-          whereArgs: [logId],
-        );
-      }
+      'total_days': endDate.difference(startDate).inDays + 1,
     });
+
+    for (final log in periodDays) {
+      updates[log.id!] = periodId;
+    }
+
+    return updates;
   }
 
   /// Fetches monthly flow data exclusively from logs that are part of a period.
@@ -417,6 +189,7 @@ class Manager {
   /// Imports periods, log_symptoms and period_logs data from a JSON string.
   /// Throws an exception if the JSON format is invalid or the database version is incompatible.
   Future<void> importDataFromJson(String jsonString) async {
+    //TODO: Needs to be refactored with new log/period split - But for now works.
     final db = await dbProvider.database;
 
     try {

@@ -7,10 +7,14 @@
     "total": "Gesamt",
     "shortest": "Kürzeste",
     "longest": "Längste",
+    "unknown": "Unknown",
     "date": "Datum",
     "time": "Zeit",
     "start": "Beginn",
     "end": "Ende",
+    "next": "Next",
+    "back": "Back",
+    "today": "Today",
     "day": "Tag",
     "days": "Tage",
     "hours": "Stunden",
@@ -24,7 +28,7 @@
             }
         }
     },
-    "monthCount": "{count, plural, one{{count} Month} other{{count} Months}}",
+    "monthCount": "{count, plural, one{{count} Monat} other{{count} Monate}}",
     "@monthCount": {
         "description": "A message that displays a count of months, handling singular and plural forms.",
         "placeholders": {
@@ -34,7 +38,7 @@
             }
         }
     },
-    "yearCount": "{count, plural, one{{count} Year} other{{count} Years}}",
+    "yearCount": "{count, plural, one{{count} Jahr} other{{count} Jahre}}",
     "@yearCount": {
         "description": "A message that displays a count of years, handling singular and plural forms.",
         "placeholders": {
@@ -44,7 +48,16 @@
             }
         }
     },
-    "edit": "Edit",
+    "countdown_daysLeft": "{days, plural, one{{days} Day left} other{{days} Days left}}",
+    "@countdown_daysLeft": {
+        "description": "A countdown message indicating the number of days left.",
+        "placeholders": {
+            "days": {}
+        }
+    },
+    "logs": "Protokolle",
+    "insights": "Insights",
+    "edit": "Bearbeiten",
     "delete": "Löschen",
     "clear": "Löschen",
     "save": "Speichern",
@@ -61,15 +74,17 @@
     "add": "Hinzufügen",
     "notSet": "Nicht festgelegt",
     "removed": "Entfernt",
+    "totalLogs": "Total Logs",
     "note": "Hinweis",
     "systemDefault": "System Standard",
     "flow": "Ausfluss",
     "type": "Typ",
-    "navBar_insights": "Einblicke",
+    "other": "Sonstiges",
     "navBar_logs": "Protokolle",
     "navBar_sanitary": "Hygiene",
+    "navBar_sexActivity": "Sex Activity",
     "navBar_pill": "Pille",
-    "navBar_larc": "LARC",
+    "navBar_reversibleContraceptive": "Contraceptives",
     "navBar_settings": "Einstellungen",
     "flowIntensity_none": "Keine",
     "flowIntensity_spotting": "Erkennen",
@@ -90,15 +105,84 @@
     "painLevel_moderate": "Mäßig",
     "painLevel_severe": "Schwerwiegend",
     "pain_unbearable": "Unerträglich",
-    "larcType_iud": "Spirale",
-    "larcType_implant": "Implantat",
-    "larcType_injection": "Injektion",
-    "larcType_ring": "Ring",
-    "larcType_patch": "Patch",
+    "reversibleContraceptive_hormonalIud": "Hormonal IUD",
+    "reversibleContraceptive_copperIud": "Copper IUD",
+    "reversibleContraceptive_implant": "Implant",
+    "reversibleContraceptive_injection": "Injection",
+    "reversibleContraceptive_ring": "Ring",
+    "reversibleContraceptive_patch": "Patch",
     "sanitaryProduct_tampon": "Tampon",
     "sanitaryProduct_pad": "Polster",
     "sanitaryProduct_menstrualCup": "Menstruationstasse",
     "sanitaryProduct_periodUnderwear": "Periodenunterwäsche",
+    "sanitaryProducts_mostUsed": "Most Used",
+    "sanitaryProducts_usageTrend": "Usage Trend",
+    "sexProtection_none": "None",
+    "@sexProtection_none": {
+        "description": "Indicates that no sexual protection method was used."
+    },
+    "sexProtection_barrier": "Barrier",
+    "@sexProtection_barrier": {
+        "description": "Indicates the use of barrier methods of sexual protection (Condoms)."
+    },
+    "sexProtection_hormonal": "Hormonell",
+    "@sexProtection_hormonal": {
+        "description": "Indicates the use of hormonal methods of sexual protection (The Pill)."
+    },
+    "sexProtection_nonHormonal": "Non-Hormonal",
+    "@sexProtection_nonHormonal": {
+        "description": "Indicates the use of non-hormonal methods of sexual protection (Copper IUD)."
+    },
+    "sexProtection_natural": "Natürlich",
+    "@sexProtection_natural": {
+        "description": "Indicates the use of natural methods of sexual protection (Fertility awernass)."
+    },
+    "sexProtection_permanent": "Dauerhaft",
+    "@sexProtection_permanent": {
+        "description": "Indicates the use of permanent methods of sexual protection (Sterilisation)."
+    },
+    "sexType_vaginal": "Vaginal",
+    "sexType_anal": "Anal",
+    "sexType_oral": "Oral",
+    "sexType_manual": "Manual",
+    "sexParticipation_solo": "Solo",
+    "sexParticipation_partner": "Partner",
+    "sexParticipation_group": "Group",
+    "userGoal_general": "General Health",
+    "@userGoal_general": {
+        "description": "For users tracking periods for general health."
+    },
+    "userGoal_sexual": "Sexual Health",
+    "@userGoal_sexual": {
+        "description": "For users focusing on sexual health."
+    },
+    "userGoal_conceive": "Trying to Conceive",
+    "@userGoal_conceive": {
+        "description": "For users focusing on trying to conceive."
+    },
+    "userGoal_avoid": "Avoiding Pregnancy",
+    "@userGoal_avoid": {
+        "description": "For users focusing on avoiding pregnancy."
+    },
+    "dayOfWeek_monday": "Montag",
+    "dayOfWeek_tuesday": "Dienstag",
+    "dayOfWeek_wednesday": "Mittwoch",
+    "dayOfWeek_thursday": "Donnerstag",
+    "dayOfWeek_friday": "Freitag",
+    "dayOfWeek_saturday": "Samstag",
+    "dayOfWeek_sunday": "Sonntag",
+    "cyclePhase_menstruation": "On Period",
+    "cyclePhase_follicular": "Pre-Ovulation",
+    "cyclePhase_ovulation": "Peak Fertility",
+    "cyclePhase_luteal": "Post-Ovulation",
+    "cyclePhase_late": "Late",
+    "cyclePhase_unknown": "Unknown",
+    "cyclePhase_menstruationDescription": "Your period is active and the uterine lining is being shed.",
+    "cyclePhase_follicularDescription": "Estrogen is rising to prepare the egg; your energy levels may be increasing.",
+    "cyclePhase_ovulationDescription": "An egg has been released. This is your most fertile time.",
+    "cyclePhase_lutealDescription": "Progesterone is dominant. Monitor for PMS symptoms as you approach your next period.",
+    "cyclePhase_lateDescription": "Your period is late.",
+    "cyclePhase_unknownDescription": "We need more data to accurately predict your cycle phase.",
     "error_valueMustbePositive": "Der Wert muss positiv sein",
     "error_valueCannotBeNull": "Der Wert darf nicht null sein",
     "notification_periodTitle": "Periode nähert sich",
@@ -135,13 +219,13 @@
     "@notification_pillBody": {
         "description": "Body for the daily pill reminder notification."
     },
-    "notification_larcTitle": "LARC-Erinnerung",
-    "@notification_larcTitle": {
-        "description": "Title for the LARC reminder notification."
+    "notification_reversibleContraceptiveTitle": "Reversible Contraceptive Reminder",
+    "@notification_reversibleContraceptiveTitle": {
+        "description": "Title for the Reversible Contraceptive reminder notification."
     },
-    "notification_larcBody": "{type} muss in {days} Tagen erneuert werden.",
-    "@notification_larcBody": {
-        "description": "The body of the LARC reminder notification, indicating the type of LARC and how many days until renewal.",
+    "notification_reversibleContraceptiveBody": "{type} is due for renewal in {days} days.",
+    "@notification_reversibleContraceptiveBody": {
+        "description": "The body of the Reversible Contraceptive reminder notification, indicating the type of Reversible Contraceptive and how many days until renewal.",
         "placeholders": {
             "type": {
                 "type": "String",
@@ -163,12 +247,81 @@
     },
     "notification_SanitaryProductReminderTitle": "Erinnerung an Hygieneartikel",
     "notification_SanitaryProductReminderBody": "Denke daran, Dein Produkt zu wechseln.",
-    "mainScreen_insightsPageTitle": "Deine Erkenntnisse",
+    "onboardingScreen_welcomeToMenstrudel": "Welcome to Menstrudel",
+    "@onboardingScreen_welcomeToMenstrudel": {
+        "description": "Title for the onboarding screen."
+    },
+    "onboardingScreen_welcomeToMenstrudelDescription": "Your offline, private cycle tracker.",
+    "@onboardingScreen_welcomeToMenstrudelDescription": {
+        "description": "Small into description for the onboarding screen."
+    },
+    "onBoardingScreen_byUsingMenstrudelYouAgreeTo": "By using Menstrudel, you agree to our ",
+    "@onBoardingScreen_byUsingMenstrudelYouAgreeTo": {
+        "description": "Part of the privacy policy agreement text on the onboarding screen."
+    },
+    "onBoardingScreen_privacyPolicy": "Privacy Policy",
+    "@onBoardingScreen_privacyPolicy": {
+        "description": "Link text to the privacy policy on the onboarding screen."
+    },
+    "onboardingScreen_profileTitle": "About You",
+    "@onboardingScreen_profileTitle": {
+        "description": "Title for the profile onboarding screen."
+    },
+    "onboardingScreen_profileName": "What should we call you?",
+    "@onboardingScreen_profileName": {
+        "description": "Name question for the profile onboarding screen."
+    },
+    "onboardingScreen_profileDate": "Birth Date (Optional)",
+    "@onboardingScreen_profileDate": {
+        "description": "Birth date for the profile onboarding screen. This field is optional."
+    },
+    "onboardingScreen_profileDatePlaceholder": "Tap to set birthday",
+    "@onboardingScreen_profileDatePlaceholder": {
+        "description": "Displays when birthday value is none (Due to being optional). Prompts user to set their birthday"
+    },
+    "onboardingScreen_goalTitle": "What's your goal?",
+    "@onboardingScreen_goalTitle": {
+        "description": "Title for the goal onboarding screen."
+    },
+    "onboardingScreen_goalDescription": "This helps tailor the insights you see.",
+    "@onboardingScreen_goalDescription": {
+        "description": "Description for the goal onboarding screen."
+    },
+    "onboardingScreen_contraceptionHint": "Note: You can enable Pill or LARC tracking later in the app settings under '{sectionName}' if wanted.",
+    "@onboardingScreen_contraceptionHint": {
+        "description": "Hint for birth control settings",
+        "placeholders": {
+            "sectionName": {
+                "type": "String"
+            }
+        }
+    },
+    "onboardingScreen_getStarted": "Get Started",
+    "@onboardingScreen_getStarted": {
+        "description": "Button text for the get started navigation button"
+    },
+    "fabToolTip_logs": "Log day",
+    "@fabToolTip_logs": {
+        "description": "Used for the main logs screen fab button as a tooltip."
+    },
+    "fabToolTip_sanitary": "Log sanitary product",
+    "@fabToolTip_sanitary": {
+        "description": "Used for the sanitary screen fab button as a tooltip."
+    },
+    "fabToolTip_sexActivity": "Log sex activity",
+    "@fabToolTip_sexActivity": {
+        "description": "Used for the sex activity screen fab button as a tooltip."
+    },
+    "fabToolTip_reversibleContraceptive": "Log Reversible Contraceptive",
+    "@fabToolTip_reversibleContraceptive": {
+        "description": "Used for the Reversible Contraceptive screen fab button as a tooltip."
+    },
+    "mainScreen_logsPageTitle": "Logs",
+    "mainSceen_sexActivityPageTitle": "Sexuelle Aktivität",
     "mainScreen_sanitaryPageTitle": "Hygieneartikel",
     "mainScreen_pillsPageTitle": "Pille",
-    "mainScreen_LarcsPageTitle": "LARC",
+    "mainScreen_reversibleContraceptivesPageTitle": "Reversible Contraceptives",
     "mainScreen_settingsPageTitle": "Einstellungen",
-    "mainScreen_tooltipLogPeriod": "Periode Eintragen",
     "insightsScreen_errorPrefix": "Fehler:",
     "insightsScreen_noDataAvailable": "Keine Daten verfügbar.",
     "logsScreen_calculatingPrediction": "Berechnung der Vorhersage...",
@@ -186,10 +339,10 @@
     },
     "pillScreen_pillForTodayMarkedAsTaken": "Pille für heute als eingenommen markiert.",
     "pillScreen_pillForTodayMarkedAsSkipped": "Pille für heute als ausgelassen markiert.",
-    "larcScreen_noLarcRecordsFound": "Keine LARC-Datensätze gefunden.",
-    "larcScreen_history": "Verlauf ({history})",
-    "@larcScreen_history": {
-        "description": "The total LARC history count.",
+    "reversibleContraceptiveScreen_noRecordsFound": "No records found.",
+    "reversibleContraceptiveScreen_history": "History ({history})",
+    "@reversibleContraceptiveScreen_history": {
+        "description": "The total Reversible Contraceptive history count.",
         "placeholders": {
             "history": {
                 "type": "int",
@@ -197,9 +350,9 @@
             }
         }
     },
-    "larcScreen_activeLarcs": "Aktive LARC ({activeCount})",
-    "@larcScreen_activeLarcs": {
-        "description": "The total active LARC count.",
+    "reversibleContraceptiveScreen_activeReversibleContraceptives": "Active ({activeCount})",
+    "@reversibleContraceptiveScreen_activeReversibleContraceptives": {
+        "description": "The total active Reversible Contraceptive count.",
         "placeholders": {
             "activeCount": {
                 "type": "int",
@@ -207,9 +360,9 @@
             }
         }
     },
-    "larcScreen_activeLarcsDescription": "Derzeit überwachte LARC-Einträge.",
-    "larcScreen_noActiveRecords": "Derzeit ist kein LARC aktiv. Bitte einen neuen Eintrag vornehmen.",
-    "larcScreen_noHistoryRecords": "Es wurden keine früheren oder überfälligen LARC-Datensätze gefunden.",
+    "reversibleContraceptiveScreen_activeReversibleContraceptivesDescription": "Currently monitored reversible contraceptive entries.",
+    "reversibleContraceptiveScreen_noActiveRecords": "No reversible contraceptive is currently active. Please log a new entry.",
+    "reversibleContraceptiveScreen_noHistoryRecords": "No past or overdue reversible contraceptive records found.",
     "sanitaryProductsScreen_noSanitaryProductRecordsFound": "Keine Einträge zu Hygieneartikeln gefunden.",
     "sanitaryProductsScreen_history": "Verlauf ({history})",
     "@sanitaryProductsScreen_history": {
@@ -242,6 +395,53 @@
             }
         }
     },
+    "sexActivityScreen_noSexActivityRecordsFound": "Keine Aufzeichnungen über sexuelle Aktivitäten gefunden.",
+    "sexActivityScreen_history": "Historie ({history})",
+    "@sexActivityScreen_history": {
+        "description": "The total sex activity history count.",
+        "placeholders": {
+            "history": {
+                "type": "int",
+                "example": "5"
+            }
+        }
+    },
+    "sexActivityScreen_primaryMethod": "Primary Method",
+    "@sexActivityScreen_primaryMethod": {
+        "description": "Label showing the primary sexual protection method."
+    },
+    "sexActivityScreen_mostFrequent": "Most Frequent",
+    "@sexActivityScreen_mostFrequent": {
+        "description": "Label showing the most frequent sex activity type."
+    },
+    "sexActivityScreen_protected": "Protected",
+    "@sexActivityScreen_protected": {
+        "description": "Label showing the total number of protected sex activities."
+    },
+    "sexActivityScreen_activityTrend": "Activity Trend",
+    "@sexActivityScreen_activityTrend": {
+        "description": "Title for the sexual activity trend chart."
+    },
+    "sexActivityScreen_activityDistribution": "Activity Distribution",
+    "@sexActivityScreen_activityDistribution": {
+        "description": "Title for the sex activity distribution chart."
+    },
+    "sexActivityScreen_protectionDistribution": "Protection Distribution",
+    "@sexActivityScreen_protectionDistribution": {
+        "description": "Title for the sexual protection distribution chart."
+    },
+    "settingsScreen_profile": "Profile",
+    "@settingsScreen_profile": {
+        "description": "Title for the profile settings button."
+    },
+    "settingsScreen_name": "Name",
+    "settingsScreen_birthDate": "Birth Date",
+    "settingsScreen_notSet": "Not set",
+    "@settingsScreen_notSet": {
+        "description": "Used when birth date is not set."
+    },
+    "settingsScreen_appGoal": "App Goal",
+    "settingsScreen_profileUpdated": "Profile updated successfully",
     "settingsScreen_selectHistoryView": "Vergangenheitsansicht auswählen",
     "settingsScreen_deleteRegimen_question": "Kuren löschen?",
     "settingsScreen_deleteRegimenDescription": "Dies wird deine aktuellen Pillenverpackungseinstellungen und alle zugehörigen Pillenaufzeichnungen löschen. Diese Aktion kann nicht rückgängig gemacht werden.",
@@ -272,12 +472,12 @@
     "settingsScreen_notificationTime": "Benachrichtigungszeit",
     "settingsScreen_overduePeriodReminder": "Erinnerung bei überfälliger Periode",
     "settingsScreen_remindMeAfter": "Erinnere mich in",
-    "settingsScreen_enableLarcTracking": "LARC-Verfolgung aktivieren",
-    "settingsScreen_larcDescription": "Erfassung langwirksamer reversibler Verhütungsmittel (LARCs).",
-    "settingsScreen_larcType": "LARC Typ",
+    "settingsScreen_enableReversibleContraceptiveTracking": "Enable Reversible Contraceptive Tracking",
+    "settingsScreen_reversibleContraceptiveDescription": "Track Reversible Contraceptives.",
+    "settingsScreen_reversibleContraceptiveType": "Contraceptive Type",
     "settingsScreen_setDuration": "Dauer festlegen",
-    "settingsScreen_larcDuration": "Dauer des LARC-Ersatzes",
-    "settingsScreen_enableLARCReminder": "LARC-Erinnerung aktivieren",
+    "settingsScreen_reversibleContraceptiveDuration": "Contraceptive Replacement Duration",
+    "settingsScreen_enableReversibleContraceptiveReminder": "Enable Contraceptive Reminder",
     "settingsScreen_currentDuration": "Aktuelle Dauer",
     "settingsScreen_durationInDays": "Dauer (Tage)",
     "settingsScreen_LoggingScreen": "Protokollieren",
@@ -323,82 +523,163 @@
     },
     "settingsScreen_pack": "Packung",
     "settingsScreen_dataManagement": "Datenverwaltung",
-    "settingsScreen_dangerZone": "Gefahrenbereich",
-    "settingsScreen_clearAllLogs": "Alle Protokolle löschen",
-    "settingsScreen_clearAllLogsSubtitle": "Löscht den gesamten Verlauf deiner Periode und Symptome.",
-    "settingsScreen_clearAllPillData": "Alle Pillen-Daten löschen",
-    "settingsScreen_clearAllPillDataSubtitle": "Löscht Deine Pilleneinnahme und die Einnahmeübersicht.",
-    "settingsScreen_clearAllPillData_question": "Alle Pillen-Daten löschen?",
-    "settingsScreen_deleteAllPillDataDescription": "This will permanently delete your pill regimen, reminders, and intake history. This action cannot be undone.",
-    "settingsScreen_allPillDataCleared": "Alle Pille-Daten wurden gelöscht.",
-    "settingsScreen_clearAllLarcData": "Alle LARC-Daten löschen",
-    "settingsScreen_clearAllLarcDataSubtitle": "Löscht deinen LARC-Verlauf.",
-    "settingsScreen_clearAllLarcData_question": "Alle LARC-Daten löschen?",
-    "settingsScreen_deleteAllLarcDataDescription": "Dadurch wird Dein LARC-Verlauf dauerhaft gelöscht.",
-    "settingsScreen_allLarcDataCleared": "Alle LARC-Daten wurden gelöscht.",
-    "settingsScreen_clearAllSanitaryData": "Alle Daten zu Hygieneartikeln löschen",
-    "settingsScreen_clearAllSanitaryDataSubtitle": "Löscht deinen Verlauf für Hygieneartikel.",
-    "settingsScreen_clearAllSanitaryData_question": "Alle Daten zu Hygieneartikeln löschen?",
-    "settingsScreen_deleteAllSanitaryDataDescription": "Dadurch wird Dein Hygieneartikelverlauf dauerhaft gelöscht.",
-    "settingsScreen_allSanitaryDataCleared": "Alle Daten zu Hygieneartikeln wurden gelöscht.",
-    "settingsScreen_exportPeriodData": "Periodendaten exportieren",
-    "settingsScreen_exportPillData": "Periodendaten exportieren",
-    "settingsScreen_exportLarcsData": "LARCs-Daten exportieren",
-    "settingsScreen_exportSanitaryData": "Daten zu Hygieneartikeln exportieren",
-    "settingsScreen_exportDataSubtitle": "Erstelle eine JSON Backup Datei.",
+    "settingsScreen_deleteZone": "Delete Zone",
+    "settingsScreen_clearLogsAndPeriods": "Clear Logs & Periods",
+    "@settingsScreen_clearLogsAndPeriods": {
+        "description": "Title for the period logs data clearing section."
+    },
+    "settingsScreen_clearLogsAndPeriodsSubtitle": "Deletes your entire period and symptom history.",
+    "@settingsScreen_clearLogsAndPeriodsSubtitle": {
+        "description": "Subtitle for the period logs data clearing section."
+    },
+    "settingsScreen_clearPillLogs": "Clear Pill Logs",
+    "@settingsScreen_clearPillLogs": {
+        "description": "Title for the pill logs data clearing section."
+    },
+    "settingsScreen_clearPillLogsSubtitle": "Removes your pill regimen and intake history.",
+    "@settingsScreen_clearPillLogsSubtitle": {
+        "description": "Subtitle for the pill logs data clearing section."
+    },
+    "settingsScreen_clearReversibleContraceptiveLogs": "Clear Reversible Contraceptive Logs",
+    "@settingsScreen_clearReversibleContraceptiveLogs": {
+        "description": "Title for the reversible contraceptive logs data clearing section."
+    },
+    "settingsScreen_clearReversibleContraceptiveLogsSubtitle": "Removes your reversible contraceptive history.",
+    "@settingsScreen_clearReversibleContraceptiveLogsSubtitle": {
+        "description": "Subtitle for the reversible contraceptive logs data clearing section."
+    },
+    "settingsScreen_clearSanitaryProductLogs": "Clear Sanitary Product Logs",
+    "@settingsScreen_clearSanitaryProductLogs": {
+        "description": "Title for the sanitary product logs data clearing section."
+    },
+    "settingsScreen_clearSanitaryProductLogsSubtitle": "Removes your sanitary products history.",
+    "@settingsScreen_clearSanitaryProductLogsSubtitle": {
+        "description": "Subtitle for the sanitary product logs data clearing section."
+    },
+    "settingsScreen_clearSexualActivityLogs": "Clear Sexual Activity Logs",
+    "@settingsScreen_clearSexualActivityLogs": {
+        "description": "Title for the sexual activity logs data clearing section."
+    },
+    "settingsScreen_clearSexualActivityLogsSubtitle": "Removes your sexual activity history.",
+    "@settingsScreen_clearSexualActivityLogsSubtitle": {
+        "description": "Subtitle for the sexual activity logs data clearing section."
+    },
+    "settingsScreen_logsAndPeriods": "Logs & Periods",
+    "@settingsScreen_logsAndPeriods": {
+        "description": "Title for the period logs data section."
+    },
+    "settingsScreen_pillLogs": "Pill Logs",
+    "@settingsScreen_pillLogs": {
+        "description": "Title for the pill logs data section."
+    },
+    "settingsScreen_reversibleContraceptivesLogs": "Reversible Contraceptive Logs",
+    "@settingsScreen_reversibleContraceptivesLogs": {
+        "description": "Title for the reversible contraceptives data section."
+    },
+    "settingsScreen_sanitaryProductLogs": "Sanitary Product Logs",
+    "@settingsScreen_sanitaryProductLogs": {
+        "description": "Title for the sanitary products data section."
+    },
+    "settingsScreen_sexualActivityLogs": "Sexual Activity Logs",
+    "@settingsScreen_sexualActivityLogs": {
+        "description": "Title for the sexual activity data section."
+    },
+    "settingsScreen_importSupportNote": "Import is currently only supported for files exported from Menstrudel.",
+    "@settingsScreen_importSupportNote": {
+        "description": "Note indicating that import is only supported for files exported from Menstrudel."
+    },
     "settingsScreen_exportSuccessful": "Daten erfolgreich exportiert.",
     "settingsScreen_exportFailed": "Export fehlgeschlagen. Bitte versuche es erneut.",
-    "settingsScreen_noDataToExport": "Keine Daten zum Exportieren gefunden.",
-    "settingsScreen_exportDataMessage": "Hier ist mein MenstruDel Datenexport.",
     "settingsScreen_exportDataTitle": "Daten exportieren",
     "settingsScreen_importDataTitle": "Daten importieren",
-    "settingsScreen_importPeriodData": "Periodendaten importieren",
-    "settingsScreen_importPillData": "Periodendaten importieren",
-    "settingsScreen_importLarcsData": "LARCs-Daten importieren",
-    "settingsScreen_importSanitaryData": "Daten zu Hygieneartikeln importieren",
     "settingsScreen_importDataSubtitle": "Überschreibt vorhandene Daten.",
-    "settingsScreen_importPeriodData_question": "Bist du sicher, dass du die Periodendaten importieren möchtest?",
-    "settingsScreen_importPillData_question": "Willst du wirklich die Pille-Daten importieren?",
-    "settingsScreen_importLarcData_question": "Willst du wirklich die Pille-Daten importieren?",
-    "settingsScreen_importSanitaryData_question": "Willst du wirklich Daten zu Hygieneartikeln importieren?",
-    "settingsScreen_importPeriodDataDescription": "Durch den Import von Daten werden alle bisherigen Periodenprotokolle und Periodeneinstellungen dauerhaft überschrieben. Dieser Vorgang kann nicht rückgängig gemacht werden.",
-    "settingsScreen_importPillDataDescription": "Durch den Import von Daten werden alle bisherigen Pillen-Daten dauerhaft überschrieben. Dieser Vorgang kann nicht rückgängig gemacht werden.",
-    "settingsScreen_importLarcDataDescription": "Durch den Import von Daten werden alle Ihre bisher gespeicherten LARC-Daten dauerhaft überschrieben. Dieser Vorgang kann nicht rückgängig gemacht werden.",
-    "settingsScreen_importSanitaryDataDescription": "Durch den Import von Daten werden alle bestehenden Daten zu deinen Hygieneartikeln dauerhaft überschrieben. Dieser Vorgang kann nicht rückgängig gemacht werden.",
     "settingsScreen_importSuccessful": "Daten erfolgreich importiert!",
     "settingsScreen_importFailed": "Datenimport fehlgeschlagen. Bitte versuche es erneut.",
-    "settingsScreen_importInvalidFile": "Ungültiges Dateiformat oder ungültige Datenstruktur.",
     "settingsScreen_importErrorGeneral": "Daten konnten nicht importiert werden. Bitte stelle sicher, dass die Datei lokal gespeichert ist.",
     "@settingsScreen_importErrorGeneral": {
         "description": "General message when file import fails for unknown reasons."
-    },
-    "settingsScreen_importErrorPlatform": "Import fehlgeschlagen: {message}. Bitte stelle sicher, dass die Datei auf dem Gerät gespeichert ist und versuche es erneut.",
-    "@settingsScreen_importErrorPlatform": {
-        "description": "Error when the native file picker fails, includes the specific error message.",
-        "placeholders": {
-            "message": {
-                "type": "String",
-                "example": "Unknown path or network access required."
-            }
-        }
     },
     "settingsScreen_security": "Sicherheit",
     "securityScreen_enableBiometricLock": "Biometrische Sperre aktivieren",
     "securityScreen_enableBiometricLockSubtitle": "Zum Öffnen der App ist eine Fingerabdruck- oder Gesichtserkennung erforderlich.",
     "securityScreen_noBiometricsAvailable": "Es wurde kein Passcode, Fingerabdruck oder Face ID gefunden. Bitte lege einen in den Einstellungen des Geräts fest.",
+    "settingsScreen_userProfile": "You",
+    "@settingsScreen_userProfile": {
+        "description": "Title for the user profile settings button."
+    },
     "settingsScreen_preferences": "Einstellungen",
     "preferencesScreen_language": "Sprache",
     "preferencesScreen_enableSanitaryProductsScreen": "Bildschirm für Hygieneartikel aktivieren",
     "preferencesScreen_enableSanitaryProductsScreenSubtitle": "Hygieneartikel in der Hauptnavigationsleiste anzeigen.",
+    "preferencesScreen_enableSexActivityScreen": "Enable Sex Activity Screen",
+    "preferencesScreen_enableSexActivityScreenSubtitle": "Show the Sex Activity tab on the main navigation bar.",
+    "preferencesScreen_StartingDayOfWeek": "Starting Day of the Week",
     "settingsScreen_about": "Über",
+    "@settingsScreen_about": {
+        "description": "Title for the about settings button."
+    },
     "aboutScreen_version": "Version",
+    "@aboutScreen_version": {
+        "description": "Label showing the current app version."
+    },
+    "aboutScreen_legalAndSource": "Legal & Source",
+    "@aboutScreen_legalAndSource": {
+        "description": "Title for the legal and source about section."
+    },
+    "aboutScreen_communityAndUpdates": "Community & Updates",
+    "@aboutScreen_communityAndUpdates": {
+        "description": "Title for the community and updates about section."
+    },
+    "aboutScreen_privacyPolicy": "Privacy Policy",
+    "@aboutScreen_privacyPolicy": {
+        "description": "Link text to the privacy policy on the about screen."
+    },
+    "aboutScreen_privacyPolicySubtitle": "Read our privacy policy",
+    "@aboutScreen_privacyPolicySubtitle": {
+        "description": "Subtitle for the privacy policy link on the about screen."
+    },
+    "aboutScreen_releaseNotes": "Release Notes",
+    "@aboutScreen_releaseNotes": {
+        "description": "Link text to the release notes on the about screen."
+    },
+    "aboutScreen_releaseNotesSubtitle": "What's new in {version}",
+    "@aboutScreen_releaseNotesSubtitle": {
+        "description": "Subtitle for the release notes link on the about screen.",
+        "placeholders": {
+            "version": {
+                "type": "String",
+                "example": "1.0.0"
+            }
+        }
+    },
     "aboutScreen_github": "GitHub",
+    "@aboutScreen_github": {
+        "description": "Link text to the GitHub repository on the about screen."
+    },
     "aboutScreen_githubSubtitle": "Quellcode und Fehlerverfolgung",
+    "@aboutScreen_githubSubtitle": {
+        "description": "Subtitle for the GitHub link on the about screen."
+    },
     "aboutScreen_discord": "Discord",
+    "@aboutScreen_discord": {
+        "description": "Link text to the Discord server on the about screen."
+    },
     "aboutScreen_discordSubtitle": "Unterstützung und Community",
+    "@aboutScreen_discordSubtitle": {
+        "description": "Subtitle for the Discord link on the about screen."
+    },
     "aboutScreen_share": "Teilen",
-    "aboutScreen_shareSubtitle": "Teile die App mit Freunden",
+    "@aboutScreen_share": {
+        "description": "Link button text for the share button on the about screen."
+    },
+    "aboutScreen_shareText": "Check out Menstrudel, a private and offline period tracker app!",
+    "@aboutScreen_shareText": {
+        "description": "Text used when sharing the app from the about screen."
+    },
     "aboutScreen_urlError": "Der Link konnte nicht geöffnet werden.",
+    "@aboutScreen_urlError": {
+        "description": "Error message shown when a link could not be opened."
+    },
     "logSummaryWidget_loggedDays": "Erfasste Tage",
     "logSummaryWidget_trackingHistory": "Verlauf verfolgen",
     "cycleLengthVarianceWidget_logAtLeastTwoPeriods": "Es sind mindestens zwei Zyklen erforderlich, um Abweichungen zu zeigen.",
@@ -418,7 +699,6 @@
     "monthlyFlowChartWidget_cycleFlowPatternsDescription": "Jede Linie stellt einen vollständigen Zyklus dar",
     "symptomFrequencyWidget_noSymptomsLoggedYet": "Noch keine Symptome erfasst.",
     "symptomFrequencyWidget_mostCommonSymptoms": "Häufigste Symptome",
-    "yearHeatMapWidget_yearlyOverview": "Jahresübersicht",
     "journalViewWidget_logYourFirstPeriod": "Trage deine erste Periode ein.",
     "listViewWidget_noPeriodsLogged": "Es wurden noch keine Perioden protokolliert.\nDrücke auf die Schaltfläche „+“, um eine hinzuzufügen.",
     "listViewWidget_confirmDelete": "Löschen bestätigen",
@@ -458,7 +738,7 @@
     "symptomEntrySheet_symptomsOptional": "Symptome (optional)",
     "periodDetailsSheet_symptoms": "Symptome",
     "periodDetailsSheet_flow": "Ausfluss",
-    "larcEntrySheet_logLARCDetails": "LARC-Details protokollieren",
+    "reversibleContraceptiveEntrySheet_logReversibleContraceptiveDetails": "Log Contraceptive Details",
     "sanitaryEntrySheet_logSanitaryProduct": "Log-Hygieneartikel",
     "sanitaryEntrySheet_setReminderDuration": "Erinnerungsdauer festlegen",
     "sanitaryEntrySheet_maxDuration": "Maximale Dauer: {hours} Stunden",
