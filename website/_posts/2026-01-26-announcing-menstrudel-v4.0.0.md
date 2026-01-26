@@ -7,8 +7,7 @@ image: /assets/images/blog/new-release.png
 ---
 
 ![New release image](/assets/images/blog/new-release.png)
-Happy new year! This is the first release of 2026 and it's a big one!
-We're excited to release version **4.0.0** of Menstrudel.
+Happy New Year! We’re kicking off 2026 with our biggest update yet. We are excited to announce the release of **Menstrudel v4.0.0**, packed with requested features and a smoother user experience.
 
 ## Get the Menstrudel App
 
@@ -16,67 +15,61 @@ We're excited to release version **4.0.0** of Menstrudel.
 - 🍎 [Apple App Store](https://apps.apple.com/us/app/menstrudel/id6751970511)
 
 
-### What's New
-* **Onboarding process** On initial startup a small onboarding will show to help get things moving
+### What’s New
 
-* **User Goals** This sets specific app screens up depending on the goal. We hope to adapt this based off user feedback
+* **Smart Onboarding:** A new guided setup to help you get the most out of Menstrudel from day one.
+* **User Goals:** Tailor your experience. The app now adapts its interface based on your specific tracking goals.
+* **Sex Activity Tracking:** A dedicated way to log and monitor sexual activity.
+* **Refined Contraception Categories:** "LARCs" has been renamed to **Reversible Contraception** for better clarity.
+* **Specific IUD Types:** Support for both **Copper** and **Hormonal** IUDs.
+* **Cycle Phase Prediction:** Understand your body’s rhythm with new phase forecasting.
+* **Guided Data Flows:** Import, export, and deletion tasks are now handled through a simple, step-by-step wizard.
+* **Expanded Insights:** New visual trends for **Sanitary Products** and **Sex Activity**.
+* **Vertical Scrolling Calendar:** View more data at once without toggling between months.
+* **Customisable Week Start:** Choose which day starts your week in settings.
+* **Community Translations:** Improvements to language support thanks to our contributors.
 
-* **Sex Activity Tracking** Users can now track sex activity. 
-
-* **LARC tracking renamed** LARCs (Long Acting Reversible Contraception) have been renamed. It is now called Reversible Contraception. This better aligns to the types of contraception being recorded.
-
-* **Better IUD types** IUDs have been split into Copper IUD and Hormonal IUD.
-
-* **Cycle Phase Prediction** Menstrudel can now predict your cycle phase.
-
-* **Guided Data Flows** The import/export and deletion page has been upgraded to a flow. Making things easier
-
-* **More Insights** Sanitary Products and Sex Acitivty gain an insights tab!
-
-* **Scrolling calendar** The Log calendar now scrolls vertically. Displaying more data.
-
-* **Selectable day of week** You can now choose what day starts the week for the calendar view
-
-* **More Translations** Thanks to the community, the app now has better translation support!
+---
 
 <h3 style="text-align: center;">Onboarding Flow</h3>
 ![Onboarding Flow](/assets/images/blog/2026-01-26-announcing-menstrudel-v4.0.0/onboarding_flow.gif)
 
-New (And current exisiting) users will be greeted by this onboarding flow. This helps user setup for first time use.
+New and existing users will be greeted by a streamlined onboarding flow. This ensures your profile and preferences are set up correctly for the most accurate tracking.
 
 <h3 style="text-align: center;">Sex Activity Tracking</h3>
 <table style="width: 100%">
     <tr>
-        <td>
+        <td style="width: 50%">
             <img src="/assets/images/blog/2026-01-26-announcing-menstrudel-v4.0.0/sex_activity_log_screen.png" alt="Sex Activity Log Screen">
         </td>
-        <td>
+        <td style="width: 50%">
             <img src="/assets/images/blog/2026-01-26-announcing-menstrudel-v4.0.0/sex_activity_insight_screen.png" alt="Sex Activity Insight Screen">
         </td>
     </tr>
 </table>
 
-Users can now track sex activity.
+You can now log sexual activity and view long-term trends within the new Insights tab.
 
 <h3 style="text-align: center;">Cycle Phase Prediction</h3>
 ![Cycle Phase Prediction](/assets/images/blog/2026-01-26-announcing-menstrudel-v4.0.0/logs_today_screen.png)
 
-Cycle phase can help users understand what their body may be going through. This is a guide and not garenteed. Cycle phase predictions only work while the body is on a 'natural' cycle. Enabling pill tracking or hormonal contraceptive will disable this.
+Gain better insight into what your body is going through. 
+> **Note:** Predictions are a guide for natural cycles. Enabling pill tracking or hormonal contraceptives will disable this feature to maintain accuracy.
 
 <h3 style="text-align: center;">Guided Data Flows</h3>
 ![Guided Data Flows](/assets/images/blog/2026-01-26-announcing-menstrudel-v4.0.0/guided_flow.gif)
 
-Gone is the messy data settings tab. Now users can quickly and easily import/export or delete their data.
+We’ve replaced the complex data settings tab with a guided flow, making it easier than ever to manage your data securely.
 
 <h3 style="text-align: center;">More Insights</h3>
 ![Sanitary product insight screen](/assets/images/blog/2026-01-26-announcing-menstrudel-v4.0.0/sanitary_product_insight_screen.png)
 
-Sanitary products gains insights! Along with the new sex tracking screen.
+Track your usage of sanitary products over time with our expanded charts and statistics.
 
 <h3 style="text-align: center;">Scrolling Calendar</h3>
 ![Scrolling Calendar](/assets/images/blog/2026-01-26-announcing-menstrudel-v4.0.0/scrolling_calendar.gif)
 
-The scrolling calendar helps show periods that may cross month boundarys.
+The new vertical layout allows you to see periods that cross month boundaries without losing context.
 
 ---
 
