@@ -7,14 +7,14 @@
     "total": "Gesamt",
     "shortest": "Kürzeste",
     "longest": "Längste",
-    "unknown": "Unknown",
+    "unknown": "Unbekannt",
     "date": "Datum",
     "time": "Zeit",
     "start": "Beginn",
     "end": "Ende",
-    "next": "Next",
-    "back": "Back",
-    "today": "Today",
+    "next": "Vorwärts",
+    "back": "Zurück",
+    "today": "Heute",
     "day": "Tag",
     "days": "Tage",
     "hours": "Stunden",
@@ -48,7 +48,7 @@
             }
         }
     },
-    "countdown_daysLeft": "{days, plural, one{{days} Day left} other{{days} Days left}}",
+    "countdown_daysLeft": "{days, plural, one{{days} Tag übrig} other{{days} Tage übrig}}",
     "@countdown_daysLeft": {
         "description": "A countdown message indicating the number of days left.",
         "placeholders": {
@@ -56,7 +56,7 @@
         }
     },
     "logs": "Protokolle",
-    "insights": "Insights",
+    "insights": "Einblicke",
     "edit": "Bearbeiten",
     "delete": "Löschen",
     "clear": "Löschen",
@@ -74,7 +74,7 @@
     "add": "Hinzufügen",
     "notSet": "Nicht festgelegt",
     "removed": "Entfernt",
-    "totalLogs": "Total Logs",
+    "totalLogs": "Alle Protokolle",
     "note": "Hinweis",
     "systemDefault": "System Standard",
     "flow": "Ausfluss",
@@ -82,9 +82,9 @@
     "other": "Sonstiges",
     "navBar_logs": "Protokolle",
     "navBar_sanitary": "Hygiene",
-    "navBar_sexActivity": "Sex Activity",
+    "navBar_sexActivity": "Sexuelle Aktivitäten",
     "navBar_pill": "Pille",
-    "navBar_reversibleContraceptive": "Contraceptives",
+    "navBar_reversibleContraceptive": "Verhütungsmethoden",
     "navBar_settings": "Einstellungen",
     "flowIntensity_none": "Keine",
     "flowIntensity_spotting": "Erkennen",
@@ -105,23 +105,23 @@
     "painLevel_moderate": "Mäßig",
     "painLevel_severe": "Schwerwiegend",
     "pain_unbearable": "Unerträglich",
-    "reversibleContraceptive_hormonalIud": "Hormonal IUD",
-    "reversibleContraceptive_copperIud": "Copper IUD",
-    "reversibleContraceptive_implant": "Implant",
-    "reversibleContraceptive_injection": "Injection",
-    "reversibleContraceptive_ring": "Ring",
-    "reversibleContraceptive_patch": "Patch",
+    "reversibleContraceptive_hormonalIud": "Hormonspirale",
+    "reversibleContraceptive_copperIud": "Kupferspirale",
+    "reversibleContraceptive_implant": "Implantat",
+    "reversibleContraceptive_injection": "Hormonspritze",
+    "reversibleContraceptive_ring": "Hormonring",
+    "reversibleContraceptive_patch": "Hormonpflaster",
     "sanitaryProduct_tampon": "Tampon",
     "sanitaryProduct_pad": "Polster",
     "sanitaryProduct_menstrualCup": "Menstruationstasse",
     "sanitaryProduct_periodUnderwear": "Periodenunterwäsche",
-    "sanitaryProducts_mostUsed": "Most Used",
-    "sanitaryProducts_usageTrend": "Usage Trend",
-    "sexProtection_none": "None",
+    "sanitaryProducts_mostUsed": "Meist Verwendet",
+    "sanitaryProducts_usageTrend": "Verwendungstrend",
+    "sexProtection_none": "Nichts",
     "@sexProtection_none": {
         "description": "Indicates that no sexual protection method was used."
     },
-    "sexProtection_barrier": "Barrier",
+    "sexProtection_barrier": "Schutz",
     "@sexProtection_barrier": {
         "description": "Indicates the use of barrier methods of sexual protection (Condoms)."
     },
@@ -129,7 +129,7 @@
     "@sexProtection_hormonal": {
         "description": "Indicates the use of hormonal methods of sexual protection (The Pill)."
     },
-    "sexProtection_nonHormonal": "Non-Hormonal",
+    "sexProtection_nonHormonal": "Nicht Hormonell",
     "@sexProtection_nonHormonal": {
         "description": "Indicates the use of non-hormonal methods of sexual protection (Copper IUD)."
     },
@@ -144,23 +144,23 @@
     "sexType_vaginal": "Vaginal",
     "sexType_anal": "Anal",
     "sexType_oral": "Oral",
-    "sexType_manual": "Manual",
-    "sexParticipation_solo": "Solo",
+    "sexType_manual": "Manuell",
+    "sexParticipation_solo": "Alleine",
     "sexParticipation_partner": "Partner",
-    "sexParticipation_group": "Group",
-    "userGoal_general": "General Health",
+    "sexParticipation_group": "Gruppe",
+    "userGoal_general": "Allg. Gesundheit",
     "@userGoal_general": {
         "description": "For users tracking periods for general health."
     },
-    "userGoal_sexual": "Sexual Health",
+    "userGoal_sexual": "Sexuelle Gesundheit",
     "@userGoal_sexual": {
         "description": "For users focusing on sexual health."
     },
-    "userGoal_conceive": "Trying to Conceive",
+    "userGoal_conceive": "Schwanger werden",
     "@userGoal_conceive": {
         "description": "For users focusing on trying to conceive."
     },
-    "userGoal_avoid": "Avoiding Pregnancy",
+    "userGoal_avoid": "Schwangerschaft vermeiden",
     "@userGoal_avoid": {
         "description": "For users focusing on avoiding pregnancy."
     },
@@ -171,12 +171,12 @@
     "dayOfWeek_friday": "Freitag",
     "dayOfWeek_saturday": "Samstag",
     "dayOfWeek_sunday": "Sonntag",
-    "cyclePhase_menstruation": "On Period",
-    "cyclePhase_follicular": "Pre-Ovulation",
-    "cyclePhase_ovulation": "Peak Fertility",
-    "cyclePhase_luteal": "Post-Ovulation",
-    "cyclePhase_late": "Late",
-    "cyclePhase_unknown": "Unknown",
+    "cyclePhase_menstruation": "Menstruation",
+    "cyclePhase_follicular": "Follikelphase",
+    "cyclePhase_ovulation": "Ovulation",
+    "cyclePhase_luteal": "Lutealphase",
+    "cyclePhase_late": "Verspätete Periode",
+    "cyclePhase_unknown": "Unbekannt",
     "cyclePhase_menstruationDescription": "Your period is active and the uterine lining is being shed.",
     "cyclePhase_follicularDescription": "Estrogen is rising to prepare the egg; your energy levels may be increasing.",
     "cyclePhase_ovulationDescription": "An egg has been released. This is your most fertile time.",
@@ -271,15 +271,15 @@
     "@onboardingScreen_profileName": {
         "description": "Name question for the profile onboarding screen."
     },
-    "onboardingScreen_profileDate": "Birth Date (Optional)",
+    "onboardingScreen_profileDate": "Geburtstag (Optional)",
     "@onboardingScreen_profileDate": {
         "description": "Birth date for the profile onboarding screen. This field is optional."
     },
-    "onboardingScreen_profileDatePlaceholder": "Tap to set birthday",
+    "onboardingScreen_profileDatePlaceholder": "Anklicken um Geburtstag festzulegen",
     "@onboardingScreen_profileDatePlaceholder": {
         "description": "Displays when birthday value is none (Due to being optional). Prompts user to set their birthday"
     },
-    "onboardingScreen_goalTitle": "What's your goal?",
+    "onboardingScreen_goalTitle": "Was ist dein Ziel?",
     "@onboardingScreen_goalTitle": {
         "description": "Title for the goal onboarding screen."
     },
@@ -440,8 +440,8 @@
     "@settingsScreen_notSet": {
         "description": "Used when birth date is not set."
     },
-    "settingsScreen_appGoal": "App Goal",
-    "settingsScreen_profileUpdated": "Profile updated successfully",
+    "settingsScreen_appGoal": "App Ziel",
+    "settingsScreen_profileUpdated": "Profil erfolgreich upgedatet",
     "settingsScreen_selectHistoryView": "Vergangenheitsansicht auswählen",
     "settingsScreen_deleteRegimen_question": "Kuren löschen?",
     "settingsScreen_deleteRegimenDescription": "Dies wird deine aktuellen Pillenverpackungseinstellungen und alle zugehörigen Pillenaufzeichnungen löschen. Diese Aktion kann nicht rückgängig gemacht werden.",
