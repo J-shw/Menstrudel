@@ -177,7 +177,7 @@
     "cyclePhase_luteal": "Lutealphase",
     "cyclePhase_late": "Verspätete Periode",
     "cyclePhase_unknown": "Unbekannt",
-    "cyclePhase_menstruationDescription": "Ihre Periode ist aktiv und die Gebärmutterschleimhaut wird abgestoßen.",
+    "cyclePhase_menstruationDescription": "Deine Periode ist aktiv und die Gebärmutterschleimhaut wird abgestoßen.",
     "cyclePhase_follicularDescription": "Der Östrogenspiegel steigt, um die Eizelle vorzubereiten; Dein Energieniveau steigt möglicherweise an.",
     "cyclePhase_ovulationDescription": "Ein Eisprung ist erfolgt. Dies ist deine fruchtbarste Zeit.",
     "cyclePhase_lutealDescription": "Progesteron überwiegt aktuell. Achte auf PMS-Symptome, wenn deine nächste Periode näher rückt.",
@@ -189,7 +189,7 @@
     "@notification_periodTitle": {
         "description": "Title for the upcoming period notification."
     },
-    "notification_periodBody": "{count, plural, =1{Deine nächste Periode startet voraussichtlich in 1 Tag.} other{Deine nächste Periode startet voraussichtlich in {count} Tagen.}}",
+    "notification_periodBody": "{count, plural, =1{Deine nächste Periode beginnt voraussichtlich in 1 Tag.} other{Deine nächste Periode beginnt voraussichtlich in {count} Tagen.}}",
     "@notification_periodBody": {
         "description": "Body for the upcoming period notification.",
         "placeholders": {
@@ -202,7 +202,7 @@
     "@notification_periodOverdueTitle": {
         "description": "Title for the overdue period notification."
     },
-    "notification_periodOverdueBody": "{count, plural, =1{Deine nächste Periode ist seit 1 Tag überfällig.} other{Deine nächste Periode ist seit {count} Tagen überfällig.}}",
+    "notification_periodOverdueBody": "{count, plural, =1{Deine nächste Periode ist seit einem Tag überfällig.} other{Deine nächste Periode ist seit {count} Tagen überfällig.}}",
     "@notification_periodOverdueBody": {
         "description": "Body for the overdue period notification.",
         "placeholders": {
@@ -328,7 +328,7 @@
     "logScreen_logAtLeastTwoPeriods": "Protokolliere mindestens zwei Perioden, um den nächsten Zyklus zu schätzen.",
     "logScreen_nextPeriodEstimate": "Nächste Periode voraussichtlich",
     "logScreen_periodDueToday": "Heute fällige Periode",
-    "logScreen_periodOverdueBy": "{count, plural, =1{Periode 1 Tag überfällig} other{Periode {count} Tage überfällig}}",
+    "logScreen_periodOverdueBy": "{count, plural, =1{Die Periode ist 1 Tag überfällig} other{Die Periode ist {count} Tage überfällig}}",
     "@logScreen_periodOverdueBy": {
         "description": "A label showing the total number of days period is overdue.",
         "placeholders": {
