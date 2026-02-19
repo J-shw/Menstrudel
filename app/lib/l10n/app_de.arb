@@ -223,7 +223,7 @@
     "@notification_reversibleContraceptiveTitle": {
         "description": "Title for the Reversible Contraceptive reminder notification."
     },
-    "notification_reversibleContraceptiveBody": "{count, plural,=1{{type} muss in {days} Tag ausgetauscht werden.} other{{type} muss in {days} Tagen ausgetauscht werden.}}",
+    "notification_reversibleContraceptiveBody": "{type} muss in {days} Tagen ausgetauscht werden.",
     "@notification_reversibleContraceptiveBody": {
         "description": "The body of the Reversible Contraceptive reminder notification, indicating the type of Reversible Contraceptive and how many days until renewal.",
         "placeholders": {
@@ -255,7 +255,7 @@
     "@onboardingScreen_welcomeToMenstrudelDescription": {
         "description": "Small into description for the onboarding screen."
     },
-    "onBoardingScreen_byUsingMenstrudelYouAgreeTo": "Beim Verwenden von Menstrudel stimmst du unserer {onBoardingScreen_privacyPolicy} zu.",
+    "onBoardingScreen_byUsingMenstrudelYouAgreeTo": "Durch die Verwendung von Menstrudel stimmst du folgendem zu: ",
     "@onBoardingScreen_byUsingMenstrudelYouAgreeTo": {
         "description": "Part of the privacy policy agreement text on the onboarding screen."
     },
