@@ -6,23 +6,60 @@
     color: #e0e0e0;
   }
 
-  .hero {
-    background-color: #1a1a1a;
-    border-color: #333;
-  }
-
+  /* Headings & Brand */
   .appName, 
   .hero h1, 
-  .page-header h1 {
+  section h2, 
+  .feature h3 {
     color: #ffffff;
   }
 
-  .hero p,
-  .appDescription {
+  /* Hero & Section Backgrounds */
+  .hero {
+    background-color: #1a1a1a;
+    border-color: #2a2a2a;
+  }
+
+  .hero p, 
+  #about p, 
+  .feature p {
     color: #b0b0b0;
   }
 
-  /* Secondary Button */
+  /* Privacy List Card Style */
+  .privacy-list {
+    background: #1a1a1a;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+
+  .privacy-list li {
+    border-bottom: 1px solid #2a2a2a;
+  }
+
+  .privacy-list li strong {
+    color: #ffffff;
+  }
+
+  /* FAQ Accordion */
+  .faq-item {
+    border-color: #2a2a2a;
+  }
+
+  .faq-content {
+    color: #b0b0b0;
+  }
+
+  /* Navigation Styling */
+  nav, .nav-menu {
+    background-color: #121212;
+    border-color: #2a2a2a;
+  }
+
+  nav a, .site-title, .nav-toggle-label {
+    color: #e0e0e0;
+  }
+
+  /* Button Refinements */
   .secondary {
     background-color: rgba(255, 255, 255, 0.05);
     color: #e0e0e0;
@@ -32,28 +69,11 @@
   .secondary:hover {
     background-color: rgba(255, 255, 255, 0.1);
     border-color: #666;
+    color: #ffffff;
   }
 
-  /* Navigation & Menus */
-  nav, .nav-menu {
-    background-color: #1a1a1a;
-    border-color: #333;
-  }
-
-  nav a, .site-title, .nav-toggle-label {
-    color: #e0e0e0;
-  }
-
-  /* Sections & Lists */
-  section, .post-preview, .faq-item, .nav-menu li {
-    border-color: #333;
-  }
-
-  .privacy-list li strong, #about h2 {
-    color: #e0e0e0;
-  }
-
-  .privacy-list li div, #about p, .faq-content {
-    color: #aaa;
+  /* Generic Section Borders */
+  section {
+    border-color: #2a2a2a;
   }
 }
