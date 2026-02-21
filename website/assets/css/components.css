@@ -101,6 +101,12 @@
   transform: translateY(-2px);
 }
 
+.cta-section {
+  text-align: center;
+  border-bottom: none !important;
+  padding: 5rem 0;
+}
+
 .primary {
   background-color: #e91e63;
   color: white;
@@ -163,7 +169,7 @@ section h2 {
   margin-top: 2rem;
   border-radius: 12px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-  overflow: hidden; 
+  overflow: hidden;
   max-width: 700px;
   width: 100%;
 }
