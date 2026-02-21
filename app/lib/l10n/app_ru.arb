@@ -223,9 +223,9 @@
     "@notification_reversibleContraceptiveTitle": {
         "description": "Title for the Reversible Contraceptive reminder notification."
     },
-    "notification_reversibleContraceptiveBody": "{type} is due for renewal in {days} days.",
+    "notification_reversibleContraceptiveBody": "{type} is due for renewal in {days} {days, plural, =1{day} other{days}}.",
     "@notification_reversibleContraceptiveBody": {
-        "description": "The body of the Reversible Contraceptive reminder notification, indicating the type of Reversible Contraceptive and how many days until renewal.",
+        "description": "The body of the Reversible Contraceptive reminder notification, indicating the type and days until renewal.",
         "placeholders": {
             "type": {
                 "type": "String",
@@ -233,7 +233,7 @@
             },
             "days": {
                 "type": "int",
-                "example": "30"
+                "example": "1"
             }
         }
     },
