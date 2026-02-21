@@ -76,4 +76,17 @@
   section {
     border-color: #2a2a2a;
   }
+
+  .subtitle {
+    color: #aaa;
+  }
+  
+  .screenshot-item img {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    background-color: #1a1a1a; /* Prevents white flashes behind images */
+  }
+
+  .screenshot-item span {
+    color: #ffffff;
+  }
 }
