@@ -15,33 +15,65 @@
 
 .hero {
   text-align: center;
-  padding: 4rem 1rem;
+  padding: 3rem 1rem;
   background-color: #f8f9fa;
 }
 
-.hero h1 {
-  font-size: 2.5rem;
-  margin-bottom: 0.5rem;
+.brand-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
 }
 
-.hero p {
-  font-size: 1.2rem;
-  color: #555;
-  max-width: 600px;
-  margin: 0 auto 2rem auto;
+.appName {
+  font-weight: bold;
+  font-size: 2.4rem;
+  letter-spacing: -0.02em;
+  color: #333;
 }
 
 .appIconLarge {
-  width: 120px;
-  height: 120px;
-  clip-path: url(#shape120);
+  width: 100px;
+  height: 100px;
+  border-radius: 22.5%;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
-.appIconShadow {
-  filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.15));
+.hero h1 {
+  font-size: clamp(1.8rem, 5vw, 3.5rem);
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  font-weight: 800;
+  color: #222;
 }
 
-/* Buttons */
+.highlight {
+  color: #e91e63;
+}
+
+.hero p {
+  font-size: 1.25rem;
+  color: #555;
+  max-width: 650px;
+  margin: 0 auto 2.5rem auto;
+}
+
+/* Button & Link Groups */
+
+.download-group {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.github-link {
+  display: block;
+  margin-top: 1rem;
+}
 
 .button {
   display: inline-block;
@@ -54,18 +86,19 @@
   margin-top: 1rem;
 }
 
-.cta-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
 .cta-button {
-  padding: 0.8rem 1.5rem;
-  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.9rem 1.8rem;
+  border-radius: 12px;
   text-decoration: none;
   font-weight: bold;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
 }
 
 .primary {
@@ -74,8 +107,14 @@
 }
 
 .secondary {
-  background-color: #333;
-  color: white;
+  background-color: transparent;
+  color: #555;
+  border: 1px solid #ddd;
+}
+
+.secondary:hover {
+  background-color: #f0f0f0;
+  border-color: #bbb;
 }
 
 /* --- Areas --- */
