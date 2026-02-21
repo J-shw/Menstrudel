@@ -18,20 +18,3 @@ body {
 main {
   padding-bottom: 2rem;
 }
-
-/* Global Buttons */
-.cta-button {
-  padding: 0.8rem 1.5rem;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: bold;
-  display: inline-block;
-}
-
-.primary { background-color: #e91e63; color: white; }
-.secondary { background-color: #333; color: white; }
-
-section {
-  padding: 3rem 0;
-  border-bottom: 1px solid #eee;
-}
