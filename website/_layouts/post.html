@@ -1,7 +1,15 @@
 ---
 layout: default
+schema: schema-blog-post.html
 ---
 <div class="container">
+  <div aria-label="Breadcrumb" class="breadcrumb">
+    <ol>
+      <li><a href="/">Home</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li>{{ page.title }}</li>
+    </ol>
+  </div>
   <article class="post">
     <header class="post-header">
       <h1>{{ page.title }}</h1>

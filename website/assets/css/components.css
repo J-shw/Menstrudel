@@ -1,0 +1,297 @@
+/* --- Global Section & Layout --- */
+section {
+  padding: 5rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+section h2 {
+  text-align: center;
+  font-size: 2.25rem;
+  margin-bottom: 3rem;
+  font-weight: 800;
+  color: #222;
+}
+
+/* --- Breadcrumbs --- */
+
+.breadcrumb ol {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0 0;
+  display: flex;
+  font-size: 0.9rem;
+}
+
+.breadcrumb li {
+  color: #666;
+}
+
+.breadcrumb li:not(:last-child)::after {
+  content: "/";
+  margin: 0 0.75rem;
+  color: #ccc;
+}
+
+.breadcrumb a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+/* --- Page Header --- */
+
+.page-header {
+  text-align: center;
+  padding: 3rem 1rem 1rem;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 2rem;
+}
+
+.page-header h1 {
+  font-size: 2.5rem;
+}
+
+/* --- Hero --- */
+.hero {
+  text-align: center;
+  padding: 6rem 1rem;
+  background-color: #f8f9fa;
+}
+
+.brand-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.appName {
+  font-weight: 800;
+  font-size: 1.5rem;
+  letter-spacing: -0.02em;
+  color: #333;
+}
+
+.appIconLarge {
+  width: 100px;
+  height: 100px;
+  border-radius: 22.5%;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.hero h1 {
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  font-weight: 800;
+  color: #222;
+}
+
+.highlight {
+  color: #e91e63;
+}
+
+.hero p {
+  font-size: 1.25rem;
+  color: #555;
+  max-width: 650px;
+  margin: 0 auto 2.5rem auto;
+}
+
+.github-link {
+  margin-top: 15px;
+}
+
+/* --- Buttons & CTAs --- */
+.download-group {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.9rem 1.8rem;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.2s ease-in-out;
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.primary {
+  background-color: #e91e63;
+  color: white;
+}
+
+.secondary {
+  background-color: transparent;
+  color: #555;
+  border: 1px solid #ddd;
+}
+
+.secondary:hover {
+  background-color: #fff;
+  border-color: #bbb;
+}
+
+.cta-section {
+  text-align: center;
+  border-bottom: none !important;
+}
+
+/* --- About & Privacy List --- */
+#about p {
+  font-size: 1.2rem;
+  color: #555;
+  line-height: 1.6;
+  text-align: center;
+  max-width: 750px;
+  margin: 0 auto 3rem auto;
+}
+
+.privacy-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  background: #fff;
+  max-width: 700px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.privacy-list li {
+  display: flex;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.privacy-list li:last-child { border-bottom: none; }
+
+.privacy-list li i {
+  font-size: 1.5rem;
+  color: #e91e63;
+  width: 3rem;
+  text-align: center;
+  margin-right: 1rem;
+}
+
+.privacy-list li strong {
+  display: block;
+  color: #222;
+  font-size: 1.1rem;
+}
+
+/* --- Features Grid --- */
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 3rem;
+}
+
+.feature {
+  text-align: center;
+  padding: 1rem;
+}
+
+.feature i {
+  font-size: 2.5rem;
+  color: #e91e63;
+  margin-bottom: 1.5rem;
+}
+
+.feature h3 {
+  font-size: 1.4rem;
+  margin-bottom: 0.75rem;
+  color: #222;
+}
+
+/* --- FAQ --- */
+.faq-item {
+  border-bottom: 1px solid #eee;
+  padding: 1.25rem 0;
+}
+
+.faq-item summary {
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+}
+
+.faq-item summary::after {
+  content: '\f078';
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  font-size: 0.8rem;
+  transition: transform 0.3s ease;
+}
+
+.faq-item[open] summary::after {
+  transform: rotate(180deg);
+}
+
+.faq-content {
+  padding: 1rem 0 0.5rem 0;
+  color: #666;
+}
+
+/* --- Screenshot Page --- */
+.subtitle {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 3rem auto;
+  font-size: 1.2rem;
+  color: #666;
+}
+
+.screenshot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 3rem;
+  margin-bottom: 4rem;
+}
+
+.screenshot-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.screenshot-item img {
+  width: 100%;
+  max-width: 300px;
+  border-radius: 2.5rem; /* Clean app-like corners */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  background-color: #fff; /* Ensures transparent PNGs look consistent */
+}
+
+.screenshot-item img:hover {
+  transform: scale(1.02) translateY(-5px);
+}
+
+.screenshot-item span {
+  margin-top: 1.25rem;
+  font-weight: 700;
+  color: #333;
+  font-size: 1.1rem;
+}
