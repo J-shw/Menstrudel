@@ -249,7 +249,7 @@ section h2 {
 
 .screenshot-item img {
   width: 100%;
-  max-width: 320px;
+  max-width: 300px;
   border-radius: 2.5rem; /* Clean app-like corners */
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
