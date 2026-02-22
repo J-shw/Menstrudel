@@ -7,14 +7,14 @@
     "total": "Gesamt",
     "shortest": "Kürzeste",
     "longest": "Längste",
-    "unknown": "Unknown",
+    "unknown": "Unbekannt",
     "date": "Datum",
     "time": "Zeit",
     "start": "Beginn",
     "end": "Ende",
-    "next": "Next",
-    "back": "Back",
-    "today": "Today",
+    "next": "Vorwärts",
+    "back": "Zurück",
+    "today": "Heute",
     "day": "Tag",
     "days": "Tage",
     "hours": "Stunden",
@@ -48,7 +48,7 @@
             }
         }
     },
-    "countdown_daysLeft": "{days, plural, one{{days} Day left} other{{days} Days left}}",
+    "countdown_daysLeft": "{days, plural, one{{days} Tag übrig} other{{days} Tage übrig}}",
     "@countdown_daysLeft": {
         "description": "A countdown message indicating the number of days left.",
         "placeholders": {
@@ -56,7 +56,7 @@
         }
     },
     "logs": "Protokolle",
-    "insights": "Insights",
+    "insights": "Einblicke",
     "edit": "Bearbeiten",
     "delete": "Löschen",
     "clear": "Löschen",
@@ -74,7 +74,7 @@
     "add": "Hinzufügen",
     "notSet": "Nicht festgelegt",
     "removed": "Entfernt",
-    "totalLogs": "Total Logs",
+    "totalLogs": "Alle Protokolle",
     "note": "Hinweis",
     "systemDefault": "System Standard",
     "flow": "Ausfluss",
@@ -82,15 +82,15 @@
     "other": "Sonstiges",
     "navBar_logs": "Protokolle",
     "navBar_sanitary": "Hygiene",
-    "navBar_sexActivity": "Sex Activity",
+    "navBar_sexActivity": "Sexuelle Aktivitäten",
     "navBar_pill": "Pille",
-    "navBar_reversibleContraceptive": "Contraceptives",
+    "navBar_reversibleContraceptive": "Verhütungsmethoden",
     "navBar_settings": "Einstellungen",
     "flowIntensity_none": "Keine",
-    "flowIntensity_spotting": "Erkennen",
-    "flowIntensity_light": "Hell",
+    "flowIntensity_spotting": "Schmierblutung",
+    "flowIntensity_light": "Leicht",
     "flowIntensity_moderate": "Mäßig",
-    "flowIntensity_heavy": "Schwer",
+    "flowIntensity_heavy": "Stark",
     "builtInSymptom_acne": "Akne",
     "builtInSymptom_backPain": "Rückenschmerzen",
     "builtInSymptom_bloating": "Blähungen",
@@ -105,23 +105,23 @@
     "painLevel_moderate": "Mäßig",
     "painLevel_severe": "Schwerwiegend",
     "pain_unbearable": "Unerträglich",
-    "reversibleContraceptive_hormonalIud": "Hormonal IUD",
-    "reversibleContraceptive_copperIud": "Copper IUD",
-    "reversibleContraceptive_implant": "Implant",
-    "reversibleContraceptive_injection": "Injection",
-    "reversibleContraceptive_ring": "Ring",
-    "reversibleContraceptive_patch": "Patch",
+    "reversibleContraceptive_hormonalIud": "Hormonspirale",
+    "reversibleContraceptive_copperIud": "Kupferspirale",
+    "reversibleContraceptive_implant": "Implantat",
+    "reversibleContraceptive_injection": "Hormonspritze",
+    "reversibleContraceptive_ring": "Hormonring",
+    "reversibleContraceptive_patch": "Hormonpflaster",
     "sanitaryProduct_tampon": "Tampon",
     "sanitaryProduct_pad": "Polster",
     "sanitaryProduct_menstrualCup": "Menstruationstasse",
     "sanitaryProduct_periodUnderwear": "Periodenunterwäsche",
-    "sanitaryProducts_mostUsed": "Most Used",
-    "sanitaryProducts_usageTrend": "Usage Trend",
-    "sexProtection_none": "None",
+    "sanitaryProducts_mostUsed": "Meist Verwendet",
+    "sanitaryProducts_usageTrend": "Verwendungstrend",
+    "sexProtection_none": "Nichts",
     "@sexProtection_none": {
         "description": "Indicates that no sexual protection method was used."
     },
-    "sexProtection_barrier": "Barrier",
+    "sexProtection_barrier": "Schutz",
     "@sexProtection_barrier": {
         "description": "Indicates the use of barrier methods of sexual protection (Condoms)."
     },
@@ -129,7 +129,7 @@
     "@sexProtection_hormonal": {
         "description": "Indicates the use of hormonal methods of sexual protection (The Pill)."
     },
-    "sexProtection_nonHormonal": "Non-Hormonal",
+    "sexProtection_nonHormonal": "Nicht Hormonell",
     "@sexProtection_nonHormonal": {
         "description": "Indicates the use of non-hormonal methods of sexual protection (Copper IUD)."
     },
@@ -144,23 +144,23 @@
     "sexType_vaginal": "Vaginal",
     "sexType_anal": "Anal",
     "sexType_oral": "Oral",
-    "sexType_manual": "Manual",
-    "sexParticipation_solo": "Solo",
+    "sexType_manual": "Per Hand",
+    "sexParticipation_solo": "Alleine",
     "sexParticipation_partner": "Partner",
-    "sexParticipation_group": "Group",
-    "userGoal_general": "General Health",
+    "sexParticipation_group": "Gruppe",
+    "userGoal_general": "Allg. Gesundheit",
     "@userGoal_general": {
         "description": "For users tracking periods for general health."
     },
-    "userGoal_sexual": "Sexual Health",
+    "userGoal_sexual": "Sexuelle Gesundheit",
     "@userGoal_sexual": {
         "description": "For users focusing on sexual health."
     },
-    "userGoal_conceive": "Trying to Conceive",
+    "userGoal_conceive": "Schwanger werden",
     "@userGoal_conceive": {
         "description": "For users focusing on trying to conceive."
     },
-    "userGoal_avoid": "Avoiding Pregnancy",
+    "userGoal_avoid": "Schwangerschaft vermeiden",
     "@userGoal_avoid": {
         "description": "For users focusing on avoiding pregnancy."
     },
@@ -171,25 +171,25 @@
     "dayOfWeek_friday": "Freitag",
     "dayOfWeek_saturday": "Samstag",
     "dayOfWeek_sunday": "Sonntag",
-    "cyclePhase_menstruation": "On Period",
-    "cyclePhase_follicular": "Pre-Ovulation",
-    "cyclePhase_ovulation": "Peak Fertility",
-    "cyclePhase_luteal": "Post-Ovulation",
-    "cyclePhase_late": "Late",
-    "cyclePhase_unknown": "Unknown",
-    "cyclePhase_menstruationDescription": "Your period is active and the uterine lining is being shed.",
-    "cyclePhase_follicularDescription": "Estrogen is rising to prepare the egg; your energy levels may be increasing.",
-    "cyclePhase_ovulationDescription": "An egg has been released. This is your most fertile time.",
-    "cyclePhase_lutealDescription": "Progesterone is dominant. Monitor for PMS symptoms as you approach your next period.",
-    "cyclePhase_lateDescription": "Your period is late.",
-    "cyclePhase_unknownDescription": "We need more data to accurately predict your cycle phase.",
+    "cyclePhase_menstruation": "Menstruation",
+    "cyclePhase_follicular": "Follikelphase",
+    "cyclePhase_ovulation": "Ovulation",
+    "cyclePhase_luteal": "Lutealphase",
+    "cyclePhase_late": "Verspätete Periode",
+    "cyclePhase_unknown": "Unbekannt",
+    "cyclePhase_menstruationDescription": "Deine Periode ist aktiv und die Gebärmutterschleimhaut wird abgestoßen.",
+    "cyclePhase_follicularDescription": "Der Östrogenspiegel steigt, um die Eizelle vorzubereiten; Dein Energieniveau steigt möglicherweise an.",
+    "cyclePhase_ovulationDescription": "Ein Eisprung ist erfolgt. Dies ist deine fruchtbarste Zeit.",
+    "cyclePhase_lutealDescription": "Progesteron überwiegt aktuell. Achte auf PMS-Symptome, wenn deine nächste Periode näher rückt.",
+    "cyclePhase_lateDescription": "Deine Periode ist verspätet.",
+    "cyclePhase_unknownDescription": "Wir benötigen mehr Daten, um deine Zyklusphasen vorherzusagen.",
     "error_valueMustbePositive": "Der Wert muss positiv sein",
     "error_valueCannotBeNull": "Der Wert darf nicht null sein",
     "notification_periodTitle": "Periode nähert sich",
     "@notification_periodTitle": {
         "description": "Title for the upcoming period notification."
     },
-    "notification_periodBody": "{count, plural, =1{Deine nächste Periode startet voraussichtlich in 1 Tag} other{Deine nächste Periode startet voraussichtlich in {count} Tagen.}}",
+    "notification_periodBody": "{count, plural, =1{Deine nächste Periode beginnt voraussichtlich in 1 Tag.} other{Deine nächste Periode beginnt voraussichtlich in {count} Tagen.}}",
     "@notification_periodBody": {
         "description": "Body for the upcoming period notification.",
         "placeholders": {
@@ -202,7 +202,7 @@
     "@notification_periodOverdueTitle": {
         "description": "Title for the overdue period notification."
     },
-    "notification_periodOverdueBody": "{count, plural, =1{Deine nächste Periode ist seit 1 Tag überfällig.} other{Deine nächste Periode ist seit {count} Tagen überfällig.}}",
+    "notification_periodOverdueBody": "{count, plural, =1{Deine nächste Periode ist seit einem Tag überfällig.} other{Deine nächste Periode ist seit {count} Tagen überfällig.}}",
     "@notification_periodOverdueBody": {
         "description": "Body for the overdue period notification.",
         "placeholders": {
@@ -219,13 +219,13 @@
     "@notification_pillBody": {
         "description": "Body for the daily pill reminder notification."
     },
-    "notification_reversibleContraceptiveTitle": "Reversible Contraceptive Reminder",
+    "notification_reversibleContraceptiveTitle": "Reversible Verhütungsmittelerinnerung",
     "@notification_reversibleContraceptiveTitle": {
         "description": "Title for the Reversible Contraceptive reminder notification."
     },
-    "notification_reversibleContraceptiveBody": "{type} is due for renewal in {days} days.",
+    "notification_reversibleContraceptiveBody": "{type} muss ausgetauscht werden in {days} {days, plural, =1{Tag} other{Tagen}}.",
     "@notification_reversibleContraceptiveBody": {
-        "description": "The body of the Reversible Contraceptive reminder notification, indicating the type of Reversible Contraceptive and how many days until renewal.",
+        "description": "The body of the Reversible Contraceptive reminder notification, indicating the type and days until renewal.",
         "placeholders": {
             "type": {
                 "type": "String",
@@ -233,61 +233,61 @@
             },
             "days": {
                 "type": "int",
-                "example": "30"
+                "example": "1"
             }
         }
     },
-    "notification_loggingReminderTitle": "Logging Reminder",
+    "notification_loggingReminderTitle": "Protokollierungserinnerung",
     "@notification_loggingReminderTitle": {
         "description": "Title for the logging reminder notification."
     },
-    "notification_loggingReminderBody": "Tap to log your flow for today.",
+    "notification_loggingReminderBody": "Tippe, um deinen Ausfluss für heute einzutragen.",
     "@notification_loggingReminderBody": {
         "description": "Body for the logging reminder notification."
     },
     "notification_SanitaryProductReminderTitle": "Erinnerung an Hygieneartikel",
     "notification_SanitaryProductReminderBody": "Denke daran, Dein Produkt zu wechseln.",
-    "onboardingScreen_welcomeToMenstrudel": "Welcome to Menstrudel",
+    "onboardingScreen_welcomeToMenstrudel": "Willkommen bei Menstrudel",
     "@onboardingScreen_welcomeToMenstrudel": {
         "description": "Title for the onboarding screen."
     },
-    "onboardingScreen_welcomeToMenstrudelDescription": "Your offline, private cycle tracker.",
+    "onboardingScreen_welcomeToMenstrudelDescription": "Dein offline, privater Zyklustracker.",
     "@onboardingScreen_welcomeToMenstrudelDescription": {
         "description": "Small into description for the onboarding screen."
     },
-    "onBoardingScreen_byUsingMenstrudelYouAgreeTo": "By using Menstrudel, you agree to our ",
+    "onBoardingScreen_byUsingMenstrudelYouAgreeTo": "Durch die Verwendung von Menstrudel stimmst du folgendem zu: ",
     "@onBoardingScreen_byUsingMenstrudelYouAgreeTo": {
         "description": "Part of the privacy policy agreement text on the onboarding screen."
     },
-    "onBoardingScreen_privacyPolicy": "Privacy Policy",
+    "onBoardingScreen_privacyPolicy": "Datenschutzrichtlinie",
     "@onBoardingScreen_privacyPolicy": {
         "description": "Link text to the privacy policy on the onboarding screen."
     },
-    "onboardingScreen_profileTitle": "About You",
+    "onboardingScreen_profileTitle": "Über dich",
     "@onboardingScreen_profileTitle": {
         "description": "Title for the profile onboarding screen."
     },
-    "onboardingScreen_profileName": "What should we call you?",
+    "onboardingScreen_profileName": "Wie sollen wir dich nennen?",
     "@onboardingScreen_profileName": {
         "description": "Name question for the profile onboarding screen."
     },
-    "onboardingScreen_profileDate": "Birth Date (Optional)",
+    "onboardingScreen_profileDate": "Geburtstag (Optional)",
     "@onboardingScreen_profileDate": {
         "description": "Birth date for the profile onboarding screen. This field is optional."
     },
-    "onboardingScreen_profileDatePlaceholder": "Tap to set birthday",
+    "onboardingScreen_profileDatePlaceholder": "Anklicken um Geburtstag festzulegen",
     "@onboardingScreen_profileDatePlaceholder": {
         "description": "Displays when birthday value is none (Due to being optional). Prompts user to set their birthday"
     },
-    "onboardingScreen_goalTitle": "What's your goal?",
+    "onboardingScreen_goalTitle": "Was ist dein Ziel?",
     "@onboardingScreen_goalTitle": {
         "description": "Title for the goal onboarding screen."
     },
-    "onboardingScreen_goalDescription": "This helps tailor the insights you see.",
+    "onboardingScreen_goalDescription": "Dadurch können die angezeigten Informationen besser auf dich zugeschnitten werden.",
     "@onboardingScreen_goalDescription": {
         "description": "Description for the goal onboarding screen."
     },
-    "onboardingScreen_contraceptionHint": "Note: You can enable Pill or LARC tracking later in the app settings under '{sectionName}' if wanted.",
+    "onboardingScreen_contraceptionHint": "Hinweis: Du kannst die Verfolgung von der Pille oder reversiblen Verhütungsmitteln später in den App-Einstellungen unter \"{sectionName}\" aktivieren, wenn du das möchtest.",
     "@onboardingScreen_contraceptionHint": {
         "description": "Hint for birth control settings",
         "placeholders": {
@@ -296,31 +296,31 @@
             }
         }
     },
-    "onboardingScreen_getStarted": "Get Started",
+    "onboardingScreen_getStarted": "Los geht's",
     "@onboardingScreen_getStarted": {
         "description": "Button text for the get started navigation button"
     },
-    "fabToolTip_logs": "Log day",
+    "fabToolTip_logs": "Tag protokollieren",
     "@fabToolTip_logs": {
         "description": "Used for the main logs screen fab button as a tooltip."
     },
-    "fabToolTip_sanitary": "Log sanitary product",
+    "fabToolTip_sanitary": "Protokolliere Hygieneartikel",
     "@fabToolTip_sanitary": {
         "description": "Used for the sanitary screen fab button as a tooltip."
     },
-    "fabToolTip_sexActivity": "Log sex activity",
+    "fabToolTip_sexActivity": "Protokolliere sexuelle Aktivitäten",
     "@fabToolTip_sexActivity": {
         "description": "Used for the sex activity screen fab button as a tooltip."
     },
-    "fabToolTip_reversibleContraceptive": "Log Reversible Contraceptive",
+    "fabToolTip_reversibleContraceptive": "Protokolliere Reversible Verhütungsmittel",
     "@fabToolTip_reversibleContraceptive": {
         "description": "Used for the Reversible Contraceptive screen fab button as a tooltip."
     },
-    "mainScreen_logsPageTitle": "Logs",
+    "mainScreen_logsPageTitle": "Protokolle",
     "mainSceen_sexActivityPageTitle": "Sexuelle Aktivität",
     "mainScreen_sanitaryPageTitle": "Hygieneartikel",
     "mainScreen_pillsPageTitle": "Pille",
-    "mainScreen_reversibleContraceptivesPageTitle": "Reversible Contraceptives",
+    "mainScreen_reversibleContraceptivesPageTitle": "Reversible Verhütungsmittel",
     "mainScreen_settingsPageTitle": "Einstellungen",
     "insightsScreen_errorPrefix": "Fehler:",
     "insightsScreen_noDataAvailable": "Keine Daten verfügbar.",
@@ -328,7 +328,7 @@
     "logScreen_logAtLeastTwoPeriods": "Protokolliere mindestens zwei Perioden, um den nächsten Zyklus zu schätzen.",
     "logScreen_nextPeriodEstimate": "Nächste Periode voraussichtlich",
     "logScreen_periodDueToday": "Heute fällige Periode",
-    "logScreen_periodOverdueBy": "{count, plural, =1{Periode 1 Tag überfällig} other{Periode {count} Tage überfällig}}",
+    "logScreen_periodOverdueBy": "{count, plural, =1{Die Periode ist 1 Tag überfällig} other{Die Periode ist {count} Tage überfällig}}",
     "@logScreen_periodOverdueBy": {
         "description": "A label showing the total number of days period is overdue.",
         "placeholders": {
@@ -339,8 +339,8 @@
     },
     "pillScreen_pillForTodayMarkedAsTaken": "Pille für heute als eingenommen markiert.",
     "pillScreen_pillForTodayMarkedAsSkipped": "Pille für heute als ausgelassen markiert.",
-    "reversibleContraceptiveScreen_noRecordsFound": "No records found.",
-    "reversibleContraceptiveScreen_history": "History ({history})",
+    "reversibleContraceptiveScreen_noRecordsFound": "Keine Protokolle gefunden.",
+    "reversibleContraceptiveScreen_history": "Vergangene ({history})",
     "@reversibleContraceptiveScreen_history": {
         "description": "The total Reversible Contraceptive history count.",
         "placeholders": {
@@ -350,7 +350,7 @@
             }
         }
     },
-    "reversibleContraceptiveScreen_activeReversibleContraceptives": "Active ({activeCount})",
+    "reversibleContraceptiveScreen_activeReversibleContraceptives": "Aktive ({activeCount})",
     "@reversibleContraceptiveScreen_activeReversibleContraceptives": {
         "description": "The total active Reversible Contraceptive count.",
         "placeholders": {
@@ -360,9 +360,9 @@
             }
         }
     },
-    "reversibleContraceptiveScreen_activeReversibleContraceptivesDescription": "Currently monitored reversible contraceptive entries.",
-    "reversibleContraceptiveScreen_noActiveRecords": "No reversible contraceptive is currently active. Please log a new entry.",
-    "reversibleContraceptiveScreen_noHistoryRecords": "No past or overdue reversible contraceptive records found.",
+    "reversibleContraceptiveScreen_activeReversibleContraceptivesDescription": "Derzeit überwachte Einträge zu reversiblen Verhütungsmitteln.",
+    "reversibleContraceptiveScreen_noActiveRecords": "Derzeit ist kein reversibles Verhütungsmittel in Gebrauch. Bitte erstelle einen neuen Eintrag.",
+    "reversibleContraceptiveScreen_noHistoryRecords": "Es wurden keine früheren oder überfälligen reversiblen Verhütungsmittelaufzeichnungen gefunden.",
     "sanitaryProductsScreen_noSanitaryProductRecordsFound": "Keine Einträge zu Hygieneartikeln gefunden.",
     "sanitaryProductsScreen_history": "Verlauf ({history})",
     "@sanitaryProductsScreen_history": {
@@ -406,42 +406,42 @@
             }
         }
     },
-    "sexActivityScreen_primaryMethod": "Primary Method",
+    "sexActivityScreen_primaryMethod": "Primäre Verhütungsmethode",
     "@sexActivityScreen_primaryMethod": {
         "description": "Label showing the primary sexual protection method."
     },
-    "sexActivityScreen_mostFrequent": "Most Frequent",
+    "sexActivityScreen_mostFrequent": "Am Häufigsten",
     "@sexActivityScreen_mostFrequent": {
         "description": "Label showing the most frequent sex activity type."
     },
-    "sexActivityScreen_protected": "Protected",
+    "sexActivityScreen_protected": "Geschützt",
     "@sexActivityScreen_protected": {
         "description": "Label showing the total number of protected sex activities."
     },
-    "sexActivityScreen_activityTrend": "Activity Trend",
+    "sexActivityScreen_activityTrend": "Aktivitätstrend",
     "@sexActivityScreen_activityTrend": {
         "description": "Title for the sexual activity trend chart."
     },
-    "sexActivityScreen_activityDistribution": "Activity Distribution",
+    "sexActivityScreen_activityDistribution": "Aktivitätsverteilung",
     "@sexActivityScreen_activityDistribution": {
         "description": "Title for the sex activity distribution chart."
     },
-    "sexActivityScreen_protectionDistribution": "Protection Distribution",
+    "sexActivityScreen_protectionDistribution": "Verteilung von Verhütungsmitteln",
     "@sexActivityScreen_protectionDistribution": {
         "description": "Title for the sexual protection distribution chart."
     },
-    "settingsScreen_profile": "Profile",
+    "settingsScreen_profile": "Profil",
     "@settingsScreen_profile": {
         "description": "Title for the profile settings button."
     },
     "settingsScreen_name": "Name",
-    "settingsScreen_birthDate": "Birth Date",
-    "settingsScreen_notSet": "Not set",
+    "settingsScreen_birthDate": "Geburtstag",
+    "settingsScreen_notSet": "Nicht hinterlegt",
     "@settingsScreen_notSet": {
         "description": "Used when birth date is not set."
     },
-    "settingsScreen_appGoal": "App Goal",
-    "settingsScreen_profileUpdated": "Profile updated successfully",
+    "settingsScreen_appGoal": "App Ziel",
+    "settingsScreen_profileUpdated": "Profil erfolgreich aktualisiert",
     "settingsScreen_selectHistoryView": "Vergangenheitsansicht auswählen",
     "settingsScreen_deleteRegimen_question": "Kuren löschen?",
     "settingsScreen_deleteRegimenDescription": "Dies wird deine aktuellen Pillenverpackungseinstellungen und alle zugehörigen Pillenaufzeichnungen löschen. Diese Aktion kann nicht rückgängig gemacht werden.",
@@ -462,7 +462,7 @@
     "settingsScreen_birthControl": "Empfängnisverhütung",
     "settingsScreen_enablePillTracking": "Pillentracking einschalten",
     "settingsScreen_pillDescription": "Erfasse Deine tägliche Einnahme von Tabletten und erhalte Erinnerungen.",
-    "settingsScreen_setUpPillRegimen": "Set Up Pill Regimen",
+    "settingsScreen_setUpPillRegimen": "Pilleneinnahme einrichten",
     "settingsScreen_trackYourDailyPillIntake": "Tägliche Pilleneinnahme tracken",
     "settingsScreen_dailyPillReminder": "Tägliche Pillenerinnerung",
     "settingsScreen_reminderTime": "Erinnerungszeit",
@@ -472,18 +472,18 @@
     "settingsScreen_notificationTime": "Benachrichtigungszeit",
     "settingsScreen_overduePeriodReminder": "Erinnerung bei überfälliger Periode",
     "settingsScreen_remindMeAfter": "Erinnere mich in",
-    "settingsScreen_enableReversibleContraceptiveTracking": "Enable Reversible Contraceptive Tracking",
-    "settingsScreen_reversibleContraceptiveDescription": "Track Reversible Contraceptives.",
-    "settingsScreen_reversibleContraceptiveType": "Contraceptive Type",
+    "settingsScreen_enableReversibleContraceptiveTracking": "Reversible Verhütungsmethode aktivieren",
+    "settingsScreen_reversibleContraceptiveDescription": "Reversible Verhütungsmethode verfolgen.",
+    "settingsScreen_reversibleContraceptiveType": "Verhütungsmethode",
     "settingsScreen_setDuration": "Dauer festlegen",
-    "settingsScreen_reversibleContraceptiveDuration": "Contraceptive Replacement Duration",
-    "settingsScreen_enableReversibleContraceptiveReminder": "Enable Contraceptive Reminder",
+    "settingsScreen_reversibleContraceptiveDuration": "Haltbarkeit des Verhütungsmittels",
+    "settingsScreen_enableReversibleContraceptiveReminder": "Verhütungsmittelerinnerung aktivieren",
     "settingsScreen_currentDuration": "Aktuelle Dauer",
     "settingsScreen_durationInDays": "Dauer (Tage)",
     "settingsScreen_LoggingScreen": "Protokollieren",
     "settingsScreen_enableLoggingReminders": "Protokollierung-Erinnerungen aktivieren",
-    "settingsScreen_loggingReminderDescription": "If you log a day with flow, you will receive a notification the following day to log your status.",
-    "settingsScreen_loggingReminderTime": "Logging Reminder Time",
+    "settingsScreen_loggingReminderDescription": "Wenn du einen Tag mit Ausfluss protokollierst, erhältst du am nächsten Tag eine Benachrichtigung, um deinen Status zu verfolgen/zu protokollieren.",
+    "settingsScreen_loggingReminderTime": "Uhrzeit der Erinnerung",
     "settingsScreen_defaultSymptoms": "Standardsymptome",
     "settingsScreen_defaultSymptomsSubtitle": "Diese sind immer sichtbar, wenn eine neue Periode eingetragen wird. Wähle ein bestehendes Symptom, um es zu löschen oder '+' um ein neues hinzuzufügen.",
     "settingsScreen_deleteDefaultSymptomQuestion": "'{symptom}' löschen?",
@@ -497,7 +497,7 @@
         }
     },
     "settingsScreen_resetSymptomsList": "Symptomliste zurücksetzen?",
-    "settingsScreen_resetSymptomsListDescription": "",
+    "settingsScreen_resetSymptomsListDescription": "Dadurch werden alle benutzerdefinierten Symptome entfernt und die ursprüngliche integrierte Liste wiederhergestellt.\n\nDeine vorhandenen Protokolleinträge werden dadurch nicht geändert.",
     "settingsScreen_deleteDefaultSymptomDescription": "'{symptom}' ist beim Protokollieren eines Zeitraums nicht mehr verfügbar.\n\n{usageCount, plural, zero{Derzeit gibt es keine Periodenprotokolle mit diesem Symptom!} one{Es gibt bereits 1 Periodenprotokoll mit diesem Symptom!\nDieses Protokoll wird nicht geänder.} other{Es gibt {usageCount} Periodenprotokolle mit diesem Symptom!\nDiese Protokolle werden nicht geändert.}}",
     "@settingsScreen_deleteDefaultSymptomDescription": {
         "description": "Question whether a symptom should be deleted.",
@@ -509,7 +509,7 @@
             "usageCount": {}
         }
     },
-    "settingsScreen_pillRegimens": "Pille-Regeln",
+    "settingsScreen_pillRegimens": "Pilleneinstellung",
     "@settingsScreen_pillRegimens": {
         "description": "Header for the section listing all created pill regimens."
     },
@@ -523,68 +523,68 @@
     },
     "settingsScreen_pack": "Packung",
     "settingsScreen_dataManagement": "Datenverwaltung",
-    "settingsScreen_deleteZone": "Delete Zone",
-    "settingsScreen_clearLogsAndPeriods": "Clear Logs & Periods",
+    "settingsScreen_deleteZone": "Datensätze löschen",
+    "settingsScreen_clearLogsAndPeriods": "Löschen der Protokolle & Perioden",
     "@settingsScreen_clearLogsAndPeriods": {
         "description": "Title for the period logs data clearing section."
     },
-    "settingsScreen_clearLogsAndPeriodsSubtitle": "Deletes your entire period and symptom history.",
+    "settingsScreen_clearLogsAndPeriodsSubtitle": "Löscht Ihre gesamte Perioden- und Symptomhistorie.",
     "@settingsScreen_clearLogsAndPeriodsSubtitle": {
         "description": "Subtitle for the period logs data clearing section."
     },
-    "settingsScreen_clearPillLogs": "Clear Pill Logs",
+    "settingsScreen_clearPillLogs": "Löschen der Pillenhistorie",
     "@settingsScreen_clearPillLogs": {
         "description": "Title for the pill logs data clearing section."
     },
-    "settingsScreen_clearPillLogsSubtitle": "Removes your pill regimen and intake history.",
+    "settingsScreen_clearPillLogsSubtitle": "Löschung deiner Pilleneinnahme und Einnahmehistorie.",
     "@settingsScreen_clearPillLogsSubtitle": {
         "description": "Subtitle for the pill logs data clearing section."
     },
-    "settingsScreen_clearReversibleContraceptiveLogs": "Clear Reversible Contraceptive Logs",
+    "settingsScreen_clearReversibleContraceptiveLogs": "Lösche die reversible Verhütungsmittelhistorie",
     "@settingsScreen_clearReversibleContraceptiveLogs": {
         "description": "Title for the reversible contraceptive logs data clearing section."
     },
-    "settingsScreen_clearReversibleContraceptiveLogsSubtitle": "Removes your reversible contraceptive history.",
+    "settingsScreen_clearReversibleContraceptiveLogsSubtitle": "Entfernt die reversible Verhütungshistorie vollständig. Dies kann nicht rückgängig gemacht werden.",
     "@settingsScreen_clearReversibleContraceptiveLogsSubtitle": {
         "description": "Subtitle for the reversible contraceptive logs data clearing section."
     },
-    "settingsScreen_clearSanitaryProductLogs": "Clear Sanitary Product Logs",
+    "settingsScreen_clearSanitaryProductLogs": "Lösche die Hygieneartikelhistorie",
     "@settingsScreen_clearSanitaryProductLogs": {
         "description": "Title for the sanitary product logs data clearing section."
     },
-    "settingsScreen_clearSanitaryProductLogsSubtitle": "Removes your sanitary products history.",
+    "settingsScreen_clearSanitaryProductLogsSubtitle": "Entfernt die Hygieneartikelhistorie vollständig. Dies kann nicht rückgängig gemacht werden.",
     "@settingsScreen_clearSanitaryProductLogsSubtitle": {
         "description": "Subtitle for the sanitary product logs data clearing section."
     },
-    "settingsScreen_clearSexualActivityLogs": "Clear Sexual Activity Logs",
+    "settingsScreen_clearSexualActivityLogs": "Lösche die sexuellen Aktivitätshistorie",
     "@settingsScreen_clearSexualActivityLogs": {
         "description": "Title for the sexual activity logs data clearing section."
     },
-    "settingsScreen_clearSexualActivityLogsSubtitle": "Removes your sexual activity history.",
+    "settingsScreen_clearSexualActivityLogsSubtitle": "Entfernt die sexuellen Aktivitätshistorie vollständig. Dies kann nicht rückgängig gemacht werden.",
     "@settingsScreen_clearSexualActivityLogsSubtitle": {
         "description": "Subtitle for the sexual activity logs data clearing section."
     },
-    "settingsScreen_logsAndPeriods": "Logs & Periods",
+    "settingsScreen_logsAndPeriods": "Protokolle & Perioden",
     "@settingsScreen_logsAndPeriods": {
         "description": "Title for the period logs data section."
     },
-    "settingsScreen_pillLogs": "Pill Logs",
+    "settingsScreen_pillLogs": "Pillenprotokoll",
     "@settingsScreen_pillLogs": {
         "description": "Title for the pill logs data section."
     },
-    "settingsScreen_reversibleContraceptivesLogs": "Reversible Contraceptive Logs",
+    "settingsScreen_reversibleContraceptivesLogs": "Reversible Verhütungsmittelhistorie",
     "@settingsScreen_reversibleContraceptivesLogs": {
         "description": "Title for the reversible contraceptives data section."
     },
-    "settingsScreen_sanitaryProductLogs": "Sanitary Product Logs",
+    "settingsScreen_sanitaryProductLogs": "Hygieneartikelhistorie",
     "@settingsScreen_sanitaryProductLogs": {
         "description": "Title for the sanitary products data section."
     },
-    "settingsScreen_sexualActivityLogs": "Sexual Activity Logs",
+    "settingsScreen_sexualActivityLogs": "Sexuelle Aktivitätshistorie",
     "@settingsScreen_sexualActivityLogs": {
         "description": "Title for the sexual activity data section."
     },
-    "settingsScreen_importSupportNote": "Import is currently only supported for files exported from Menstrudel.",
+    "settingsScreen_importSupportNote": "Der Datenimport wird derzeit nur für Dateien unterstützt, die aus Menstrudel exportiert wurden.",
     "@settingsScreen_importSupportNote": {
         "description": "Note indicating that import is only supported for files exported from Menstrudel."
     },
@@ -603,7 +603,7 @@
     "securityScreen_enableBiometricLock": "Biometrische Sperre aktivieren",
     "securityScreen_enableBiometricLockSubtitle": "Zum Öffnen der App ist eine Fingerabdruck- oder Gesichtserkennung erforderlich.",
     "securityScreen_noBiometricsAvailable": "Es wurde kein Passcode, Fingerabdruck oder Face ID gefunden. Bitte lege einen in den Einstellungen des Geräts fest.",
-    "settingsScreen_userProfile": "You",
+    "settingsScreen_userProfile": "Du",
     "@settingsScreen_userProfile": {
         "description": "Title for the user profile settings button."
     },
@@ -611,9 +611,9 @@
     "preferencesScreen_language": "Sprache",
     "preferencesScreen_enableSanitaryProductsScreen": "Bildschirm für Hygieneartikel aktivieren",
     "preferencesScreen_enableSanitaryProductsScreenSubtitle": "Hygieneartikel in der Hauptnavigationsleiste anzeigen.",
-    "preferencesScreen_enableSexActivityScreen": "Enable Sex Activity Screen",
-    "preferencesScreen_enableSexActivityScreenSubtitle": "Show the Sex Activity tab on the main navigation bar.",
-    "preferencesScreen_StartingDayOfWeek": "Starting Day of the Week",
+    "preferencesScreen_enableSexActivityScreen": "Sex-Aktivitätsanzeige aktivieren",
+    "preferencesScreen_enableSexActivityScreenSubtitle": "Zeige den Tab \"Sex Aktivitäten\" in der Hauptnavigationsbar an.",
+    "preferencesScreen_StartingDayOfWeek": "Erster Wochentag",
     "settingsScreen_about": "Über",
     "@settingsScreen_about": {
         "description": "Title for the about settings button."
@@ -622,7 +622,7 @@
     "@aboutScreen_version": {
         "description": "Label showing the current app version."
     },
-    "aboutScreen_legalAndSource": "Legal & Source",
+    "aboutScreen_legalAndSource": "Rechtliches & Quelle",
     "@aboutScreen_legalAndSource": {
         "description": "Title for the legal and source about section."
     },
@@ -630,19 +630,19 @@
     "@aboutScreen_communityAndUpdates": {
         "description": "Title for the community and updates about section."
     },
-    "aboutScreen_privacyPolicy": "Privacy Policy",
+    "aboutScreen_privacyPolicy": "Datenschutzerklärung",
     "@aboutScreen_privacyPolicy": {
         "description": "Link text to the privacy policy on the about screen."
     },
-    "aboutScreen_privacyPolicySubtitle": "Read our privacy policy",
+    "aboutScreen_privacyPolicySubtitle": "Lies unsere Datenschutzerklärung",
     "@aboutScreen_privacyPolicySubtitle": {
         "description": "Subtitle for the privacy policy link on the about screen."
     },
-    "aboutScreen_releaseNotes": "Release Notes",
+    "aboutScreen_releaseNotes": "Versionshinweise",
     "@aboutScreen_releaseNotes": {
         "description": "Link text to the release notes on the about screen."
     },
-    "aboutScreen_releaseNotesSubtitle": "What's new in {version}",
+    "aboutScreen_releaseNotesSubtitle": "Was ist neu in {version}",
     "@aboutScreen_releaseNotesSubtitle": {
         "description": "Subtitle for the release notes link on the about screen.",
         "placeholders": {
@@ -672,7 +672,7 @@
     "@aboutScreen_share": {
         "description": "Link button text for the share button on the about screen."
     },
-    "aboutScreen_shareText": "Check out Menstrudel, a private and offline period tracker app!",
+    "aboutScreen_shareText": "Probiere Menstrudel aus, eine private und offline verfügbare App zur Verfolgung deines Zyklus!",
     "@aboutScreen_shareText": {
         "description": "Text used when sharing the app from the about screen."
     },
@@ -734,11 +734,11 @@
     "regimenSetupWidget_enterANumber": "Eine Zahl eingeben",
     "regimenSetupWidget_placeboPills": "Placebo-Pillen",
     "regimenSetupWidget_firstDayOfThisPack": "Erster Tag dieser Packung",
-    "symptomEntrySheet_logYourDay": "Protokolliere Deinen Tag",
+    "symptomEntrySheet_logYourDay": "Protokolliere deinen Tag",
     "symptomEntrySheet_symptomsOptional": "Symptome (optional)",
     "periodDetailsSheet_symptoms": "Symptome",
     "periodDetailsSheet_flow": "Ausfluss",
-    "reversibleContraceptiveEntrySheet_logReversibleContraceptiveDetails": "Log Contraceptive Details",
+    "reversibleContraceptiveEntrySheet_logReversibleContraceptiveDetails": "Details zum Verhütungsmittel protokollieren",
     "sanitaryEntrySheet_logSanitaryProduct": "Log-Hygieneartikel",
     "sanitaryEntrySheet_setReminderDuration": "Erinnerungsdauer festlegen",
     "sanitaryEntrySheet_maxDuration": "Maximale Dauer: {hours} Stunden",
@@ -762,6 +762,6 @@
         }
     },
     "customSymptomDialog_newSymptom": "Neues Symptom",
-    "customSymptomDialog_enterCustomSymptom": "Please enter a custom symptom",
+    "customSymptomDialog_enterCustomSymptom": "Ein individuelles Symptom eingeben",
     "customSymptomDialog_temporarySymptom": "Vorübergehendes Symptom"
 }
