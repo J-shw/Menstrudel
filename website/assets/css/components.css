@@ -12,6 +12,35 @@ section h2 {
   color: #222;
 }
 
+/* --- Breadcrumbs --- */
+
+.breadcrumb ol {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0 0;
+  display: flex;
+  font-size: 0.9rem;
+}
+
+.breadcrumb li {
+  color: #666;
+}
+
+.breadcrumb li:not(:last-child)::after {
+  content: "/";
+  margin: 0 0.75rem;
+  color: #ccc;
+}
+
+.breadcrumb a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
 /* --- Page Header --- */
 
 .page-header {

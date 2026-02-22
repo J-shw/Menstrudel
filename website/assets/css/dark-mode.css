@@ -6,6 +6,10 @@
     color: #e0e0e0;
   }
 
+  .breadcrumb li {
+    color: #aaa;
+  }
+
   /* Headings & Brand */
   .appName, 
   .hero h1, 
