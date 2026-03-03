@@ -1,5 +1,5 @@
 {
-    "@@locale": "es",
+    "@@locale": "nl",
     "appTitle": "Menstrudel",
     "nextDue": "Next Due",
     "ongoing": "Ongoing",
@@ -287,7 +287,7 @@
     "@onboardingScreen_goalDescription": {
         "description": "Description for the goal onboarding screen."
     },
-    "onboardingScreen_contraceptionHint": "Note: You can enable Pill or LARC tracking later in the app settings under '{sectionName}' if wanted.",
+    "onboardingScreen_contraceptionHint": "Note: You can enable Pill or Reversible Contraceptive tracking later in the app settings under '{sectionName}' if wanted.",
     "@onboardingScreen_contraceptionHint": {
         "description": "Hint for birth control settings",
         "placeholders": {

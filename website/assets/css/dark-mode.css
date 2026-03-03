@@ -1,0 +1,136 @@
+/* --- Dark Mode --- */
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #121212;
+    color: #e0e0e0;
+  }
+
+  .breadcrumb li {
+    color: #aaa;
+  }
+
+  /* Headings & Brand */
+  .appName, 
+  .hero h1, 
+  section h2, 
+  .feature h3 {
+    color: #ffffff;
+  }
+
+  /* Hero & Section Backgrounds */
+  .hero {
+    background-color: #1a1a1a;
+    border-color: #2a2a2a;
+  }
+
+  .hero p, 
+  #about p, 
+  .feature p {
+    color: #b0b0b0;
+  }
+
+  /* Privacy List Card Style */
+  .privacy-list {
+    background: #1a1a1a;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+
+  .privacy-list li {
+    border-bottom: 1px solid #2a2a2a;
+  }
+
+  .privacy-list li strong {
+    color: #ffffff;
+  }
+
+  /* FAQ Accordion */
+  .faq-item {
+    border-color: #2a2a2a;
+  }
+
+  .faq-content {
+    color: #b0b0b0;
+  }
+
+  /* Navigation Styling */
+  nav, .nav-menu {
+    background-color: #121212;
+    border-color: #2a2a2a;
+  }
+
+  nav a, .site-title, .nav-toggle-label {
+    color: #e0e0e0;
+  }
+
+  /* Button Refinements */
+  .secondary {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #e0e0e0;
+    border-color: #444;
+  }
+
+  .secondary:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: #666;
+    color: #ffffff;
+  }
+
+  /* Generic Section Borders */
+  section {
+    border-color: #2a2a2a;
+  }
+
+  .subtitle {
+    color: #aaa;
+  }
+  
+  .screenshot-item img {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    background-color: #1a1a1a;
+    }
+
+  .screenshot-item span {
+    color: #ffffff;
+  }
+
+  /* --- Blog --- */
+  .page-header h1,
+  .post-preview h2 a,
+  .post-header h1 {
+    color: #ffffff;
+  }
+
+  .post-preview {
+    border-color: #2a2a2a;
+  }
+
+  .post-details p,
+  .post-content p {
+    color: #b0b0b0;
+  }
+
+  .post-details .post-meta {
+    color: #888;
+  }
+
+  .post-details .post-meta::after {
+    color: #444;
+  }
+
+  .category-tag {
+    background-color: #2a2a2a;
+    color: #e0e0e0;
+  }
+
+  .post-content h3 {
+    color: #ffffff;
+  }
+
+  .post-content code {
+    background-color: #2a2a2a;
+    color: #ff80ab;
+    padding: 2px 5px;
+    border-radius: 4px;
+  }
+}

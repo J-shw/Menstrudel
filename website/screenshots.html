@@ -2,22 +2,57 @@
 layout: default
 title: App Screenshots
 permalink: /screenshots/
+schema: schema-screenshot.html
 ---
 
 <div class="container">
+    <div aria-label="Breadcrumb" class="breadcrumb">
+        <ol>
+        <li><a href="/">Home</a></li>
+        <li>Screenshots</li>
+        </ol>
+    </div>
     <header class="page-header">
-        <h1>{{ page.title }}</h1>
+        <h1>Experience Menstrudel</h1>
+        <p class="subtitle">A clean, focused interface designed for your privacy. No clutter, no ads, just your data.</p>
     </header>
 
-    <p style="text-align: center; max-width: 700px; margin: 0 auto 2rem auto;">Here's a closer look at the clean, simple interface of Menstrudel, designed to be private and easy to use.</p>
-    
     <div class="screenshot-grid">
-        <img src="/assets/images/screenshots/logs_screen.png" alt="Daily logs screen">
-        <img src="/assets/images/screenshots/log_screen.png" alt="Log your day">
-        <img src="/assets/images/screenshots/insights_screen.png" alt="Insights and predictions screen">
-        <img src="/assets/images/screenshots/pills_screen.png" alt="Pill reminder screen">
-        <img src="/assets/images/screenshots/larc_screen.png" alt="LARC Tracking screen">
-        <img src="/assets/images/screenshots/tampon_reminder.png" alt="Tampon reminder screen">
+        <div class="screenshot-item">
+            <img src="/assets/images/screenshots/logs_today_screen.png" alt="Today screen">
+            <span>Cycle Overview</span>
+        </div>
+        <div class="screenshot-item">
+            <img src="/assets/images/screenshots/logs_add_log_screen.png" alt="Log your day">
+            <span>Daily Logging</span>
+        </div>
+        <div class="screenshot-item">
+            <img src="/assets/images/screenshots/logs_insights_screen.png" alt="Logs insights screen">
+            <span>Logs Insights</span>
+        </div>
+        <div class="screenshot-item">
+            <img src="/assets/images/screenshots/logs_calendar_screen.png" alt="Logs calander screen">
+            <span>Logs Calander</span>
+        </div>
+        <div class="screenshot-item">
+            <img src="/assets/images/screenshots/pill_screen.png" alt="Pill reminder screen">
+            <span>Pill Management</span>
+        </div>
+        <div class="screenshot-item">
+            <img src="/assets/images/screenshots/contraceptives_screen.png" alt="LARC Tracking screen">
+            <span>LARC & IUD Tracking</span>
+        </div>
+        <div class="screenshot-item">
+            <img src="/assets/images/screenshots/sex_activity_log_screen.png" alt="Sex activity log screen">
+            <span>Sex Activity Tracking screen</span> 
+        </div>
+        <div class="screenshot-item">
+            <img src="/assets/images/screenshots/sanitary_product_log_screen.png" alt="Tampon reminder screen">
+            <span>Sanitary Product Tracking</span>
+        </div>
     </div>
 
+    <section class="cta-section">
+        <a href="/" class="cta-button secondary">Back to Home</a>
+    </section>
 </div>

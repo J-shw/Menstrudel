@@ -1,0 +1,84 @@
+/* --- Navigation Bar --- */
+nav {
+  position: sticky;
+  background-color: #fff;
+  border-bottom: 1px solid #eee;
+  padding: 1rem 0;
+  z-index: 100;
+  top: 0;
+}
+
+nav .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.site-title {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #333;
+  text-decoration: none;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+nav a {
+  color: #555;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+nav a:hover {
+  color: #e91e63;
+}
+
+/* --- Responsive Navigation --- */
+
+.nav-toggle {
+  display: none;
+}
+
+.nav-toggle-label {
+  display: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #333;
+}
+
+@media (max-width: 768px) {
+
+  .nav-toggle-label {
+    display: block;
+  }
+
+.nav-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    border-top: 1px solid #eee;
+    text-align: center;
+  }
+
+  .nav-menu ul {
+    flex-direction: column;
+  }
+
+  .nav-menu li {
+    padding: 1rem 0;
+    border-bottom: 1px solid #eee;
+  }
+
+  .nav-toggle:checked~.nav-menu {
+    display: block;
+  }
+}
