@@ -129,55 +129,59 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
     );
   }
 
-  Widget _buildDot(Color color) {
-    return Container(
-      width: 8,
-      height: 8,
-      decoration: BoxDecoration(
-        color: color,
-        shape: BoxShape.circle,
-      ),
-    );
-  }
-
   Widget _buildLogDay(DateTime day, LogDay log, ColorScheme colorScheme) {
-    final hasSymptoms = log.symptoms.isNotEmpty;
-    final hasPain = log.painLevel != null;
+  final hasSymptoms = log.symptoms.isNotEmpty;
+  final hasPain = log.painLevel != null;
 
-    final symptomColor = Colors.tealAccent.shade400;
+  final symptomColor = Colors.teal.shade200;
 
-    return GestureDetector(
-      onTap: () => widget.onLogTapped(log),
-      child: Container(
-        margin: const EdgeInsets.all(4),
-        decoration: BoxDecoration(
-          color: log.flow.color,
-          shape: BoxShape.circle,
-        ),
-        child: Stack(
+  return GestureDetector(
+    onTap: () => widget.onLogTapped(log),
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          height: 40,
+          width: 40,
+          margin: const EdgeInsets.all(2),
+          decoration: BoxDecoration(
+            color: log.flow.color,
+            shape: BoxShape.circle,
+          ),
           alignment: Alignment.center,
-          children: [
-            Text(
-              '${day.day}',
-              style: TextStyle(color: colorScheme.onPrimary),
+          child: Text(
+            '${day.day}',
+            style: TextStyle(
+              color: colorScheme.onPrimary,
+              fontWeight: FontWeight.bold,
             ),
-            Positioned(
-              bottom: 0,
-              left: 0,
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  if (hasPain) _buildDot(PainLevel.values[log.painLevel!].color),
-                  if (hasPain && hasSymptoms) const SizedBox(width: 2),
-                  if (hasSymptoms) _buildDot(symptomColor),
-                ],
-              ),
-            ),
-          ],
+          ),
         ),
-      ),
-    );
-  }
+        SizedBox(
+          height: 12,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              if (hasPain) 
+                Icon(
+                  PainLevel.values[log.painLevel!].icon,
+                  size: 10, 
+                  color: PainLevel.values[log.painLevel!].color
+                ),
+              if (hasPain && hasSymptoms) const SizedBox(width: 2),
+              if (hasSymptoms) 
+                Icon(
+                  Icons.add_circle,
+                  size: 10, 
+                  color: symptomColor
+                ),
+            ],
+          ),
+        ),
+      ],
+    ),
+  );
+}
 
   Widget _buildPredictedDay(DateTime day, ColorScheme colorScheme) {
     return GestureDetector(
