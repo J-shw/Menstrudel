@@ -46,13 +46,13 @@ class LogsScreenPeriodQuickViewTab extends StatelessWidget {
       return Center(child: Text(l10n.logScreen_logAtLeastTwoPeriods));
     }
 
-    final predictedCycle = periodService.predictedCycle;
+    final predictedCurrentCycle = periodService.predictedCurrentCycle;
     String phaseText = '';
     CyclePhase currentPhase = CyclePhase.unknown;
 
-    if (predictedCycle != null) {
-      currentPhase = predictedCycle.getPhaseForDate(DateTime.now());
-      final daysLeft = predictedCycle.getDaysLeft(DateTime.now(), currentPhase);
+    if (predictedCurrentCycle != null) {
+      currentPhase = predictedCurrentCycle.getPhaseForDate(DateTime.now());
+      final daysLeft = predictedCurrentCycle.getDaysLeft(DateTime.now(), currentPhase);
 
       if (currentPhase == CyclePhase.unknown) {
         phaseText = "";
@@ -89,7 +89,7 @@ class LogsScreenPeriodQuickViewTab extends StatelessWidget {
           value: datePart.isNotEmpty ? datePart : "--",
           color: colorScheme.surfaceContainerHighest,
         ),
-        if (settingsService.isNaturalCycle && predictedCycle != null)
+        if (settingsService.isNaturalCycle && predictedCurrentCycle != null)
           _buildStatusCard(
             context,
             icon: currentPhase.icon,
