@@ -113,23 +113,25 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
         final now = DateTime.now();
         final todayOnly = DateUtils.dateOnly(now);
         final isToday = dayMs == todayMs;
+        var phase = CyclePhase.unknown;
+
+        if (predictedCurrentCycle != null) {
+          phase = predictedCurrentCycle.getPhaseForDate(dayOnly);
+        }
 
         if (logMap.containsKey(dayOnly)) {
           return _buildLogDay(day, logMap[dayOnly]!, colorScheme, isToday);
         }
         
         if (dayOnly.isAfter(todayOnly)) {
-          if (predictedCurrentCycle != null) {
-            final phase = predictedCurrentCycle.getPhaseForDate(dayOnly);
-            
-            if (phase == CyclePhase.fertileWindow || phase == CyclePhase.ovulation) {
-              return _buildPhaseDay(day, phase, colorScheme);
-            }
-            
-            if (phase == CyclePhase.menstruation) {
-               return _buildPredictedDay(day, colorScheme);
-            }
+          if (phase == CyclePhase.fertileWindow || phase == CyclePhase.ovulation) {
+            return _buildPhaseDay(day, phase, colorScheme);
           }
+          
+          if (phase == CyclePhase.menstruation) {
+              return _buildPredictedDay(day, colorScheme);
+          }
+          
         }
 
         if (predictedDates.contains(dayOnly)) {
@@ -143,6 +145,7 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
           colorScheme: colorScheme,
           normalColor: normalColor,
           futureColor: futureColor,
+          phase: phase,
         );
       },
     );
@@ -255,13 +258,16 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
     required ColorScheme colorScheme,
     required Color normalColor,
     required Color futureColor,
+    required CyclePhase phase,
   }) {
     return Container(
       margin: const EdgeInsets.all(4),
       alignment: Alignment.center,
       decoration: isToday
           ? BoxDecoration(
-              border: Border.all(color: colorScheme.primary, width: 2),
+              border: phase==CyclePhase.fertileWindow || phase==CyclePhase.ovulation || phase==CyclePhase.menstruation
+                 ? Border.all(color: phase.color, width: 3)
+                 : Border.all(color: colorScheme.primary, width: 2),
               shape: BoxShape.circle,
             )
           : null,
