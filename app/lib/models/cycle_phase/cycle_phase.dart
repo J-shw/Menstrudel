@@ -84,8 +84,8 @@ class PredictedCycle {
   /// Returns the l10n translated string for the chance of getting pregnant. (High/Medium/Low)
   String getFertilityLevel(DateTime date, CyclePhase phase, AppLocalizations l10n) {
     final chance = getPregnancyChance(date, phase);
-    if (chance >= 0.25) return l10n.pregnancyChance_high;
-    if (chance >= 0.10) return l10n.pregnancyChance_medium;
-    return l10n.pregnancyChance_low;
+    if (chance >= 0.25) return l10n.fertilityChance_high;
+    if (chance >= 0.10) return l10n.fertilityChance_medium;
+    return l10n.fertilityChance_low;
   }
 }
