@@ -134,7 +134,7 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
           
         }
 
-        if (predictedDates.contains(dayOnly)) {
+        if (predictedDates.contains(dayOnly) && !isToday) {
           return _buildPredictedDay(day, colorScheme);
         }
 
@@ -264,7 +264,7 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
       alignment: Alignment.center,
       decoration: isToday
           ? BoxDecoration(
-              border: phase==CyclePhase.fertileWindow || phase==CyclePhase.ovulation || phase==CyclePhase.menstruation
+              border: phase==CyclePhase.fertileWindow || phase==CyclePhase.ovulation || phase==CyclePhase.menstruation || phase==CyclePhase.late
                  ? Border.all(color: phase.color, width: 3)
                  : Border.all(color: colorScheme.primary, width: 2),
               shape: BoxShape.circle,
