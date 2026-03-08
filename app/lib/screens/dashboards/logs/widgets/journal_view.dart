@@ -128,7 +128,21 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
     );
   }
 
+  Widget _buildDot(Color color) {
+    return Container(
+      width: 6,
+      height: 6,
+      decoration: BoxDecoration(
+        color: color,
+        shape: BoxShape.circle,
+      ),
+    );
+  }
+
   Widget _buildLogDay(DateTime day, LogDay log, ColorScheme colorScheme) {
+    final hasSymptoms = log.symptoms.isNotEmpty;
+    final hasPain = log.painLevel != null;
+
     return GestureDetector(
       onTap: () => widget.onLogTapped(log),
       child: Container(
@@ -137,10 +151,25 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
           color: log.flow.color,
           shape: BoxShape.circle,
         ),
-        alignment: Alignment.center,
-        child: Text(
-          '${day.day}',
-          style: TextStyle(color: colorScheme.onPrimary),
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Text(
+              '${day.day}',
+              style: TextStyle(color: colorScheme.onPrimary),
+            ),
+            Positioned(
+              bottom: 6,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  if (hasPain) _buildDot(colorScheme.onPrimary),
+                  if (hasPain && hasSymptoms) const SizedBox(width: 2),
+                  if (hasSymptoms) _buildDot(colorScheme.onPrimary.withValues(alpha: 0.6)),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
