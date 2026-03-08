@@ -28,6 +28,7 @@ class PeriodService extends ChangeNotifier {
   int _circleCurrentValue = 0;
   int _circleMaxValue = 28;
   bool _isPeriodOngoing = false;
+  int _menstruationDay = 0;
 
   /// Whether a background operation is currently in progress.
   bool get isLoading => _isLoading;
@@ -46,6 +47,9 @@ class PeriodService extends ChangeNotifier {
 
   /// Whether the user's period is considered to be ongoing today.
   bool get isPeriodOngoing => _isPeriodOngoing;
+
+  /// The number of days since current period started.
+  int get menstruationDay => _menstruationDay;
 
   /// A pre-computed list of timeline items for the PeriodListView.
   List<Object> get timelineItems => _timelineItems;
@@ -98,6 +102,14 @@ class PeriodService extends ChangeNotifier {
     _isPeriodOngoing =
         lastPeriod != null &&
         DateUtils.isSameDay(lastPeriod.endDate, DateTime.now());
+    
+    if (lastPeriod == null){
+      _menstruationDay = 0;
+    }else{
+      final today = DateUtils.dateOnly(DateTime.now());
+      final start = DateUtils.dateOnly(lastPeriod.startDate);
+      _menstruationDay = today.difference(start).inDays + 1;
+    }
   }
 
   /// Recalculates periods based on the provided [logs] and returns a mapping of log IDs to period IDs.
