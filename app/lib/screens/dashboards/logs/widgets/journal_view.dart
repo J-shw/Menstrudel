@@ -237,13 +237,12 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
         decoration: BoxDecoration(
           color: phase.color,
           shape: BoxShape.circle,
-          border: isOvulation ? Border.all(color: Colors.teal.shade700, width: 1) : null,
         ),
         alignment: Alignment.center,
         child: Text(
           '${day.day}',
           style: TextStyle(
-            color: isOvulation ? Colors.teal.shade900 : Colors.teal.shade700,
+            color: isOvulation ? Colors.teal.shade900 : Colors.teal.shade700, // Not an issue for now as teal is the only colour used. But this needs sorting...
             fontWeight: isOvulation ? FontWeight.bold : FontWeight.normal,
           ),
         ),
