@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/models/flows/flow_enum.dart';
+import 'package:menstrudel/models/period_logs/pain_level_enum.dart';
 import 'package:provider/provider.dart';
 import 'package:scrollable_clean_calendar/controllers/clean_calendar_controller.dart';
 import 'package:scrollable_clean_calendar/scrollable_clean_calendar.dart';
@@ -129,22 +130,58 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
   }
 
   Widget _buildLogDay(DateTime day, LogDay log, ColorScheme colorScheme) {
-    return GestureDetector(
-      onTap: () => widget.onLogTapped(log),
-      child: Container(
-        margin: const EdgeInsets.all(4),
-        decoration: BoxDecoration(
-          color: log.flow.color,
-          shape: BoxShape.circle,
+  final hasSymptoms = log.symptoms.isNotEmpty;
+  final hasPain = log.painLevel != null;
+
+  final symptomColor = Colors.teal.shade200;
+
+  return GestureDetector(
+    onTap: () => widget.onLogTapped(log),
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          height: 40,
+          width: 40,
+          margin: const EdgeInsets.all(2),
+          decoration: BoxDecoration(
+            color: log.flow.color,
+            shape: BoxShape.circle,
+          ),
+          alignment: Alignment.center,
+          child: Text(
+            '${day.day}',
+            style: TextStyle(
+              color: colorScheme.onPrimary,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ),
-        alignment: Alignment.center,
-        child: Text(
-          '${day.day}',
-          style: TextStyle(color: colorScheme.onPrimary),
+        SizedBox(
+          height: 12,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              if (hasPain) 
+                Icon(
+                  PainLevel.values[log.painLevel!].icon,
+                  size: 10, 
+                  color: PainLevel.values[log.painLevel!].color
+                ),
+              if (hasPain && hasSymptoms) const SizedBox(width: 2),
+              if (hasSymptoms) 
+                Icon(
+                  Icons.add_circle,
+                  size: 10, 
+                  color: symptomColor
+                ),
+            ],
+          ),
         ),
-      ),
-    );
-  }
+      ],
+    ),
+  );
+}
 
   Widget _buildPredictedDay(DateTime day, ColorScheme colorScheme) {
     return GestureDetector(
