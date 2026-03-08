@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
-import 'package:menstrudel/models/cycle_phase/cycle_phase.dart';
 import 'package:menstrudel/models/cycle_phase/cycle_phase_enum.dart';
-import 'package:menstrudel/models/cycles/cycle_stats.dart';
-import 'package:menstrudel/models/periods/period_stats.dart';
 import 'package:menstrudel/services/period_service.dart';
 import 'package:menstrudel/screens/dashboards/logs/widgets/basic_progress_circle.dart';
 import 'package:menstrudel/services/settings_service.dart';
-import 'package:menstrudel/utils/cycle_phase_predictor.dart';
-import 'package:menstrudel/utils/period_predictor.dart';
 import 'package:provider/provider.dart';
 
 class LogsScreenPeriodQuickViewTab extends StatelessWidget {
@@ -47,23 +42,30 @@ class LogsScreenPeriodQuickViewTab extends StatelessWidget {
     }
 
     final allPeriods = periodService.periodEntries;
-    final CycleStats? cycleStats = PeriodPredictor.getCycleStats(allPeriods);
-    final PeriodStats? periodStats = PeriodPredictor.getPeriodStats(allPeriods);
+    if (allPeriods.isEmpty) {
+      return Center(child: Text(l10n.logScreen_logAtLeastTwoPeriods));
+    }
 
-    final CyclePhaseResult phaseResult = CyclePhasePredictor.getPhaseStatus(
-      lastPeriodStartDate: allPeriods.isNotEmpty ? allPeriods.first.startDate : null,
-      averageCycleLength: cycleStats?.averageCycleLength,
-      averagePeriodDuration: periodStats?.averageLength,
-      isPeriodOngoing: periodService.isPeriodOngoing,
-    );
+    final predictedCurrentCycle = periodService.predictedCurrentCycle;
+    String phaseText = '';
+    CyclePhase currentPhase = CyclePhase.unknown;
 
-    String phaseText;
-    if (phaseResult.phase == CyclePhase.unknown) {
-      phaseText = "";
-    } else if (phaseResult.daysRemainingInPhase > 0) {
-      phaseText = l10n.countdown_daysLeft(phaseResult.daysRemainingInPhase);
-    } else {
-      phaseText = l10n.ongoing;
+    if (predictedCurrentCycle != null) {
+      currentPhase = predictedCurrentCycle.getPhaseForDate(DateTime.now());
+      final daysLeft = predictedCurrentCycle.getDaysLeft(DateTime.now(), currentPhase);
+
+      if (currentPhase == CyclePhase.unknown) {
+        phaseText = "";
+      } else if (currentPhase == CyclePhase.late) {
+        phaseText = currentPhase.getDescription(l10n);
+      } else if (currentPhase == CyclePhase.menstruation || periodService.isPeriodOngoing) { // If user does not match their average this will show period ongoing.
+        phaseText = l10n.countUp_day(periodService.menstruationDay);
+        currentPhase = CyclePhase.menstruation;
+      } else if (daysLeft > 0) {
+        phaseText = l10n.countdown_daysLeft(daysLeft);
+      } else {
+        phaseText = l10n.ongoing;
+      }
     }
 
     return ListView(
@@ -89,13 +91,13 @@ class LogsScreenPeriodQuickViewTab extends StatelessWidget {
           value: datePart.isNotEmpty ? datePart : "--",
           color: colorScheme.surfaceContainerHighest,
         ),
-        if (settingsService.isNaturalCycle)
+        if (settingsService.isNaturalCycle && predictedCurrentCycle != null)
           _buildStatusCard(
             context,
-            icon: phaseResult.phase.icon,
-            title: phaseResult.phase.getDisplayName(l10n),
+            icon: currentPhase.icon,
+            title: currentPhase.getDisplayName(l10n),
             value: phaseText,
-            color: phaseResult.phase.color.withValues(alpha: 0.1),
+            color: currentPhase.color.withValues(alpha: 0.4),
           ),
       ],
     );
