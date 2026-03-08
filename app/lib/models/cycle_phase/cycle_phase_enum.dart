@@ -6,6 +6,8 @@ enum CyclePhase {
   menstruation,
   /// Follicular phase (Pre-Ovulation)
   follicular,
+  /// Fertile Window
+  fertileWindow,
   /// Ovulation phase (Peak Fertility)
   ovulation,
   /// Luteal phase (Post-Ovulation)
@@ -23,6 +25,8 @@ extension FlowExtension on CyclePhase {
         return l10n.cyclePhase_menstruation;
       case CyclePhase.follicular:
         return l10n.cyclePhase_follicular;
+      case CyclePhase.fertileWindow:
+        return l10n.cyclePhase_fertileWindow;
       case CyclePhase.ovulation:
         return l10n.cyclePhase_ovulation;
       case CyclePhase.luteal:
@@ -40,6 +44,8 @@ extension FlowExtension on CyclePhase {
         return l10n.cyclePhase_menstruationDescription;
       case CyclePhase.follicular:
         return l10n.cyclePhase_follicularDescription;
+      case CyclePhase.fertileWindow:
+        return l10n.cyclePhase_fertileWindowDescription;
       case CyclePhase.ovulation:
         return l10n.cyclePhase_ovulationDescription;
       case CyclePhase.luteal:
@@ -57,6 +63,8 @@ extension FlowExtension on CyclePhase {
         return Icons.water_drop;
       case CyclePhase.follicular:
         return Icons.wb_sunny_outlined;
+      case CyclePhase.fertileWindow:
+        return Icons.favorite;
       case CyclePhase.ovulation:
         return Icons.favorite;
       case CyclePhase.luteal:
@@ -74,6 +82,8 @@ extension FlowExtension on CyclePhase {
         return Colors.red;
       case CyclePhase.follicular:
         return Colors.green;
+      case CyclePhase.fertileWindow:
+        return Colors.blue;
       case CyclePhase.ovulation:
         return Colors.yellow;
       case CyclePhase.luteal:
