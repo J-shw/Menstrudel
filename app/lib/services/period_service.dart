@@ -27,7 +27,7 @@ class PeriodService extends ChangeNotifier {
   List<Period> _periodEntries = [];
   List<Object> _timelineItems = [];
   PeriodPredictionResult? _predictionResult;
-  PredictedCycle? _predictedCycle;
+  PredictedCycle? _predictedCurrentCycle;
   int _circleCurrentValue = 0;
   int _circleMaxValue = 28;
   bool _isPeriodOngoing = false;
@@ -42,8 +42,8 @@ class PeriodService extends ChangeNotifier {
   /// The calculated prediction for the next period, if available.
   PeriodPredictionResult? get predictionResult => _predictionResult;
 
-  /// The calculated prediction for the next cycle, if available.
-  PredictedCycle? get predictedCycle => _predictedCycle;
+  /// The calculated phase predictions for current cycle.
+  PredictedCycle? get predictedCurrentCycle => _predictedCurrentCycle;
 
   /// The current value for the main progress circle (e.g., days until due).
   int get circleCurrentValue => _circleCurrentValue;
@@ -113,7 +113,7 @@ class PeriodService extends ChangeNotifier {
     final averageCycleLength = _predictionResult?.averageCycleLength ?? 0;
     final averagePeriodDuration = _predictionResult?.averagePeriodDuration ?? 0;
     
-    _predictedCycle = CyclePhasePredictor.predictCycle(
+    _predictedCurrentCycle = CyclePhasePredictor.predictCycle(
       lastPeriodStartDate: lastPeriodStartDate, 
       averageCycleLength: averageCycleLength, 
       averagePeriodDuration: averagePeriodDuration
