@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/models/flows/flow_enum.dart';
+import 'package:menstrudel/models/period_logs/pain_level_enum.dart';
 import 'package:provider/provider.dart';
 import 'package:scrollable_clean_calendar/controllers/clean_calendar_controller.dart';
 import 'package:scrollable_clean_calendar/scrollable_clean_calendar.dart';
@@ -130,8 +131,8 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
 
   Widget _buildDot(Color color) {
     return Container(
-      width: 6,
-      height: 6,
+      width: 8,
+      height: 8,
       decoration: BoxDecoration(
         color: color,
         shape: BoxShape.circle,
@@ -142,6 +143,8 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
   Widget _buildLogDay(DateTime day, LogDay log, ColorScheme colorScheme) {
     final hasSymptoms = log.symptoms.isNotEmpty;
     final hasPain = log.painLevel != null;
+
+    final symptomColor = Colors.tealAccent.shade400;
 
     return GestureDetector(
       onTap: () => widget.onLogTapped(log),
@@ -159,13 +162,14 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
               style: TextStyle(color: colorScheme.onPrimary),
             ),
             Positioned(
-              bottom: 6,
+              bottom: 0,
+              left: 0,
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  if (hasPain) _buildDot(colorScheme.onPrimary),
+                  if (hasPain) _buildDot(PainLevel.values[log.painLevel!].color),
                   if (hasPain && hasSymptoms) const SizedBox(width: 2),
-                  if (hasSymptoms) _buildDot(colorScheme.onPrimary.withValues(alpha: 0.6)),
+                  if (hasSymptoms) _buildDot(symptomColor),
                 ],
               ),
             ),
