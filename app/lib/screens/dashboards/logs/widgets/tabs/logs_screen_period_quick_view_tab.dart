@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
+import 'package:menstrudel/models/cycle_phase/cycle_phase.dart';
 import 'package:menstrudel/models/cycle_phase/cycle_phase_enum.dart';
 import 'package:menstrudel/services/period_service.dart';
 import 'package:menstrudel/screens/dashboards/logs/widgets/basic_progress_circle.dart';
@@ -91,7 +92,7 @@ class LogsScreenPeriodQuickViewTab extends StatelessWidget {
           value: datePart.isNotEmpty ? datePart : "--",
           color: colorScheme.surfaceContainerHighest,
         ),
-        if (settingsService.isNaturalCycle && predictedCurrentCycle != null)
+        if (settingsService.isNaturalCycle && predictedCurrentCycle != null) ...[
           _buildStatusCard(
             context,
             icon: currentPhase.icon,
@@ -99,6 +100,15 @@ class LogsScreenPeriodQuickViewTab extends StatelessWidget {
             value: phaseText,
             color: currentPhase.color.withValues(alpha: 0.4),
           ),
+
+          _buildStatusCard(
+            context,
+            icon: Icons.pregnant_woman_rounded,
+            title: "Fertility Chance",
+            value:  predictedCurrentCycle.getFertilityLevel(DateTime.now(), currentPhase, l10n),
+            color:  colorScheme.surfaceContainerHighest,
+          ),
+        ]
       ],
     );
   }
