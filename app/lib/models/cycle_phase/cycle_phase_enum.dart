@@ -81,11 +81,11 @@ extension FlowExtension on CyclePhase {
       case CyclePhase.menstruation:
         return Colors.red;
       case CyclePhase.follicular:
-        return Colors.green;
-      case CyclePhase.fertileWindow:
         return Colors.blue;
+      case CyclePhase.fertileWindow:
+        return Colors.teal.shade100;
       case CyclePhase.ovulation:
-        return Colors.yellow;
+        return Colors.teal.shade300;
       case CyclePhase.luteal:
         return Colors.purple;
       case CyclePhase.late:
