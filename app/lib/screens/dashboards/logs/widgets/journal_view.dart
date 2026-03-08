@@ -226,14 +226,13 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
 
   Widget _buildPhaseDay(DateTime day, CyclePhase phase, ColorScheme colorScheme) {
     final isOvulation = phase == CyclePhase.ovulation;
-    final baseColor = isOvulation ? Colors.teal.shade300 : Colors.teal.shade100;
-    
+
     return GestureDetector(
       onTap: () => widget.onLogRequested(day),
       child: Container(
         margin: const EdgeInsets.all(4),
         decoration: BoxDecoration(
-          color: baseColor.withAlpha(isOvulation ? 150 : 80),
+          color: phase.color,
           shape: BoxShape.circle,
           border: isOvulation ? Border.all(color: Colors.teal.shade700, width: 1) : null,
         ),
