@@ -95,7 +95,7 @@ class LogsScreenPeriodQuickViewTab extends StatelessWidget {
             icon: currentPhase.icon,
             title: currentPhase.getDisplayName(l10n),
             value: phaseText,
-            color: currentPhase.color.withValues(alpha: 0.1),
+            color: currentPhase.color.withValues(alpha: 0.4),
           ),
       ],
     );
