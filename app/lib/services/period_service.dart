@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:menstrudel/models/cycle_phase/cycle_phase.dart';
 import 'package:menstrudel/models/flows/flow_enum.dart';
 import 'package:collection/collection.dart';
 import 'package:intl/intl.dart';
@@ -7,6 +8,7 @@ import 'package:menstrudel/models/period_logs/log_day.dart';
 import 'package:menstrudel/models/periods/period.dart';
 import 'package:menstrudel/models/period_prediction_result.dart';
 import 'package:menstrudel/utils/constants.dart';
+import 'package:menstrudel/utils/cycle_phase_predictor.dart';
 import 'package:menstrudel/utils/period_predictor.dart';
 import 'package:menstrudel/services/notification_service.dart';
 import 'package:menstrudel/services/settings_service.dart';
@@ -25,9 +27,11 @@ class PeriodService extends ChangeNotifier {
   List<Period> _periodEntries = [];
   List<Object> _timelineItems = [];
   PeriodPredictionResult? _predictionResult;
+  PredictedCycle? _predictedCurrentCycle;
   int _circleCurrentValue = 0;
   int _circleMaxValue = 28;
   bool _isPeriodOngoing = false;
+  int _menstruationDay = 0;
 
   /// Whether a background operation is currently in progress.
   bool get isLoading => _isLoading;
@@ -38,6 +42,9 @@ class PeriodService extends ChangeNotifier {
   /// The calculated prediction for the next period, if available.
   PeriodPredictionResult? get predictionResult => _predictionResult;
 
+  /// The calculated phase predictions for current cycle.
+  PredictedCycle? get predictedCurrentCycle => _predictedCurrentCycle;
+
   /// The current value for the main progress circle (e.g., days until due).
   int get circleCurrentValue => _circleCurrentValue;
 
@@ -46,6 +53,9 @@ class PeriodService extends ChangeNotifier {
 
   /// Whether the user's period is considered to be ongoing today.
   bool get isPeriodOngoing => _isPeriodOngoing;
+
+  /// The number of days since current period started.
+  int get menstruationDay => _menstruationDay;
 
   /// A pre-computed list of timeline items for the PeriodListView.
   List<Object> get timelineItems => _timelineItems;
@@ -98,6 +108,29 @@ class PeriodService extends ChangeNotifier {
     _isPeriodOngoing =
         lastPeriod != null &&
         DateUtils.isSameDay(lastPeriod.endDate, DateTime.now());
+    
+    if (_predictionResult != null) {
+      final lastPeriodStartDate = _periodEntries.first.startDate;
+      final averageCycleLength = _predictionResult?.averageCycleLength ?? 0;
+      final averagePeriodDuration = _predictionResult?.averagePeriodDuration ?? 0;
+      
+      _predictedCurrentCycle = CyclePhasePredictor.predictCycle(
+        lastPeriodStartDate: lastPeriodStartDate, 
+        averageCycleLength: averageCycleLength, 
+        averagePeriodDuration: averagePeriodDuration
+      );
+    }else{
+      _predictedCurrentCycle = null;
+    }
+
+
+    if (lastPeriod == null){
+      _menstruationDay = 0;
+    }else{
+      final today = DateUtils.dateOnly(DateTime.now());
+      final start = DateUtils.dateOnly(lastPeriod.startDate);
+      _menstruationDay = today.difference(start).inDays + 1;
+    }
   }
 
   /// Recalculates periods based on the provided [logs] and returns a mapping of log IDs to period IDs.

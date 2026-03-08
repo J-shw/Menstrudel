@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:menstrudel/models/cycle_phase/cycle_phase_enum.dart';
 import 'package:menstrudel/models/flows/flow_enum.dart';
 import 'package:menstrudel/models/period_logs/pain_level_enum.dart';
 import 'package:provider/provider.dart';
@@ -83,6 +84,7 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
     final periodService = context.watch<PeriodService>();
     final logMap = logService.logMap;
     final predictedDates = _calculatePredictedDates(periodService);
+    final predictedCurrentCycle = periodService.predictedCurrentCycle;
     
     final isLoading = logService.isLoading || periodService.isLoading;
     final futureColor = colorScheme.onSurface.withAlpha(75);
@@ -91,7 +93,7 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
     final todayMs = DateUtils.dateOnly(now).millisecondsSinceEpoch;
 
     if (_calendarController == null && !isLoading) {
-       _initCalendar();
+      _initCalendar();
     }
 
     if (isLoading) return const Center(child: CircularProgressIndicator());
@@ -108,80 +110,101 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
         final day = values.day;
         final dayMs = day.millisecondsSinceEpoch;
         final dayOnly = DateUtils.dateOnly(day);
+        final now = DateTime.now();
+        final todayOnly = DateUtils.dateOnly(now);
+        final isToday = dayMs == todayMs;
+        var phase = CyclePhase.unknown;
 
-        if (logMap.containsKey(dayOnly)) {
-          return _buildLogDay(day, logMap[dayOnly]!, colorScheme);
+        if (predictedCurrentCycle != null) {
+          phase = predictedCurrentCycle.getPhaseForDate(dayOnly);
         }
 
-        if (predictedDates.contains(dayOnly)) {
+        if (logMap.containsKey(dayOnly)) {
+          return _buildLogDay(day, logMap[dayOnly]!, colorScheme, isToday);
+        }
+        
+        if (dayOnly.isAfter(todayOnly)) {
+          if (phase == CyclePhase.fertileWindow || phase == CyclePhase.ovulation) {
+            return _buildPhaseDay(day, phase, colorScheme);
+          }
+          
+          if (phase == CyclePhase.menstruation) {
+              return _buildPredictedDay(day, colorScheme);
+          }
+          
+        }
+
+        if (predictedDates.contains(dayOnly) && !isToday) {
           return _buildPredictedDay(day, colorScheme);
         }
 
         return _buildDefaultDay(
           day: day,
-          isToday: dayMs == todayMs,
+          isToday: isToday,
           isFuture: dayMs > todayMs,
           colorScheme: colorScheme,
           normalColor: normalColor,
           futureColor: futureColor,
+          phase: phase,
         );
       },
     );
   }
 
-  Widget _buildLogDay(DateTime day, LogDay log, ColorScheme colorScheme) {
-  final hasSymptoms = log.symptoms.isNotEmpty;
-  final hasPain = log.painLevel != null;
+  Widget _buildLogDay(DateTime day, LogDay log, ColorScheme colorScheme, bool isToday) {
+    final hasSymptoms = log.symptoms.isNotEmpty;
+    final hasPain = log.painLevel != null;
 
-  final symptomColor = Colors.teal.shade200;
+    final symptomColor = Colors.teal.shade200;
 
-  return GestureDetector(
-    onTap: () => widget.onLogTapped(log),
-    child: Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          height: 40,
-          width: 40,
-          margin: const EdgeInsets.all(2),
-          decoration: BoxDecoration(
-            color: log.flow.color,
-            shape: BoxShape.circle,
-          ),
-          alignment: Alignment.center,
-          child: Text(
-            '${day.day}',
-            style: TextStyle(
-              color: colorScheme.onPrimary,
-              fontWeight: FontWeight.bold,
+    return GestureDetector(
+      onTap: () => widget.onLogTapped(log),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            height: 40,
+            width: 40,
+            margin: const EdgeInsets.all(2),
+            decoration: BoxDecoration(
+              color: log.flow.color,
+              shape: BoxShape.circle,
+              border: isToday ? Border.all(color: colorScheme.primary, width: 3) : null,
+            ),
+            alignment: Alignment.center,
+            child: Text(
+              '${day.day}',
+              style: TextStyle(
+                color: colorScheme.onPrimary,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
-        ),
-        SizedBox(
-          height: 12,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              if (hasPain) 
-                Icon(
-                  PainLevel.values[log.painLevel!].icon,
-                  size: 10, 
-                  color: PainLevel.values[log.painLevel!].color
-                ),
-              if (hasPain && hasSymptoms) const SizedBox(width: 2),
-              if (hasSymptoms) 
-                Icon(
-                  Icons.add_circle,
-                  size: 10, 
-                  color: symptomColor
-                ),
-            ],
+          SizedBox(
+            height: 12,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                if (hasPain) 
+                  Icon(
+                    PainLevel.values[log.painLevel!].icon,
+                    size: 10, 
+                    color: PainLevel.values[log.painLevel!].color
+                  ),
+                if (hasPain && hasSymptoms) const SizedBox(width: 2),
+                if (hasSymptoms) 
+                  Icon(
+                    Icons.add_circle,
+                    size: 10, 
+                    color: symptomColor
+                  ),
+              ],
+            ),
           ),
-        ),
-      ],
-    ),
-  );
-}
+        ],
+      ),
+    );
+  }
 
   Widget _buildPredictedDay(DateTime day, ColorScheme colorScheme) {
     return GestureDetector(
@@ -204,6 +227,29 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
     );
   }
 
+  Widget _buildPhaseDay(DateTime day, CyclePhase phase, ColorScheme colorScheme) {
+    final isOvulation = phase == CyclePhase.ovulation;
+
+    return GestureDetector(
+      onTap: () => widget.onLogRequested(day),
+      child: Container(
+        margin: const EdgeInsets.all(4),
+        decoration: BoxDecoration(
+          color: phase.color,
+          shape: BoxShape.circle,
+        ),
+        alignment: Alignment.center,
+        child: Text(
+          '${day.day}',
+          style: TextStyle(
+            color: isOvulation ? Colors.teal.shade900 : Colors.teal.shade700, // Not an issue for now as teal is the only colour used. But this needs sorting...
+            fontWeight: isOvulation ? FontWeight.bold : FontWeight.normal,
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget _buildDefaultDay({
     required DateTime day,
     required bool isToday,
@@ -211,13 +257,16 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
     required ColorScheme colorScheme,
     required Color normalColor,
     required Color futureColor,
+    required CyclePhase phase,
   }) {
     return Container(
       margin: const EdgeInsets.all(4),
       alignment: Alignment.center,
       decoration: isToday
           ? BoxDecoration(
-              border: Border.all(color: colorScheme.primary, width: 2),
+              border: phase==CyclePhase.fertileWindow || phase==CyclePhase.ovulation || phase==CyclePhase.menstruation || phase==CyclePhase.late
+                 ? Border.all(color: phase.color, width: 3)
+                 : Border.all(color: colorScheme.primary, width: 2),
               shape: BoxShape.circle,
             )
           : null,

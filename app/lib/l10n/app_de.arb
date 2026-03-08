@@ -52,7 +52,10 @@
     "@countdown_daysLeft": {
         "description": "A countdown message indicating the number of days left.",
         "placeholders": {
-            "days": {}
+            "days": {
+                "type": "int",
+                "example": "5"
+            }
         }
     },
     "logs": "Protokolle",
