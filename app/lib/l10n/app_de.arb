@@ -52,7 +52,20 @@
     "@countdown_daysLeft": {
         "description": "A countdown message indicating the number of days left.",
         "placeholders": {
-            "days": {}
+            "days": {
+                "type": "int",
+                "example": "5"
+            }
+        }
+    },
+    "countUp_day": "Day {day}",
+    "@countUp_day": {
+        "description": "A count up message indicating the current day. E.g. 'Day 1 of period'.",
+        "placeholders": {
+            "day": {
+                "type": "int",
+                "example": "1"
+            }
         }
     },
     "logs": "Protokolle",
@@ -173,11 +186,13 @@
     "dayOfWeek_sunday": "Sonntag",
     "cyclePhase_menstruation": "Menstruation",
     "cyclePhase_follicular": "Follikelphase",
+    "cyclePhase_fertileWindow": "Fertile Window",
     "cyclePhase_ovulation": "Ovulation",
     "cyclePhase_luteal": "Lutealphase",
     "cyclePhase_late": "Verspätete Periode",
     "cyclePhase_unknown": "Unbekannt",
     "cyclePhase_menstruationDescription": "Deine Periode ist aktiv und die Gebärmutterschleimhaut wird abgestoßen.",
+    "cyclePhase_fertileWindowDescription": "Your fertile window is active.",
     "cyclePhase_follicularDescription": "Der Östrogenspiegel steigt, um die Eizelle vorzubereiten; Dein Energieniveau steigt möglicherweise an.",
     "cyclePhase_ovulationDescription": "Ein Eisprung ist erfolgt. Dies ist deine fruchtbarste Zeit.",
     "cyclePhase_lutealDescription": "Progesteron überwiegt aktuell. Achte auf PMS-Symptome, wenn deine nächste Periode näher rückt.",
@@ -441,7 +456,7 @@
         "description": "Used when birth date is not set."
     },
     "settingsScreen_appGoal": "App Ziel",
-    "settingsScreen_profileUpdated": "Profil erfolgreich aktualisiert",
+    "settingsScreen_profileUpdated": "Profil erfolgreich upgedatet",
     "settingsScreen_selectHistoryView": "Vergangenheitsansicht auswählen",
     "settingsScreen_deleteRegimen_question": "Kuren löschen?",
     "settingsScreen_deleteRegimenDescription": "Dies wird deine aktuellen Pillenverpackungseinstellungen und alle zugehörigen Pillenaufzeichnungen löschen. Diese Aktion kann nicht rückgängig gemacht werden.",
