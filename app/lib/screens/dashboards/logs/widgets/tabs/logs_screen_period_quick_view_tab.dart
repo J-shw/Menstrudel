@@ -56,7 +56,7 @@ class LogsScreenPeriodQuickViewTab extends StatelessWidget {
 
       if (currentPhase == CyclePhase.unknown) {
         phaseText = "";
-      } else if (currentPhase == CyclePhase.menstruation || periodService.isPeriodOngoing) {
+      } else if (currentPhase == CyclePhase.menstruation || periodService.isPeriodOngoing) { // If user does not match their average this will show period ongoing.
         phaseText = l10n.countUp_day(periodService.menstruationDay);
         currentPhase = CyclePhase.menstruation;
       } else if (daysLeft > 0) {
