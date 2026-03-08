@@ -51,7 +51,7 @@ class LogsScreenPeriodQuickViewTab extends StatelessWidget {
     CyclePhase currentPhase = CyclePhase.unknown;
 
     if (predictedCycle != null) {
-      final currentPhase = predictedCycle.getPhaseForDate(DateTime.now());
+      currentPhase = predictedCycle.getPhaseForDate(DateTime.now());
       final daysLeft = predictedCycle.getDaysLeft(DateTime.now(), currentPhase);
 
       if (currentPhase == CyclePhase.unknown) {
