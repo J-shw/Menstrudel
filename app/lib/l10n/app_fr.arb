@@ -52,7 +52,20 @@
     "@countdown_daysLeft": {
         "description": "A countdown message indicating the number of days left.",
         "placeholders": {
-            "days": {}
+            "days": {
+                "type": "int",
+                "example": "5"
+            }
+        }
+    },
+    "countUp_day": "Day {day}",
+    "@countUp_day": {
+        "description": "A count up message indicating the current day. E.g. 'Day 1 of period'.",
+        "placeholders": {
+            "day": {
+                "type": "int",
+                "example": "1"
+            }
         }
     },
     "logs": "Données",
@@ -173,11 +186,13 @@
     "dayOfWeek_sunday": "Dimanche",
     "cyclePhase_menstruation": "Règles",
     "cyclePhase_follicular": "Pré-ovulation",
+    "cyclePhase_fertileWindow": "Fertile Window",
     "cyclePhase_ovulation": "Pic de fertilité",
     "cyclePhase_luteal": "Post-ovulation",
     "cyclePhase_late": "En retard",
     "cyclePhase_unknown": "Inconnue",
     "cyclePhase_menstruationDescription": "Vos règles sont actives et la muqueuse utérine est en train de se détacher.",
+    "cyclePhase_fertileWindowDescription": "Your fertile window is active.",
     "cyclePhase_follicularDescription": "Le taux d’œstrogènes augmente pour préparer l'ovule ; votre niveau d'énergie peut être en hausse.",
     "cyclePhase_ovulationDescription": "Un ovule a été libéré. C'est votre période la plus fertile.",
     "cyclePhase_lutealDescription": "La progestérone est dominante. Surveillez l'apparition de symptômes de syndrome prémenstruel (SPM) car vous approchez de vos prochaines règles. ",
