@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:menstrudel/models/cycle_phase/cycle_phase.dart';
 import 'package:menstrudel/models/flows/flow_enum.dart';
 import 'package:collection/collection.dart';
 import 'package:intl/intl.dart';
@@ -7,6 +8,7 @@ import 'package:menstrudel/models/period_logs/log_day.dart';
 import 'package:menstrudel/models/periods/period.dart';
 import 'package:menstrudel/models/period_prediction_result.dart';
 import 'package:menstrudel/utils/constants.dart';
+import 'package:menstrudel/utils/cycle_phase_predictor.dart';
 import 'package:menstrudel/utils/period_predictor.dart';
 import 'package:menstrudel/services/notification_service.dart';
 import 'package:menstrudel/services/settings_service.dart';
@@ -25,6 +27,7 @@ class PeriodService extends ChangeNotifier {
   List<Period> _periodEntries = [];
   List<Object> _timelineItems = [];
   PeriodPredictionResult? _predictionResult;
+  PredictedCycle? _predictedCycle;
   int _circleCurrentValue = 0;
   int _circleMaxValue = 28;
   bool _isPeriodOngoing = false;
@@ -38,6 +41,9 @@ class PeriodService extends ChangeNotifier {
 
   /// The calculated prediction for the next period, if available.
   PeriodPredictionResult? get predictionResult => _predictionResult;
+
+  /// The calculated prediction for the next cycle, if available.
+  PredictedCycle? get predictedCycle => _predictedCycle;
 
   /// The current value for the main progress circle (e.g., days until due).
   int get circleCurrentValue => _circleCurrentValue;
@@ -103,6 +109,17 @@ class PeriodService extends ChangeNotifier {
         lastPeriod != null &&
         DateUtils.isSameDay(lastPeriod.endDate, DateTime.now());
     
+    final lastPeriodStartDate = _periodEntries.first.startDate;
+    final averageCycleLength = _predictionResult?.averageCycleLength ?? 0;
+    final averagePeriodDuration = _predictionResult?.averagePeriodDuration ?? 0;
+    
+    _predictedCycle = CyclePhasePredictor.predictCycle(
+      lastPeriodStartDate: lastPeriodStartDate, 
+      averageCycleLength: averageCycleLength, 
+      averagePeriodDuration: averagePeriodDuration
+    );
+
+
     if (lastPeriod == null){
       _menstruationDay = 0;
     }else{
