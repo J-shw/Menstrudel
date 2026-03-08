@@ -61,7 +61,21 @@
     "@countdown_daysLeft": {
         "description": "A countdown message indicating the number of days left.",
         "placeholders": {
-            "days": {}
+            "days": {
+                "type": "int",
+                "example": "5"
+            }
+        }
+    },
+
+    "countUp_day": "Day {day}",
+    "@countUp_day": {
+        "description": "A count up message indicating the current day. E.g. 'Day 1 of period'.",
+        "placeholders": {
+            "day": {
+                "type": "int",
+                "example": "1"
+            }
         }
     },
 
