@@ -109,15 +109,19 @@ class PeriodService extends ChangeNotifier {
         lastPeriod != null &&
         DateUtils.isSameDay(lastPeriod.endDate, DateTime.now());
     
-    final lastPeriodStartDate = _periodEntries.first.startDate;
-    final averageCycleLength = _predictionResult?.averageCycleLength ?? 0;
-    final averagePeriodDuration = _predictionResult?.averagePeriodDuration ?? 0;
-    
-    _predictedCurrentCycle = CyclePhasePredictor.predictCycle(
-      lastPeriodStartDate: lastPeriodStartDate, 
-      averageCycleLength: averageCycleLength, 
-      averagePeriodDuration: averagePeriodDuration
-    );
+    if (_predictionResult != null) {
+      final lastPeriodStartDate = _periodEntries.first.startDate;
+      final averageCycleLength = _predictionResult?.averageCycleLength ?? 0;
+      final averagePeriodDuration = _predictionResult?.averagePeriodDuration ?? 0;
+      
+      _predictedCurrentCycle = CyclePhasePredictor.predictCycle(
+        lastPeriodStartDate: lastPeriodStartDate, 
+        averageCycleLength: averageCycleLength, 
+        averagePeriodDuration: averagePeriodDuration
+      );
+    }else{
+      _predictedCurrentCycle = null;
+    }
 
 
     if (lastPeriod == null){
