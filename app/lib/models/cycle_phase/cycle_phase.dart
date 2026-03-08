@@ -17,14 +17,9 @@ class PredictedCycle {
     required this.nextPeriodStart,
   });
 
-  CyclePhase getPhaseForDate(DateTime date, bool isPeriodOngoing) {
+  CyclePhase getPhaseForDate(DateTime date) {
     // Normalise to midnight to make comparison work regardless of time
     final d = DateTime(date.year, date.month, date.day);
-
-    if (isPeriodOngoing && d.isAfter(menstruationStart.subtract(const Duration(days: 1))) 
-        && d.isBefore(fertileWindowStart)) {
-      return CyclePhase.menstruation;
-    }
 
     if (d.isBefore(menstruationStart)) return CyclePhase.unknown;
     if (d.isBefore(follicularStart)) return CyclePhase.menstruation;
@@ -41,7 +36,7 @@ class PredictedCycle {
     final d = DateTime(date.year, date.month, date.day);
 
     switch (phase) {
-      case CyclePhase.menstruation: // This is based off average and not the if the user is currently on their period.
+      case CyclePhase.menstruation: // This is based off average and not if the user is currently on their period.
         return follicularStart.difference(d).inDays;
       case CyclePhase.follicular:
         return fertileWindowStart.difference(d).inDays;
