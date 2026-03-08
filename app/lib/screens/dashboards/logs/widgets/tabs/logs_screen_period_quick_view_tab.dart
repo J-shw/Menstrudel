@@ -47,21 +47,31 @@ class LogsScreenPeriodQuickViewTab extends StatelessWidget {
     }
 
     final allPeriods = periodService.periodEntries;
+    if (allPeriods.isEmpty) {
+      return Center(child: Text(l10n.logScreen_logAtLeastTwoPeriods));
+    }
+
     final CycleStats? cycleStats = PeriodPredictor.getCycleStats(allPeriods);
     final PeriodStats? periodStats = PeriodPredictor.getPeriodStats(allPeriods);
 
-    final CyclePhaseResult phaseResult = CyclePhasePredictor.getPhaseStatus(
-      lastPeriodStartDate: allPeriods.isNotEmpty ? allPeriods.first.startDate : null,
-      averageCycleLength: cycleStats?.averageCycleLength,
-      averagePeriodDuration: periodStats?.averageLength,
-      isPeriodOngoing: periodService.isPeriodOngoing,
-    );
+    final lastPeriodStartDate = allPeriods.first.startDate;
+    final averageCycleLength = cycleStats?.averageCycleLength ?? 0;
+    final averagePeriodDuration = periodStats?.averageLength ?? 0;
+    final isPeriodOngoing = periodService.isPeriodOngoing;
+
+
+    final PredictedCycle precdictedCycle = CyclePhasePredictor.predictCycle(lastPeriodStartDate: lastPeriodStartDate, averageCycleLength: averageCycleLength, averagePeriodDuration: averagePeriodDuration);
+    final currentPhase = precdictedCycle.getPhaseForDate(DateTime.now(), isPeriodOngoing);
+    final daysLeft = precdictedCycle.getDaysLeft(DateTime.now(), currentPhase);
+
 
     String phaseText;
-    if (phaseResult.phase == CyclePhase.unknown) {
+    if (currentPhase == CyclePhase.unknown) {
       phaseText = "";
-    } else if (phaseResult.daysRemainingInPhase > 0) {
-      phaseText = l10n.countdown_daysLeft(phaseResult.daysRemainingInPhase);
+    } else if (currentPhase == CyclePhase.menstruation) {
+      phaseText = l10n.countUp_day(periodService.menstruationDay);
+    } else if (daysLeft > 0) {
+      phaseText = l10n.countdown_daysLeft(daysLeft);
     } else {
       phaseText = l10n.ongoing;
     }
@@ -92,10 +102,10 @@ class LogsScreenPeriodQuickViewTab extends StatelessWidget {
         if (settingsService.isNaturalCycle)
           _buildStatusCard(
             context,
-            icon: phaseResult.phase.icon,
-            title: phaseResult.phase.getDisplayName(l10n),
+            icon: currentPhase.icon,
+            title: currentPhase.getDisplayName(l10n),
             value: phaseText,
-            color: phaseResult.phase.color.withValues(alpha: 0.1),
+            color: currentPhase.color.withValues(alpha: 0.1),
           ),
       ],
     );
