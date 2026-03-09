@@ -91,7 +91,7 @@ class LogsScreenPeriodQuickViewTab extends StatelessWidget {
           value: datePart.isNotEmpty ? datePart : "--",
           color: colorScheme.surfaceContainerHighest,
         ),
-        if (settingsService.isNaturalCycle && predictedCurrentCycle != null)
+        if (settingsService.isNaturalCycle && predictedCurrentCycle != null) ...[
           _buildStatusCard(
             context,
             icon: currentPhase.icon,
@@ -99,6 +99,15 @@ class LogsScreenPeriodQuickViewTab extends StatelessWidget {
             value: phaseText,
             color: currentPhase.color.withValues(alpha: 0.4),
           ),
+
+          _buildStatusCard(
+            context,
+            icon: Icons.pregnant_woman_rounded,
+            title: "Fertility Chance",
+            value:  predictedCurrentCycle.getFertilityLevel(DateTime.now(), currentPhase, l10n),
+            color:  colorScheme.surfaceContainerHighest,
+          ),
+        ]
       ],
     );
   }

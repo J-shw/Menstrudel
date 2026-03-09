@@ -1,3 +1,4 @@
+import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/models/cycle_phase/cycle_phase_enum.dart';
 
 class PredictedCycle {
@@ -53,5 +54,38 @@ class PredictedCycle {
       default:
         return 0;
     }
+  }
+
+  double getPregnancyChance(DateTime date, CyclePhase phase) {
+    // For this I am following the basic strucuture of the diagram from this article:
+    // "https://premom.com/getting-pregnant-at-menstrual-cycle-phase/"
+    // So this is not actually a % chance, and so the raw % should not be displayed to the user.
+
+    final d = DateTime(date.year, date.month, date.day);
+
+    if (phase != CyclePhase.fertileWindow && phase != CyclePhase.ovulation) { // It's a low chance if not within this window.
+      return 0.05;
+    }
+
+    final daysToOvulation = ovulationDay.difference(d).inDays;
+
+    switch (daysToOvulation) {
+      case 5: return 0.10; // 5 days before
+      case 4: return 0.15; // 4 days before
+      case 3: return 0.20; // 3 days before
+      case 2: return 0.25; // 2 days before
+      case 1: return 0.30; // 1 day before
+      case 0: return 0.33; // Ovulation Day
+      case -1: return 0.10; // Day after
+      default: return 0.05;
+    }
+  }
+
+  /// Returns the l10n translated string for the chance of getting pregnant. (High/Medium/Low)
+  String getFertilityLevel(DateTime date, CyclePhase phase, AppLocalizations l10n) {
+    final chance = getPregnancyChance(date, phase);
+    if (chance >= 0.25) return l10n.fertilityChance_high;
+    if (chance >= 0.10) return l10n.fertilityChance_medium;
+    return l10n.fertilityChance_low;
   }
 }
