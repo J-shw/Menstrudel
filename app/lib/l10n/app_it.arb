@@ -198,6 +198,18 @@
     "cyclePhase_lutealDescription": "Progesterone is dominant. Monitor for PMS symptoms as you approach your next period.",
     "cyclePhase_lateDescription": "Your period is late.",
     "cyclePhase_unknownDescription": "We need more data to accurately predict your cycle phase.",
+    "fertilityChance_high": "High",
+    "@fertilityChance_high": {
+        "description": "Label shown when the user is in their peak fertile window or on ovulation day."
+    },
+    "fertilityChance_medium": "Medium",
+    "@fertilityChance_medium": {
+        "description": "Label shown when the user is at the very beginning or end of their fertile window."
+    },
+    "fertilityChance_low": "Low",
+    "@fertilityChance_low": {
+        "description": "Label shown when the user is outside of their fertile window (e.g., during menstruation or the luteal phase)."
+    },
     "error_valueMustbePositive": "Value must be positive",
     "error_valueCannotBeNull": "Value cannot be null",
     "notification_periodTitle": "Ciclo in arrivo",
