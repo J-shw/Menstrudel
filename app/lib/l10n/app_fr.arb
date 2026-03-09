@@ -198,6 +198,18 @@
     "cyclePhase_lutealDescription": "La progestérone est dominante. Surveillez l'apparition de symptômes de syndrome prémenstruel (SPM) car vous approchez de vos prochaines règles. ",
     "cyclePhase_lateDescription": "Vos règles sont en retards",
     "cyclePhase_unknownDescription": "Nous avons besoin de plus de données pour prédire précisément votre phase de cycle.",
+    "fertilityChance_high": "High",
+    "@fertilityChance_high": {
+        "description": "Label shown when the user is in their peak fertile window or on ovulation day."
+    },
+    "fertilityChance_medium": "Medium",
+    "@fertilityChance_medium": {
+        "description": "Label shown when the user is at the very beginning or end of their fertile window."
+    },
+    "fertilityChance_low": "Low",
+    "@fertilityChance_low": {
+        "description": "Label shown when the user is outside of their fertile window (e.g., during menstruation or the luteal phase)."
+    },
     "error_valueMustbePositive": "La valeur doit être supérieure à zéro",
     "error_valueCannotBeNull": "La valeur ne peut pas être vide",
     "notification_periodTitle": "Règles imminentes",
