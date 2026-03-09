@@ -198,6 +198,18 @@
     "cyclePhase_lutealDescription": "Progesteron überwiegt aktuell. Achte auf PMS-Symptome, wenn deine nächste Periode näher rückt.",
     "cyclePhase_lateDescription": "Deine Periode ist verspätet.",
     "cyclePhase_unknownDescription": "Wir benötigen mehr Daten, um deine Zyklusphasen vorherzusagen.",
+    "fertilityChance_high": "High",
+    "@fertilityChance_high": {
+        "description": "Label shown when the user is in their peak fertile window or on ovulation day."
+    },
+    "fertilityChance_medium": "Medium",
+    "@fertilityChance_medium": {
+        "description": "Label shown when the user is at the very beginning or end of their fertile window."
+    },
+    "fertilityChance_low": "Low",
+    "@fertilityChance_low": {
+        "description": "Label shown when the user is outside of their fertile window (e.g., during menstruation or the luteal phase)."
+    },
     "error_valueMustbePositive": "Der Wert muss positiv sein",
     "error_valueCannotBeNull": "Der Wert darf nicht null sein",
     "notification_periodTitle": "Periode nähert sich",
