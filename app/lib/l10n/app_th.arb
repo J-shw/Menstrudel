@@ -198,6 +198,18 @@
     "cyclePhase_lutealDescription": "ฮอร์โมนโปรเจสเตอโรนจะสูงในช่วงนี้ สังเกตอาการก่อนมีประจำเดือนเมื่อใกล้ถึงรอบถัดไป",
     "cyclePhase_lateDescription": "ประจำเดือนของคุณมาช้า",
     "cyclePhase_unknownDescription": "ต้องการข้อมูลเพิ่มเติมเพื่อคาดการณ์ระยะรอบเดือนอย่างแม่นยำ",
+    "fertilityChance_high": "High",
+    "@fertilityChance_high": {
+        "description": "Label shown when the user is in their peak fertile window or on ovulation day."
+    },
+    "fertilityChance_medium": "Medium",
+    "@fertilityChance_medium": {
+        "description": "Label shown when the user is at the very beginning or end of their fertile window."
+    },
+    "fertilityChance_low": "Low",
+    "@fertilityChance_low": {
+        "description": "Label shown when the user is outside of their fertile window (e.g., during menstruation or the luteal phase)."
+    },
     "error_valueMustbePositive": "ค่าต้องมากกว่า 0",
     "error_valueCannotBeNull": "ห้ามเว้นว่าง",
     "notification_periodTitle": "ใกล้ถึงรอบเดือน",
