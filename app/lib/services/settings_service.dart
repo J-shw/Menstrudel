@@ -110,7 +110,7 @@ class SettingsService extends ChangeNotifier {
     return true;
   }
   /// Whether fertile window notifications are enabled
-  bool get fertileWindowNotificationsEnabled => _fertileWindowNotificationsEnabled;
+  bool get areFertileWindowNotificationsEnabled => _fertileWindowNotificationsEnabled;
   /// The time of day the fertile window notification should be sent
   TimeOfDay get fertileWindowReminderTime => _fertileWindowReminderTime;
   /// The amount of days before fertile window notification should be sent
@@ -351,6 +351,28 @@ class SettingsService extends ChangeNotifier {
     _loggingReminderTime = time;
     final String formattedTime = '${time.hour}:${time.minute}';
     await _prefs.setString(loggingReminderTimeKey, formattedTime);
+    notifyListeners();
+  }
+
+  Future<void> setFertileWindowNotificationsEnabled(bool enabled) async {
+    _notificationsEnabled = enabled;
+    await _prefs.setBool(fertileWindowNotificationsEnabledKey, enabled);
+    if (!enabled) {
+      await NotificationService.cancelFertileWindowNotification();
+    }
+    notifyListeners();
+  }
+
+  Future<void> setFertileWindowReminderTime(TimeOfDay time) async {
+    _loggingReminderTime = time;
+    final String formattedTime = '${time.hour}:${time.minute}';
+    await _prefs.setString(fertileWindowReminderTimeKey, formattedTime);
+    notifyListeners();
+  }
+
+  Future<void> setFertileWindowReminderDaysBefore(int days) async {
+    _notificationDays = days;
+    await _prefs.setInt(fertileWindowReminderDaysBeforeKey, days);
     notifyListeners();
   }
 
