@@ -39,6 +39,9 @@ class SettingsService extends ChangeNotifier {
   int _reversibleContraceptiveReminderDays = kDefaultReversibleContraceptiveReminderDays;
   TimeOfDay _reversibleContraceptiveReminderTime = kDefaultReversibleContraceptiveReminderTime;
   String _startingDayOfWeek = kDefaultStartingDayOfWeek;
+  bool _fertileWindowNotificationsEnabled = kDefaultFertileWindowNotificationsEnabled;
+  TimeOfDay _fertileWindowReminderTime = kDefaultNotificationTime;
+  int _fertileWindowReminderDaysBefore = kDefaultNotificationDays;
 
   /// Whether the 'Pill' tab is visible in the main navigation bar.
   bool get isPillNavEnabled => _pillNavEnabled;
@@ -106,6 +109,12 @@ class SettingsService extends ChangeNotifier {
     }
     return true;
   }
+  /// Whether fertile window notifications are enabled
+  bool get fertileWindowNotificationsEnabled => _fertileWindowNotificationsEnabled;
+  /// The time of day the fertile window notification should be sent
+  TimeOfDay get fertileWindowReminderTime => _fertileWindowReminderTime;
+  /// The amount of days before fertile window notification should be sent
+  int get fertileWindowReminderDaysBefore => _fertileWindowReminderDaysBefore;
 
   Future<void> loadSettings() async {
     _prefs = await SharedPreferences.getInstance();
@@ -134,6 +143,10 @@ class SettingsService extends ChangeNotifier {
 
     _defaultSymptoms = _loadDefaultSymptoms();
     _startingDayOfWeek = _prefs.getString(startingDayOfWeekKey) ?? 'monday';
+
+    _fertileWindowNotificationsEnabled = _prefs.getBool(fertileWindowNotificationsEnabledKey) ?? kDefaultFertileWindowNotificationsEnabled;
+    _fertileWindowReminderTime = _loadTimeOfDay(fertileWindowReminderTimeKey, 9, 0);
+    _fertileWindowReminderDaysBefore = _prefs.getInt(fertileWindowReminderDaysBeforeKey) ?? kDefaultNotificationDays;
 
     final String? storedDurationsJson = _prefs.getString(reversibleContraceptiveDurationsKey);
     if (storedDurationsJson != null) {
