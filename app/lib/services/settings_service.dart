@@ -355,7 +355,7 @@ class SettingsService extends ChangeNotifier {
   }
 
   Future<void> setFertileWindowNotificationsEnabled(bool enabled) async {
-    _notificationsEnabled = enabled;
+    _fertileWindowNotificationsEnabled = enabled;
     await _prefs.setBool(fertileWindowNotificationsEnabledKey, enabled);
     if (!enabled) {
       await NotificationService.cancelFertileWindowNotification();
@@ -364,14 +364,14 @@ class SettingsService extends ChangeNotifier {
   }
 
   Future<void> setFertileWindowReminderTime(TimeOfDay time) async {
-    _loggingReminderTime = time;
+    _fertileWindowReminderTime = time;
     final String formattedTime = '${time.hour}:${time.minute}';
     await _prefs.setString(fertileWindowReminderTimeKey, formattedTime);
     notifyListeners();
   }
 
   Future<void> setFertileWindowReminderDaysBefore(int days) async {
-    _notificationDays = days;
+    _fertileWindowReminderDaysBefore = days;
     await _prefs.setInt(fertileWindowReminderDaysBeforeKey, days);
     notifyListeners();
   }
