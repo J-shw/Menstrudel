@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:menstrudel/models/cycle_phase/cycle_phase_enum.dart';
 import 'package:menstrudel/models/flows/flow_enum.dart';
 import 'package:menstrudel/models/period_logs/pain_level_enum.dart';
+import 'package:menstrudel/models/period_prediction_result.dart';
 import 'package:provider/provider.dart';
 import 'package:scrollable_clean_calendar/controllers/clean_calendar_controller.dart';
 import 'package:scrollable_clean_calendar/scrollable_clean_calendar.dart';
@@ -46,7 +47,7 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
     if (earliest != null) {
       _calendarController = CleanCalendarController(
         minDate: earliest.subtract(const Duration(days: 90)),
-        maxDate: DateTime.now().add(const Duration(days: 60)),
+        maxDate: DateTime.now().add(const Duration(days: 90)),
         initialFocusDate: DateTime.now(),
         weekdayStart: DayOfWeek.fromString(
           settingsService.startingDayOfWeek,
@@ -59,20 +60,27 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
   }
 
   Set<DateTime> _calculatePredictedDates(PeriodService periodService) {
-    final prediction = periodService.predictionResult;
     final dates = <DateTime>{};
+    final today = DateUtils.dateOnly(DateTime.now());
+    
+    void addRange(PeriodPredictionResult? prediction) {
+      if (prediction?.estimatedStartDate != null &&
+          prediction?.estimatedEndDate != null) {
+        DateTime current = DateUtils.dateOnly(prediction!.estimatedStartDate);
+        final end = DateUtils.dateOnly(prediction.estimatedEndDate);
 
-    if (prediction?.estimatedStartDate != null &&
-        prediction?.estimatedEndDate != null) {
-      final start = DateUtils.dateOnly(prediction!.estimatedStartDate);
-      final end = DateUtils.dateOnly(prediction.estimatedEndDate);
-
-      DateTime current = start;
-      while (!current.isAfter(end)) {
-        dates.add(current);
-        current = current.add(const Duration(days: 1));
+        while (!current.isAfter(end)) {
+          if (current.isAfter(today)) {
+            dates.add(current);
+          }
+          current = current.add(const Duration(days: 1));
+        }
       }
     }
+
+    addRange(periodService.upcomingPeriodPrediction);
+    addRange(periodService.followingPeriodPrediction);
+
     return dates;
   }
 

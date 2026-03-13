@@ -26,7 +26,8 @@ class PeriodService extends ChangeNotifier {
   bool _isLoading = true;
   List<Period> _periodEntries = [];
   List<Object> _timelineItems = [];
-  PeriodPredictionResult? _predictionResult;
+  PeriodPredictionResult? _upcomingPeriodPrediction;
+  PeriodPredictionResult? _followingPeriodPrediction;
   PredictedCycle? _predictedCurrentCycle;
   int _circleCurrentValue = 0;
   int _circleMaxValue = 28;
@@ -39,8 +40,11 @@ class PeriodService extends ChangeNotifier {
   /// The list of calculated [Period] objects, representing entire period cycles.
   List<Period> get periodEntries => _periodEntries;
 
-  /// The calculated prediction for the next period, if available.
-  PeriodPredictionResult? get predictionResult => _predictionResult;
+  /// Prediction for the immediate next period.
+  PeriodPredictionResult? get upcomingPeriodPrediction => _upcomingPeriodPrediction;
+
+  /// Prediction for the period after the next one.
+  PeriodPredictionResult? get followingPeriodPrediction => _followingPeriodPrediction;
 
   /// The calculated phase predictions for current cycle.
   PredictedCycle? get predictedCurrentCycle => _predictedCurrentCycle;
@@ -74,7 +78,7 @@ class PeriodService extends ChangeNotifier {
 
     notifyListeners();
 
-    final oldPredictionDate = _predictionResult?.estimatedStartDate;
+    final oldPredictionDate = _upcomingPeriodPrediction?.estimatedStartDate;
 
     try {
       _periodEntries = await _periodsRepo.readAllPeriods();
@@ -85,7 +89,7 @@ class PeriodService extends ChangeNotifier {
 
       if (l10n != null) {
         _updateWidgetData(l10n, widgetController);
-        if (oldPredictionDate != _predictionResult?.estimatedStartDate) {
+        if (oldPredictionDate != _upcomingPeriodPrediction?.estimatedStartDate) {
           _schedulePeriodNotifications(l10n);
         }
       }
@@ -97,9 +101,9 @@ class PeriodService extends ChangeNotifier {
     }
   }
 
-  /// Calculates the period prediction and ongoing status.
+  /// Calculates the period predictions, cycle predictions and ongoing status.
   void _calculatePrediction() {
-    _predictionResult = PeriodPredictor.estimateNextPeriod(
+    _upcomingPeriodPrediction = PeriodPredictor.estimateNextPeriod(
       _periodEntries,
       DateTime.now(),
     );
@@ -109,18 +113,36 @@ class PeriodService extends ChangeNotifier {
         lastPeriod != null &&
         DateUtils.isSameDay(lastPeriod.endDate, DateTime.now());
     
-    if (_predictionResult != null) {
+    if (_upcomingPeriodPrediction != null) {
       final lastPeriodStartDate = _periodEntries.first.startDate;
-      final averageCycleLength = _predictionResult?.averageCycleLength ?? 0;
-      final averagePeriodDuration = _predictionResult?.averagePeriodDuration ?? 0;
+      final averageCycleLength = _upcomingPeriodPrediction?.averageCycleLength ?? 0;
+      final averagePeriodDuration = _upcomingPeriodPrediction?.averagePeriodDuration ?? 0;
       
       _predictedCurrentCycle = CyclePhasePredictor.predictCycle(
         lastPeriodStartDate: lastPeriodStartDate, 
         averageCycleLength: averageCycleLength, 
         averagePeriodDuration: averagePeriodDuration
       );
+
+      final estimatedFollowingPeriodStartDate = _upcomingPeriodPrediction!.estimatedStartDate.add(
+        Duration(days: averageCycleLength),
+      );
+      final estimatedFollowingPeriodEndDate = estimatedFollowingPeriodStartDate.add(
+        Duration(days: averagePeriodDuration -1),
+      );
+      final estimatedFollowingPeriodDaysUntilDue = estimatedFollowingPeriodStartDate.difference(DateTime.now()).inDays;
+      
+
+      _followingPeriodPrediction = PeriodPredictionResult(
+        estimatedStartDate: estimatedFollowingPeriodStartDate,
+        estimatedEndDate: estimatedFollowingPeriodEndDate, 
+        daysUntilDue: estimatedFollowingPeriodDaysUntilDue, 
+        averageCycleLength: averageCycleLength, 
+        averagePeriodDuration: averagePeriodDuration
+      );
     }else{
       _predictedCurrentCycle = null;
+      _followingPeriodPrediction = null;
     }
 
 
@@ -141,8 +163,8 @@ class PeriodService extends ChangeNotifier {
 
   /// Updates the circle and FAB state variables.
   void _updateUiState() {
-    int daysUntilDue = _predictionResult?.daysUntilDue ?? 0;
-    _circleMaxValue = _predictionResult?.averageCycleLength ?? 28;
+    int daysUntilDue = _upcomingPeriodPrediction?.daysUntilDue ?? 0;
+    _circleMaxValue = _upcomingPeriodPrediction?.averageCycleLength ?? 28;
     _circleCurrentValue = daysUntilDue.clamp(0, _circleMaxValue);
   }
 
@@ -152,9 +174,9 @@ class PeriodService extends ChangeNotifier {
     String smallText = l10n.periodPredictionCircle_days(_circleCurrentValue);
 
     String dateText = '';
-    if (_predictionResult != null) {
+    if (_upcomingPeriodPrediction != null) {
       dateText =
-          '${l10n.logScreen_nextPeriodEstimate}:\n ${DateFormat('MMM d').format(_predictionResult!.estimatedStartDate)}';
+          '${l10n.logScreen_nextPeriodEstimate}:\n ${DateFormat('MMM d').format(_upcomingPeriodPrediction!.estimatedStartDate)}';
     }
     controller.saveAndAndUpdateCircle(
       currentValue: _circleCurrentValue,
@@ -167,12 +189,12 @@ class PeriodService extends ChangeNotifier {
 
   /// Schedules period due and overdue notifications.
   Future<void> _schedulePeriodNotifications(AppLocalizations l10n) async {
-    if (_predictionResult == null) return;
+    if (_upcomingPeriodPrediction == null) return;
 
     // Period due notification
     try {
       await NotificationService.schedulePeriodNotifications(
-        scheduledTime: _predictionResult!.estimatedStartDate,
+        scheduledTime: _upcomingPeriodPrediction!.estimatedStartDate,
         areEnabled: _settingsService.areNotificationsEnabled,
         daysBefore: _settingsService.notificationDays,
         notificationTime: _settingsService.notificationTime,
@@ -187,7 +209,7 @@ class PeriodService extends ChangeNotifier {
     // Overdue period notification
     try {
       await NotificationService.schedulePeriodNotifications(
-        scheduledTime: _predictionResult!.estimatedStartDate,
+        scheduledTime: _upcomingPeriodPrediction!.estimatedStartDate,
         areEnabled: _settingsService.arePeriodOverdueNotificationsEnabled,
         daysAfter: _settingsService.periodOverdueNotificationDays,
         notificationTime: _settingsService.periodOverdueNotificationTime,
