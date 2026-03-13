@@ -18,13 +18,30 @@ class WatchSyncService {
 
     debugPrint('Initialising and listening on applicationContextStream...');
 
+    try {
+      if (!await _watch.isSupported) {
+        debugPrint('Watch connectivity not supported on this platform.');
+        return;
+      }
 
-    final missedContexts = await _watch.receivedApplicationContexts;
-    for (final context in missedContexts) {
-      await _handleContext(context);
+      if (defaultTargetPlatform == TargetPlatform.android) {
+        if (!await _watch.isPaired) {
+          debugPrint('No watch paired. Skipping context retrieval.');
+          _subscription = _watch.contextStream.listen(_handleContext);
+          return;
+        }
+      }
+
+      final missedContexts = await _watch.receivedApplicationContexts;
+      for (final context in missedContexts) {
+        await _handleContext(context);
+      }
+
+      _subscription = _watch.contextStream.listen(_handleContext);
+      
+    } catch (e) {
+      debugPrint('WatchSyncService initialisation failed: $e');
     }
-
-    _subscription = _watch.contextStream.listen(_handleContext);
   }
   
   Future<void> _handleContext(Map<dynamic, dynamic> contextMap) async {
