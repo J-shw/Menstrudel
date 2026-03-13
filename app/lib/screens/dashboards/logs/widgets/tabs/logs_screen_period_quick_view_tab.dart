@@ -25,10 +25,10 @@ class LogsScreenPeriodQuickViewTab extends StatelessWidget {
     String predictionText = '';
     String datePart = '';
     
-    if (periodService.predictionResult == null) {
+    if (periodService.upcomingPeriodPrediction == null) {
       predictionText = l10n.logScreen_logAtLeastTwoPeriods;
     } else {
-      final prediction = periodService.predictionResult!;
+      final prediction = periodService.upcomingPeriodPrediction!;
       
       datePart = DateFormat('dd/MM/yyyy').format(prediction.estimatedStartDate);
       
