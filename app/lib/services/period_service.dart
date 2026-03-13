@@ -224,6 +224,25 @@ class PeriodService extends ChangeNotifier {
     }
   }
 
+  /// Schedules fertile window notification.
+  Future<void> _scheduleFertileWindowNotification(AppLocalizations l10n) async {
+    if (_predictedCurrentCycle == null) return;
+    if(!_settingsService.fertileWindowNotificationsEnabled) return;
+
+    try {
+      await NotificationService.scheduleFertileWindowNotification(
+        scheduledTime: _predictedCurrentCycle!.fertileWindowStart,
+        daysBefore: _settingsService.fertileWindowReminderDaysBefore,
+        notificationTime: _settingsService.fertileWindowReminderTime,
+        title: l10n.notification_fertileWindowTitle,
+        body: l10n.notification_fertileWindowBody(_settingsService.fertileWindowReminderDaysBefore),
+        notificationID: fertileWindowReminderId,
+      );
+    } catch (e) {
+      debugPrint('Error creating fertile window notification: $e');
+    }
+  }
+
   /// Schedules a logging reminder from a [LogDay] object.
   Future<void> scheduleLoggingReminder({
     required LogDay log,
