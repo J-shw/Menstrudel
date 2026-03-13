@@ -150,6 +150,11 @@ class NotificationService {
     );
   }
 
+  static Future<void> cancelFertileWindowNotification() async {
+    debugPrint('Canceling fertile window notification reminder');
+    await _plugin.cancel(fertileWindowReminderId);
+  }
+
   // Logging reminders
 
   static int _generateLoggingReminderIdFromScheduledDate(DateTime scheduledDate) {
