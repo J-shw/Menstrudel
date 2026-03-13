@@ -12,11 +12,16 @@ const int minValidCycleLength = 10;
 /// The max days for valid cycle length - Set high for missed durations.
 const int maxValidCycleLength = 130;
 
+// Notification IDs
+
 const int periodDueNotificationId = 1;
 const int periodOverdueNotificationId = 4;
 const int sanitaryProductsID = 2;
 const int pillReminderId = 3;
 const int reversibleContraceptiveReminderId = 5;
+const int fertileWindowReminderId = 6;
+
+// Notification channels
 
 const periodNotificationChannelId = 'period_channel';
 const periodNotificationChannelName = 'Period Predictions';
@@ -33,6 +38,10 @@ const reversibleContraceptivesReminderChannelName = 'Reversible Contraceptive Re
 
 const loggingReminderChannelId = 'logging_reminder_channel';
 const loggingReminderChannelName = 'Logging Reminders';
+
+const fertileWindowReminderChannelId = 'fertile_window_reminder_channel';
+const fertileWindowReminderChannelName = 'Fertile Window Reminders';
+
 
 
 // Shared preferences keys
@@ -64,6 +73,9 @@ const String reversibleContraceptiveNotificationTimeKey = 'larc_notification_tim
 const String loggingReminderKey = 'logging_reminder_notification_enabled';
 const String loggingReminderTimeKey = 'logging_reminder_notification_time';
 const String startingDayOfWeekKey = 'starting_day_of_week';
+const String fertileWindowNotificationsEnabledKey = 'fertile_window_notifications_enabled';
+const String fertileWindowReminderDaysBeforeKey = 'fertile_window_reminder_days_before';
+const String fertileWindowReminderTimeKey = 'fertile_window_reminder_time';
 
 // Notifications
 const String tamponReminderDateTimeKey = 'tampon_reminder_date_time';
@@ -96,3 +108,4 @@ const TimeOfDay kDefaultReversibleContraceptiveReminderTime = TimeOfDay(hour: 9,
 const bool kDefaultLoggingReminder = false;
 const TimeOfDay kDefaultLoggingReminderTime = TimeOfDay(hour: 9, minute: 0);
 const String kDefaultStartingDayOfWeek = 'monday';
+const bool kDefaultFertileWindowNotificationsEnabled = false;
