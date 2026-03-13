@@ -561,11 +561,12 @@
     "settingsScreen_reminderTime": "Reminder Time",
 
     "settingsScreen_periodPredictionAndReminders": "Period Prediction & Reminders",
-    "settingsScreen_upcomingPeriodReminder": "Upcoming Period Reminder",
-    "settingsScreen_remindMeBefore": "Remind Me Before",
     "settingsScreen_notificationTime": "Notification Time",
-    "settingsScreen_overduePeriodReminder": "Overdue Period Reminder",
+    "settingsScreen_remindMeBefore": "Remind Me Before",
     "settingsScreen_remindMeAfter": "Remind Me After",
+    "settingsScreen_upcomingPeriodReminder": "Upcoming Period Reminder",
+    "settingsScreen_overduePeriodReminder": "Overdue Period Reminder",
+    "settingsScreen_fertileWindowReminder": "Fertile Window Reminder",
 
     "settingsScreen_enableReversibleContraceptiveTracking": "Enable Reversible Contraceptive Tracking",
     "settingsScreen_reversibleContraceptiveDescription": "Track Reversible Contraceptives.",
