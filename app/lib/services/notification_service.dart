@@ -98,6 +98,58 @@ class NotificationService {
     );
   }
 
+  // Phase notifications
+
+  static Future<void> scheduleFertileWindowNotification({
+    required DateTime scheduledTime,
+    required TimeOfDay notificationTime,
+    required String title,
+    required String body,
+    required int notificationID,
+    int? daysBefore,
+  }) async {
+
+    if(daysBefore != null){
+      debugPrint("daysBefore is required.");
+      return;
+    }
+
+    final notificationDateTime = DateTime(
+      scheduledTime.year, scheduledTime.month, scheduledTime.day,
+      notificationTime.hour, notificationTime.minute,
+    );
+
+    tz.TZDateTime? tzScheduledTime;
+
+    if (daysBefore != null) {
+      tzScheduledTime = tz.TZDateTime.from(notificationDateTime, tz.local)
+        .subtract(Duration(days: daysBefore));
+    }
+
+    if (tzScheduledTime == null) return;
+
+    if (tzScheduledTime.isBefore(tz.TZDateTime.now(tz.local))) throw PastNotificationException();
+
+    await _plugin.cancel(notificationID);
+
+    const details = fln.NotificationDetails(
+      android: fln.AndroidNotificationDetails(
+        periodNotificationChannelId, periodNotificationChannelName,
+        importance: fln.Importance.max, priority: fln.Priority.high
+      ),
+      iOS: fln.DarwinNotificationDetails(),
+    );
+
+    await _plugin.zonedSchedule(
+      notificationID,
+      title,
+      body,
+      tzScheduledTime,
+      details,
+      androidScheduleMode: fln.AndroidScheduleMode.exactAllowWhileIdle,
+    );
+  }
+
   // Logging reminders
 
   static int _generateLoggingReminderIdFromScheduledDate(DateTime scheduledDate) {
