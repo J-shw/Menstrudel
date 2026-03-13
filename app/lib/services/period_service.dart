@@ -232,7 +232,7 @@ class PeriodService extends ChangeNotifier {
   /// Schedules fertile window notification.
   Future<void> _scheduleFertileWindowNotification(AppLocalizations l10n) async {
     if (_predictedCurrentCycle == null) return;
-    if(!_settingsService.fertileWindowNotificationsEnabled) return;
+    if(!_settingsService.areFertileWindowNotificationsEnabled) return;
 
     try {
       await NotificationService.scheduleFertileWindowNotification(
