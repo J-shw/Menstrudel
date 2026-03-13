@@ -101,18 +101,12 @@ class PeriodService extends ChangeNotifier {
     }
   }
 
-  /// Calculates the period prediction and ongoing status.
+  /// Calculates the period predictions, cycle predictions and ongoing status.
   void _calculatePrediction() {
     _upcomingPeriodPrediction = PeriodPredictor.estimateNextPeriod(
       _periodEntries,
       DateTime.now(),
     );
-
-    _followingPeriodPrediction = PeriodPredictor.estimateNextPeriod(
-      _periodEntries,
-      _upcomingPeriodPrediction?.estimatedEndDate ?? DateTime.now(),
-    );
-
 
     final lastPeriod = _periodEntries.firstOrNull;
     _isPeriodOngoing =
@@ -129,8 +123,26 @@ class PeriodService extends ChangeNotifier {
         averageCycleLength: averageCycleLength, 
         averagePeriodDuration: averagePeriodDuration
       );
+
+      final estimatedFollowingPeriodStartDate = _upcomingPeriodPrediction!.estimatedStartDate.add(
+        Duration(days: averageCycleLength),
+      );
+      final estimatedFollowingPeriodEndDate = estimatedFollowingPeriodStartDate.add(
+        Duration(days: averagePeriodDuration -1),
+      );
+      final estimatedFollowingPeriodDaysUntilDue = estimatedFollowingPeriodStartDate.difference(DateTime.now()).inDays;
+      
+
+      _followingPeriodPrediction = PeriodPredictionResult(
+        estimatedStartDate: estimatedFollowingPeriodStartDate,
+        estimatedEndDate: estimatedFollowingPeriodEndDate, 
+        daysUntilDue: estimatedFollowingPeriodDaysUntilDue, 
+        averageCycleLength: averageCycleLength, 
+        averagePeriodDuration: averagePeriodDuration
+      );
     }else{
       _predictedCurrentCycle = null;
+      _followingPeriodPrediction = null;
     }
 
 
