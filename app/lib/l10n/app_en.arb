@@ -314,6 +314,20 @@
     "notification_SanitaryProductReminderTitle": "Sanitary Product Reminder",
     "notification_SanitaryProductReminderBody": "Remember to change your product.",
 
+    "notification_fertileWindowTitle": "Fertile Window Reminder",
+    "@notification_fertileWindowTitle": {
+        "description": "Title for the fertile window notification."
+    },
+    "notification_fertileWindowBody": "{count, plural, =1{Your next fertile window is estimated to start in 1 day.} other{Your next fertile window is estimated to start in {count} days.}}",
+    "@notification_fertileWindowBody": {
+        "description": "Body for the upcoming fertile window notification.",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+
     "onboardingScreen_welcomeToMenstrudel": "Welcome to Menstrudel",
     "@onboardingScreen_welcomeToMenstrudel": {
         "description": "Title for the onboarding screen."
