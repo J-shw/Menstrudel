@@ -58,6 +58,16 @@
             }
         }
     },
+    "countUp_day": "Day {day}",
+    "@countUp_day": {
+        "description": "A count up message indicating the current day. E.g. 'Day 1 of period'.",
+        "placeholders": {
+            "day": {
+                "type": "int",
+                "example": "1"
+            }
+        }
+    },
     "logs": "Données",
     "insights": "Aperçu",
     "edit": "Éditer",
@@ -176,16 +186,30 @@
     "dayOfWeek_sunday": "Dimanche",
     "cyclePhase_menstruation": "Règles",
     "cyclePhase_follicular": "Pré-ovulation",
+    "cyclePhase_fertileWindow": "Fertile Window",
     "cyclePhase_ovulation": "Pic de fertilité",
     "cyclePhase_luteal": "Post-ovulation",
     "cyclePhase_late": "En retard",
     "cyclePhase_unknown": "Inconnue",
     "cyclePhase_menstruationDescription": "Vos règles sont actives et la muqueuse utérine est en train de se détacher.",
+    "cyclePhase_fertileWindowDescription": "Your fertile window is active.",
     "cyclePhase_follicularDescription": "Le taux d’œstrogènes augmente pour préparer l'ovule ; votre niveau d'énergie peut être en hausse.",
     "cyclePhase_ovulationDescription": "Un ovule a été libéré. C'est votre période la plus fertile.",
     "cyclePhase_lutealDescription": "La progestérone est dominante. Surveillez l'apparition de symptômes de syndrome prémenstruel (SPM) car vous approchez de vos prochaines règles. ",
     "cyclePhase_lateDescription": "Vos règles sont en retards",
     "cyclePhase_unknownDescription": "Nous avons besoin de plus de données pour prédire précisément votre phase de cycle.",
+    "fertilityChance_high": "High",
+    "@fertilityChance_high": {
+        "description": "Label shown when the user is in their peak fertile window or on ovulation day."
+    },
+    "fertilityChance_medium": "Medium",
+    "@fertilityChance_medium": {
+        "description": "Label shown when the user is at the very beginning or end of their fertile window."
+    },
+    "fertilityChance_low": "Low",
+    "@fertilityChance_low": {
+        "description": "Label shown when the user is outside of their fertile window (e.g., during menstruation or the luteal phase)."
+    },
     "error_valueMustbePositive": "La valeur doit être supérieure à zéro",
     "error_valueCannotBeNull": "La valeur ne peut pas être vide",
     "notification_periodTitle": "Règles imminentes",
@@ -250,6 +274,32 @@
     },
     "notification_SanitaryProductReminderTitle": "Rappel des produits hygiénique",
     "notification_SanitaryProductReminderBody": "N'oubliez pas de changer votre produit hygiénique.",
+    "notification_fertileWindowTitle": "Fertile Window Reminder",
+    "@notification_fertileWindowTitle": {
+        "description": "Title for the fertile window notification."
+    },
+    "notification_fertileWindowBody": "{count, plural, =1{Your next fertile window is estimated to start in 1 day.} other{Your next fertile window is estimated to start in {count} days.}}",
+    "@notification_fertileWindowBody": {
+        "description": "Body for the upcoming fertile window notification.",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "notification_ovulationDayReminderTitle": "Ovulation Day Reminder",
+    "@notification_ovulationDayReminderTitle": {
+        "description": "Title for the ovulation day notification."
+    },
+    "notification_ovulationDayReminderBody": "{count, plural, =1{Your next ovulation day is estimated to start in 1 day.} other{Your next ovulation day is estimated to start in {count} days.}}",
+    "@notification_ovulationDayReminderBody": {
+        "description": "Body for the upcoming ovulation day notification.",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
     "onboardingScreen_welcomeToMenstrudel": "Bienvenue sur Menstrudel",
     "@onboardingScreen_welcomeToMenstrudel": {
         "description": "Title for the onboarding screen."
@@ -470,11 +520,13 @@
     "settingsScreen_dailyPillReminder": "Rappel pour la pilule quotidienne",
     "settingsScreen_reminderTime": "Heure du rappel",
     "settingsScreen_periodPredictionAndReminders": "Prédiction des règles et rappels",
-    "settingsScreen_upcomingPeriodReminder": "Rappel des prochaines règles",
-    "settingsScreen_remindMeBefore": "M’avertir avant",
     "settingsScreen_notificationTime": "Heure de la notification",
-    "settingsScreen_overduePeriodReminder": "Alerte de retard de règles",
+    "settingsScreen_remindMeBefore": "M’avertir avant",
     "settingsScreen_remindMeAfter": "Me rappeler après",
+    "settingsScreen_upcomingPeriodReminder": "Rappel des prochaines règles",
+    "settingsScreen_overduePeriodReminder": "Alerte de retard de règles",
+    "settingsScreen_fertileWindowReminder": "Fertile Window Reminder",
+    "settingsScreen_ovulationDayReminder": "Ovulation Day Reminder",
     "settingsScreen_enableReversibleContraceptiveTracking": "Activer le suivi des contraceptions réversibles",
     "settingsScreen_reversibleContraceptiveDescription": "Suivre les contraceptions réversibles.",
     "settingsScreen_reversibleContraceptiveType": "Type de contraceptif",

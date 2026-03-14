@@ -58,6 +58,16 @@
             }
         }
     },
+    "countUp_day": "Day {day}",
+    "@countUp_day": {
+        "description": "A count up message indicating the current day. E.g. 'Day 1 of period'.",
+        "placeholders": {
+            "day": {
+                "type": "int",
+                "example": "1"
+            }
+        }
+    },
     "logs": "บันทึก",
     "insights": "สรุปข้อมูลเชิงลึก",
     "edit": "แก้ไข",
@@ -176,16 +186,30 @@
     "dayOfWeek_sunday": "วันอาทิตย์",
     "cyclePhase_menstruation": "มีประจำเดือน",
     "cyclePhase_follicular": "ก่อนตกไข่",
+    "cyclePhase_fertileWindow": "Fertile Window",
     "cyclePhase_ovulation": "ช่วงเจริญพันธุ์สูงสุด",
     "cyclePhase_luteal": "หลังตกไข่",
     "cyclePhase_late": "ล่าช้า",
     "cyclePhase_unknown": "ไม่ทราบ",
     "cyclePhase_menstruationDescription": "คุณกำลังมีประจำเดือน และเยื่อบุโพรงมดลูกกำลังหลุดลอก",
+    "cyclePhase_fertileWindowDescription": "Your fertile window is active.",
     "cyclePhase_follicularDescription": "ระดับเอสโตรเจนกำลังเพิ่มขึ้นเพื่อเตรียมไข่ ระดับพลังงานของคุณอาจเพิ่มขึ้นด้วย",
     "cyclePhase_ovulationDescription": "มีการตกไข่แล้ว นี่คือช่วงที่มีโอกาสตั้งครรภ์สูงที่สุด",
     "cyclePhase_lutealDescription": "ฮอร์โมนโปรเจสเตอโรนจะสูงในช่วงนี้ สังเกตอาการก่อนมีประจำเดือนเมื่อใกล้ถึงรอบถัดไป",
     "cyclePhase_lateDescription": "ประจำเดือนของคุณมาช้า",
     "cyclePhase_unknownDescription": "ต้องการข้อมูลเพิ่มเติมเพื่อคาดการณ์ระยะรอบเดือนอย่างแม่นยำ",
+    "fertilityChance_high": "High",
+    "@fertilityChance_high": {
+        "description": "Label shown when the user is in their peak fertile window or on ovulation day."
+    },
+    "fertilityChance_medium": "Medium",
+    "@fertilityChance_medium": {
+        "description": "Label shown when the user is at the very beginning or end of their fertile window."
+    },
+    "fertilityChance_low": "Low",
+    "@fertilityChance_low": {
+        "description": "Label shown when the user is outside of their fertile window (e.g., during menstruation or the luteal phase)."
+    },
     "error_valueMustbePositive": "ค่าต้องมากกว่า 0",
     "error_valueCannotBeNull": "ห้ามเว้นว่าง",
     "notification_periodTitle": "ใกล้ถึงรอบเดือน",
@@ -250,6 +274,32 @@
     },
     "notification_SanitaryProductReminderTitle": "เตือนการเปลี่ยนผลิตภัณฑ์สุขอนามัย",
     "notification_SanitaryProductReminderBody": "อย่าลืมเปลี่ยนผลิตภัณฑ์",
+    "notification_fertileWindowTitle": "Fertile Window Reminder",
+    "@notification_fertileWindowTitle": {
+        "description": "Title for the fertile window notification."
+    },
+    "notification_fertileWindowBody": "{count, plural, =1{Your next fertile window is estimated to start in 1 day.} other{Your next fertile window is estimated to start in {count} days.}}",
+    "@notification_fertileWindowBody": {
+        "description": "Body for the upcoming fertile window notification.",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "notification_ovulationDayReminderTitle": "Ovulation Day Reminder",
+    "@notification_ovulationDayReminderTitle": {
+        "description": "Title for the ovulation day notification."
+    },
+    "notification_ovulationDayReminderBody": "{count, plural, =1{Your next ovulation day is estimated to start in 1 day.} other{Your next ovulation day is estimated to start in {count} days.}}",
+    "@notification_ovulationDayReminderBody": {
+        "description": "Body for the upcoming ovulation day notification.",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
     "onboardingScreen_welcomeToMenstrudel": "ยินดีต้อนรับสู่ Menstrudel",
     "@onboardingScreen_welcomeToMenstrudel": {
         "description": "Title for the onboarding screen."
@@ -455,41 +505,43 @@
     "settingsScreen_historyViewStyle": "รูปแบบการแสดงประวัติ",
     "settingsScreen_appTheme": "ธีมแอป",
     "settingsScreen_themeLight": "โหมดสว่าง",
-    "settingsScreen_themeDark": "Dark",
-    "settingsScreen_themeSystem": "System",
-    "settingsScreen_dynamicTheme": "Dynamic Theme",
-    "settingsScreen_useWallpaperColors": "Use Wallpaper Colors",
-    "settingsScreen_themeColor": "Theme Color",
-    "settingsScreen_pickAColor": "Pick a Color",
-    "settingsScreen_view": "View",
-    "settingsScreen_birthControl": "Birth Control",
-    "settingsScreen_enablePillTracking": "Enable Pill Tracking",
-    "settingsScreen_pillDescription": "Track your daily pill intake and get reminders.",
-    "settingsScreen_setUpPillRegimen": "Set Up Pill Regimen",
-    "settingsScreen_trackYourDailyPillIntake": "Track Your Daily Pill Intake",
-    "settingsScreen_dailyPillReminder": "Daily Pill Reminder",
-    "settingsScreen_reminderTime": "Reminder Time",
-    "settingsScreen_periodPredictionAndReminders": "Period Prediction & Reminders",
-    "settingsScreen_upcomingPeriodReminder": "Upcoming Period Reminder",
-    "settingsScreen_remindMeBefore": "Remind Me Before",
-    "settingsScreen_notificationTime": "Notification Time",
-    "settingsScreen_overduePeriodReminder": "Overdue Period Reminder",
-    "settingsScreen_remindMeAfter": "Remind Me After",
-    "settingsScreen_enableReversibleContraceptiveTracking": "Enable Reversible Contraceptive Tracking",
-    "settingsScreen_reversibleContraceptiveDescription": "Track Reversible Contraceptives.",
-    "settingsScreen_reversibleContraceptiveType": "Contraceptive Type",
-    "settingsScreen_setDuration": "Set Duration",
-    "settingsScreen_reversibleContraceptiveDuration": "Contraceptive Replacement Duration",
-    "settingsScreen_enableReversibleContraceptiveReminder": "Enable Contraceptive Reminder",
-    "settingsScreen_currentDuration": "Current Duration",
-    "settingsScreen_durationInDays": "Duration (Days)",
-    "settingsScreen_LoggingScreen": "Logging",
-    "settingsScreen_enableLoggingReminders": "Enable Logging Reminders",
-    "settingsScreen_loggingReminderDescription": "If you log a day with flow, you will receive a notification the following day to log your status.",
-    "settingsScreen_loggingReminderTime": "Logging Reminder Time",
-    "settingsScreen_defaultSymptoms": "Default Symptoms",
-    "settingsScreen_defaultSymptomsSubtitle": "These are always available when logging new periods.\nTap an existing symptom to delete or '+' to add a new one.",
-    "settingsScreen_deleteDefaultSymptomQuestion": "Delete '{symptom}'?",
+    "settingsScreen_themeDark": "โหมดมืด",
+    "settingsScreen_themeSystem": "ตามระบบ",
+    "settingsScreen_dynamicTheme": "ธีมอัตโนมัติ",
+    "settingsScreen_useWallpaperColors": "ใช้สีจากวอลเปเปอร์",
+    "settingsScreen_themeColor": "สีธีม",
+    "settingsScreen_pickAColor": "เลือกสี",
+    "settingsScreen_view": "มุมมอง",
+    "settingsScreen_birthControl": "การคุมกำเนิด",
+    "settingsScreen_enablePillTracking": "เปิดติดตามการกินยาคุม",
+    "settingsScreen_pillDescription": "บันทึกการกินยาคุมรายวัน พร้อมรับการแจ้งเตือน",
+    "settingsScreen_setUpPillRegimen": "ตั้งค่ารอบการกินยาคุม",
+    "settingsScreen_trackYourDailyPillIntake": "ติดตามการกินยาคุมรายวัน",
+    "settingsScreen_dailyPillReminder": "แจ้งเตือนกินยาคุมรายวัน",
+    "settingsScreen_reminderTime": "เวลาแจ้งเตือน",
+    "settingsScreen_periodPredictionAndReminders": "การคาดการณ์ประจำเดือนและการแจ้งเตือน",
+    "settingsScreen_notificationTime": "เวลาแจ้งเตือน",
+    "settingsScreen_remindMeBefore": "แจ้งเตือนล่วงหน้า",
+    "settingsScreen_remindMeAfter": "แจ้งเตือนหลังจาก",
+    "settingsScreen_upcomingPeriodReminder": "แจ้งเตือนประจำเดือนใกล้มา",
+    "settingsScreen_overduePeriodReminder": "แจ้งเตือนเมื่อประจำเดือนมาช้า",
+    "settingsScreen_fertileWindowReminder": "Fertile Window Reminder",
+    "settingsScreen_ovulationDayReminder": "Ovulation Day Reminder",
+    "settingsScreen_enableReversibleContraceptiveTracking": "เปิดติดตามการคุมกำเนิดแบบถอดออกได้",
+    "settingsScreen_reversibleContraceptiveDescription": "บันทึกการใช้การคุมกำเนิดแบบถอดออกได้",
+    "settingsScreen_reversibleContraceptiveType": "ประเภทการคุมกำเนิด",
+    "settingsScreen_setDuration": "กำหนดระยะเวลา",
+    "settingsScreen_reversibleContraceptiveDuration": "ระยะเวลาเปลี่ยนการคุมกำเนิด",
+    "settingsScreen_enableReversibleContraceptiveReminder": "เปิดแจ้งเตือนการคุมกำเนิด",
+    "settingsScreen_currentDuration": "ระยะเวลาปัจจุบัน",
+    "settingsScreen_durationInDays": "ระยะเวลา (วัน)",
+    "settingsScreen_LoggingScreen": "การบันทึก",
+    "settingsScreen_enableLoggingReminders": "เปิดแจ้งเตือนการบันทึก",
+    "settingsScreen_loggingReminderDescription": "หากคุณบันทึกว่ามีประจำเดือน ระบบจะแจ้งเตือนในวันถัดไปให้บันทึกสถานะอีกครั้ง",
+    "settingsScreen_loggingReminderTime": "เวลาแจ้งเตือนการบันทึก",
+    "settingsScreen_defaultSymptoms": "อาการเริ่มต้น",
+    "settingsScreen_defaultSymptomsSubtitle": "อาการเหล่านี้จะแสดงทุกครั้งเมื่อบันทึกประจำเดือน\nแตะที่อาการเพื่อลบ หรือกด '+' เพื่อเพิ่มอาการใหม่",
+    "settingsScreen_deleteDefaultSymptomQuestion": "ลบ '{symptom}' ใช่ไหม?",
     "@settingsScreen_deleteDefaultSymptomQuestion": {
         "description": "Question whether a symptom should be deleted.",
         "placeholders": {
@@ -499,9 +551,9 @@
             }
         }
     },
-    "settingsScreen_resetSymptomsList": "Reset Symptoms List?",
-    "settingsScreen_resetSymptomsListDescription": "This will remove all your custom symptoms and restore the original built-in list.\n\nYour existing log entries will not be changed.",
-    "settingsScreen_deleteDefaultSymptomDescription": "'{symptom}' will no longer be available when logging a period.\n\n{usageCount, plural, zero{There are currently no period logs with this symptom!} one{There is already 1 period log with this symptom!\nThis log will not be changed.} other{There are {usageCount} period logs with this symptom!\nThese logs will not be changed.}}",
+    "settingsScreen_resetSymptomsList": "รีเซ็ตรายการอาการ?",
+    "settingsScreen_resetSymptomsListDescription": "การดำเนินการนี้จะลบอาการที่คุณเพิ่มเองทั้งหมด และคืนค่าเป็นรายการเริ่มต้น\n\nข้อมูลที่เคยบันทึกไว้จะไม่ถูกเปลี่ยนแปลง",
+    "settingsScreen_deleteDefaultSymptomDescription": "'{symptom}' จะไม่สามารถเลือกได้อีกเมื่อบันทึกประจำเดือน\n\n{usageCount, plural,\n  other{มีบันทึกประจำเดือน {usageCount} รายการที่มีอาการนี้\nรายการเหล่านี้จะไม่ถูกแก้ไข}}",
     "@settingsScreen_deleteDefaultSymptomDescription": {
         "description": "Question whether a symptom should be deleted.",
         "placeholders": {
@@ -512,42 +564,42 @@
             "usageCount": {}
         }
     },
-    "settingsScreen_pillRegimens": "Pill Regimens",
+    "settingsScreen_pillRegimens": "รูปแบบการกินยาคุม",
     "@settingsScreen_pillRegimens": {
         "description": "Header for the section listing all created pill regimens."
     },
-    "settingsScreen_makeActive": "Set as Active",
+    "settingsScreen_makeActive": "ตั้งเป็นที่ใช้งานอยู่",
     "@settingsScreen_makeActive": {
         "description": "Button to select a regimen and set it as the one currently being tracked."
     },
-    "settingsScreen_activeRegimenReminder": "Active Regimen Reminder Settings",
+    "settingsScreen_activeRegimenReminder": "การตั้งค่าแจ้งเตือนสำหรับรูปแบบที่ใช้งานอยู่",
     "@settingsScreen_activeRegimenReminder": {
         "description": "Header for the daily reminder settings section."
     },
-    "settingsScreen_pack": "Pack",
-    "settingsScreen_dataManagement": "Data Management",
-    "settingsScreen_deleteZone": "Delete Zone",
-    "settingsScreen_clearLogsAndPeriods": "Clear Logs & Periods",
+    "settingsScreen_pack": "แผงยา",
+    "settingsScreen_dataManagement": "การจัดการข้อมูล",
+    "settingsScreen_deleteZone": "พื้นที่ลบข้อมูล",
+    "settingsScreen_clearLogsAndPeriods": "ลบบันทึกและประจำเดือนทั้งหมด",
     "@settingsScreen_clearLogsAndPeriods": {
         "description": "Title for the period logs data clearing section."
     },
-    "settingsScreen_clearLogsAndPeriodsSubtitle": "Deletes your entire period and symptom history.",
+    "settingsScreen_clearLogsAndPeriodsSubtitle": "ลบประวัติประจำเดือนและอาการทั้งหมดของคุณ",
     "@settingsScreen_clearLogsAndPeriodsSubtitle": {
         "description": "Subtitle for the period logs data clearing section."
     },
-    "settingsScreen_clearPillLogs": "Clear Pill Logs",
+    "settingsScreen_clearPillLogs": "ลบบันทึกยาคุม",
     "@settingsScreen_clearPillLogs": {
         "description": "Title for the pill logs data clearing section."
     },
-    "settingsScreen_clearPillLogsSubtitle": "Removes your pill regimen and intake history.",
+    "settingsScreen_clearPillLogsSubtitle": "ลบรูปแบบการกินยาและประวัติการกินยาคุมของคุณ",
     "@settingsScreen_clearPillLogsSubtitle": {
         "description": "Subtitle for the pill logs data clearing section."
     },
-    "settingsScreen_clearReversibleContraceptiveLogs": "Clear Reversible Contraceptive Logs",
+    "settingsScreen_clearReversibleContraceptiveLogs": "ลบบันทึกการคุมกำเนิดแบบถอดออกได้",
     "@settingsScreen_clearReversibleContraceptiveLogs": {
         "description": "Title for the reversible contraceptive logs data clearing section."
     },
-    "settingsScreen_clearReversibleContraceptiveLogsSubtitle": "Removes your reversible contraceptive history.",
+    "settingsScreen_clearReversibleContraceptiveLogsSubtitle": "ลบประวัติการคุมกำเนิดแบบถอดออกได้ของคุณ",
     "@settingsScreen_clearReversibleContraceptiveLogsSubtitle": {
         "description": "Subtitle for the reversible contraceptive logs data clearing section."
     },
@@ -605,47 +657,47 @@
     "settingsScreen_security": "ความปลอดภัย",
     "securityScreen_enableBiometricLock": "เปิดใช้งานการล็อกด้วยชีวมิติ",
     "securityScreen_enableBiometricLockSubtitle": "ต้องใช้ลายนิ้วมือหรือ Face ID เพื่อเข้าแอป",
-    "securityScreen_noBiometricsAvailable": "No passcode, fingerprint, or face ID found. Please set one up in your device's settings.",
-    "settingsScreen_userProfile": "You",
+    "securityScreen_noBiometricsAvailable": "ไม่พบรหัสผ่าน ลายนิ้วมือ หรือ Face ID กรุณาตั้งค่าในอุปกรณ์ของคุณก่อน",
+    "settingsScreen_userProfile": "คุณ",
     "@settingsScreen_userProfile": {
         "description": "Title for the user profile settings button."
     },
-    "settingsScreen_preferences": "Preferences",
-    "preferencesScreen_language": "Language",
-    "preferencesScreen_enableSanitaryProductsScreen": "Enable Sanitary Products Screen",
-    "preferencesScreen_enableSanitaryProductsScreenSubtitle": "Show the Sanitary Products tab on the main navigation bar.",
-    "preferencesScreen_enableSexActivityScreen": "Enable Sex Activity Screen",
-    "preferencesScreen_enableSexActivityScreenSubtitle": "Show the Sex Activity tab on the main navigation bar.",
-    "preferencesScreen_StartingDayOfWeek": "Starting Day of the Week",
-    "settingsScreen_about": "About",
+    "settingsScreen_preferences": "การตั้งค่า",
+    "preferencesScreen_language": "ภาษา",
+    "preferencesScreen_enableSanitaryProductsScreen": "เปิดหน้าผลิตภัณฑ์สุขอนามัย",
+    "preferencesScreen_enableSanitaryProductsScreenSubtitle": "แสดงแท็บผลิตภัณฑ์สุขอนามัยในแถบนำทางหลัก",
+    "preferencesScreen_enableSexActivityScreen": "เปิดหน้ากิจกรรมทางเพศ",
+    "preferencesScreen_enableSexActivityScreenSubtitle": "แสดงแท็บกิจกรรมทางเพศในแถบนำทางหลัก",
+    "preferencesScreen_StartingDayOfWeek": "วันเริ่มต้นของสัปดาห์",
+    "settingsScreen_about": "เกี่ยวกับ",
     "@settingsScreen_about": {
         "description": "Title for the about settings button."
     },
-    "aboutScreen_version": "Version",
+    "aboutScreen_version": "เวอร์ชัน",
     "@aboutScreen_version": {
         "description": "Label showing the current app version."
     },
-    "aboutScreen_legalAndSource": "Legal & Source",
+    "aboutScreen_legalAndSource": "ข้อมูลทางกฎหมายและซอร์สโค้ด",
     "@aboutScreen_legalAndSource": {
         "description": "Title for the legal and source about section."
     },
-    "aboutScreen_communityAndUpdates": "Community & Updates",
+    "aboutScreen_communityAndUpdates": "ชุมชนและอัปเดต",
     "@aboutScreen_communityAndUpdates": {
         "description": "Title for the community and updates about section."
     },
-    "aboutScreen_privacyPolicy": "Privacy Policy",
+    "aboutScreen_privacyPolicy": "นโยบายความเป็นส่วนตัว",
     "@aboutScreen_privacyPolicy": {
         "description": "Link text to the privacy policy on the about screen."
     },
-    "aboutScreen_privacyPolicySubtitle": "Read our privacy policy",
+    "aboutScreen_privacyPolicySubtitle": "อ่านนโยบายความเป็นส่วนตัว",
     "@aboutScreen_privacyPolicySubtitle": {
         "description": "Subtitle for the privacy policy link on the about screen."
     },
-    "aboutScreen_releaseNotes": "Release Notes",
+    "aboutScreen_releaseNotes": "บันทึกการอัปเดต",
     "@aboutScreen_releaseNotes": {
         "description": "Link text to the release notes on the about screen."
     },
-    "aboutScreen_releaseNotesSubtitle": "What's new in {version}",
+    "aboutScreen_releaseNotesSubtitle": "มีอะไรใหม่ในเวอร์ชัน {version}",
     "@aboutScreen_releaseNotesSubtitle": {
         "description": "Subtitle for the release notes link on the about screen.",
         "placeholders": {
@@ -659,7 +711,7 @@
     "@aboutScreen_github": {
         "description": "Link text to the GitHub repository on the about screen."
     },
-    "aboutScreen_githubSubtitle": "Source code and issue tracking",
+    "aboutScreen_githubSubtitle": "ซอร์สโค้ดและการติดตามปัญหา",
     "@aboutScreen_githubSubtitle": {
         "description": "Subtitle for the GitHub link on the about screen."
     },
@@ -667,48 +719,48 @@
     "@aboutScreen_discord": {
         "description": "Link text to the Discord server on the about screen."
     },
-    "aboutScreen_discordSubtitle": "Support and community",
+    "aboutScreen_discordSubtitle": "การสนับสนุนและชุมชน",
     "@aboutScreen_discordSubtitle": {
         "description": "Subtitle for the Discord link on the about screen."
     },
-    "aboutScreen_share": "Share",
+    "aboutScreen_share": "แชร์",
     "@aboutScreen_share": {
         "description": "Link button text for the share button on the about screen."
     },
-    "aboutScreen_shareText": "Check out Menstrudel, a private and offline period tracker app!",
+    "aboutScreen_shareText": "ลองใช้ Menstrudel แอปติดตามรอบเดือนแบบออฟไลน์และเป็นส่วนตัว!",
     "@aboutScreen_shareText": {
         "description": "Text used when sharing the app from the about screen."
     },
-    "aboutScreen_urlError": "Could not open the link.",
+    "aboutScreen_urlError": "ไม่สามารถเปิดลิงก์ได้",
     "@aboutScreen_urlError": {
         "description": "Error message shown when a link could not be opened."
     },
-    "logSummaryWidget_loggedDays": "Logged Days",
-    "logSummaryWidget_trackingHistory": "Tracking History",
-    "cycleLengthVarianceWidget_logAtLeastTwoPeriods": "Need at least two cycles to show variance.",
-    "cycleLengthVarianceWidget_title": "Cycle Length Variance",
-    "cycleLengthVarianceWidget_averageCycle": "Avg. Cycle",
-    "cycleLengthVarianceWidget_cycle": "Cycle",
-    "periodDurationWidget_logAtLeastTwoPeriods": "Log at least two periods to see period statistics.",
-    "periodDurationWidget_title": "Period Duration Variance",
-    "periodDurationWidget_averagePeriod": "Avg. Period",
-    "periodDurationWidget_period": "Period",
-    "flowIntensityWidget_flowIntensityBreakdown": "Flow Intensity Breakdown",
-    "flowIntensityWidget_noFlowDataLoggedYet": "No flow data logged yet.",
-    "painLevelWidget_noPainDataLoggedYet": "No pain data logged yet.",
-    "painLevelWidget_painLevelBreakdown": "Pain Level Breakdown",
-    "monthlyFlowChartWidget_noDataToDisplay": "No data to display.",
-    "monthlyFlowChartWidget_cycleFlowPatterns": "Cycle Flow Patterns",
-    "monthlyFlowChartWidget_cycleFlowPatternsDescription": "Each line represents one complete cycle",
-    "symptomFrequencyWidget_noSymptomsLoggedYet": "No symptoms logged yet.",
-    "symptomFrequencyWidget_mostCommonSymptoms": "Most Common Symptoms",
-    "journalViewWidget_logYourFirstPeriod": "Log your first period.",
-    "listViewWidget_noPeriodsLogged": "No periods logged yet.\nTap the + button to add one.",
-    "listViewWidget_confirmDelete": "Confirm Delete",
-    "listViewWidget_confirmDeleteDescription": "Are you sure you want to delete this entry?",
-    "emptyPillStateWidget_noPillRegimenFound": "No pill regimen found.",
-    "emptyPillStateWidget_noPillRegimenFoundDescription": "Set up your pill pack in settings to start tracking.",
-    "pillStatus_pillsOfTotal": "{count, plural, =1{of 1 pill} other{of {count} pills}}",
+    "logSummaryWidget_loggedDays": "จำนวนวันที่บันทึกแล้ว",
+    "logSummaryWidget_trackingHistory": "ประวัติการติดตาม",
+    "cycleLengthVarianceWidget_logAtLeastTwoPeriods": "ต้องมีอย่างน้อย 2 รอบเดือนเพื่อแสดงความแปรปรวน",
+    "cycleLengthVarianceWidget_title": "ความแปรปรวนของความยาวรอบเดือน",
+    "cycleLengthVarianceWidget_averageCycle": "รอบเดือนเฉลี่ย",
+    "cycleLengthVarianceWidget_cycle": "รอบเดือน",
+    "periodDurationWidget_logAtLeastTwoPeriods": "บันทึกรอบเดือนอย่างน้อย 2 ครั้งเพื่อดูสถิติ",
+    "periodDurationWidget_title": "ความแปรปรวนของระยะเวลารอบเดือน",
+    "periodDurationWidget_averagePeriod": "รอบเดือนเฉลี่ย",
+    "periodDurationWidget_period": "รอบเดือน",
+    "flowIntensityWidget_flowIntensityBreakdown": "สรุประดับปริมาณประจำเดือน",
+    "flowIntensityWidget_noFlowDataLoggedYet": "ไม่มีข้อมูลปริมาณประจำเดือน",
+    "painLevelWidget_noPainDataLoggedYet": "ไม่มีข้อมูลอาการปวด",
+    "painLevelWidget_painLevelBreakdown": "สรุประดับความปวด",
+    "monthlyFlowChartWidget_noDataToDisplay": "ไม่มีข้อมูลที่จะแสดง",
+    "monthlyFlowChartWidget_cycleFlowPatterns": "รูปแบบปริมาณประจำเดือนในแต่ละรอบ",
+    "monthlyFlowChartWidget_cycleFlowPatternsDescription": "แต่ละเส้นแทนหนึ่งรอบเดือนที่สมบูรณ์",
+    "symptomFrequencyWidget_noSymptomsLoggedYet": "ยังไม่มีการบันทึกอาการ",
+    "symptomFrequencyWidget_mostCommonSymptoms": "อาการที่พบบ่อยที่สุด",
+    "journalViewWidget_logYourFirstPeriod": "บันทึกรอบเดือนครั้งแรกของคุณ",
+    "listViewWidget_noPeriodsLogged": "ยังไม่มีการบันทึกรอบเดือน\nแตะปุ่ม + เพื่อเพิ่ม",
+    "listViewWidget_confirmDelete": "ยืนยันการลบ",
+    "listViewWidget_confirmDeleteDescription": "คุณแน่ใจหรือไม่ว่าต้องการลบรายการนี้?",
+    "emptyPillStateWidget_noPillRegimenFound": "ไม่พบการตั้งค่าการใช้ยาคุม",
+    "emptyPillStateWidget_noPillRegimenFoundDescription": "ตั้งค่าแผงยาในเมนูการตั้งค่าเพื่อเริ่มติดตาม",
+    "pillStatus_pillsOfTotal": "{count, plural, =1{จาก 1 เม็ด} other{จาก {count} เม็ด}}",
     "@pillStatus_pillsOfTotal": {
         "description": "A label showing the total number of pills.",
         "placeholders": {
@@ -717,10 +769,10 @@
             }
         }
     },
-    "pillStatus_undo": "Undo",
-    "pillStatus_skip": "Skip",
-    "pillStatus_markAsTaken": "Mark As Taken",
-    "pillStatus_packStartInFuture": "Your next pill pack starts on {date}.",
+    "pillStatus_undo": "เลิกทำ",
+    "pillStatus_skip": "ข้าม",
+    "pillStatus_markAsTaken": "ทำเครื่องหมายว่าได้รับประทานแล้ว",
+    "pillStatus_packStartInFuture": "แผงยาถัดไปของคุณจะเริ่มในวันที่ {date}",
     "@pillStatus_packStartInFuture": {
         "description": "Message shown when the pill pack start date is in the future.",
         "placeholders": {
@@ -730,21 +782,21 @@
             }
         }
     },
-    "regimenSetupWidget_setUpPillRegimen": "Set Up Pill Regimen",
-    "regimenSetupWidget_packName": "Pack Name",
-    "regimenSetupWidget_pleaseEnterAName": "Please enter a name",
-    "regimenSetupWidget_activePills": "Active Pills",
-    "regimenSetupWidget_enterANumber": "Enter a number",
-    "regimenSetupWidget_placeboPills": "Placebo Pills",
-    "regimenSetupWidget_firstDayOfThisPack": "First Day of This Pack",
-    "symptomEntrySheet_logYourDay": "Log Your Day",
-    "symptomEntrySheet_symptomsOptional": "Symptoms (Optional)",
-    "periodDetailsSheet_symptoms": "Symptoms",
-    "periodDetailsSheet_flow": "Flow",
-    "reversibleContraceptiveEntrySheet_logReversibleContraceptiveDetails": "Log Contraceptive Details",
-    "sanitaryEntrySheet_logSanitaryProduct": "Log Sanitary Product",
-    "sanitaryEntrySheet_setReminderDuration": "Set Reminder Duration",
-    "sanitaryEntrySheet_maxDuration": "Max Duration: {hours} hours",
+    "regimenSetupWidget_setUpPillRegimen": "ตั้งค่าการใช้ยาคุม",
+    "regimenSetupWidget_packName": "ชื่อแผงยา",
+    "regimenSetupWidget_pleaseEnterAName": "กรุณากรอกชื่อ",
+    "regimenSetupWidget_activePills": "เม็ดยาฮอร์โมน",
+    "regimenSetupWidget_enterANumber": "กรอกตัวเลข",
+    "regimenSetupWidget_placeboPills": "เม็ดแป้ง",
+    "regimenSetupWidget_firstDayOfThisPack": "วันแรกของแผงนี้",
+    "symptomEntrySheet_logYourDay": "บันทึกวันนี้",
+    "symptomEntrySheet_symptomsOptional": "อาการ (ไม่บังคับ)",
+    "periodDetailsSheet_symptoms": "อาการ",
+    "periodDetailsSheet_flow": "ปริมาณประจำเดือน",
+    "reversibleContraceptiveEntrySheet_logReversibleContraceptiveDetails": "บันทึกรายละเอียดการคุมกำเนิด",
+    "sanitaryEntrySheet_logSanitaryProduct": "บันทึกการใช้ผลิตภัณฑ์สุขอนามัย",
+    "sanitaryEntrySheet_setReminderDuration": "ตั้งค่าระยะเวลาแจ้งเตือน",
+    "sanitaryEntrySheet_maxDuration": "ระยะเวลาสูงสุด: {hours} ชั่วโมง",
     "@sanitaryEntrySheet_maxDuration": {
         "description": "Label showing the maximum duration for the selected sanitary product type.",
         "placeholders": {
@@ -753,9 +805,9 @@
             }
         }
     },
-    "sanitaryEntrySheet_futureLogTimeError": "Log time cannot be in the future.",
-    "sanitaryEntrySheet_pastReminderTimeError": "Reminder end time cannot be in the past.",
-    "periodPredictionCircle_days": "{count, plural, =1{Day} other{Days}}",
+    "sanitaryEntrySheet_futureLogTimeError": "เวลาที่บันทึกต้องไม่เป็นเวลาในอนาคต",
+    "sanitaryEntrySheet_pastReminderTimeError": "เวลาสิ้นสุดการแจ้งเตือนต้องไม่เป็นเวลาในอดีต",
+    "periodPredictionCircle_days": "{count, plural, =1{วัน} other{วัน}}",
     "@periodPredictionCircle_days": {
         "description": "A label showing the total number of days until period is due.",
         "placeholders": {
@@ -764,7 +816,7 @@
             }
         }
     },
-    "customSymptomDialog_newSymptom": "New Symptom",
-    "customSymptomDialog_enterCustomSymptom": "Enter a custom symptom",
-    "customSymptomDialog_temporarySymptom": "Temporary Symptom"
+    "customSymptomDialog_newSymptom": "เพิ่มอาการใหม่",
+    "customSymptomDialog_enterCustomSymptom": "กรอกอาการที่ต้องการเพิ่ม",
+    "customSymptomDialog_temporarySymptom": "อาการชั่วคราว"
 }
