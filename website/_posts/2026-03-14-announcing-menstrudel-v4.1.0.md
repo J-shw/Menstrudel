@@ -27,17 +27,17 @@ We are excited to announce the release of **Menstrudel v4.1.0**, packed with req
 ---
 
 <h3 style="text-align: center;">Preview logged data on calendar</h3>
-![Logged data preview](/assets/images/2026-03-14-announcing-menstrudel-v4.1.0/logged_data_preview.png)
+![Logged data preview](/assets/images/blog/2026-03-14-announcing-menstrudel-v4.1.0/logged_data_preview.png)
 
 New visual indicators let you see pain levels and symptoms at a glance. You no longer need to open individual logs to review your data.
 
 <h3 style="text-align: center;">Fertile Window on Calendar</h3>
-![Fertile Window on Calendar](/assets/images/2026-03-14-announcing-menstrudel-v4.1.0/log_calendar.png)
+![Fertile Window on Calendar](/assets/images/blog/2026-03-14-announcing-menstrudel-v4.1.0/log_calendar.png)
 
 Your fertile window is now visible directly on the calendar. If you prefer a cleaner view, you can turn this off under Settings > Cycle Notifications & Predictions.
 
 <h3 style="text-align: center;">Fertility Chance</h3>
-![Fertile chance](/assets/images/2026-03-14-announcing-menstrudel-v4.1.0/today_tab.png)
+![Fertile chance](/assets/images/blog/2026-03-14-announcing-menstrudel-v4.1.0/today_tab.png)
 
 Check your daily fertility status—categorised as low, medium, or high—directly on your dashboard.
 > **Note:** Predictions are a guide for natural cycles. Enabling pill tracking or hormonal contraceptives will disable this feature to maintain accuracy.
