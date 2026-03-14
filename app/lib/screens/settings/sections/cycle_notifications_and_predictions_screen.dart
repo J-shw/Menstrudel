@@ -66,12 +66,36 @@ class CycleNotificationsAndPredictionsScreen extends StatelessWidget {
       body: ListView(
         children: [
           SwitchListTile(
-            title: Text(l10n.settingsScreen_cycleNotificationsAndPredictions),
-            value: settingsService.arePeriodDueNotificationsEnabled,
+            title: Text(l10n.settingsScreen_enablePhasePredictions),
+            value: settingsService.arePhasePredictionsEnabled,
             onChanged: (bool value) {
-              context.read<SettingsService>().setNotificationsEnabled(value);
+              context.read<SettingsService>().setPhasePredictions(value);
             },
           ),
+          if (settingsService.arePhasePredictionsEnabled) ...[
+            SwitchListTile(
+              title: Text(l10n.settingsScreen_displayFertileChance),
+              value: settingsService.displayFertileChance,
+              onChanged: (bool value) {
+                context.read<SettingsService>().setDisplayFertileChance(value);
+              },
+            ),
+            SwitchListTile(
+              title: Text(l10n.settingsScreen_displayFertileWindowOnCalendar),
+              value: settingsService.displayFertileWindowOnCalendar,
+              onChanged: (bool value) {
+                context.read<SettingsService>().setDisplayFertileWindowOnCalendar(value);
+              },
+            ),
+          ],
+          const Divider(),
+          SwitchListTile(
+              title: Text(l10n.settingsScreen_cycleNotificationsAndPredictions),
+              value: settingsService.arePeriodDueNotificationsEnabled,
+              onChanged: (bool value) {
+                context.read<SettingsService>().setNotificationsEnabled(value);
+              },
+            ),
           if (settingsService.arePeriodDueNotificationsEnabled) ...[
             ListTile(
               title: Text(l10n.settingsScreen_remindMeBefore),
