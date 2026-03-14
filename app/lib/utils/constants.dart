@@ -20,6 +20,7 @@ const int sanitaryProductsID = 2;
 const int pillReminderId = 3;
 const int reversibleContraceptiveReminderId = 5;
 const int fertileWindowReminderId = 6;
+const int ovulationReminderId = 7;
 
 // Notification channels
 
@@ -42,6 +43,8 @@ const loggingReminderChannelName = 'Logging Reminders';
 const fertileWindowReminderChannelId = 'fertile_window_reminder_channel';
 const fertileWindowReminderChannelName = 'Fertile Window Reminders';
 
+const ovulationReminderChannelId = 'ovulation_reminder_channel';
+const ovulationReminderChannelName = 'Ovulation Reminders';
 
 
 // Shared preferences keys
@@ -76,6 +79,9 @@ const String startingDayOfWeekKey = 'starting_day_of_week';
 const String fertileWindowNotificationsEnabledKey = 'fertile_window_notifications_enabled';
 const String fertileWindowReminderDaysBeforeKey = 'fertile_window_reminder_days_before';
 const String fertileWindowReminderTimeKey = 'fertile_window_reminder_time';
+const String ovulationNotificationsEnabledKey = 'ovulation_notifications_enabled';
+const String ovulationReminderDaysBeforeKey = 'ovulation_reminder_days_before';
+const String ovulationReminderTimeKey = 'ovulation_reminder_time';
 
 // Notifications
 const String tamponReminderDateTimeKey = 'tampon_reminder_date_time';
@@ -109,3 +115,4 @@ const bool kDefaultLoggingReminder = false;
 const TimeOfDay kDefaultLoggingReminderTime = TimeOfDay(hour: 9, minute: 0);
 const String kDefaultStartingDayOfWeek = 'monday';
 const bool kDefaultFertileWindowNotificationsEnabled = false;
+const bool kDefaultOvulationNotificationsEnabled = false;
