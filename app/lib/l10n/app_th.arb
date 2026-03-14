@@ -519,7 +519,13 @@
     "settingsScreen_trackYourDailyPillIntake": "ติดตามการกินยาคุมรายวัน",
     "settingsScreen_dailyPillReminder": "แจ้งเตือนกินยาคุมรายวัน",
     "settingsScreen_reminderTime": "เวลาแจ้งเตือน",
-    "settingsScreen_periodPredictionAndReminders": "การคาดการณ์ประจำเดือนและการแจ้งเตือน",
+    "settingsScreen_cycleNotificationsAndPredictions": "Cycle Notifications & Predictions",
+    "@settingsScreen_cycleNotificationsAndPredictions": {
+        "description": "Header for the cycle notifications and predictions section"
+    },
+    "settingsScreen_enablePhasePredictions": "Enable Phase Predictions",
+    "settingsScreen_displayFertileChance": "Display Fertile Chance",
+    "settingsScreen_displayFertileWindowOnCalendar": "Display Fertile Window on Calendar",
     "settingsScreen_notificationTime": "เวลาแจ้งเตือน",
     "settingsScreen_remindMeBefore": "แจ้งเตือนล่วงหน้า",
     "settingsScreen_remindMeAfter": "แจ้งเตือนหลังจาก",
