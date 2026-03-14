@@ -125,11 +125,7 @@ const bool kDefaultOvulationNotificationsEnabled = false;
 const bool kDefaultReversibleContraceptiveNotificationsEnabled = false;
 
 const int kDefaultNotificationDays = 1;
-const int kDefaultPeriodOverdueNotificationDays = 1;
 const int kDefaultReversibleContraceptiveReminderDays = 30;
 
 
 const TimeOfDay kDefaultNotificationTime = TimeOfDay(hour: 9, minute: 0);
-const TimeOfDay kDefaultPeriodOverdueNotificationTime = TimeOfDay(hour: 9, minute: 0);
-const TimeOfDay kDefaultReversibleContraceptiveReminderTime = TimeOfDay(hour: 9, minute: 0);
-const TimeOfDay kDefaultLoggingReminderTime = TimeOfDay(hour: 9, minute: 0);
