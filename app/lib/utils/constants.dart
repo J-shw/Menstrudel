@@ -50,69 +50,89 @@ const ovulationReminderChannelName = 'Ovulation Reminders';
 // Shared preferences keys
 
 // Settings
-const String notificationsEnabledKey = 'notifications_enabled';
-const String notificationDaysKey = 'notification_days';
-const String notificationTimeKey = 'notification_time';
-const String periodOverdueNotificationsEnabledKey = 'period_overdue_notifications_enabled';
-const String periodOverdueNotificationDaysKey = 'period_overdue_notification_days';
-const String periodOverdueNotificationTimeKey = 'period_overdue_notification_time';
+
+// App
+const String languageKey = "language";
 const String biometricEnabledKey = 'biometric_enabled';
-const String historyViewKey = 'history_view';
 const String dynamicColorKey = 'dynamic_color';
 const String themeColorKey = 'theme_color';
 const String themeModeKey = 'theme_mode';
-const String persistentReminderKey = "always_show_reminder_button";
-const String defaultSymptomsKey = "default_symptoms";
-const String languageKey = "language";
+const String startingDayOfWeekKey = 'starting_day_of_week';
+const String historyViewKey = 'history_view';
+
+// Nav
 const String pillNavEnabledKey = "pill_nav_enabled";
 const String reversibleContraceptiveNavEnabledKey = "larc_nav_enabled"; // Key will remain the same so existing users dont get unexpected behaviour.
 const String sanitaryNavEnabledKey = "sanitary_nav_enabled";
 const String sexActivityNavEnabledKey = "sex_activity_nav_enabled";
+
+// User
 const String reversibleContraceptiveTypeKey = "larc_type"; // Key will remain the same so existing users dont get unexpected behaviour.
+const String defaultSymptomsKey = "default_symptoms";
 const String reversibleContraceptiveDurationsKey = "larc_durations"; // Key will remain the same so existing users dont get unexpected behaviour.
-const String reversibleContraceptiveNotificationsEnabledKey = "larc_notifications_enabled"; // Key will remain the same so existing users dont get unexpected behaviour.
-const String reversibleContraceptiveNotificationDaysKey = 'larc_notification_days'; // Key will remain the same so existing users dont get unexpected behaviour.
-const String reversibleContraceptiveNotificationTimeKey = 'larc_notification_time'; // Key will remain the same so existing users dont get unexpected behaviour.
-const String loggingReminderKey = 'logging_reminder_notification_enabled';
-const String loggingReminderTimeKey = 'logging_reminder_notification_time';
-const String startingDayOfWeekKey = 'starting_day_of_week';
-const String fertileWindowNotificationsEnabledKey = 'fertile_window_notifications_enabled';
-const String fertileWindowReminderDaysBeforeKey = 'fertile_window_reminder_days_before';
-const String fertileWindowReminderTimeKey = 'fertile_window_reminder_time';
-const String ovulationNotificationsEnabledKey = 'ovulation_notifications_enabled';
-const String ovulationReminderDaysBeforeKey = 'ovulation_reminder_days_before';
-const String ovulationReminderTimeKey = 'ovulation_reminder_time';
 
 // Notifications
+const String notificationsEnabledKey = 'notifications_enabled';
+const String loggingReminderKey = 'logging_reminder_notification_enabled';
+const String periodOverdueNotificationsEnabledKey = 'period_overdue_notifications_enabled';
+const String fertileWindowNotificationsEnabledKey = 'fertile_window_notifications_enabled';
+const String ovulationNotificationsEnabledKey = 'ovulation_notifications_enabled';
+const String reversibleContraceptiveNotificationsEnabledKey = "larc_notifications_enabled"; // Key will remain the same so existing users dont get unexpected behaviour.
+
+const String notificationDaysKey = 'notification_days';
+const String periodOverdueNotificationDaysKey = 'period_overdue_notification_days';
+const String reversibleContraceptiveNotificationDaysKey = 'larc_notification_days'; // Key will remain the same so existing users dont get unexpected behaviour.
+const String fertileWindowReminderDaysBeforeKey = 'fertile_window_reminder_days_before';
+const String ovulationReminderDaysBeforeKey = 'ovulation_reminder_days_before';
+
+const String notificationTimeKey = 'notification_time';
+const String periodOverdueNotificationTimeKey = 'period_overdue_notification_time';
+const String reversibleContraceptiveNotificationTimeKey = 'larc_notification_time'; // Key will remain the same so existing users dont get unexpected behaviour.
+const String loggingReminderTimeKey = 'logging_reminder_notification_time';
+const String fertileWindowReminderTimeKey = 'fertile_window_reminder_time';
+const String ovulationReminderTimeKey = 'ovulation_reminder_time';
+
+
+// Notifications - Currently only sanitary product reminders are stored in the settings service.
 const String tamponReminderDateTimeKey = 'tampon_reminder_date_time';
 
 // Shared preferences default values
 
 // Settings
+
+// App
+const String kDefaultLanguageCode = 'system';
+const bool kDefaultBiometricsEnabled = false;
+const bool kDefaultDynamicColorEnabled = false;
+const Color kDefaultThemeColor = seedColor;
+const AppThemeMode kDefaultThemeMode = AppThemeMode.system;
+const String kDefaultStartingDayOfWeek = 'monday';
+const PeriodHistoryView kDefaultHistoryView = PeriodHistoryView.journal;
+
+// Nav
 const bool kDefaultPillNavEnabled = false;
 const bool kDefaultReversibleContraceptiveNavEnabled = false;
 const bool kDefaultSanitaryNavEnabled = true;
 const bool kDefaultSexActivityNavEnabled = false;
+
+// User
 const ReversibleContraceptiveTypes kDefaultReversibleContraceptiveType = ReversibleContraceptiveTypes.injection;
-const String kDefaultLanguageCode = 'system';
-const bool kDefaultAlwaysShowReminderButton = false;
-const bool kDefaultBiometricsEnabled = false;
-const bool kDefaultNotificationsEnabled = true;
-const int kDefaultNotificationDays = 1;
-const TimeOfDay kDefaultNotificationTime = TimeOfDay(hour: 9, minute: 0);
-const bool kDefaultPeriodOverdueNotificationsEnabled = true;
-const int kDefaultPeriodOverdueNotificationDays = 1;
-const TimeOfDay kDefaultPeriodOverdueNotificationTime = TimeOfDay(hour: 9, minute: 0);
-const PeriodHistoryView kDefaultHistoryView = PeriodHistoryView.journal;
-const bool kDefaultDynamicColorEnabled = false;
-const Color kDefaultThemeColor = seedColor;
-const AppThemeMode kDefaultThemeMode = AppThemeMode.system;
 const Set<Symptom> kDefaultSymptoms = {};
-const bool kDefaultReversibleContraceptiveNotificationsEnabled = false;
-const int kDefaultReversibleContraceptiveReminderDays = 30;
-const TimeOfDay kDefaultReversibleContraceptiveReminderTime = TimeOfDay(hour: 9, minute: 0);
+
+// Notifications
+const bool kDefaultNotificationsEnabled = true;
+const bool kDefaultPeriodOverdueNotificationsEnabled = true;
 const bool kDefaultLoggingReminder = false;
-const TimeOfDay kDefaultLoggingReminderTime = TimeOfDay(hour: 9, minute: 0);
-const String kDefaultStartingDayOfWeek = 'monday';
 const bool kDefaultFertileWindowNotificationsEnabled = false;
 const bool kDefaultOvulationNotificationsEnabled = false;
+const bool kDefaultReversibleContraceptiveNotificationsEnabled = false;
+
+const int kDefaultNotificationDays = 1;
+const int kDefaultPeriodOverdueNotificationDays = 1;
+const int kDefaultReversibleContraceptiveReminderDays = 30;
+
+
+const TimeOfDay kDefaultNotificationTime = TimeOfDay(hour: 9, minute: 0);
+const TimeOfDay kDefaultPeriodOverdueNotificationTime = TimeOfDay(hour: 9, minute: 0);
+const TimeOfDay kDefaultReversibleContraceptiveReminderTime = TimeOfDay(hour: 9, minute: 0);
+const TimeOfDay kDefaultLoggingReminderTime = TimeOfDay(hour: 9, minute: 0);
