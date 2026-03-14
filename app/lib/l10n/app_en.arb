@@ -314,6 +314,34 @@
     "notification_SanitaryProductReminderTitle": "Sanitary Product Reminder",
     "notification_SanitaryProductReminderBody": "Remember to change your product.",
 
+    "notification_fertileWindowTitle": "Fertile Window Reminder",
+    "@notification_fertileWindowTitle": {
+        "description": "Title for the fertile window notification."
+    },
+    "notification_fertileWindowBody": "{count, plural, =1{Your next fertile window is estimated to start in 1 day.} other{Your next fertile window is estimated to start in {count} days.}}",
+    "@notification_fertileWindowBody": {
+        "description": "Body for the upcoming fertile window notification.",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+
+    "notification_ovulationDayReminderTitle": "Ovulation Day Reminder",
+    "@notification_ovulationDayReminderTitle": {
+        "description": "Title for the ovulation day notification."
+    },
+    "notification_ovulationDayReminderBody": "{count, plural, =1{Your next ovulation day is estimated to start in 1 day.} other{Your next ovulation day is estimated to start in {count} days.}}",
+    "@notification_ovulationDayReminderBody": {
+        "description": "Body for the upcoming ovulation day notification.",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+
     "onboardingScreen_welcomeToMenstrudel": "Welcome to Menstrudel",
     "@onboardingScreen_welcomeToMenstrudel": {
         "description": "Title for the onboarding screen."
@@ -547,11 +575,13 @@
     "settingsScreen_reminderTime": "Reminder Time",
 
     "settingsScreen_periodPredictionAndReminders": "Period Prediction & Reminders",
-    "settingsScreen_upcomingPeriodReminder": "Upcoming Period Reminder",
-    "settingsScreen_remindMeBefore": "Remind Me Before",
     "settingsScreen_notificationTime": "Notification Time",
-    "settingsScreen_overduePeriodReminder": "Overdue Period Reminder",
+    "settingsScreen_remindMeBefore": "Remind Me Before",
     "settingsScreen_remindMeAfter": "Remind Me After",
+    "settingsScreen_upcomingPeriodReminder": "Upcoming Period Reminder",
+    "settingsScreen_overduePeriodReminder": "Overdue Period Reminder",
+    "settingsScreen_fertileWindowReminder": "Fertile Window Reminder",
+    "settingsScreen_ovulationDayReminder": "Ovulation Day Reminder",
 
     "settingsScreen_enableReversibleContraceptiveTracking": "Enable Reversible Contraceptive Tracking",
     "settingsScreen_reversibleContraceptiveDescription": "Track Reversible Contraceptives.",

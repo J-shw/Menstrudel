@@ -7,8 +7,8 @@ import 'package:menstrudel/database/repositories/periods_repository.dart';
 import 'package:menstrudel/models/period_logs/log_day.dart';
 import 'package:menstrudel/models/periods/period.dart';
 import 'package:menstrudel/models/period_prediction_result.dart';
-import 'package:menstrudel/utils/constants.dart';
 import 'package:menstrudel/utils/cycle_phase_predictor.dart';
+import 'package:menstrudel/utils/exceptions.dart';
 import 'package:menstrudel/utils/period_predictor.dart';
 import 'package:menstrudel/services/notification_service.dart';
 import 'package:menstrudel/services/settings_service.dart';
@@ -79,6 +79,8 @@ class PeriodService extends ChangeNotifier {
     notifyListeners();
 
     final oldPredictionDate = _upcomingPeriodPrediction?.estimatedStartDate;
+    final oldCyclePredictionFertileStart = _predictedCurrentCycle?.fertileWindowStart;
+    final oldCyclePredictionOvulationDay = _predictedCurrentCycle?.ovulationDay;
 
     try {
       _periodEntries = await _periodsRepo.readAllPeriods();
@@ -92,8 +94,15 @@ class PeriodService extends ChangeNotifier {
         if (oldPredictionDate != _upcomingPeriodPrediction?.estimatedStartDate) {
           _schedulePeriodNotifications(l10n);
         }
+        if (_predictedCurrentCycle != null){
+          if (oldCyclePredictionFertileStart != _predictedCurrentCycle?.fertileWindowStart && _settingsService.areFertileWindowNotificationsEnabled) {
+            _scheduleFertileWindowNotification(l10n);
+          } 
+          if (oldCyclePredictionOvulationDay != _predictedCurrentCycle?.ovulationDay && _settingsService.areOvulationNotificationsEnabled) {
+            _scheduleOvulationDayNotification(l10n);
+          }
+        }
       }
-
       _syncWatchData();
     } finally {
       _isLoading = false;
@@ -192,35 +201,65 @@ class PeriodService extends ChangeNotifier {
     if (_upcomingPeriodPrediction == null) return;
 
     // Period due notification
-    try {
-      await NotificationService.schedulePeriodNotifications(
-        scheduledTime: _upcomingPeriodPrediction!.estimatedStartDate,
-        areEnabled: _settingsService.areNotificationsEnabled,
-        daysBefore: _settingsService.notificationDays,
-        notificationTime: _settingsService.notificationTime,
-        title: l10n.notification_periodTitle,
-        body: l10n.notification_periodBody(_settingsService.notificationDays),
-        notificationID: periodDueNotificationId,
-      );
-    } catch (e) {
-      debugPrint('Error creating period notification: $e');
+    if (_settingsService.areNotificationsEnabled){
+      try {
+        await NotificationService.schedulePeriodNotifications(
+          scheduledTime: _upcomingPeriodPrediction!.estimatedStartDate,
+          daysBefore: _settingsService.notificationDays,
+          notificationTime: _settingsService.notificationTime,
+          title: l10n.notification_periodTitle,
+          body: l10n.notification_periodBody(_settingsService.notificationDays)
+        );
+      } catch (e) {
+        debugPrint('Error creating period notification: $e');
+      }
     }
 
     // Overdue period notification
+    if (_settingsService.arePeriodOverdueNotificationsEnabled){
+      try {
+        await NotificationService.schedulePeriodNotifications(
+          scheduledTime: _upcomingPeriodPrediction!.estimatedStartDate,
+          daysAfter: _settingsService.periodOverdueNotificationDays,
+          notificationTime: _settingsService.periodOverdueNotificationTime,
+          title: l10n.notification_periodOverdueTitle,
+          body: l10n.notification_periodOverdueBody(
+            _settingsService.periodOverdueNotificationDays,
+          )
+        );
+      } catch (e) {
+        debugPrint('Error creating period overdue notification: $e');
+      }
+    }
+  }
+
+  /// Schedules fertile window notification.
+  Future<void> _scheduleFertileWindowNotification(AppLocalizations l10n) async {
     try {
-      await NotificationService.schedulePeriodNotifications(
-        scheduledTime: _upcomingPeriodPrediction!.estimatedStartDate,
-        areEnabled: _settingsService.arePeriodOverdueNotificationsEnabled,
-        daysAfter: _settingsService.periodOverdueNotificationDays,
-        notificationTime: _settingsService.periodOverdueNotificationTime,
-        title: l10n.notification_periodOverdueTitle,
-        body: l10n.notification_periodOverdueBody(
-          _settingsService.periodOverdueNotificationDays,
-        ),
-        notificationID: periodOverdueNotificationId,
+      await NotificationService.scheduleFertileWindowNotification(
+        scheduledTime: _predictedCurrentCycle!.fertileWindowStart,
+        daysBefore: _settingsService.fertileWindowReminderDaysBefore,
+        notificationTime: _settingsService.fertileWindowReminderTime,
+        title: l10n.notification_fertileWindowTitle,
+        body: l10n.notification_fertileWindowBody(_settingsService.fertileWindowReminderDaysBefore),
       );
     } catch (e) {
-      debugPrint('Error creating period overdue notification: $e');
+      debugPrint('Error creating fertile window notification: $e');
+    }
+  }
+
+  /// Schedules ovulation day notification.
+  Future<void> _scheduleOvulationDayNotification(AppLocalizations l10n) async {
+    try {
+      await NotificationService.scheduleOvulationNotification(
+        scheduledTime: _predictedCurrentCycle!.ovulationDay,
+        daysBefore: _settingsService.ovulationReminderDays,
+        notificationTime: _settingsService.ovulationReminderTime,
+        title: l10n.notification_ovulationDayReminderTitle,
+        body: l10n.notification_ovulationDayReminderBody(_settingsService.ovulationReminderDays),
+      );
+    } catch (e) {
+      debugPrint('Error creating fertile window notification: $e');
     }
   }
 
