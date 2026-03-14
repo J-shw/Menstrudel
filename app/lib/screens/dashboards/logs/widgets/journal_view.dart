@@ -87,6 +87,7 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    final settingsService = context.read<SettingsService>();
     final colorScheme = Theme.of(context).colorScheme;
     final logService = context.watch<LogService>();
     final periodService = context.watch<PeriodService>();
@@ -131,8 +132,8 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
           return _buildLogDay(day, logMap[dayOnly]!, colorScheme, isToday);
         }
         
-        if (dayOnly.isAfter(todayOnly)) {
-          if (phase == CyclePhase.fertileWindow || phase == CyclePhase.ovulation) {
+        if (dayOnly.isAfter(todayOnly) && settingsService.isNaturalCycle) {
+          if (settingsService.arePhasePredictionsEnabled && settingsService.displayFertileWindowOnCalendar && (phase == CyclePhase.fertileWindow || phase == CyclePhase.ovulation)) {
             return _buildPhaseDay(day, phase, colorScheme);
           }
           

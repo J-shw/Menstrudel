@@ -143,8 +143,8 @@ class NotificationService {
       title: title,
       body: body,
       notificationID: fertileWindowReminderId,
-      notificationChannelId: fertileWindowReminderChannelId,
-      notificationChannelName: fertileWindowReminderChannelName,
+      notificationChannelId: cyclePhaseReminderChannelId,
+      notificationChannelName: cyclePhaseReminderChannelName,
     );   
   }
 
@@ -172,8 +172,8 @@ class NotificationService {
       title: title,
       body: body,
       notificationID: ovulationReminderId,
-      notificationChannelId: ovulationReminderChannelId,
-      notificationChannelName: ovulationReminderChannelName,
+      notificationChannelId: cyclePhaseReminderChannelId,
+      notificationChannelName: cyclePhaseReminderChannelName,
     );
   }
 

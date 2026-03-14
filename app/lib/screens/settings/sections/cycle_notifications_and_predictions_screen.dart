@@ -3,8 +3,8 @@ import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/services/settings_service.dart';
 import 'package:provider/provider.dart';
 
-class PeriodSettingsScreen extends StatelessWidget {
-  const PeriodSettingsScreen({super.key});
+class CycleNotificationsAndPredictionsScreen extends StatelessWidget {
+  const CycleNotificationsAndPredictionsScreen({super.key});
 
   Future<void> _selectPeriodReminderTime(BuildContext context) async {
     final settingsService = context.read<SettingsService>();
@@ -61,18 +61,38 @@ class PeriodSettingsScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.settingsScreen_periodPredictionAndReminders),
+        title: Text(l10n.settingsScreen_cycleNotificationsAndPredictions),
       ),
       body: ListView(
         children: [
           SwitchListTile(
-            title: Text(l10n.settingsScreen_upcomingPeriodReminder),
-            value: settingsService.areNotificationsEnabled,
+            title: Text(l10n.settingsScreen_enablePhasePredictions),
+            value: settingsService.arePhasePredictionsEnabled,
             onChanged: (bool value) {
-              context.read<SettingsService>().setNotificationsEnabled(value);
+              context.read<SettingsService>().setPhasePredictions(value);
             },
           ),
-          if (settingsService.areNotificationsEnabled) ...[
+          if (settingsService.arePhasePredictionsEnabled) ...[
+            CheckboxListTile(
+              title: Text(l10n.settingsScreen_displayFertileChance),
+              value: settingsService.displayFertileChance,
+              onChanged: (val) => settingsService.setDisplayFertileChance(val ?? false),
+            ),
+            CheckboxListTile(
+              title: Text(l10n.settingsScreen_displayFertileWindowOnCalendar),
+              value: settingsService.displayFertileWindowOnCalendar,
+              onChanged: (val) => settingsService.setDisplayFertileWindowOnCalendar(val ?? false),
+            ),
+          ],
+          const Divider(),
+          SwitchListTile(
+              title: Text(l10n.settingsScreen_cycleNotificationsAndPredictions),
+              value: settingsService.arePeriodDueNotificationsEnabled,
+              onChanged: (bool value) {
+                context.read<SettingsService>().setNotificationsEnabled(value);
+              },
+            ),
+          if (settingsService.arePeriodDueNotificationsEnabled) ...[
             ListTile(
               title: Text(l10n.settingsScreen_remindMeBefore),
               trailing: DropdownButton<int>(

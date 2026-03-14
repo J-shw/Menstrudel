@@ -13,38 +13,68 @@ enum PeriodHistoryView { list, journal }
 
 class SettingsService extends ChangeNotifier {
   late SharedPreferences _prefs;
+  // App
+  String _languageCode = kDefaultLanguageCode;
+  bool _biometricsEnabled = kDefaultBiometricsEnabled;
+  bool _dynamicColorEnabled = kDefaultDynamicColorEnabled;
+  Color _themeColor = kDefaultThemeColor;
+  AppThemeMode _themeMode = kDefaultThemeMode;
+  String _startingDayOfWeek = kDefaultStartingDayOfWeek;
+  PeriodHistoryView _historyView = kDefaultHistoryView;
 
+  // Nav
   bool _pillNavEnabled = kDefaultPillNavEnabled;
   bool _reversibleContraceptiveNavEnabled = kDefaultReversibleContraceptiveNavEnabled;
   bool _sanitaryNavEnabled = kDefaultSanitaryNavEnabled;
   bool _sexActivityNavEnabled = kDefaultSexActivityNavEnabled;
+
+  // User
   ReversibleContraceptiveTypes _reversibleContraceptiveType = kDefaultReversibleContraceptiveType;
-  String _languageCode = kDefaultLanguageCode;
-  bool _biometricsEnabled = kDefaultBiometricsEnabled;
-  bool _notificationsEnabled = kDefaultNotificationsEnabled;
-  int _notificationDays = kDefaultNotificationDays;
-  TimeOfDay _notificationTime = kDefaultNotificationTime;
-  bool _periodOverdueNotificationsEnabled = kDefaultPeriodOverdueNotificationsEnabled;
-  int _periodOverdueNotificationDays = kDefaultPeriodOverdueNotificationDays;
-  TimeOfDay _periodOverdueNotificationTime = kDefaultPeriodOverdueNotificationTime;
-  bool _loggingReminder = kDefaultLoggingReminder;
-  TimeOfDay _loggingReminderTime = kDefaultLoggingReminderTime;
-  PeriodHistoryView _historyView = kDefaultHistoryView;
-  bool _dynamicColorEnabled = kDefaultDynamicColorEnabled;
-  Color _themeColor = kDefaultThemeColor;
-  AppThemeMode _themeMode = kDefaultThemeMode;
   Set<Symptom> _defaultSymptoms = kDefaultSymptoms;
   Map<ReversibleContraceptiveTypes, int> _reversibleContraceptiveDurations = {};
-  bool _reversibleContraceptiveNotificationsEnabled = kDefaultReversibleContraceptiveNotificationsEnabled;
-  int _reversibleContraceptiveReminderDays = kDefaultReversibleContraceptiveReminderDays;
-  TimeOfDay _reversibleContraceptiveReminderTime = kDefaultReversibleContraceptiveReminderTime;
-  String _startingDayOfWeek = kDefaultStartingDayOfWeek;
+  bool _phasePredictions = kDefaultPhasePredictions;
+  bool _displayFertileChance = kDefaultDisplayFertileChance;
+  bool _displayFertileWindowOnCalendar = kDefaultDisplayFertileWindowOnCalendar;
+
+  // Notifications
+  bool _periodDueNotificationsEnabled = kDefaultPeriodDueNotificationsEnabled;
+  bool _loggingReminder = kDefaultLoggingReminder;
+  bool _periodOverdueNotificationsEnabled = kDefaultPeriodOverdueNotificationsEnabled;
   bool _fertileWindowNotificationsEnabled = kDefaultFertileWindowNotificationsEnabled;
-  TimeOfDay _fertileWindowReminderTime = kDefaultNotificationTime;
-  int _fertileWindowReminderDaysBefore = kDefaultNotificationDays;
   bool _ovulationNotificationsEnabled = kDefaultOvulationNotificationsEnabled;
-  TimeOfDay _ovulationReminderTime = kDefaultNotificationTime;
+  bool _reversibleContraceptiveNotificationsEnabled = kDefaultReversibleContraceptiveNotificationsEnabled;
+
+  int _notificationDays = kDefaultNotificationDays;
+  int _periodOverdueNotificationDays = kDefaultNotificationDays;
+  int _reversibleContraceptiveReminderDays = kDefaultReversibleContraceptiveReminderDays;
+  int _fertileWindowReminderDaysBefore = kDefaultNotificationDays;
   int _ovulationReminderDays = kDefaultNotificationDays;
+
+  TimeOfDay _notificationTime = kDefaultNotificationTime;
+  TimeOfDay _periodOverdueNotificationTime = kDefaultNotificationTime;
+  TimeOfDay _loggingReminderTime = kDefaultNotificationTime;
+  TimeOfDay _reversibleContraceptiveReminderTime = kDefaultNotificationTime;
+  TimeOfDay _fertileWindowReminderTime = kDefaultNotificationTime;
+  TimeOfDay _ovulationReminderTime = kDefaultNotificationTime;
+
+  // App
+
+  /// The selected language code for the app (e.g., 'en', 'es', or 'system').
+  String get languageCode => _languageCode;
+  /// Whether the app requires biometric authentication (e.g., fingerprint, face) on startup.
+  bool get areBiometricsEnabled => _biometricsEnabled;
+  /// Whether to use Material You dynamic colors from the wallpaper (Android 12+).
+  bool get isDynamicThemeEnabled => _dynamicColorEnabled;
+  /// The seed color for the app's theme (used if dynamic color is off).
+  Color get themeColor => _themeColor;
+  /// The app's theme mode (Light, Dark, or System).
+  AppThemeMode get themeMode => _themeMode;
+  /// The starting day of the week for calendars
+  String get startingDayOfWeek => _startingDayOfWeek;
+  /// The user's preferred view for the period history (list vs. journal).
+  PeriodHistoryView get historyView => _historyView;
+
+  // Nav
 
   /// Whether the 'Pill' tab is visible in the main navigation bar.
   bool get isPillNavEnabled => _pillNavEnabled;
@@ -54,33 +84,11 @@ class SettingsService extends ChangeNotifier {
   bool get isSanitaryNavEnabled => _sanitaryNavEnabled;
   /// Sex Activity navigation enabled
   bool get isSexActivityNavEnabled => _sexActivityNavEnabled;
+
+  // User
+
   /// Reversible Contraceptive type selected
   ReversibleContraceptiveTypes get reversibleContraceptiveType => _reversibleContraceptiveType;
-  /// The selected language code for the app (e.g., 'en', 'es', or 'system').
-  String get languageCode => _languageCode;
-  /// Whether the app requires biometric authentication (e.g., fingerprint, face) on startup.
-  bool get areBiometricsEnabled => _biometricsEnabled;
-  /// Whether notifications for the *upcoming* period (due) are enabled.
-  bool get areNotificationsEnabled => _notificationsEnabled;
-  /// How many days *before* the period is due to send the notification.
-  int get notificationDays => _notificationDays;
-  /// The time of day to send the 'period due' notification.
-  TimeOfDay get notificationTime => _notificationTime;
-  /// Whether notifications for an *overdue* period are enabled.
-  bool get arePeriodOverdueNotificationsEnabled =>
-      _periodOverdueNotificationsEnabled;
-  /// How many days *after* the period is due to send the overdue notification.
-  int get periodOverdueNotificationDays => _periodOverdueNotificationDays;
-  /// The time of day to send the 'period overdue' notification.
-  TimeOfDay get periodOverdueNotificationTime => _periodOverdueNotificationTime;
-  /// The user's preferred view for the period history (list vs. journal).
-  PeriodHistoryView get historyView => _historyView;
-  /// Whether to use Material You dynamic colors from the wallpaper (Android 12+).
-  bool get isDynamicThemeEnabled => _dynamicColorEnabled;
-  /// The seed color for the app's theme (used if dynamic color is off).
-  Color get themeColor => _themeColor;
-  /// The app's theme mode (Light, Dark, or System).
-  AppThemeMode get themeMode => _themeMode;
   /// The user configured default symptoms
   Set<Symptom> get defaultSymptoms => _defaultSymptoms;
   /// Retrieves the duration in days for a specific Reversible Contraceptive type, which determines its estimated renewal date.
@@ -90,18 +98,55 @@ class SettingsService extends ChangeNotifier {
     }
     return type.defaultDurationDays; 
   }
-  /// If reversible contraceptive notifications are enabled
-  bool get reversibleContraceptiveNotificationsEnabled => _reversibleContraceptiveNotificationsEnabled;
-  /// The amount of days before reversible contraceptive renew date notificaiton shuold be sent
-  int get reversibleContraceptiveReminderDays => _reversibleContraceptiveReminderDays;
-  /// The time of day the reversible contraceptive renew notification should be sent
-  TimeOfDay get reversibleContraceptiveReminderTime => _reversibleContraceptiveReminderTime;
+  /// Whether phase predictions are enabled.
+  bool get arePhasePredictionsEnabled => _phasePredictions;
+  /// Whether fertility chance should be displayed on the today tab.
+  bool get displayFertileChance => _displayFertileChance;
+  /// Whether fertility window should be displayed on the calendar.
+  bool get displayFertileWindowOnCalendar => _displayFertileWindowOnCalendar;
+
+
+  // Notifications
+
+  /// Whether notifications for the *upcoming* period (due) are enabled.
+  bool get arePeriodDueNotificationsEnabled => _periodDueNotificationsEnabled;
   /// Whether the logging reminder is enabled
   bool get isLoggingReminderNotificationEnabled => _loggingReminder;
+  /// Whether notifications for an *overdue* period are enabled.
+  bool get arePeriodOverdueNotificationsEnabled => _periodOverdueNotificationsEnabled;
+  /// Whether fertile window notifications are enabled
+  bool get areFertileWindowNotificationsEnabled => _fertileWindowNotificationsEnabled;
+  /// Whether ovulation notifications are enabled
+  bool get areOvulationNotificationsEnabled => _ovulationNotificationsEnabled;
+  /// If reversible contraceptive notifications are enabled
+  bool get reversibleContraceptiveNotificationsEnabled => _reversibleContraceptiveNotificationsEnabled;
+
+  /// How many days *before* the period is due to send the notification.
+  int get notificationDays => _notificationDays;
+  /// How many days *after* the period is due to send the overdue notification.
+  int get periodOverdueNotificationDays => _periodOverdueNotificationDays;
+  /// The amount of days before reversible contraceptive renew date notificaiton shuold be sent
+  int get reversibleContraceptiveReminderDays => _reversibleContraceptiveReminderDays;
+  /// The amount of days before fertile window notification should be sent
+  int get fertileWindowReminderDaysBefore => _fertileWindowReminderDaysBefore;
+  /// The amount of days before ovulation notification should be sent
+  int get ovulationReminderDays => _ovulationReminderDays;
+
+  /// The time of day to send the 'period due' notification.
+  TimeOfDay get notificationTime => _notificationTime;
+  /// The time of day to send the 'period overdue' notification.
+  TimeOfDay get periodOverdueNotificationTime => _periodOverdueNotificationTime;
   /// The time of day the logging reminder should be sent
   TimeOfDay get loggingReminderTime => _loggingReminderTime;
-  /// The starting day of the week for calendars
-  String get startingDayOfWeek => _startingDayOfWeek;
+  /// The time of day the reversible contraceptive renew notification should be sent
+  TimeOfDay get reversibleContraceptiveReminderTime => _reversibleContraceptiveReminderTime;
+  /// The time of day the fertile window notification should be sent
+  TimeOfDay get fertileWindowReminderTime => _fertileWindowReminderTime;
+  /// The time of day the ovulation notification should be sent
+  TimeOfDay get ovulationReminderTime => _ovulationReminderTime;
+
+  // Other
+
   /// Returns true if user is on natural cycle (Not using pill or affecting reversible contraceptive).
   bool get isNaturalCycle {
     if (_pillNavEnabled) return false;
@@ -112,93 +157,83 @@ class SettingsService extends ChangeNotifier {
     }
     return true;
   }
-  /// Whether fertile window notifications are enabled
-  bool get areFertileWindowNotificationsEnabled => _fertileWindowNotificationsEnabled;
-  /// The time of day the fertile window notification should be sent
-  TimeOfDay get fertileWindowReminderTime => _fertileWindowReminderTime;
-  /// The amount of days before fertile window notification should be sent
-  int get fertileWindowReminderDaysBefore => _fertileWindowReminderDaysBefore;
-  /// Whether ovulation notifications are enabled
-  bool get areOvulationNotificationsEnabled => _ovulationNotificationsEnabled;
-  /// The time of day the ovulation notification should be sent
-  TimeOfDay get ovulationReminderTime => _ovulationReminderTime;
-  /// The amount of days before ovulation notification should be sent
-  int get ovulationReminderDays => _ovulationReminderDays;
-
+  
+  
   Future<void> loadSettings() async {
     _prefs = await SharedPreferences.getInstance();
 
-    _pillNavEnabled = _prefs.getBool(pillNavEnabledKey) ?? false;
-    _reversibleContraceptiveNavEnabled = _prefs.getBool(reversibleContraceptiveNavEnabledKey) ?? false;
-    _sanitaryNavEnabled = _prefs.getBool(sanitaryNavEnabledKey) ?? true;
-    _sexActivityNavEnabled = _prefs.getBool(sexActivityNavEnabledKey) ?? false;
-    _languageCode = _prefs.getString(languageKey) ?? 'system';
-    _biometricsEnabled = _prefs.getBool(biometricEnabledKey) ?? false;
-    _notificationsEnabled = _prefs.getBool(notificationsEnabledKey) ?? true;
-    _notificationDays = _prefs.getInt(notificationDaysKey) ?? 1;
-    _notificationTime = _loadTimeOfDay(notificationTimeKey, 9, 0);
-
-    _periodOverdueNotificationsEnabled = _prefs.getBool(periodOverdueNotificationsEnabledKey) ?? true;
-    _periodOverdueNotificationDays = _prefs.getInt(periodOverdueNotificationDaysKey) ?? 1;
-    _periodOverdueNotificationTime = _loadTimeOfDay(periodOverdueNotificationTimeKey, 9, 0);
-
-    _loggingReminder = _prefs.getBool(loggingReminderKey) ?? false;
-    _loggingReminderTime = _loadTimeOfDay(loggingReminderTimeKey, 9, 0);
-
-    _historyView = _loadHistoryView();
-    _dynamicColorEnabled = _prefs.getBool(dynamicColorKey) ?? false;
+    // App
+    _languageCode = _loadString(languageKey, kDefaultLanguageCode);
+    _biometricsEnabled = _loadBool(biometricEnabledKey, kDefaultBiometricsEnabled);
+    _dynamicColorEnabled = _loadBool(dynamicColorKey, kDefaultDynamicColorEnabled);
     _themeColor = _loadThemeColor();
     _themeMode = _loadThemeMode();
+    _startingDayOfWeek = _loadString(startingDayOfWeekKey, kDefaultStartingDayOfWeek);
+    _historyView = _loadHistoryView();
 
+    // Nav
+    _pillNavEnabled = _loadBool(pillNavEnabledKey, kDefaultPillNavEnabled);
+    _reversibleContraceptiveNavEnabled = _loadBool(reversibleContraceptiveNavEnabledKey, kDefaultReversibleContraceptiveNavEnabled);
+    _sanitaryNavEnabled = _loadBool(sanitaryNavEnabledKey, kDefaultSanitaryNavEnabled);
+    _sexActivityNavEnabled = _loadBool(sexActivityNavEnabledKey, kDefaultSexActivityNavEnabled);
+
+    //User
+    _reversibleContraceptiveType = _loadReversibleContraceptiveType();
     _defaultSymptoms = _loadDefaultSymptoms();
-    _startingDayOfWeek = _prefs.getString(startingDayOfWeekKey) ?? 'monday';
+    _reversibleContraceptiveDurations = _loadReversibleContraceptiveDurations();
+    _phasePredictions = _loadBool(phasePredictionsKey, kDefaultPhasePredictions);
+    _displayFertileChance = _loadBool(displayFertileChanceKey, kDefaultDisplayFertileChance);
+    _displayFertileWindowOnCalendar = _loadBool(displayFertileWindowOnCalendarKey, kDefaultDisplayFertileWindowOnCalendar);
 
-    _fertileWindowNotificationsEnabled = _prefs.getBool(fertileWindowNotificationsEnabledKey) ?? kDefaultFertileWindowNotificationsEnabled;
-    _fertileWindowReminderTime = _loadTimeOfDay(fertileWindowReminderTimeKey, 9, 0);
-    _fertileWindowReminderDaysBefore = _prefs.getInt(fertileWindowReminderDaysBeforeKey) ?? kDefaultNotificationDays;
+    // Notifications
+    _periodDueNotificationsEnabled = _loadBool(periodDueNotificationsEnabledKey, kDefaultPeriodDueNotificationsEnabled);
+    _periodOverdueNotificationsEnabled = _loadBool(periodOverdueNotificationsEnabledKey, kDefaultPeriodOverdueNotificationsEnabled);
+    _reversibleContraceptiveNotificationsEnabled = _loadBool(reversibleContraceptiveNotificationsEnabledKey, kDefaultReversibleContraceptiveNotificationsEnabled);
+    _fertileWindowNotificationsEnabled = _loadBool(fertileWindowNotificationsEnabledKey, kDefaultFertileWindowNotificationsEnabled);
+    _ovulationNotificationsEnabled = _loadBool(ovulationNotificationsEnabledKey, kDefaultOvulationNotificationsEnabled);
+    _loggingReminder = _loadBool(loggingReminderKey, kDefaultLoggingReminder);
 
-    _ovulationNotificationsEnabled = _prefs.getBool(ovulationNotificationsEnabledKey) ?? kDefaultOvulationNotificationsEnabled;
-    _ovulationReminderTime = _loadTimeOfDay(ovulationReminderTimeKey, 9, 0);
-    _ovulationReminderDays = _prefs.getInt(ovulationReminderDaysBeforeKey) ?? kDefaultNotificationDays;
+    _notificationDays = _loadInt(notificationDaysKey, kDefaultNotificationDays);
+    _periodOverdueNotificationDays = _loadInt(periodOverdueNotificationDaysKey, kDefaultNotificationDays);
+    _reversibleContraceptiveReminderDays = _loadInt(reversibleContraceptiveNotificationDaysKey, kDefaultReversibleContraceptiveReminderDays);
+    _fertileWindowReminderDaysBefore = _loadInt(fertileWindowReminderDaysBeforeKey, kDefaultNotificationDays);
+    _ovulationReminderDays = _loadInt(ovulationReminderDaysBeforeKey, kDefaultNotificationDays);
 
-    final String? storedDurationsJson = _prefs.getString(reversibleContraceptiveDurationsKey);
-    if (storedDurationsJson != null) {
-      final Map<String, dynamic> decodedMap = json.decode(storedDurationsJson);
-      
-      _reversibleContraceptiveDurations = decodedMap.map((key, value) {
-        final type = ReversibleContraceptiveTypes.values.firstWhere((e) => e.name == key);
-        return MapEntry(type, value as int);
-      });
-    } else {
-      _reversibleContraceptiveDurations = {};
-    }
-
-    try {
-      final String? reversibleContraceptiveTypeString = _prefs.getString(reversibleContraceptiveTypeKey);
-      _reversibleContraceptiveType = ReversibleContraceptiveTypes.values.firstWhere(
-        (e) => e.name == reversibleContraceptiveTypeString,
-      );
-    } catch (e) {
-      debugPrint('Corrupt saved reversible contraceptive type. Resetting to default.');
-      _reversibleContraceptiveType = kDefaultReversibleContraceptiveType;
-    }
-    _reversibleContraceptiveNotificationsEnabled = _prefs.getBool(reversibleContraceptiveNotificationsEnabledKey) ?? true;
-    _reversibleContraceptiveReminderDays = _prefs.getInt(reversibleContraceptiveNotificationDaysKey) ?? 30;
-    _reversibleContraceptiveReminderTime = _loadTimeOfDay(reversibleContraceptiveNotificationTimeKey, 9, 0);
+    _notificationTime = _loadTimeOfDay(notificationTimeKey, kDefaultNotificationTime);
+    _periodOverdueNotificationTime = _loadTimeOfDay(periodOverdueNotificationTimeKey, kDefaultNotificationTime);
+    _loggingReminderTime = _loadTimeOfDay(loggingReminderTimeKey, kDefaultNotificationTime);
+    _fertileWindowReminderTime = _loadTimeOfDay(fertileWindowReminderTimeKey, kDefaultNotificationTime);
+    _ovulationReminderTime = _loadTimeOfDay(ovulationReminderTimeKey, kDefaultNotificationTime);
+    _reversibleContraceptiveReminderTime = _loadTimeOfDay(reversibleContraceptiveNotificationTimeKey, kDefaultNotificationTime);
 
     notifyListeners();
   }
 
-  TimeOfDay _loadTimeOfDay(String key, int defaultHour, int defaultMinute) {
+  TimeOfDay _loadTimeOfDay(String key, TimeOfDay defaultTime) {
     final String? storedTime = _prefs.getString(key);
     if (storedTime == null) {
-      return TimeOfDay(hour: defaultHour, minute: defaultMinute);
+      return defaultTime;
     }
     final parts = storedTime.split(':');
     return TimeOfDay(
       hour: int.parse(parts[0]),
       minute: int.parse(parts[1]),
     );
+  }
+
+  bool _loadBool(String key, bool defaultValue) {
+    final bool? storedValue = _prefs.getBool(key);
+    return storedValue ?? defaultValue;
+  }
+
+  int _loadInt(String key, int defaultValue) {
+    final int? storedValue = _prefs.getInt(key);
+    return storedValue ?? defaultValue;
+  }
+
+  String _loadString(String key, String defaultValue) {
+    final String? storedValue = _prefs.getString(key);
+    return storedValue ?? defaultValue;
   }
 
   PeriodHistoryView _loadHistoryView() {
@@ -210,7 +245,7 @@ class SettingsService extends ChangeNotifier {
   }
 
   Color _loadThemeColor() {
-    final colorValue = _prefs.getInt(themeColorKey) ?? seedColor.toARGB32();
+    final colorValue = _prefs.getInt(themeColorKey) ?? kDefaultThemeColor.toARGB32();
     return Color(colorValue);
   }
 
@@ -232,6 +267,32 @@ class SettingsService extends ChangeNotifier {
           .toSet();
     }
     return storedDefaultSymptoms.map((e) => Symptom.fromDbString(e)).toSet();
+  }
+
+  Map<ReversibleContraceptiveTypes, int> _loadReversibleContraceptiveDurations() {
+    final String? storedDurationsJson = _prefs.getString(reversibleContraceptiveDurationsKey);
+    if (storedDurationsJson != null) {
+      final Map<String, dynamic> decodedMap = json.decode(storedDurationsJson);
+      
+      return decodedMap.map((key, value) {
+        final type = ReversibleContraceptiveTypes.values.firstWhere((e) => e.name == key);
+        return MapEntry(type, value as int);
+      });
+    } else {
+      return {};
+    }
+  }
+
+  ReversibleContraceptiveTypes _loadReversibleContraceptiveType() {
+    try {
+      final String? reversibleContraceptiveTypeString = _prefs.getString(reversibleContraceptiveTypeKey);
+      return ReversibleContraceptiveTypes.values.firstWhere(
+        (e) => e.name == reversibleContraceptiveTypeString,
+      );
+    } catch (e) {
+      debugPrint('Corrupt saved reversible contraceptive type. Resetting to default.');
+      return kDefaultReversibleContraceptiveType;
+    }
   }
 
   Future<void> deleteAllSettings() async {
@@ -314,8 +375,8 @@ class SettingsService extends ChangeNotifier {
   }
 
   Future<void> setNotificationsEnabled(bool enabled) async {
-    _notificationsEnabled = enabled;
-    await _prefs.setBool(notificationsEnabledKey, enabled);
+    _periodDueNotificationsEnabled = enabled;
+    await _prefs.setBool(periodDueNotificationsEnabledKey, enabled);
     if (!enabled) {
       await NotificationService.cancelPillReminder();
     }
@@ -481,6 +542,27 @@ class SettingsService extends ChangeNotifier {
       _prefs.setBool(sexActivityNavEnabledKey, _sexActivityNavEnabled)
     ]);
     
+    notifyListeners();
+  }
+
+  /// Enable/Disable phase predictions
+  Future<void> setPhasePredictions(bool enabled) async {
+    _phasePredictions = enabled;
+    await _prefs.setBool(phasePredictionsKey, enabled);
+    notifyListeners();
+  }
+
+  /// Enable/Disable fertile chance display on today tab
+  Future<void> setDisplayFertileChance(bool enabled) async {
+    _displayFertileChance = enabled;
+    await _prefs.setBool(displayFertileChanceKey, enabled);
+    notifyListeners();
+  }
+
+  /// Enable/Disable fertile window display on calendar
+  Future<void> setDisplayFertileWindowOnCalendar(bool enabled) async {
+    _displayFertileWindowOnCalendar = enabled;
+    await _prefs.setBool(displayFertileWindowOnCalendarKey, enabled);
     notifyListeners();
   }
 }

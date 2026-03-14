@@ -4,7 +4,7 @@ import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/screens/settings/sections/appearance_settings_screen.dart';
 import 'package:menstrudel/screens/settings/sections/birth_control_settings_screen.dart';
 import 'package:menstrudel/screens/settings/sections/log_settings_screen.dart';
-import 'package:menstrudel/screens/settings/sections/period_settings_screen.dart';
+import 'package:menstrudel/screens/settings/sections/cycle_notifications_and_predictions_screen.dart';
 import 'package:menstrudel/screens/settings/sections/data_settings_screen.dart';
 import 'package:menstrudel/screens/settings/sections/security_settings_screen.dart';
 import 'package:menstrudel/screens/settings/sections/preferences_settings_screen.dart';
@@ -73,12 +73,12 @@ class SettingsScreen extends StatelessWidget {
           },
         ),
         _SettingsSectionButton(
-          title: l10n.settingsScreen_periodPredictionAndReminders,
+          title: l10n.settingsScreen_cycleNotificationsAndPredictions,
           icon: Icons.water_drop_outlined,
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const PeriodSettingsScreen()),
+              MaterialPageRoute(builder: (context) => const CycleNotificationsAndPredictionsScreen()),
             );
           },
         ),

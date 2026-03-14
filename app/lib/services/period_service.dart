@@ -8,7 +8,6 @@ import 'package:menstrudel/models/period_logs/log_day.dart';
 import 'package:menstrudel/models/periods/period.dart';
 import 'package:menstrudel/models/period_prediction_result.dart';
 import 'package:menstrudel/utils/cycle_phase_predictor.dart';
-import 'package:menstrudel/utils/exceptions.dart';
 import 'package:menstrudel/utils/period_predictor.dart';
 import 'package:menstrudel/services/notification_service.dart';
 import 'package:menstrudel/services/settings_service.dart';
@@ -201,7 +200,7 @@ class PeriodService extends ChangeNotifier {
     if (_upcomingPeriodPrediction == null) return;
 
     // Period due notification
-    if (_settingsService.areNotificationsEnabled){
+    if (_settingsService.arePeriodDueNotificationsEnabled){
       try {
         await NotificationService.schedulePeriodNotifications(
           scheduledTime: _upcomingPeriodPrediction!.estimatedStartDate,
