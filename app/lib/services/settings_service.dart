@@ -42,15 +42,15 @@ class SettingsService extends ChangeNotifier {
   bool _reversibleContraceptiveNotificationsEnabled = kDefaultReversibleContraceptiveNotificationsEnabled;
 
   int _notificationDays = kDefaultNotificationDays;
-  int _periodOverdueNotificationDays = kDefaultPeriodOverdueNotificationDays;
+  int _periodOverdueNotificationDays = kDefaultNotificationDays;
   int _reversibleContraceptiveReminderDays = kDefaultReversibleContraceptiveReminderDays;
   int _fertileWindowReminderDaysBefore = kDefaultNotificationDays;
   int _ovulationReminderDays = kDefaultNotificationDays;
 
   TimeOfDay _notificationTime = kDefaultNotificationTime;
-  TimeOfDay _periodOverdueNotificationTime = kDefaultPeriodOverdueNotificationTime;
-  TimeOfDay _loggingReminderTime = kDefaultLoggingReminderTime;
-  TimeOfDay _reversibleContraceptiveReminderTime = kDefaultReversibleContraceptiveReminderTime;
+  TimeOfDay _periodOverdueNotificationTime = kDefaultNotificationTime;
+  TimeOfDay _loggingReminderTime = kDefaultNotificationTime;
+  TimeOfDay _reversibleContraceptiveReminderTime = kDefaultNotificationTime;
   TimeOfDay _fertileWindowReminderTime = kDefaultNotificationTime;
   TimeOfDay _ovulationReminderTime = kDefaultNotificationTime;
 
