@@ -54,6 +54,25 @@ class SettingsService extends ChangeNotifier {
   TimeOfDay _fertileWindowReminderTime = kDefaultNotificationTime;
   TimeOfDay _ovulationReminderTime = kDefaultNotificationTime;
 
+  // App
+
+  /// The selected language code for the app (e.g., 'en', 'es', or 'system').
+  String get languageCode => _languageCode;
+  /// Whether the app requires biometric authentication (e.g., fingerprint, face) on startup.
+  bool get areBiometricsEnabled => _biometricsEnabled;
+  /// Whether to use Material You dynamic colors from the wallpaper (Android 12+).
+  bool get isDynamicThemeEnabled => _dynamicColorEnabled;
+  /// The seed color for the app's theme (used if dynamic color is off).
+  Color get themeColor => _themeColor;
+  /// The app's theme mode (Light, Dark, or System).
+  AppThemeMode get themeMode => _themeMode;
+  /// The starting day of the week for calendars
+  String get startingDayOfWeek => _startingDayOfWeek;
+  /// The user's preferred view for the period history (list vs. journal).
+  PeriodHistoryView get historyView => _historyView;
+
+  // Nav
+
   /// Whether the 'Pill' tab is visible in the main navigation bar.
   bool get isPillNavEnabled => _pillNavEnabled;
   /// Reversible Contraceptive navigation enabled
@@ -62,33 +81,11 @@ class SettingsService extends ChangeNotifier {
   bool get isSanitaryNavEnabled => _sanitaryNavEnabled;
   /// Sex Activity navigation enabled
   bool get isSexActivityNavEnabled => _sexActivityNavEnabled;
+
+  // User
+
   /// Reversible Contraceptive type selected
   ReversibleContraceptiveTypes get reversibleContraceptiveType => _reversibleContraceptiveType;
-  /// The selected language code for the app (e.g., 'en', 'es', or 'system').
-  String get languageCode => _languageCode;
-  /// Whether the app requires biometric authentication (e.g., fingerprint, face) on startup.
-  bool get areBiometricsEnabled => _biometricsEnabled;
-  /// Whether notifications for the *upcoming* period (due) are enabled.
-  bool get areNotificationsEnabled => _notificationsEnabled;
-  /// How many days *before* the period is due to send the notification.
-  int get notificationDays => _notificationDays;
-  /// The time of day to send the 'period due' notification.
-  TimeOfDay get notificationTime => _notificationTime;
-  /// Whether notifications for an *overdue* period are enabled.
-  bool get arePeriodOverdueNotificationsEnabled =>
-      _periodOverdueNotificationsEnabled;
-  /// How many days *after* the period is due to send the overdue notification.
-  int get periodOverdueNotificationDays => _periodOverdueNotificationDays;
-  /// The time of day to send the 'period overdue' notification.
-  TimeOfDay get periodOverdueNotificationTime => _periodOverdueNotificationTime;
-  /// The user's preferred view for the period history (list vs. journal).
-  PeriodHistoryView get historyView => _historyView;
-  /// Whether to use Material You dynamic colors from the wallpaper (Android 12+).
-  bool get isDynamicThemeEnabled => _dynamicColorEnabled;
-  /// The seed color for the app's theme (used if dynamic color is off).
-  Color get themeColor => _themeColor;
-  /// The app's theme mode (Light, Dark, or System).
-  AppThemeMode get themeMode => _themeMode;
   /// The user configured default symptoms
   Set<Symptom> get defaultSymptoms => _defaultSymptoms;
   /// Retrieves the duration in days for a specific Reversible Contraceptive type, which determines its estimated renewal date.
@@ -98,18 +95,48 @@ class SettingsService extends ChangeNotifier {
     }
     return type.defaultDurationDays; 
   }
-  /// If reversible contraceptive notifications are enabled
-  bool get reversibleContraceptiveNotificationsEnabled => _reversibleContraceptiveNotificationsEnabled;
-  /// The amount of days before reversible contraceptive renew date notificaiton shuold be sent
-  int get reversibleContraceptiveReminderDays => _reversibleContraceptiveReminderDays;
-  /// The time of day the reversible contraceptive renew notification should be sent
-  TimeOfDay get reversibleContraceptiveReminderTime => _reversibleContraceptiveReminderTime;
+
+  // Notifications
+
+  /// Whether notifications for the *upcoming* period (due) are enabled.
+  bool get areNotificationsEnabled => _notificationsEnabled;
   /// Whether the logging reminder is enabled
   bool get isLoggingReminderNotificationEnabled => _loggingReminder;
+  /// Whether notifications for an *overdue* period are enabled.
+  bool get arePeriodOverdueNotificationsEnabled => _periodOverdueNotificationsEnabled;
+  /// Whether fertile window notifications are enabled
+  bool get areFertileWindowNotificationsEnabled => _fertileWindowNotificationsEnabled;
+  /// Whether ovulation notifications are enabled
+  bool get areOvulationNotificationsEnabled => _ovulationNotificationsEnabled;
+  /// If reversible contraceptive notifications are enabled
+  bool get reversibleContraceptiveNotificationsEnabled => _reversibleContraceptiveNotificationsEnabled;
+
+  /// How many days *before* the period is due to send the notification.
+  int get notificationDays => _notificationDays;
+  /// How many days *after* the period is due to send the overdue notification.
+  int get periodOverdueNotificationDays => _periodOverdueNotificationDays;
+  /// The amount of days before reversible contraceptive renew date notificaiton shuold be sent
+  int get reversibleContraceptiveReminderDays => _reversibleContraceptiveReminderDays;
+  /// The amount of days before fertile window notification should be sent
+  int get fertileWindowReminderDaysBefore => _fertileWindowReminderDaysBefore;
+  /// The amount of days before ovulation notification should be sent
+  int get ovulationReminderDays => _ovulationReminderDays;
+
+  /// The time of day to send the 'period due' notification.
+  TimeOfDay get notificationTime => _notificationTime;
+  /// The time of day to send the 'period overdue' notification.
+  TimeOfDay get periodOverdueNotificationTime => _periodOverdueNotificationTime;
   /// The time of day the logging reminder should be sent
   TimeOfDay get loggingReminderTime => _loggingReminderTime;
-  /// The starting day of the week for calendars
-  String get startingDayOfWeek => _startingDayOfWeek;
+  /// The time of day the reversible contraceptive renew notification should be sent
+  TimeOfDay get reversibleContraceptiveReminderTime => _reversibleContraceptiveReminderTime;
+  /// The time of day the fertile window notification should be sent
+  TimeOfDay get fertileWindowReminderTime => _fertileWindowReminderTime;
+  /// The time of day the ovulation notification should be sent
+  TimeOfDay get ovulationReminderTime => _ovulationReminderTime;
+
+  // Other
+
   /// Returns true if user is on natural cycle (Not using pill or affecting reversible contraceptive).
   bool get isNaturalCycle {
     if (_pillNavEnabled) return false;
@@ -120,19 +147,8 @@ class SettingsService extends ChangeNotifier {
     }
     return true;
   }
-  /// Whether fertile window notifications are enabled
-  bool get areFertileWindowNotificationsEnabled => _fertileWindowNotificationsEnabled;
-  /// The time of day the fertile window notification should be sent
-  TimeOfDay get fertileWindowReminderTime => _fertileWindowReminderTime;
-  /// The amount of days before fertile window notification should be sent
-  int get fertileWindowReminderDaysBefore => _fertileWindowReminderDaysBefore;
-  /// Whether ovulation notifications are enabled
-  bool get areOvulationNotificationsEnabled => _ovulationNotificationsEnabled;
-  /// The time of day the ovulation notification should be sent
-  TimeOfDay get ovulationReminderTime => _ovulationReminderTime;
-  /// The amount of days before ovulation notification should be sent
-  int get ovulationReminderDays => _ovulationReminderDays;
-
+  
+  
   Future<void> loadSettings() async {
     _prefs = await SharedPreferences.getInstance();
 
