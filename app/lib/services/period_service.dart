@@ -78,8 +78,8 @@ class PeriodService extends ChangeNotifier {
     notifyListeners();
 
     final oldPredictionDate = _upcomingPeriodPrediction?.estimatedStartDate;
-    final oldCyclePredictionFertilestart = _predictedCurrentCycle?.fertileWindowStart;
-
+    final oldCyclePredictionFertileStart = _predictedCurrentCycle?.fertileWindowStart;
+    final oldCyclePredictionOvulationDay = _predictedCurrentCycle?.ovulationDay;
 
     try {
       _periodEntries = await _periodsRepo.readAllPeriods();
@@ -93,11 +93,15 @@ class PeriodService extends ChangeNotifier {
         if (oldPredictionDate != _upcomingPeriodPrediction?.estimatedStartDate) {
           _schedulePeriodNotifications(l10n);
         }
-        if (_predictedCurrentCycle != null && oldCyclePredictionFertilestart != _predictedCurrentCycle?.fertileWindowStart) {
-          _scheduleFertileWindowNotification(l10n);
+        if (_predictedCurrentCycle != null){
+          if (oldCyclePredictionFertileStart != _predictedCurrentCycle?.fertileWindowStart) {
+            _scheduleFertileWindowNotification(l10n);
+          }
+          if (oldCyclePredictionOvulationDay != _predictedCurrentCycle?.ovulationDay) {
+            _scheduleOvulationDayNotification(l10n);
+          }
         }
       }
-
       _syncWatchData();
     } finally {
       _isLoading = false;
@@ -228,7 +232,6 @@ class PeriodService extends ChangeNotifier {
 
   /// Schedules fertile window notification.
   Future<void> _scheduleFertileWindowNotification(AppLocalizations l10n) async {
-    if (_predictedCurrentCycle == null) return;
     if(!_settingsService.areFertileWindowNotificationsEnabled) return;
 
     try {
@@ -238,6 +241,23 @@ class PeriodService extends ChangeNotifier {
         notificationTime: _settingsService.fertileWindowReminderTime,
         title: l10n.notification_fertileWindowTitle,
         body: l10n.notification_fertileWindowBody(_settingsService.fertileWindowReminderDaysBefore),
+      );
+    } catch (e) {
+      debugPrint('Error creating fertile window notification: $e');
+    }
+  }
+
+  /// Schedules ovulation day notification.
+  Future<void> _scheduleOvulationDayNotification(AppLocalizations l10n) async {
+    if(!_settingsService.areOvulationNotificationsEnabled) return;
+
+    try {
+      await NotificationService.scheduleOvulationNotification(
+        scheduledTime: _predictedCurrentCycle!.ovulationDay,
+        daysBefore: _settingsService.ovulationReminderDays,
+        notificationTime: _settingsService.ovulationReminderTime,
+        title: l10n.notification_ovulationDayReminderTitle,
+        body: l10n.notification_ovulationDayReminderBody(_settingsService.ovulationReminderDays),
       );
     } catch (e) {
       debugPrint('Error creating fertile window notification: $e');
