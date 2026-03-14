@@ -67,12 +67,12 @@ class CycleNotificationsAndPredictionsScreen extends StatelessWidget {
         children: [
           SwitchListTile(
             title: Text(l10n.settingsScreen_cycleNotificationsAndPredictions),
-            value: settingsService.areNotificationsEnabled,
+            value: settingsService.arePeriodDueNotificationsEnabled,
             onChanged: (bool value) {
               context.read<SettingsService>().setNotificationsEnabled(value);
             },
           ),
-          if (settingsService.areNotificationsEnabled) ...[
+          if (settingsService.arePeriodDueNotificationsEnabled) ...[
             ListTile(
               title: Text(l10n.settingsScreen_remindMeBefore),
               trailing: DropdownButton<int>(
