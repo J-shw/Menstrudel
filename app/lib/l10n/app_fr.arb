@@ -519,7 +519,13 @@
     "settingsScreen_trackYourDailyPillIntake": "Suivi quotidien de la pilule",
     "settingsScreen_dailyPillReminder": "Rappel pour la pilule quotidienne",
     "settingsScreen_reminderTime": "Heure du rappel",
-    "settingsScreen_periodPredictionAndReminders": "Prédiction des règles et rappels",
+    "settingsScreen_cycleNotificationsAndPredictions": "Cycle Notifications & Predictions",
+    "@settingsScreen_cycleNotificationsAndPredictions": {
+        "description": "Header for the cycle notifications and predictions section"
+    },
+    "settingsScreen_enablePhasePredictions": "Enable Phase Predictions",
+    "settingsScreen_displayFertileChance": "Display Fertile Chance",
+    "settingsScreen_displayFertileWindowOnCalendar": "Display Fertile Window on Calendar",
     "settingsScreen_notificationTime": "Heure de la notification",
     "settingsScreen_remindMeBefore": "M’avertir avant",
     "settingsScreen_remindMeAfter": "Me rappeler après",
