@@ -73,17 +73,15 @@ class NotificationService {
   // Perdiods
 
   /// Schedules notifications related to periods
+  /// Make sure notification is enabled before calling this function
   static Future<void> schedulePeriodNotifications({
     required DateTime scheduledTime,
-    required bool areEnabled,
     required TimeOfDay notificationTime,
     required String title,
     required String body,
     int? daysBefore,
     int? daysAfter,
   }) async {
-
-    if (!areEnabled) return;
 
     if(daysBefore != null && daysAfter != null){
       debugPrint("daysBefore or daysAfter are required.");
@@ -107,7 +105,7 @@ class NotificationService {
     }
     if (tzScheduledTime == null) return;
 
-    _setNotification(
+    await _setNotification(
       tzScheduledTime: tzScheduledTime,
       title: title,
       body: body,
@@ -120,6 +118,7 @@ class NotificationService {
   // Phase notifications
 
   /// Schedules fertile window reminder
+  /// Make sure notification is enabled before calling this function
   static Future<void> scheduleFertileWindowNotification({
     required DateTime scheduledTime,
     required TimeOfDay notificationTime,
@@ -139,7 +138,7 @@ class NotificationService {
     tzScheduledTime = tz.TZDateTime.from(notificationDateTime, tz.local)
       .subtract(Duration(days: daysBefore));
 
-    _setNotification(
+    await _setNotification(
       tzScheduledTime: tzScheduledTime,
       title: title,
       body: body,
@@ -150,6 +149,7 @@ class NotificationService {
   }
 
   /// Schedules ovulation reminder
+  /// Make sure notification is enabled before calling this function
   static Future<void> scheduleOvulationNotification({
     required DateTime scheduledTime,
     required TimeOfDay notificationTime,
@@ -167,7 +167,7 @@ class NotificationService {
     tzScheduledTime = tz.TZDateTime.from(notificationDateTime, tz.local)
       .subtract(Duration(days: daysBefore));
 
-    _setNotification(
+    await _setNotification(
       tzScheduledTime: tzScheduledTime,
       title: title,
       body: body,
@@ -200,6 +200,8 @@ class NotificationService {
           date.day;
   }
 
+  /// Schedules a logging reminder.
+  /// Make sure notification is enabled before calling this function
   static Future<void> scheduleLoggingReminder({
     required DateTime scheduledTime,
     required bool isEnabled,
@@ -213,7 +215,7 @@ class NotificationService {
     
     final tz.TZDateTime scheduledDate = tz.TZDateTime.from(scheduledTime, tz.local);
 
-    _setNotification(
+    await _setNotification(
       tzScheduledTime: scheduledDate,
       title: title,
       body: body,
@@ -294,6 +296,8 @@ class NotificationService {
 
   // Sanitary Product Reminders
 
+  /// Schedules a sanitary product reminder.
+  /// Make sure notification is enabled before calling this function
   static Future<void> scheduleSanitaryProductReminder({
     required DateTime reminderDateTime,
     required String title,
@@ -301,7 +305,7 @@ class NotificationService {
   }) async {
     final tzScheduledTime = tz.TZDateTime.from(reminderDateTime, tz.local);
 
-    _setNotification(
+    await _setNotification(
       tzScheduledTime: tzScheduledTime,
       title: title,
       body: body,
@@ -350,7 +354,7 @@ class NotificationService {
 
     debugPrint('Scheduling reverible contraceptive reminder');
 
-    _setNotification(
+    await _setNotification(
       tzScheduledTime: tzScheduledTime,
       title: title,
       body: body,
