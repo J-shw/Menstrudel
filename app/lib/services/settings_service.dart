@@ -39,6 +39,12 @@ class SettingsService extends ChangeNotifier {
   int _reversibleContraceptiveReminderDays = kDefaultReversibleContraceptiveReminderDays;
   TimeOfDay _reversibleContraceptiveReminderTime = kDefaultReversibleContraceptiveReminderTime;
   String _startingDayOfWeek = kDefaultStartingDayOfWeek;
+  bool _fertileWindowNotificationsEnabled = kDefaultFertileWindowNotificationsEnabled;
+  TimeOfDay _fertileWindowReminderTime = kDefaultNotificationTime;
+  int _fertileWindowReminderDaysBefore = kDefaultNotificationDays;
+  bool _ovulationNotificationsEnabled = kDefaultOvulationNotificationsEnabled;
+  TimeOfDay _ovulationReminderTime = kDefaultNotificationTime;
+  int _ovulationReminderDays = kDefaultNotificationDays;
 
   /// Whether the 'Pill' tab is visible in the main navigation bar.
   bool get isPillNavEnabled => _pillNavEnabled;
@@ -106,6 +112,18 @@ class SettingsService extends ChangeNotifier {
     }
     return true;
   }
+  /// Whether fertile window notifications are enabled
+  bool get areFertileWindowNotificationsEnabled => _fertileWindowNotificationsEnabled;
+  /// The time of day the fertile window notification should be sent
+  TimeOfDay get fertileWindowReminderTime => _fertileWindowReminderTime;
+  /// The amount of days before fertile window notification should be sent
+  int get fertileWindowReminderDaysBefore => _fertileWindowReminderDaysBefore;
+  /// Whether ovulation notifications are enabled
+  bool get areOvulationNotificationsEnabled => _ovulationNotificationsEnabled;
+  /// The time of day the ovulation notification should be sent
+  TimeOfDay get ovulationReminderTime => _ovulationReminderTime;
+  /// The amount of days before ovulation notification should be sent
+  int get ovulationReminderDays => _ovulationReminderDays;
 
   Future<void> loadSettings() async {
     _prefs = await SharedPreferences.getInstance();
@@ -134,6 +152,14 @@ class SettingsService extends ChangeNotifier {
 
     _defaultSymptoms = _loadDefaultSymptoms();
     _startingDayOfWeek = _prefs.getString(startingDayOfWeekKey) ?? 'monday';
+
+    _fertileWindowNotificationsEnabled = _prefs.getBool(fertileWindowNotificationsEnabledKey) ?? kDefaultFertileWindowNotificationsEnabled;
+    _fertileWindowReminderTime = _loadTimeOfDay(fertileWindowReminderTimeKey, 9, 0);
+    _fertileWindowReminderDaysBefore = _prefs.getInt(fertileWindowReminderDaysBeforeKey) ?? kDefaultNotificationDays;
+
+    _ovulationNotificationsEnabled = _prefs.getBool(ovulationNotificationsEnabledKey) ?? kDefaultOvulationNotificationsEnabled;
+    _ovulationReminderTime = _loadTimeOfDay(ovulationReminderTimeKey, 9, 0);
+    _ovulationReminderDays = _prefs.getInt(ovulationReminderDaysBeforeKey) ?? kDefaultNotificationDays;
 
     final String? storedDurationsJson = _prefs.getString(reversibleContraceptiveDurationsKey);
     if (storedDurationsJson != null) {
@@ -338,6 +364,50 @@ class SettingsService extends ChangeNotifier {
     _loggingReminderTime = time;
     final String formattedTime = '${time.hour}:${time.minute}';
     await _prefs.setString(loggingReminderTimeKey, formattedTime);
+    notifyListeners();
+  }
+
+  Future<void> setFertileWindowNotificationsEnabled(bool enabled) async {
+    _fertileWindowNotificationsEnabled = enabled;
+    await _prefs.setBool(fertileWindowNotificationsEnabledKey, enabled);
+    if (!enabled) {
+      await NotificationService.cancelFertileWindowNotification();
+    }
+    notifyListeners();
+  }
+
+  Future<void> setFertileWindowReminderTime(TimeOfDay time) async {
+    _fertileWindowReminderTime = time;
+    final String formattedTime = '${time.hour}:${time.minute}';
+    await _prefs.setString(fertileWindowReminderTimeKey, formattedTime);
+    notifyListeners();
+  }
+
+  Future<void> setFertileWindowReminderDaysBefore(int days) async {
+    _fertileWindowReminderDaysBefore = days;
+    await _prefs.setInt(fertileWindowReminderDaysBeforeKey, days);
+    notifyListeners();
+  }
+
+  Future<void> setOvulationNotificationsEnabled(bool enabled) async {
+    _ovulationNotificationsEnabled = enabled;
+    await _prefs.setBool(ovulationNotificationsEnabledKey, enabled);
+    if (!_ovulationNotificationsEnabled) {
+      await NotificationService.cancelOvulationNotification();
+    }
+    notifyListeners();
+  }
+
+  Future<void> setOvulationReminderTime(TimeOfDay time) async {
+    _ovulationReminderTime = time;
+    final String formattedTime = '${time.hour}:${time.minute}';
+    await _prefs.setString(ovulationReminderTimeKey, formattedTime);
+    notifyListeners();
+  }
+
+  Future<void> setOvulationReminderDaysBefore(int days) async {
+    _ovulationReminderDays = days;
+    await _prefs.setInt(ovulationReminderDaysBeforeKey, days);
     notifyListeners();
   }
 
