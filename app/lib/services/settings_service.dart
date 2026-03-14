@@ -34,7 +34,7 @@ class SettingsService extends ChangeNotifier {
   Map<ReversibleContraceptiveTypes, int> _reversibleContraceptiveDurations = {};
 
   // Notifications
-  bool _notificationsEnabled = kDefaultNotificationsEnabled;
+  bool _periodDueNotificationsEnabled = kDefaultPeriodDueNotificationsEnabled;
   bool _loggingReminder = kDefaultLoggingReminder;
   bool _periodOverdueNotificationsEnabled = kDefaultPeriodOverdueNotificationsEnabled;
   bool _fertileWindowNotificationsEnabled = kDefaultFertileWindowNotificationsEnabled;
@@ -99,7 +99,7 @@ class SettingsService extends ChangeNotifier {
   // Notifications
 
   /// Whether notifications for the *upcoming* period (due) are enabled.
-  bool get areNotificationsEnabled => _notificationsEnabled;
+  bool get arePeriodDueNotificationsEnabled => _periodDueNotificationsEnabled;
   /// Whether the logging reminder is enabled
   bool get isLoggingReminderNotificationEnabled => _loggingReminder;
   /// Whether notifications for an *overdue* period are enabled.
@@ -158,7 +158,7 @@ class SettingsService extends ChangeNotifier {
     _sexActivityNavEnabled = _prefs.getBool(sexActivityNavEnabledKey) ?? false;
     _languageCode = _prefs.getString(languageKey) ?? 'system';
     _biometricsEnabled = _prefs.getBool(biometricEnabledKey) ?? false;
-    _notificationsEnabled = _prefs.getBool(notificationsEnabledKey) ?? true;
+    _periodDueNotificationsEnabled = _prefs.getBool(periodDueNotificationsEnabledKey) ?? true;
     _notificationDays = _prefs.getInt(notificationDaysKey) ?? 1;
     _notificationTime = _loadTimeOfDay(notificationTimeKey, 9, 0);
 
@@ -338,8 +338,8 @@ class SettingsService extends ChangeNotifier {
   }
 
   Future<void> setNotificationsEnabled(bool enabled) async {
-    _notificationsEnabled = enabled;
-    await _prefs.setBool(notificationsEnabledKey, enabled);
+    _periodDueNotificationsEnabled = enabled;
+    await _prefs.setBool(periodDueNotificationsEnabledKey, enabled);
     if (!enabled) {
       await NotificationService.cancelPillReminder();
     }

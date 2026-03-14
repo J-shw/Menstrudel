@@ -40,16 +40,13 @@ const reversibleContraceptivesReminderChannelName = 'Reversible Contraceptive Re
 const loggingReminderChannelId = 'logging_reminder_channel';
 const loggingReminderChannelName = 'Logging Reminders';
 
-const fertileWindowReminderChannelId = 'fertile_window_reminder_channel';
-const fertileWindowReminderChannelName = 'Fertile Window Reminders';
-
-const ovulationReminderChannelId = 'ovulation_reminder_channel';
-const ovulationReminderChannelName = 'Ovulation Reminders';
+const cyclePhaseReminderChannelId = 'cycle_phase_reminder_channel';
+const cyclePhaseReminderChannelName = 'Cycle Phase Reminders';
 
 
 // Shared preferences keys
 
-// Settings
+// Setting Service
 
 // App
 const String languageKey = "language";
@@ -72,7 +69,7 @@ const String defaultSymptomsKey = "default_symptoms";
 const String reversibleContraceptiveDurationsKey = "larc_durations"; // Key will remain the same so existing users dont get unexpected behaviour.
 
 // Notifications
-const String notificationsEnabledKey = 'notifications_enabled';
+const String periodDueNotificationsEnabledKey = 'notifications_enabled';
 const String loggingReminderKey = 'logging_reminder_notification_enabled';
 const String periodOverdueNotificationsEnabledKey = 'period_overdue_notifications_enabled';
 const String fertileWindowNotificationsEnabledKey = 'fertile_window_notifications_enabled';
@@ -93,12 +90,12 @@ const String fertileWindowReminderTimeKey = 'fertile_window_reminder_time';
 const String ovulationReminderTimeKey = 'ovulation_reminder_time';
 
 
-// Notifications - Currently only sanitary product reminders are stored in the settings service.
+// Notification Service - Currently only sanitary product reminders are stored in the settings service.
 const String tamponReminderDateTimeKey = 'tampon_reminder_date_time';
 
 // Shared preferences default values
 
-// Settings
+// Setting Service
 
 // App
 const String kDefaultLanguageCode = 'system';
@@ -120,8 +117,8 @@ const ReversibleContraceptiveTypes kDefaultReversibleContraceptiveType = Reversi
 const Set<Symptom> kDefaultSymptoms = {};
 
 // Notifications
-const bool kDefaultNotificationsEnabled = true;
-const bool kDefaultPeriodOverdueNotificationsEnabled = true;
+const bool kDefaultPeriodDueNotificationsEnabled = true;
+const bool kDefaultPeriodOverdueNotificationsEnabled = false;
 const bool kDefaultLoggingReminder = false;
 const bool kDefaultFertileWindowNotificationsEnabled = false;
 const bool kDefaultOvulationNotificationsEnabled = false;
