@@ -581,6 +581,7 @@
     "settingsScreen_upcomingPeriodReminder": "Upcoming Period Reminder",
     "settingsScreen_overduePeriodReminder": "Overdue Period Reminder",
     "settingsScreen_fertileWindowReminder": "Fertile Window Reminder",
+    "settingsScreen_ovulationDayReminder": "Ovulation Day Reminder",
 
     "settingsScreen_enableReversibleContraceptiveTracking": "Enable Reversible Contraceptive Tracking",
     "settingsScreen_reversibleContraceptiveDescription": "Track Reversible Contraceptives.",
