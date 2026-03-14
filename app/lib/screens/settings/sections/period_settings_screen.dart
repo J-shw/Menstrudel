@@ -42,6 +42,18 @@ class PeriodSettingsScreen extends StatelessWidget {
     }
   }
 
+  Future<void> _selectOvulationReminderTime(BuildContext context) async {
+    final settingsService = context.read<SettingsService>();
+    final TimeOfDay? pickedTime = await showTimePicker(
+      context: context,
+      initialTime: settingsService.fertileWindowReminderTime,
+    );
+
+    if (pickedTime != null && pickedTime != settingsService.fertileWindowReminderTime) {
+      await settingsService.setOvulationReminderTime(pickedTime);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
@@ -166,6 +178,44 @@ class PeriodSettingsScreen extends StatelessWidget {
                 ),
               ),
               onTap: () => _selectFertileWindowReminderTime(context),
+            ),
+          ],
+          const Divider(),
+          SwitchListTile(
+            title: Text(l10n.settingsScreen_ovulationDayReminder),
+            value: settingsService.areOvulationNotificationsEnabled,
+            onChanged: (bool value) {
+              context.read<SettingsService>().setOvulationNotificationsEnabled(value);
+            },
+          ),
+          if (settingsService.areOvulationNotificationsEnabled) ...[
+            ListTile(
+              title: Text(l10n.settingsScreen_remindMeBefore),
+              trailing: DropdownButton<int>(
+                value: settingsService.ovulationReminderDays,
+                items: [1, 2, 3].map((int days) {
+                  return DropdownMenuItem<int>(
+                    value: days,
+                    child: Text(l10n.dayCount(days)),
+                  );
+                }).toList(),
+                onChanged: (int? newDays) {
+                  if (newDays != null) {
+                    context.read<SettingsService>().setOvulationReminderDaysBefore(newDays);
+                  }
+                },
+              ),
+            ),
+            ListTile(
+              title: Text(l10n.settingsScreen_notificationTime),
+              trailing: Text(
+                settingsService.ovulationReminderTime.format(context),
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              onTap: () => _selectOvulationReminderTime(context),
             ),
           ],
         ],
