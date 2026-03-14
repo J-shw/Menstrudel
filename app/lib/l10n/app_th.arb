@@ -274,6 +274,32 @@
     },
     "notification_SanitaryProductReminderTitle": "เตือนการเปลี่ยนผลิตภัณฑ์สุขอนามัย",
     "notification_SanitaryProductReminderBody": "อย่าลืมเปลี่ยนผลิตภัณฑ์",
+    "notification_fertileWindowTitle": "Fertile Window Reminder",
+    "@notification_fertileWindowTitle": {
+        "description": "Title for the fertile window notification."
+    },
+    "notification_fertileWindowBody": "{count, plural, =1{Your next fertile window is estimated to start in 1 day.} other{Your next fertile window is estimated to start in {count} days.}}",
+    "@notification_fertileWindowBody": {
+        "description": "Body for the upcoming fertile window notification.",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "notification_ovulationDayReminderTitle": "Ovulation Day Reminder",
+    "@notification_ovulationDayReminderTitle": {
+        "description": "Title for the ovulation day notification."
+    },
+    "notification_ovulationDayReminderBody": "{count, plural, =1{Your next ovulation day is estimated to start in 1 day.} other{Your next ovulation day is estimated to start in {count} days.}}",
+    "@notification_ovulationDayReminderBody": {
+        "description": "Body for the upcoming ovulation day notification.",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
     "onboardingScreen_welcomeToMenstrudel": "ยินดีต้อนรับสู่ Menstrudel",
     "@onboardingScreen_welcomeToMenstrudel": {
         "description": "Title for the onboarding screen."
@@ -494,11 +520,13 @@
     "settingsScreen_dailyPillReminder": "แจ้งเตือนกินยาคุมรายวัน",
     "settingsScreen_reminderTime": "เวลาแจ้งเตือน",
     "settingsScreen_periodPredictionAndReminders": "การคาดการณ์ประจำเดือนและการแจ้งเตือน",
-    "settingsScreen_upcomingPeriodReminder": "แจ้งเตือนประจำเดือนใกล้มา",
-    "settingsScreen_remindMeBefore": "แจ้งเตือนล่วงหน้า",
     "settingsScreen_notificationTime": "เวลาแจ้งเตือน",
-    "settingsScreen_overduePeriodReminder": "แจ้งเตือนเมื่อประจำเดือนมาช้า",
+    "settingsScreen_remindMeBefore": "แจ้งเตือนล่วงหน้า",
     "settingsScreen_remindMeAfter": "แจ้งเตือนหลังจาก",
+    "settingsScreen_upcomingPeriodReminder": "แจ้งเตือนประจำเดือนใกล้มา",
+    "settingsScreen_overduePeriodReminder": "แจ้งเตือนเมื่อประจำเดือนมาช้า",
+    "settingsScreen_fertileWindowReminder": "Fertile Window Reminder",
+    "settingsScreen_ovulationDayReminder": "Ovulation Day Reminder",
     "settingsScreen_enableReversibleContraceptiveTracking": "เปิดติดตามการคุมกำเนิดแบบถอดออกได้",
     "settingsScreen_reversibleContraceptiveDescription": "บันทึกการใช้การคุมกำเนิดแบบถอดออกได้",
     "settingsScreen_reversibleContraceptiveType": "ประเภทการคุมกำเนิด",
