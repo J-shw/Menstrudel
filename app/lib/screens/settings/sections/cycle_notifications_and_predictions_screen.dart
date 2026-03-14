@@ -3,8 +3,8 @@ import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/services/settings_service.dart';
 import 'package:provider/provider.dart';
 
-class PeriodSettingsScreen extends StatelessWidget {
-  const PeriodSettingsScreen({super.key});
+class CycleNotificationsAndPredictionsScreen extends StatelessWidget {
+  const CycleNotificationsAndPredictionsScreen({super.key});
 
   Future<void> _selectPeriodReminderTime(BuildContext context) async {
     final settingsService = context.read<SettingsService>();
@@ -61,12 +61,12 @@ class PeriodSettingsScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.settingsScreen_periodPredictionAndReminders),
+        title: Text(l10n.settingsScreen_cycleNotificationsAndPredictions),
       ),
       body: ListView(
         children: [
           SwitchListTile(
-            title: Text(l10n.settingsScreen_upcomingPeriodReminder),
+            title: Text(l10n.settingsScreen_cycleNotificationsAndPredictions),
             value: settingsService.areNotificationsEnabled,
             onChanged: (bool value) {
               context.read<SettingsService>().setNotificationsEnabled(value);
