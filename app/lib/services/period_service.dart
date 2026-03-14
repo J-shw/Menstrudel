@@ -93,7 +93,7 @@ class PeriodService extends ChangeNotifier {
         if (oldPredictionDate != _upcomingPeriodPrediction?.estimatedStartDate) {
           _schedulePeriodNotifications(l10n);
         }
-        if (_predictedCurrentCycle != null){
+        if (_predictedCurrentCycle != null && _settingsService.isNaturalCycle){
           if (oldCyclePredictionFertileStart != _predictedCurrentCycle?.fertileWindowStart && _settingsService.areFertileWindowNotificationsEnabled) {
             _scheduleFertileWindowNotification(l10n);
           } 
@@ -101,6 +101,10 @@ class PeriodService extends ChangeNotifier {
             _scheduleOvulationDayNotification(l10n);
           }
         }
+      }
+      if(!_settingsService.isNaturalCycle){
+        NotificationService.cancelFertileWindowNotification();
+        NotificationService.cancelOvulationNotification();
       }
       _syncWatchData();
     } finally {
