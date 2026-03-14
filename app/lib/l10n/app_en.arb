@@ -574,7 +574,10 @@
     "settingsScreen_dailyPillReminder": "Daily Pill Reminder",
     "settingsScreen_reminderTime": "Reminder Time",
 
-    "settingsScreen_periodPredictionAndReminders": "Period Prediction & Reminders",
+    "settingsScreen_cycleNotificationsAndPredictions": "Cycle Notifications & Predictions",
+    "@settingsScreen_cycleNotificationsAndPredictions": {
+        "description": "Header for the cycle notifications and predictions section"
+    },
     "settingsScreen_notificationTime": "Notification Time",
     "settingsScreen_remindMeBefore": "Remind Me Before",
     "settingsScreen_remindMeAfter": "Remind Me After",
