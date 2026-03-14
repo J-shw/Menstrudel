@@ -79,7 +79,6 @@ class NotificationService {
     required TimeOfDay notificationTime,
     required String title,
     required String body,
-    required int notificationID,
     int? daysBefore,
     int? daysAfter,
   }) async {
@@ -112,7 +111,7 @@ class NotificationService {
       tzScheduledTime: tzScheduledTime,
       title: title,
       body: body,
-      notificationID: notificationID,
+      notificationID: periodDueNotificationId,
       notificationChannelId: periodNotificationChannelId,
       notificationChannelName: periodNotificationChannelName,
     );  
@@ -126,7 +125,6 @@ class NotificationService {
     required TimeOfDay notificationTime,
     required String title,
     required String body,
-    required int notificationID,
     required int daysBefore,
   }) async {
 
@@ -145,7 +143,7 @@ class NotificationService {
       tzScheduledTime: tzScheduledTime,
       title: title,
       body: body,
-      notificationID: notificationID,
+      notificationID: fertileWindowReminderId,
       notificationChannelId: fertileWindowReminderChannelId,
       notificationChannelName: fertileWindowReminderChannelName,
     );   
