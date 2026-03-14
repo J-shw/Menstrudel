@@ -73,8 +73,6 @@ class SettingsService extends ChangeNotifier {
   String get startingDayOfWeek => _startingDayOfWeek;
   /// The user's preferred view for the period history (list vs. journal).
   PeriodHistoryView get historyView => _historyView;
-  /// Whether phase predictions are enabled.
-  bool get arePhasePredictions => _phasePredictions;
 
   // Nav
 
@@ -547,18 +545,21 @@ class SettingsService extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// Enable/Disable phase predictions
   Future<void> setPhasePredictions(bool enabled) async {
     _phasePredictions = enabled;
     await _prefs.setBool(phasePredictionsKey, enabled);
     notifyListeners();
   }
 
+  /// Enable/Disable fertile chance display on today tab
   Future<void> setDisplayFertileChance(bool enabled) async {
     _displayFertileChance = enabled;
     await _prefs.setBool(displayFertileChanceKey, enabled);
     notifyListeners();
   }
 
+  /// Enable/Disable fertile window display on calendar
   Future<void> setDisplayFertileWindowOnCalendar(bool enabled) async {
     _displayFertileWindowOnCalendar = enabled;
     await _prefs.setBool(displayFertileWindowOnCalendarKey, enabled);
