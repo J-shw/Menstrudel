@@ -156,19 +156,19 @@ class SettingsService extends ChangeNotifier {
     _prefs = await SharedPreferences.getInstance();
 
     // App
-    _languageCode = _prefs.getString(languageKey) ?? 'system';
-    _biometricsEnabled = _prefs.getBool(biometricEnabledKey) ?? false;
-    _dynamicColorEnabled = _prefs.getBool(dynamicColorKey) ?? false;
+    _languageCode = _loadString(languageKey, kDefaultLanguageCode);
+    _biometricsEnabled = _loadBool(biometricEnabledKey, kDefaultBiometricsEnabled);
+    _dynamicColorEnabled = _loadBool(dynamicColorKey, kDefaultDynamicColorEnabled);
     _themeColor = _loadThemeColor();
     _themeMode = _loadThemeMode();
-    _startingDayOfWeek = _prefs.getString(startingDayOfWeekKey) ?? 'monday';
+    _startingDayOfWeek = _loadString(startingDayOfWeekKey, kDefaultStartingDayOfWeek);
     _historyView = _loadHistoryView();
 
     // Nav
-    _pillNavEnabled = _prefs.getBool(pillNavEnabledKey) ?? false;
-    _reversibleContraceptiveNavEnabled = _prefs.getBool(reversibleContraceptiveNavEnabledKey) ?? false;
-    _sanitaryNavEnabled = _prefs.getBool(sanitaryNavEnabledKey) ?? true;
-    _sexActivityNavEnabled = _prefs.getBool(sexActivityNavEnabledKey) ?? false;
+    _pillNavEnabled = _loadBool(pillNavEnabledKey, kDefaultPillNavEnabled);
+    _reversibleContraceptiveNavEnabled = _loadBool(reversibleContraceptiveNavEnabledKey, kDefaultReversibleContraceptiveNavEnabled);
+    _sanitaryNavEnabled = _loadBool(sanitaryNavEnabledKey, kDefaultSanitaryNavEnabled);
+    _sexActivityNavEnabled = _loadBool(sexActivityNavEnabledKey, kDefaultSexActivityNavEnabled);
 
     //User
     _reversibleContraceptiveType = _loadReversibleContraceptiveType();
@@ -176,39 +176,54 @@ class SettingsService extends ChangeNotifier {
     _reversibleContraceptiveDurations = _loadReversibleContraceptiveDurations();
 
     // Notifications
-    _periodDueNotificationsEnabled = _prefs.getBool(periodDueNotificationsEnabledKey) ?? true;
-    _periodOverdueNotificationsEnabled = _prefs.getBool(periodOverdueNotificationsEnabledKey) ?? true;
-    _reversibleContraceptiveNotificationsEnabled = _prefs.getBool(reversibleContraceptiveNotificationsEnabledKey) ?? true;
-    _fertileWindowNotificationsEnabled = _prefs.getBool(fertileWindowNotificationsEnabledKey) ?? kDefaultFertileWindowNotificationsEnabled;
-    _ovulationNotificationsEnabled = _prefs.getBool(ovulationNotificationsEnabledKey) ?? kDefaultOvulationNotificationsEnabled;
-    _loggingReminder = _prefs.getBool(loggingReminderKey) ?? false;
+    _periodDueNotificationsEnabled = _loadBool(periodDueNotificationsEnabledKey, kDefaultPeriodDueNotificationsEnabled);
+    _periodOverdueNotificationsEnabled = _loadBool(periodOverdueNotificationsEnabledKey, kDefaultPeriodOverdueNotificationsEnabled);
+    _reversibleContraceptiveNotificationsEnabled = _loadBool(reversibleContraceptiveNotificationsEnabledKey, kDefaultReversibleContraceptiveNotificationsEnabled);
+    _fertileWindowNotificationsEnabled = _loadBool(fertileWindowNotificationsEnabledKey, kDefaultFertileWindowNotificationsEnabled);
+    _ovulationNotificationsEnabled = _loadBool(ovulationNotificationsEnabledKey, kDefaultOvulationNotificationsEnabled);
+    _loggingReminder = _loadBool(loggingReminderKey, kDefaultLoggingReminder);
 
-    _notificationDays = _prefs.getInt(notificationDaysKey) ?? 1;
-    _periodOverdueNotificationDays = _prefs.getInt(periodOverdueNotificationDaysKey) ?? 1;
-    _reversibleContraceptiveReminderDays = _prefs.getInt(reversibleContraceptiveNotificationDaysKey) ?? 30;
-    _fertileWindowReminderDaysBefore = _prefs.getInt(fertileWindowReminderDaysBeforeKey) ?? kDefaultNotificationDays;
-    _ovulationReminderDays = _prefs.getInt(ovulationReminderDaysBeforeKey) ?? kDefaultNotificationDays;
+    _notificationDays = _loadInt(notificationDaysKey, kDefaultNotificationDays);
+    _periodOverdueNotificationDays = _loadInt(periodOverdueNotificationDaysKey, kDefaultNotificationDays);
+    _reversibleContraceptiveReminderDays = _loadInt(reversibleContraceptiveNotificationDaysKey, kDefaultReversibleContraceptiveReminderDays);
+    _fertileWindowReminderDaysBefore = _loadInt(fertileWindowReminderDaysBeforeKey, kDefaultNotificationDays);
+    _ovulationReminderDays = _loadInt(ovulationReminderDaysBeforeKey, kDefaultNotificationDays);
 
-    _notificationTime = _loadTimeOfDay(notificationTimeKey, 9, 0);
-    _periodOverdueNotificationTime = _loadTimeOfDay(periodOverdueNotificationTimeKey, 9, 0);
-    _loggingReminderTime = _loadTimeOfDay(loggingReminderTimeKey, 9, 0);
-    _fertileWindowReminderTime = _loadTimeOfDay(fertileWindowReminderTimeKey, 9, 0);
-    _ovulationReminderTime = _loadTimeOfDay(ovulationReminderTimeKey, 9, 0);
-    _reversibleContraceptiveReminderTime = _loadTimeOfDay(reversibleContraceptiveNotificationTimeKey, 9, 0);
+    _notificationTime = _loadTimeOfDay(notificationTimeKey, kDefaultNotificationTime);
+    _periodOverdueNotificationTime = _loadTimeOfDay(periodOverdueNotificationTimeKey, kDefaultNotificationTime);
+    _loggingReminderTime = _loadTimeOfDay(loggingReminderTimeKey, kDefaultNotificationTime);
+    _fertileWindowReminderTime = _loadTimeOfDay(fertileWindowReminderTimeKey, kDefaultNotificationTime);
+    _ovulationReminderTime = _loadTimeOfDay(ovulationReminderTimeKey, kDefaultNotificationTime);
+    _reversibleContraceptiveReminderTime = _loadTimeOfDay(reversibleContraceptiveNotificationTimeKey, kDefaultNotificationTime);
 
     notifyListeners();
   }
 
-  TimeOfDay _loadTimeOfDay(String key, int defaultHour, int defaultMinute) {
+  TimeOfDay _loadTimeOfDay(String key, TimeOfDay defaultTime) {
     final String? storedTime = _prefs.getString(key);
     if (storedTime == null) {
-      return TimeOfDay(hour: defaultHour, minute: defaultMinute);
+      return defaultTime;
     }
     final parts = storedTime.split(':');
     return TimeOfDay(
       hour: int.parse(parts[0]),
       minute: int.parse(parts[1]),
     );
+  }
+
+  bool _loadBool(String key, bool defaultValue) {
+    final bool? storedValue = _prefs.getBool(key);
+    return storedValue ?? defaultValue;
+  }
+
+  int _loadInt(String key, int defaultValue) {
+    final int? storedValue = _prefs.getInt(key);
+    return storedValue ?? defaultValue;
+  }
+
+  String _loadString(String key, String defaultValue) {
+    final String? storedValue = _prefs.getString(key);
+    return storedValue ?? defaultValue;
   }
 
   PeriodHistoryView _loadHistoryView() {
