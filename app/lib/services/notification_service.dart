@@ -119,7 +119,7 @@ class NotificationService {
 
   // Phase notifications
 
-  /// Schedules notifications related to fertile windows
+  /// Schedules fertile window reminder
   static Future<void> scheduleFertileWindowNotification({
     required DateTime scheduledTime,
     required TimeOfDay notificationTime,
@@ -149,9 +149,42 @@ class NotificationService {
     );   
   }
 
+  /// Schedules ovulation reminder
+  static Future<void> scheduleOvulationNotification({
+    required DateTime scheduledTime,
+    required TimeOfDay notificationTime,
+    required String title,
+    required String body,
+    required int daysBefore,
+  }) async {
+    final notificationDateTime = DateTime(
+      scheduledTime.year, scheduledTime.month, scheduledTime.day,
+      notificationTime.hour, notificationTime.minute,
+    );
+
+    tz.TZDateTime? tzScheduledTime;
+
+    tzScheduledTime = tz.TZDateTime.from(notificationDateTime, tz.local)
+      .subtract(Duration(days: daysBefore));
+
+    _setNotification(
+      tzScheduledTime: tzScheduledTime,
+      title: title,
+      body: body,
+      notificationID: ovulationReminderId,
+      notificationChannelId: ovulationReminderChannelId,
+      notificationChannelName: ovulationReminderChannelName,
+    );
+  }
+
   static Future<void> cancelFertileWindowNotification() async {
     debugPrint('Canceling fertile window notification reminder');
     await _plugin.cancel(fertileWindowReminderId);
+  }
+
+  static Future<void> cancelOvulationNotification() async {
+    debugPrint('Canceling ovulation notification reminder');
+    await _plugin.cancel(ovulationReminderId);
   }
 
   // Logging reminders
