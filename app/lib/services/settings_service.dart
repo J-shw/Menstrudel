@@ -13,38 +13,46 @@ enum PeriodHistoryView { list, journal }
 
 class SettingsService extends ChangeNotifier {
   late SharedPreferences _prefs;
+  // App
+  String _languageCode = kDefaultLanguageCode;
+  bool _biometricsEnabled = kDefaultBiometricsEnabled;
+  bool _dynamicColorEnabled = kDefaultDynamicColorEnabled;
+  Color _themeColor = kDefaultThemeColor;
+  AppThemeMode _themeMode = kDefaultThemeMode;
+  String _startingDayOfWeek = kDefaultStartingDayOfWeek;
+  PeriodHistoryView _historyView = kDefaultHistoryView;
 
+  // Nav
   bool _pillNavEnabled = kDefaultPillNavEnabled;
   bool _reversibleContraceptiveNavEnabled = kDefaultReversibleContraceptiveNavEnabled;
   bool _sanitaryNavEnabled = kDefaultSanitaryNavEnabled;
   bool _sexActivityNavEnabled = kDefaultSexActivityNavEnabled;
+
+  // User
   ReversibleContraceptiveTypes _reversibleContraceptiveType = kDefaultReversibleContraceptiveType;
-  String _languageCode = kDefaultLanguageCode;
-  bool _biometricsEnabled = kDefaultBiometricsEnabled;
-  bool _notificationsEnabled = kDefaultNotificationsEnabled;
-  int _notificationDays = kDefaultNotificationDays;
-  TimeOfDay _notificationTime = kDefaultNotificationTime;
-  bool _periodOverdueNotificationsEnabled = kDefaultPeriodOverdueNotificationsEnabled;
-  int _periodOverdueNotificationDays = kDefaultPeriodOverdueNotificationDays;
-  TimeOfDay _periodOverdueNotificationTime = kDefaultPeriodOverdueNotificationTime;
-  bool _loggingReminder = kDefaultLoggingReminder;
-  TimeOfDay _loggingReminderTime = kDefaultLoggingReminderTime;
-  PeriodHistoryView _historyView = kDefaultHistoryView;
-  bool _dynamicColorEnabled = kDefaultDynamicColorEnabled;
-  Color _themeColor = kDefaultThemeColor;
-  AppThemeMode _themeMode = kDefaultThemeMode;
   Set<Symptom> _defaultSymptoms = kDefaultSymptoms;
   Map<ReversibleContraceptiveTypes, int> _reversibleContraceptiveDurations = {};
-  bool _reversibleContraceptiveNotificationsEnabled = kDefaultReversibleContraceptiveNotificationsEnabled;
-  int _reversibleContraceptiveReminderDays = kDefaultReversibleContraceptiveReminderDays;
-  TimeOfDay _reversibleContraceptiveReminderTime = kDefaultReversibleContraceptiveReminderTime;
-  String _startingDayOfWeek = kDefaultStartingDayOfWeek;
+
+  // Notifications
+  bool _notificationsEnabled = kDefaultNotificationsEnabled;
+  bool _loggingReminder = kDefaultLoggingReminder;
+  bool _periodOverdueNotificationsEnabled = kDefaultPeriodOverdueNotificationsEnabled;
   bool _fertileWindowNotificationsEnabled = kDefaultFertileWindowNotificationsEnabled;
-  TimeOfDay _fertileWindowReminderTime = kDefaultNotificationTime;
-  int _fertileWindowReminderDaysBefore = kDefaultNotificationDays;
   bool _ovulationNotificationsEnabled = kDefaultOvulationNotificationsEnabled;
-  TimeOfDay _ovulationReminderTime = kDefaultNotificationTime;
+  bool _reversibleContraceptiveNotificationsEnabled = kDefaultReversibleContraceptiveNotificationsEnabled;
+
+  int _notificationDays = kDefaultNotificationDays;
+  int _periodOverdueNotificationDays = kDefaultPeriodOverdueNotificationDays;
+  int _reversibleContraceptiveReminderDays = kDefaultReversibleContraceptiveReminderDays;
+  int _fertileWindowReminderDaysBefore = kDefaultNotificationDays;
   int _ovulationReminderDays = kDefaultNotificationDays;
+
+  TimeOfDay _notificationTime = kDefaultNotificationTime;
+  TimeOfDay _periodOverdueNotificationTime = kDefaultPeriodOverdueNotificationTime;
+  TimeOfDay _loggingReminderTime = kDefaultLoggingReminderTime;
+  TimeOfDay _reversibleContraceptiveReminderTime = kDefaultReversibleContraceptiveReminderTime;
+  TimeOfDay _fertileWindowReminderTime = kDefaultNotificationTime;
+  TimeOfDay _ovulationReminderTime = kDefaultNotificationTime;
 
   /// Whether the 'Pill' tab is visible in the main navigation bar.
   bool get isPillNavEnabled => _pillNavEnabled;
