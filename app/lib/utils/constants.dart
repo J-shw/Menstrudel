@@ -67,6 +67,7 @@ const String sexActivityNavEnabledKey = "sex_activity_nav_enabled";
 const String reversibleContraceptiveTypeKey = "larc_type"; // Key will remain the same so existing users dont get unexpected behaviour.
 const String defaultSymptomsKey = "default_symptoms";
 const String reversibleContraceptiveDurationsKey = "larc_durations"; // Key will remain the same so existing users dont get unexpected behaviour.
+const String phasePredictionsKey = "phase_predictions";
 
 // Notifications
 const String periodDueNotificationsEnabledKey = 'notifications_enabled';
@@ -115,6 +116,7 @@ const bool kDefaultSexActivityNavEnabled = false;
 // User
 const ReversibleContraceptiveTypes kDefaultReversibleContraceptiveType = ReversibleContraceptiveTypes.injection;
 const Set<Symptom> kDefaultSymptoms = {};
+const bool kDefaultPhasePredictions = false;
 
 // Notifications
 const bool kDefaultPeriodDueNotificationsEnabled = true;
