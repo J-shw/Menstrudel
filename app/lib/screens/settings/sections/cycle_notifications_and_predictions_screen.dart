@@ -73,19 +73,15 @@ class CycleNotificationsAndPredictionsScreen extends StatelessWidget {
             },
           ),
           if (settingsService.arePhasePredictionsEnabled) ...[
-            SwitchListTile(
+            CheckboxListTile(
               title: Text(l10n.settingsScreen_displayFertileChance),
               value: settingsService.displayFertileChance,
-              onChanged: (bool value) {
-                context.read<SettingsService>().setDisplayFertileChance(value);
-              },
+              onChanged: (val) => settingsService.setDisplayFertileChance(val ?? false),
             ),
-            SwitchListTile(
+            CheckboxListTile(
               title: Text(l10n.settingsScreen_displayFertileWindowOnCalendar),
               value: settingsService.displayFertileWindowOnCalendar,
-              onChanged: (bool value) {
-                context.read<SettingsService>().setDisplayFertileWindowOnCalendar(value);
-              },
+              onChanged: (val) => settingsService.setDisplayFertileWindowOnCalendar(val ?? false),
             ),
           ],
           const Divider(),
