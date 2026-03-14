@@ -33,6 +33,8 @@ class SettingsService extends ChangeNotifier {
   Set<Symptom> _defaultSymptoms = kDefaultSymptoms;
   Map<ReversibleContraceptiveTypes, int> _reversibleContraceptiveDurations = {};
   bool _phasePredictions = kDefaultPhasePredictions;
+  bool _displayFertileChance = kDefaultDisplayFertileChance;
+  bool _displayFertileWindowOnCalendar = kDefaultDisplayFertileWindowOnCalendar;
 
   // Notifications
   bool _periodDueNotificationsEnabled = kDefaultPeriodDueNotificationsEnabled;
@@ -98,6 +100,13 @@ class SettingsService extends ChangeNotifier {
     }
     return type.defaultDurationDays; 
   }
+  /// Whether phase predictions are enabled.
+  bool get arePhasePredictionsEnabled => _phasePredictions;
+  /// Whether fertility chance should be displayed on the today tab.
+  bool get displayFertileChance => _displayFertileChance;
+  /// Whether fertility window should be displayed on the calendar.
+  bool get displayFertileWindowOnCalendar => _displayFertileWindowOnCalendar;
+
 
   // Notifications
 
@@ -174,6 +183,9 @@ class SettingsService extends ChangeNotifier {
     _reversibleContraceptiveType = _loadReversibleContraceptiveType();
     _defaultSymptoms = _loadDefaultSymptoms();
     _reversibleContraceptiveDurations = _loadReversibleContraceptiveDurations();
+    _phasePredictions = _loadBool(phasePredictionsKey, kDefaultPhasePredictions);
+    _displayFertileChance = _loadBool(displayFertileChanceKey, kDefaultDisplayFertileChance);
+    _displayFertileWindowOnCalendar = _loadBool(displayFertileWindowOnCalendarKey, kDefaultDisplayFertileWindowOnCalendar);
 
     // Notifications
     _periodDueNotificationsEnabled = _loadBool(periodDueNotificationsEnabledKey, kDefaultPeriodDueNotificationsEnabled);
@@ -235,7 +247,7 @@ class SettingsService extends ChangeNotifier {
   }
 
   Color _loadThemeColor() {
-    final colorValue = _prefs.getInt(themeColorKey) ?? seedColor.toARGB32();
+    final colorValue = _prefs.getInt(themeColorKey) ?? kDefaultThemeColor.toARGB32();
     return Color(colorValue);
   }
 
@@ -532,6 +544,24 @@ class SettingsService extends ChangeNotifier {
       _prefs.setBool(sexActivityNavEnabledKey, _sexActivityNavEnabled)
     ]);
     
+    notifyListeners();
+  }
+
+  Future<void> setPhasePredictions(bool enabled) async {
+    _phasePredictions = enabled;
+    await _prefs.setBool(phasePredictionsKey, enabled);
+    notifyListeners();
+  }
+
+  Future<void> setDisplayFertileChance(bool enabled) async {
+    _displayFertileChance = enabled;
+    await _prefs.setBool(displayFertileChanceKey, enabled);
+    notifyListeners();
+  }
+
+  Future<void> setDisplayFertileWindowOnCalendar(bool enabled) async {
+    _displayFertileWindowOnCalendar = enabled;
+    await _prefs.setBool(displayFertileWindowOnCalendarKey, enabled);
     notifyListeners();
   }
 }
