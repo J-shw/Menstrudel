@@ -38,21 +38,50 @@ class NotificationService {
         ?.requestNotificationsPermission();
   }
 
-  // Perdiods
-
-  /// Schedules notifications related to periods
-  static Future<void> schedulePeriodNotifications({
-    required DateTime scheduledTime,
-    required bool areEnabled,
-    required TimeOfDay notificationTime,
+  /// Helper to set the notification
+  static Future<void> _setNotification({
+    required tz.TZDateTime tzScheduledTime,
     required String title,
     required String body,
     required int notificationID,
+    required String notificationChannelId,
+    required String notificationChannelName,
+  }) async {
+
+    if (tzScheduledTime.isBefore(tz.TZDateTime.now(tz.local))) throw PastNotificationException();
+
+    await _plugin.cancel(notificationID);
+
+    final details = fln.NotificationDetails(
+      android: fln.AndroidNotificationDetails(
+        notificationChannelId, notificationChannelName,
+        importance: fln.Importance.max, priority: fln.Priority.high
+      ),
+      iOS: fln.DarwinNotificationDetails(presentSound: true, presentBadge: true),
+    );
+
+    await _plugin.zonedSchedule(
+      notificationID,
+      title,
+      body,
+      tzScheduledTime,
+      details,
+      androidScheduleMode: fln.AndroidScheduleMode.exactAllowWhileIdle,
+    );
+  }
+
+  // Perdiods
+
+  /// Schedules notifications related to periods
+  /// Make sure notification is enabled before calling this function
+  static Future<void> schedulePeriodNotifications({
+    required DateTime scheduledTime,
+    required TimeOfDay notificationTime,
+    required String title,
+    required String body,
     int? daysBefore,
     int? daysAfter,
   }) async {
-
-    if (!areEnabled) return;
 
     if(daysBefore != null && daysAfter != null){
       debugPrint("daysBefore or daysAfter are required.");
@@ -76,26 +105,86 @@ class NotificationService {
     }
     if (tzScheduledTime == null) return;
 
-    if (tzScheduledTime.isBefore(tz.TZDateTime.now(tz.local))) throw PastNotificationException();
+    await _setNotification(
+      tzScheduledTime: tzScheduledTime,
+      title: title,
+      body: body,
+      notificationID: periodDueNotificationId,
+      notificationChannelId: periodNotificationChannelId,
+      notificationChannelName: periodNotificationChannelName,
+    );  
+  }
 
-    await _plugin.cancel(notificationID);
+  // Phase notifications
 
-    const details = fln.NotificationDetails(
-      android: fln.AndroidNotificationDetails(
-        periodNotificationChannelId, periodNotificationChannelName,
-        importance: fln.Importance.max, priority: fln.Priority.high
-      ),
-      iOS: fln.DarwinNotificationDetails(),
+  /// Schedules fertile window reminder
+  /// Make sure notification is enabled before calling this function
+  static Future<void> scheduleFertileWindowNotification({
+    required DateTime scheduledTime,
+    required TimeOfDay notificationTime,
+    required String title,
+    required String body,
+    required int daysBefore,
+  }) async {
+
+    final notificationDateTime = DateTime(
+      scheduledTime.year, scheduledTime.month, scheduledTime.day,
+      notificationTime.hour, notificationTime.minute,
     );
 
-    await _plugin.zonedSchedule(
-      notificationID,
-      title,
-      body,
-      tzScheduledTime,
-      details,
-      androidScheduleMode: fln.AndroidScheduleMode.exactAllowWhileIdle,
+    tz.TZDateTime? tzScheduledTime;
+
+
+    tzScheduledTime = tz.TZDateTime.from(notificationDateTime, tz.local)
+      .subtract(Duration(days: daysBefore));
+
+    await _setNotification(
+      tzScheduledTime: tzScheduledTime,
+      title: title,
+      body: body,
+      notificationID: fertileWindowReminderId,
+      notificationChannelId: cyclePhaseReminderChannelId,
+      notificationChannelName: cyclePhaseReminderChannelName,
+    );   
+  }
+
+  /// Schedules ovulation reminder
+  /// Make sure notification is enabled before calling this function
+  static Future<void> scheduleOvulationNotification({
+    required DateTime scheduledTime,
+    required TimeOfDay notificationTime,
+    required String title,
+    required String body,
+    required int daysBefore,
+  }) async {
+    final notificationDateTime = DateTime(
+      scheduledTime.year, scheduledTime.month, scheduledTime.day,
+      notificationTime.hour, notificationTime.minute,
     );
+
+    tz.TZDateTime? tzScheduledTime;
+
+    tzScheduledTime = tz.TZDateTime.from(notificationDateTime, tz.local)
+      .subtract(Duration(days: daysBefore));
+
+    await _setNotification(
+      tzScheduledTime: tzScheduledTime,
+      title: title,
+      body: body,
+      notificationID: ovulationReminderId,
+      notificationChannelId: cyclePhaseReminderChannelId,
+      notificationChannelName: cyclePhaseReminderChannelName,
+    );
+  }
+
+  static Future<void> cancelFertileWindowNotification() async {
+    debugPrint('Canceling fertile window notification reminder');
+    await _plugin.cancel(fertileWindowReminderId);
+  }
+
+  static Future<void> cancelOvulationNotification() async {
+    debugPrint('Canceling ovulation notification reminder');
+    await _plugin.cancel(ovulationReminderId);
   }
 
   // Logging reminders
@@ -111,6 +200,8 @@ class NotificationService {
           date.day;
   }
 
+  /// Schedules a logging reminder.
+  /// Make sure notification is enabled before calling this function
   static Future<void> scheduleLoggingReminder({
     required DateTime scheduledTime,
     required bool isEnabled,
@@ -119,33 +210,19 @@ class NotificationService {
   }) async {
     if (!isEnabled) return;
 
-    if (scheduledTime.isBefore(DateTime.now())){
-      debugPrint('Scheduled time is in the past.');
-      return;
-    };
-
     final int reminderId = _generateLoggingReminderIdFromScheduledDate(scheduledTime);
     debugPrint('Scheduling logging reminder with ID: $reminderId');
     
     final tz.TZDateTime scheduledDate = tz.TZDateTime.from(scheduledTime, tz.local);
 
-    const details = fln.NotificationDetails(
-      android: fln.AndroidNotificationDetails(
-        loggingReminderChannelId, loggingReminderChannelName,
-        channelDescription: 'Logging reminders',
-        importance: fln.Importance.max, priority: fln.Priority.high,
-      ),
-      iOS: fln.DarwinNotificationDetails(),
-    );
-
-    await _plugin.zonedSchedule(
-      reminderId,
-      title,
-      body,
-      scheduledDate,
-      details,
-      androidScheduleMode: fln.AndroidScheduleMode.exactAllowWhileIdle,
-    );
+    await _setNotification(
+      tzScheduledTime: scheduledDate,
+      title: title,
+      body: body,
+      notificationID: reminderId,
+      notificationChannelId: loggingReminderChannelId,
+      notificationChannelName: loggingReminderChannelName,
+    ); 
   }
 
   static Future<void> cancelLoggingReminder(DateTime logDate) async {
@@ -219,28 +296,23 @@ class NotificationService {
 
   // Sanitary Product Reminders
 
+  /// Schedules a sanitary product reminder.
+  /// Make sure notification is enabled before calling this function
   static Future<void> scheduleSanitaryProductReminder({
     required DateTime reminderDateTime,
     required String title,
     required String body,
   }) async {
-    final scheduledDate = tz.TZDateTime.from(reminderDateTime, tz.local);
+    final tzScheduledTime = tz.TZDateTime.from(reminderDateTime, tz.local);
 
-    const details = fln.NotificationDetails(
-      android: fln.AndroidNotificationDetails(
-        sanitaryProductChannelId, sanitaryProductChannelName,
-        importance: fln.Importance.max, priority: fln.Priority.high,
-      ),
-      iOS: fln.DarwinNotificationDetails(presentSound: true, presentBadge: true, presentAlert: true),
-    );
-
-    await _plugin.zonedSchedule(
-        sanitaryProductsID,
-        title,
-        body,
-        scheduledDate,
-        details,
-        androidScheduleMode: fln.AndroidScheduleMode.exactAllowWhileIdle);
+    await _setNotification(
+      tzScheduledTime: tzScheduledTime,
+      title: title,
+      body: body,
+      notificationID: sanitaryProductsID,
+      notificationChannelId: sanitaryProductChannelId,
+      notificationChannelName: sanitaryProductChannelName,
+    ); 
   }
 
   static Future<void> cancelSanitaryProductReminder() async {
@@ -277,27 +349,19 @@ class NotificationService {
     required String title,
     required String body,
   }) async {
-    final scheduledDate = tz.TZDateTime.from(reminderDateTime, tz.local);
+    final tzScheduledTime = tz.TZDateTime.from(reminderDateTime, tz.local);
 
-    if (scheduledDate.isBefore(tz.TZDateTime.now(tz.local))) throw PastNotificationException();
 
     debugPrint('Scheduling reverible contraceptive reminder');
 
-    const details = fln.NotificationDetails(
-      android: fln.AndroidNotificationDetails(
-        reversibleContraceptivesReminderChannelId, reversibleContraceptivesReminderChannelName,
-        importance: fln.Importance.max, priority: fln.Priority.high,
-      ),
-      iOS: fln.DarwinNotificationDetails(presentSound: true, presentBadge: true, presentAlert: true),
-    );
-
-    await _plugin.zonedSchedule(
-        reversibleContraceptiveReminderId,
-        title,
-        body,
-        scheduledDate,
-        details,
-        androidScheduleMode: fln.AndroidScheduleMode.exactAllowWhileIdle);
+    await _setNotification(
+      tzScheduledTime: tzScheduledTime,
+      title: title,
+      body: body,
+      notificationID: reversibleContraceptiveReminderId,
+      notificationChannelId: reversibleContraceptivesReminderChannelId,
+      notificationChannelName: reversibleContraceptivesReminderChannelName,
+    ); 
   }
 
   static Future<void> cancelReversibleContraceptiveReminder() async {
