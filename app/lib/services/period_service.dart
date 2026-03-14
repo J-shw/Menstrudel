@@ -7,7 +7,6 @@ import 'package:menstrudel/database/repositories/periods_repository.dart';
 import 'package:menstrudel/models/period_logs/log_day.dart';
 import 'package:menstrudel/models/periods/period.dart';
 import 'package:menstrudel/models/period_prediction_result.dart';
-import 'package:menstrudel/utils/constants.dart';
 import 'package:menstrudel/utils/cycle_phase_predictor.dart';
 import 'package:menstrudel/utils/period_predictor.dart';
 import 'package:menstrudel/services/notification_service.dart';
