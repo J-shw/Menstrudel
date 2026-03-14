@@ -578,6 +578,9 @@
     "@settingsScreen_cycleNotificationsAndPredictions": {
         "description": "Header for the cycle notifications and predictions section"
     },
+    "settingsScreen_enablePhasePredictions": "Enable Phase Predictions",
+    "settingsScreen_displayFertileChance": "Display Fertile Chance",
+    "settingsScreen_displayFertileWindowOnCalendar": "Display Fertile Window on Calendar",
     "settingsScreen_notificationTime": "Notification Time",
     "settingsScreen_remindMeBefore": "Remind Me Before",
     "settingsScreen_remindMeAfter": "Remind Me After",
