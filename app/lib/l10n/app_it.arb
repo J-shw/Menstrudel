@@ -519,7 +519,13 @@
     "settingsScreen_trackYourDailyPillIntake": "Monitoraggio pillola giornaliero",
     "settingsScreen_dailyPillReminder": "Promemoria pillola giornaliero",
     "settingsScreen_reminderTime": "Orario promemoria",
-    "settingsScreen_periodPredictionAndReminders": "Previsioni ciclo e promemoria",
+    "settingsScreen_cycleNotificationsAndPredictions": "Cycle Notifications & Predictions",
+    "@settingsScreen_cycleNotificationsAndPredictions": {
+        "description": "Header for the cycle notifications and predictions section"
+    },
+    "settingsScreen_enablePhasePredictions": "Enable Phase Predictions",
+    "settingsScreen_displayFertileChance": "Display Fertile Chance",
+    "settingsScreen_displayFertileWindowOnCalendar": "Display Fertile Window on Calendar",
     "settingsScreen_notificationTime": "Orario notifica",
     "settingsScreen_remindMeBefore": "Avvisami prima",
     "settingsScreen_remindMeAfter": "Avvisami dopo",

@@ -519,7 +519,13 @@
     "settingsScreen_trackYourDailyPillIntake": "Sledujte svůj denní příjem pilulek",
     "settingsScreen_dailyPillReminder": "Denní připomenutí užívání pilulek",
     "settingsScreen_reminderTime": "Čas připomenutí",
-    "settingsScreen_periodPredictionAndReminders": "Předpověď menstruace a připomenutí",
+    "settingsScreen_cycleNotificationsAndPredictions": "Cycle Notifications & Predictions",
+    "@settingsScreen_cycleNotificationsAndPredictions": {
+        "description": "Header for the cycle notifications and predictions section"
+    },
+    "settingsScreen_enablePhasePredictions": "Enable Phase Predictions",
+    "settingsScreen_displayFertileChance": "Display Fertile Chance",
+    "settingsScreen_displayFertileWindowOnCalendar": "Display Fertile Window on Calendar",
     "settingsScreen_notificationTime": "Čas oznámení",
     "settingsScreen_remindMeBefore": "Připomenout mi předem",
     "settingsScreen_remindMeAfter": "Připomenout mi potom",
