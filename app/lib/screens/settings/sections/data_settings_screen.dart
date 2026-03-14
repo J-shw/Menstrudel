@@ -146,8 +146,9 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
               throw TimeoutException('File picking timed out.');
             },
           );
-      if (result == null || result.files.single.path == null || !mounted)
+      if (result == null || result.files.single.path == null || !mounted){
         return;
+      }
 
       final path = result.files.single.path!;
 
@@ -161,10 +162,11 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
         ),
       );
     } catch (e) {
-      if (mounted)
+      if (mounted){
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(l10n.settingsScreen_importErrorGeneral)),
         );
+      }
     }
   }
 
@@ -186,15 +188,17 @@ class _DataSettingsScreenState extends State<DataSettingsScreen> {
         case DataType.sexualActivity:
           await sexRepo.manager.importDataFromJson(content);
       }
-      if (mounted)
+      if (mounted){
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(l10n.settingsScreen_importSuccessful)),
         );
+      }
     } catch (e) {
-      if (mounted)
+      if (mounted){
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(l10n.settingsScreen_importFailed)),
         );
+      }
     } finally {
       if (type == DataType.logsAndPeriods) {
         await coordinator.resetAllData();
