@@ -1,5 +1,5 @@
 {
-    "@@locale": "es",
+    "@@locale": "es-ES",
     "appTitle": "Menstrudel",
     "nextDue": "Next Due",
     "ongoing": "Ongoing",
@@ -519,7 +519,13 @@
     "settingsScreen_trackYourDailyPillIntake": "Track Your Daily Pill Intake",
     "settingsScreen_dailyPillReminder": "Daily Pill Reminder",
     "settingsScreen_reminderTime": "Reminder Time",
-    "settingsScreen_periodPredictionAndReminders": "Period Prediction & Reminders",
+    "settingsScreen_cycleNotificationsAndPredictions": "Cycle Notifications & Predictions",
+    "@settingsScreen_cycleNotificationsAndPredictions": {
+        "description": "Header for the cycle notifications and predictions section"
+    },
+    "settingsScreen_enablePhasePredictions": "Enable Phase Predictions",
+    "settingsScreen_displayFertileChance": "Display Fertile Chance",
+    "settingsScreen_displayFertileWindowOnCalendar": "Display Fertile Window on Calendar",
     "settingsScreen_notificationTime": "Notification Time",
     "settingsScreen_remindMeBefore": "Remind Me Before",
     "settingsScreen_remindMeAfter": "Remind Me After",
