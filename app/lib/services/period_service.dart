@@ -204,8 +204,7 @@ class PeriodService extends ChangeNotifier {
         daysBefore: _settingsService.notificationDays,
         notificationTime: _settingsService.notificationTime,
         title: l10n.notification_periodTitle,
-        body: l10n.notification_periodBody(_settingsService.notificationDays),
-        notificationID: periodDueNotificationId,
+        body: l10n.notification_periodBody(_settingsService.notificationDays)
       );
     } catch (e) {
       debugPrint('Error creating period notification: $e');
@@ -221,8 +220,7 @@ class PeriodService extends ChangeNotifier {
         title: l10n.notification_periodOverdueTitle,
         body: l10n.notification_periodOverdueBody(
           _settingsService.periodOverdueNotificationDays,
-        ),
-        notificationID: periodOverdueNotificationId,
+        )
       );
     } catch (e) {
       debugPrint('Error creating period overdue notification: $e');
@@ -241,7 +239,6 @@ class PeriodService extends ChangeNotifier {
         notificationTime: _settingsService.fertileWindowReminderTime,
         title: l10n.notification_fertileWindowTitle,
         body: l10n.notification_fertileWindowBody(_settingsService.fertileWindowReminderDaysBefore),
-        notificationID: fertileWindowReminderId,
       );
     } catch (e) {
       debugPrint('Error creating fertile window notification: $e');
