@@ -67,12 +67,14 @@ class CycleNotificationsAndPredictionsScreen extends StatelessWidget {
         children: [
           SwitchListTile(
             title: Text(l10n.settingsScreen_enablePhasePredictions),
-            value: settingsService.arePhasePredictionsEnabled,
-            onChanged: (bool value) {
-              context.read<SettingsService>().setPhasePredictions(value);
-            },
+            value: settingsService.isNaturalCycle ? settingsService.arePhasePredictionsEnabled : false,
+            onChanged: settingsService.isNaturalCycle 
+              ? (bool value) {
+                  context.read<SettingsService>().setPhasePredictions(value);
+                }
+              : null,
           ),
-          if (settingsService.arePhasePredictionsEnabled) ...[
+          if (settingsService.arePhasePredictionsEnabled && settingsService.isNaturalCycle) ...[
             CheckboxListTile(
               title: Text(l10n.settingsScreen_displayFertileChance),
               value: settingsService.displayFertileChance,
