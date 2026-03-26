@@ -3,9 +3,12 @@ import 'package:menstrudel/models/app/user_goal_types_enum.dart';
 class UserEntry {
   static const int singletonId = 1; // There can only ever be 1 user
 
-  final int id; 
+  final int id;
+  /// The user's name.
   final String name;
+  /// The user's date of birth.
   final DateTime? birthDate;
+  /// The user's primary goal for the app.
   final UserGoalTypes primaryGoal;
 
   UserEntry({
