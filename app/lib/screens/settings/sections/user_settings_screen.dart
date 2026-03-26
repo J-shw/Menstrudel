@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/services/settings_service.dart';
+import 'package:menstrudel/services/user_service.dart';
 import 'package:menstrudel/widgets/goal_card.dart';
 import 'package:provider/provider.dart';
-import 'package:menstrudel/database/repositories/user_repository.dart';
-import 'package:menstrudel/models/app/user_entry.dart';
 import 'package:menstrudel/models/app/user_goal_types_enum.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 
@@ -17,63 +16,24 @@ class ProfileSettingsScreen extends StatefulWidget {
 class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
   late TextEditingController _nameController;
   DateTime? _selectedDate;
-  UserGoalTypes? _selectedGoal;
-  UserEntry? _initialUser;
-  bool _isLoading = true;
 
   @override
   void initState() {
     super.initState();
-    _loadUserData();
-  }
-
-  Future<void> _loadUserData() async {
-    final user = await context.read<UserRepository>().getUser();
-    if (user != null) {
-      setState(() {
-        _initialUser = user;
-        _nameController = TextEditingController(text: user.name);
-        _selectedDate = user.birthDate;
-        _selectedGoal = user.primaryGoal;
-        _isLoading = false;
-      });
-    }
-  }
-
-  Future<void> _saveChanges() async {
-    if (_initialUser == null) return;
-    final l10n = AppLocalizations.of(context)!;
-
-    final updatedUser = _initialUser!.copyWith(
-      name: _nameController.text,
-      birthDate: _selectedDate,
-      primaryGoal: _selectedGoal,
-    );
-
-    await context.read<UserRepository>().updateUser(updatedUser);
-
-    if (mounted) await context.read<SettingsService>().applySettingsForGoal(_selectedGoal!);
-    
-    if (mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(l10n.settingsScreen_profileUpdated)),
-      );
-      Navigator.pop(context);
-    }
   }
 
   @override
   Widget build(BuildContext context) {
-    if (_isLoading) return const Scaffold(body: Center(child: CircularProgressIndicator()));
-
     final l10n = AppLocalizations.of(context)!;
+    final userService = context.watch<UserService>();
+    final SettingsService settingsService = context.watch<SettingsService>();
+
+    _nameController = TextEditingController(text: userService.user?.name ?? '');
+    _selectedDate = userService.user?.birthDate;
 
     return Scaffold(
       appBar: AppBar(
         title: Text(l10n.settingsScreen_profile),
-        actions: [
-          IconButton(onPressed: _saveChanges, icon: const Icon(Icons.check)),
-        ],
       ),
       body: ListView(
         padding: const EdgeInsets.all(24.0),
@@ -91,23 +51,23 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
           _buildSelectionCard(
             context,
             title: l10n.settingsScreen_birthDate,
-            subtitle: _selectedDate != null 
-                ? "${_selectedDate!.day}/${_selectedDate!.month}/${_selectedDate!.year}"
+            subtitle: userService.user?.birthDate != null 
+                ? "${userService.user?.birthDate!.day}/${userService.user?.birthDate!.month}/${_selectedDate!.year}"
                 : l10n.settingsScreen_notSet,
             icon: Icons.cake_outlined,
             onTap: () async {
-              final picked = await showDatePicker(
+              final pickedDob = await showDatePicker(
                 context: context,
-                initialDate: _selectedDate ?? DateTime(2000),
+                initialDate: userService.user?.birthDate ?? DateTime(2000),
                 firstDate: DateTime(1900),
                 lastDate: DateTime.now(),
               );
-              if (picked != null) setState(() => _selectedDate = picked);
+              if (pickedDob != null) setState(() => userService.setBirthDate(pickedDob));
             },
-            trailing: _selectedDate != null 
+            trailing: userService.user?.birthDate != null 
                 ? IconButton(
                     icon: const Icon(Icons.close), 
-                    onPressed: () => setState(() => _selectedDate = null)
+                    onPressed: () => setState(() => userService.removeBirthDate())
                   )
                 : null,
           ),
@@ -123,12 +83,12 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
             mainAxisSpacing: 12,
             childAspectRatio: 1.3,
             children: UserGoalTypes.values.map((goal) {
-              final isSelected = goal == _selectedGoal;
+              final isSelected = goal == userService.user?.primaryGoal;
               return GoalCard(
                 title: goal.getDisplayName(l10n),
                 isSelected: isSelected,
                 icon:goal.icon,
-                onTap: () => setState(() => _selectedGoal = goal),
+                onTap: () => setState(() => userService.setPrimaryGoal(goal, settingsService)),
               );
             }).toList(),
           ),
