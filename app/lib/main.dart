@@ -8,6 +8,7 @@ import 'package:menstrudel/database/repositories/periods_repository.dart';
 import 'package:menstrudel/database/repositories/logs_repository.dart';
 import 'package:menstrudel/database/repositories/user_repository.dart';
 import 'package:menstrudel/screens/gates/root_gate.dart';
+import 'package:menstrudel/services/user_service.dart';
 import 'package:timezone/data/latest.dart' as tz_data;
 import 'package:timezone/timezone.dart' as tz;
 import 'package:dynamic_color/dynamic_color.dart';
@@ -67,6 +68,9 @@ void main() async {
         Provider(create: (_) => WidgetController()),
 
         // --- Domain services ---
+        ChangeNotifierProvider(
+          create: (context) => UserService(context.read<UserRepository>()),
+        ),
         ChangeNotifierProvider(
           create: (context) => LogService(context.read<LogsRepository>()),
         ),
