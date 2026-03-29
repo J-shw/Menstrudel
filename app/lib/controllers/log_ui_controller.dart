@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/coordinators/data_refresh_coordinator.dart';
+import 'package:menstrudel/services/symptom_service.dart';
 import 'package:menstrudel/widgets/sheets/period_details_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 import 'package:menstrudel/models/period_logs/log_day.dart';
@@ -18,11 +19,13 @@ class LogUIController extends ChangeNotifier {
   Future<void> handleCreateNewLog({
     required BuildContext context,
     required DateTime selectedDate,
+    required SymptomService symptomService,
+    required int? age,
   }) async {
     final result = await showModalBottomSheet<Map<String, dynamic>>(
       context: context,
       isScrollControlled: true,
-      builder: (_) => SymptomEntrySheet(selectedDate: selectedDate),
+      builder: (_) => SymptomEntrySheet(selectedDate: selectedDate, symptomService: symptomService, age: age),
     );
 
     if (result == null || !context.mounted) return;
@@ -71,6 +74,7 @@ class LogUIController extends ChangeNotifier {
   Future<void> handleEditLog({
     required BuildContext context,
     required LogDay log,
+    required SymptomService symptomService,
   }) async {
     await showModalBottomSheet<void>(
       context: context,
@@ -81,7 +85,7 @@ class LogUIController extends ChangeNotifier {
       builder: (sheetContext) {
         return PeriodDetailsBottomSheet(
           log: log,
-
+          symptomService: symptomService,
           onDelete: () async {
             final logService = context.read<LogService>();
             final coordinator = context.read<DataRefreshCoordinator>();

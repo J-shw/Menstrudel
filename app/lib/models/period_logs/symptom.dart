@@ -17,6 +17,9 @@ class Symptom {
       'headache' => SymptomType.headache,
       'mood swings' => SymptomType.moodSwings,
       'nausea' => SymptomType.nausea,
+      'tender breasts' => SymptomType.tenderBreasts,
+      'insomnia' => SymptomType.insomnia,
+      'depressed' => SymptomType.depressed,
       _ => SymptomType.custom,
     };
 
@@ -82,6 +85,12 @@ extension SymptomExtension on Symptom {
         return 'mood swings';
       case SymptomType.nausea:
         return 'nausea';
+      case SymptomType.tenderBreasts:
+        return 'tender breasts';
+      case SymptomType.insomnia:
+        return 'insomnia';
+      case SymptomType.depressed:
+        return 'depressed';
       case SymptomType.custom:
         return customName.toLowerCase();
     }
@@ -105,6 +114,12 @@ extension SymptomExtension on Symptom {
         return l10n.builtInSymptom_moodSwings;
       case SymptomType.nausea:
         return l10n.builtInSymptom_nausea;
+      case SymptomType.tenderBreasts:
+        return l10n.builtInSymptom_tenderBreasts;
+      case SymptomType.insomnia:
+        return l10n.builtInSymptom_insomnia;
+      case SymptomType.depressed:
+        return l10n.builtInSymptom_depressed;
       case SymptomType.custom:
         return customName.toCapitalized();
     }

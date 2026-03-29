@@ -3,17 +3,17 @@ import 'package:menstrudel/database/repositories/logs_repository.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/models/period_logs/symptom.dart';
 import 'package:menstrudel/services/settings_service.dart';
+import 'package:menstrudel/services/symptom_service.dart';
 import 'package:menstrudel/widgets/dialogs/custom_symptom_dialog.dart';
 import 'package:menstrudel/widgets/dialogs/delete_confirmation_dialog.dart';
 import 'package:provider/provider.dart';
 
 class LogSettingsScreen extends StatelessWidget {
-  LogSettingsScreen({super.key});
+  const LogSettingsScreen({super.key, required this.logsRepo});
 
-  final logsRepo = LogsRepository();
+  final LogsRepository logsRepo;
 
-  Future<void> _showNewCustomSymptomDialog(BuildContext context) async {
-    final settingsService = context.read<SettingsService>();
+  Future<void> _showNewCustomSymptomDialog(BuildContext context, SymptomService symptomService) async {
     
     final (String name, bool isDefault)? result =
         await showDialog<(String, bool)>(
@@ -26,17 +26,15 @@ class LogSettingsScreen extends StatelessWidget {
     if (result != null) {
       var symptom = Symptom.fromDbString(result.$1);
       
-      if (settingsService.defaultSymptoms.contains(symptom)) {
+      if (symptomService.symptoms.contains(symptom)) {
         return;
       }
       
-      await settingsService.addDefaultSymptom(symptom);
+      await symptomService.addSymptom(symptom);
     }
   }
 
-  Future<void> _removeDefaultSymptom(BuildContext context, Symptom symptom) async {
-    final l10n = AppLocalizations.of(context)!;
-    final settingsService = context.read<SettingsService>();
+  Future<void> _removeDefaultSymptom(BuildContext context, Symptom symptom, AppLocalizations l10n, SymptomService symptomService) async {    
     final symptomUsageCount = await logsRepo.getSingleSymptomFrequency(
       symptom,
     );
@@ -56,16 +54,15 @@ class LogSettingsScreen extends StatelessWidget {
           ),
           confirmButtonText: l10n.delete,
           onConfirm: () async {
-            await settingsService.removeDefaultSymptom(symptom);
+            await symptomService.removeSymptom(symptom);
           },
         );
       },
     );
   }
 
-  Future<void> _refreshSymptoms(BuildContext context) async {
+  Future<void> _refreshSymptoms(BuildContext context, SymptomService symptomService) async {
     final l10n = AppLocalizations.of(context)!;
-    final settingsService = context.read<SettingsService>();
 
     return showDialog<void>(
       context: context,
@@ -75,15 +72,14 @@ class LogSettingsScreen extends StatelessWidget {
           contentText: l10n.settingsScreen_resetSymptomsListDescription,
           confirmButtonText: l10n.reset,
           onConfirm: () async {
-            await settingsService.resetDefaultSymptoms();
+            await symptomService.resetSymptoms();
           },
         );
       },
     );
   }
 
-  Future<void> _selectLoggingReminderTime(BuildContext context) async {
-    final settingsService = context.read<SettingsService>();
+  Future<void> _selectLoggingReminderTime(BuildContext context, SettingsService settingsService) async {
     final TimeOfDay? pickedTime = await showTimePicker(
       context: context,
       initialTime: settingsService.periodOverdueNotificationTime,
@@ -97,10 +93,10 @@ class LogSettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    final symptomService = context.watch<SymptomService>();
+    final settingsService = context.watch<SettingsService>();
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    
-    final settingsService = context.watch<SettingsService>();
 
     return Scaffold(
       appBar: AppBar(
@@ -113,7 +109,7 @@ class LogSettingsScreen extends StatelessWidget {
             subtitle: Text(l10n.settingsScreen_loggingReminderDescription),
             value: settingsService.isLoggingReminderNotificationEnabled,
             onChanged: (bool value) {
-              context.read<SettingsService>().setLoggingReminder(value);
+              settingsService.setLoggingReminder(value);
             },
           ),
           if (settingsService.isLoggingReminderNotificationEnabled) ...[
@@ -126,7 +122,7 @@ class LogSettingsScreen extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              onTap: () => _selectLoggingReminderTime(context),
+              onTap: () => _selectLoggingReminderTime(context, settingsService),
             ),
           ],
           const Divider(),
@@ -148,11 +144,11 @@ class LogSettingsScreen extends StatelessWidget {
               spacing: 4.0,
               runSpacing: 4.0,
               children: [
-                ...settingsService.defaultSymptoms.map((symptom) {
+                ...symptomService.symptoms.map((symptom) {
                   return RawChip(
                     label: Text(symptom.getDisplayName(l10n)),
                     tapEnabled: true,
-                    onPressed: () => _removeDefaultSymptom(context, symptom),
+                    onPressed: () => _removeDefaultSymptom(context, symptom, l10n, symptomService),
                   );
                 }),
                 
@@ -160,14 +156,14 @@ class LogSettingsScreen extends StatelessWidget {
                   avatar: const Icon(Icons.refresh, size: 18),
                   label: Text(l10n.reset), 
                   backgroundColor: colorScheme.secondaryContainer,
-                  onPressed: () => _refreshSymptoms(context),
+                  onPressed: () => _refreshSymptoms(context, symptomService),
                 ),
 
                 ActionChip(
                   avatar: const Icon(Icons.add, size: 18),
                   label: Text(l10n.add),
                   backgroundColor: colorScheme.secondaryContainer,
-                  onPressed: () => _showNewCustomSymptomDialog(context),
+                  onPressed: () => _showNewCustomSymptomDialog(context, symptomService),
                 ),
               ],
             ),

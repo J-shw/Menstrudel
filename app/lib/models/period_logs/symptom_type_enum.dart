@@ -7,5 +7,8 @@ enum SymptomType {
   headache,
   moodSwings,
   nausea,
+  tenderBreasts,
+  insomnia,
+  depressed,
   custom
 }
