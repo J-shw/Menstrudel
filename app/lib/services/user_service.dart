@@ -17,14 +17,14 @@ class UserService extends ChangeNotifier {
 
   UserEntry? _user;
   bool _isLoading = false;
-  int _age = 0;
+  int? _age;
 
   /// The user data.
   UserEntry? get user => _user;
   /// Whether service is loading
   bool get isLoading => _isLoading;
   /// The users age. If DoB is provided.
-  int get age => _age;
+  int? get age => _age;
 
   /// Loads user data.
   Future<void> loadUser() async {
@@ -39,6 +39,8 @@ class UserService extends ChangeNotifier {
 
     if (_user != null && _user!.birthDate != null) {
       _age  = AgeCalculator.age(_user!.birthDate!).years;
+    }else {
+      _age = null;
     }
 
     _isLoading = false;    
