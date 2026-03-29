@@ -47,6 +47,7 @@ class _MainScreenState extends State<MainScreen> {
         context.read<LogUIController>().handleCreateNewLog(
               context: context,
               selectedDate: DateTime.now(),
+              symptomService: context.read(),
             );
       },
       child: const Icon(Icons.add),
