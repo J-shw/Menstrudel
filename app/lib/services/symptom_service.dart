@@ -16,6 +16,12 @@ class SymptomService extends ChangeNotifier {
 
   /// Symptoms that are available for the user to select from when logging their period.
   Set<Symptom> get symptoms => _symptoms;
+  /// The default set of symptoms that are available to the user when they first use the app.
+  Set<Symptom> get defaultSymptoms => kDefaultSymptoms;
+  /// Custom symptoms that the user has added to their symptom list.
+  Set<Symptom> get customSymptoms => _symptoms.where((s) => s.type == SymptomType.custom).toSet();
+  /// Symptoms that are not custom symptoms.
+  Set<Symptom> get nonCustomSymptoms => _symptoms.where((s) => s.type != SymptomType.custom).toSet();
 
 
   Future<void> load() async {
