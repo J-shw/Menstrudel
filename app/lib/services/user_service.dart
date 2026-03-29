@@ -84,5 +84,4 @@ class UserService extends ChangeNotifier {
     _userRepo.updateUser(_user!);
     settingsService.applySettingsForGoal(goal);
   }
-
 }
