@@ -33,11 +33,13 @@ class _LogsScreenLogTabState extends State<LogsScreenLogTab> with AutomaticKeepA
         context.read<LogUIController>().handleCreateNewLog(
           context: context,
           selectedDate: date,
+          symptomService: context.read(),
         );
       },
       onLogTapped: (log) => context.read<LogUIController>().handleEditLog(
         context: context,
         log: log,
+        symptomService: context.read(),
       ),
     );
   }
