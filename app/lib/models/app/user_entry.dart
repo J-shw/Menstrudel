@@ -35,7 +35,7 @@ class UserEntry {
     return UserEntry(
       id: id,
       name: name ?? this.name,
-      birthDate: birthDate ?? this.birthDate,
+      birthDate: birthDate,
       primaryGoal: primaryGoal ?? this.primaryGoal,
     );
   }
