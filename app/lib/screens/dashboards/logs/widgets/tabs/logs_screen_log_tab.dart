@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 
 class LogsScreenLogTab extends StatefulWidget {
   final PeriodService periodService;
-  final int userAge;
+  final int? userAge;
 
   const LogsScreenLogTab({
     super.key,

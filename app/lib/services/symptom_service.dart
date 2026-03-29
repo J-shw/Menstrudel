@@ -24,7 +24,9 @@ class SymptomService extends ChangeNotifier {
   Set<Symptom> get nonCustomSymptoms => _symptoms.where((s) => s.type != SymptomType.custom).toSet();
   /// Returns symptoms ordered by likelihood based on age (Cunningham et al. 2024).
   /// Custom symptoms are appended to the end.
-  List<Symptom> ageOrderedSymptoms(int age) {
+  List<Symptom> ageOrderedSymptoms(int? age) {
+    if (age == null) return _symptoms.toList();
+
     final order = _getPriorityListForAge(age);
     List<Symptom> sortedList = _symptoms.toList();
 

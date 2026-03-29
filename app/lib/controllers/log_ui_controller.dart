@@ -20,7 +20,7 @@ class LogUIController extends ChangeNotifier {
     required BuildContext context,
     required DateTime selectedDate,
     required SymptomService symptomService,
-    required int age,
+    required int? age,
   }) async {
     final result = await showModalBottomSheet<Map<String, dynamic>>(
       context: context,

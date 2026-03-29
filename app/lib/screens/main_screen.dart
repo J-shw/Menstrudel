@@ -39,7 +39,7 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   /// Builds Log screen FAB
-  Widget _buildLogDayFab(BuildContext context, AppLocalizations l10n, int age) {
+  Widget _buildLogDayFab(BuildContext context, AppLocalizations l10n, int? age) {
     return FloatingActionButton(
       key: const ValueKey('log_day_fab'),
       tooltip: l10n.fabToolTip_logs,

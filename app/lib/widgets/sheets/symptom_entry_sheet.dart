@@ -12,7 +12,7 @@ class SymptomEntrySheet extends StatefulWidget {
 
   final DateTime selectedDate;
   final SymptomService symptomService;
-  final int age;
+  final int? age;
 
   @override
   State<SymptomEntrySheet> createState() => _SymptomEntrySheetState();
