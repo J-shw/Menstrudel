@@ -8,10 +8,11 @@ import 'package:menstrudel/services/symptom_service.dart';
 import 'package:menstrudel/widgets/dialogs/custom_symptom_dialog.dart';
 
 class SymptomEntrySheet extends StatefulWidget {
-  const SymptomEntrySheet({super.key, required this.selectedDate, required this.symptomService});
+  const SymptomEntrySheet({super.key, required this.selectedDate, required this.symptomService, required this.age});
 
   final DateTime selectedDate;
   final SymptomService symptomService;
+  final int? age;
 
   @override
   State<SymptomEntrySheet> createState() => _SymptomEntrySheetState();
@@ -34,7 +35,7 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
   }
 
   void _loadSymptoms() {
-    _defaultSymptoms.addAll(widget.symptomService.symptoms);
+    _defaultSymptoms.addAll(widget.symptomService.ageOrderedSymptoms(widget.age));
     _symptoms.addAll(_defaultSymptoms);
   }
 
