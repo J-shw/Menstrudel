@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:menstrudel/models/app/user_goal_types_enum.dart';
 import 'dart:convert';
 import 'package:menstrudel/models/birth_control/reversible_contraceptives/reversible_contraceptive_types_enum.dart';
-import 'package:menstrudel/models/period_logs/symptom.dart';
-import 'package:menstrudel/models/period_logs/symptom_type_enum.dart';
 import 'package:menstrudel/services/notification_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:menstrudel/utils/constants.dart';
@@ -12,7 +10,12 @@ import 'package:menstrudel/models/themes/app_theme_mode_enum.dart';
 enum PeriodHistoryView { list, journal }
 
 class SettingsService extends ChangeNotifier {
-  late SharedPreferences _prefs;
+  final SharedPreferences _prefs;
+
+  SettingsService(this._prefs) {
+    loadSettings();
+  }
+
   // App
   String _languageCode = kDefaultLanguageCode;
   bool _biometricsEnabled = kDefaultBiometricsEnabled;
@@ -30,7 +33,6 @@ class SettingsService extends ChangeNotifier {
 
   // User
   ReversibleContraceptiveTypes _reversibleContraceptiveType = kDefaultReversibleContraceptiveType;
-  Set<Symptom> _defaultSymptoms = kDefaultSymptoms;
   Map<ReversibleContraceptiveTypes, int> _reversibleContraceptiveDurations = {};
   bool _phasePredictions = kDefaultPhasePredictions;
   bool _displayFertileChance = kDefaultDisplayFertileChance;
@@ -89,8 +91,6 @@ class SettingsService extends ChangeNotifier {
 
   /// Reversible Contraceptive type selected
   ReversibleContraceptiveTypes get reversibleContraceptiveType => _reversibleContraceptiveType;
-  /// The user configured default symptoms
-  Set<Symptom> get defaultSymptoms => _defaultSymptoms;
   /// Retrieves the duration in days for a specific Reversible Contraceptive type, which determines its estimated renewal date.
   int getReversibleContraceptiveDurationDays(ReversibleContraceptiveTypes type) {
     if (_reversibleContraceptiveDurations.containsKey(type)) {
@@ -160,8 +160,6 @@ class SettingsService extends ChangeNotifier {
   
   
   Future<void> loadSettings() async {
-    _prefs = await SharedPreferences.getInstance();
-
     // App
     _languageCode = _loadString(languageKey, kDefaultLanguageCode);
     _biometricsEnabled = _loadBool(biometricEnabledKey, kDefaultBiometricsEnabled);
@@ -179,7 +177,6 @@ class SettingsService extends ChangeNotifier {
 
     //User
     _reversibleContraceptiveType = _loadReversibleContraceptiveType();
-    _defaultSymptoms = _loadDefaultSymptoms();
     _reversibleContraceptiveDurations = _loadReversibleContraceptiveDurations();
     _phasePredictions = _loadBool(phasePredictionsKey, kDefaultPhasePredictions);
     _displayFertileChance = _loadBool(displayFertileChanceKey, kDefaultDisplayFertileChance);
@@ -252,21 +249,6 @@ class SettingsService extends ChangeNotifier {
   AppThemeMode _loadThemeMode() {
     final themeIndex = _prefs.getInt(themeModeKey) ?? AppThemeMode.system.index;
     return AppThemeMode.values[themeIndex];
-  }
-
-  Set<Symptom> _loadDefaultSymptoms() {
-    final storedDefaultSymptoms = _prefs.getStringList(defaultSymptomsKey);
-
-    if (storedDefaultSymptoms == null || storedDefaultSymptoms.isEmpty) {
-      return SymptomType.values
-          .where(
-            (element) =>
-                element != SymptomType.custom,
-          )
-          .map((e) => Symptom(type: e))
-          .toSet();
-    }
-    return storedDefaultSymptoms.map((e) => Symptom.fromDbString(e)).toSet();
   }
 
   Map<ReversibleContraceptiveTypes, int> _loadReversibleContraceptiveDurations() {
@@ -500,33 +482,6 @@ class SettingsService extends ChangeNotifier {
     _startingDayOfWeek = day;
     await _prefs.setString(startingDayOfWeekKey, day);
     notifyListeners();
-  }
-
-  Future<void> setDefaultSymptoms(Set<Symptom> symptoms) async {
-    _defaultSymptoms = symptoms;
-    await _prefs.setStringList(
-      defaultSymptomsKey, 
-      symptoms.map((e) => e.getDbName()).toList()
-    );
-    notifyListeners();
-  }
-
-  Future<void> resetDefaultSymptoms() async {
-    await _prefs.remove(defaultSymptomsKey);
-    final defaultSet = _loadDefaultSymptoms();
-    await setDefaultSymptoms(defaultSet);
-  }
-
-  Future<void> addDefaultSymptom(Symptom symptom) async {
-    final newSet = Set<Symptom>.from(_defaultSymptoms);
-    newSet.add(symptom);
-    await setDefaultSymptoms(newSet);
-  }
-
-  Future<void> removeDefaultSymptom(Symptom symptom) async {
-    final newSet = Set<Symptom>.from(_defaultSymptoms);
-    newSet.remove(symptom);
-    await setDefaultSymptoms(newSet);
   }
 
   Future<void> applySettingsForGoal(UserGoalTypes goal) async {
