@@ -56,6 +56,7 @@ class UserService extends ChangeNotifier {
   Future<void> setBirthDate(DateTime date) async {
     if (_user == null) return;
     _user = _user!.copyWith(birthDate: date);
+    _age = AgeCalculator.age(_user!.birthDate!).years;
     notifyListeners();
     _userRepo.updateUser(_user!);
   }
