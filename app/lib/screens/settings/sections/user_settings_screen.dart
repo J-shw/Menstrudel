@@ -15,21 +15,22 @@ class ProfileSettingsScreen extends StatefulWidget {
 
 class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
   late TextEditingController _nameController;
-  DateTime? _selectedDate;
 
   @override
   void initState() {
     super.initState();
+    final user = Provider.of<UserService>(context, listen: false).user;
+    _nameController = TextEditingController(text: user?.name ?? '');
   }
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final userService = context.watch<UserService>();
+    final UserService userService = context.watch<UserService>();
     final SettingsService settingsService = context.watch<SettingsService>();
 
-    _nameController = TextEditingController(text: userService.user?.name ?? '');
-    _selectedDate = userService.user?.birthDate;
+    final user = userService.user;
+    final birthDate = user?.birthDate;
 
     return Scaffold(
       appBar: AppBar(
@@ -40,6 +41,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
         children: [
           TextField(
             controller: _nameController,
+            onChanged: (value) => userService.setName(value),
             decoration: InputDecoration(
               labelText: l10n.settingsScreen_name,
               prefixIcon: const Icon(Icons.person_outline),
@@ -51,8 +53,8 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
           _buildSelectionCard(
             context,
             title: l10n.settingsScreen_birthDate,
-            subtitle: userService.user?.birthDate != null 
-                ? "${userService.user?.birthDate!.day}/${userService.user?.birthDate!.month}/${_selectedDate!.year}"
+            subtitle: birthDate != null 
+                ? "${birthDate.day}/${birthDate.month}/${birthDate.year} (${userService.age})"
                 : l10n.settingsScreen_notSet,
             icon: Icons.cake_outlined,
             onTap: () async {
@@ -62,12 +64,14 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                 firstDate: DateTime(1900),
                 lastDate: DateTime.now(),
               );
-              if (pickedDob != null) setState(() => userService.setBirthDate(pickedDob));
+              if (pickedDob != null) {
+                await userService.setBirthDate(pickedDob);
+              }
             },
             trailing: userService.user?.birthDate != null 
                 ? IconButton(
                     icon: const Icon(Icons.close), 
-                    onPressed: () => setState(() => userService.removeBirthDate())
+                    onPressed: () => userService.removeBirthDate(),
                   )
                 : null,
           ),
@@ -88,7 +92,9 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                 title: goal.getDisplayName(l10n),
                 isSelected: isSelected,
                 icon:goal.icon,
-                onTap: () => setState(() => userService.setPrimaryGoal(goal, settingsService)),
+                onTap: () async {
+                  await userService.setPrimaryGoal(goal, settingsService);
+                }
               );
             }).toList(),
           ),
