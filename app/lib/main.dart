@@ -43,7 +43,10 @@ void main() async {
   await NotificationService.initialize();
 
   final settingsService = SettingsService();
+  final UserService userService = UserService(UserRepository());
+  
   await settingsService.loadSettings();
+  await userService.loadUser();
 
   watchService.initialize(onPeriodLog: logsRepository.logFromWatch);
 
@@ -52,9 +55,9 @@ void main() async {
       providers: [
         // --- Core services ---
         ChangeNotifierProvider(create: (_) => settingsService),
+        ChangeNotifierProvider(create: (_) => userService),
         Provider(create: (_) => LogsRepository()),
         Provider(create: (_) => PeriodsRepository()),
-        Provider(create: (_) => UserRepository()),
 
         // --- UI state ---
         ChangeNotifierProvider(
@@ -68,9 +71,6 @@ void main() async {
         Provider(create: (_) => WidgetController()),
 
         // --- Domain services ---
-        ChangeNotifierProvider(
-          create: (context) => UserService(context.read<UserRepository>()),
-        ),
         ChangeNotifierProvider(
           create: (context) => LogService(context.read<LogsRepository>()),
         ),
