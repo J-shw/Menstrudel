@@ -8,6 +8,7 @@ import 'package:menstrudel/database/repositories/periods_repository.dart';
 import 'package:menstrudel/database/repositories/logs_repository.dart';
 import 'package:menstrudel/database/repositories/user_repository.dart';
 import 'package:menstrudel/screens/gates/root_gate.dart';
+import 'package:menstrudel/services/user_service.dart';
 import 'package:timezone/data/latest.dart' as tz_data;
 import 'package:timezone/timezone.dart' as tz;
 import 'package:dynamic_color/dynamic_color.dart';
@@ -42,7 +43,10 @@ void main() async {
   await NotificationService.initialize();
 
   final settingsService = SettingsService();
+  final UserService userService = UserService(UserRepository());
+  
   await settingsService.loadSettings();
+  await userService.loadUser();
 
   watchService.initialize(onPeriodLog: logsRepository.logFromWatch);
 
@@ -51,9 +55,9 @@ void main() async {
       providers: [
         // --- Core services ---
         ChangeNotifierProvider(create: (_) => settingsService),
+        ChangeNotifierProvider(create: (_) => userService),
         Provider(create: (_) => LogsRepository()),
         Provider(create: (_) => PeriodsRepository()),
-        Provider(create: (_) => UserRepository()),
 
         // --- UI state ---
         ChangeNotifierProvider(
