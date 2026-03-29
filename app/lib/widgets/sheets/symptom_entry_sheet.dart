@@ -4,21 +4,20 @@ import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/models/flows/flow_enum.dart';
 import 'package:menstrudel/models/period_logs/pain_level_enum.dart';
 import 'package:menstrudel/models/period_logs/symptom.dart';
+import 'package:menstrudel/services/symptom_service.dart';
 import 'package:menstrudel/widgets/dialogs/custom_symptom_dialog.dart';
-import 'package:menstrudel/services/settings_service.dart';
-import 'package:provider/provider.dart';
 
 class SymptomEntrySheet extends StatefulWidget {
-  const SymptomEntrySheet({super.key, required this.selectedDate});
+  const SymptomEntrySheet({super.key, required this.selectedDate, required this.symptomService});
 
   final DateTime selectedDate;
+  final SymptomService symptomService;
 
   @override
   State<SymptomEntrySheet> createState() => _SymptomEntrySheetState();
 }
 
 class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
-  late SettingsService _settingsService;
   late DateTime _selectedDate;
   final Set<Symptom> _defaultSymptoms = {};
   final Set<Symptom> _selectedSymptoms = {};
@@ -31,12 +30,11 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
   void initState() {
     super.initState();
     _selectedDate = widget.selectedDate;
-    _settingsService = context.read<SettingsService>();
     _loadSymptoms();
   }
 
   void _loadSymptoms() {
-    _defaultSymptoms.addAll(_settingsService.defaultSymptoms);
+    _defaultSymptoms.addAll(widget.symptomService.symptoms);
     _symptoms.addAll(_defaultSymptoms);
   }
 
@@ -55,7 +53,7 @@ class _SymptomEntrySheetState extends State<SymptomEntrySheet> {
       if (_symptoms.contains(symptom) == false) { // Check if the _symptoms already contains the Symptom
         if (isSymptomTemporary == false) {
           _defaultSymptoms.add(symptom);
-          await _settingsService.addDefaultSymptom(symptom);
+          await widget.symptomService.addSymptom(symptom);
         }
 
         setState(() {

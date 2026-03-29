@@ -5,23 +5,23 @@ import 'package:menstrudel/models/period_logs/log_day.dart';
 import 'package:menstrudel/models/flows/flow_enum.dart';
 import 'package:menstrudel/models/period_logs/pain_level_enum.dart';
 import 'package:menstrudel/models/period_logs/symptom.dart';
-import 'package:menstrudel/services/settings_service.dart';
+import 'package:menstrudel/services/symptom_service.dart';
 import 'package:menstrudel/widgets/dialogs/custom_symptom_dialog.dart';
-import 'package:provider/provider.dart';
+
 // TODO: Rename this file to log_edit_bottom_sheet.dart since it handles both viewing and editing
 class PeriodDetailsBottomSheet extends StatefulWidget {
   final LogDay log;
   final VoidCallback onDelete;
   final void Function(LogDay) onSave;
+  final SymptomService symptomService;
 
-  const PeriodDetailsBottomSheet({super.key, required this.log, required this.onDelete, required this.onSave});
+  const PeriodDetailsBottomSheet({super.key, required this.log, required this.onDelete, required this.onSave, required this.symptomService});
 
   @override
   State<PeriodDetailsBottomSheet> createState() => _PeriodDetailsBottomSheetState();
 }
 
 class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
-  late SettingsService _settingsService;
 
   bool _isEditing = false;
 
@@ -35,7 +35,6 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
   @override
   void initState() {
     super.initState();
-    _settingsService = context.read<SettingsService>();
     _resetEditableState();
     _loadDefaultSymptoms();
   }
@@ -48,7 +47,7 @@ class _PeriodDetailsBottomSheetState extends State<PeriodDetailsBottomSheet> {
   }
 
   void _loadDefaultSymptoms() {
-    _defaultSymptoms.addAll(_settingsService.defaultSymptoms);
+    _defaultSymptoms.addAll(widget.symptomService.symptoms);
     _symptoms.addAll(_defaultSymptoms);
     _symptoms.addAll(_selectedSymptoms);
   }
@@ -80,7 +79,7 @@ Future<void> _showNewCustomSymptomDialog() async {
       if (_symptoms.contains(symptom) == false) {
         if (isSymptomTemporary == false) { // Add to defaults if not temporary
           _defaultSymptoms.add(symptom);
-          await _settingsService.addDefaultSymptom(symptom);
+          await widget.symptomService.addSymptom(symptom);
         }
 
         setState(() {
