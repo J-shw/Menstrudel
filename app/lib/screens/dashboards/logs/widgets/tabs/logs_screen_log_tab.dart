@@ -6,10 +6,12 @@ import 'package:provider/provider.dart';
 
 class LogsScreenLogTab extends StatefulWidget {
   final PeriodService periodService;
+  final int userAge;
 
   const LogsScreenLogTab({
     super.key,
     required this.periodService,
+    required this.userAge,
   });
 
   @override
@@ -34,6 +36,7 @@ class _LogsScreenLogTabState extends State<LogsScreenLogTab> with AutomaticKeepA
           context: context,
           selectedDate: date,
           symptomService: context.read(),
+          age: widget.userAge,
         );
       },
       onLogTapped: (log) => context.read<LogUIController>().handleEditLog(

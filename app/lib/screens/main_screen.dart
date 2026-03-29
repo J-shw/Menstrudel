@@ -8,6 +8,7 @@ import 'package:menstrudel/screens/dashboards/sanitary_screen.dart';
 import 'package:menstrudel/screens/settings/settings_screen.dart';
 import 'package:menstrudel/screens/dashboards/pills_screen.dart';
 import 'package:menstrudel/screens/dashboards/sex/sex_screen.dart';
+import 'package:menstrudel/services/user_service.dart';
 import 'package:menstrudel/widgets/main/main_navigation_bar.dart';
 import 'package:menstrudel/widgets/main/app_bar.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
@@ -38,8 +39,7 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   /// Builds Log screen FAB
-  Widget _buildLogDayFab(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
+  Widget _buildLogDayFab(BuildContext context, AppLocalizations l10n, int age) {
     return FloatingActionButton(
       key: const ValueKey('log_day_fab'),
       tooltip: l10n.fabToolTip_logs,
@@ -48,6 +48,7 @@ class _MainScreenState extends State<MainScreen> {
               context: context,
               selectedDate: DateTime.now(),
               symptomService: context.read(),
+              age: age,
             );
       },
       child: const Icon(Icons.add),
@@ -99,6 +100,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final settingsService = context.watch<SettingsService>();
+    final userService = context.watch<UserService>();
 
     final bool isPillNavEnabled = settingsService.isPillNavEnabled;
     final bool isReversibleContraceptiveNavEnabled = settingsService.isReversibleContraceptiveNavEnabled;
@@ -130,7 +132,7 @@ class _MainScreenState extends State<MainScreen> {
     ];
 
     final List appFABs = [
-      _buildLogDayFab(context),
+      _buildLogDayFab(context, l10n, userService.age),
       if (isSanitaryNavEnabled) _buildSanitaryFab(context),
       if (isSexActivityNavEnabled) _buildSexFab(context),
       if (isPillNavEnabled) null,
