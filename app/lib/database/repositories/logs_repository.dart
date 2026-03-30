@@ -131,6 +131,33 @@ class LogsRepository {
     return LogDay.fromMap(result.first, symptoms: symptoms);
   }
 
+  /// Reads all logs since the given date, including their associated symptoms.
+  Future<List<LogDay>> readLogsSince(DateTime date) async {
+    final db = await dbProvider.database;
+
+    final logsResult = await db.query(
+      'period_logs',
+      where: 'date >= ?',
+      whereArgs: [date.millisecondsSinceEpoch],
+      orderBy: 'date DESC',
+    );
+
+    final symptomsResult = await db.query('log_symptoms');
+
+    final Map<int, List<Symptom>> symptomMap = {};
+    for (final row in symptomsResult) {
+      final int logId = row['log_id_fk'] as int;
+      final String symptom = row['symptom'] as String;
+      (symptomMap[logId] ??= []).add(Symptom.fromDbString(symptom));
+    }
+
+    return logsResult.map((json) {
+      final int logId = json['id'] as int;
+      final List<Symptom> symptoms = symptomMap[logId] ?? [];
+      return LogDay.fromMap(json, symptoms: symptoms);
+    }).toList();
+  }
+
   Future<void> updateLogPeriodIds(Map<int, int> mapping) async {
     final db = await dbProvider.database;
     final batch = db.batch();
