@@ -120,16 +120,6 @@ class _LogsScreenInsightsTab extends State<LogsScreenInsightsTab> {
     return FutureBuilder<List<dynamic>>(
       future: _insightsDataFuture,
       builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
-        }
-
-        if (snapshot.hasError) {
-          return Center(
-            child: Text('${l10n.insightsScreen_errorPrefix} ${snapshot.error}'),
-          );
-        }
-
         if (snapshot.hasData) {
           final allPeriods = snapshot.data![0] as List<Period>;
           final allLogs = snapshot.data![1] as List<LogDay>;
@@ -263,6 +253,17 @@ class _LogsScreenInsightsTab extends State<LogsScreenInsightsTab> {
             ),
           );
         }
+        
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        }
+
+        if (snapshot.hasError) {
+          return Center(
+            child: Text('${l10n.insightsScreen_errorPrefix} ${snapshot.error}'),
+          );
+        }
+        
         return Center(child: Text(l10n.insightsScreen_noDataAvailable));
       },
     );
