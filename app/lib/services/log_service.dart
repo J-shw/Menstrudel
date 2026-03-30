@@ -89,4 +89,9 @@ class LogService extends ChangeNotifier {
     await _logRepo.deleteLog(id);
     await loadLogs();
   }
+
+  /// Fetches logs starting from a specific date.
+  Future<List<LogDay>> getLogsSince(DateTime date) async {
+    return _logRepo.readLogsSince(date);
+  }
 }

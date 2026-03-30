@@ -346,4 +346,9 @@ class PeriodService extends ChangeNotifier {
     }
     _timelineItems = items;
   }
+
+  /// Fetches periods starting from a specific date.
+  Future<List<Period>> getPeriodsSince(DateTime date) async {
+    return _periodsRepo.readPeriodsSince(date);
+  }
 }
