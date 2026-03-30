@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:menstrudel/database/repositories/logs_repository.dart';
-import 'package:menstrudel/database/repositories/periods_repository.dart';
 import 'package:menstrudel/models/cycles/cycle_stats.dart';
 import 'package:menstrudel/models/period_logs/log_day.dart';
 import 'package:menstrudel/models/period_logs/symptom.dart';
 import 'package:menstrudel/models/periods/period.dart';
 import 'package:menstrudel/models/flows/flow_data.dart';
 import 'package:menstrudel/models/periods/period_stats.dart';
+import 'package:menstrudel/services/log_service.dart';
+import 'package:menstrudel/services/period_service.dart';
 import 'package:menstrudel/utils/period_predictor.dart';
 import 'package:menstrudel/widgets/insights/symptom_frequency.dart';
 import 'package:menstrudel/widgets/insights/cycle_length_variance.dart';
@@ -17,6 +17,7 @@ import 'package:menstrudel/widgets/insights/log_summary_widget.dart';
 import 'package:menstrudel/widgets/insights/monthly_flow.dart';
 
 import 'package:menstrudel/l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 class LogsScreenInsightsTab extends StatefulWidget {
   const LogsScreenInsightsTab({super.key});
@@ -27,13 +28,14 @@ class LogsScreenInsightsTab extends StatefulWidget {
 
 class _LogsScreenInsightsTab extends State<LogsScreenInsightsTab> {
   late Future<List<dynamic>> _insightsDataFuture;
-  final periodsRepo = PeriodsRepository();
-  final logsRepo = LogsRepository();
   final PageController _cycleAndPeriodCarouselPageController = PageController(viewportFraction: 1.0);
   final PageController _painAndFlowCarouselPageController = PageController(viewportFraction: 1.0);
   int _cycleAndPeriodCarouselCurrentPage = 0;
   int _painAndFlowCarouselCurrentPage = 0;
+  int _selectedMonths = 6;
 
+  late PeriodService periodService = context.read<PeriodService>();
+  late LogService logsService = context.read<LogService>();
 
   @override
   void initState() {
@@ -58,6 +60,9 @@ class _LogsScreenInsightsTab extends State<LogsScreenInsightsTab> {
     });
   }
 
+  DateTime get _insightsDataStartDate => 
+      DateTime.now().subtract(Duration(days: _selectedMonths * 30));
+
   @override
   void dispose() {
     _cycleAndPeriodCarouselPageController.dispose();
@@ -67,10 +72,10 @@ class _LogsScreenInsightsTab extends State<LogsScreenInsightsTab> {
 
   void _loadInsightsData() {
     _insightsDataFuture = Future.wait([
-      periodsRepo.readAllPeriods(),
-      logsRepo.readAllLogs(),
-      periodsRepo.getMonthlyPeriodFlows(),
-      logsRepo.getSymptomFrequency(),
+      periodService.getPeriodsSince(_insightsDataStartDate),
+      logsService.getLogsSince(_insightsDataStartDate),
+      periodService.getMonthlyPeriodFlowsSince(_insightsDataStartDate),
+      logsService.getSymptomFrequencySince(_insightsDataStartDate),
     ]);
   }
 
@@ -145,26 +150,40 @@ class _LogsScreenInsightsTab extends State<LogsScreenInsightsTab> {
             FlowBreakdownWidget(logs: allLogs),
           ];
 
-          return ListView(
-            padding: EdgeInsets.zero,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: LogSummaryWidget(
+          return Padding(
+            padding: const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),
+            child: ListView(
+              padding: EdgeInsets.zero,
+              children: [
+                LogSummaryWidget(
                   totalLoggedDays: allLogs.length,
                   loggingSpan: loggingSpan,
                 ),
-              ),
-                    
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: SymptomFrequencyWidget(symptomCounts: symptomCounts),
-              ),
-              
-              // --- First Carousel (Cycles/Periods) ---
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 16.0),
-                child: Column(
+
+                const SizedBox(height: 16.0),
+
+                SegmentedButton<int>(
+                  segments: [
+                    ButtonSegment(value: 6, label: Text(l10n.monthCount(6))),
+                    ButtonSegment(value: 12, label: Text(l10n.monthCount(12))),
+                  ],
+                  selected: {_selectedMonths},
+                  onSelectionChanged: (Set<int> newSelection) {
+                    setState(() {
+                      _selectedMonths = newSelection.first;
+                      _loadInsightsData();
+                    });
+                  },
+                ),
+                
+                const SizedBox(height: 16.0),
+
+                SymptomFrequencyWidget(symptomCounts: symptomCounts),
+
+                const SizedBox(height: 16.0),
+                
+                // --- First Carousel (Cycles/Periods) ---
+                Column(
                   children: [
                     SizedBox(
                       height: 450.0,
@@ -172,12 +191,7 @@ class _LogsScreenInsightsTab extends State<LogsScreenInsightsTab> {
                         controller: _cycleAndPeriodCarouselPageController,
                         itemCount: cycleAndPeriodCarouselItems.length,
                         itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 16.0,
-                            ),
-                            child: cycleAndPeriodCarouselItems[index],
-                          );
+                          return cycleAndPeriodCarouselItems[index];
                         },
                       ),
                     ),
@@ -203,12 +217,11 @@ class _LogsScreenInsightsTab extends State<LogsScreenInsightsTab> {
                     ),
                   ],
                 ),
-              ),
-              
-              // --- Second Carousel (Pain/Flow) ---
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 16.0),
-                child: Column(
+
+                const SizedBox(height: 16.0),
+                
+                // --- Second Carousel (Pain/Flow) ---
+                Column(
                   children: [
                     SizedBox(
                       height: 350.0,
@@ -216,12 +229,7 @@ class _LogsScreenInsightsTab extends State<LogsScreenInsightsTab> {
                         controller: _painAndFlowCarouselPageController,
                         itemCount: painAndFlowCarouselItems.length,
                         itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 16.0,
-                            ),
-                            child: painAndFlowCarouselItems[index],
-                          );
+                          return painAndFlowCarouselItems[index];
                         },
                       ),
                     ),
@@ -247,13 +255,12 @@ class _LogsScreenInsightsTab extends State<LogsScreenInsightsTab> {
                     ),
                   ],
                 ),
-              ),
-              
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: FlowPatternsWidget(monthlyFlowData: allFlows),
-              ),
-            ],
+                
+                const SizedBox(height: 16.0),
+
+                FlowPatternsWidget(monthlyFlowData: allFlows),
+              ],
+            ),
           );
         }
         return Center(child: Text(l10n.insightsScreen_noDataAvailable));
