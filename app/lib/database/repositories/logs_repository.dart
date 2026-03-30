@@ -206,11 +206,14 @@ class LogsRepository {
   }
 
   /// Calculates the usage count for every symptom in the database.
-  Future<Map<Symptom, int>> getSymptomFrequency() async {
+  /// This is used for insights and to show the most common symptoms in the UI.
+  /// Is filtered by date to only include recent logs for more relevant insights.
+  Future<Map<Symptom, int>> getSymptomFrequencySince(DateTime date) async {
     final db = await dbProvider.database;
 
     final result = await db.rawQuery(
-      'SELECT symptom, COUNT(symptom) as count FROM log_symptoms GROUP BY symptom',
+      'SELECT symptom, COUNT(symptom) as count FROM log_symptoms WHERE log_id_fk IN (SELECT id FROM period_logs WHERE date >= ?) GROUP BY symptom',
+      [date.millisecondsSinceEpoch],
     );
 
     if (result.isEmpty) {
