@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/database/repositories/logs_repository.dart';
 import 'package:menstrudel/models/period_logs/log_day.dart';
+import 'package:menstrudel/models/period_logs/symptom.dart';
 
 class LogService extends ChangeNotifier {
   final LogsRepository _logRepo;
@@ -93,5 +94,10 @@ class LogService extends ChangeNotifier {
   /// Fetches logs starting from a specific date.
   Future<List<LogDay>> getLogsSince(DateTime date) async {
     return _logRepo.readLogsSince(date);
+  }
+
+  /// Fetches the frequency of symptoms starting from a specific date for insights purposes.
+  Future<Map<Symptom, int>> getSymptomFrequencySince(DateTime date) async {
+    return _logRepo.getSymptomFrequencySince(date);
   }
 }

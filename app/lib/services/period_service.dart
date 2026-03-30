@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/models/cycle_phase/cycle_phase.dart';
+import 'package:menstrudel/models/flows/flow_data.dart';
 import 'package:menstrudel/models/flows/flow_enum.dart';
 import 'package:collection/collection.dart';
 import 'package:intl/intl.dart';
@@ -350,5 +351,10 @@ class PeriodService extends ChangeNotifier {
   /// Fetches periods starting from a specific date.
   Future<List<Period>> getPeriodsSince(DateTime date) async {
     return _periodsRepo.readPeriodsSince(date);
+  }
+
+  /// Fetches monthly flow data exclusively from logs that are part of a period.
+  Future<List<MonthlyFlowData>> getMonthlyPeriodFlowsSince(DateTime date) async {
+    return _periodsRepo.getMonthlyPeriodFlowsSince(date);
   }
 }
