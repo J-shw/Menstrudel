@@ -213,7 +213,7 @@ class LogsRepository {
 
     final result = await db.rawQuery(
       'SELECT symptom, COUNT(symptom) as count FROM log_symptoms WHERE log_id_fk IN (SELECT id FROM period_logs WHERE date >= ?) GROUP BY symptom',
-      [date.millisecondsSinceEpoch],
+      [date.toIso8601String()],
     );
 
     if (result.isEmpty) {
