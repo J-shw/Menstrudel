@@ -138,11 +138,12 @@ class PeriodsRepository {
   }
 
   /// Fetches monthly flow data exclusively from logs that are part of a period.
-  Future<List<MonthlyFlowData>> getMonthlyPeriodFlows() async {
+  /// Takes a starting date to limit the results to recent data for insights purposes.
+  Future<List<MonthlyFlowData>> getMonthlyPeriodFlowsSince(DateTime date) async {
     final db = await dbProvider.database;
     final List<MonthlyFlowData> allMonthlyFlows = [];
 
-    final allPeriods = await readAllPeriods();
+    final allPeriods = await readPeriodsSince(date);
 
     for (final period in allPeriods) {
       if (period.id == null) continue;
