@@ -66,25 +66,25 @@ class PeriodPredictor {
   /// Returns a [PeriodPredictionResult] object, or `null` if there are not enough
   /// entries or if statistics cannot be calculated.
   static PeriodPredictionResult? estimateNextPeriod(
-    List<Period> entries,
+    List<Period> periods,
     DateTime now,
   ) {
-    if (entries.length < _minPeriodsLogged) {
+    if (periods.length < _minPeriodsLogged) {
       return null;
     }
 
-    final sortedEntries = List<Period>.from(entries)
+    final sortedPeriods = List<Period>.from(periods)
       ..sort((a, b) => a.startDate.compareTo(b.startDate));
 
-    final List<int> cycleLengths = _getValidCycleLengths(sortedEntries);
-    if (cycleLengths.isEmpty) {
+    final List<int> validCycleLengths = _getValidCycleLengths(sortedPeriods);
+    if (validCycleLengths.isEmpty) {
       return null;
     }
-    final int totalCycleDays = cycleLengths.reduce((a, b) => a + b);
-    final int averageCycleLength = (totalCycleDays / cycleLengths.length)
+    final int totalCycleDays = validCycleLengths.reduce((a, b) => a + b);
+    final int averageCycleLength = (totalCycleDays / validCycleLengths.length)
         .round();
 
-    final List<int> periodDurations = _getValidPeriodDurations(sortedEntries);
+    final List<int> periodDurations = _getValidPeriodDurations(sortedPeriods);
     if (periodDurations.isEmpty) {
       return null;
     }
@@ -96,7 +96,7 @@ class PeriodPredictor {
       return null;
     }
 
-    DateTime lastPeriodStartDate = sortedEntries.last.startDate;
+    DateTime lastPeriodStartDate = sortedPeriods.last.startDate;
 
     DateTime estimatedStartDate = lastPeriodStartDate.add(
       Duration(days: averageCycleLength),
