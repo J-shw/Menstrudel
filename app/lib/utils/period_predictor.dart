@@ -47,12 +47,11 @@ class PeriodPredictor {
   ///
   /// Duration is calculated as the difference between end date and start date, plus one day.
   /// Only durations greater than 0 are included.
-  static List<int> _getValidPeriodDurations(List<Period> entries) {
+  static List<int> _getValidPeriodDurations(List<Period> periods) {
     final List<int> durations = [];
-    for (final entry in entries) {
-      final duration = entry.endDate.difference(entry.startDate).inDays + 1;
-      if (duration > 0) {
-        durations.add(duration);
+    for (final period in periods) {
+      if (period.totalDays > 0) {
+        durations.add(period.totalDays);
       }
     }
     return durations;
