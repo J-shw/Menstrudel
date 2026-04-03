@@ -119,7 +119,7 @@ class NotificationService {
     debugPrint('Canceling period due notification reminder');
     await _plugin.cancel(periodDueNotificationId);
   }
-  
+
   static Future<void> cancelPeriodOverdueNotification() async {
     debugPrint('Canceling period overdue notification reminder');
     await _plugin.cancel(periodOverdueNotificationId);
