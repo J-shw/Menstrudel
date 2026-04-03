@@ -115,6 +115,16 @@ class NotificationService {
     );  
   }
 
+  static Future<void> cancelPeriodDueNotification() async {
+    debugPrint('Canceling period due notification reminder');
+    await _plugin.cancel(periodDueNotificationId);
+  }
+
+  static Future<void> cancelPeriodOverdueNotification() async {
+    debugPrint('Canceling period overdue notification reminder');
+    await _plugin.cancel(periodOverdueNotificationId);
+  }
+
   // Phase notifications
 
   /// Schedules fertile window reminder

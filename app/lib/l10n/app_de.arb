@@ -58,7 +58,7 @@
             }
         }
     },
-    "countUp_day": "Day {day}",
+    "countUp_day": "Tag {day}",
     "@countUp_day": {
         "description": "A count up message indicating the current day. E.g. 'Day 1 of period'.",
         "placeholders": {
@@ -95,7 +95,7 @@
     "other": "Sonstiges",
     "navBar_logs": "Protokolle",
     "navBar_sanitary": "Hygiene",
-    "navBar_sexActivity": "Sexuelle Aktivitäten",
+    "navBar_sexActivity": "Sexaktivität",
     "navBar_pill": "Pille",
     "navBar_reversibleContraceptive": "Verhütungsmethoden",
     "navBar_settings": "Einstellungen",
@@ -112,6 +112,9 @@
     "builtInSymptom_headache": "Kopfschmerzen",
     "builtInSymptom_moodSwings": "Stimmungsschwankungen",
     "builtInSymptom_nausea": "Übelkeit",
+    "builtInSymptom_tenderBreasts": "Tender breasts",
+    "builtInSymptom_insomnia": "Insomnia",
+    "builtInSymptom_depressed": "Depressed",
     "painLevel_title": "Schmerzgrad",
     "painLevel_none": "Keine",
     "painLevel_mild": "Mild",
@@ -125,7 +128,7 @@
     "reversibleContraceptive_ring": "Hormonring",
     "reversibleContraceptive_patch": "Hormonpflaster",
     "sanitaryProduct_tampon": "Tampon",
-    "sanitaryProduct_pad": "Polster",
+    "sanitaryProduct_pad": "Binden",
     "sanitaryProduct_menstrualCup": "Menstruationstasse",
     "sanitaryProduct_periodUnderwear": "Periodenunterwäsche",
     "sanitaryProducts_mostUsed": "Meist Verwendet",
@@ -186,27 +189,27 @@
     "dayOfWeek_sunday": "Sonntag",
     "cyclePhase_menstruation": "Menstruation",
     "cyclePhase_follicular": "Follikelphase",
-    "cyclePhase_fertileWindow": "Fertile Window",
+    "cyclePhase_fertileWindow": "Fruchtbare Tage",
     "cyclePhase_ovulation": "Ovulation",
     "cyclePhase_luteal": "Lutealphase",
     "cyclePhase_late": "Verspätete Periode",
     "cyclePhase_unknown": "Unbekannt",
     "cyclePhase_menstruationDescription": "Deine Periode ist aktiv und die Gebärmutterschleimhaut wird abgestoßen.",
-    "cyclePhase_fertileWindowDescription": "Your fertile window is active.",
+    "cyclePhase_fertileWindowDescription": "Du befindest dich in deinen fruchtbaren Tagen.",
     "cyclePhase_follicularDescription": "Der Östrogenspiegel steigt, um die Eizelle vorzubereiten; Dein Energieniveau steigt möglicherweise an.",
     "cyclePhase_ovulationDescription": "Ein Eisprung ist erfolgt. Dies ist deine fruchtbarste Zeit.",
     "cyclePhase_lutealDescription": "Progesteron überwiegt aktuell. Achte auf PMS-Symptome, wenn deine nächste Periode näher rückt.",
     "cyclePhase_lateDescription": "Deine Periode ist verspätet.",
     "cyclePhase_unknownDescription": "Wir benötigen mehr Daten, um deine Zyklusphasen vorherzusagen.",
-    "fertilityChance_high": "High",
+    "fertilityChance_high": "Hoch",
     "@fertilityChance_high": {
         "description": "Label shown when the user is in their peak fertile window or on ovulation day."
     },
-    "fertilityChance_medium": "Medium",
+    "fertilityChance_medium": "Mittel",
     "@fertilityChance_medium": {
         "description": "Label shown when the user is at the very beginning or end of their fertile window."
     },
-    "fertilityChance_low": "Low",
+    "fertilityChance_low": "Gering",
     "@fertilityChance_low": {
         "description": "Label shown when the user is outside of their fertile window (e.g., during menstruation or the luteal phase)."
     },
@@ -274,11 +277,11 @@
     },
     "notification_SanitaryProductReminderTitle": "Erinnerung an Hygieneartikel",
     "notification_SanitaryProductReminderBody": "Denke daran, Dein Produkt zu wechseln.",
-    "notification_fertileWindowTitle": "Fertile Window Reminder",
+    "notification_fertileWindowTitle": "Fruchtbare Tage",
     "@notification_fertileWindowTitle": {
         "description": "Title for the fertile window notification."
     },
-    "notification_fertileWindowBody": "{count, plural, =1{Your next fertile window is estimated to start in 1 day.} other{Your next fertile window is estimated to start in {count} days.}}",
+    "notification_fertileWindowBody": "{count, plural, =1{Deine fruchtbaren Tage starten in 1 Tag.} other{Deine fruchtbaren Tage starten in {count} Tagen.}}",
     "@notification_fertileWindowBody": {
         "description": "Body for the upcoming fertile window notification.",
         "placeholders": {
@@ -287,11 +290,11 @@
             }
         }
     },
-    "notification_ovulationDayReminderTitle": "Ovulation Day Reminder",
+    "notification_ovulationDayReminderTitle": "Eisprung",
     "@notification_ovulationDayReminderTitle": {
         "description": "Title for the ovulation day notification."
     },
-    "notification_ovulationDayReminderBody": "{count, plural, =1{Your next ovulation day is estimated to start in 1 day.} other{Your next ovulation day is estimated to start in {count} days.}}",
+    "notification_ovulationDayReminderBody": "{count, plural, =1{Dein nächster Eisprung startet in 1 Tag.} other{Dein nächster Eisprung startet in {count} Tagen.}}",
     "@notification_ovulationDayReminderBody": {
         "description": "Body for the upcoming ovulation day notification.",
         "placeholders": {
@@ -519,20 +522,20 @@
     "settingsScreen_trackYourDailyPillIntake": "Tägliche Pilleneinnahme tracken",
     "settingsScreen_dailyPillReminder": "Tägliche Pillenerinnerung",
     "settingsScreen_reminderTime": "Erinnerungszeit",
-    "settingsScreen_cycleNotificationsAndPredictions": "Cycle Notifications & Predictions",
+    "settingsScreen_cycleNotificationsAndPredictions": "Zyklusbenachrichtigungen & Voraussagen",
     "@settingsScreen_cycleNotificationsAndPredictions": {
         "description": "Header for the cycle notifications and predictions section"
     },
-    "settingsScreen_enablePhasePredictions": "Enable Phase Predictions",
-    "settingsScreen_displayFertileChance": "Display Fertile Chance",
-    "settingsScreen_displayFertileWindowOnCalendar": "Display Fertile Window on Calendar",
+    "settingsScreen_enablePhasePredictions": "Zyklusvorhersagen aktivieren",
+    "settingsScreen_displayFertileChance": "Schwangerschaftswahrscheinlichkeit Anzeigen",
+    "settingsScreen_displayFertileWindowOnCalendar": "Fruchtbare Tage im Kalender anzeigen",
     "settingsScreen_notificationTime": "Benachrichtigungszeit",
     "settingsScreen_remindMeBefore": "Erinnere mich vorher",
     "settingsScreen_remindMeAfter": "Erinnere mich in",
     "settingsScreen_upcomingPeriodReminder": "Erinnerung an die bevorstehende Periode",
     "settingsScreen_overduePeriodReminder": "Erinnerung bei überfälliger Periode",
-    "settingsScreen_fertileWindowReminder": "Fertile Window Reminder",
-    "settingsScreen_ovulationDayReminder": "Ovulation Day Reminder",
+    "settingsScreen_fertileWindowReminder": "Erinnerung für fruchtbare Tage",
+    "settingsScreen_ovulationDayReminder": "Erinnerung für den Eisprung",
     "settingsScreen_enableReversibleContraceptiveTracking": "Reversible Verhütungsmethode aktivieren",
     "settingsScreen_reversibleContraceptiveDescription": "Reversible Verhütungsmethode verfolgen.",
     "settingsScreen_reversibleContraceptiveType": "Verhütungsmethode",
@@ -593,7 +596,7 @@
     "@settingsScreen_clearLogsAndPeriodsSubtitle": {
         "description": "Subtitle for the period logs data clearing section."
     },
-    "settingsScreen_clearPillLogs": "Löschen der Pillenhistorie",
+    "settingsScreen_clearPillLogs": "Löschen des Pillenprotokolls",
     "@settingsScreen_clearPillLogs": {
         "description": "Title for the pill logs data clearing section."
     },

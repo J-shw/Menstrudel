@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/models/cycle_phase/cycle_phase.dart';
+import 'package:menstrudel/models/flows/flow_data.dart';
 import 'package:menstrudel/models/flows/flow_enum.dart';
 import 'package:collection/collection.dart';
 import 'package:intl/intl.dart';
@@ -20,10 +21,14 @@ class PeriodService extends ChangeNotifier {
   final PeriodsRepository _periodsRepo;
   final _watchSyncService = WatchSyncService();
 
+  /// The maximum number of recent months to consider when calculating cycle statistics.
+  static const int _lastNMonthsToConsider = 6;
+
   PeriodService(this._settingsService, this._periodsRepo);
 
   bool _isLoading = true;
   List<Period> _periodEntries = [];
+  Period? _lastPeriod;
   List<Object> _timelineItems = [];
   PeriodPredictionResult? _upcomingPeriodPrediction;
   PeriodPredictionResult? _followingPeriodPrediction;
@@ -38,6 +43,9 @@ class PeriodService extends ChangeNotifier {
 
   /// The list of calculated [Period] objects, representing entire period cycles.
   List<Period> get periodEntries => _periodEntries;
+
+  /// The most recent period entry, or null if no periods are logged.
+  Period? get lastPeriod => _lastPeriod;
 
   /// Prediction for the immediate next period.
   PeriodPredictionResult? get upcomingPeriodPrediction => _upcomingPeriodPrediction;
@@ -77,12 +85,12 @@ class PeriodService extends ChangeNotifier {
 
     notifyListeners();
 
-    final oldPredictionDate = _upcomingPeriodPrediction?.estimatedStartDate;
     final oldCyclePredictionFertileStart = _predictedCurrentCycle?.fertileWindowStart;
     final oldCyclePredictionOvulationDay = _predictedCurrentCycle?.ovulationDay;
 
     try {
       _periodEntries = await _periodsRepo.readAllPeriods();
+      _lastPeriod = _periodEntries.lastOrNull;
 
       _calculatePrediction();
       _updateUiState();
@@ -90,9 +98,8 @@ class PeriodService extends ChangeNotifier {
 
       if (l10n != null) {
         _updateWidgetData(l10n, widgetController);
-        if (oldPredictionDate != _upcomingPeriodPrediction?.estimatedStartDate) {
-          _schedulePeriodNotifications(l10n);
-        }
+        _schedulePeriodNotifications(l10n);
+
         if (_predictedCurrentCycle != null && _settingsService.isNaturalCycle){
           if (oldCyclePredictionFertileStart != _predictedCurrentCycle?.fertileWindowStart && _settingsService.areFertileWindowNotificationsEnabled) {
             _scheduleFertileWindowNotification(l10n);
@@ -114,19 +121,18 @@ class PeriodService extends ChangeNotifier {
   }
 
   /// Calculates the period predictions, cycle predictions and ongoing status.
-  void _calculatePrediction() {
+  Future<void> _calculatePrediction() async {
+    final periods = await getPeriodsSince(DateTime.now().subtract(const Duration(days: _lastNMonthsToConsider * 30)));
+
     _upcomingPeriodPrediction = PeriodPredictor.estimateNextPeriod(
-      _periodEntries,
+      periods,
       DateTime.now(),
     );
 
-    final lastPeriod = _periodEntries.firstOrNull;
-    _isPeriodOngoing =
-        lastPeriod != null &&
-        DateUtils.isSameDay(lastPeriod.endDate, DateTime.now());
+    _isPeriodOngoing = _lastPeriod != null ? DateUtils.isSameDay(_lastPeriod!.endDate, DateTime.now()) : false;
     
-    if (_upcomingPeriodPrediction != null) {
-      final lastPeriodStartDate = _periodEntries.first.startDate;
+    if (_upcomingPeriodPrediction != null && _lastPeriod != null) {
+      final lastPeriodStartDate = _lastPeriod!.startDate;
       final averageCycleLength = _upcomingPeriodPrediction?.averageCycleLength ?? 0;
       final averagePeriodDuration = _upcomingPeriodPrediction?.averagePeriodDuration ?? 0;
       
@@ -162,7 +168,7 @@ class PeriodService extends ChangeNotifier {
       _menstruationDay = 0;
     }else{
       final today = DateUtils.dateOnly(DateTime.now());
-      final start = DateUtils.dateOnly(lastPeriod.startDate);
+      final start = DateUtils.dateOnly(_lastPeriod!.startDate);
       _menstruationDay = today.difference(start).inDays + 1;
     }
   }
@@ -345,5 +351,15 @@ class PeriodService extends ChangeNotifier {
       }
     }
     _timelineItems = items;
+  }
+
+  /// Fetches periods starting from a specific date.
+  Future<List<Period>> getPeriodsSince(DateTime date) async {
+    return _periodsRepo.readPeriodsSince(date);
+  }
+
+  /// Fetches monthly flow data exclusively from logs that are part of a period.
+  Future<List<MonthlyFlowData>> getMonthlyPeriodFlowsSince(DateTime date) async {
+    return _periodsRepo.getMonthlyPeriodFlowsSince(date);
   }
 }

@@ -3,6 +3,7 @@ import 'package:menstrudel/screens/dashboards/logs/widgets/tabs/logs_screen_insi
 import 'package:menstrudel/screens/dashboards/logs/widgets/tabs/logs_screen_log_tab.dart';
 import 'package:menstrudel/screens/dashboards/logs/widgets/tabs/logs_screen_period_quick_view_tab.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
+import 'package:menstrudel/services/user_service.dart';
 import 'package:provider/provider.dart';
 import 'package:menstrudel/services/period_service.dart';
 
@@ -24,6 +25,7 @@ class LogsScreenState extends State<LogsScreen> {
     final l10n = AppLocalizations.of(context)!;
     final colorScheme = Theme.of(context).colorScheme;
     final periodService = context.watch<PeriodService>();
+    final userAge = context.watch<UserService>().age;
 
     return DefaultTabController(
       length: 3,
@@ -46,7 +48,7 @@ class LogsScreenState extends State<LogsScreen> {
                 child: TabBarView(
                   children: [
                     LogsScreenPeriodQuickViewTab(periodService: periodService),
-                    LogsScreenLogTab(periodService: periodService),
+                    LogsScreenLogTab(periodService: periodService, userAge: userAge),
                     LogsScreenInsightsTab(),
                   ],
                 ),

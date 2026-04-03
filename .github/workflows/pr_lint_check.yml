@@ -19,7 +19,7 @@ jobs:
         run: |
           title_is_valid=false
 
-          title_regex="^(Feature|Bugfix|Docs|Chore|Refactor|Style|Test|Post)\/(app|wear|web|repo)\/([a-z0-9-]+\/)?[a-z0-9-]+"
+          title_regex="^(Release|Feature|Bugfix|Docs|Chore|Refactor|Style|Test|Post)\/(app|wear|web|repo)\/([a-z0-9-]+\/)?[a-z0-9-]+"
           if [[ "$PR_TITLE" =~ $title_regex || "$PR_TITLE" == 'New Crowdin updates' ]] then
             title_is_valid=true
           fi

@@ -10,6 +10,7 @@ import 'package:menstrudel/screens/settings/sections/security_settings_screen.da
 import 'package:menstrudel/screens/settings/sections/preferences_settings_screen.dart';
 import 'package:menstrudel/screens/settings/sections/about_screen.dart';
 import 'package:menstrudel/screens/settings/sections/user_settings_screen.dart';
+import 'package:provider/provider.dart';
 
 
 class SettingsScreen extends StatelessWidget {
@@ -68,7 +69,7 @@ class SettingsScreen extends StatelessWidget {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => LogSettingsScreen()),
+              MaterialPageRoute(builder: (context) => LogSettingsScreen(logsRepo: context.read())),
             );
           },
         ),
