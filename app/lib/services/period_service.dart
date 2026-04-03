@@ -85,7 +85,6 @@ class PeriodService extends ChangeNotifier {
 
     notifyListeners();
 
-    final oldPredictionDate = _upcomingPeriodPrediction?.estimatedStartDate;
     final oldCyclePredictionFertileStart = _predictedCurrentCycle?.fertileWindowStart;
     final oldCyclePredictionOvulationDay = _predictedCurrentCycle?.ovulationDay;
 
@@ -99,9 +98,8 @@ class PeriodService extends ChangeNotifier {
 
       if (l10n != null) {
         _updateWidgetData(l10n, widgetController);
-        if (oldPredictionDate != _upcomingPeriodPrediction?.estimatedStartDate) {
-          _schedulePeriodNotifications(l10n);
-        }
+        _schedulePeriodNotifications(l10n);
+
         if (_predictedCurrentCycle != null && _settingsService.isNaturalCycle){
           if (oldCyclePredictionFertileStart != _predictedCurrentCycle?.fertileWindowStart && _settingsService.areFertileWindowNotificationsEnabled) {
             _scheduleFertileWindowNotification(l10n);
