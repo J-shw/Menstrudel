@@ -92,7 +92,7 @@ class PeriodService extends ChangeNotifier {
       _periodEntries = await _periodsRepo.readAllPeriods();
       _lastPeriod = _periodEntries.firstOrNull;
 
-      _calculatePrediction();
+      await _calculatePrediction();
       _updateUiState();
       _buildTimelineItems(currentLogs: currentLogs);
 
