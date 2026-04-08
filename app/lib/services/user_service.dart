@@ -51,7 +51,7 @@ class UserService extends ChangeNotifier {
   Future<void> updateUser(UserEntry user) async {
     _user = user;
     notifyListeners();
-    _userRepo.updateUser(user);
+    _userRepo.saveUser(user);
   }
 
   /// Updates the user's date of birth.
@@ -60,7 +60,7 @@ class UserService extends ChangeNotifier {
     _user = _user!.copyWith(birthDate: date);
     _age = AgeCalculator.age(_user!.birthDate!).years;
     notifyListeners();
-    _userRepo.updateUser(_user!);
+    _userRepo.saveUser(_user!);
   }
 
   /// Remove date of birth.
@@ -68,7 +68,7 @@ class UserService extends ChangeNotifier {
     if (_user == null) return;
     _user = _user!.copyWith(birthDate: null);
     notifyListeners();
-    _userRepo.updateUser(_user!);
+    _userRepo.saveUser(_user!);
   }
 
   /// Updates the user's name
@@ -76,7 +76,7 @@ class UserService extends ChangeNotifier {
     if (_user == null) return;
     _user = _user!.copyWith(name: name);
     notifyListeners();
-    _userRepo.updateUser(_user!);
+    _userRepo.saveUser(_user!);
   }
 
   /// Updates the user's primary goal
@@ -84,7 +84,7 @@ class UserService extends ChangeNotifier {
     if (_user == null) return;
     _user = _user!.copyWith(primaryGoal: goal);
     notifyListeners();
-    _userRepo.updateUser(_user!);
+    _userRepo.saveUser(_user!);
     settingsService.applySettingsForGoal(goal);
   }
 }
