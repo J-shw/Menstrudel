@@ -58,7 +58,7 @@
             }
         }
     },
-    "countUp_day": "Day {day}",
+    "countUp_day": "Jour {day}",
     "@countUp_day": {
         "description": "A count up message indicating the current day. E.g. 'Day 1 of period'.",
         "placeholders": {
