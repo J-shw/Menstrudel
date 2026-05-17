@@ -58,7 +58,7 @@
             }
         }
     },
-    "countUp_day": "Day {day}",
+    "countUp_day": "วัน{day}",
     "@countUp_day": {
         "description": "A count up message indicating the current day. E.g. 'Day 1 of period'.",
         "placeholders": {
@@ -112,9 +112,9 @@
     "builtInSymptom_headache": "ปวดศีรษะ",
     "builtInSymptom_moodSwings": "อารมณ์แปรปรวน",
     "builtInSymptom_nausea": "คลื่นไส้",
-    "builtInSymptom_tenderBreasts": "Tender breasts",
-    "builtInSymptom_insomnia": "Insomnia",
-    "builtInSymptom_depressed": "Depressed",
+    "builtInSymptom_tenderBreasts": "คัดตึงเต้านม",
+    "builtInSymptom_insomnia": "นอนไม่หลับ",
+    "builtInSymptom_depressed": "ซึมเศร้า",
     "painLevel_title": "ระดับความปวด",
     "painLevel_none": "ไม่ปวด",
     "painLevel_mild": "เล็กน้อย",
@@ -189,27 +189,27 @@
     "dayOfWeek_sunday": "วันอาทิตย์",
     "cyclePhase_menstruation": "มีประจำเดือน",
     "cyclePhase_follicular": "ก่อนตกไข่",
-    "cyclePhase_fertileWindow": "Fertile Window",
+    "cyclePhase_fertileWindow": "ช่วงไข่สุก",
     "cyclePhase_ovulation": "ช่วงเจริญพันธุ์สูงสุด",
     "cyclePhase_luteal": "หลังตกไข่",
     "cyclePhase_late": "ล่าช้า",
     "cyclePhase_unknown": "ไม่ทราบ",
     "cyclePhase_menstruationDescription": "คุณกำลังมีประจำเดือน และเยื่อบุโพรงมดลูกกำลังหลุดลอก",
-    "cyclePhase_fertileWindowDescription": "Your fertile window is active.",
+    "cyclePhase_fertileWindowDescription": "อยู่ในช่วงที่มีโอกาสตั้งครรภ์สูง",
     "cyclePhase_follicularDescription": "ระดับเอสโตรเจนกำลังเพิ่มขึ้นเพื่อเตรียมไข่ ระดับพลังงานของคุณอาจเพิ่มขึ้นด้วย",
     "cyclePhase_ovulationDescription": "มีการตกไข่แล้ว นี่คือช่วงที่มีโอกาสตั้งครรภ์สูงที่สุด",
     "cyclePhase_lutealDescription": "ฮอร์โมนโปรเจสเตอโรนจะสูงในช่วงนี้ สังเกตอาการก่อนมีประจำเดือนเมื่อใกล้ถึงรอบถัดไป",
     "cyclePhase_lateDescription": "ประจำเดือนของคุณมาช้า",
     "cyclePhase_unknownDescription": "ต้องการข้อมูลเพิ่มเติมเพื่อคาดการณ์ระยะรอบเดือนอย่างแม่นยำ",
-    "fertilityChance_high": "High",
+    "fertilityChance_high": "สูง",
     "@fertilityChance_high": {
         "description": "Label shown when the user is in their peak fertile window or on ovulation day."
     },
-    "fertilityChance_medium": "Medium",
+    "fertilityChance_medium": "ปานกลาง",
     "@fertilityChance_medium": {
         "description": "Label shown when the user is at the very beginning or end of their fertile window."
     },
-    "fertilityChance_low": "Low",
+    "fertilityChance_low": "ต่ำ",
     "@fertilityChance_low": {
         "description": "Label shown when the user is outside of their fertile window (e.g., during menstruation or the luteal phase)."
     },
@@ -277,11 +277,11 @@
     },
     "notification_SanitaryProductReminderTitle": "เตือนการเปลี่ยนผลิตภัณฑ์สุขอนามัย",
     "notification_SanitaryProductReminderBody": "อย่าลืมเปลี่ยนผลิตภัณฑ์",
-    "notification_fertileWindowTitle": "Fertile Window Reminder",
+    "notification_fertileWindowTitle": "แจ้งเตือนช่วงที่มีโอกาสตั้งครรภ์สูง",
     "@notification_fertileWindowTitle": {
         "description": "Title for the fertile window notification."
     },
-    "notification_fertileWindowBody": "{count, plural, =1{Your next fertile window is estimated to start in 1 day.} other{Your next fertile window is estimated to start in {count} days.}}",
+    "notification_fertileWindowBody": "{count, plural, =1{คาดว่าช่วงที่มีโอกาสตั้งครรภ์สูงครั้งถัดไปจะเริ่มในอีก 1 วัน} other{คาดว่าช่วงที่มีโอกาสตั้งครรภ์สูงครั้งถัดไปจะเริ่มในอีก {count} วัน}}",
     "@notification_fertileWindowBody": {
         "description": "Body for the upcoming fertile window notification.",
         "placeholders": {
@@ -290,11 +290,11 @@
             }
         }
     },
-    "notification_ovulationDayReminderTitle": "Ovulation Day Reminder",
+    "notification_ovulationDayReminderTitle": "แจ้งเตือนวันไข่ตก",
     "@notification_ovulationDayReminderTitle": {
         "description": "Title for the ovulation day notification."
     },
-    "notification_ovulationDayReminderBody": "{count, plural, =1{Your next ovulation day is estimated to start in 1 day.} other{Your next ovulation day is estimated to start in {count} days.}}",
+    "notification_ovulationDayReminderBody": "{count, plural, =1{คาดว่าวันไข่ตกครั้งถัดไปจะเริ่มในอีก 1 วัน} other{คาดว่าวันไข่ตกครั้งถัดไปจะเริ่มในอีก {count} วัน}}",
     "@notification_ovulationDayReminderBody": {
         "description": "Body for the upcoming ovulation day notification.",
         "placeholders": {
@@ -522,20 +522,20 @@
     "settingsScreen_trackYourDailyPillIntake": "ติดตามการกินยาคุมรายวัน",
     "settingsScreen_dailyPillReminder": "แจ้งเตือนกินยาคุมรายวัน",
     "settingsScreen_reminderTime": "เวลาแจ้งเตือน",
-    "settingsScreen_cycleNotificationsAndPredictions": "Cycle Notifications & Predictions",
+    "settingsScreen_cycleNotificationsAndPredictions": "การแจ้งเตือนและการคาดการณ์รอบเดือน",
     "@settingsScreen_cycleNotificationsAndPredictions": {
         "description": "Header for the cycle notifications and predictions section"
     },
-    "settingsScreen_enablePhasePredictions": "Enable Phase Predictions",
-    "settingsScreen_displayFertileChance": "Display Fertile Chance",
-    "settingsScreen_displayFertileWindowOnCalendar": "Display Fertile Window on Calendar",
+    "settingsScreen_enablePhasePredictions": "เปิดใช้งานการคาดการณ์ระยะรอบเดือน",
+    "settingsScreen_displayFertileChance": "แสดงโอกาสการตั้งครรภ์",
+    "settingsScreen_displayFertileWindowOnCalendar": "แสดงช่วงที่มีโอกาสตั้งครรภ์สูงบนปฏิทิน",
     "settingsScreen_notificationTime": "เวลาแจ้งเตือน",
     "settingsScreen_remindMeBefore": "แจ้งเตือนล่วงหน้า",
     "settingsScreen_remindMeAfter": "แจ้งเตือนหลังจาก",
     "settingsScreen_upcomingPeriodReminder": "แจ้งเตือนประจำเดือนใกล้มา",
     "settingsScreen_overduePeriodReminder": "แจ้งเตือนเมื่อประจำเดือนมาช้า",
-    "settingsScreen_fertileWindowReminder": "Fertile Window Reminder",
-    "settingsScreen_ovulationDayReminder": "Ovulation Day Reminder",
+    "settingsScreen_fertileWindowReminder": "แจ้งเตือนช่วงที่มีโอกาสตั้งครรภ์สูง",
+    "settingsScreen_ovulationDayReminder": "แจ้งเตือนวันไข่ตก",
     "settingsScreen_enableReversibleContraceptiveTracking": "เปิดติดตามการคุมกำเนิดแบบถอดออกได้",
     "settingsScreen_reversibleContraceptiveDescription": "บันทึกการใช้การคุมกำเนิดแบบถอดออกได้",
     "settingsScreen_reversibleContraceptiveType": "ประเภทการคุมกำเนิด",
