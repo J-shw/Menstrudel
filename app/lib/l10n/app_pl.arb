@@ -11,12 +11,12 @@
     "date": "Date",
     "time": "Time",
     "start": "Start",
-    "end": "End",
+    "end": "Koniec",
     "next": "Next",
     "back": "Back",
-    "today": "Today",
+    "today": "Dzisiaj",
     "day": "Dzień",
-    "days": "Days",
+    "days": "Dni",
     "hours": "Godziny",
     "dayCount": "{count, plural, one{{count} Day} other{{count} Days}}",
     "@dayCount": {
@@ -110,12 +110,12 @@
     "builtInSymptom_cramps": "Bóle brzucha",
     "builtInSymptom_fatigue": "Przemęczenie",
     "builtInSymptom_headache": "Bóle głowy",
-    "builtInSymptom_moodSwings": "Mood swings",
+    "builtInSymptom_moodSwings": "Wahania nastrojów",
     "builtInSymptom_nausea": "Nudności",
-    "builtInSymptom_tenderBreasts": "Tender breasts",
-    "builtInSymptom_insomnia": "Insomnia",
-    "builtInSymptom_depressed": "Depressed",
-    "painLevel_title": "Pain Level",
+    "builtInSymptom_tenderBreasts": "Bolesne piersi",
+    "builtInSymptom_insomnia": "Bezsenność",
+    "builtInSymptom_depressed": "Depresja",
+    "painLevel_title": "Poziom Bólu",
     "painLevel_none": "Brak",
     "painLevel_mild": "Niski",
     "painLevel_moderate": "Średni",
@@ -327,7 +327,7 @@
     "@onboardingScreen_profileName": {
         "description": "Name question for the profile onboarding screen."
     },
-    "onboardingScreen_profileDate": "Birth Date (Optional)",
+    "onboardingScreen_profileDate": "Data Urodzenia (Opcjonalna)",
     "@onboardingScreen_profileDate": {
         "description": "Birth date for the profile onboarding screen. This field is optional."
     },
@@ -486,12 +486,12 @@
     "@sexActivityScreen_protectionDistribution": {
         "description": "Title for the sexual protection distribution chart."
     },
-    "settingsScreen_profile": "Profile",
+    "settingsScreen_profile": "Profil",
     "@settingsScreen_profile": {
         "description": "Title for the profile settings button."
     },
-    "settingsScreen_name": "Name",
-    "settingsScreen_birthDate": "Birth Date",
+    "settingsScreen_name": "Imię",
+    "settingsScreen_birthDate": "Data Urodzenia",
     "settingsScreen_notSet": "Not set",
     "@settingsScreen_notSet": {
         "description": "Used when birth date is not set."
@@ -550,7 +550,7 @@
     "settingsScreen_loggingReminderTime": "Logging Reminder Time",
     "settingsScreen_defaultSymptoms": "Default Symptoms",
     "settingsScreen_defaultSymptomsSubtitle": "These are always available when logging new periods.\nTap an existing symptom to delete or '+' to add a new one.",
-    "settingsScreen_deleteDefaultSymptomQuestion": "Delete '{symptom}'?",
+    "settingsScreen_deleteDefaultSymptomQuestion": "Usunąć '{symptom}'?",
     "@settingsScreen_deleteDefaultSymptomQuestion": {
         "description": "Question whether a symptom should be deleted.",
         "placeholders": {
@@ -560,7 +560,7 @@
             }
         }
     },
-    "settingsScreen_resetSymptomsList": "Reset Symptoms List?",
+    "settingsScreen_resetSymptomsList": "Zresetować Listę Objawów?",
     "settingsScreen_resetSymptomsListDescription": "This will remove all your custom symptoms and restore the original built-in list.\n\nYour existing log entries will not be changed.",
     "settingsScreen_deleteDefaultSymptomDescription": "'{symptom}' will no longer be available when logging a period.\n\n{usageCount, plural, zero{There are currently no period logs with this symptom!} one{There is already 1 period log with this symptom!\nThis log will not be changed.} other{There are {usageCount} period logs with this symptom!\nThese logs will not be changed.}}",
     "@settingsScreen_deleteDefaultSymptomDescription": {
@@ -654,8 +654,8 @@
     },
     "settingsScreen_exportSuccessful": "Data exported successfully.",
     "settingsScreen_exportFailed": "Export failed. Please try again.",
-    "settingsScreen_exportDataTitle": "Export Data",
-    "settingsScreen_importDataTitle": "Import Data",
+    "settingsScreen_exportDataTitle": "Eksportuj Dane",
+    "settingsScreen_importDataTitle": "Importuj Dane",
     "settingsScreen_importDataSubtitle": "Overwrites existing data.",
     "settingsScreen_importSuccessful": "Data imported successfully!",
     "settingsScreen_importFailed": "Failed to import data. Please try again.",
@@ -672,7 +672,7 @@
         "description": "Title for the user profile settings button."
     },
     "settingsScreen_preferences": "Preferences",
-    "preferencesScreen_language": "Language",
+    "preferencesScreen_language": "Język",
     "preferencesScreen_enableSanitaryProductsScreen": "Enable Sanitary Products Screen",
     "preferencesScreen_enableSanitaryProductsScreenSubtitle": "Show the Sanitary Products tab on the main navigation bar.",
     "preferencesScreen_enableSexActivityScreen": "Enable Sex Activity Screen",
@@ -749,11 +749,11 @@
     "cycleLengthVarianceWidget_logAtLeastTwoPeriods": "Need at least two cycles to show variance.",
     "cycleLengthVarianceWidget_title": "Cycle Length Variance",
     "cycleLengthVarianceWidget_averageCycle": "Avg. Cycle",
-    "cycleLengthVarianceWidget_cycle": "Cycle",
+    "cycleLengthVarianceWidget_cycle": "Cykl",
     "periodDurationWidget_logAtLeastTwoPeriods": "Log at least two periods to see period statistics.",
     "periodDurationWidget_title": "Period Duration Variance",
     "periodDurationWidget_averagePeriod": "Avg. Period",
-    "periodDurationWidget_period": "Period",
+    "periodDurationWidget_period": "Okres",
     "flowIntensityWidget_flowIntensityBreakdown": "Flow Intensity Breakdown",
     "flowIntensityWidget_noFlowDataLoggedYet": "No flow data logged yet.",
     "painLevelWidget_noPainDataLoggedYet": "No pain data logged yet.",
@@ -779,8 +779,8 @@
         }
     },
     "pillStatus_undo": "Undo",
-    "pillStatus_skip": "Skip",
-    "pillStatus_markAsTaken": "Mark As Taken",
+    "pillStatus_skip": "Pomiń",
+    "pillStatus_markAsTaken": "Zaznacz Jako Wzięte",
     "pillStatus_packStartInFuture": "Your next pill pack starts on {date}.",
     "@pillStatus_packStartInFuture": {
         "description": "Message shown when the pill pack start date is in the future.",
@@ -794,13 +794,13 @@
     "regimenSetupWidget_setUpPillRegimen": "Set Up Pill Regimen",
     "regimenSetupWidget_packName": "Pack Name",
     "regimenSetupWidget_pleaseEnterAName": "Please enter a name",
-    "regimenSetupWidget_activePills": "Active Pills",
+    "regimenSetupWidget_activePills": "Aktywne Tabletki",
     "regimenSetupWidget_enterANumber": "Enter a number",
-    "regimenSetupWidget_placeboPills": "Placebo Pills",
+    "regimenSetupWidget_placeboPills": "Tabletki Placebo",
     "regimenSetupWidget_firstDayOfThisPack": "First Day of This Pack",
     "symptomEntrySheet_logYourDay": "Log Your Day",
-    "symptomEntrySheet_symptomsOptional": "Symptoms (Optional)",
-    "periodDetailsSheet_symptoms": "Symptoms",
+    "symptomEntrySheet_symptomsOptional": "Objawy (Opcjonalne)",
+    "periodDetailsSheet_symptoms": "Objawy",
     "periodDetailsSheet_flow": "Flow",
     "reversibleContraceptiveEntrySheet_logReversibleContraceptiveDetails": "Log Contraceptive Details",
     "sanitaryEntrySheet_logSanitaryProduct": "Log Sanitary Product",
@@ -825,7 +825,7 @@
             }
         }
     },
-    "customSymptomDialog_newSymptom": "New Symptom",
+    "customSymptomDialog_newSymptom": "Nowy Objaw",
     "customSymptomDialog_enterCustomSymptom": "Enter a custom symptom",
     "customSymptomDialog_temporarySymptom": "Temporary Symptom"
 }
