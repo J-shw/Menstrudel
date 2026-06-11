@@ -1,23 +1,23 @@
 {
     "@@locale": "it",
     "appTitle": "Menstrudel",
-    "nextDue": "Next Due",
+    "nextDue": "In scadenza",
     "ongoing": "In corso",
-    "overdue": "Overdue",
-    "total": "Total",
-    "shortest": "Shortest",
-    "longest": "Longest",
-    "unknown": "Unknown",
+    "overdue": "In ritardo",
+    "total": "Totale",
+    "shortest": "Più breve",
+    "longest": "Più lungo",
+    "unknown": "Sconosciuto",
     "date": "Data",
     "time": "Ora",
     "start": "Inizio",
     "end": "Fine",
-    "next": "Next",
-    "back": "Back",
-    "today": "Today",
+    "next": "Successivo",
+    "back": "Precedente",
+    "today": "Oggi",
     "day": "Giorno",
     "days": "Giorni",
-    "hours": "Hours",
+    "hours": "Ore",
     "dayCount": "{count, plural, one{{count} Giorno} other{{count} Giorni}}",
     "@dayCount": {
         "description": "A message that displays a count of days, handling singular and plural forms.",
@@ -28,7 +28,7 @@
             }
         }
     },
-    "monthCount": "{count, plural, one{{count} Month} other{{count} Months}}",
+    "monthCount": "{count, plural, one{{count} Mese} other{{count} Mesi}}",
     "@monthCount": {
         "description": "A message that displays a count of months, handling singular and plural forms.",
         "placeholders": {
@@ -38,7 +38,7 @@
             }
         }
     },
-    "yearCount": "{count, plural, one{{count} Year} other{{count} Years}}",
+    "yearCount": "{count, plural, one{{count} Anno} other{{count} Anni}}",
     "@yearCount": {
         "description": "A message that displays a count of years, handling singular and plural forms.",
         "placeholders": {
@@ -48,7 +48,7 @@
             }
         }
     },
-    "countdown_daysLeft": "{days, plural, one{{days} Day left} other{{days} Days left}}",
+    "countdown_daysLeft": "{days, plural, one{{days} Giorno rimanente} other{{days} Giorni rimanenti}}",
     "@countdown_daysLeft": {
         "description": "A countdown message indicating the number of days left.",
         "placeholders": {
@@ -58,7 +58,7 @@
             }
         }
     },
-    "countUp_day": "Day {day}",
+    "countUp_day": "Giorno {day}",
     "@countUp_day": {
         "description": "A count up message indicating the current day. E.g. 'Day 1 of period'.",
         "placeholders": {
@@ -68,9 +68,9 @@
             }
         }
     },
-    "logs": "Logs",
-    "insights": "Insights",
-    "edit": "Edit",
+    "logs": "Registri",
+    "insights": "Statistiche",
+    "edit": "Modifica",
     "delete": "Elimina",
     "clear": "Cancella",
     "save": "Salva",
@@ -84,20 +84,20 @@
     "select": "Seleziona",
     "close": "Chiudi",
     "reset": "Reset",
-    "add": "Add",
-    "notSet": "Not set",
-    "removed": "Removed",
-    "totalLogs": "Total Logs",
+    "add": "Aggiungi",
+    "notSet": "Non impostato",
+    "removed": "Rimosso",
+    "totalLogs": "Registri totali",
     "note": "Note",
-    "systemDefault": "System Default",
+    "systemDefault": "Predefinito di sistema",
     "flow": "Flusso",
-    "type": "Type",
-    "other": "Other",
+    "type": "Tipo",
+    "other": "Altro",
     "navBar_logs": "Calendario",
-    "navBar_sanitary": "Sanitary",
-    "navBar_sexActivity": "Sex Activity",
+    "navBar_sanitary": "Sanitaria",
+    "navBar_sexActivity": "Attività sessuale",
     "navBar_pill": "Pillola",
-    "navBar_reversibleContraceptive": "Contraceptives",
+    "navBar_reversibleContraceptive": "Contraccettivi",
     "navBar_settings": "Impostazioni",
     "flowIntensity_none": "Assente",
     "flowIntensity_spotting": "Spotting",
@@ -105,16 +105,16 @@
     "flowIntensity_moderate": "Medio",
     "flowIntensity_heavy": "Abbondante",
     "builtInSymptom_acne": "Acne",
-    "builtInSymptom_backPain": "Back pain",
-    "builtInSymptom_bloating": "Bloating",
-    "builtInSymptom_cramps": "Cramps",
-    "builtInSymptom_fatigue": "Fatigue",
-    "builtInSymptom_headache": "Headache",
-    "builtInSymptom_moodSwings": "Mood swings",
+    "builtInSymptom_backPain": "Mal di schiena",
+    "builtInSymptom_bloating": "Gonfiore",
+    "builtInSymptom_cramps": "Crampi",
+    "builtInSymptom_fatigue": "Affaticamento",
+    "builtInSymptom_headache": "Mal di testa",
+    "builtInSymptom_moodSwings": "Sbalzi d'umore",
     "builtInSymptom_nausea": "Nausea",
-    "builtInSymptom_tenderBreasts": "Tender breasts",
-    "builtInSymptom_insomnia": "Insomnia",
-    "builtInSymptom_depressed": "Depressed",
+    "builtInSymptom_tenderBreasts": "Seno dolente",
+    "builtInSymptom_insomnia": "Insonnia",
+    "builtInSymptom_depressed": "Depressione",
     "painLevel_title": "Intensità del dolore",
     "painLevel_none": "Assente",
     "painLevel_mild": "Leggero",
@@ -125,15 +125,15 @@
     "reversibleContraceptive_copperIud": "Copper IUD",
     "reversibleContraceptive_implant": "Implant",
     "reversibleContraceptive_injection": "Injection",
-    "reversibleContraceptive_ring": "Ring",
-    "reversibleContraceptive_patch": "Patch",
+    "reversibleContraceptive_ring": "Anello",
+    "reversibleContraceptive_patch": "Cerotto",
     "sanitaryProduct_tampon": "Tampon",
     "sanitaryProduct_pad": "Pad",
     "sanitaryProduct_menstrualCup": "Menstrual Cup",
     "sanitaryProduct_periodUnderwear": "Period Underwear",
     "sanitaryProducts_mostUsed": "Most Used",
     "sanitaryProducts_usageTrend": "Usage Trend",
-    "sexProtection_none": "None",
+    "sexProtection_none": "Nessuno",
     "@sexProtection_none": {
         "description": "Indicates that no sexual protection method was used."
     },
@@ -157,7 +157,7 @@
     "@sexProtection_permanent": {
         "description": "Indicates the use of permanent methods of sexual protection (Sterilisation)."
     },
-    "sexType_vaginal": "Vaginal",
+    "sexType_vaginal": "Vaginale",
     "sexType_anal": "Anal",
     "sexType_oral": "Oral",
     "sexType_manual": "Manual",
