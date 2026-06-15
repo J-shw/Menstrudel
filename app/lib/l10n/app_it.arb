@@ -307,7 +307,7 @@
     "@onboardingScreen_welcomeToMenstrudel": {
         "description": "Title for the onboarding screen."
     },
-    "onboardingScreen_welcomeToMenstrudelDescription": "La tua app privata e offline per tracciare il ciclo.",
+    "onboardingScreen_welcomeToMenstrudelDescription": "La tua app privata e offline per monitorare il ciclo.",
     "@onboardingScreen_welcomeToMenstrudelDescription": {
         "description": "Small into description for the onboarding screen."
     },
@@ -498,14 +498,14 @@
     },
     "settingsScreen_appGoal": "Scopo dell'app",
     "settingsScreen_profileUpdated": "Profilo aggiornato correttamente",
-    "settingsScreen_selectHistoryView": "Seleziona vista cronologia",
+    "settingsScreen_selectHistoryView": "Seleziona vista storico",
     "settingsScreen_deleteRegimen_question": "Cancellare piano pillola?",
     "settingsScreen_deleteRegimenDescription": "Questo eliminerà le impostazioni della tua confezione di pillole e tutta la cronologia associata. Questa operazione non può essere annullata.",
     "settingsScreen_allLogsHaveBeenCleared": "Tutti i dati sono stati eliminati.",
     "settingsScreen_clearAllLogs_question": "Eliminare tutti i dati?",
     "settingsScreen_deleteAllLogsDescription": "Questo cancellerà definitivamente tutti i dati del ciclo. Le impostazioni dell'app non verranno modificate.",
     "settingsScreen_appearance": "Aspetto",
-    "settingsScreen_historyViewStyle": "Aspetto della cronologia",
+    "settingsScreen_historyViewStyle": "Aspetto dello storico",
     "settingsScreen_appTheme": "Tema app",
     "settingsScreen_themeLight": "Chiaro",
     "settingsScreen_themeDark": "Scuro",
@@ -527,8 +527,8 @@
         "description": "Header for the cycle notifications and predictions section"
     },
     "settingsScreen_enablePhasePredictions": "Attiva previsioni delle fasi ",
-    "settingsScreen_displayFertileChance": "Display Fertile Chance",
-    "settingsScreen_displayFertileWindowOnCalendar": "Display Fertile Window on Calendar",
+    "settingsScreen_displayFertileChance": "Visualizza grado di fertilità",
+    "settingsScreen_displayFertileWindowOnCalendar": "Visualizza periodo fertile sul calendario",
     "settingsScreen_notificationTime": "Orario notifica",
     "settingsScreen_remindMeBefore": "Avvisami prima",
     "settingsScreen_remindMeAfter": "Avvisami dopo",
@@ -537,20 +537,20 @@
     "settingsScreen_fertileWindowReminder": "Promemoria periodo fertile",
     "settingsScreen_ovulationDayReminder": "Promemoria giorno ovulazione",
     "settingsScreen_enableReversibleContraceptiveTracking": "Abilita monitoraggio contraccettivi reversibili",
-    "settingsScreen_reversibleContraceptiveDescription": "Track Reversible Contraceptives.",
-    "settingsScreen_reversibleContraceptiveType": "Contraceptive Type",
-    "settingsScreen_setDuration": "Set Duration",
-    "settingsScreen_reversibleContraceptiveDuration": "Contraceptive Replacement Duration",
+    "settingsScreen_reversibleContraceptiveDescription": "Monitora contraccettivi reversibili.",
+    "settingsScreen_reversibleContraceptiveType": "Tipo di contraccettivo",
+    "settingsScreen_setDuration": "Imposta durata",
+    "settingsScreen_reversibleContraceptiveDuration": "Durata sostituzione contraccettiva",
     "settingsScreen_enableReversibleContraceptiveReminder": "Abilita promemoria contraccettivi",
-    "settingsScreen_currentDuration": "Current Duration",
-    "settingsScreen_durationInDays": "Duration (Days)",
+    "settingsScreen_currentDuration": "Durata corrente",
+    "settingsScreen_durationInDays": "Durata (giorni)",
     "settingsScreen_LoggingScreen": "Registrazioni",
     "settingsScreen_enableLoggingReminders": "Abilita promemoria registrazioni",
     "settingsScreen_loggingReminderDescription": "Se aggiungi un giorno di flusso, il giorno dopo riceverai un promemoria per aggiornare la tua situazione.",
     "settingsScreen_loggingReminderTime": "Orario promemoria registrazioni",
-    "settingsScreen_defaultSymptoms": "Default Symptoms",
+    "settingsScreen_defaultSymptoms": "Sintomi predefiniti",
     "settingsScreen_defaultSymptomsSubtitle": "Disponibili sempre quando aggiungi nuove mestruazioni. Tocca un sintomo per cancellarlo o '+' per aggiungerne un altro.",
-    "settingsScreen_deleteDefaultSymptomQuestion": "Delete '{symptom}'?",
+    "settingsScreen_deleteDefaultSymptomQuestion": "Eliminare '{symptom}'?",
     "@settingsScreen_deleteDefaultSymptomQuestion": {
         "description": "Question whether a symptom should be deleted.",
         "placeholders": {
@@ -560,9 +560,9 @@
             }
         }
     },
-    "settingsScreen_resetSymptomsList": "Reset Symptoms List?",
+    "settingsScreen_resetSymptomsList": "Ripristinare la lista dei sintomi?",
     "settingsScreen_resetSymptomsListDescription": "Questa operazione cancellerà tutti i sintomi personali e ripristinerà la lista iniziale. I tuoi dati già salvati rimarranno invariati.",
-    "settingsScreen_deleteDefaultSymptomDescription": "'{symptom}' will no longer be available when logging a period.\n\n{usageCount, plural, zero{There are currently no period logs with this symptom!} one{There is already 1 period log with this symptom!\nThis log will not be changed.} other{There are {usageCount} period logs with this symptom!\nThese logs will not be changed.}}",
+    "settingsScreen_deleteDefaultSymptomDescription": "'{symptom}' non sarà più disponibile durante la registrazione di un ciclo.\n\n{usageCount, plural, zero{Al momento non ci sono registrazioni di ciclo con questo sintomo!} one{C'è già una registrazione di ciclo con questo sintomo! Questa registrazione non verrà modificata.} other{Ci sono {usageCount} registrazioni di ciclo con questo sintomo! Queste registrazioni non verranno modificate.}}",
     "@settingsScreen_deleteDefaultSymptomDescription": {
         "description": "Question whether a symptom should be deleted.",
         "placeholders": {
@@ -600,7 +600,7 @@
     "@settingsScreen_clearPillLogs": {
         "description": "Title for the pill logs data clearing section."
     },
-    "settingsScreen_clearPillLogsSubtitle": "Removes your pill regimen and intake history.",
+    "settingsScreen_clearPillLogsSubtitle": "Cancella il tuo piano pillola e lo storico delle assunzioni.",
     "@settingsScreen_clearPillLogsSubtitle": {
         "description": "Subtitle for the pill logs data clearing section."
     },
@@ -675,8 +675,8 @@
     "preferencesScreen_language": "Lingua",
     "preferencesScreen_enableSanitaryProductsScreen": "Attiva schermata Assorbenti",
     "preferencesScreen_enableSanitaryProductsScreenSubtitle": "Mostra la scheda Assorbenti nella barra di navigazione.",
-    "preferencesScreen_enableSexActivityScreen": "Enable Sex Activity Screen",
-    "preferencesScreen_enableSexActivityScreenSubtitle": "Show the Sex Activity tab on the main navigation bar.",
+    "preferencesScreen_enableSexActivityScreen": "Abilita schermata Attività Sessuale",
+    "preferencesScreen_enableSexActivityScreenSubtitle": "Mostra la scheda Attività sessuale nella barra di navigazione.",
     "preferencesScreen_StartingDayOfWeek": "Primo giorno della settimana",
     "settingsScreen_about": "Informazioni",
     "@settingsScreen_about": {
@@ -686,11 +686,11 @@
     "@aboutScreen_version": {
         "description": "Label showing the current app version."
     },
-    "aboutScreen_legalAndSource": "Legal & Source",
+    "aboutScreen_legalAndSource": "Note legali e fonte",
     "@aboutScreen_legalAndSource": {
         "description": "Title for the legal and source about section."
     },
-    "aboutScreen_communityAndUpdates": "Community & Updates",
+    "aboutScreen_communityAndUpdates": "Community e novità",
     "@aboutScreen_communityAndUpdates": {
         "description": "Title for the community and updates about section."
     },
@@ -736,7 +736,7 @@
     "@aboutScreen_share": {
         "description": "Link button text for the share button on the about screen."
     },
-    "aboutScreen_shareText": "Check out Menstrudel, a private and offline period tracker app!",
+    "aboutScreen_shareText": "Scopri Menstrudel, un'app per il monitoraggio del ciclo privata e offline!",
     "@aboutScreen_shareText": {
         "description": "Text used when sharing the app from the about screen."
     },
@@ -746,7 +746,7 @@
     },
     "logSummaryWidget_loggedDays": "Giorni registrati",
     "logSummaryWidget_trackingHistory": "Storico monitoraggi",
-    "cycleLengthVarianceWidget_logAtLeastTwoPeriods": "Need at least two cycles to show variance.",
+    "cycleLengthVarianceWidget_logAtLeastTwoPeriods": "Servono almeno due cicli per mostrare la variazione.",
     "cycleLengthVarianceWidget_title": "Variazione durata ciclo",
     "cycleLengthVarianceWidget_averageCycle": "Ciclo medio",
     "cycleLengthVarianceWidget_cycle": "Ciclo mestruale",
