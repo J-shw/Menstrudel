@@ -94,7 +94,7 @@
     "type": "Tipo",
     "other": "Altro",
     "navBar_logs": "Registri",
-    "navBar_sanitary": "Sanitaria",
+    "navBar_sanitary": "Assorbenti",
     "navBar_sexActivity": "Attività sessuale",
     "navBar_pill": "Pillola",
     "navBar_reversibleContraceptive": "Contraccettivi",
@@ -132,7 +132,7 @@
     "sanitaryProduct_menstrualCup": "Coppetta mestruale",
     "sanitaryProduct_periodUnderwear": "Mutande assorbenti",
     "sanitaryProducts_mostUsed": "Più usato",
-    "sanitaryProducts_usageTrend": "Tendenza d'uso",
+    "sanitaryProducts_usageTrend": "Andamento d'uso",
     "sexProtection_none": "Nessuno",
     "@sexProtection_none": {
         "description": "Indicates that no sexual protection method was used."
@@ -194,13 +194,13 @@
     "cyclePhase_luteal": "Post ovulazione",
     "cyclePhase_late": "In ritardo",
     "cyclePhase_unknown": "Sconosciuto",
-    "cyclePhase_menstruationDescription": "Your period is active and the uterine lining is being shed.",
+    "cyclePhase_menstruationDescription": "La mestruazione è attiva e l'endometrio viene eliminato.",
     "cyclePhase_fertileWindowDescription": "Il tuo periodo fertile è in corso.",
-    "cyclePhase_follicularDescription": "Estrogen is rising to prepare the egg; your energy levels may be increasing.",
-    "cyclePhase_ovulationDescription": "An egg has been released. This is your most fertile time.",
-    "cyclePhase_lutealDescription": "Progesterone is dominant. Monitor for PMS symptoms as you approach your next period.",
+    "cyclePhase_follicularDescription": "L'estrogeno sale per preparare l'ovulo; potresti avere più energia.",
+    "cyclePhase_ovulationDescription": "È avvenuta l'ovulazione. Questo è il tuo momento più fertile.",
+    "cyclePhase_lutealDescription": "Predomina il progesterone. Monitora i sintomi premestruali in prossimità del prossimo ciclo.",
     "cyclePhase_lateDescription": "Il tuo ciclo è in ritardo.",
-    "cyclePhase_unknownDescription": "We need more data to accurately predict your cycle phase.",
+    "cyclePhase_unknownDescription": "Servono più dati per predire accuratamente la tua fase del ciclo.",
     "fertilityChance_high": "Alta",
     "@fertilityChance_high": {
         "description": "Label shown when the user is in their peak fertile window or on ovulation day."
@@ -213,7 +213,7 @@
     "@fertilityChance_low": {
         "description": "Label shown when the user is outside of their fertile window (e.g., during menstruation or the luteal phase)."
     },
-    "error_valueMustbePositive": "Value must be positive",
+    "error_valueMustbePositive": "Il valore deve essere positivo.",
     "error_valueCannotBeNull": "Il valore non può essere vuoto",
     "notification_periodTitle": "Ciclo in arrivo",
     "@notification_periodTitle": {
@@ -253,7 +253,7 @@
     "@notification_reversibleContraceptiveTitle": {
         "description": "Title for the Reversible Contraceptive reminder notification."
     },
-    "notification_reversibleContraceptiveBody": "{type} is due for renewal in {days} {days, plural, =1{day} other{days}}.",
+    "notification_reversibleContraceptiveBody": "{type} è in scadenza per il rinnovo tra {days} {days, plural, =1{giorno} other{giorni}}.",
     "@notification_reversibleContraceptiveBody": {
         "description": "The body of the Reversible Contraceptive reminder notification, indicating the type and days until renewal.",
         "placeholders": {
@@ -271,17 +271,17 @@
     "@notification_loggingReminderTitle": {
         "description": "Title for the logging reminder notification."
     },
-    "notification_loggingReminderBody": "Tocca per registrare il tuo flusso di oggi.",
+    "notification_loggingReminderBody": "Tocca per aggiungere il tuo flusso di oggi.",
     "@notification_loggingReminderBody": {
         "description": "Body for the logging reminder notification."
     },
-    "notification_SanitaryProductReminderTitle": "Promemoria prodotti sanitari",
+    "notification_SanitaryProductReminderTitle": "Promemoria assorbenti",
     "notification_SanitaryProductReminderBody": "Ricordati di cambiare il prodotto.",
     "notification_fertileWindowTitle": "Promemoria periodo fertile",
     "@notification_fertileWindowTitle": {
         "description": "Title for the fertile window notification."
     },
-    "notification_fertileWindowBody": "{count, plural, =1{Your next fertile window is estimated to start in 1 day.} other{Your next fertile window is estimated to start in {count} days.}}",
+    "notification_fertileWindowBody": "{count, plural, =1{Il tuo prossimo periodo fertile dovrebbe iniziare tra 1 giorno.} other{Il tuo prossimo periodo fertile dovrebbe iniziare tra {count} giorni.}}",
     "@notification_fertileWindowBody": {
         "description": "Body for the upcoming fertile window notification.",
         "placeholders": {
@@ -294,7 +294,7 @@
     "@notification_ovulationDayReminderTitle": {
         "description": "Title for the ovulation day notification."
     },
-    "notification_ovulationDayReminderBody": "{count, plural, =1{Your next ovulation day is estimated to start in 1 day.} other{Your next ovulation day is estimated to start in {count} days.}}",
+    "notification_ovulationDayReminderBody": "{count, plural, =1{Il tuo prossimo giorno di ovulazione dovrebbe iniziare tra 1 giorno.} other{Il tuo prossimo giorno di ovulazione dovrebbe iniziare tra {count} giorni.}}",
     "@notification_ovulationDayReminderBody": {
         "description": "Body for the upcoming ovulation day notification.",
         "placeholders": {
@@ -339,7 +339,7 @@
     "@onboardingScreen_goalTitle": {
         "description": "Title for the goal onboarding screen."
     },
-    "onboardingScreen_goalDescription": "This helps tailor the insights you see.",
+    "onboardingScreen_goalDescription": "Questo aiuta a personalizzare le informazioni che visualizzi.",
     "@onboardingScreen_goalDescription": {
         "description": "Description for the goal onboarding screen."
     },
@@ -356,11 +356,11 @@
     "@onboardingScreen_getStarted": {
         "description": "Button text for the get started navigation button"
     },
-    "fabToolTip_logs": "Registra giorno",
+    "fabToolTip_logs": "Aggiungi i dati giornalieri",
     "@fabToolTip_logs": {
         "description": "Used for the main logs screen fab button as a tooltip."
     },
-    "fabToolTip_sanitary": "Aggiungi prodotto sanitario",
+    "fabToolTip_sanitary": "Aggiungi assorbente",
     "@fabToolTip_sanitary": {
         "description": "Used for the sanitary screen fab button as a tooltip."
     },
@@ -368,22 +368,22 @@
     "@fabToolTip_sexActivity": {
         "description": "Used for the sex activity screen fab button as a tooltip."
     },
-    "fabToolTip_reversibleContraceptive": "Registra contraccettivi reversibili",
+    "fabToolTip_reversibleContraceptive": "Aggiungi contraccettivi reversibili",
     "@fabToolTip_reversibleContraceptive": {
         "description": "Used for the Reversible Contraceptive screen fab button as a tooltip."
     },
     "mainScreen_logsPageTitle": "Registri",
     "mainSceen_sexActivityPageTitle": "Attività sessuale",
-    "mainScreen_sanitaryPageTitle": "Prodotti sanitari",
+    "mainScreen_sanitaryPageTitle": "Assorbenti",
     "mainScreen_pillsPageTitle": "Pillole",
     "mainScreen_reversibleContraceptivesPageTitle": "Contraccettivi reversibili",
     "mainScreen_settingsPageTitle": "Impostazioni",
     "insightsScreen_errorPrefix": "Errore:",
     "insightsScreen_noDataAvailable": "Nessun dato disponibile.",
     "logsScreen_calculatingPrediction": "Calcolo previsione in corso...",
-    "logScreen_logAtLeastTwoPeriods": "Registra almeno due cicli per stimare il prossimo.",
-    "logScreen_nextPeriodEstimate": "Prossimo ciclo previsto",
-    "logScreen_periodDueToday": "Ciclo previsto per oggi",
+    "logScreen_logAtLeastTwoPeriods": "Aggiungi almeno due cicli per stimare il prossimo.",
+    "logScreen_nextPeriodEstimate": "Prossima ciclo prevista",
+    "logScreen_periodDueToday": "Ciclo prevista per oggi",
     "logScreen_periodOverdueBy": "{count, plural, =1{Ciclo in ritardo di 1 giorno} other{Ciclo in ritardo di {count} giorni}}",
     "@logScreen_periodOverdueBy": {
         "description": "A label showing the total number of days period is overdue.",
@@ -416,10 +416,10 @@
             }
         }
     },
-    "reversibleContraceptiveScreen_activeReversibleContraceptivesDescription": "Currently monitored reversible contraceptive entries.",
-    "reversibleContraceptiveScreen_noActiveRecords": "No reversible contraceptive is currently active. Please log a new entry.",
-    "reversibleContraceptiveScreen_noHistoryRecords": "No past or overdue reversible contraceptive records found.",
-    "sanitaryProductsScreen_noSanitaryProductRecordsFound": "Nessuno prodotto sanitario.",
+    "reversibleContraceptiveScreen_activeReversibleContraceptivesDescription": "Contraccettivi reversibili attualmente tracciati.",
+    "reversibleContraceptiveScreen_noActiveRecords": "Nessun contraccettivo reversibile in corso. Aggiungine uno.",
+    "reversibleContraceptiveScreen_noHistoryRecords": "Nessun dato passato o scaduto di contraccettivi reversibili trovato.",
+    "sanitaryProductsScreen_noSanitaryProductRecordsFound": "Nessuno assorbente.",
     "sanitaryProductsScreen_history": "Storico ({history})",
     "@sanitaryProductsScreen_history": {
         "description": "The total sanitary product history count.",
@@ -430,7 +430,7 @@
             }
         }
     },
-    "sanitaryProductsScreen_noHistoryRecords": "No past sanitary product records found.",
+    "sanitaryProductsScreen_noHistoryRecords": "Nessun dato passato di assorbenti trovato.",
     "sanitaryProductsScreen_activeProduct": "Attivo {activeType}",
     "@sanitaryProductsScreen_activeProduct": {
         "description": "Label showing the type of active sanitary product.",
@@ -441,7 +441,7 @@
             }
         }
     },
-    "sanitaryProductsScreen_changeDueAt": "Change Due At {time}",
+    "sanitaryProductsScreen_changeDueAt": "Modifica scadenza alle {time}",
     "@sanitaryProductsScreen_changeDueAt": {
         "description": "Label showing the time when the sanitary product needs to be changed.",
         "placeholders": {
@@ -474,15 +474,15 @@
     "@sexActivityScreen_protected": {
         "description": "Label showing the total number of protected sex activities."
     },
-    "sexActivityScreen_activityTrend": "Activity Trend",
+    "sexActivityScreen_activityTrend": "Andamento attività",
     "@sexActivityScreen_activityTrend": {
         "description": "Title for the sexual activity trend chart."
     },
-    "sexActivityScreen_activityDistribution": "Activity Distribution",
+    "sexActivityScreen_activityDistribution": "Distribuzione attività ",
     "@sexActivityScreen_activityDistribution": {
         "description": "Title for the sex activity distribution chart."
     },
-    "sexActivityScreen_protectionDistribution": "Protection Distribution",
+    "sexActivityScreen_protectionDistribution": "Distribuzione protezioni",
     "@sexActivityScreen_protectionDistribution": {
         "description": "Title for the sexual protection distribution chart."
     },
@@ -496,8 +496,8 @@
     "@settingsScreen_notSet": {
         "description": "Used when birth date is not set."
     },
-    "settingsScreen_appGoal": "App Goal",
-    "settingsScreen_profileUpdated": "Profile updated successfully",
+    "settingsScreen_appGoal": "Scopo dell'app",
+    "settingsScreen_profileUpdated": "Profilo aggiornato correttamente",
     "settingsScreen_selectHistoryView": "Seleziona vista cronologia",
     "settingsScreen_deleteRegimen_question": "Cancellare piano pillola?",
     "settingsScreen_deleteRegimenDescription": "Questo eliminerà le impostazioni della tua confezione di pillole e tutta la cronologia associata. Questa operazione non può essere annullata.",
@@ -516,17 +516,17 @@
     "settingsScreen_pickAColor": "Scegli un colore",
     "settingsScreen_view": "Visualizza",
     "settingsScreen_birthControl": "Contraccezione",
-    "settingsScreen_enablePillTracking": "Enable Pill Tracking",
-    "settingsScreen_pillDescription": "Track your daily pill intake and get reminders.",
+    "settingsScreen_enablePillTracking": "Abilita monitoraggio pillola",
+    "settingsScreen_pillDescription": "Monitora l'assunzione quotidiana della pillola e ricevi promemoria.",
     "settingsScreen_setUpPillRegimen": "Crea piano pillola",
     "settingsScreen_trackYourDailyPillIntake": "Monitoraggio pillola giornaliero",
     "settingsScreen_dailyPillReminder": "Promemoria pillola giornaliero",
     "settingsScreen_reminderTime": "Orario promemoria",
-    "settingsScreen_cycleNotificationsAndPredictions": "Cycle Notifications & Predictions",
+    "settingsScreen_cycleNotificationsAndPredictions": "Notifiche e previsioni del ciclo",
     "@settingsScreen_cycleNotificationsAndPredictions": {
         "description": "Header for the cycle notifications and predictions section"
     },
-    "settingsScreen_enablePhasePredictions": "Enable Phase Predictions",
+    "settingsScreen_enablePhasePredictions": "Attiva previsioni delle fasi ",
     "settingsScreen_displayFertileChance": "Display Fertile Chance",
     "settingsScreen_displayFertileWindowOnCalendar": "Display Fertile Window on Calendar",
     "settingsScreen_notificationTime": "Orario notifica",
@@ -536,7 +536,7 @@
     "settingsScreen_overduePeriodReminder": "Promemoria ciclo in ritardo",
     "settingsScreen_fertileWindowReminder": "Promemoria periodo fertile",
     "settingsScreen_ovulationDayReminder": "Promemoria giorno ovulazione",
-    "settingsScreen_enableReversibleContraceptiveTracking": "Enable Reversible Contraceptive Tracking",
+    "settingsScreen_enableReversibleContraceptiveTracking": "Abilita monitoraggio contraccettivi reversibili",
     "settingsScreen_reversibleContraceptiveDescription": "Track Reversible Contraceptives.",
     "settingsScreen_reversibleContraceptiveType": "Contraceptive Type",
     "settingsScreen_setDuration": "Set Duration",
@@ -544,12 +544,12 @@
     "settingsScreen_enableReversibleContraceptiveReminder": "Abilita promemoria contraccettivi",
     "settingsScreen_currentDuration": "Current Duration",
     "settingsScreen_durationInDays": "Duration (Days)",
-    "settingsScreen_LoggingScreen": "Logging",
+    "settingsScreen_LoggingScreen": "Registrazioni",
     "settingsScreen_enableLoggingReminders": "Abilita promemoria registrazioni",
-    "settingsScreen_loggingReminderDescription": "If you log a day with flow, you will receive a notification the following day to log your status.",
+    "settingsScreen_loggingReminderDescription": "Se aggiungi un giorno di flusso, il giorno dopo riceverai un promemoria per aggiornare la tua situazione.",
     "settingsScreen_loggingReminderTime": "Orario promemoria registrazioni",
     "settingsScreen_defaultSymptoms": "Default Symptoms",
-    "settingsScreen_defaultSymptomsSubtitle": "These are always available when logging new periods.\nTap an existing symptom to delete or '+' to add a new one.",
+    "settingsScreen_defaultSymptomsSubtitle": "Disponibili sempre quando aggiungi nuove mestruazioni. Tocca un sintomo per cancellarlo o '+' per aggiungerne un altro.",
     "settingsScreen_deleteDefaultSymptomQuestion": "Delete '{symptom}'?",
     "@settingsScreen_deleteDefaultSymptomQuestion": {
         "description": "Question whether a symptom should be deleted.",
@@ -561,7 +561,7 @@
         }
     },
     "settingsScreen_resetSymptomsList": "Reset Symptoms List?",
-    "settingsScreen_resetSymptomsListDescription": "This will remove all your custom symptoms and restore the original built-in list.\n\nYour existing log entries will not be changed.",
+    "settingsScreen_resetSymptomsListDescription": "Questa operazione cancellerà tutti i sintomi personali e ripristinerà la lista iniziale. I tuoi dati già salvati rimarranno invariati.",
     "settingsScreen_deleteDefaultSymptomDescription": "'{symptom}' will no longer be available when logging a period.\n\n{usageCount, plural, zero{There are currently no period logs with this symptom!} one{There is already 1 period log with this symptom!\nThis log will not be changed.} other{There are {usageCount} period logs with this symptom!\nThese logs will not be changed.}}",
     "@settingsScreen_deleteDefaultSymptomDescription": {
         "description": "Question whether a symptom should be deleted.",
@@ -612,11 +612,11 @@
     "@settingsScreen_clearReversibleContraceptiveLogsSubtitle": {
         "description": "Subtitle for the reversible contraceptive logs data clearing section."
     },
-    "settingsScreen_clearSanitaryProductLogs": "Elimina registri prodotti sanitari",
+    "settingsScreen_clearSanitaryProductLogs": "Elimina registri assorbenti",
     "@settingsScreen_clearSanitaryProductLogs": {
         "description": "Title for the sanitary product logs data clearing section."
     },
-    "settingsScreen_clearSanitaryProductLogsSubtitle": "Elimina storico prodotti sanitari.",
+    "settingsScreen_clearSanitaryProductLogsSubtitle": "Elimina storico assorbenti.",
     "@settingsScreen_clearSanitaryProductLogsSubtitle": {
         "description": "Subtitle for the sanitary product logs data clearing section."
     },
@@ -628,7 +628,7 @@
     "@settingsScreen_clearSexualActivityLogsSubtitle": {
         "description": "Subtitle for the sexual activity logs data clearing section."
     },
-    "settingsScreen_logsAndPeriods": "Registrazioni e cicli",
+    "settingsScreen_logsAndPeriods": "Registrazioni e mestruazioni",
     "@settingsScreen_logsAndPeriods": {
         "description": "Title for the period logs data section."
     },
@@ -640,7 +640,7 @@
     "@settingsScreen_reversibleContraceptivesLogs": {
         "description": "Title for the reversible contraceptives data section."
     },
-    "settingsScreen_sanitaryProductLogs": "Registri prodotti sanitari",
+    "settingsScreen_sanitaryProductLogs": "Registri assorbenti",
     "@settingsScreen_sanitaryProductLogs": {
         "description": "Title for the sanitary products data section."
     },
@@ -673,8 +673,8 @@
     },
     "settingsScreen_preferences": "Preferenze",
     "preferencesScreen_language": "Lingua",
-    "preferencesScreen_enableSanitaryProductsScreen": "Enable Sanitary Products Screen",
-    "preferencesScreen_enableSanitaryProductsScreenSubtitle": "Show the Sanitary Products tab on the main navigation bar.",
+    "preferencesScreen_enableSanitaryProductsScreen": "Attiva schermata Assorbenti",
+    "preferencesScreen_enableSanitaryProductsScreenSubtitle": "Mostra la scheda Assorbenti nella barra di navigazione.",
     "preferencesScreen_enableSexActivityScreen": "Enable Sex Activity Screen",
     "preferencesScreen_enableSexActivityScreenSubtitle": "Show the Sex Activity tab on the main navigation bar.",
     "preferencesScreen_StartingDayOfWeek": "Primo giorno della settimana",
@@ -745,26 +745,26 @@
         "description": "Error message shown when a link could not be opened."
     },
     "logSummaryWidget_loggedDays": "Giorni registrati",
-    "logSummaryWidget_trackingHistory": "Storico tracciamenti",
+    "logSummaryWidget_trackingHistory": "Storico monitoraggi",
     "cycleLengthVarianceWidget_logAtLeastTwoPeriods": "Need at least two cycles to show variance.",
-    "cycleLengthVarianceWidget_title": "Cycle Length Variance",
+    "cycleLengthVarianceWidget_title": "Variazione durata ciclo",
     "cycleLengthVarianceWidget_averageCycle": "Ciclo medio",
     "cycleLengthVarianceWidget_cycle": "Ciclo mestruale",
-    "periodDurationWidget_logAtLeastTwoPeriods": "Log at least two periods to see period statistics.",
-    "periodDurationWidget_title": "Period Duration Variance",
-    "periodDurationWidget_averagePeriod": "Avg. Period",
+    "periodDurationWidget_logAtLeastTwoPeriods": "Registra almeno due cicli per vedere le statistiche.",
+    "periodDurationWidget_title": "Variazione durata ciclo",
+    "periodDurationWidget_averagePeriod": "Durata media mestruazione",
     "periodDurationWidget_period": "Ciclo",
     "flowIntensityWidget_flowIntensityBreakdown": "Dettaglio intensità flusso",
-    "flowIntensityWidget_noFlowDataLoggedYet": "Nessun dato del flusso registrato.",
-    "painLevelWidget_noPainDataLoggedYet": "Nessun dato dolore registrato.",
+    "flowIntensityWidget_noFlowDataLoggedYet": "Nessun dato del flusso aggiunto.",
+    "painLevelWidget_noPainDataLoggedYet": "Nessun dato sul dolore aggiunto.",
     "painLevelWidget_painLevelBreakdown": "Dettagli livello dolore",
     "monthlyFlowChartWidget_noDataToDisplay": "Nessun dato da mostrare.",
     "monthlyFlowChartWidget_cycleFlowPatterns": "Andamenti del flusso mestruale",
     "monthlyFlowChartWidget_cycleFlowPatternsDescription": "Ogni linea rappresenta un ciclo completo.",
-    "symptomFrequencyWidget_noSymptomsLoggedYet": "Nessun sintomo registrato.",
+    "symptomFrequencyWidget_noSymptomsLoggedYet": "Nessun sintomo aggiunto.",
     "symptomFrequencyWidget_mostCommonSymptoms": "Sintomi più comuni",
-    "journalViewWidget_logYourFirstPeriod": "Registra il tuo primo ciclo.",
-    "listViewWidget_noPeriodsLogged": "Nessun ciclo registrato.\nTocca il pulsante + per aggiungerne uno.",
+    "journalViewWidget_logYourFirstPeriod": "Aggiungi il tuo primo ciclo.",
+    "listViewWidget_noPeriodsLogged": "Nessun ciclo inserito.\nTocca il pulsante + per aggiungerne uno.",
     "listViewWidget_confirmDelete": "Conferma eliminazione",
     "listViewWidget_confirmDeleteDescription": "Sei sicura di voler eliminare questa voce?",
     "emptyPillStateWidget_noPillRegimenFound": "Nessun piano pillola trovato.",
@@ -798,14 +798,14 @@
     "regimenSetupWidget_enterANumber": "Inserire un numero",
     "regimenSetupWidget_placeboPills": "Pillole vuote (placebo)",
     "regimenSetupWidget_firstDayOfThisPack": "Primo giorno di questa confezione",
-    "symptomEntrySheet_logYourDay": "Inserisci i dati giornalieri",
+    "symptomEntrySheet_logYourDay": "Aggiungi i dati giornalieri",
     "symptomEntrySheet_symptomsOptional": "Sintomi (facoltativo)",
     "periodDetailsSheet_symptoms": "Sintomi",
     "periodDetailsSheet_flow": "Flusso",
-    "reversibleContraceptiveEntrySheet_logReversibleContraceptiveDetails": "Log Contraceptive Details",
-    "sanitaryEntrySheet_logSanitaryProduct": "Log Sanitary Product",
+    "reversibleContraceptiveEntrySheet_logReversibleContraceptiveDetails": "Aggiungi dettagli contraccettivo",
+    "sanitaryEntrySheet_logSanitaryProduct": "Aggiungi assorbente",
     "sanitaryEntrySheet_setReminderDuration": "Imposta la durata del promemoria",
-    "sanitaryEntrySheet_maxDuration": "Max Duration: {hours} hours",
+    "sanitaryEntrySheet_maxDuration": "Durata massima: {hours} ore",
     "@sanitaryEntrySheet_maxDuration": {
         "description": "Label showing the maximum duration for the selected sanitary product type.",
         "placeholders": {
@@ -814,7 +814,7 @@
             }
         }
     },
-    "sanitaryEntrySheet_futureLogTimeError": "Log time cannot be in the future.",
+    "sanitaryEntrySheet_futureLogTimeError": "L'ora inserita non può essere futura.",
     "sanitaryEntrySheet_pastReminderTimeError": "L'orario di fine promemoria non può essere nel passato.",
     "periodPredictionCircle_days": "{count, plural, =1{Giorno} other{Giorni}}",
     "@periodPredictionCircle_days": {
