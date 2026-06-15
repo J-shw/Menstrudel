@@ -121,14 +121,14 @@
     "painLevel_moderate": "Medio",
     "painLevel_severe": "Forte",
     "pain_unbearable": "Insopportabile",
-    "reversibleContraceptive_hormonalIud": "Hormonal IUD",
-    "reversibleContraceptive_copperIud": "Copper IUD",
-    "reversibleContraceptive_implant": "Implant",
-    "reversibleContraceptive_injection": "Injection",
+    "reversibleContraceptive_hormonalIud": "Spirale ormonale",
+    "reversibleContraceptive_copperIud": "Spirale al rame",
+    "reversibleContraceptive_implant": "Impianto sottocutaneo",
+    "reversibleContraceptive_injection": "Iniezione ",
     "reversibleContraceptive_ring": "Anello",
     "reversibleContraceptive_patch": "Cerotto",
-    "sanitaryProduct_tampon": "Tampon",
-    "sanitaryProduct_pad": "Pad",
+    "sanitaryProduct_tampon": "Tampax",
+    "sanitaryProduct_pad": "Assorbente",
     "sanitaryProduct_menstrualCup": "Menstrual Cup",
     "sanitaryProduct_periodUnderwear": "Period Underwear",
     "sanitaryProducts_mostUsed": "Most Used",
@@ -141,34 +141,34 @@
     "@sexProtection_barrier": {
         "description": "Indicates the use of barrier methods of sexual protection (Condoms)."
     },
-    "sexProtection_hormonal": "Hormonal",
+    "sexProtection_hormonal": "Ormonale",
     "@sexProtection_hormonal": {
         "description": "Indicates the use of hormonal methods of sexual protection (The Pill)."
     },
-    "sexProtection_nonHormonal": "Non-Hormonal",
+    "sexProtection_nonHormonal": "Non ormonale",
     "@sexProtection_nonHormonal": {
         "description": "Indicates the use of non-hormonal methods of sexual protection (Copper IUD)."
     },
-    "sexProtection_natural": "Natural",
+    "sexProtection_natural": "Naturale",
     "@sexProtection_natural": {
         "description": "Indicates the use of natural methods of sexual protection (Fertility awernass)."
     },
-    "sexProtection_permanent": "Permanent",
+    "sexProtection_permanent": "Permanente",
     "@sexProtection_permanent": {
         "description": "Indicates the use of permanent methods of sexual protection (Sterilisation)."
     },
     "sexType_vaginal": "Vaginale",
-    "sexType_anal": "Anal",
-    "sexType_oral": "Oral",
+    "sexType_anal": "Anale",
+    "sexType_oral": "Orale",
     "sexType_manual": "Manual",
     "sexParticipation_solo": "Solo",
     "sexParticipation_partner": "Partner",
-    "sexParticipation_group": "Group",
-    "userGoal_general": "General Health",
+    "sexParticipation_group": "Di gruppo",
+    "userGoal_general": "Salute generale",
     "@userGoal_general": {
         "description": "For users tracking periods for general health."
     },
-    "userGoal_sexual": "Sexual Health",
+    "userGoal_sexual": "Salute sessuale",
     "@userGoal_sexual": {
         "description": "For users focusing on sexual health."
     },
@@ -180,16 +180,16 @@
     "@userGoal_avoid": {
         "description": "For users focusing on avoiding pregnancy."
     },
-    "dayOfWeek_monday": "Monday",
-    "dayOfWeek_tuesday": "Tuesday",
-    "dayOfWeek_wednesday": "Wednesday",
-    "dayOfWeek_thursday": "Thursday",
-    "dayOfWeek_friday": "Friday",
-    "dayOfWeek_saturday": "Saturday",
-    "dayOfWeek_sunday": "Sunday",
+    "dayOfWeek_monday": "Lunedì",
+    "dayOfWeek_tuesday": "Martedì",
+    "dayOfWeek_wednesday": "Mercoledì",
+    "dayOfWeek_thursday": "Giovedì",
+    "dayOfWeek_friday": "Venerdì",
+    "dayOfWeek_saturday": "Sabato",
+    "dayOfWeek_sunday": "Domenica",
     "cyclePhase_menstruation": "On Period",
     "cyclePhase_follicular": "Pre-Ovulation",
-    "cyclePhase_fertileWindow": "Fertile Window",
+    "cyclePhase_fertileWindow": "Periodo fertile",
     "cyclePhase_ovulation": "Peak Fertility",
     "cyclePhase_luteal": "Post-Ovulation",
     "cyclePhase_late": "Late",
@@ -201,15 +201,15 @@
     "cyclePhase_lutealDescription": "Progesterone is dominant. Monitor for PMS symptoms as you approach your next period.",
     "cyclePhase_lateDescription": "Your period is late.",
     "cyclePhase_unknownDescription": "We need more data to accurately predict your cycle phase.",
-    "fertilityChance_high": "High",
+    "fertilityChance_high": "Alta",
     "@fertilityChance_high": {
         "description": "Label shown when the user is in their peak fertile window or on ovulation day."
     },
-    "fertilityChance_medium": "Medium",
+    "fertilityChance_medium": "Media",
     "@fertilityChance_medium": {
         "description": "Label shown when the user is at the very beginning or end of their fertile window."
     },
-    "fertilityChance_low": "Low",
+    "fertilityChance_low": "Bassa",
     "@fertilityChance_low": {
         "description": "Label shown when the user is outside of their fertile window (e.g., during menstruation or the luteal phase)."
     },
@@ -360,11 +360,11 @@
     "@fabToolTip_logs": {
         "description": "Used for the main logs screen fab button as a tooltip."
     },
-    "fabToolTip_sanitary": "Log sanitary product",
+    "fabToolTip_sanitary": "Aggiungi prodotto sanitario",
     "@fabToolTip_sanitary": {
         "description": "Used for the sanitary screen fab button as a tooltip."
     },
-    "fabToolTip_sexActivity": "Log sex activity",
+    "fabToolTip_sexActivity": "Aggiungi attività sessuale",
     "@fabToolTip_sexActivity": {
         "description": "Used for the sex activity screen fab button as a tooltip."
     },
