@@ -587,16 +587,16 @@
     },
     "settingsScreen_pack": "Confezione",
     "settingsScreen_dataManagement": "Gestione dati",
-    "settingsScreen_deleteZone": "Delete Zone",
-    "settingsScreen_clearLogsAndPeriods": "Clear Logs & Periods",
+    "settingsScreen_deleteZone": "Zona eliminazione",
+    "settingsScreen_clearLogsAndPeriods": "Elimina registrazioni e cicli",
     "@settingsScreen_clearLogsAndPeriods": {
         "description": "Title for the period logs data clearing section."
     },
-    "settingsScreen_clearLogsAndPeriodsSubtitle": "Deletes your entire period and symptom history.",
+    "settingsScreen_clearLogsAndPeriodsSubtitle": "Elimina storico cicli e sintomi",
     "@settingsScreen_clearLogsAndPeriodsSubtitle": {
         "description": "Subtitle for the period logs data clearing section."
     },
-    "settingsScreen_clearPillLogs": "Clear Pill Logs",
+    "settingsScreen_clearPillLogs": "Elimina registrazioni pillole",
     "@settingsScreen_clearPillLogs": {
         "description": "Title for the pill logs data clearing section."
     },
@@ -604,47 +604,47 @@
     "@settingsScreen_clearPillLogsSubtitle": {
         "description": "Subtitle for the pill logs data clearing section."
     },
-    "settingsScreen_clearReversibleContraceptiveLogs": "Clear Reversible Contraceptive Logs",
+    "settingsScreen_clearReversibleContraceptiveLogs": "Elimina registrazioni contraccettivi reversibili",
     "@settingsScreen_clearReversibleContraceptiveLogs": {
         "description": "Title for the reversible contraceptive logs data clearing section."
     },
-    "settingsScreen_clearReversibleContraceptiveLogsSubtitle": "Removes your reversible contraceptive history.",
+    "settingsScreen_clearReversibleContraceptiveLogsSubtitle": "Elimina storico contraccettivi reversibili",
     "@settingsScreen_clearReversibleContraceptiveLogsSubtitle": {
         "description": "Subtitle for the reversible contraceptive logs data clearing section."
     },
-    "settingsScreen_clearSanitaryProductLogs": "Clear Sanitary Product Logs",
+    "settingsScreen_clearSanitaryProductLogs": "Elimina registrazioni prodotti sanitari",
     "@settingsScreen_clearSanitaryProductLogs": {
         "description": "Title for the sanitary product logs data clearing section."
     },
-    "settingsScreen_clearSanitaryProductLogsSubtitle": "Removes your sanitary products history.",
+    "settingsScreen_clearSanitaryProductLogsSubtitle": "Elimina storico prodotti sanitari",
     "@settingsScreen_clearSanitaryProductLogsSubtitle": {
         "description": "Subtitle for the sanitary product logs data clearing section."
     },
-    "settingsScreen_clearSexualActivityLogs": "Clear Sexual Activity Logs",
+    "settingsScreen_clearSexualActivityLogs": "Elimina registrazioni attività sessuale",
     "@settingsScreen_clearSexualActivityLogs": {
         "description": "Title for the sexual activity logs data clearing section."
     },
-    "settingsScreen_clearSexualActivityLogsSubtitle": "Removes your sexual activity history.",
+    "settingsScreen_clearSexualActivityLogsSubtitle": "Elimina storico attività sessuale",
     "@settingsScreen_clearSexualActivityLogsSubtitle": {
         "description": "Subtitle for the sexual activity logs data clearing section."
     },
-    "settingsScreen_logsAndPeriods": "Logs & Periods",
+    "settingsScreen_logsAndPeriods": "Registrazioni e cicli",
     "@settingsScreen_logsAndPeriods": {
         "description": "Title for the period logs data section."
     },
-    "settingsScreen_pillLogs": "Pill Logs",
+    "settingsScreen_pillLogs": "Registrazioni pillole",
     "@settingsScreen_pillLogs": {
         "description": "Title for the pill logs data section."
     },
-    "settingsScreen_reversibleContraceptivesLogs": "Reversible Contraceptive Logs",
+    "settingsScreen_reversibleContraceptivesLogs": "Registrazioni contraccettivi reversibili",
     "@settingsScreen_reversibleContraceptivesLogs": {
         "description": "Title for the reversible contraceptives data section."
     },
-    "settingsScreen_sanitaryProductLogs": "Sanitary Product Logs",
+    "settingsScreen_sanitaryProductLogs": "Registrazioni prodotti sanitari",
     "@settingsScreen_sanitaryProductLogs": {
         "description": "Title for the sanitary products data section."
     },
-    "settingsScreen_sexualActivityLogs": "Sexual Activity Logs",
+    "settingsScreen_sexualActivityLogs": "Registrazioni attività sessuali",
     "@settingsScreen_sexualActivityLogs": {
         "description": "Title for the sexual activity data section."
     },
@@ -667,17 +667,17 @@
     "securityScreen_enableBiometricLock": "Abilita blocco biometrico",
     "securityScreen_enableBiometricLockSubtitle": "Richiedi impronta digitale o riconoscimento facciale per aprire l'app.",
     "securityScreen_noBiometricsAvailable": "Nessun codice di sblocco, impronta digitale o riconoscimento facciale trovato. Configuralo nelle impostazioni del tuo dispositivo.",
-    "settingsScreen_userProfile": "You",
+    "settingsScreen_userProfile": "Tu",
     "@settingsScreen_userProfile": {
         "description": "Title for the user profile settings button."
     },
     "settingsScreen_preferences": "Preferenze",
-    "preferencesScreen_language": "Language",
+    "preferencesScreen_language": "Lingua",
     "preferencesScreen_enableSanitaryProductsScreen": "Enable Sanitary Products Screen",
     "preferencesScreen_enableSanitaryProductsScreenSubtitle": "Show the Sanitary Products tab on the main navigation bar.",
     "preferencesScreen_enableSexActivityScreen": "Enable Sex Activity Screen",
     "preferencesScreen_enableSexActivityScreenSubtitle": "Show the Sex Activity tab on the main navigation bar.",
-    "preferencesScreen_StartingDayOfWeek": "Starting Day of the Week",
+    "preferencesScreen_StartingDayOfWeek": "Primo giorno della settimana",
     "settingsScreen_about": "Informazioni",
     "@settingsScreen_about": {
         "description": "Title for the about settings button."
@@ -728,7 +728,7 @@
     "@aboutScreen_discord": {
         "description": "Link text to the Discord server on the about screen."
     },
-    "aboutScreen_discordSubtitle": "Support and community",
+    "aboutScreen_discordSubtitle": "Supporto & community",
     "@aboutScreen_discordSubtitle": {
         "description": "Subtitle for the Discord link on the about screen."
     },
@@ -753,7 +753,7 @@
     "periodDurationWidget_logAtLeastTwoPeriods": "Log at least two periods to see period statistics.",
     "periodDurationWidget_title": "Period Duration Variance",
     "periodDurationWidget_averagePeriod": "Avg. Period",
-    "periodDurationWidget_period": "Period",
+    "periodDurationWidget_period": "Ciclo",
     "flowIntensityWidget_flowIntensityBreakdown": "Dettaglio intensità flusso",
     "flowIntensityWidget_noFlowDataLoggedYet": "Nessun dato del flusso registrato.",
     "painLevelWidget_noPainDataLoggedYet": "Nessun dato dolore registrato.",
@@ -825,7 +825,7 @@
             }
         }
     },
-    "customSymptomDialog_newSymptom": "New Symptom",
+    "customSymptomDialog_newSymptom": "Nuovo sintomo",
     "customSymptomDialog_enterCustomSymptom": "Please enter a custom symptom",
-    "customSymptomDialog_temporarySymptom": "Temporary Symptom"
+    "customSymptomDialog_temporarySymptom": "Sintomo temporaneo"
 }
