@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
 import 'package:menstrudel/services/settings_service.dart';
+import 'package:menstrudel/services/user_service.dart';
 import 'package:provider/provider.dart';
 import 'package:menstrudel/models/app/user_entry.dart';
 import 'package:menstrudel/models/app/user_goal_types_enum.dart';
@@ -32,7 +33,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       birthDate: _selectedDate,
       primaryGoal: _selectedGoal,
     );
-    await context.read<UserRepository>().createUser(newUser);
+    await context.read<UserService>().updateUser(newUser);
     if (mounted){
       await context.read<SettingsService>().applySettingsForGoal(_selectedGoal);
     }

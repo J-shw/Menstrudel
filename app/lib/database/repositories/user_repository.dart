@@ -10,11 +10,12 @@ class UserRepository {
 
   UserRepository() : manager = Manager(AppDatabase.instance);
 
-  Future<void> createUser(UserEntry user) async {
+  /// Saves or updates the user data.
+  Future<void> saveUser(UserEntry user) async {
     final db = await dbProvider.database;
     await db.insert(
-      'user', 
-      user.toMap(), 
+      'user',
+      user.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }
@@ -25,16 +26,6 @@ class UserRepository {
     
     if (maps.isEmpty) return null;
     return UserEntry.fromMap(maps.first);
-  }
-
-  Future<void> updateUser(UserEntry user) async {
-    final db = await dbProvider.database;
-    await db.update(
-      'user',
-      user.toMap(),
-      where: 'id = ?',
-      whereArgs: [UserEntry.singletonId],
-    );
   }
 
   Future<void> deleteUser() async {
