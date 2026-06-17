@@ -5,7 +5,6 @@ import 'package:menstrudel/services/user_service.dart';
 import 'package:provider/provider.dart';
 import 'package:menstrudel/models/app/user_entry.dart';
 import 'package:menstrudel/models/app/user_goal_types_enum.dart';
-import 'package:menstrudel/database/repositories/user_repository.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'widgets/welcome_step.dart';
 import 'widgets/profile_step.dart';
