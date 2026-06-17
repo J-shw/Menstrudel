@@ -28,7 +28,7 @@ class NotificationService {
     const initSettings = fln.InitializationSettings(android: androidSettings, iOS: iOSSettings);
 
     await _plugin.initialize(
-      initSettings,
+      settings: initSettings,
       onDidReceiveNotificationResponse: onDidReceiveNotificationResponse,
       onDidReceiveBackgroundNotificationResponse: onDidReceiveBackgroundNotificationResponse,
     );
@@ -50,7 +50,7 @@ class NotificationService {
 
     if (tzScheduledTime.isBefore(tz.TZDateTime.now(tz.local))) throw PastNotificationException();
 
-    await _plugin.cancel(notificationID);
+    await _plugin.cancel(id: notificationID);
 
     final details = fln.NotificationDetails(
       android: fln.AndroidNotificationDetails(
@@ -61,11 +61,11 @@ class NotificationService {
     );
 
     await _plugin.zonedSchedule(
-      notificationID,
-      title,
-      body,
-      tzScheduledTime,
-      details,
+      id: notificationID,
+      title: title,
+      body: body,
+      scheduledDate: tzScheduledTime,
+      notificationDetails: details,
       androidScheduleMode: fln.AndroidScheduleMode.exactAllowWhileIdle,
     );
   }
@@ -117,12 +117,12 @@ class NotificationService {
 
   static Future<void> cancelPeriodDueNotification() async {
     debugPrint('Canceling period due notification reminder');
-    await _plugin.cancel(periodDueNotificationId);
+    await _plugin.cancel(id: periodDueNotificationId);
   }
 
   static Future<void> cancelPeriodOverdueNotification() async {
     debugPrint('Canceling period overdue notification reminder');
-    await _plugin.cancel(periodOverdueNotificationId);
+    await _plugin.cancel(id: periodOverdueNotificationId);
   }
 
   // Phase notifications
@@ -189,12 +189,12 @@ class NotificationService {
 
   static Future<void> cancelFertileWindowNotification() async {
     debugPrint('Canceling fertile window notification reminder');
-    await _plugin.cancel(fertileWindowReminderId);
+    await _plugin.cancel(id: fertileWindowReminderId);
   }
 
   static Future<void> cancelOvulationNotification() async {
     debugPrint('Canceling ovulation notification reminder');
-    await _plugin.cancel(ovulationReminderId);
+    await _plugin.cancel(id: ovulationReminderId);
   }
 
   // Logging reminders
@@ -239,7 +239,7 @@ class NotificationService {
     final scheduledDate = logDate.add(const Duration(days: 1));
     final int reminderId = _generateLoggingReminderIdFromScheduledDate(scheduledDate);
     
-    await _plugin.cancel(reminderId);
+    await _plugin.cancel(id: reminderId);
     debugPrint('Canceled logging reminder associated with log date: ${logDate.toIso8601String()} (ID: $reminderId)');
   }
 
@@ -262,7 +262,7 @@ class NotificationService {
     }else{
       debugPrint('Scheduling pill reminder');
     }
-    await _plugin.cancel(pillReminderId);
+    await _plugin.cancel(id: pillReminderId);
 
     if (!isEnabled) return;
 
@@ -278,11 +278,11 @@ class NotificationService {
     );
 
     await _plugin.zonedSchedule(
-      pillReminderId,
-      title,
-      body,
-      scheduledDate,
-      details,
+      id: pillReminderId,
+      title: title,
+      body: body,
+      scheduledDate: scheduledDate,
+      notificationDetails: details,
       androidScheduleMode: fln.AndroidScheduleMode.exactAllowWhileIdle,
       matchDateTimeComponents: fln.DateTimeComponents.time,
     );
@@ -290,7 +290,7 @@ class NotificationService {
 
   static Future<void> cancelPillReminder() async {
     debugPrint('Canceling pill reminder');
-    await _plugin.cancel(pillReminderId);
+    await _plugin.cancel(id: pillReminderId);
   }
 
   static tz.TZDateTime _nextInstanceOfTime(TimeOfDay time, bool startingTomorrow) {
@@ -326,7 +326,7 @@ class NotificationService {
   }
 
   static Future<void> cancelSanitaryProductReminder() async {
-    await _plugin.cancel(sanitaryProductsID);
+    await _plugin.cancel(id: sanitaryProductsID);
   }
 
   static Future<bool> isSanitaryProductReminderScheduled() async {
@@ -376,7 +376,7 @@ class NotificationService {
 
   static Future<void> cancelReversibleContraceptiveReminder() async {
     debugPrint('Canceling reverisble contraceptive reminder');
-    await _plugin.cancel(reversibleContraceptiveReminderId);
+    await _plugin.cancel(id: reversibleContraceptiveReminderId);
   }
 
 
