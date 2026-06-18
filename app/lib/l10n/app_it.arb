@@ -95,7 +95,7 @@
     "other": "Altro",
     "navBar_logs": "Registri",
     "navBar_sanitary": "Assorbenti",
-    "navBar_sexActivity": "Attività sessuale",
+    "navBar_sexActivity": "Sesso",
     "navBar_pill": "Pillola",
     "navBar_reversibleContraceptive": "Contraccettivi",
     "navBar_settings": "Impostazioni",
@@ -544,10 +544,10 @@
     "settingsScreen_enableReversibleContraceptiveReminder": "Abilita promemoria contraccettivi",
     "settingsScreen_currentDuration": "Durata corrente",
     "settingsScreen_durationInDays": "Durata (giorni)",
-    "settingsScreen_LoggingScreen": "Registrazioni",
-    "settingsScreen_enableLoggingReminders": "Abilita promemoria registrazioni",
+    "settingsScreen_LoggingScreen": "Inserimenti",
+    "settingsScreen_enableLoggingReminders": "Abilita promemoria inserimenti",
     "settingsScreen_loggingReminderDescription": "Se aggiungi un giorno di flusso, il giorno dopo riceverai un promemoria per aggiornare la tua situazione.",
-    "settingsScreen_loggingReminderTime": "Orario promemoria registrazioni",
+    "settingsScreen_loggingReminderTime": "Orario promemoria inserimenti",
     "settingsScreen_defaultSymptoms": "Sintomi predefiniti",
     "settingsScreen_defaultSymptomsSubtitle": "Disponibili sempre quando aggiungi nuove mestruazioni. Tocca un sintomo per eliminarlo o '+' per aggiungerne un altro.",
     "settingsScreen_deleteDefaultSymptomQuestion": "Eliminare '{symptom}'?",
@@ -588,7 +588,7 @@
     "settingsScreen_pack": "Confezione",
     "settingsScreen_dataManagement": "Gestione dati",
     "settingsScreen_deleteZone": "Zona eliminazione",
-    "settingsScreen_clearLogsAndPeriods": "Cancella registri e cicli",
+    "settingsScreen_clearLogsAndPeriods": "Cancella inserimenti e cicli",
     "@settingsScreen_clearLogsAndPeriods": {
         "description": "Title for the period logs data clearing section."
     },
@@ -628,7 +628,7 @@
     "@settingsScreen_clearSexualActivityLogsSubtitle": {
         "description": "Subtitle for the sexual activity logs data clearing section."
     },
-    "settingsScreen_logsAndPeriods": "Registrazioni e mestruazioni",
+    "settingsScreen_logsAndPeriods": "Inserimenti e cicli",
     "@settingsScreen_logsAndPeriods": {
         "description": "Title for the period logs data section."
     },
