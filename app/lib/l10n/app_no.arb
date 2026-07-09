@@ -1,23 +1,23 @@
 {
-    "@@locale": "nl",
+    "@@locale": "no",
     "appTitle": "Menstrudel",
-    "nextDue": "Verwacht",
-    "ongoing": "Huidig",
-    "overdue": "Over tijd",
-    "total": "Totaal",
-    "shortest": "Kortste",
-    "longest": "Langste",
-    "unknown": "Onbekend",
-    "date": "Datum",
-    "time": "Tijd",
+    "nextDue": "Next Due",
+    "ongoing": "Ongoing",
+    "overdue": "Overdue",
+    "total": "Total",
+    "shortest": "Shortest",
+    "longest": "Longest",
+    "unknown": "Ukjent",
+    "date": "Date",
+    "time": "Time",
     "start": "Start",
-    "end": "Einde",
-    "next": "Volgende",
-    "back": "Vorige",
-    "today": "Vandaag",
+    "end": "Slutt",
+    "next": "Neste",
+    "back": "Forrige",
+    "today": "I dag",
     "day": "Dag",
-    "days": "Dagen",
-    "hours": "Uren",
+    "days": "Dager",
+    "hours": "Timer",
     "dayCount": "{count, plural, one{{count} Day} other{{count} Days}}",
     "@dayCount": {
         "description": "A message that displays a count of days, handling singular and plural forms.",
@@ -58,7 +58,7 @@
             }
         }
     },
-    "countUp_day": "Dag",
+    "countUp_day": "Day {day}",
     "@countUp_day": {
         "description": "A count up message indicating the current day. E.g. 'Day 1 of period'.",
         "placeholders": {
@@ -68,88 +68,88 @@
             }
         }
     },
-    "logs": "Invoer",
-    "insights": "Inzichten",
-    "edit": "Pas aan",
-    "delete": "Verwijder",
-    "clear": "Verwijder",
-    "save": "Sla op",
-    "import": "Importeer",
+    "logs": "Logs",
+    "insights": "Insights",
+    "edit": "Edit",
+    "delete": "Delete",
+    "clear": "Clear",
+    "save": "Save",
+    "import": "Import",
     "ok": "OK",
-    "confirm": "Bevestig",
-    "set": "Stel in",
-    "yes": "Ja",
-    "no": "Nee",
-    "cancel": "Annuleer",
-    "select": "Selecteer",
-    "close": "Sluit",
+    "confirm": "Confirm",
+    "set": "Set",
+    "yes": "Yes",
+    "no": "No",
+    "cancel": "Cancel",
+    "select": "Select",
+    "close": "Close",
     "reset": "Reset",
-    "add": "Voeg toe",
-    "notSet": "Niet ingesteld",
-    "removed": "Verwijderd",
-    "totalLogs": "Totale invoer",
-    "note": "Notitie",
-    "systemDefault": "Standaard",
-    "flow": "Menstruatie",
+    "add": "Add",
+    "notSet": "Not set",
+    "removed": "Removed",
+    "totalLogs": "Total Logs",
+    "note": "Note",
+    "systemDefault": "System Default",
+    "flow": "Flow",
     "type": "Type",
-    "other": "Overig",
-    "navBar_logs": "Invoer",
-    "navBar_sanitary": "Menstruatieproducten",
-    "navBar_sexActivity": "Seksuele activiteit",
-    "navBar_pill": "Pil",
-    "navBar_reversibleContraceptive": "Anticonceptie",
-    "navBar_settings": "Instellingen",
-    "flowIntensity_none": "Geen",
+    "other": "Other",
+    "navBar_logs": "Logs",
+    "navBar_sanitary": "Sanitet",
+    "navBar_sexActivity": "Sexliv",
+    "navBar_pill": "P-pille",
+    "navBar_reversibleContraceptive": "Prevensjonsmidler",
+    "navBar_settings": "Settings",
+    "flowIntensity_none": "Ingen",
     "flowIntensity_spotting": "Spotting",
-    "flowIntensity_light": "Licht",
-    "flowIntensity_moderate": "Gemiddeld",
-    "flowIntensity_heavy": "Zwaar",
-    "builtInSymptom_acne": "Acne",
-    "builtInSymptom_backPain": "Rugpijn",
-    "builtInSymptom_bloating": "Opgeblazen gevoel",
-    "builtInSymptom_cramps": "Krampen",
-    "builtInSymptom_fatigue": "Vermoeidheid",
-    "builtInSymptom_headache": "Hoofdpijn",
-    "builtInSymptom_moodSwings": "Stemmingswisselingen",
-    "builtInSymptom_nausea": "Misselijkheid",
-    "builtInSymptom_tenderBreasts": "Gevoelige borsten",
-    "builtInSymptom_insomnia": "Insomnia\n",
-    "builtInSymptom_depressed": "Depressief",
-    "painLevel_title": "Pijnniveau ",
-    "painLevel_none": "Geen",
-    "painLevel_mild": "Mild",
-    "painLevel_moderate": "Gemiddeld",
-    "painLevel_severe": "Zwaar",
-    "pain_unbearable": "Ondraaglijk",
-    "reversibleContraceptive_hormonalIud": "Hormoonspiraal",
-    "reversibleContraceptive_copperIud": "Koperspiraal",
-    "reversibleContraceptive_implant": "Anticonceptie implantaat",
-    "reversibleContraceptive_injection": "Injectie",
-    "reversibleContraceptive_ring": "Hormoonring",
-    "reversibleContraceptive_patch": "Anticonceptie patch",
-    "sanitaryProduct_tampon": "Tampon",
-    "sanitaryProduct_pad": "Maandverband",
-    "sanitaryProduct_menstrualCup": "Menstruatie cup",
-    "sanitaryProduct_periodUnderwear": "Menstruatie ondergoed",
-    "sanitaryProducts_mostUsed": "Meest gebruikt",
-    "sanitaryProducts_usageTrend": "Gebruikerstrend",
-    "sexProtection_none": "Geen",
+    "flowIntensity_light": "Lett",
+    "flowIntensity_moderate": "Middels",
+    "flowIntensity_heavy": "Sterk",
+    "builtInSymptom_acne": "Akne",
+    "builtInSymptom_backPain": "Ryggsmerter",
+    "builtInSymptom_bloating": "Oppblåsthet",
+    "builtInSymptom_cramps": "Magesmerter",
+    "builtInSymptom_fatigue": "Utmattelse",
+    "builtInSymptom_headache": "Hodepine",
+    "builtInSymptom_moodSwings": "Humørsvingninger",
+    "builtInSymptom_nausea": "Svimmelhet",
+    "builtInSymptom_tenderBreasts": "Ømme bryster",
+    "builtInSymptom_insomnia": "Søvnløshet",
+    "builtInSymptom_depressed": "Nedstemthet",
+    "painLevel_title": "Smertenivå",
+    "painLevel_none": "Ingen",
+    "painLevel_mild": "Svak",
+    "painLevel_moderate": "Moderat",
+    "painLevel_severe": "Sterk",
+    "pain_unbearable": "Uutholdelig",
+    "reversibleContraceptive_hormonalIud": "Hormonell prevensjon",
+    "reversibleContraceptive_copperIud": "Kobberspiral",
+    "reversibleContraceptive_implant": "P-stav",
+    "reversibleContraceptive_injection": "Sprøyte",
+    "reversibleContraceptive_ring": "P-ring",
+    "reversibleContraceptive_patch": "P-plaster",
+    "sanitaryProduct_tampon": "Tampong",
+    "sanitaryProduct_pad": "Bind",
+    "sanitaryProduct_menstrualCup": "Menskopp",
+    "sanitaryProduct_periodUnderwear": "Menstruse",
+    "sanitaryProducts_mostUsed": "Mest brukt",
+    "sanitaryProducts_usageTrend": "Usage Trend",
+    "sexProtection_none": "Ingen",
     "@sexProtection_none": {
         "description": "Indicates that no sexual protection method was used."
     },
-    "sexProtection_barrier": "Condoom",
+    "sexProtection_barrier": "Kondom",
     "@sexProtection_barrier": {
         "description": "Indicates the use of barrier methods of sexual protection (Condoms)."
     },
-    "sexProtection_hormonal": "Hormonaal",
+    "sexProtection_hormonal": "Hormonell",
     "@sexProtection_hormonal": {
         "description": "Indicates the use of hormonal methods of sexual protection (The Pill)."
     },
-    "sexProtection_nonHormonal": "Niet hormonaal",
+    "sexProtection_nonHormonal": "Ikke-hormonell",
     "@sexProtection_nonHormonal": {
         "description": "Indicates the use of non-hormonal methods of sexual protection (Copper IUD)."
     },
-    "sexProtection_natural": "Natuurlijk",
+    "sexProtection_natural": "Natural",
     "@sexProtection_natural": {
         "description": "Indicates the use of natural methods of sexual protection (Fertility awernass)."
     },
@@ -157,51 +157,51 @@
     "@sexProtection_permanent": {
         "description": "Indicates the use of permanent methods of sexual protection (Sterilisation)."
     },
-    "sexType_vaginal": "Vaginaal",
-    "sexType_anal": "Anaal",
-    "sexType_oral": "Oraal",
-    "sexType_manual": "Hand",
+    "sexType_vaginal": "Vaginal",
+    "sexType_anal": "Anal",
+    "sexType_oral": "Oral",
+    "sexType_manual": "Hender",
     "sexParticipation_solo": "Solo",
     "sexParticipation_partner": "Partner",
-    "sexParticipation_group": "Groep",
-    "userGoal_general": "Algemene gezondheid",
+    "sexParticipation_group": "Gruppe",
+    "userGoal_general": "Generell helse",
     "@userGoal_general": {
         "description": "For users tracking periods for general health."
     },
-    "userGoal_sexual": "Seksuele gezondheid",
+    "userGoal_sexual": "Seksuell helse",
     "@userGoal_sexual": {
         "description": "For users focusing on sexual health."
     },
-    "userGoal_conceive": "Zwanger worden",
+    "userGoal_conceive": "Graviditet",
     "@userGoal_conceive": {
         "description": "For users focusing on trying to conceive."
     },
-    "userGoal_avoid": "Zwangerschap vermijden",
+    "userGoal_avoid": "Unngå graviditet",
     "@userGoal_avoid": {
         "description": "For users focusing on avoiding pregnancy."
     },
-    "dayOfWeek_monday": "Maandag",
-    "dayOfWeek_tuesday": "Dinsdag",
-    "dayOfWeek_wednesday": "Woensdag",
-    "dayOfWeek_thursday": "Donderdag",
-    "dayOfWeek_friday": "Vrijdag",
-    "dayOfWeek_saturday": "Zaterdag",
-    "dayOfWeek_sunday": "Zondag",
-    "cyclePhase_menstruation": "Ongesteld",
-    "cyclePhase_follicular": "Pre-ovulatie",
-    "cyclePhase_fertileWindow": "Vruchtbare periode",
-    "cyclePhase_ovulation": "Meest vruchtbaar",
-    "cyclePhase_luteal": "Post-ovulatie",
-    "cyclePhase_late": "Over tijd",
-    "cyclePhase_unknown": "Onbekend",
-    "cyclePhase_menstruationDescription": "Je bent ongesteld, het baarmoederslijmvlies wordt afgestoten",
-    "cyclePhase_fertileWindowDescription": "Je bevindt je in je vruchtbare periode",
-    "cyclePhase_follicularDescription": "Oestrogeen stijgt om de eisprong voor te bereiden; je energieniveau kan stijgen",
-    "cyclePhase_ovulationDescription": "Er is een eitje vrijgekomen. Dit is je meest vruchtbare periode.",
-    "cyclePhase_lutealDescription": "Progesteron is dominant. Let op PMS-symptomen nu je ongesteldheid nadert",
-    "cyclePhase_lateDescription": "Je bent over tijd",
-    "cyclePhase_unknownDescription": "We hebben meer data nodig om je cyclus goed te voorspellen",
-    "fertilityChance_high": "Hoog",
+    "dayOfWeek_monday": "Mandag",
+    "dayOfWeek_tuesday": "Tirsdag",
+    "dayOfWeek_wednesday": "Onsdag",
+    "dayOfWeek_thursday": "Torsdag",
+    "dayOfWeek_friday": "Fredag",
+    "dayOfWeek_saturday": "Lørdag",
+    "dayOfWeek_sunday": "Søndag",
+    "cyclePhase_menstruation": "On Period",
+    "cyclePhase_follicular": "Pre-Ovulation",
+    "cyclePhase_fertileWindow": "Fertile Window",
+    "cyclePhase_ovulation": "Peak Fertility",
+    "cyclePhase_luteal": "Post-Ovulation",
+    "cyclePhase_late": "Late",
+    "cyclePhase_unknown": "Unknown",
+    "cyclePhase_menstruationDescription": "Your period is active and the uterine lining is being shed.",
+    "cyclePhase_fertileWindowDescription": "Your fertile window is active.",
+    "cyclePhase_follicularDescription": "Estrogen is rising to prepare the egg; your energy levels may be increasing.",
+    "cyclePhase_ovulationDescription": "An egg has been released. This is your most fertile time.",
+    "cyclePhase_lutealDescription": "Progesterone is dominant. Monitor for PMS symptoms as you approach your next period.",
+    "cyclePhase_lateDescription": "Your period is late.",
+    "cyclePhase_unknownDescription": "We need more data to accurately predict your cycle phase.",
+    "fertilityChance_high": "High",
     "@fertilityChance_high": {
         "description": "Label shown when the user is in their peak fertile window or on ovulation day."
     },
@@ -209,17 +209,17 @@
     "@fertilityChance_medium": {
         "description": "Label shown when the user is at the very beginning or end of their fertile window."
     },
-    "fertilityChance_low": "Laag",
+    "fertilityChance_low": "Low",
     "@fertilityChance_low": {
         "description": "Label shown when the user is outside of their fertile window (e.g., during menstruation or the luteal phase)."
     },
-    "error_valueMustbePositive": "De waarde moet positief zijn",
-    "error_valueCannotBeNull": "De waarde kan geen nul zijn",
-    "notification_periodTitle": "Bijna ongesteld",
+    "error_valueMustbePositive": "Value must be positive",
+    "error_valueCannotBeNull": "Value cannot be null",
+    "notification_periodTitle": "Period Approaching",
     "@notification_periodTitle": {
         "description": "Title for the upcoming period notification."
     },
-    "notification_periodBody": "{count, plural, =1{Je volgende ongesteldheid begint waarschijnlijk over 1 dag.} other{Je volgende ongesteldheid begint waarschijnlijk over {count} dagen.}}",
+    "notification_periodBody": "{count, plural, =1{Your next period is estimated to start in 1 day.} other{Your next period is estimated to start in {count} days.}}",
     "@notification_periodBody": {
         "description": "Body for the upcoming period notification.",
         "placeholders": {
@@ -228,7 +228,7 @@
             }
         }
     },
-    "notification_periodOverdueTitle": "Over tijd",
+    "notification_periodOverdueTitle": "Period Overdue",
     "@notification_periodOverdueTitle": {
         "description": "Title for the overdue period notification."
     },
@@ -241,15 +241,15 @@
             }
         }
     },
-    "notification_pillTitle": "Herinnering pil",
+    "notification_pillTitle": "Pill Reminder",
     "@notification_pillTitle": {
         "description": "Title for the daily pill reminder notification."
     },
-    "notification_pillBody": "Vergeet vandaag niet de pil te slikken",
+    "notification_pillBody": "Don't forget to take your pill for today.",
     "@notification_pillBody": {
         "description": "Body for the daily pill reminder notification."
     },
-    "notification_reversibleContraceptiveTitle": "Herinnering tijdelijk anticonceptiemiddel",
+    "notification_reversibleContraceptiveTitle": "Reversible Contraceptive Reminder",
     "@notification_reversibleContraceptiveTitle": {
         "description": "Title for the Reversible Contraceptive reminder notification."
     },
@@ -267,17 +267,17 @@
             }
         }
     },
-    "notification_loggingReminderTitle": "Herinnering invoer",
+    "notification_loggingReminderTitle": "Logging Reminder",
     "@notification_loggingReminderTitle": {
         "description": "Title for the logging reminder notification."
     },
-    "notification_loggingReminderBody": "Klik om je menstruatie van vandaag in te voeren ",
+    "notification_loggingReminderBody": "Tap to log your flow for today.",
     "@notification_loggingReminderBody": {
         "description": "Body for the logging reminder notification."
     },
-    "notification_SanitaryProductReminderTitle": "Herinnering menstruatieproduct",
-    "notification_SanitaryProductReminderBody": "Denk eraan om je menstruatieproduct te verwisselen",
-    "notification_fertileWindowTitle": "Herinnering vruchtbare periode",
+    "notification_SanitaryProductReminderTitle": "Sanitary Product Reminder",
+    "notification_SanitaryProductReminderBody": "Remember to change your product.",
+    "notification_fertileWindowTitle": "Fertile Window Reminder",
     "@notification_fertileWindowTitle": {
         "description": "Title for the fertile window notification."
     },
@@ -290,7 +290,7 @@
             }
         }
     },
-    "notification_ovulationDayReminderTitle": "Herinnering eisprong",
+    "notification_ovulationDayReminderTitle": "Ovulation Day Reminder",
     "@notification_ovulationDayReminderTitle": {
         "description": "Title for the ovulation day notification."
     },
@@ -303,47 +303,47 @@
             }
         }
     },
-    "onboardingScreen_welcomeToMenstrudel": "Welkom bij Menstrudel",
+    "onboardingScreen_welcomeToMenstrudel": "Welcome to Menstrudel",
     "@onboardingScreen_welcomeToMenstrudel": {
         "description": "Title for the onboarding screen."
     },
-    "onboardingScreen_welcomeToMenstrudelDescription": "Jouw offline en privé cyclus tracker",
+    "onboardingScreen_welcomeToMenstrudelDescription": "Your offline, private cycle tracker.",
     "@onboardingScreen_welcomeToMenstrudelDescription": {
         "description": "Small into description for the onboarding screen."
     },
-    "onBoardingScreen_byUsingMenstrudelYouAgreeTo": "Door gebruik te maken van Menstrudel, stem je in met onze",
+    "onBoardingScreen_byUsingMenstrudelYouAgreeTo": "By using Menstrudel, you agree to our ",
     "@onBoardingScreen_byUsingMenstrudelYouAgreeTo": {
         "description": "Part of the privacy policy agreement text on the onboarding screen."
     },
-    "onBoardingScreen_privacyPolicy": "Privacybeleid",
+    "onBoardingScreen_privacyPolicy": "Privacy Policy",
     "@onBoardingScreen_privacyPolicy": {
         "description": "Link text to the privacy policy on the onboarding screen."
     },
-    "onboardingScreen_profileTitle": "Over jou",
+    "onboardingScreen_profileTitle": "About You",
     "@onboardingScreen_profileTitle": {
         "description": "Title for the profile onboarding screen."
     },
-    "onboardingScreen_profileName": "Hoe wil je dat we je noemen?",
+    "onboardingScreen_profileName": "What should we call you?",
     "@onboardingScreen_profileName": {
         "description": "Name question for the profile onboarding screen."
     },
-    "onboardingScreen_profileDate": "Geboordedatum (optioneel)",
+    "onboardingScreen_profileDate": "Birth Date (Optional)",
     "@onboardingScreen_profileDate": {
         "description": "Birth date for the profile onboarding screen. This field is optional."
     },
-    "onboardingScreen_profileDatePlaceholder": "Klik om geboortedatum in te voeren",
+    "onboardingScreen_profileDatePlaceholder": "Tap to set birthday",
     "@onboardingScreen_profileDatePlaceholder": {
         "description": "Displays when birthday value is none (Due to being optional). Prompts user to set their birthday"
     },
-    "onboardingScreen_goalTitle": "Wat is je doel?",
+    "onboardingScreen_goalTitle": "What's your goal?",
     "@onboardingScreen_goalTitle": {
         "description": "Title for the goal onboarding screen."
     },
-    "onboardingScreen_goalDescription": "Dit helpt om jouw inzichten gerichter aan te bieden",
+    "onboardingScreen_goalDescription": "This helps tailor the insights you see.",
     "@onboardingScreen_goalDescription": {
         "description": "Description for the goal onboarding screen."
     },
-    "onboardingScreen_contraceptionHint": "Opmerking: Als je wil kan je het bijhouden van de pil of tijdelijke anticonceptie later nog aanzetten in de instellingen van de app bij [...] ",
+    "onboardingScreen_contraceptionHint": "Note: You can enable Pill or Reversible Contraceptive tracking later in the app settings under '{sectionName}' if wanted.",
     "@onboardingScreen_contraceptionHint": {
         "description": "Hint for birth control settings",
         "placeholders": {
@@ -352,37 +352,37 @@
             }
         }
     },
-    "onboardingScreen_getStarted": "Laten we beginnen",
+    "onboardingScreen_getStarted": "Get Started",
     "@onboardingScreen_getStarted": {
         "description": "Button text for the get started navigation button"
     },
-    "fabToolTip_logs": "Invoer dag",
+    "fabToolTip_logs": "Log day",
     "@fabToolTip_logs": {
         "description": "Used for the main logs screen fab button as a tooltip."
     },
-    "fabToolTip_sanitary": "Invoer menstruatieproduct",
+    "fabToolTip_sanitary": "Log sanitary product",
     "@fabToolTip_sanitary": {
         "description": "Used for the sanitary screen fab button as a tooltip."
     },
-    "fabToolTip_sexActivity": "Invoer seksuele activiteit",
+    "fabToolTip_sexActivity": "Log sex activity",
     "@fabToolTip_sexActivity": {
         "description": "Used for the sex activity screen fab button as a tooltip."
     },
-    "fabToolTip_reversibleContraceptive": "Invoer tijdelijke anticonceptie",
+    "fabToolTip_reversibleContraceptive": "Log Reversible Contraceptive",
     "@fabToolTip_reversibleContraceptive": {
         "description": "Used for the Reversible Contraceptive screen fab button as a tooltip."
     },
-    "mainScreen_logsPageTitle": "Invoer",
-    "mainSceen_sexActivityPageTitle": "Seksuele activiteit",
-    "mainScreen_sanitaryPageTitle": "Menstruatieproducten",
-    "mainScreen_pillsPageTitle": "Pil",
-    "mainScreen_reversibleContraceptivesPageTitle": "Tijdelijke anticonceptie",
-    "mainScreen_settingsPageTitle": "Instellingen",
-    "insightsScreen_errorPrefix": "Fout:",
-    "insightsScreen_noDataAvailable": "Geen data beschikbaar",
-    "logsScreen_calculatingPrediction": "Voorspelling uitrekenen...",
-    "logScreen_logAtLeastTwoPeriods": "Voer minimaal twee cycli in om de volgende cyclus in te schatten",
-    "logScreen_nextPeriodEstimate": "Schatting volgende ongesteldheid",
+    "mainScreen_logsPageTitle": "Logs",
+    "mainSceen_sexActivityPageTitle": "Sex Activity",
+    "mainScreen_sanitaryPageTitle": "Sanitary Products",
+    "mainScreen_pillsPageTitle": "Pills",
+    "mainScreen_reversibleContraceptivesPageTitle": "Reversible Contraceptives",
+    "mainScreen_settingsPageTitle": "Settings",
+    "insightsScreen_errorPrefix": "Error:",
+    "insightsScreen_noDataAvailable": "No data available.",
+    "logsScreen_calculatingPrediction": "Calculating prediction...",
+    "logScreen_logAtLeastTwoPeriods": "Log at least two periods to estimate next cycle.",
+    "logScreen_nextPeriodEstimate": "Next period Est",
     "logScreen_periodDueToday": "Period due today",
     "logScreen_periodOverdueBy": "{count, plural, =1{Period overdue by 1 day} other{Period overdue by {count} days}}",
     "@logScreen_periodOverdueBy": {
@@ -452,7 +452,7 @@
         }
     },
     "sexActivityScreen_noSexActivityRecordsFound": "No sex activity records found.",
-    "sexActivityScreen_history": "Geschiedenis ({history})",
+    "sexActivityScreen_history": "History ({history})",
     "@sexActivityScreen_history": {
         "description": "The total sex activity history count.",
         "placeholders": {
@@ -510,7 +510,7 @@
     "settingsScreen_themeLight": "Light",
     "settingsScreen_themeDark": "Dark",
     "settingsScreen_themeSystem": "System",
-    "settingsScreen_dynamicTheme": "Dynamisch thema",
+    "settingsScreen_dynamicTheme": "Dynamic Theme",
     "settingsScreen_useWallpaperColors": "Use Wallpaper Colors",
     "settingsScreen_themeColor": "Theme Color",
     "settingsScreen_pickAColor": "Pick a Color",
@@ -592,7 +592,7 @@
     "@settingsScreen_clearLogsAndPeriods": {
         "description": "Title for the period logs data clearing section."
     },
-    "settingsScreen_clearLogsAndPeriodsSubtitle": "Verwijder je gehele menstruatie en symptomen geschiedenis.",
+    "settingsScreen_clearLogsAndPeriodsSubtitle": "Deletes your entire period and symptom history.",
     "@settingsScreen_clearLogsAndPeriodsSubtitle": {
         "description": "Subtitle for the period logs data clearing section."
     },
@@ -600,7 +600,7 @@
     "@settingsScreen_clearPillLogs": {
         "description": "Title for the pill logs data clearing section."
     },
-    "settingsScreen_clearPillLogsSubtitle": "Verwijder je pilschema en inname geschiedenis.",
+    "settingsScreen_clearPillLogsSubtitle": "Removes your pill regimen and intake history.",
     "@settingsScreen_clearPillLogsSubtitle": {
         "description": "Subtitle for the pill logs data clearing section."
     },
