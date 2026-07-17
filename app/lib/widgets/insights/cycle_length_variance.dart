@@ -34,7 +34,7 @@ class CycleLengthVarianceWidget extends StatelessWidget {
       );
     }
 
-    final List<int> reversedCycleLengths = cycleStats!.cycleLengths.reversed.toList();
+    final List<int> reversedCycleLengths = cycleStats!.cycleLengths.toList();
     final List<Period> reversedPeriods = periods.reversed.toList();
 
     return Card(
