@@ -34,7 +34,7 @@ class CycleLengthVarianceWidget extends StatelessWidget {
       );
     }
 
-    final List<int> reversedCycleLengths = cycleStats!.cycleLengths.toList();
+    final List<int> cycleLengths = cycleStats!.cycleLengths.toList();
     final List<Period> reversedPeriods = periods.reversed.toList();
 
     return Card(
@@ -113,8 +113,8 @@ class CycleLengthVarianceWidget extends StatelessWidget {
                       },
                     ),
                   ),
-                  barGroups: List.generate(reversedCycleLengths.length, (index) {
-                    final double cycleLength = reversedCycleLengths[index].toDouble();
+                  barGroups: List.generate(cycleLengths.length, (index) {
+                    final double cycleLength = cycleLengths[index].toDouble();
                     return BarChartGroupData(
                       x: index,
                       barRods: [
