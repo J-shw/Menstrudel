@@ -172,9 +172,9 @@ class _PeriodJournalViewState extends State<PeriodJournalView> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            height: 40,
-            width: 40,
-            margin: const EdgeInsets.all(2),
+            height: 35,
+            width: 35,
+            margin: const EdgeInsets.all(1),
             decoration: BoxDecoration(
               color: log.flow.color,
               shape: BoxShape.circle,
