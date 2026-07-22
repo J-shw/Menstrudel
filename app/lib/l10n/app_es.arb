@@ -219,7 +219,7 @@
     "@notification_periodTitle": {
         "description": "Title for the upcoming period notification."
     },
-    "notification_periodBody": "{count, plural, =1{Your next period is estimated to start in 1 day.} other{Your next period is estimated to start in {count} days.}}",
+    "notification_periodBody": "{count, plural,=1{Se estima que tu próximo período comenzará en 1 día.} other{Se estima que tu próximo período comenzará en {count} días.}}",
     "@notification_periodBody": {
         "description": "Body for the upcoming period notification.",
         "placeholders": {
@@ -228,7 +228,7 @@
             }
         }
     },
-    "notification_periodOverdueTitle": "Period Overdue",
+    "notification_periodOverdueTitle": "Menstruación atrasada",
     "@notification_periodOverdueTitle": {
         "description": "Title for the overdue period notification."
     },
@@ -686,27 +686,27 @@
     "@aboutScreen_version": {
         "description": "Label showing the current app version."
     },
-    "aboutScreen_legalAndSource": "Legal & Source",
+    "aboutScreen_legalAndSource": "Legal y código fuente",
     "@aboutScreen_legalAndSource": {
         "description": "Title for the legal and source about section."
     },
-    "aboutScreen_communityAndUpdates": "Community & Updates",
+    "aboutScreen_communityAndUpdates": "Comunidad y actualizaciones",
     "@aboutScreen_communityAndUpdates": {
         "description": "Title for the community and updates about section."
     },
-    "aboutScreen_privacyPolicy": "Privacy Policy",
+    "aboutScreen_privacyPolicy": "Política de privacidad",
     "@aboutScreen_privacyPolicy": {
         "description": "Link text to the privacy policy on the about screen."
     },
-    "aboutScreen_privacyPolicySubtitle": "Read our privacy policy",
+    "aboutScreen_privacyPolicySubtitle": "Lee nuestra política de privacidad",
     "@aboutScreen_privacyPolicySubtitle": {
         "description": "Subtitle for the privacy policy link on the about screen."
     },
-    "aboutScreen_releaseNotes": "Release Notes",
+    "aboutScreen_releaseNotes": "Notas de la versión",
     "@aboutScreen_releaseNotes": {
         "description": "Link text to the release notes on the about screen."
     },
-    "aboutScreen_releaseNotesSubtitle": "What's new in {version}",
+    "aboutScreen_releaseNotesSubtitle": "Novedades en {version}",
     "@aboutScreen_releaseNotesSubtitle": {
         "description": "Subtitle for the release notes link on the about screen.",
         "placeholders": {
@@ -720,7 +720,7 @@
     "@aboutScreen_github": {
         "description": "Link text to the GitHub repository on the about screen."
     },
-    "aboutScreen_githubSubtitle": "Source code and issue tracking",
+    "aboutScreen_githubSubtitle": "Código fuente y seguimiento de errores",
     "@aboutScreen_githubSubtitle": {
         "description": "Subtitle for the GitHub link on the about screen."
     },
@@ -728,48 +728,48 @@
     "@aboutScreen_discord": {
         "description": "Link text to the Discord server on the about screen."
     },
-    "aboutScreen_discordSubtitle": "Support and community",
+    "aboutScreen_discordSubtitle": "Soporte y comunidad",
     "@aboutScreen_discordSubtitle": {
         "description": "Subtitle for the Discord link on the about screen."
     },
-    "aboutScreen_share": "Share",
+    "aboutScreen_share": "Compartir",
     "@aboutScreen_share": {
         "description": "Link button text for the share button on the about screen."
     },
-    "aboutScreen_shareText": "Check out Menstrudel, a private and offline period tracker app!",
+    "aboutScreen_shareText": "¡Descubre Menstrudel, una app privada y sin conexión para el seguimiento del periodo!",
     "@aboutScreen_shareText": {
         "description": "Text used when sharing the app from the about screen."
     },
-    "aboutScreen_urlError": "Could not open the link.",
+    "aboutScreen_urlError": "No se pudo abrir el enlace.",
     "@aboutScreen_urlError": {
         "description": "Error message shown when a link could not be opened."
     },
-    "logSummaryWidget_loggedDays": "Logged Days",
-    "logSummaryWidget_trackingHistory": "Tracking History",
-    "cycleLengthVarianceWidget_logAtLeastTwoPeriods": "Need at least two cycles to show variance.",
-    "cycleLengthVarianceWidget_title": "Cycle Length Variance",
-    "cycleLengthVarianceWidget_averageCycle": "Avg. Cycle",
-    "cycleLengthVarianceWidget_cycle": "Cycle",
-    "periodDurationWidget_logAtLeastTwoPeriods": "Log at least two periods to see period statistics.",
-    "periodDurationWidget_title": "Period Duration Variance",
-    "periodDurationWidget_averagePeriod": "Avg. Period",
-    "periodDurationWidget_period": "Period",
-    "flowIntensityWidget_flowIntensityBreakdown": "Flow Intensity Breakdown",
-    "flowIntensityWidget_noFlowDataLoggedYet": "No flow data logged yet.",
-    "painLevelWidget_noPainDataLoggedYet": "No pain data logged yet.",
-    "painLevelWidget_painLevelBreakdown": "Pain Level Breakdown",
-    "monthlyFlowChartWidget_noDataToDisplay": "No data to display.",
-    "monthlyFlowChartWidget_cycleFlowPatterns": "Cycle Flow Patterns",
-    "monthlyFlowChartWidget_cycleFlowPatternsDescription": "Each line represents one complete cycle",
-    "symptomFrequencyWidget_noSymptomsLoggedYet": "No symptoms logged yet.",
-    "symptomFrequencyWidget_mostCommonSymptoms": "Most Common Symptoms",
-    "journalViewWidget_logYourFirstPeriod": "Log your first period.",
-    "listViewWidget_noPeriodsLogged": "No periods logged yet.\nTap the + button to add one.",
-    "listViewWidget_confirmDelete": "Confirm Delete",
-    "listViewWidget_confirmDeleteDescription": "Are you sure you want to delete this entry?",
-    "emptyPillStateWidget_noPillRegimenFound": "No pill regimen found.",
-    "emptyPillStateWidget_noPillRegimenFoundDescription": "Set up your pill pack in settings to start tracking.",
-    "pillStatus_pillsOfTotal": "{count, plural, =1{of 1 pill} other{of {count} pills}}",
+    "logSummaryWidget_loggedDays": "Días registrados",
+    "logSummaryWidget_trackingHistory": "Historial de seguimiento",
+    "cycleLengthVarianceWidget_logAtLeastTwoPeriods": "Se necesitan al menos dos ciclos para mostrar la variación.",
+    "cycleLengthVarianceWidget_title": "Variación de la duración del ciclo",
+    "cycleLengthVarianceWidget_averageCycle": "Ciclo promedio",
+    "cycleLengthVarianceWidget_cycle": "Ciclo",
+    "periodDurationWidget_logAtLeastTwoPeriods": "Registra al menos dos periodos para ver las estadísticas del periodo.",
+    "periodDurationWidget_title": "Variación de la duración del periodo",
+    "periodDurationWidget_averagePeriod": "Periodo promedio",
+    "periodDurationWidget_period": "Periodo",
+    "flowIntensityWidget_flowIntensityBreakdown": "Desglose de la intensidad del flujo",
+    "flowIntensityWidget_noFlowDataLoggedYet": "Aún no se han registrado datos de flujo.",
+    "painLevelWidget_noPainDataLoggedYet": "Aún no se han registrado datos de dolor.",
+    "painLevelWidget_painLevelBreakdown": "Desglose del nivel de dolor",
+    "monthlyFlowChartWidget_noDataToDisplay": "No hay datos para mostrar.",
+    "monthlyFlowChartWidget_cycleFlowPatterns": "Patrones de flujo del ciclo",
+    "monthlyFlowChartWidget_cycleFlowPatternsDescription": "Cada línea representa un ciclo completo.",
+    "symptomFrequencyWidget_noSymptomsLoggedYet": "Aún no se han registrado síntomas.",
+    "symptomFrequencyWidget_mostCommonSymptoms": "Síntomas más comunes",
+    "journalViewWidget_logYourFirstPeriod": "Registra tu primer periodo.",
+    "listViewWidget_noPeriodsLogged": "Aún no hay periodos registrados. \nToca el botón + para añadir uno.",
+    "listViewWidget_confirmDelete": "Confirmar eliminación",
+    "listViewWidget_confirmDeleteDescription": "¿Seguro que quieres eliminar este registro?",
+    "emptyPillStateWidget_noPillRegimenFound": "No se encontró ninguna pauta de pastillas.",
+    "emptyPillStateWidget_noPillRegimenFoundDescription": "Configura tu paquete de pastillas en los ajustes para empezar el seguimiento.",
+    "pillStatus_pillsOfTotal": "{count, plural, =1{de 1 pastilla} other{de {count} pastillas}}",
     "@pillStatus_pillsOfTotal": {
         "description": "A label showing the total number of pills.",
         "placeholders": {
@@ -778,10 +778,10 @@
             }
         }
     },
-    "pillStatus_undo": "Undo",
-    "pillStatus_skip": "Skip",
-    "pillStatus_markAsTaken": "Mark As Taken",
-    "pillStatus_packStartInFuture": "Your next pill pack starts on {date}.",
+    "pillStatus_undo": "Deshacer",
+    "pillStatus_skip": "Omitir",
+    "pillStatus_markAsTaken": "Marcar como tomada",
+    "pillStatus_packStartInFuture": "Tu próximo paquete de pastillas empieza él {date}.",
     "@pillStatus_packStartInFuture": {
         "description": "Message shown when the pill pack start date is in the future.",
         "placeholders": {
@@ -791,21 +791,21 @@
             }
         }
     },
-    "regimenSetupWidget_setUpPillRegimen": "Set Up Pill Regimen",
-    "regimenSetupWidget_packName": "Pack Name",
-    "regimenSetupWidget_pleaseEnterAName": "Please enter a name",
-    "regimenSetupWidget_activePills": "Active Pills",
-    "regimenSetupWidget_enterANumber": "Enter a number",
-    "regimenSetupWidget_placeboPills": "Placebo Pills",
-    "regimenSetupWidget_firstDayOfThisPack": "First Day of This Pack",
-    "symptomEntrySheet_logYourDay": "Log Your Day",
-    "symptomEntrySheet_symptomsOptional": "Symptoms (Optional)",
-    "periodDetailsSheet_symptoms": "Symptoms",
-    "periodDetailsSheet_flow": "Flow",
-    "reversibleContraceptiveEntrySheet_logReversibleContraceptiveDetails": "Log Contraceptive Details",
-    "sanitaryEntrySheet_logSanitaryProduct": "Log Sanitary Product",
-    "sanitaryEntrySheet_setReminderDuration": "Set Reminder Duration",
-    "sanitaryEntrySheet_maxDuration": "Max Duration: {hours} hours",
+    "regimenSetupWidget_setUpPillRegimen": "Configurar régimen de pastillas",
+    "regimenSetupWidget_packName": "Nombre del paquete",
+    "regimenSetupWidget_pleaseEnterAName": "Por favor, introduce un nombre",
+    "regimenSetupWidget_activePills": "Pastillas activas",
+    "regimenSetupWidget_enterANumber": "Introduce un número",
+    "regimenSetupWidget_placeboPills": "Pastillas de placebo",
+    "regimenSetupWidget_firstDayOfThisPack": "Primer día de este paquete",
+    "symptomEntrySheet_logYourDay": "Registra tu día",
+    "symptomEntrySheet_symptomsOptional": "Síntomas (opcional)",
+    "periodDetailsSheet_symptoms": "Síntomas",
+    "periodDetailsSheet_flow": "Flujo",
+    "reversibleContraceptiveEntrySheet_logReversibleContraceptiveDetails": "Registrar detalles del anticonceptivo",
+    "sanitaryEntrySheet_logSanitaryProduct": "Registrar producto de higiene",
+    "sanitaryEntrySheet_setReminderDuration": "Establecer duración del recordatorio",
+    "sanitaryEntrySheet_maxDuration": "Duración máxima: {hours} horas",
     "@sanitaryEntrySheet_maxDuration": {
         "description": "Label showing the maximum duration for the selected sanitary product type.",
         "placeholders": {
@@ -814,9 +814,9 @@
             }
         }
     },
-    "sanitaryEntrySheet_futureLogTimeError": "Log time cannot be in the future.",
-    "sanitaryEntrySheet_pastReminderTimeError": "Reminder end time cannot be in the past.",
-    "periodPredictionCircle_days": "{count, plural, =1{Day} other{Days}}",
+    "sanitaryEntrySheet_futureLogTimeError": "La hora de registro no puede estar en el futuro.",
+    "sanitaryEntrySheet_pastReminderTimeError": "La hora de finalización del recordatorio no puede estar en el pasado.",
+    "periodPredictionCircle_days": "{count, plural, =1{Día} other{Días}}",
     "@periodPredictionCircle_days": {
         "description": "A label showing the total number of days until period is due.",
         "placeholders": {
@@ -825,7 +825,7 @@
             }
         }
     },
-    "customSymptomDialog_newSymptom": "New Symptom",
-    "customSymptomDialog_enterCustomSymptom": "Enter a custom symptom",
-    "customSymptomDialog_temporarySymptom": "Temporary Symptom"
+    "customSymptomDialog_newSymptom": "Nuevo síntoma",
+    "customSymptomDialog_enterCustomSymptom": "Introduce un síntoma personalizado",
+    "customSymptomDialog_temporarySymptom": "Síntoma temporal"
 }
