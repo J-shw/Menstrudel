@@ -492,65 +492,65 @@
     },
     "settingsScreen_name": "Nombre",
     "settingsScreen_birthDate": "Fecha de nacimiento",
-    "settingsScreen_notSet": "Not set",
+    "settingsScreen_notSet": "Sin definir",
     "@settingsScreen_notSet": {
         "description": "Used when birth date is not set."
     },
-    "settingsScreen_appGoal": "App Goal",
-    "settingsScreen_profileUpdated": "Profile updated successfully",
-    "settingsScreen_selectHistoryView": "Select History View",
-    "settingsScreen_deleteRegimen_question": "Delete Regimen?",
-    "settingsScreen_deleteRegimenDescription": "This will delete your current pill pack settings and all associated pill logs. This cannot be undone.",
-    "settingsScreen_allLogsHaveBeenCleared": "All logs have been cleared.",
-    "settingsScreen_clearAllLogs_question": "Clear All Logs?",
-    "settingsScreen_deleteAllLogsDescription": "This will permanently delete all your period logs. Your app settings will not be affected.",
-    "settingsScreen_appearance": "Appearance",
-    "settingsScreen_historyViewStyle": "History View Style",
-    "settingsScreen_appTheme": "App Theme",
-    "settingsScreen_themeLight": "Light",
-    "settingsScreen_themeDark": "Dark",
-    "settingsScreen_themeSystem": "System",
-    "settingsScreen_dynamicTheme": "Dynamic Theme",
-    "settingsScreen_useWallpaperColors": "Use Wallpaper Colors",
-    "settingsScreen_themeColor": "Theme Color",
-    "settingsScreen_pickAColor": "Pick a Color",
-    "settingsScreen_view": "View",
-    "settingsScreen_birthControl": "Birth Control",
-    "settingsScreen_enablePillTracking": "Enable Pill Tracking",
-    "settingsScreen_pillDescription": "Track your daily pill intake and get reminders.",
-    "settingsScreen_setUpPillRegimen": "Set Up Pill Regimen",
-    "settingsScreen_trackYourDailyPillIntake": "Track Your Daily Pill Intake",
-    "settingsScreen_dailyPillReminder": "Daily Pill Reminder",
-    "settingsScreen_reminderTime": "Reminder Time",
-    "settingsScreen_cycleNotificationsAndPredictions": "Cycle Notifications & Predictions",
+    "settingsScreen_appGoal": "Objetivo de la aplicación",
+    "settingsScreen_profileUpdated": "Perfil actualizado con éxito",
+    "settingsScreen_selectHistoryView": "Seleccionar vista del historial",
+    "settingsScreen_deleteRegimen_question": "¿Eliminar régimen?",
+    "settingsScreen_deleteRegimenDescription": "Esto borrará tu configuración actual del paquete de pastillas y todos los registros de pastillas asociados. Esta acción no se puede revertir.",
+    "settingsScreen_allLogsHaveBeenCleared": "Se han borrado todos los registros.",
+    "settingsScreen_clearAllLogs_question": "¿Borrar todos los registros?",
+    "settingsScreen_deleteAllLogsDescription": "Esto eliminará de forma permanente todos tus registros de menstruación. La configuración de tu app no se verá afectada.",
+    "settingsScreen_appearance": "Apariencia",
+    "settingsScreen_historyViewStyle": "Estilo de visualización del historial",
+    "settingsScreen_appTheme": "Tema de la aplicación",
+    "settingsScreen_themeLight": "Claro",
+    "settingsScreen_themeDark": "Oscuro",
+    "settingsScreen_themeSystem": "Sistema",
+    "settingsScreen_dynamicTheme": "Tema dinámico",
+    "settingsScreen_useWallpaperColors": "Usar colores del fondo de pantalla",
+    "settingsScreen_themeColor": "Color del tema",
+    "settingsScreen_pickAColor": "Elegir un color",
+    "settingsScreen_view": "Vista",
+    "settingsScreen_birthControl": "Anticonceptivos",
+    "settingsScreen_enablePillTracking": "Activar seguimiento de la pastilla",
+    "settingsScreen_pillDescription": "Lleva un registro de las pastillas que tomas cada día y recibe recordatorios.",
+    "settingsScreen_setUpPillRegimen": "Configurar régimen de pastillas",
+    "settingsScreen_trackYourDailyPillIntake": "Lleva un registro de las pastillas que tomas cada día",
+    "settingsScreen_dailyPillReminder": "Recordatorio diario para tomar las pastillas",
+    "settingsScreen_reminderTime": "Hora del recordatorio",
+    "settingsScreen_cycleNotificationsAndPredictions": "Notificaciones y predicciones del ciclo",
     "@settingsScreen_cycleNotificationsAndPredictions": {
         "description": "Header for the cycle notifications and predictions section"
     },
-    "settingsScreen_enablePhasePredictions": "Enable Phase Predictions",
-    "settingsScreen_displayFertileChance": "Display Fertile Chance",
-    "settingsScreen_displayFertileWindowOnCalendar": "Display Fertile Window on Calendar",
-    "settingsScreen_notificationTime": "Notification Time",
-    "settingsScreen_remindMeBefore": "Remind Me Before",
-    "settingsScreen_remindMeAfter": "Remind Me After",
-    "settingsScreen_upcomingPeriodReminder": "Upcoming Period Reminder",
-    "settingsScreen_overduePeriodReminder": "Overdue Period Reminder",
-    "settingsScreen_fertileWindowReminder": "Fertile Window Reminder",
-    "settingsScreen_ovulationDayReminder": "Ovulation Day Reminder",
-    "settingsScreen_enableReversibleContraceptiveTracking": "Enable Reversible Contraceptive Tracking",
-    "settingsScreen_reversibleContraceptiveDescription": "Track Reversible Contraceptives.",
-    "settingsScreen_reversibleContraceptiveType": "Contraceptive Type",
-    "settingsScreen_setDuration": "Set Duration",
-    "settingsScreen_reversibleContraceptiveDuration": "Contraceptive Replacement Duration",
-    "settingsScreen_enableReversibleContraceptiveReminder": "Enable Contraceptive Reminder",
-    "settingsScreen_currentDuration": "Current Duration",
-    "settingsScreen_durationInDays": "Duration (Days)",
-    "settingsScreen_LoggingScreen": "Logging",
-    "settingsScreen_enableLoggingReminders": "Enable Logging Reminders",
-    "settingsScreen_loggingReminderDescription": "If you log a day with flow, you will receive a notification the following day to log your status.",
-    "settingsScreen_loggingReminderTime": "Logging Reminder Time",
-    "settingsScreen_defaultSymptoms": "Default Symptoms",
-    "settingsScreen_defaultSymptomsSubtitle": "These are always available when logging new periods.\nTap an existing symptom to delete or '+' to add a new one.",
-    "settingsScreen_deleteDefaultSymptomQuestion": "Delete '{symptom}'?",
+    "settingsScreen_enablePhasePredictions": "Activar predicciones de fase",
+    "settingsScreen_displayFertileChance": "Mostrar probabilidad de fertilidad",
+    "settingsScreen_displayFertileWindowOnCalendar": "Mostrar ventana fértil en el calendario",
+    "settingsScreen_notificationTime": "Hora de notificación",
+    "settingsScreen_remindMeBefore": "Recuérdame antes",
+    "settingsScreen_remindMeAfter": "Recuérdamelo más tarde",
+    "settingsScreen_upcomingPeriodReminder": "Recordatorio del próximo periodo",
+    "settingsScreen_overduePeriodReminder": "Recordatorio de periodo retrasado",
+    "settingsScreen_fertileWindowReminder": "Recordatorio de ventana fértil",
+    "settingsScreen_ovulationDayReminder": "Recordatorio del día de ovulación",
+    "settingsScreen_enableReversibleContraceptiveTracking": "Activar seguimiento de anticonceptivos reversibles",
+    "settingsScreen_reversibleContraceptiveDescription": "Registra anticonceptivos reversibles.",
+    "settingsScreen_reversibleContraceptiveType": "Tipo de anticonceptivo",
+    "settingsScreen_setDuration": "Establecer duración",
+    "settingsScreen_reversibleContraceptiveDuration": "Duración de reemplazo del anticonceptivo",
+    "settingsScreen_enableReversibleContraceptiveReminder": "Activar recordatorio de anticonceptivo",
+    "settingsScreen_currentDuration": "Duración actual",
+    "settingsScreen_durationInDays": "Duración (días)",
+    "settingsScreen_LoggingScreen": "Registro",
+    "settingsScreen_enableLoggingReminders": "Activar recordatorios de registro",
+    "settingsScreen_loggingReminderDescription": "Si registras un día con flujo, recibirás una notificación al día siguiente para registrar tu estado.",
+    "settingsScreen_loggingReminderTime": "Hora del recordatorio de registro",
+    "settingsScreen_defaultSymptoms": "Síntomas predeterminados",
+    "settingsScreen_defaultSymptomsSubtitle": "Estos están siempre disponibles al registrar nuevos periodos. Toca un síntoma existente para eliminarlo o '+' para añadir uno nuevo.",
+    "settingsScreen_deleteDefaultSymptomQuestion": "¿Eliminar '{symptom}'?",
     "@settingsScreen_deleteDefaultSymptomQuestion": {
         "description": "Question whether a symptom should be deleted.",
         "placeholders": {
@@ -560,9 +560,9 @@
             }
         }
     },
-    "settingsScreen_resetSymptomsList": "Reset Symptoms List?",
-    "settingsScreen_resetSymptomsListDescription": "This will remove all your custom symptoms and restore the original built-in list.\n\nYour existing log entries will not be changed.",
-    "settingsScreen_deleteDefaultSymptomDescription": "'{symptom}' will no longer be available when logging a period.\n\n{usageCount, plural, zero{There are currently no period logs with this symptom!} one{There is already 1 period log with this symptom!\nThis log will not be changed.} other{There are {usageCount} period logs with this symptom!\nThese logs will not be changed.}}",
+    "settingsScreen_resetSymptomsList": "¿Restablecer lista de síntomas?",
+    "settingsScreen_resetSymptomsListDescription": "Esto eliminará todos tus síntomas personalizados y restaurará la lista original de la app.\n\nTus registros existentes no se modificarán.",
+    "settingsScreen_deleteDefaultSymptomDescription": "'{symptom}' ya no estará disponible al registrar un periodo.\n\n{usageCount, plural, zero{¡Actualmente no hay registros del periodo con este síntoma!} one{¡Ya hay 1 registro del periodo con este síntoma! \nEste registro no se modificará.} other{¡Hay {usageCount} registros del periodo con este síntoma! \nEstos registros no cambiarán.}}",
     "@settingsScreen_deleteDefaultSymptomDescription": {
         "description": "Question whether a symptom should be deleted.",
         "placeholders": {
@@ -573,116 +573,116 @@
             "usageCount": {}
         }
     },
-    "settingsScreen_pillRegimens": "Pill Regimens",
+    "settingsScreen_pillRegimens": "Regímenes de pastillas",
     "@settingsScreen_pillRegimens": {
         "description": "Header for the section listing all created pill regimens."
     },
-    "settingsScreen_makeActive": "Set as Active",
+    "settingsScreen_makeActive": "Establecer como activo",
     "@settingsScreen_makeActive": {
         "description": "Button to select a regimen and set it as the one currently being tracked."
     },
-    "settingsScreen_activeRegimenReminder": "Active Regimen Reminder Settings",
+    "settingsScreen_activeRegimenReminder": "Ajustes del recordatorio del régimen activo",
     "@settingsScreen_activeRegimenReminder": {
         "description": "Header for the daily reminder settings section."
     },
-    "settingsScreen_pack": "Pack",
-    "settingsScreen_dataManagement": "Data Management",
-    "settingsScreen_deleteZone": "Delete Zone",
-    "settingsScreen_clearLogsAndPeriods": "Clear Logs & Periods",
+    "settingsScreen_pack": "Paquete",
+    "settingsScreen_dataManagement": "Gestión de datos",
+    "settingsScreen_deleteZone": "Zona de eliminación",
+    "settingsScreen_clearLogsAndPeriods": "Borrar registros y periodos",
     "@settingsScreen_clearLogsAndPeriods": {
         "description": "Title for the period logs data clearing section."
     },
-    "settingsScreen_clearLogsAndPeriodsSubtitle": "Deletes your entire period and symptom history.",
+    "settingsScreen_clearLogsAndPeriodsSubtitle": "Elimina todo tu historial de periodos y síntomas.",
     "@settingsScreen_clearLogsAndPeriodsSubtitle": {
         "description": "Subtitle for the period logs data clearing section."
     },
-    "settingsScreen_clearPillLogs": "Clear Pill Logs",
+    "settingsScreen_clearPillLogs": "Borrar registros de pastillas",
     "@settingsScreen_clearPillLogs": {
         "description": "Title for the pill logs data clearing section."
     },
-    "settingsScreen_clearPillLogsSubtitle": "Removes your pill regimen and intake history.",
+    "settingsScreen_clearPillLogsSubtitle": "Elimina tu régimen de medicamentos y tu historial de consumo.",
     "@settingsScreen_clearPillLogsSubtitle": {
         "description": "Subtitle for the pill logs data clearing section."
     },
-    "settingsScreen_clearReversibleContraceptiveLogs": "Clear Reversible Contraceptive Logs",
+    "settingsScreen_clearReversibleContraceptiveLogs": "Borrar registros de anticonceptivos reversibles",
     "@settingsScreen_clearReversibleContraceptiveLogs": {
         "description": "Title for the reversible contraceptive logs data clearing section."
     },
-    "settingsScreen_clearReversibleContraceptiveLogsSubtitle": "Removes your reversible contraceptive history.",
+    "settingsScreen_clearReversibleContraceptiveLogsSubtitle": "Elimina tu historial de anticonceptivos reversibles.",
     "@settingsScreen_clearReversibleContraceptiveLogsSubtitle": {
         "description": "Subtitle for the reversible contraceptive logs data clearing section."
     },
-    "settingsScreen_clearSanitaryProductLogs": "Clear Sanitary Product Logs",
+    "settingsScreen_clearSanitaryProductLogs": "Borrar registros de productos de higiene",
     "@settingsScreen_clearSanitaryProductLogs": {
         "description": "Title for the sanitary product logs data clearing section."
     },
-    "settingsScreen_clearSanitaryProductLogsSubtitle": "Removes your sanitary products history.",
+    "settingsScreen_clearSanitaryProductLogsSubtitle": "Elimina tu historial de productos de higiene.",
     "@settingsScreen_clearSanitaryProductLogsSubtitle": {
         "description": "Subtitle for the sanitary product logs data clearing section."
     },
-    "settingsScreen_clearSexualActivityLogs": "Clear Sexual Activity Logs",
+    "settingsScreen_clearSexualActivityLogs": "Borrar registros de actividad sexual",
     "@settingsScreen_clearSexualActivityLogs": {
         "description": "Title for the sexual activity logs data clearing section."
     },
-    "settingsScreen_clearSexualActivityLogsSubtitle": "Removes your sexual activity history.",
+    "settingsScreen_clearSexualActivityLogsSubtitle": "Elimina tu historial de actividad sexual.",
     "@settingsScreen_clearSexualActivityLogsSubtitle": {
         "description": "Subtitle for the sexual activity logs data clearing section."
     },
-    "settingsScreen_logsAndPeriods": "Logs & Periods",
+    "settingsScreen_logsAndPeriods": "Registros y periodos",
     "@settingsScreen_logsAndPeriods": {
         "description": "Title for the period logs data section."
     },
-    "settingsScreen_pillLogs": "Pill Logs",
+    "settingsScreen_pillLogs": "Registros de pastillas",
     "@settingsScreen_pillLogs": {
         "description": "Title for the pill logs data section."
     },
-    "settingsScreen_reversibleContraceptivesLogs": "Reversible Contraceptive Logs",
+    "settingsScreen_reversibleContraceptivesLogs": "Registros de anticonceptivos reversibles",
     "@settingsScreen_reversibleContraceptivesLogs": {
         "description": "Title for the reversible contraceptives data section."
     },
-    "settingsScreen_sanitaryProductLogs": "Sanitary Product Logs",
+    "settingsScreen_sanitaryProductLogs": "Registros de productos de higiene",
     "@settingsScreen_sanitaryProductLogs": {
         "description": "Title for the sanitary products data section."
     },
-    "settingsScreen_sexualActivityLogs": "Sexual Activity Logs",
+    "settingsScreen_sexualActivityLogs": "Registros de actividad sexual",
     "@settingsScreen_sexualActivityLogs": {
         "description": "Title for the sexual activity data section."
     },
-    "settingsScreen_importSupportNote": "Import is currently only supported for files exported from Menstrudel.",
+    "settingsScreen_importSupportNote": "Actualmente la importación solo es compatible con archivos exportados desde Menstrudel.",
     "@settingsScreen_importSupportNote": {
         "description": "Note indicating that import is only supported for files exported from Menstrudel."
     },
-    "settingsScreen_exportSuccessful": "Data exported successfully.",
-    "settingsScreen_exportFailed": "Export failed. Please try again.",
-    "settingsScreen_exportDataTitle": "Export Data",
-    "settingsScreen_importDataTitle": "Import Data",
-    "settingsScreen_importDataSubtitle": "Overwrites existing data.",
-    "settingsScreen_importSuccessful": "Data imported successfully!",
-    "settingsScreen_importFailed": "Failed to import data. Please try again.",
-    "settingsScreen_importErrorGeneral": "Failed to import data. Please ensure the file is saved locally.",
+    "settingsScreen_exportSuccessful": "Datos exportados con éxito.",
+    "settingsScreen_exportFailed": "Error al exportar. Por favor, inténtalo de nuevo.",
+    "settingsScreen_exportDataTitle": "Exportar datos",
+    "settingsScreen_importDataTitle": "Importar datos",
+    "settingsScreen_importDataSubtitle": "Sobrescribe los datos existentes.",
+    "settingsScreen_importSuccessful": "¡Datos importados con éxito!",
+    "settingsScreen_importFailed": "Error al importar los datos. Por favor, inténtalo de nuevo.",
+    "settingsScreen_importErrorGeneral": "Error al importar los datos. Por favor, asegúrate de que el archivo esté guardado localmente.",
     "@settingsScreen_importErrorGeneral": {
         "description": "General message when file import fails for unknown reasons."
     },
-    "settingsScreen_security": "Security",
-    "securityScreen_enableBiometricLock": "Enable Biometric Lock",
-    "securityScreen_enableBiometricLockSubtitle": "Require fingerprint or face ID to open the app.",
-    "securityScreen_noBiometricsAvailable": "No passcode, fingerprint, or face ID found. Please set one up in your device's settings.",
-    "settingsScreen_userProfile": "You",
+    "settingsScreen_security": "Seguridad",
+    "securityScreen_enableBiometricLock": "Activar bloqueo biométrico",
+    "securityScreen_enableBiometricLockSubtitle": "Requerir huella dactilar o reconocimiento facial para abrir la app.",
+    "securityScreen_noBiometricsAvailable": "No se encontró ningún código de acceso, huella dactilar o reconocimiento facial. Por favor, configura uno en los ajustes de tu dispositivo.",
+    "settingsScreen_userProfile": "Tú",
     "@settingsScreen_userProfile": {
         "description": "Title for the user profile settings button."
     },
-    "settingsScreen_preferences": "Preferences",
-    "preferencesScreen_language": "Language",
-    "preferencesScreen_enableSanitaryProductsScreen": "Enable Sanitary Products Screen",
-    "preferencesScreen_enableSanitaryProductsScreenSubtitle": "Show the Sanitary Products tab on the main navigation bar.",
-    "preferencesScreen_enableSexActivityScreen": "Enable Sex Activity Screen",
-    "preferencesScreen_enableSexActivityScreenSubtitle": "Show the Sex Activity tab on the main navigation bar.",
-    "preferencesScreen_StartingDayOfWeek": "Starting Day of the Week",
-    "settingsScreen_about": "About",
+    "settingsScreen_preferences": "Preferencias",
+    "preferencesScreen_language": "Idioma",
+    "preferencesScreen_enableSanitaryProductsScreen": "Activar pantalla de productos de higiene",
+    "preferencesScreen_enableSanitaryProductsScreenSubtitle": "Mostrar la pestaña de productos de higiene en la barra de navegación principal.",
+    "preferencesScreen_enableSexActivityScreen": "Activar pantalla de actividad sexual",
+    "preferencesScreen_enableSexActivityScreenSubtitle": "Mostrar la pestaña de actividad sexual en la barra de navegación principal.",
+    "preferencesScreen_StartingDayOfWeek": "Primer día de la semana",
+    "settingsScreen_about": "Acerca de",
     "@settingsScreen_about": {
         "description": "Title for the about settings button."
     },
-    "aboutScreen_version": "Version",
+    "aboutScreen_version": "Versión",
     "@aboutScreen_version": {
         "description": "Label showing the current app version."
     },
