@@ -17,7 +17,7 @@
     "today": "Hoy",
     "day": "Día",
     "days": "Días",
-    "hours": "Horario",
+    "hours": "Horas",
     "dayCount": "{count, plural, one{{count} día} other{{count} días}}",
     "@dayCount": {
         "description": "A message that displays a count of days, handling singular and plural forms.",
@@ -48,7 +48,7 @@
             }
         }
     },
-    "countdown_daysLeft": "{days, plural, one{{days} Day left} other{{days} Days left}}",
+    "countdown_daysLeft": "{days, plural, one{{days} día restante} other{{days} días restantes}}",
     "@countdown_daysLeft": {
         "description": "A countdown message indicating the number of days left.",
         "placeholders": {
@@ -93,51 +93,51 @@
     "flow": "Flujo",
     "type": "Tipo",
     "other": "Otros",
-    "navBar_logs": "Logs",
+    "navBar_logs": "Registros",
     "navBar_sanitary": "Sanitario",
-    "navBar_sexActivity": "Sex Activity",
-    "navBar_pill": "Pill",
-    "navBar_reversibleContraceptive": "Contraceptives",
-    "navBar_settings": "Settings",
-    "flowIntensity_none": "None",
-    "flowIntensity_spotting": "Spotting",
-    "flowIntensity_light": "Light",
-    "flowIntensity_moderate": "Moderate",
-    "flowIntensity_heavy": "Heavy",
-    "builtInSymptom_acne": "Acne",
-    "builtInSymptom_backPain": "Back pain",
-    "builtInSymptom_bloating": "Bloating",
-    "builtInSymptom_cramps": "Cramps",
-    "builtInSymptom_fatigue": "Fatigue",
-    "builtInSymptom_headache": "Headache",
-    "builtInSymptom_moodSwings": "Mood swings",
-    "builtInSymptom_nausea": "Nausea",
-    "builtInSymptom_tenderBreasts": "Tender breasts",
-    "builtInSymptom_insomnia": "Insomnia",
-    "builtInSymptom_depressed": "Depressed",
-    "painLevel_title": "Pain Level",
-    "painLevel_none": "None",
-    "painLevel_mild": "Mild",
-    "painLevel_moderate": "Moderate",
-    "painLevel_severe": "Severe",
-    "pain_unbearable": "Unbearable",
-    "reversibleContraceptive_hormonalIud": "Hormonal IUD",
-    "reversibleContraceptive_copperIud": "Copper IUD",
-    "reversibleContraceptive_implant": "Implant",
-    "reversibleContraceptive_injection": "Injection",
-    "reversibleContraceptive_ring": "Ring",
-    "reversibleContraceptive_patch": "Patch",
-    "sanitaryProduct_tampon": "Tampon",
-    "sanitaryProduct_pad": "Pad",
-    "sanitaryProduct_menstrualCup": "Menstrual Cup",
-    "sanitaryProduct_periodUnderwear": "Period Underwear",
-    "sanitaryProducts_mostUsed": "Most Used",
-    "sanitaryProducts_usageTrend": "Usage Trend",
-    "sexProtection_none": "None",
+    "navBar_sexActivity": "Actividad sexual",
+    "navBar_pill": "Pastilla",
+    "navBar_reversibleContraceptive": "Anticonceptivos",
+    "navBar_settings": "Configuración",
+    "flowIntensity_none": "Ninguno",
+    "flowIntensity_spotting": "Manchado",
+    "flowIntensity_light": "Ligero",
+    "flowIntensity_moderate": "Moderado",
+    "flowIntensity_heavy": "Abundante",
+    "builtInSymptom_acne": "Acné",
+    "builtInSymptom_backPain": "Dolor de espalda",
+    "builtInSymptom_bloating": "Hinchazón",
+    "builtInSymptom_cramps": "Cólicos",
+    "builtInSymptom_fatigue": "Cansancio",
+    "builtInSymptom_headache": "Dolor de cabeza",
+    "builtInSymptom_moodSwings": "Cambios de ánimo",
+    "builtInSymptom_nausea": "Náuseas",
+    "builtInSymptom_tenderBreasts": "Sensibilidad en los pechos",
+    "builtInSymptom_insomnia": "Insomnio",
+    "builtInSymptom_depressed": "Depresión",
+    "painLevel_title": "Nivel de dolor",
+    "painLevel_none": "Ninguno",
+    "painLevel_mild": "Leve",
+    "painLevel_moderate": "Moderado",
+    "painLevel_severe": "Intenso",
+    "pain_unbearable": "Insoportable",
+    "reversibleContraceptive_hormonalIud": "DIU hormonal",
+    "reversibleContraceptive_copperIud": "DIU de cobre",
+    "reversibleContraceptive_implant": "Implante",
+    "reversibleContraceptive_injection": "Inyección",
+    "reversibleContraceptive_ring": "Anillo",
+    "reversibleContraceptive_patch": "Parche",
+    "sanitaryProduct_tampon": "Tampón",
+    "sanitaryProduct_pad": "Toalla sanitaria",
+    "sanitaryProduct_menstrualCup": "Copa menstrual",
+    "sanitaryProduct_periodUnderwear": "Ropa interior menstrual",
+    "sanitaryProducts_mostUsed": "Más utilizado",
+    "sanitaryProducts_usageTrend": "Tendencia de uso",
+    "sexProtection_none": "Ninguna",
     "@sexProtection_none": {
         "description": "Indicates that no sexual protection method was used."
     },
-    "sexProtection_barrier": "Barrier",
+    "sexProtection_barrier": "Barrera",
     "@sexProtection_barrier": {
         "description": "Indicates the use of barrier methods of sexual protection (Condoms)."
     },
@@ -145,7 +145,7 @@
     "@sexProtection_hormonal": {
         "description": "Indicates the use of hormonal methods of sexual protection (The Pill)."
     },
-    "sexProtection_nonHormonal": "Non-Hormonal",
+    "sexProtection_nonHormonal": "No hormonal",
     "@sexProtection_nonHormonal": {
         "description": "Indicates the use of non-hormonal methods of sexual protection (Copper IUD)."
     },
@@ -153,7 +153,7 @@
     "@sexProtection_natural": {
         "description": "Indicates the use of natural methods of sexual protection (Fertility awernass)."
     },
-    "sexProtection_permanent": "Permanent",
+    "sexProtection_permanent": "Permanente",
     "@sexProtection_permanent": {
         "description": "Indicates the use of permanent methods of sexual protection (Sterilisation)."
     },
@@ -161,7 +161,7 @@
     "sexType_anal": "Anal",
     "sexType_oral": "Oral",
     "sexType_manual": "Manual",
-    "sexParticipation_solo": "Solo",
+    "sexParticipation_solo": "A solas",
     "sexParticipation_partner": "​En pareja",
     "sexParticipation_group": "En grupo",
     "userGoal_general": "Salud general",
@@ -194,28 +194,28 @@
     "cyclePhase_luteal": "Postovulación",
     "cyclePhase_late": "Retraso",
     "cyclePhase_unknown": "Desconocido",
-    "cyclePhase_menstruationDescription": "Antes de la ovulación: tu periodo está activo y el revestimiento uterino se está desprendiendo.",
-    "cyclePhase_fertileWindowDescription": "Your fertile window is active.",
-    "cyclePhase_follicularDescription": "Estrogen is rising to prepare the egg; your energy levels may be increasing.",
-    "cyclePhase_ovulationDescription": "An egg has been released. This is your most fertile time.",
-    "cyclePhase_lutealDescription": "Progesterone is dominant. Monitor for PMS symptoms as you approach your next period.",
-    "cyclePhase_lateDescription": "Your period is late.",
-    "cyclePhase_unknownDescription": "We need more data to accurately predict your cycle phase.",
-    "fertilityChance_high": "High",
+    "cyclePhase_menstruationDescription": "Tienes tu periodo y el revestimiento uterino se está desprendiendo.",
+    "cyclePhase_fertileWindowDescription": "Tu ventana fértil está activa.",
+    "cyclePhase_follicularDescription": "Los estrógenos están aumentando para preparar el óvulo; es posible que tus niveles de energía aumenten.",
+    "cyclePhase_ovulationDescription": "Se ha liberado un óvulo. Este es tu momento de mayor fertilidad.",
+    "cyclePhase_lutealDescription": "La progesterona es la hormona dominante. Esté atenta a los síntomas del síndrome premenstrual a medida que se acerque su próximo período.",
+    "cyclePhase_lateDescription": "Tu periodo está retrasado.",
+    "cyclePhase_unknownDescription": "Necesitamos más datos para predecir con precisión la fase de tu ciclo.",
+    "fertilityChance_high": "Alta",
     "@fertilityChance_high": {
         "description": "Label shown when the user is in their peak fertile window or on ovulation day."
     },
-    "fertilityChance_medium": "Medium",
+    "fertilityChance_medium": "Media",
     "@fertilityChance_medium": {
         "description": "Label shown when the user is at the very beginning or end of their fertile window."
     },
-    "fertilityChance_low": "Low",
+    "fertilityChance_low": "Baja",
     "@fertilityChance_low": {
         "description": "Label shown when the user is outside of their fertile window (e.g., during menstruation or the luteal phase)."
     },
-    "error_valueMustbePositive": "Value must be positive",
-    "error_valueCannotBeNull": "Value cannot be null",
-    "notification_periodTitle": "Period Approaching",
+    "error_valueMustbePositive": "El valor debe ser positivo",
+    "error_valueCannotBeNull": "Este campo no puede estar vacío",
+    "notification_periodTitle": "Tu periodo se acerca",
     "@notification_periodTitle": {
         "description": "Title for the upcoming period notification."
     },
@@ -232,7 +232,7 @@
     "@notification_periodOverdueTitle": {
         "description": "Title for the overdue period notification."
     },
-    "notification_periodOverdueBody": "{count, plural, =1{Your next period is overdue by 1 day.} other{Your next period is overdue by {count} days.}}",
+    "notification_periodOverdueBody": "{count, plural,=1{Tu próximo periodo ya se ha retrasado un día.}other{Tu próxima menstruación ya se ha retrasado {count} días.}}",
     "@notification_periodOverdueBody": {
         "description": "Body for the overdue period notification.",
         "placeholders": {
@@ -241,7 +241,7 @@
             }
         }
     },
-    "notification_pillTitle": "Pill Reminder",
+    "notification_pillTitle": "Recordatorio de la pastilla",
     "@notification_pillTitle": {
         "description": "Title for the daily pill reminder notification."
     },
@@ -253,7 +253,7 @@
     "@notification_reversibleContraceptiveTitle": {
         "description": "Title for the Reversible Contraceptive reminder notification."
     },
-    "notification_reversibleContraceptiveBody": "{type} is due for renewal in {days} {days, plural, =1{day} other{days}}.",
+    "notification_reversibleContraceptiveBody": "{type} debe renovarse en {days} {days, plural, =1{día} other{días}}.",
     "@notification_reversibleContraceptiveBody": {
         "description": "The body of the Reversible Contraceptive reminder notification, indicating the type and days until renewal.",
         "placeholders": {
@@ -267,11 +267,11 @@
             }
         }
     },
-    "notification_loggingReminderTitle": "Logging Reminder",
+    "notification_loggingReminderTitle": "Recordatorio de registro",
     "@notification_loggingReminderTitle": {
         "description": "Title for the logging reminder notification."
     },
-    "notification_loggingReminderBody": "Tap to log your flow for today.",
+    "notification_loggingReminderBody": "Toca para registrar tu flujo de hoy.",
     "@notification_loggingReminderBody": {
         "description": "Body for the logging reminder notification."
     },
