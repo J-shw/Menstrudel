@@ -146,4 +146,5 @@ You can view our privacy policy [here](https://menstrudel.app/privacy/).
 
 # Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=J-shw/Menstrudel&type=Date)](https://www.star-history.com/#J-shw/Menstrudel&Date)
+
+[![Star History Chart](https://api.star-history.com/chart?repos=J-shw/Menstrudel&type=date&legend=top-left&sealed_token=ZmvOkLGUxAazJckzS1ZToc7nzzlM-L7cXc6bZVYupHfpADbytTpqCwufsx8npmRhn2NRXEscqu8iwwDKOoPmLjxAzLbF0ddvPE-TEMSh0BFsfBZJH0Fhv6e3nvOe2O3j5XeK6Cy2ai6SD4BrmUbOn9enYYdOXREWToD580FrY1sMA-sKqMVLlELmaF5t)](https://www.star-history.com/?repos=J-shw%2FMenstrudel&type=date&legend=top-left)

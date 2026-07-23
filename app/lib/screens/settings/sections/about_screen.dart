@@ -99,7 +99,7 @@ Widget build(BuildContext context) {
           icon: Icons.privacy_tip_outlined,
           title: l10n.aboutScreen_privacyPolicy,
           subtitle: l10n.aboutScreen_privacyPolicySubtitle,
-          onTap: () => _launchUrl('https://github.com/J-shw/Menstrudel/blob/main/PRIVACY.md', l10n),
+          onTap: () => _launchUrl('https://menstrudel.app/privacy/', l10n),
         ),
         _buildListTile(
           icon: Icons.code_rounded,
