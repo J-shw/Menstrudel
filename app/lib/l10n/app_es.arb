@@ -1,5 +1,5 @@
 {
-    "@@locale": "es",
+    "@@locale": "es-ES",
     "appTitle": "Menstrudel",
     "nextDue": "Próximo periodo",
     "ongoing": "En curso",
@@ -219,7 +219,7 @@
     "@notification_periodTitle": {
         "description": "Title for the upcoming period notification."
     },
-    "notification_periodBody": "{count, plural,=1{Se estima que tu próximo período comenzará en 1 día.} other{Se estima que tu próximo período comenzará en {count} días.}}",
+    "notification_periodBody": "{count, plural, =1{Se estima que tu próximo período comenzará en 1 día.} other{Se estima que tu próximo período comenzará en {count} días.}}",
     "@notification_periodBody": {
         "description": "Body for the upcoming period notification.",
         "placeholders": {
@@ -232,7 +232,7 @@
     "@notification_periodOverdueTitle": {
         "description": "Title for the overdue period notification."
     },
-    "notification_periodOverdueBody": "{count, plural,=1{Tu próximo periodo ya se ha retrasado un día.}other{Tu próxima menstruación ya se ha retrasado {count} días.}}",
+    "notification_periodOverdueBody": "{count, plural, =1{Tu próximo periodo ya se ha retrasado un día.} other{Tu próxima menstruación ya se ha retrasado {count} días.}}",
     "@notification_periodOverdueBody": {
         "description": "Body for the overdue period notification.",
         "placeholders": {
