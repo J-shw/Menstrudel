@@ -232,7 +232,7 @@
     "@notification_periodOverdueTitle": {
         "description": "Title for the overdue period notification."
     },
-    "notification_periodOverdueBody": "{count, plural, =1{Your next period is overdue by 1 day.} other{Your next period is overdue by {count} days.}}",
+    "notification_periodOverdueBody": "{count, plural, =1{Het begin van je menstruatie is waarschijnlijk over 1 dag.} other{Het begin van je menstruatie is waarschijnlijk over {count} dagen.}}",
     "@notification_periodOverdueBody": {
         "description": "Body for the overdue period notification.",
         "placeholders": {
