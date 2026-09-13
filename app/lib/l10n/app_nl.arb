@@ -420,7 +420,7 @@
     "reversibleContraceptiveScreen_noActiveRecords": "No reversible contraceptive is currently active. Please log a new entry.",
     "reversibleContraceptiveScreen_noHistoryRecords": "No past or overdue reversible contraceptive records found.",
     "sanitaryProductsScreen_noSanitaryProductRecordsFound": "No sanitary product records found.",
-    "sanitaryProductsScreen_history": "History ({history})",
+    "sanitaryProductsScreen_history": "Geschiedenis ({history})",
     "@sanitaryProductsScreen_history": {
         "description": "The total sanitary product history count.",
         "placeholders": {
