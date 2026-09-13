@@ -562,7 +562,7 @@
     },
     "settingsScreen_resetSymptomsList": "Symptomenlijst resetten?",
     "settingsScreen_resetSymptomsListDescription": "Al je aangepaste symptomen zullen worden verwijderd en de oorspronkelijke ingebouwde lijst wordt hersteld.\n\nJe bestaande logboekvermeldingen blijven ongewijzigd.",
-    "settingsScreen_deleteDefaultSymptomDescription": "'{symptom}' will no longer be available when logging a period.\n\n{usageCount, plural, zero{There are currently no period logs with this symptom!} one{There is already 1 period log with this symptom!\nThis log will not be changed.} other{There are {usageCount} period logs with this symptom!\nThese logs will not be changed.}}",
+    "settingsScreen_deleteDefaultSymptomDescription": "'{symptom}' zal niet langer beschikbaar zijn bij het loggen van deze menstruatie.\n\n{usageCount, plural, zero{Er zijn geen logs beschikbaar met dit symptoom!} one{Er is 1 log beschikbaar met dit symptoom!\nDeze log wordt niet aangepast.} other{Er zijn {usageCount} logs beschikbaar met dit symptoom!\nDeze logs wordt niet aangepast.}}",
     "@settingsScreen_deleteDefaultSymptomDescription": {
         "description": "Question whether a symptom should be deleted.",
         "placeholders": {
@@ -573,22 +573,22 @@
             "usageCount": {}
         }
     },
-    "settingsScreen_pillRegimens": "Pill Regimens",
+    "settingsScreen_pillRegimens": "Medicatieschema’s",
     "@settingsScreen_pillRegimens": {
         "description": "Header for the section listing all created pill regimens."
     },
-    "settingsScreen_makeActive": "Set as Active",
+    "settingsScreen_makeActive": "Als 'Actief' instellen",
     "@settingsScreen_makeActive": {
         "description": "Button to select a regimen and set it as the one currently being tracked."
     },
-    "settingsScreen_activeRegimenReminder": "Active Regimen Reminder Settings",
+    "settingsScreen_activeRegimenReminder": "Instellingen voor herinneringen aan het actieve behandelingsschema",
     "@settingsScreen_activeRegimenReminder": {
         "description": "Header for the daily reminder settings section."
     },
-    "settingsScreen_pack": "Pack",
-    "settingsScreen_dataManagement": "Data Management",
-    "settingsScreen_deleteZone": "Delete Zone",
-    "settingsScreen_clearLogsAndPeriods": "Clear Logs & Periods",
+    "settingsScreen_pack": "Pakket",
+    "settingsScreen_dataManagement": "Gegevensbeheer",
+    "settingsScreen_deleteZone": "Zone verwijderen",
+    "settingsScreen_clearLogsAndPeriods": "Logs en Perioden wissen",
     "@settingsScreen_clearLogsAndPeriods": {
         "description": "Title for the period logs data clearing section."
     },
@@ -596,7 +596,7 @@
     "@settingsScreen_clearLogsAndPeriodsSubtitle": {
         "description": "Subtitle for the period logs data clearing section."
     },
-    "settingsScreen_clearPillLogs": "Clear Pill Logs",
+    "settingsScreen_clearPillLogs": "Alle pil-logs verwijderen",
     "@settingsScreen_clearPillLogs": {
         "description": "Title for the pill logs data clearing section."
     },
@@ -604,56 +604,56 @@
     "@settingsScreen_clearPillLogsSubtitle": {
         "description": "Subtitle for the pill logs data clearing section."
     },
-    "settingsScreen_clearReversibleContraceptiveLogs": "Clear Reversible Contraceptive Logs",
+    "settingsScreen_clearReversibleContraceptiveLogs": "Logs van tijdelijke anticonceptie verwijderen",
     "@settingsScreen_clearReversibleContraceptiveLogs": {
         "description": "Title for the reversible contraceptive logs data clearing section."
     },
-    "settingsScreen_clearReversibleContraceptiveLogsSubtitle": "Removes your reversible contraceptive history.",
+    "settingsScreen_clearReversibleContraceptiveLogsSubtitle": "Deze actie wist je geschiedenis van omkeerbare conceptiemiddelen.",
     "@settingsScreen_clearReversibleContraceptiveLogsSubtitle": {
         "description": "Subtitle for the reversible contraceptive logs data clearing section."
     },
-    "settingsScreen_clearSanitaryProductLogs": "Clear Sanitary Product Logs",
+    "settingsScreen_clearSanitaryProductLogs": "Logboeken van hygiëneproducten wissen",
     "@settingsScreen_clearSanitaryProductLogs": {
         "description": "Title for the sanitary product logs data clearing section."
     },
-    "settingsScreen_clearSanitaryProductLogsSubtitle": "Removes your sanitary products history.",
+    "settingsScreen_clearSanitaryProductLogsSubtitle": "Deze actie wist je geschiedenis van hygiëneproducten.",
     "@settingsScreen_clearSanitaryProductLogsSubtitle": {
         "description": "Subtitle for the sanitary product logs data clearing section."
     },
-    "settingsScreen_clearSexualActivityLogs": "Clear Sexual Activity Logs",
+    "settingsScreen_clearSexualActivityLogs": "Logboeken met seksuele activiteiten wissen",
     "@settingsScreen_clearSexualActivityLogs": {
         "description": "Title for the sexual activity logs data clearing section."
     },
-    "settingsScreen_clearSexualActivityLogsSubtitle": "Removes your sexual activity history.",
+    "settingsScreen_clearSexualActivityLogsSubtitle": "Deze actie wist je geschiedenis van seksuele activiteiten.",
     "@settingsScreen_clearSexualActivityLogsSubtitle": {
         "description": "Subtitle for the sexual activity logs data clearing section."
     },
-    "settingsScreen_logsAndPeriods": "Logs & Periods",
+    "settingsScreen_logsAndPeriods": "Logs & Menstruaties",
     "@settingsScreen_logsAndPeriods": {
         "description": "Title for the period logs data section."
     },
-    "settingsScreen_pillLogs": "Pill Logs",
+    "settingsScreen_pillLogs": "Pil-overzicht",
     "@settingsScreen_pillLogs": {
         "description": "Title for the pill logs data section."
     },
-    "settingsScreen_reversibleContraceptivesLogs": "Reversible Contraceptive Logs",
+    "settingsScreen_reversibleContraceptivesLogs": "Logboek van omkeerbare anticonceptie",
     "@settingsScreen_reversibleContraceptivesLogs": {
         "description": "Title for the reversible contraceptives data section."
     },
-    "settingsScreen_sanitaryProductLogs": "Sanitary Product Logs",
+    "settingsScreen_sanitaryProductLogs": "Logboek van hygiëneproducten",
     "@settingsScreen_sanitaryProductLogs": {
         "description": "Title for the sanitary products data section."
     },
-    "settingsScreen_sexualActivityLogs": "Sexual Activity Logs",
+    "settingsScreen_sexualActivityLogs": "Logboeken over seksuele activiteiten",
     "@settingsScreen_sexualActivityLogs": {
         "description": "Title for the sexual activity data section."
     },
-    "settingsScreen_importSupportNote": "Import is currently only supported for files exported from Menstrudel.",
+    "settingsScreen_importSupportNote": "Importeren wordt momenteel alleen ondersteund voor bestanden die vanuit Menstrudel zijn geëxporteerd.",
     "@settingsScreen_importSupportNote": {
         "description": "Note indicating that import is only supported for files exported from Menstrudel."
     },
-    "settingsScreen_exportSuccessful": "Data exported successfully.",
-    "settingsScreen_exportFailed": "Export failed. Please try again.",
+    "settingsScreen_exportSuccessful": "Gegevens succesvol geëxporteerd.",
+    "settingsScreen_exportFailed": "Exporteren is mislukt. Probeer het opnieuw.",
     "settingsScreen_exportDataTitle": "Exporteer data",
     "settingsScreen_importDataTitle": "Importeer data",
     "settingsScreen_importDataSubtitle": "Overschrijft bestaande gegevens.",
@@ -754,19 +754,19 @@
     "periodDurationWidget_title": "Afwijking in duur van menstruatie",
     "periodDurationWidget_averagePeriod": "Gemiddelde menstruatieduur",
     "periodDurationWidget_period": "Menstruatie",
-    "flowIntensityWidget_flowIntensityBreakdown": "Flow Intensity Breakdown",
-    "flowIntensityWidget_noFlowDataLoggedYet": "No flow data logged yet.",
+    "flowIntensityWidget_flowIntensityBreakdown": "Overzicht van de intensiteit van de stroming",
+    "flowIntensityWidget_noFlowDataLoggedYet": "Er zijn nog geen stromingsgegevens geregistreerd.",
     "painLevelWidget_noPainDataLoggedYet": "Er zijn nog geen pijnmetingen geregistreerd.",
     "painLevelWidget_painLevelBreakdown": "Overzicht van pijnmetingen",
     "monthlyFlowChartWidget_noDataToDisplay": "Geen gegevens om weer te geven.",
-    "monthlyFlowChartWidget_cycleFlowPatterns": "Cycle Flow Patterns",
-    "monthlyFlowChartWidget_cycleFlowPatternsDescription": "Each line represents one complete cycle",
-    "symptomFrequencyWidget_noSymptomsLoggedYet": "No symptoms logged yet.",
-    "symptomFrequencyWidget_mostCommonSymptoms": "Most Common Symptoms",
-    "journalViewWidget_logYourFirstPeriod": "Log your first period.",
-    "listViewWidget_noPeriodsLogged": "No periods logged yet.\nTap the + button to add one.",
-    "listViewWidget_confirmDelete": "Confirm Delete",
-    "listViewWidget_confirmDeleteDescription": "Are you sure you want to delete this entry?",
+    "monthlyFlowChartWidget_cycleFlowPatterns": "Stroomverlooppatronen in de menstruatiecyclus",
+    "monthlyFlowChartWidget_cycleFlowPatternsDescription": "Elke lijn staat voor één volledige cyclus",
+    "symptomFrequencyWidget_noSymptomsLoggedYet": "Nog geen symptomen geregistreerd.",
+    "symptomFrequencyWidget_mostCommonSymptoms": "Meest voorkomende symptomen",
+    "journalViewWidget_logYourFirstPeriod": "Log je eerste menstruatie.",
+    "listViewWidget_noPeriodsLogged": "Er zijn nog geen menstruaties geregistreerd.\nTik op de + knop om er een toe te voegen.",
+    "listViewWidget_confirmDelete": "Verwijderen bevestigen",
+    "listViewWidget_confirmDeleteDescription": "Weet je zeker dat je dit item wilt verwijderen?",
     "emptyPillStateWidget_noPillRegimenFound": "Er is geen medicatieschema gevonden.",
     "emptyPillStateWidget_noPillRegimenFoundDescription": "Stel je pillendoosje in via de instellingen om het bijhouden te starten.",
     "pillStatus_pillsOfTotal": "{count, plural, =1{of 1 pil} other{of {count} pillen}}",
@@ -801,9 +801,9 @@
     "symptomEntrySheet_logYourDay": "Log je dag",
     "symptomEntrySheet_symptomsOptional": "Symptomen (optioneel)",
     "periodDetailsSheet_symptoms": "Symptomen",
-    "periodDetailsSheet_flow": "Flow",
-    "reversibleContraceptiveEntrySheet_logReversibleContraceptiveDetails": "Log Contraceptive Details",
-    "sanitaryEntrySheet_logSanitaryProduct": "Log Sanitary Product",
+    "periodDetailsSheet_flow": "Stroming",
+    "reversibleContraceptiveEntrySheet_logReversibleContraceptiveDetails": "Gegevens over anticonceptie vastleggen",
+    "sanitaryEntrySheet_logSanitaryProduct": "Gegevens over hygiëneproducten vastleggen",
     "sanitaryEntrySheet_setReminderDuration": "Herinnering instellen",
     "sanitaryEntrySheet_maxDuration": "Max. Tijdsduur: {hours} uren",
     "@sanitaryEntrySheet_maxDuration": {
