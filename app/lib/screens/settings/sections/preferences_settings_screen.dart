@@ -24,19 +24,24 @@ class PreferencesSettingsScreen extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.language_outlined),
             title: Text(l10n.preferencesScreen_language),
-            trailing: DropdownButton<String>(
-              value: settingsService.languageCode,
-              items: languageOptions.entries.map((entry) {
-                return DropdownMenuItem<String>(
-                  value: entry.key,
-                  child: Text(entry.value),
-                );
-              }).toList(),
-              onChanged: (String? newLanguageCode) {
-                if (newLanguageCode != null) {
-                  context.read<LocaleNotifier>().setLocale(newLanguageCode);
-                }
-              },
+            trailing: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 180),
+              child: DropdownButton<String>(
+                isExpanded: true,
+                menuWidth: MediaQuery.sizeOf(context).width * 0.9,
+                value: settingsService.languageCode,
+                items: languageOptions.entries.map((entry) {
+                  return DropdownMenuItem<String>(
+                    value: entry.key,
+                    child: Text(entry.value, overflow: TextOverflow.ellipsis),
+                  );
+                }).toList(),
+                onChanged: (String? newLanguageCode) {
+                  if (newLanguageCode != null) {
+                    context.read<LocaleNotifier>().setLocale(newLanguageCode);
+                  }
+                },
+              ),
             ),
           ),
           ListTile(
