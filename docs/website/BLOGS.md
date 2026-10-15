@@ -56,7 +56,7 @@ layout: post
 title: "Your Amazing Post Title Goes Here"
 date: YYYY-MM-DD HH:MM:SS +0000
 categories: [category1, category2]
-image: /assets/images/blog/2025-09-14-new-feature-announcement/your-featured-image.jpg
+image: assets/images/blog/2025-09-14-new-feature-announcement/your-featured-image.jpg
 author: "Jane Doe"
 ---
 ```
@@ -64,7 +64,7 @@ author: "Jane Doe"
 -   **title:** The full title of the post that will be displayed on the page. Keep it inside the quotation marks.
 -   **date:** The exact date and time of publication.
 -   **categories:** A list of categories for the post. This is optional but useful for organization. Common categories for this site are `release notes` and `announcements`.
--   **image:** This is the main "featured image" for the post. Its path is used to tell Google which image to show in search results. Place your image in the `/assets/images/blog/` folder under a new folder named after your post file (`2025-09-14-new-feature-announcement`) and update the path here. The path must start with a /.
+-   **image:** This is the main "featured image" for the post. Its path is used to tell Google which image to show in search results. Place your image in the `assets/images/blog/` folder under a new folder named after your post file (`2025-09-14-new-feature-announcement`) and update the path here. The path must start with a /.
 -   **author:** _(Optional)_ This is the name of the person who wrote the post. If you delete this entire line, the post will automatically be authored by the organisation, "Menstrudel". If you are writing as an individual add your name here.
 
 ### 3. Write Your Content
@@ -74,7 +74,7 @@ Below the Front Matter, you can write your post using standard Markdown.
 ```markdown
 ### This is a Subheading
 
-![This is an image](/assets/images/blog/image.png) <!-- Make sure to put your image in the `assets/images/blog` folder -->
+![This is an image](assets/images/blog/image.png) <!-- Make sure to put your image in the `assets/images/blog` folder -->
 
 
 This is a regular paragraph. You can add lists, links, and other formatting.
@@ -97,10 +97,10 @@ layout: post
 title: "My new announcement"
 date: 2025-10-20
 categories: [release notes, announcements]
-image: /assets/images/blog/new-release.png
+image: assets/images/blog/new-release.png
 ---
 
-![New release image](/assets/images/blog/new-release.png)
+![New release image]({{ "assets/images/blog/new-release.png" | relative_url }})
 I am excited to announce a new release! 🎉
 
 More writing here for the rest of the blog ect..

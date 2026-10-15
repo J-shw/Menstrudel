@@ -3,10 +3,10 @@ layout: post
 title: "Menstrudel v4.0.0"
 date: 2026-01-26
 categories: [release notes, announcements]
-image: /assets/images/blog/new-release.png
+image: assets/images/blog/new-release.png
 ---
 
-![New release image](/assets/images/blog/new-release.png)
+![New release image]({{ "assets/images/blog/new-release.png" | relative_url }})
 Happy New Year! We’re kicking off 2026 with our biggest update yet. We are excited to announce the release of **Menstrudel v4.0.0**, packed with requested features and a smoother user experience.
 
 ## Get the Menstrudel App
@@ -32,7 +32,7 @@ Happy New Year! We’re kicking off 2026 with our biggest update yet. We are exc
 ---
 
 <h3 style="text-align: center;">Onboarding Flow</h3>
-![Onboarding Flow](/assets/images/blog/2026-01-26-announcing-menstrudel-v4.0.0/onboarding_flow.gif)
+![Onboarding Flow]({{"assets/images/blog/2026-01-26-announcing-menstrudel-v4.0.0/onboarding_flow.gif"  | relative_url }})
 
 New and existing users will be greeted by a streamlined onboarding flow. This ensures your profile and preferences are set up correctly for the most accurate tracking.
 
@@ -40,10 +40,10 @@ New and existing users will be greeted by a streamlined onboarding flow. This en
 <table style="width: 100%">
     <tr>
         <td style="width: 50%">
-            <img src="/assets/images/blog/2026-01-26-announcing-menstrudel-v4.0.0/sex_activity_log_screen.png" alt="Sex Activity Log Screen">
+            <img src={{"assets/images/blog/2026-01-26-announcing-menstrudel-v4.0.0/sex_activity_log_screen.png" | relative_url }} alt="Sex Activity Log Screen">
         </td>
         <td style="width: 50%">
-            <img src="/assets/images/blog/2026-01-26-announcing-menstrudel-v4.0.0/sex_activity_insight_screen.png" alt="Sex Activity Insight Screen">
+            <img src={{"assets/images/blog/2026-01-26-announcing-menstrudel-v4.0.0/sex_activity_insight_screen.png" | relative_url }} alt="Sex Activity Insight Screen">
         </td>
     </tr>
 </table>
@@ -51,23 +51,23 @@ New and existing users will be greeted by a streamlined onboarding flow. This en
 You can now log sexual activity and view long-term trends within the new Insights tab.
 
 <h3 style="text-align: center;">Cycle Phase Prediction</h3>
-![Cycle Phase Prediction](/assets/images/blog/2026-01-26-announcing-menstrudel-v4.0.0/logs_today_screen.png)
+![Cycle Phase Prediction]({{"assets/images/blog/2026-01-26-announcing-menstrudel-v4.0.0/logs_today_screen.png"  | relative_url }})
 
 Gain better insight into what your body is going through. 
 > **Note:** Predictions are a guide for natural cycles. Enabling pill tracking or hormonal contraceptives will disable this feature to maintain accuracy.
 
 <h3 style="text-align: center;">Guided Data Flows</h3>
-![Guided Data Flows](/assets/images/blog/2026-01-26-announcing-menstrudel-v4.0.0/guided_flow.gif)
+![Guided Data Flows]({{"assets/images/blog/2026-01-26-announcing-menstrudel-v4.0.0/guided_flow.gif"  | relative_url }})
 
 We’ve replaced the complex data settings tab with a guided flow, making it easier than ever to manage your data securely.
 
 <h3 style="text-align: center;">More Insights</h3>
-![Sanitary product insight screen](/assets/images/blog/2026-01-26-announcing-menstrudel-v4.0.0/sanitary_product_insight_screen.png)
+![Sanitary product insight screen]({{"assets/images/blog/2026-01-26-announcing-menstrudel-v4.0.0/sanitary_product_insight_screen.png"  | relative_url }})
 
 Track your usage of sanitary products over time with our expanded charts and statistics.
 
 <h3 style="text-align: center;">Scrolling Calendar</h3>
-![Scrolling Calendar](/assets/images/blog/2026-01-26-announcing-menstrudel-v4.0.0/scrolling_calendar.gif)
+![Scrolling Calendar]({{"assets/images/blog/2026-01-26-announcing-menstrudel-v4.0.0/scrolling_calendar.gif"  | relative_url }})
 
 The new vertical layout allows you to see periods that cross month boundaries without losing context.
 
