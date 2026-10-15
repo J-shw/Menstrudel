@@ -1,6 +1,7 @@
 title: Menstrudel | Private & Offline Period Tracker
 description: "A free, open-source period tracker app that puts your privacy first. No ads, no sign-ups, and no cloud, completely offline."
-url: "https://j-shw.github.io/Menstrudel"
+baseurl: "/Menstrudel"
+url: "https://j-shw.github.io"
 image: /assets/images/og-preview.png
 logo: /assets/images/favicon.png
 plugins:
