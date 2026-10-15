@@ -6,7 +6,7 @@ categories: [release notes, announcements]
 image: assets/images/blog/new-release.png
 ---
 
-![New release image](assets/images/blog/new-release.png)
+![New release image]({{ "assets/images/blog/new-release.png" | relative_url }})
 Happy New Year! We’re kicking off 2026 with our biggest update yet. We are excited to announce the release of **Menstrudel v4.0.0**, packed with requested features and a smoother user experience.
 
 ## Get the Menstrudel App

@@ -6,7 +6,7 @@ categories: [release notes, announcements]
 image: assets/images/blog/new-release.png
 ---
 
-![New release image](assets/images/blog/new-release.png)
+![New release image]({{ "assets/images/blog/new-release.png" | relative_url }})
 We're excited to release version **3.2.0** of Menstrudel. This update includes several new features requested by the community and important bug fixes.
 
 ## Get the Menstrudel App

@@ -6,7 +6,7 @@ categories: [release notes, announcements]
 image: assets/images/blog/new-release.png
 ---
 
-![New release image](assets/images/blog/new-release.png)
+![New release image]({{ "assets/images/blog/new-release.png" | relative_url }})
 We're excited to release version **3.0.0** of Menstrudel, our first official public release! 🎉
 
 After months of hard work, the main functions are stable and we feel the app is ready for everyone. This huge update brings the features below:

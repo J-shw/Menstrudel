@@ -6,7 +6,7 @@ categories: [release notes, announcements]
 image: assets/images/blog/new-release.png
 ---
 
-![New release image](assets/images/blog/new-release.png)
+![New release image]({{ "assets/images/blog/new-release.png" | relative_url }})
 We're excited to release version **3.4.0** of Menstrudel. This update brings **Improved Sanitary Product Tracking**, **More Insights** and several fixes.
 
 ## Get the Menstrudel App

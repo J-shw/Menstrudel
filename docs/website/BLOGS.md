@@ -100,7 +100,7 @@ categories: [release notes, announcements]
 image: assets/images/blog/new-release.png
 ---
 
-![New release image](assets/images/blog/new-release.png)
+![New release image]({{ "assets/images/blog/new-release.png" | relative_url }})
 I am excited to announce a new release! 🎉
 
 More writing here for the rest of the blog ect..
