@@ -8,7 +8,7 @@ image: assets/images/blog/2026-01-10-30-stars-on-github/star-history-2026110.png
 
 ### We reached 30 stars! ⭐
 
-![Star History Chart](assets/images/blog/2026-01-10-30-stars-on-github/star-history-2026110.png)
+![Star History Chart]({{"assets/images/blog/2026-01-10-30-stars-on-github/star-history-2026110.png"  | relative_url }})
 
 A huge thank you to everyone supporting Menstrudel. Your support helps keep this project private, open, and accessible for everyone. Reaching **30 stars** on GitHub is an awesome achievement!
 

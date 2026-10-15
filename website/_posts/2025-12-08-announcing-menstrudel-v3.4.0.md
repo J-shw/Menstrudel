@@ -23,12 +23,12 @@ We're excited to release version **3.4.0** of Menstrudel. This update brings **I
 * **More Translations** Thanks to the community, the app now has better translation support!
 
 <h3 style="text-align: center;">Sanitary Product Tracking</h3>
-![Sanitary Product Tracking](assets/images/blog/2025-12-08-announcing-menstrudel-v3.4.0/sanitary_product_tracking.gif)
+![Sanitary Product Tracking]({{"assets/images/blog/2025-12-08-announcing-menstrudel-v3.4.0/sanitary_product_tracking.gif" | relative_url }})
 
 A new dedicated screen for tracking sanitary products. With new products to track and an improved notification system!
 
 <h3 style="text-align: center;">Improved Insights</h3>
-![Improved Insights Screen](assets/images/blog/2025-12-08-announcing-menstrudel-v3.4.0/insights_screen.gif)
+![Improved Insights Screen]({{"assets/images/blog/2025-12-08-announcing-menstrudel-v3.4.0/insights_screen.gif" | relative_url }})
 
 We've made small, effective tweaks to the **Insights** screen to better utilise space and display metrics at a glance.
 

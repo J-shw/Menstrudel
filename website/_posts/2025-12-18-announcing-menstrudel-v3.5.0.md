@@ -21,7 +21,7 @@ We're excited to release version **3.5.0** of Menstrudel. This update brings **L
 * **More Translations** Thanks to the community, the app now has better translation support!
 
 <h3 style="text-align: center;">Logging Reminders</h3>
-![Logging Reminders](assets/images/blog/2025-12-18-announcing-menstrudel-v3.5.0/logging_reminders.gif)
+![Logging Reminders]({{"assets/images/blog/2025-12-18-announcing-menstrudel-v3.5.0/logging_reminders.gif"  | relative_url }})
 
 When you log your flow, the app can now automatically schedule a gentle nudge for the following day to remind you to keep your logs updated. This helps maintain a complete and accurate history of your period without you having to remember to open the app.
 

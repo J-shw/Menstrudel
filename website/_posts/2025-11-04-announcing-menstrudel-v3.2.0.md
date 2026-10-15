@@ -28,19 +28,19 @@ We're excited to release version **3.2.0** of Menstrudel. This update includes s
 
 
 <h3 style="text-align: center;">Custom Symptoms </h3>
-![Custom Symptoms GIF](assets/images/blog/2025-11-04-announcing-menstrudel-v3.2.0/custom-symptom.gif)
+![Custom Symptoms GIF]({{"assets/images/blog/2025-11-04-announcing-menstrudel-v3.2.0/custom-symptom.gif" | relative_url }})
 
 Thats right, you can now log any and every symptom you want! This has been one of our most requested features since starting. We know symptoms are unique and affect everyone differently, so this feature gives you the freedom to log them all.
 
 <h3 style="text-align: center;">Introducing Android Widgets!</h3>
-![New Android Wdiget Image](assets/images/blog/2025-11-04-announcing-menstrudel-v3.2.0/widget.png)
+![New Android Wdiget Image]({{"assets/images/blog/2025-11-04-announcing-menstrudel-v3.2.0/widget.png" | relative_url }})
 
 We're excited to release our first widget, **starting with Android**! It shows the estimated start date of your next period using the same circular progress bar you know from the app.
 
 This is just the beginning, and we plan to improve it and add more options based on your feedback.
 
 <h3 style="text-align: center;">Hide the Pill Screen</h3>
-![Hiding Pill Screen GIF](assets/images/blog/2025-11-04-announcing-menstrudel-v3.2.0/pill-screen.gif)
+![Hiding Pill Screen GIF]({{"assets/images/blog/2025-11-04-announcing-menstrudel-v3.2.0/pill-screen.gif" | relative_url }})
 
 We know not all of our users need pill tracking. If you don't use this feature, you can now remove it from the navigation bar completely.
 

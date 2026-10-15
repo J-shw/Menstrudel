@@ -23,12 +23,12 @@ We're excited to release version **3.3.0** of Menstrudel. This update brings a *
 * **More Translations** Thanks to the community, the app now has better translation support!
 
 <h3 style="text-align: center;">New Logo</h3>
-![New Logo](assets/images/favicon.png)
+![New Logo]({{"assets/images/favicon.png" | relative_url }})
 
 Check out our new look! We think this logo is more modern and adds personality to the app. Based on user feedback, we came up with this design and hope you love it as much as we do!
 
 <h3 style="text-align: center;">LARC Tracking</h3>
-![enable LARC tracking](assets/images/blog/2025-11-22-announcing-menstrudel-v3.3.0/enable-larc.gif)
+![enable LARC tracking]({{"assets/images/blog/2025-11-22-announcing-menstrudel-v3.3.0/enable-larc.gif" | relative_url }})
 
 We are expanding our birth control tracking! You can now log **Long-Acting Reversible Contraception (LARCs)**—highly effective methods like IUDs and implants that last for years—and set renewal reminders.
 
