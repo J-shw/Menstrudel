@@ -3,10 +3,10 @@ layout: post
 title: "Menstrudel v3.1.0"
 date: 2025-10-27
 categories: [release notes, announcements]
-image: /assets/images/blog/new-release.png
+image: assets/images/blog/new-release.png
 ---
 
-![New release image](/assets/images/blog/new-release.png)
+![New release image](assets/images/blog/new-release.png)
 We're excited to release version **3.1.0** of Menstrudel. This update includes several new features requested by the community and important bug fixes.
 
 ## Get the Menstrudel App

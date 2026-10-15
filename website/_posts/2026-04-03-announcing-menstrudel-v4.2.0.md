@@ -3,10 +3,10 @@ layout: post
 title: "Menstrudel v4.2.0"
 date: 2026-04-03
 categories: [release notes, announcements]
-image: /assets/images/blog/new-release.png
+image: assets/images/blog/new-release.png
 ---
 
-![New release image](/assets/images/blog/new-release.png)
+![New release image](assets/images/blog/new-release.png)
 We are excited to announce **Menstrudel v4.2.0**. This update introduces smarter symptom sorting and addresses several reported bugs.
 
 ## Get the Menstrudel App

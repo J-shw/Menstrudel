@@ -3,10 +3,10 @@ layout: post
 title: "Menstrudel v3.3.0"
 date: 2025-11-22
 categories: [release notes, announcements]
-image: /assets/images/blog/new-release.png
+image: assets/images/blog/new-release.png
 ---
 
-![New release image](/assets/images/blog/new-release.png)
+![New release image](assets/images/blog/new-release.png)
 We're excited to release version **3.3.0** of Menstrudel. This update brings a **fresh new look**, **Long-Acting Reversible Contraception (LARC) tracking**, and several fixes.
 
 ## Get the Menstrudel App
@@ -23,16 +23,16 @@ We're excited to release version **3.3.0** of Menstrudel. This update brings a *
 * **More Translations** Thanks to the community, the app now has better translation support!
 
 <h3 style="text-align: center;">New Logo</h3>
-![New Logo](/assets/images/favicon.png)
+![New Logo](assets/images/favicon.png)
 
 Check out our new look! We think this logo is more modern and adds personality to the app. Based on user feedback, we came up with this design and hope you love it as much as we do!
 
 <h3 style="text-align: center;">LARC Tracking</h3>
-![enable LARC tracking](/assets/images/blog/2025-11-22-announcing-menstrudel-v3.3.0/enable-larc.gif)
+![enable LARC tracking](assets/images/blog/2025-11-22-announcing-menstrudel-v3.3.0/enable-larc.gif)
 
 We are expanding our birth control tracking! You can now log **Long-Acting Reversible Contraception (LARCs)**—highly effective methods like IUDs and implants that last for years—and set renewal reminders.
 
-![Logging a LARC](/assets/images/blog/2025-11-22-announcing-menstrudel-v3.3.0/logging-larc.gif)
+![Logging a LARC](assets/images/blog/2025-11-22-announcing-menstrudel-v3.3.0/logging-larc.gif)
 
 Logging LARC usage is simple and quick. If notifications are enabled, you'll get a reminder for renewal.
 
