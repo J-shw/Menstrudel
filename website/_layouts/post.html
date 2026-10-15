@@ -5,8 +5,8 @@ schema: schema-blog-post.html
 <div class="container">
   <div aria-label="Breadcrumb" class="breadcrumb">
     <ol>
-      <li><a href="/">Home</a></li>
-      <li><a href="blog">Blog</a></li>
+      <li><a href="{{ "/" | relative_url }}">Home</a></li>
+      <li><a href="{{ "blog" | relative_url }}">Blog</a></li>
       <li>{{ page.title }}</li>
     </ol>
   </div>
