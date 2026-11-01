@@ -1,9 +1,9 @@
 {
-    "@@locale": "zh",
+    "@@locale": "zh-CN",
     "appTitle": "Menstrudel",
-    "nextDue": "下一个到期日",
+    "nextDue": "预计下次",
     "ongoing": "进行中",
-    "overdue": "逾期",
+    "overdue": "已逾期",
     "total": "总计",
     "shortest": "最短",
     "longest": "最长",
@@ -12,7 +12,7 @@
     "time": "时间",
     "start": "开始",
     "end": "结束",
-    "next": "下一个",
+    "next": "下一次",
     "back": "返回",
     "today": "今天",
     "day": "天",
@@ -48,7 +48,7 @@
             }
         }
     },
-    "countdown_daysLeft": "{days, plural, other{还有 {days} 天}}",
+    "countdown_daysLeft": "{days, plural, other{还剩 {days} 天}}",
     "@countdown_daysLeft": {
         "description": "A countdown message indicating the number of days left.",
         "placeholders": {
@@ -68,15 +68,15 @@
             }
         }
     },
-    "logs": "日志",
-    "insights": "见解",
+    "logs": "记录",
+    "insights": "分析",
     "edit": "编辑",
     "delete": "删除",
     "clear": "清除",
     "save": "保存",
     "import": "导入",
     "ok": "确定",
-    "confirm": "确定",
+    "confirm": "确认",
     "set": "设置",
     "yes": "是",
     "no": "否",
@@ -87,139 +87,139 @@
     "add": "添加",
     "notSet": "未设置",
     "removed": "已移除",
-    "totalLogs": "总日志",
+    "totalLogs": "记录总数",
     "note": "备注",
-    "systemDefault": "系统默认",
-    "flow": "流动",
+    "systemDefault": "跟随系统",
+    "flow": "经量",
     "type": "类型",
     "other": "其他",
-    "navBar_logs": "日志",
-    "navBar_sanitary": "卫生",
-    "navBar_sexActivity": "性活动",
-    "navBar_pill": "药片",
-    "navBar_reversibleContraceptive": "避孕药",
+    "navBar_logs": "记录",
+    "navBar_sanitary": "卫生用品",
+    "navBar_sexActivity": "性生活",
+    "navBar_pill": "避孕药",
+    "navBar_reversibleContraceptive": "可逆避孕",
     "navBar_settings": "设置",
     "flowIntensity_none": "无",
-    "flowIntensity_spotting": "发现",
-    "flowIntensity_light": "轻",
+    "flowIntensity_spotting": "点滴出血",
+    "flowIntensity_light": "少量",
     "flowIntensity_moderate": "中等",
-    "flowIntensity_heavy": "重",
-    "builtInSymptom_acne": "粉刺",
+    "flowIntensity_heavy": "较多",
+    "builtInSymptom_acne": "痤疮",
     "builtInSymptom_backPain": "背痛",
     "builtInSymptom_bloating": "腹胀",
-    "builtInSymptom_cramps": "抽筋",
+    "builtInSymptom_cramps": "痛经",
     "builtInSymptom_fatigue": "疲劳",
     "builtInSymptom_headache": "头痛",
-    "builtInSymptom_moodSwings": "Mood swings",
-    "builtInSymptom_nausea": "Nausea",
-    "builtInSymptom_tenderBreasts": "Tender breasts",
-    "builtInSymptom_insomnia": "Insomnia",
-    "builtInSymptom_depressed": "Depressed",
-    "painLevel_title": "Pain Level",
-    "painLevel_none": "None",
-    "painLevel_mild": "Mild",
-    "painLevel_moderate": "Moderate",
-    "painLevel_severe": "Severe",
-    "pain_unbearable": "Unbearable",
-    "reversibleContraceptive_hormonalIud": "Hormonal IUD",
-    "reversibleContraceptive_copperIud": "Copper IUD",
-    "reversibleContraceptive_implant": "Implant",
-    "reversibleContraceptive_injection": "Injection",
-    "reversibleContraceptive_ring": "Ring",
-    "reversibleContraceptive_patch": "Patch",
-    "sanitaryProduct_tampon": "Tampon",
-    "sanitaryProduct_pad": "Pad",
-    "sanitaryProduct_menstrualCup": "Menstrual Cup",
-    "sanitaryProduct_periodUnderwear": "Period Underwear",
-    "sanitaryProducts_mostUsed": "Most Used",
-    "sanitaryProducts_usageTrend": "Usage Trend",
-    "sexProtection_none": "None",
+    "builtInSymptom_moodSwings": "情绪波动",
+    "builtInSymptom_nausea": "恶心",
+    "builtInSymptom_tenderBreasts": "乳房胀痛",
+    "builtInSymptom_insomnia": "失眠",
+    "builtInSymptom_depressed": "情绪低落",
+    "painLevel_title": "疼痛程度",
+    "painLevel_none": "无",
+    "painLevel_mild": "轻微",
+    "painLevel_moderate": "中等",
+    "painLevel_severe": "严重",
+    "pain_unbearable": "难以忍受",
+    "reversibleContraceptive_hormonalIud": "激素型宫内节育器",
+    "reversibleContraceptive_copperIud": "含铜宫内节育器",
+    "reversibleContraceptive_implant": "皮下埋植",
+    "reversibleContraceptive_injection": "避孕针",
+    "reversibleContraceptive_ring": "阴道环",
+    "reversibleContraceptive_patch": "避孕贴",
+    "sanitaryProduct_tampon": "卫生棉条",
+    "sanitaryProduct_pad": "卫生巾",
+    "sanitaryProduct_menstrualCup": "月经杯",
+    "sanitaryProduct_periodUnderwear": "经期内裤",
+    "sanitaryProducts_mostUsed": "最常用",
+    "sanitaryProducts_usageTrend": "使用趋势",
+    "sexProtection_none": "无",
     "@sexProtection_none": {
         "description": "Indicates that no sexual protection method was used."
     },
-    "sexProtection_barrier": "Barrier",
+    "sexProtection_barrier": "屏障避孕",
     "@sexProtection_barrier": {
         "description": "Indicates the use of barrier methods of sexual protection (Condoms)."
     },
-    "sexProtection_hormonal": "Hormonal",
+    "sexProtection_hormonal": "激素避孕",
     "@sexProtection_hormonal": {
         "description": "Indicates the use of hormonal methods of sexual protection (The Pill)."
     },
-    "sexProtection_nonHormonal": "Non-Hormonal",
+    "sexProtection_nonHormonal": "非激素避孕",
     "@sexProtection_nonHormonal": {
         "description": "Indicates the use of non-hormonal methods of sexual protection (Copper IUD)."
     },
-    "sexProtection_natural": "Natural",
+    "sexProtection_natural": "自然避孕",
     "@sexProtection_natural": {
         "description": "Indicates the use of natural methods of sexual protection (Fertility awernass)."
     },
-    "sexProtection_permanent": "Permanent",
+    "sexProtection_permanent": "永久避孕",
     "@sexProtection_permanent": {
         "description": "Indicates the use of permanent methods of sexual protection (Sterilisation)."
     },
-    "sexType_vaginal": "Vaginal",
-    "sexType_anal": "Anal",
-    "sexType_oral": "Oral",
-    "sexType_manual": "Manual",
-    "sexParticipation_solo": "Solo",
-    "sexParticipation_partner": "Partner",
-    "sexParticipation_group": "Group",
-    "userGoal_general": "General Health",
+    "sexType_vaginal": "阴道",
+    "sexType_anal": "肛交",
+    "sexType_oral": "口交",
+    "sexType_manual": "手交",
+    "sexParticipation_solo": "独自",
+    "sexParticipation_partner": "伴侣",
+    "sexParticipation_group": "多人",
+    "userGoal_general": "日常健康",
     "@userGoal_general": {
         "description": "For users tracking periods for general health."
     },
-    "userGoal_sexual": "Sexual Health",
+    "userGoal_sexual": "性健康",
     "@userGoal_sexual": {
         "description": "For users focusing on sexual health."
     },
-    "userGoal_conceive": "Trying to Conceive",
+    "userGoal_conceive": "备孕",
     "@userGoal_conceive": {
         "description": "For users focusing on trying to conceive."
     },
-    "userGoal_avoid": "Avoiding Pregnancy",
+    "userGoal_avoid": "避孕",
     "@userGoal_avoid": {
         "description": "For users focusing on avoiding pregnancy."
     },
-    "dayOfWeek_monday": "Monday",
-    "dayOfWeek_tuesday": "Tuesday",
-    "dayOfWeek_wednesday": "Wednesday",
-    "dayOfWeek_thursday": "Thursday",
-    "dayOfWeek_friday": "Friday",
-    "dayOfWeek_saturday": "Saturday",
-    "dayOfWeek_sunday": "Sunday",
-    "cyclePhase_menstruation": "On Period",
-    "cyclePhase_follicular": "Pre-Ovulation",
-    "cyclePhase_fertileWindow": "Fertile Window",
-    "cyclePhase_ovulation": "Peak Fertility",
-    "cyclePhase_luteal": "Post-Ovulation",
-    "cyclePhase_late": "Late",
-    "cyclePhase_unknown": "Unknown",
-    "cyclePhase_menstruationDescription": "Your period is active and the uterine lining is being shed.",
-    "cyclePhase_fertileWindowDescription": "Your fertile window is active.",
-    "cyclePhase_follicularDescription": "Estrogen is rising to prepare the egg; your energy levels may be increasing.",
-    "cyclePhase_ovulationDescription": "An egg has been released. This is your most fertile time.",
-    "cyclePhase_lutealDescription": "Progesterone is dominant. Monitor for PMS symptoms as you approach your next period.",
-    "cyclePhase_lateDescription": "Your period is late.",
-    "cyclePhase_unknownDescription": "We need more data to accurately predict your cycle phase.",
-    "fertilityChance_high": "High",
+    "dayOfWeek_monday": "星期一",
+    "dayOfWeek_tuesday": "星期二",
+    "dayOfWeek_wednesday": "星期三",
+    "dayOfWeek_thursday": "星期四",
+    "dayOfWeek_friday": "星期五",
+    "dayOfWeek_saturday": "星期六",
+    "dayOfWeek_sunday": "星期日",
+    "cyclePhase_menstruation": "经期",
+    "cyclePhase_follicular": "排卵前",
+    "cyclePhase_fertileWindow": "易孕窗口",
+    "cyclePhase_ovulation": "受孕高峰",
+    "cyclePhase_luteal": "排卵后",
+    "cyclePhase_late": "推迟",
+    "cyclePhase_unknown": "未知",
+    "cyclePhase_menstruationDescription": "你正处于经期，子宫内膜正在脱落。",
+    "cyclePhase_fertileWindowDescription": "你正处于易孕窗口。",
+    "cyclePhase_follicularDescription": "雌激素正在上升，为排卵做准备；你的精力可能会变好。",
+    "cyclePhase_ovulationDescription": "卵子已排出。这是你最容易受孕的时期。",
+    "cyclePhase_lutealDescription": "孕激素占据主导。临近下次经期时，请留意经前综合征的症状。",
+    "cyclePhase_lateDescription": "你的经期推迟了。",
+    "cyclePhase_unknownDescription": "需要更多数据才能准确判断你当前的周期阶段。",
+    "fertilityChance_high": "高",
     "@fertilityChance_high": {
         "description": "Label shown when the user is in their peak fertile window or on ovulation day."
     },
-    "fertilityChance_medium": "Medium",
+    "fertilityChance_medium": "中",
     "@fertilityChance_medium": {
         "description": "Label shown when the user is at the very beginning or end of their fertile window."
     },
-    "fertilityChance_low": "Low",
+    "fertilityChance_low": "低",
     "@fertilityChance_low": {
         "description": "Label shown when the user is outside of their fertile window (e.g., during menstruation or the luteal phase)."
     },
-    "error_valueMustbePositive": "Value must be positive",
-    "error_valueCannotBeNull": "Value cannot be null",
-    "notification_periodTitle": "Period Approaching",
+    "error_valueMustbePositive": "数值必须为正数",
+    "error_valueCannotBeNull": "数值不能为空",
+    "notification_periodTitle": "经期将至",
     "@notification_periodTitle": {
         "description": "Title for the upcoming period notification."
     },
-    "notification_periodBody": "{count, plural, =1{Your next period is estimated to start in 1 day.} other{Your next period is estimated to start in {count} days.}}",
+    "notification_periodBody": "{count, plural, =1{预计下次经期将在 1 天后开始。} other{预计下次经期将在 {count} 天后开始。}}",
     "@notification_periodBody": {
         "description": "Body for the upcoming period notification.",
         "placeholders": {
@@ -228,11 +228,11 @@
             }
         }
     },
-    "notification_periodOverdueTitle": "Period Overdue",
+    "notification_periodOverdueTitle": "经期推迟",
     "@notification_periodOverdueTitle": {
         "description": "Title for the overdue period notification."
     },
-    "notification_periodOverdueBody": "{count, plural, =1{Your next period is overdue by 1 day.} other{Your next period is overdue by {count} days.}}",
+    "notification_periodOverdueBody": "{count, plural, =1{下次经期已推迟 1 天。} other{下次经期已推迟 {count} 天。}}",
     "@notification_periodOverdueBody": {
         "description": "Body for the overdue period notification.",
         "placeholders": {
@@ -241,19 +241,19 @@
             }
         }
     },
-    "notification_pillTitle": "Pill Reminder",
+    "notification_pillTitle": "服药提醒",
     "@notification_pillTitle": {
         "description": "Title for the daily pill reminder notification."
     },
-    "notification_pillBody": "Don't forget to take your pill for today.",
+    "notification_pillBody": "别忘了服用今天的药。",
     "@notification_pillBody": {
         "description": "Body for the daily pill reminder notification."
     },
-    "notification_reversibleContraceptiveTitle": "Reversible Contraceptive Reminder",
+    "notification_reversibleContraceptiveTitle": "避孕到期提醒",
     "@notification_reversibleContraceptiveTitle": {
         "description": "Title for the Reversible Contraceptive reminder notification."
     },
-    "notification_reversibleContraceptiveBody": "{type} is due for renewal in {days} {days, plural, =1{day} other{days}}.",
+    "notification_reversibleContraceptiveBody": "{type} 将在 {days} {days, plural, =1{天} other{天}}后到期。",
     "@notification_reversibleContraceptiveBody": {
         "description": "The body of the Reversible Contraceptive reminder notification, indicating the type and days until renewal.",
         "placeholders": {
@@ -267,21 +267,21 @@
             }
         }
     },
-    "notification_loggingReminderTitle": "Logging Reminder",
+    "notification_loggingReminderTitle": "记录提醒",
     "@notification_loggingReminderTitle": {
         "description": "Title for the logging reminder notification."
     },
-    "notification_loggingReminderBody": "Tap to log your flow for today.",
+    "notification_loggingReminderBody": "点击记录今天的经量。",
     "@notification_loggingReminderBody": {
         "description": "Body for the logging reminder notification."
     },
-    "notification_SanitaryProductReminderTitle": "Sanitary Product Reminder",
-    "notification_SanitaryProductReminderBody": "Remember to change your product.",
-    "notification_fertileWindowTitle": "Fertile Window Reminder",
+    "notification_SanitaryProductReminderTitle": "卫生用品更换提醒",
+    "notification_SanitaryProductReminderBody": "记得及时更换卫生用品。",
+    "notification_fertileWindowTitle": "易孕窗口提醒",
     "@notification_fertileWindowTitle": {
         "description": "Title for the fertile window notification."
     },
-    "notification_fertileWindowBody": "{count, plural, =1{Your next fertile window is estimated to start in 1 day.} other{Your next fertile window is estimated to start in {count} days.}}",
+    "notification_fertileWindowBody": "{count, plural, =1{预计易孕窗口将在 1 天后开始。} other{预计易孕窗口将在 {count} 天后开始。}}",
     "@notification_fertileWindowBody": {
         "description": "Body for the upcoming fertile window notification.",
         "placeholders": {
@@ -290,11 +290,11 @@
             }
         }
     },
-    "notification_ovulationDayReminderTitle": "Ovulation Day Reminder",
+    "notification_ovulationDayReminderTitle": "排卵日提醒",
     "@notification_ovulationDayReminderTitle": {
         "description": "Title for the ovulation day notification."
     },
-    "notification_ovulationDayReminderBody": "{count, plural, =1{Your next ovulation day is estimated to start in 1 day.} other{Your next ovulation day is estimated to start in {count} days.}}",
+    "notification_ovulationDayReminderBody": "{count, plural, =1{预计排卵日将在 1 天后到来。} other{预计排卵日将在 {count} 天后到来。}}",
     "@notification_ovulationDayReminderBody": {
         "description": "Body for the upcoming ovulation day notification.",
         "placeholders": {
@@ -303,47 +303,47 @@
             }
         }
     },
-    "onboardingScreen_welcomeToMenstrudel": "Welcome to Menstrudel",
+    "onboardingScreen_welcomeToMenstrudel": "欢迎使用 Menstrudel",
     "@onboardingScreen_welcomeToMenstrudel": {
         "description": "Title for the onboarding screen."
     },
-    "onboardingScreen_welcomeToMenstrudelDescription": "Your offline, private cycle tracker.",
+    "onboardingScreen_welcomeToMenstrudelDescription": "离线、私密的周期记录工具。",
     "@onboardingScreen_welcomeToMenstrudelDescription": {
         "description": "Small into description for the onboarding screen."
     },
-    "onBoardingScreen_byUsingMenstrudelYouAgreeTo": "By using Menstrudel, you agree to our ",
+    "onBoardingScreen_byUsingMenstrudelYouAgreeTo": "使用 Menstrudel 即表示你同意我们的",
     "@onBoardingScreen_byUsingMenstrudelYouAgreeTo": {
         "description": "Part of the privacy policy agreement text on the onboarding screen."
     },
-    "onBoardingScreen_privacyPolicy": "Privacy Policy",
+    "onBoardingScreen_privacyPolicy": "隐私政策",
     "@onBoardingScreen_privacyPolicy": {
         "description": "Link text to the privacy policy on the onboarding screen."
     },
-    "onboardingScreen_profileTitle": "About You",
+    "onboardingScreen_profileTitle": "关于你",
     "@onboardingScreen_profileTitle": {
         "description": "Title for the profile onboarding screen."
     },
-    "onboardingScreen_profileName": "What should we call you?",
+    "onboardingScreen_profileName": "我们该怎么称呼你？",
     "@onboardingScreen_profileName": {
         "description": "Name question for the profile onboarding screen."
     },
-    "onboardingScreen_profileDate": "Birth Date (Optional)",
+    "onboardingScreen_profileDate": "出生日期（选填）",
     "@onboardingScreen_profileDate": {
         "description": "Birth date for the profile onboarding screen. This field is optional."
     },
-    "onboardingScreen_profileDatePlaceholder": "Tap to set birthday",
+    "onboardingScreen_profileDatePlaceholder": "点击设置生日",
     "@onboardingScreen_profileDatePlaceholder": {
         "description": "Displays when birthday value is none (Due to being optional). Prompts user to set their birthday"
     },
-    "onboardingScreen_goalTitle": "What's your goal?",
+    "onboardingScreen_goalTitle": "你的目标是？",
     "@onboardingScreen_goalTitle": {
         "description": "Title for the goal onboarding screen."
     },
-    "onboardingScreen_goalDescription": "This helps tailor the insights you see.",
+    "onboardingScreen_goalDescription": "这会帮助我们调整为你展示的分析内容。",
     "@onboardingScreen_goalDescription": {
         "description": "Description for the goal onboarding screen."
     },
-    "onboardingScreen_contraceptionHint": "Note: You can enable Pill or Reversible Contraceptive tracking later in the app settings under '{sectionName}' if wanted.",
+    "onboardingScreen_contraceptionHint": "提示：之后可以在设置的「{sectionName}」中开启口服避孕药或可逆避孕的记录。",
     "@onboardingScreen_contraceptionHint": {
         "description": "Hint for birth control settings",
         "placeholders": {
@@ -352,39 +352,39 @@
             }
         }
     },
-    "onboardingScreen_getStarted": "Get Started",
+    "onboardingScreen_getStarted": "开始使用",
     "@onboardingScreen_getStarted": {
         "description": "Button text for the get started navigation button"
     },
-    "fabToolTip_logs": "Log day",
+    "fabToolTip_logs": "记录当天",
     "@fabToolTip_logs": {
         "description": "Used for the main logs screen fab button as a tooltip."
     },
-    "fabToolTip_sanitary": "Log sanitary product",
+    "fabToolTip_sanitary": "记录卫生用品",
     "@fabToolTip_sanitary": {
         "description": "Used for the sanitary screen fab button as a tooltip."
     },
-    "fabToolTip_sexActivity": "Log sex activity",
+    "fabToolTip_sexActivity": "记录性生活",
     "@fabToolTip_sexActivity": {
         "description": "Used for the sex activity screen fab button as a tooltip."
     },
-    "fabToolTip_reversibleContraceptive": "Log Reversible Contraceptive",
+    "fabToolTip_reversibleContraceptive": "记录可逆避孕",
     "@fabToolTip_reversibleContraceptive": {
         "description": "Used for the Reversible Contraceptive screen fab button as a tooltip."
     },
-    "mainScreen_logsPageTitle": "Logs",
-    "mainSceen_sexActivityPageTitle": "Sex Activity",
-    "mainScreen_sanitaryPageTitle": "Sanitary Products",
-    "mainScreen_pillsPageTitle": "Pills",
-    "mainScreen_reversibleContraceptivesPageTitle": "Reversible Contraceptives",
-    "mainScreen_settingsPageTitle": "Settings",
-    "insightsScreen_errorPrefix": "Error:",
-    "insightsScreen_noDataAvailable": "No data available.",
-    "logsScreen_calculatingPrediction": "Calculating prediction...",
-    "logScreen_logAtLeastTwoPeriods": "Log at least two periods to estimate next cycle.",
-    "logScreen_nextPeriodEstimate": "Next period Est",
-    "logScreen_periodDueToday": "Period due today",
-    "logScreen_periodOverdueBy": "{count, plural, =1{Period overdue by 1 day} other{Period overdue by {count} days}}",
+    "mainScreen_logsPageTitle": "记录",
+    "mainSceen_sexActivityPageTitle": "性生活",
+    "mainScreen_sanitaryPageTitle": "卫生用品",
+    "mainScreen_pillsPageTitle": "口服避孕药",
+    "mainScreen_reversibleContraceptivesPageTitle": "可逆避孕",
+    "mainScreen_settingsPageTitle": "设置",
+    "insightsScreen_errorPrefix": "错误：",
+    "insightsScreen_noDataAvailable": "暂无数据。",
+    "logsScreen_calculatingPrediction": "正在计算预测…",
+    "logScreen_logAtLeastTwoPeriods": "至少记录两次经期，才能预测下个周期。",
+    "logScreen_nextPeriodEstimate": "预计下次经期",
+    "logScreen_periodDueToday": "经期预计今天开始",
+    "logScreen_periodOverdueBy": "{count, plural, =1{经期已推迟 1 天} other{经期已推迟 {count} 天}}",
     "@logScreen_periodOverdueBy": {
         "description": "A label showing the total number of days period is overdue.",
         "placeholders": {
@@ -393,10 +393,10 @@
             }
         }
     },
-    "pillScreen_pillForTodayMarkedAsTaken": "Pill for today marked as taken.",
-    "pillScreen_pillForTodayMarkedAsSkipped": "Pill for today marked as skipped.",
-    "reversibleContraceptiveScreen_noRecordsFound": "No records found.",
-    "reversibleContraceptiveScreen_history": "History ({history})",
+    "pillScreen_pillForTodayMarkedAsTaken": "今天的药已标记为已服用。",
+    "pillScreen_pillForTodayMarkedAsSkipped": "今天的药已标记为跳过。",
+    "reversibleContraceptiveScreen_noRecordsFound": "没有找到记录。",
+    "reversibleContraceptiveScreen_history": "历史（{history}）",
     "@reversibleContraceptiveScreen_history": {
         "description": "The total Reversible Contraceptive history count.",
         "placeholders": {
@@ -406,7 +406,7 @@
             }
         }
     },
-    "reversibleContraceptiveScreen_activeReversibleContraceptives": "Active ({activeCount})",
+    "reversibleContraceptiveScreen_activeReversibleContraceptives": "使用中（{activeCount}）",
     "@reversibleContraceptiveScreen_activeReversibleContraceptives": {
         "description": "The total active Reversible Contraceptive count.",
         "placeholders": {
@@ -416,11 +416,11 @@
             }
         }
     },
-    "reversibleContraceptiveScreen_activeReversibleContraceptivesDescription": "Currently monitored reversible contraceptive entries.",
-    "reversibleContraceptiveScreen_noActiveRecords": "No reversible contraceptive is currently active. Please log a new entry.",
-    "reversibleContraceptiveScreen_noHistoryRecords": "No past or overdue reversible contraceptive records found.",
-    "sanitaryProductsScreen_noSanitaryProductRecordsFound": "No sanitary product records found.",
-    "sanitaryProductsScreen_history": "History ({history})",
+    "reversibleContraceptiveScreen_activeReversibleContraceptivesDescription": "当前正在使用的可逆避孕记录。",
+    "reversibleContraceptiveScreen_noActiveRecords": "当前没有正在使用的可逆避孕方式，请新增一条记录。",
+    "reversibleContraceptiveScreen_noHistoryRecords": "没有历史或已到期的可逆避孕记录。",
+    "sanitaryProductsScreen_noSanitaryProductRecordsFound": "没有找到卫生用品记录。",
+    "sanitaryProductsScreen_history": "历史（{history}）",
     "@sanitaryProductsScreen_history": {
         "description": "The total sanitary product history count.",
         "placeholders": {
@@ -430,8 +430,8 @@
             }
         }
     },
-    "sanitaryProductsScreen_noHistoryRecords": "No past sanitary product records found.",
-    "sanitaryProductsScreen_activeProduct": "Active {activeType}",
+    "sanitaryProductsScreen_noHistoryRecords": "没有过去的卫生用品记录。",
+    "sanitaryProductsScreen_activeProduct": "使用中：{activeType}",
     "@sanitaryProductsScreen_activeProduct": {
         "description": "Label showing the type of active sanitary product.",
         "placeholders": {
@@ -441,7 +441,7 @@
             }
         }
     },
-    "sanitaryProductsScreen_changeDueAt": "Change Due At {time}",
+    "sanitaryProductsScreen_changeDueAt": "更换时间 {time}",
     "@sanitaryProductsScreen_changeDueAt": {
         "description": "Label showing the time when the sanitary product needs to be changed.",
         "placeholders": {
@@ -451,8 +451,8 @@
             }
         }
     },
-    "sexActivityScreen_noSexActivityRecordsFound": "No sex activity records found.",
-    "sexActivityScreen_history": "History ({history})",
+    "sexActivityScreen_noSexActivityRecordsFound": "没有找到性生活记录。",
+    "sexActivityScreen_history": "历史（{history}）",
     "@sexActivityScreen_history": {
         "description": "The total sex activity history count.",
         "placeholders": {
@@ -462,95 +462,95 @@
             }
         }
     },
-    "sexActivityScreen_primaryMethod": "Primary Method",
+    "sexActivityScreen_primaryMethod": "主要避孕方式",
     "@sexActivityScreen_primaryMethod": {
         "description": "Label showing the primary sexual protection method."
     },
-    "sexActivityScreen_mostFrequent": "Most Frequent",
+    "sexActivityScreen_mostFrequent": "最常见",
     "@sexActivityScreen_mostFrequent": {
         "description": "Label showing the most frequent sex activity type."
     },
-    "sexActivityScreen_protected": "Protected",
+    "sexActivityScreen_protected": "有防护",
     "@sexActivityScreen_protected": {
         "description": "Label showing the total number of protected sex activities."
     },
-    "sexActivityScreen_activityTrend": "Activity Trend",
+    "sexActivityScreen_activityTrend": "性生活频率趋势",
     "@sexActivityScreen_activityTrend": {
         "description": "Title for the sexual activity trend chart."
     },
-    "sexActivityScreen_activityDistribution": "Activity Distribution",
+    "sexActivityScreen_activityDistribution": "性行为方式分布",
     "@sexActivityScreen_activityDistribution": {
         "description": "Title for the sex activity distribution chart."
     },
-    "sexActivityScreen_protectionDistribution": "Protection Distribution",
+    "sexActivityScreen_protectionDistribution": "避孕方式分布",
     "@sexActivityScreen_protectionDistribution": {
         "description": "Title for the sexual protection distribution chart."
     },
-    "settingsScreen_profile": "Profile",
+    "settingsScreen_profile": "个人资料",
     "@settingsScreen_profile": {
         "description": "Title for the profile settings button."
     },
-    "settingsScreen_name": "Name",
-    "settingsScreen_birthDate": "Birth Date",
-    "settingsScreen_notSet": "Not set",
+    "settingsScreen_name": "姓名",
+    "settingsScreen_birthDate": "出生日期",
+    "settingsScreen_notSet": "未设置",
     "@settingsScreen_notSet": {
         "description": "Used when birth date is not set."
     },
-    "settingsScreen_appGoal": "App Goal",
-    "settingsScreen_profileUpdated": "Profile updated successfully",
-    "settingsScreen_selectHistoryView": "Select History View",
-    "settingsScreen_deleteRegimen_question": "Delete Regimen?",
-    "settingsScreen_deleteRegimenDescription": "This will delete your current pill pack settings and all associated pill logs. This cannot be undone.",
-    "settingsScreen_allLogsHaveBeenCleared": "All logs have been cleared.",
-    "settingsScreen_clearAllLogs_question": "Clear All Logs?",
-    "settingsScreen_deleteAllLogsDescription": "This will permanently delete all your period logs. Your app settings will not be affected.",
-    "settingsScreen_appearance": "Appearance",
-    "settingsScreen_historyViewStyle": "History View Style",
-    "settingsScreen_appTheme": "App Theme",
-    "settingsScreen_themeLight": "Light",
-    "settingsScreen_themeDark": "Dark",
-    "settingsScreen_themeSystem": "System",
-    "settingsScreen_dynamicTheme": "Dynamic Theme",
-    "settingsScreen_useWallpaperColors": "Use Wallpaper Colors",
-    "settingsScreen_themeColor": "Theme Color",
-    "settingsScreen_pickAColor": "Pick a Color",
-    "settingsScreen_view": "View",
-    "settingsScreen_birthControl": "Birth Control",
-    "settingsScreen_enablePillTracking": "Enable Pill Tracking",
-    "settingsScreen_pillDescription": "Track your daily pill intake and get reminders.",
-    "settingsScreen_setUpPillRegimen": "Set Up Pill Regimen",
-    "settingsScreen_trackYourDailyPillIntake": "Track Your Daily Pill Intake",
-    "settingsScreen_dailyPillReminder": "Daily Pill Reminder",
-    "settingsScreen_reminderTime": "Reminder Time",
-    "settingsScreen_cycleNotificationsAndPredictions": "Cycle Notifications & Predictions",
+    "settingsScreen_appGoal": "使用目标",
+    "settingsScreen_profileUpdated": "个人资料已更新",
+    "settingsScreen_selectHistoryView": "选择历史视图",
+    "settingsScreen_deleteRegimen_question": "删除用药方案？",
+    "settingsScreen_deleteRegimenDescription": "这会删除当前的药板设置和所有相关服药记录，且无法撤销。",
+    "settingsScreen_allLogsHaveBeenCleared": "所有记录已清除。",
+    "settingsScreen_clearAllLogs_question": "清除所有记录？",
+    "settingsScreen_deleteAllLogsDescription": "这会永久删除所有经期记录，你的应用设置不受影响。",
+    "settingsScreen_appearance": "外观",
+    "settingsScreen_historyViewStyle": "历史视图样式",
+    "settingsScreen_appTheme": "应用主题",
+    "settingsScreen_themeLight": "浅色",
+    "settingsScreen_themeDark": "深色",
+    "settingsScreen_themeSystem": "跟随系统",
+    "settingsScreen_dynamicTheme": "动态主题",
+    "settingsScreen_useWallpaperColors": "使用壁纸配色",
+    "settingsScreen_themeColor": "主题色",
+    "settingsScreen_pickAColor": "选择颜色",
+    "settingsScreen_view": "视图",
+    "settingsScreen_birthControl": "避孕",
+    "settingsScreen_enablePillTracking": "开启口服避孕药记录",
+    "settingsScreen_pillDescription": "记录每天的服药情况并接收提醒。",
+    "settingsScreen_setUpPillRegimen": "设置用药方案",
+    "settingsScreen_trackYourDailyPillIntake": "记录每天服药",
+    "settingsScreen_dailyPillReminder": "每日服药提醒",
+    "settingsScreen_reminderTime": "提醒时间",
+    "settingsScreen_cycleNotificationsAndPredictions": "周期提醒与预测",
     "@settingsScreen_cycleNotificationsAndPredictions": {
         "description": "Header for the cycle notifications and predictions section"
     },
-    "settingsScreen_enablePhasePredictions": "Enable Phase Predictions",
-    "settingsScreen_displayFertileChance": "Display Fertile Chance",
-    "settingsScreen_displayFertileWindowOnCalendar": "Display Fertile Window on Calendar",
-    "settingsScreen_notificationTime": "Notification Time",
-    "settingsScreen_remindMeBefore": "Remind Me Before",
-    "settingsScreen_remindMeAfter": "Remind Me After",
-    "settingsScreen_upcomingPeriodReminder": "Upcoming Period Reminder",
-    "settingsScreen_overduePeriodReminder": "Overdue Period Reminder",
-    "settingsScreen_fertileWindowReminder": "Fertile Window Reminder",
-    "settingsScreen_ovulationDayReminder": "Ovulation Day Reminder",
-    "settingsScreen_enableReversibleContraceptiveTracking": "Enable Reversible Contraceptive Tracking",
-    "settingsScreen_reversibleContraceptiveDescription": "Track Reversible Contraceptives.",
-    "settingsScreen_reversibleContraceptiveType": "Contraceptive Type",
-    "settingsScreen_setDuration": "Set Duration",
-    "settingsScreen_reversibleContraceptiveDuration": "Contraceptive Replacement Duration",
-    "settingsScreen_enableReversibleContraceptiveReminder": "Enable Contraceptive Reminder",
-    "settingsScreen_currentDuration": "Current Duration",
-    "settingsScreen_durationInDays": "Duration (Days)",
-    "settingsScreen_LoggingScreen": "Logging",
-    "settingsScreen_enableLoggingReminders": "Enable Logging Reminders",
-    "settingsScreen_loggingReminderDescription": "If you log a day with flow, you will receive a notification the following day to log your status.",
-    "settingsScreen_loggingReminderTime": "Logging Reminder Time",
-    "settingsScreen_defaultSymptoms": "Default Symptoms",
-    "settingsScreen_defaultSymptomsSubtitle": "These are always available when logging new periods.\nTap an existing symptom to delete or '+' to add a new one.",
-    "settingsScreen_deleteDefaultSymptomQuestion": "Delete '{symptom}'?",
+    "settingsScreen_enablePhasePredictions": "开启阶段预测",
+    "settingsScreen_displayFertileChance": "显示受孕概率",
+    "settingsScreen_displayFertileWindowOnCalendar": "在日历上显示易孕窗口",
+    "settingsScreen_notificationTime": "提醒时间",
+    "settingsScreen_remindMeBefore": "提前提醒",
+    "settingsScreen_remindMeAfter": "推迟后提醒",
+    "settingsScreen_upcomingPeriodReminder": "经期将至提醒",
+    "settingsScreen_overduePeriodReminder": "经期推迟提醒",
+    "settingsScreen_fertileWindowReminder": "易孕窗口提醒",
+    "settingsScreen_ovulationDayReminder": "排卵日提醒",
+    "settingsScreen_enableReversibleContraceptiveTracking": "开启可逆避孕记录",
+    "settingsScreen_reversibleContraceptiveDescription": "记录可逆避孕方式。",
+    "settingsScreen_reversibleContraceptiveType": "避孕方式类型",
+    "settingsScreen_setDuration": "设置时长",
+    "settingsScreen_reversibleContraceptiveDuration": "避孕更换周期",
+    "settingsScreen_enableReversibleContraceptiveReminder": "开启避孕到期提醒",
+    "settingsScreen_currentDuration": "当前时长",
+    "settingsScreen_durationInDays": "时长（天）",
+    "settingsScreen_LoggingScreen": "记录",
+    "settingsScreen_enableLoggingReminders": "开启记录提醒",
+    "settingsScreen_loggingReminderDescription": "如果你记录了某天的经量，第二天会收到提醒，提示你记录当天状态。",
+    "settingsScreen_loggingReminderTime": "记录提醒时间",
+    "settingsScreen_defaultSymptoms": "默认症状",
+    "settingsScreen_defaultSymptomsSubtitle": "记录新经期时，这些症状始终可选。\n点击已有症状可删除，点击「+」可新增。",
+    "settingsScreen_deleteDefaultSymptomQuestion": "删除「{symptom}」？",
     "@settingsScreen_deleteDefaultSymptomQuestion": {
         "description": "Question whether a symptom should be deleted.",
         "placeholders": {
@@ -560,9 +560,9 @@
             }
         }
     },
-    "settingsScreen_resetSymptomsList": "Reset Symptoms List?",
-    "settingsScreen_resetSymptomsListDescription": "This will remove all your custom symptoms and restore the original built-in list.\n\nYour existing log entries will not be changed.",
-    "settingsScreen_deleteDefaultSymptomDescription": "'{symptom}' will no longer be available when logging a period.\n\n{usageCount, plural, zero{There are currently no period logs with this symptom!} one{There is already 1 period log with this symptom!\nThis log will not be changed.} other{There are {usageCount} period logs with this symptom!\nThese logs will not be changed.}}",
+    "settingsScreen_resetSymptomsList": "重置症状列表？",
+    "settingsScreen_resetSymptomsListDescription": "这会删除你自定义的症状，并恢复内置列表。\n\n已有的记录不会被修改。",
+    "settingsScreen_deleteDefaultSymptomDescription": "'{symptom}' 将不再出现在记录经期的选项中。\n\n{usageCount, plural, zero{目前没有包含该症状的经期记录。} one{已有 1 条经期记录包含该症状，该记录不会被修改。} other{有 {usageCount} 条经期记录包含该症状，这些记录不会被修改。}}",
     "@settingsScreen_deleteDefaultSymptomDescription": {
         "description": "Question whether a symptom should be deleted.",
         "placeholders": {
@@ -573,140 +573,140 @@
             "usageCount": {}
         }
     },
-    "settingsScreen_pillRegimens": "Pill Regimens",
+    "settingsScreen_pillRegimens": "用药方案",
     "@settingsScreen_pillRegimens": {
         "description": "Header for the section listing all created pill regimens."
     },
-    "settingsScreen_makeActive": "Set as Active",
+    "settingsScreen_makeActive": "设为当前方案",
     "@settingsScreen_makeActive": {
         "description": "Button to select a regimen and set it as the one currently being tracked."
     },
-    "settingsScreen_activeRegimenReminder": "Active Regimen Reminder Settings",
+    "settingsScreen_activeRegimenReminder": "当前方案的提醒设置",
     "@settingsScreen_activeRegimenReminder": {
         "description": "Header for the daily reminder settings section."
     },
-    "settingsScreen_pack": "Pack",
-    "settingsScreen_dataManagement": "Data Management",
-    "settingsScreen_deleteZone": "Delete Zone",
-    "settingsScreen_clearLogsAndPeriods": "Clear Logs & Periods",
+    "settingsScreen_pack": "药板",
+    "settingsScreen_dataManagement": "数据管理",
+    "settingsScreen_deleteZone": "删除数据",
+    "settingsScreen_clearLogsAndPeriods": "清除记录与经期",
     "@settingsScreen_clearLogsAndPeriods": {
         "description": "Title for the period logs data clearing section."
     },
-    "settingsScreen_clearLogsAndPeriodsSubtitle": "Deletes your entire period and symptom history.",
+    "settingsScreen_clearLogsAndPeriodsSubtitle": "删除全部经期与症状历史。",
     "@settingsScreen_clearLogsAndPeriodsSubtitle": {
         "description": "Subtitle for the period logs data clearing section."
     },
-    "settingsScreen_clearPillLogs": "Clear Pill Logs",
+    "settingsScreen_clearPillLogs": "清除服药记录",
     "@settingsScreen_clearPillLogs": {
         "description": "Title for the pill logs data clearing section."
     },
-    "settingsScreen_clearPillLogsSubtitle": "Removes your pill regimen and intake history.",
+    "settingsScreen_clearPillLogsSubtitle": "删除用药方案和服药历史。",
     "@settingsScreen_clearPillLogsSubtitle": {
         "description": "Subtitle for the pill logs data clearing section."
     },
-    "settingsScreen_clearReversibleContraceptiveLogs": "Clear Reversible Contraceptive Logs",
+    "settingsScreen_clearReversibleContraceptiveLogs": "清除可逆避孕记录",
     "@settingsScreen_clearReversibleContraceptiveLogs": {
         "description": "Title for the reversible contraceptive logs data clearing section."
     },
-    "settingsScreen_clearReversibleContraceptiveLogsSubtitle": "Removes your reversible contraceptive history.",
+    "settingsScreen_clearReversibleContraceptiveLogsSubtitle": "删除可逆避孕历史。",
     "@settingsScreen_clearReversibleContraceptiveLogsSubtitle": {
         "description": "Subtitle for the reversible contraceptive logs data clearing section."
     },
-    "settingsScreen_clearSanitaryProductLogs": "Clear Sanitary Product Logs",
+    "settingsScreen_clearSanitaryProductLogs": "清除卫生用品记录",
     "@settingsScreen_clearSanitaryProductLogs": {
         "description": "Title for the sanitary product logs data clearing section."
     },
-    "settingsScreen_clearSanitaryProductLogsSubtitle": "Removes your sanitary products history.",
+    "settingsScreen_clearSanitaryProductLogsSubtitle": "删除卫生用品历史。",
     "@settingsScreen_clearSanitaryProductLogsSubtitle": {
         "description": "Subtitle for the sanitary product logs data clearing section."
     },
-    "settingsScreen_clearSexualActivityLogs": "Clear Sexual Activity Logs",
+    "settingsScreen_clearSexualActivityLogs": "清除性生活记录",
     "@settingsScreen_clearSexualActivityLogs": {
         "description": "Title for the sexual activity logs data clearing section."
     },
-    "settingsScreen_clearSexualActivityLogsSubtitle": "Removes your sexual activity history.",
+    "settingsScreen_clearSexualActivityLogsSubtitle": "删除性生活历史。",
     "@settingsScreen_clearSexualActivityLogsSubtitle": {
         "description": "Subtitle for the sexual activity logs data clearing section."
     },
-    "settingsScreen_logsAndPeriods": "Logs & Periods",
+    "settingsScreen_logsAndPeriods": "记录与经期",
     "@settingsScreen_logsAndPeriods": {
         "description": "Title for the period logs data section."
     },
-    "settingsScreen_pillLogs": "Pill Logs",
+    "settingsScreen_pillLogs": "服药记录",
     "@settingsScreen_pillLogs": {
         "description": "Title for the pill logs data section."
     },
-    "settingsScreen_reversibleContraceptivesLogs": "Reversible Contraceptive Logs",
+    "settingsScreen_reversibleContraceptivesLogs": "可逆避孕记录",
     "@settingsScreen_reversibleContraceptivesLogs": {
         "description": "Title for the reversible contraceptives data section."
     },
-    "settingsScreen_sanitaryProductLogs": "Sanitary Product Logs",
+    "settingsScreen_sanitaryProductLogs": "卫生用品记录",
     "@settingsScreen_sanitaryProductLogs": {
         "description": "Title for the sanitary products data section."
     },
-    "settingsScreen_sexualActivityLogs": "Sexual Activity Logs",
+    "settingsScreen_sexualActivityLogs": "性生活记录",
     "@settingsScreen_sexualActivityLogs": {
         "description": "Title for the sexual activity data section."
     },
-    "settingsScreen_importSupportNote": "Import is currently only supported for files exported from Menstrudel.",
+    "settingsScreen_importSupportNote": "目前仅支持导入从 Menstrudel 导出的文件。",
     "@settingsScreen_importSupportNote": {
         "description": "Note indicating that import is only supported for files exported from Menstrudel."
     },
-    "settingsScreen_exportSuccessful": "Data exported successfully.",
-    "settingsScreen_exportFailed": "Export failed. Please try again.",
-    "settingsScreen_exportDataTitle": "Export Data",
-    "settingsScreen_importDataTitle": "Import Data",
-    "settingsScreen_importDataSubtitle": "Overwrites existing data.",
-    "settingsScreen_importSuccessful": "Data imported successfully!",
-    "settingsScreen_importFailed": "Failed to import data. Please try again.",
-    "settingsScreen_importErrorGeneral": "Failed to import data. Please ensure the file is saved locally.",
+    "settingsScreen_exportSuccessful": "数据已导出。",
+    "settingsScreen_exportFailed": "导出失败，请重试。",
+    "settingsScreen_exportDataTitle": "导出数据",
+    "settingsScreen_importDataTitle": "导入数据",
+    "settingsScreen_importDataSubtitle": "会覆盖现有数据。",
+    "settingsScreen_importSuccessful": "数据导入成功！",
+    "settingsScreen_importFailed": "数据导入失败，请重试。",
+    "settingsScreen_importErrorGeneral": "数据导入失败，请确认文件已保存到本地。",
     "@settingsScreen_importErrorGeneral": {
         "description": "General message when file import fails for unknown reasons."
     },
-    "settingsScreen_security": "Security",
-    "securityScreen_enableBiometricLock": "Enable Biometric Lock",
-    "securityScreen_enableBiometricLockSubtitle": "Require fingerprint or face ID to open the app.",
-    "securityScreen_noBiometricsAvailable": "No passcode, fingerprint, or face ID found. Please set one up in your device's settings.",
-    "settingsScreen_userProfile": "You",
+    "settingsScreen_security": "安全",
+    "securityScreen_enableBiometricLock": "开启生物识别锁",
+    "securityScreen_enableBiometricLockSubtitle": "打开应用时需要指纹或面容 ID。",
+    "securityScreen_noBiometricsAvailable": "未检测到密码、指纹或面容 ID，请先在系统设置中设置。",
+    "settingsScreen_userProfile": "你",
     "@settingsScreen_userProfile": {
         "description": "Title for the user profile settings button."
     },
-    "settingsScreen_preferences": "Preferences",
-    "preferencesScreen_language": "Language",
-    "preferencesScreen_enableSanitaryProductsScreen": "Enable Sanitary Products Screen",
-    "preferencesScreen_enableSanitaryProductsScreenSubtitle": "Show the Sanitary Products tab on the main navigation bar.",
-    "preferencesScreen_enableSexActivityScreen": "Enable Sex Activity Screen",
-    "preferencesScreen_enableSexActivityScreenSubtitle": "Show the Sex Activity tab on the main navigation bar.",
-    "preferencesScreen_StartingDayOfWeek": "Starting Day of the Week",
-    "settingsScreen_about": "About",
+    "settingsScreen_preferences": "偏好设置",
+    "preferencesScreen_language": "语言",
+    "preferencesScreen_enableSanitaryProductsScreen": "显示卫生用品页面",
+    "preferencesScreen_enableSanitaryProductsScreenSubtitle": "在底部导航栏显示「卫生用品」标签页。",
+    "preferencesScreen_enableSexActivityScreen": "显示性生活页面",
+    "preferencesScreen_enableSexActivityScreenSubtitle": "在底部导航栏显示「性生活」标签页。",
+    "preferencesScreen_StartingDayOfWeek": "每周起始日",
+    "settingsScreen_about": "关于",
     "@settingsScreen_about": {
         "description": "Title for the about settings button."
     },
-    "aboutScreen_version": "Version",
+    "aboutScreen_version": "版本",
     "@aboutScreen_version": {
         "description": "Label showing the current app version."
     },
-    "aboutScreen_legalAndSource": "Legal & Source",
+    "aboutScreen_legalAndSource": "法律信息与源码",
     "@aboutScreen_legalAndSource": {
         "description": "Title for the legal and source about section."
     },
-    "aboutScreen_communityAndUpdates": "Community & Updates",
+    "aboutScreen_communityAndUpdates": "社区与更新",
     "@aboutScreen_communityAndUpdates": {
         "description": "Title for the community and updates about section."
     },
-    "aboutScreen_privacyPolicy": "Privacy Policy",
+    "aboutScreen_privacyPolicy": "隐私政策",
     "@aboutScreen_privacyPolicy": {
         "description": "Link text to the privacy policy on the about screen."
     },
-    "aboutScreen_privacyPolicySubtitle": "Read our privacy policy",
+    "aboutScreen_privacyPolicySubtitle": "阅读我们的隐私政策",
     "@aboutScreen_privacyPolicySubtitle": {
         "description": "Subtitle for the privacy policy link on the about screen."
     },
-    "aboutScreen_releaseNotes": "Release Notes",
+    "aboutScreen_releaseNotes": "更新日志",
     "@aboutScreen_releaseNotes": {
         "description": "Link text to the release notes on the about screen."
     },
-    "aboutScreen_releaseNotesSubtitle": "What's new in {version}",
+    "aboutScreen_releaseNotesSubtitle": "{version} 的新变化",
     "@aboutScreen_releaseNotesSubtitle": {
         "description": "Subtitle for the release notes link on the about screen.",
         "placeholders": {
@@ -720,7 +720,7 @@
     "@aboutScreen_github": {
         "description": "Link text to the GitHub repository on the about screen."
     },
-    "aboutScreen_githubSubtitle": "Source code and issue tracking",
+    "aboutScreen_githubSubtitle": "源代码与问题反馈",
     "@aboutScreen_githubSubtitle": {
         "description": "Subtitle for the GitHub link on the about screen."
     },
@@ -728,48 +728,48 @@
     "@aboutScreen_discord": {
         "description": "Link text to the Discord server on the about screen."
     },
-    "aboutScreen_discordSubtitle": "Support and community",
+    "aboutScreen_discordSubtitle": "支持与社区",
     "@aboutScreen_discordSubtitle": {
         "description": "Subtitle for the Discord link on the about screen."
     },
-    "aboutScreen_share": "Share",
+    "aboutScreen_share": "分享",
     "@aboutScreen_share": {
         "description": "Link button text for the share button on the about screen."
     },
-    "aboutScreen_shareText": "Check out Menstrudel, a private and offline period tracker app!",
+    "aboutScreen_shareText": "看看 Menstrudel，一个私密、离线的经期记录应用！",
     "@aboutScreen_shareText": {
         "description": "Text used when sharing the app from the about screen."
     },
-    "aboutScreen_urlError": "Could not open the link.",
+    "aboutScreen_urlError": "无法打开链接。",
     "@aboutScreen_urlError": {
         "description": "Error message shown when a link could not be opened."
     },
-    "logSummaryWidget_loggedDays": "Logged Days",
-    "logSummaryWidget_trackingHistory": "Tracking History",
-    "cycleLengthVarianceWidget_logAtLeastTwoPeriods": "Need at least two cycles to show variance.",
-    "cycleLengthVarianceWidget_title": "Cycle Length Variance",
-    "cycleLengthVarianceWidget_averageCycle": "Avg. Cycle",
-    "cycleLengthVarianceWidget_cycle": "Cycle",
-    "periodDurationWidget_logAtLeastTwoPeriods": "Log at least two periods to see period statistics.",
-    "periodDurationWidget_title": "Period Duration Variance",
-    "periodDurationWidget_averagePeriod": "Avg. Period",
-    "periodDurationWidget_period": "Period",
-    "flowIntensityWidget_flowIntensityBreakdown": "Flow Intensity Breakdown",
-    "flowIntensityWidget_noFlowDataLoggedYet": "No flow data logged yet.",
-    "painLevelWidget_noPainDataLoggedYet": "No pain data logged yet.",
-    "painLevelWidget_painLevelBreakdown": "Pain Level Breakdown",
-    "monthlyFlowChartWidget_noDataToDisplay": "No data to display.",
-    "monthlyFlowChartWidget_cycleFlowPatterns": "Cycle Flow Patterns",
-    "monthlyFlowChartWidget_cycleFlowPatternsDescription": "Each line represents one complete cycle",
-    "symptomFrequencyWidget_noSymptomsLoggedYet": "No symptoms logged yet.",
-    "symptomFrequencyWidget_mostCommonSymptoms": "Most Common Symptoms",
-    "journalViewWidget_logYourFirstPeriod": "Log your first period.",
-    "listViewWidget_noPeriodsLogged": "No periods logged yet.\nTap the + button to add one.",
-    "listViewWidget_confirmDelete": "Confirm Delete",
-    "listViewWidget_confirmDeleteDescription": "Are you sure you want to delete this entry?",
-    "emptyPillStateWidget_noPillRegimenFound": "No pill regimen found.",
-    "emptyPillStateWidget_noPillRegimenFoundDescription": "Set up your pill pack in settings to start tracking.",
-    "pillStatus_pillsOfTotal": "{count, plural, =1{of 1 pill} other{of {count} pills}}",
+    "logSummaryWidget_loggedDays": "已记录天数",
+    "logSummaryWidget_trackingHistory": "记录历史",
+    "cycleLengthVarianceWidget_logAtLeastTwoPeriods": "至少需要两个完整周期才能显示波动。",
+    "cycleLengthVarianceWidget_title": "周期长度波动",
+    "cycleLengthVarianceWidget_averageCycle": "平均周期",
+    "cycleLengthVarianceWidget_cycle": "周期",
+    "periodDurationWidget_logAtLeastTwoPeriods": "至少记录两次经期才能查看经期统计。",
+    "periodDurationWidget_title": "经期时长波动",
+    "periodDurationWidget_averagePeriod": "平均经期",
+    "periodDurationWidget_period": "经期",
+    "flowIntensityWidget_flowIntensityBreakdown": "经量分布",
+    "flowIntensityWidget_noFlowDataLoggedYet": "还没有经量数据。",
+    "painLevelWidget_noPainDataLoggedYet": "还没有疼痛数据。",
+    "painLevelWidget_painLevelBreakdown": "疼痛程度分布",
+    "monthlyFlowChartWidget_noDataToDisplay": "暂无可显示的数据。",
+    "monthlyFlowChartWidget_cycleFlowPatterns": "各周期经量曲线",
+    "monthlyFlowChartWidget_cycleFlowPatternsDescription": "每条线代表一个完整周期",
+    "symptomFrequencyWidget_noSymptomsLoggedYet": "还没有症状记录。",
+    "symptomFrequencyWidget_mostCommonSymptoms": "最常见症状",
+    "journalViewWidget_logYourFirstPeriod": "记录你的第一次经期。",
+    "listViewWidget_noPeriodsLogged": "还没有经期记录。\n点击 + 按钮添加。",
+    "listViewWidget_confirmDelete": "确认删除",
+    "listViewWidget_confirmDeleteDescription": "确定要删除这条记录吗？",
+    "emptyPillStateWidget_noPillRegimenFound": "没有找到用药方案。",
+    "emptyPillStateWidget_noPillRegimenFoundDescription": "请先在设置中设置药板，才能开始记录。",
+    "pillStatus_pillsOfTotal": "{count, plural, =1{共 1 片} other{共 {count} 片}}",
     "@pillStatus_pillsOfTotal": {
         "description": "A label showing the total number of pills.",
         "placeholders": {
@@ -778,10 +778,10 @@
             }
         }
     },
-    "pillStatus_undo": "Undo",
-    "pillStatus_skip": "Skip",
-    "pillStatus_markAsTaken": "Mark As Taken",
-    "pillStatus_packStartInFuture": "Your next pill pack starts on {date}.",
+    "pillStatus_undo": "撤销",
+    "pillStatus_skip": "跳过",
+    "pillStatus_markAsTaken": "标记为已服用",
+    "pillStatus_packStartInFuture": "下一板药将于 {date} 开始。",
     "@pillStatus_packStartInFuture": {
         "description": "Message shown when the pill pack start date is in the future.",
         "placeholders": {
@@ -791,21 +791,21 @@
             }
         }
     },
-    "regimenSetupWidget_setUpPillRegimen": "Set Up Pill Regimen",
-    "regimenSetupWidget_packName": "Pack Name",
-    "regimenSetupWidget_pleaseEnterAName": "Please enter a name",
-    "regimenSetupWidget_activePills": "Active Pills",
-    "regimenSetupWidget_enterANumber": "Enter a number",
-    "regimenSetupWidget_placeboPills": "Placebo Pills",
-    "regimenSetupWidget_firstDayOfThisPack": "First Day of This Pack",
-    "symptomEntrySheet_logYourDay": "Log Your Day",
-    "symptomEntrySheet_symptomsOptional": "Symptoms (Optional)",
-    "periodDetailsSheet_symptoms": "Symptoms",
-    "periodDetailsSheet_flow": "Flow",
-    "reversibleContraceptiveEntrySheet_logReversibleContraceptiveDetails": "Log Contraceptive Details",
-    "sanitaryEntrySheet_logSanitaryProduct": "Log Sanitary Product",
-    "sanitaryEntrySheet_setReminderDuration": "Set Reminder Duration",
-    "sanitaryEntrySheet_maxDuration": "Max Duration: {hours} hours",
+    "regimenSetupWidget_setUpPillRegimen": "设置用药方案",
+    "regimenSetupWidget_packName": "药板名称",
+    "regimenSetupWidget_pleaseEnterAName": "请输入名称",
+    "regimenSetupWidget_activePills": "有效药片",
+    "regimenSetupWidget_enterANumber": "请输入数字",
+    "regimenSetupWidget_placeboPills": "安慰剂片",
+    "regimenSetupWidget_firstDayOfThisPack": "本板第一天",
+    "symptomEntrySheet_logYourDay": "记录今天",
+    "symptomEntrySheet_symptomsOptional": "症状（选填）",
+    "periodDetailsSheet_symptoms": "症状",
+    "periodDetailsSheet_flow": "经量",
+    "reversibleContraceptiveEntrySheet_logReversibleContraceptiveDetails": "记录避孕详情",
+    "sanitaryEntrySheet_logSanitaryProduct": "记录卫生用品",
+    "sanitaryEntrySheet_setReminderDuration": "设置提醒时长",
+    "sanitaryEntrySheet_maxDuration": "最长 {hours} 小时",
     "@sanitaryEntrySheet_maxDuration": {
         "description": "Label showing the maximum duration for the selected sanitary product type.",
         "placeholders": {
@@ -814,9 +814,9 @@
             }
         }
     },
-    "sanitaryEntrySheet_futureLogTimeError": "Log time cannot be in the future.",
-    "sanitaryEntrySheet_pastReminderTimeError": "Reminder end time cannot be in the past.",
-    "periodPredictionCircle_days": "{count, plural, =1{Day} other{Days}}",
+    "sanitaryEntrySheet_futureLogTimeError": "记录时间不能晚于当前时间。",
+    "sanitaryEntrySheet_pastReminderTimeError": "提醒结束时间不能早于当前时间。",
+    "periodPredictionCircle_days": "{count, plural, =1{天} other{天}}",
     "@periodPredictionCircle_days": {
         "description": "A label showing the total number of days until period is due.",
         "placeholders": {
@@ -825,7 +825,7 @@
             }
         }
     },
-    "customSymptomDialog_newSymptom": "New Symptom",
-    "customSymptomDialog_enterCustomSymptom": "Enter a custom symptom",
-    "customSymptomDialog_temporarySymptom": "Temporary Symptom"
+    "customSymptomDialog_newSymptom": "新症状",
+    "customSymptomDialog_enterCustomSymptom": "输入自定义症状",
+    "customSymptomDialog_temporarySymptom": "临时症状"
 }
