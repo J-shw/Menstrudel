@@ -3,6 +3,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:menstrudel/l10n/app_localizations.dart';
+import 'package:menstrudel/utils/constants.dart';
 
 class AboutScreen extends StatefulWidget {
   const AboutScreen({super.key});
@@ -84,7 +85,7 @@ Widget build(BuildContext context) {
           icon: Icons.history_rounded,
           title: "Release Notes",
           subtitle: l10n.aboutScreen_releaseNotesSubtitle(_appVersion),
-          onTap: () => _launchUrl('https://menstrudel.app/release-notes/', l10n),
+          onTap: () => _launchUrl(baseWebsiteURL+'release-notes/', l10n),
         ),
         _buildListTile(
           icon: Icons.discord,
@@ -99,7 +100,7 @@ Widget build(BuildContext context) {
           icon: Icons.privacy_tip_outlined,
           title: l10n.aboutScreen_privacyPolicy,
           subtitle: l10n.aboutScreen_privacyPolicySubtitle,
-          onTap: () => _launchUrl('https://menstrudel.app/privacy/', l10n),
+          onTap: () => _launchUrl(baseWebsiteURL+'privacy/', l10n),
         ),
         _buildListTile(
           icon: Icons.code_rounded,

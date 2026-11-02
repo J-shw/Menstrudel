@@ -9,6 +9,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'widgets/welcome_step.dart';
 import 'widgets/profile_step.dart';
 import 'widgets/goal_step.dart';
+import 'package:menstrudel/utils/constants.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -131,7 +132,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ),
                 GestureDetector(
                   onTap: () =>
-                      launchUrl(Uri.parse('https://menstrudel.app/privacy/')),
+                      launchUrl(Uri.parse(baseWebsiteURL+'privacy/')),
                   child: Text(
                     l10n.onBoardingScreen_privacyPolicy,
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
