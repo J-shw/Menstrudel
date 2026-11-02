@@ -8,7 +8,7 @@ import 'package:menstrudel/models/birth_control/reversible_contraceptives/revers
 const seedColor = Color(0xFF60A5FA);
 
 /// Base website URL (With tailing `/`)
-const baseWebsiteURL = "https://j-shw.github.io/Menstrudel/"
+const baseWebsiteURL = "https://j-shw.github.io/Menstrudel/";
 
 /// The min days for valid cycle length
 const int minValidCycleLength = 10;
